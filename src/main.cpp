@@ -1,4 +1,4 @@
-#include <Core/Game.hpp>
+#include <Game.hpp>
 #include <stdexcept>
 #include <iostream>
 

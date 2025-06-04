@@ -1,11 +1,17 @@
-#include <Core/Game.hpp>
+#include <Game.hpp>
 
-Game::Game()
+Game::Game()    
     : contextSettings(0, 0, 16)
     , window(sf::VideoMode(1600, 900), "Super Mario Bros!", sf::Style::Default, contextSettings)
-    , shape(50.f)
 {
-    shape.setFillColor(sf::Color::Green);   
+    player = std::make_unique<Mario>(100, 200);
+    goomba = std::make_unique<Enemy>(500, 100);
+
+    movementSystem.addEntity(player.get());
+    renderSystem.addEntity(player.get());
+
+    movementSystem.addEntity(goomba.get());
+    renderSystem.addEntity(goomba.get());
 }
 
 void Game::handleEvent()
@@ -20,15 +26,12 @@ void Game::handleEvent()
 
 void Game::update(float dt)
 {
-    shape.setPosition(shape.getPosition() + sf::Vector2f(100, 20) * dt);
+    movementSystem.update(dt);
 }
 
 void Game::draw()
 {
-
-    window.clear(sf::Color(245, 245, 245));
-    window.draw(shape);
-    window.display();
+    renderSystem.draw(window);
 }
 
 void Game::run()
@@ -37,8 +40,12 @@ void Game::run()
     while (window.isOpen())
     {
         handleEvent();
+
         float dt = clock.restart().asSeconds();
         update(dt);
+
+        window.clear(sf::Color(245, 245, 245));
         draw();
+        window.display();
     }
 }
