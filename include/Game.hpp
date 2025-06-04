@@ -1,25 +1,25 @@
 #pragma once
+#include "GameState.hpp"
+#include "StateRegistry.hpp"
 #include <SFML/Graphics.hpp>
-#include <Mario.hpp>
-#include <Enemy.hpp>
-#include <System.hpp>
+#include <vector>
+#include <memory>
+#include <string>
 
-class Game
-{
+class Game {
+private:
+    sf::ContextSettings contextSettings;
+    sf::RenderWindow window;
+    std::vector<std::shared_ptr<GameState>> stateStack;
+    bool isRunning = true;
+    StateRegistry registry;
+
 public:
-                            Game();
-    void                    run();
-
-private:
-    void                    handleEvent();
-    void                    update(float dt);
-    void                    draw();
-
-private:
-    sf::ContextSettings     contextSettings;
-    sf::RenderWindow        window;
-    std::unique_ptr<Mario>  player;
-    std::unique_ptr<Enemy>  goomba;
-    MovementSystem          movementSystem;
-    RenderSystem            renderSystem;
+    Game();
+    void run();
+    void pushState(const std::string& string);
+    void popState();
+    GameState* currentState();
+    sf::RenderWindow& getWindow();
+    void quit();
 };
