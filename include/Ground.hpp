@@ -1,17 +1,16 @@
 #pragma once
-
 #include <Entity.hpp>
 #include <Components/Declaration.hpp>
 
-class Enemy : public Entity
+class Ground : public Entity
 {
 public:
-    Enemy(float x, float y)
+    Ground(float x, float y)
     {
         addComponent<BoxCollider2D>(BoxCollider2D(sf::Vector2f(100.f, 100.f)));
-        addComponent<EnemyTag>();
-        addComponent<RigidBody>(RigidBody(0, 0));
-        addComponent<Sprite2D>(Sprite2D(sf::Color::Blue));
+        addComponent<Gravity>(Gravity(90.f));
+        addComponent<Sprite2D>(Sprite2D(sf::Color::Yellow));
         addComponent<Transform>(Transform(x, y));
+        addComponent<Solid>();
     }
 };

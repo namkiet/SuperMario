@@ -6,7 +6,7 @@ PlayingState::PlayingState()
     // no-op
 }
 
-void PlayingState::handleEvent(Game& game, sf::Event& event)
+void PlayingState::handleEvent(Game& game, const sf::Event& event)
 {
     if (event.type == sf::Event::KeyPressed)
     {

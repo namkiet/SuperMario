@@ -1,32 +1,7 @@
 #pragma once
-
+#include <SFML/Graphics.hpp>
+#include <Components/Declaration.hpp>
 #include <Entity.hpp>
-
-class MovementSystem
-{
-public:
-    void addEntity(Entity* entity)
-    {
-        entityList.push_back(entity);
-    }
-
-    void update(float dt)
-    {
-        for (Entity* entity : entityList)
-        {
-            auto& rb = entity->getComponent<RigidBody>();
-            auto& tf = entity->getComponent<Transform>();
-
-            auto vel = rb.getVelocity();
-            auto pos = tf.getPosition();
-
-            tf.setPosition(pos + sf::Vector2f(vel.x * dt, vel.y * dt));
-        }
-    }
-
-private:
-    std::vector<Entity*> entityList;
-};
 
 class RenderSystem
 {
@@ -43,6 +18,18 @@ public:
             auto pos = entity->getComponent<Transform>().getPosition();
             auto shape = entity->getComponent<Sprite2D>().getShape();
             shape.setPosition(pos);
+
+            if (entity->hasComponent<BoxCollider2D>())
+            {
+                auto& box = entity->getComponent<BoxCollider2D>();
+                sf::RectangleShape rect(box.size);
+                rect.setPosition(pos + box.offset);
+                rect.setOutlineColor(sf::Color::Red);
+                rect.setOutlineThickness(2.f);
+                rect.setFillColor(sf::Color::Transparent);
+
+                window.draw(rect);
+            }
 
             window.draw(shape);
         }

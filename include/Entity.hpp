@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Component.hpp>
-// #include <cassert>
 #include <typeindex>
 #include <memory>
 #include <unordered_map>

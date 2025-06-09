@@ -9,11 +9,14 @@ MenuState::MenuState()
     playText.setPosition(250, 250);
 }
 
-void MenuState::handleEvent(Game& game, sf::Event& event)
+void MenuState::handleEvent(Game& game, const sf::Event& event)
 {
-    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter)
+    if (event.type == sf::Event::KeyPressed)
     {
-        game.pushState("play");
+        if (event.key.code == sf::Keyboard::Enter)
+        {
+            game.pushState("play");
+        }
     }
 }
 

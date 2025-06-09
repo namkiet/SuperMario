@@ -9,7 +9,7 @@ SettingsState::SettingsState()
     info.setPosition(200, 250);
 }
 
-void SettingsState::handleEvent(Game& game, sf::Event& event)
+void SettingsState::handleEvent(Game& game, const sf::Event& event)
 {
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
         game.popState();  // return to PlayGameState

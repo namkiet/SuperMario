@@ -9,7 +9,7 @@ private:
     sf::Text playText;
 public:
     MenuState();
-    void handleEvent(Game& game, sf::Event& event) override;
+    void handleEvent(Game& game, const sf::Event& event) override;
     void update(Game& game, float dt) override;
     void render(Game& game, sf::RenderWindow& window) override;
 };
