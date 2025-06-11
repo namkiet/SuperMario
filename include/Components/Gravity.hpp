@@ -1,5 +1,5 @@
 #pragma once
-#include <Component.hpp>
+#include <ECS/Component.hpp>
 
 class Gravity : public Component
 {

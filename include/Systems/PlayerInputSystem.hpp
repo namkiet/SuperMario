@@ -1,27 +1,19 @@
 #pragma once
+#include <World.hpp>
+#include <Components/Input.hpp>
 #include <SFML/Graphics.hpp>
-#include <Components/Declaration.hpp>
-#include <Entity.hpp>
 
-class PlayerInputSystem
+class PlayerInputSystem : public System
 {
 public:
-    void addEntity(Entity* entity)
+    void update(World& world, float dt) override
     {
-        entityList.push_back(entity);
-    }
-
-    void update(float dt)
-    {
-        for (Entity* entity : entityList)
+        for (Entity* entity : world.findAll<Input>())
         {
             auto& input = entity->getComponent<Input>();
             input.moveLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::A);
             input.moveRight = sf::Keyboard::isKeyPressed(sf::Keyboard::D);
             input.jumpPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::W);
         }
-    }   
-
-private:
-    std::vector<Entity*> entityList;
+    }
 };

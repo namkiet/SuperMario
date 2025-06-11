@@ -1,5 +1,5 @@
-#include "MenuState.hpp"
-#include "Game.hpp"
+#include <Game.hpp>
+#include <States/MenuState.hpp>
 
 MenuState::MenuState()
 {

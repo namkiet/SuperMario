@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Entity.hpp>
+#include <ECS/Entity.hpp>
 #include <Components/Declaration.hpp>
 
 class Enemy : public Entity
@@ -11,7 +11,10 @@ public:
         addComponent<BoxCollider2D>(BoxCollider2D(sf::Vector2f(100.f, 100.f)));
         addComponent<EnemyTag>();
         addComponent<RigidBody>(RigidBody(0, 0));
-        addComponent<Sprite2D>(Sprite2D(sf::Color::Blue));
+
+        sf::Sprite sprite(TextureManager::load("assets/hero_idle.png"));
+        addComponent<Sprite2D>(sprite);
+        
         addComponent<Transform>(Transform(x, y));
     }
 };

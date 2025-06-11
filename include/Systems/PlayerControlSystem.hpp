@@ -1,19 +1,14 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <Components/Declaration.hpp>
-#include <Entity.hpp>
+#include <World.hpp>
+#include <Components/Input.hpp>
+#include <Components/RigidBody.hpp>
 
-class PlayerControlSystem
+class PlayerControlSystem : public System
 {
 public:
-    void addEntity(Entity* entity)
+    void update(World& world, float dt) override
     {
-        entityList.push_back(entity);
-    }
-
-    void update(float dt)
-    {
-        for (Entity* entity : entityList)
+        for (Entity* entity : world.findAll<Input, RigidBody>())
         {
             auto& input = entity->getComponent<Input>();
             auto& rb = entity->getComponent<RigidBody>();
@@ -35,13 +30,10 @@ public:
 
             if (input.jumpPressed)
             {
-                vel.y = -50.f;
+                vel.y = -100.f;
             }
 
             rb.setVelocity(vel);
         }
-    }   
-
-private:
-    std::vector<Entity*> entityList;
+    }
 };

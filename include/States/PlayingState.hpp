@@ -1,6 +1,6 @@
 #pragma once
 #include "GameState.hpp"
-#include "World.hpp"
+#include "GameManager.hpp"
 #include <SFML/Graphics.hpp>
 
 class PlayingState : public GameState 
@@ -12,5 +12,5 @@ public:
     void render(Game& game, sf::RenderWindow& window) override;
 
 private:
-    World world;
+    GameManager gameManager;
 };

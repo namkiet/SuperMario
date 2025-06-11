@@ -1,5 +1,5 @@
-#include "PlayingState.hpp"
-#include "Game.hpp"
+#include <Game.hpp>
+#include <States/PlayingState.hpp>
 
 PlayingState::PlayingState() 
 {
@@ -21,15 +21,15 @@ void PlayingState::handleEvent(Game& game, const sf::Event& event)
         }
     }
     
-    world.handleEvent(event);
+    gameManager.handleEvent(event);
 }
 
 void PlayingState::update(Game&, float dt) 
 {
-    world.update(dt);
+    gameManager.update(dt);
 }
 
 void PlayingState::render(Game&, sf::RenderWindow& window)
 {
-    world.draw(window);
+    gameManager.draw(window);
 }

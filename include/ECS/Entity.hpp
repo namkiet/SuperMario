@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Component.hpp>
+#include <ECS/Component.hpp>
 #include <typeindex>
 #include <memory>
 #include <unordered_map>

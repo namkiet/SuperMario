@@ -1,8 +1,8 @@
 // === Game.cpp ===
-#include "Game.hpp"
-#include "MenuState.hpp"
-#include "PlayingState.hpp"
-#include "SettingsState.hpp"
+#include <Game.hpp>
+#include <States/MenuState.hpp>
+#include <States/PlayingState.hpp>
+#include <States/SettingsState.hpp>
 
 Game::Game() 
     : contextSettings(0, 0, 16)

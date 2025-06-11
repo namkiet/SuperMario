@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <Component.hpp>
+#include <ECS/Component.hpp>
 
 class RigidBody : public Component
 {

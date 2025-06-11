@@ -1,5 +1,7 @@
 #pragma once
+#include <Components/Animation.hpp>
 #include <Components/BoxCollider2D.hpp>
+#include <Components/Camera.hpp>
 #include <Components/Gravity.hpp>
 #include <Components/Input.hpp>
 #include <Components/RigidBody.hpp>

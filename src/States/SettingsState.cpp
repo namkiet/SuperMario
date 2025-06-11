@@ -1,5 +1,5 @@
-#include "SettingsState.hpp"
-#include "Game.hpp"
+#include <Game.hpp>
+#include <States/SettingsState.hpp>
 
 SettingsState::SettingsState() 
 {

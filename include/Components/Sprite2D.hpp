@@ -1,20 +1,42 @@
 #pragma once
+#include <ECS/Component.hpp>
 #include <SFML/Graphics.hpp>
-#include <Component.hpp>
+#include <stdexcept>
 
 class Sprite2D : public Component
 {
 public:
-    Sprite2D(const sf::Color& color) : shape(50.f)
+    Sprite2D(const sf::Sprite& sprite) : sprite(sprite) {}
+
+    Sprite2D() = default;
+
+    void registerSprite(const std::string& name, const sf::Texture& texture)
     {
-        shape.setFillColor(color);        
+        if (spriteMap.find(name) != spriteMap.end())
+        {
+            throw std::runtime_error("Sprite " + name + "has already been registered.");
+        }
+
+        sf::Sprite newSprite(texture);
+        spriteMap[name] = newSprite;
     }
 
-    const sf::CircleShape& getShape() const
+    void setSprite(const std::string& name)
     {
-        return shape;
+        if (spriteMap.find(name) == spriteMap.end())
+        {
+            throw std::runtime_error("Cannot find sprite: " + name);
+        }
+        sprite = spriteMap[name];
     }
+
+    sf::Sprite& getSprite()
+    {
+        return sprite;
+    }
+    
+    sf::Sprite sprite;
 
 private:
-    sf::CircleShape shape;
+    std::unordered_map<std::string, sf::Sprite> spriteMap;
 };

@@ -1,9 +1,8 @@
 #pragma once
+#include <World.hpp>
+#include <Components/BoxCollider2D.hpp>
+#include <Components/Transform.hpp>
 #include <SFML/Graphics.hpp>
-#include <Components/Declaration.hpp>
-#include <Entity.hpp>
-
-#include <iostream>
 
 inline bool AABBOverlap(const sf::Vector2f& sizeA, const sf::Vector2f& posA, const sf::Vector2f& sizeB, const sf::Vector2f& posB)
 {
@@ -39,16 +38,12 @@ inline sf::Vector2f resolveAABB(const sf::Vector2f& sizeA, const sf::Vector2f& p
         return {0.f, dy < 0 ? -overlapY : overlapY};
 }
 
-class ColliderSystem
+class ColliderSystem : public System
 {
 public:
-    void addEntity(Entity* entity)
+    void update(World& world, float dt) override
     {
-        entityList.push_back(entity);
-    }
-
-    void update(float dt)
-    {
+        auto entityList = world.findAll<BoxCollider2D, Transform>();
         for (int i = 0; i < entityList.size(); i++)
         {
             Entity* entityA = entityList[i];
@@ -64,23 +59,9 @@ public:
                 {
                     sf::Vector2f mtv = resolveAABB(box1.size, box1.offset + pos1, box2.size, box2.offset + pos2);
                     pos1 += mtv;
-                    // pos2 -= mtv;
                     entityA->getComponent<Transform>().setPosition(pos1);
-                    // entityB->getComponent<Transform>().setPosition(pos2);
-                    // handleCollision(entityA, entityB);
-                    // handleCollision(entityB, entityA);
                 }
             }
         }
-    }   
-
-private:
-    // static void handleCollision(Entity* entityA, Entity& entityB)
-    // {
-    //     auto vel = entity->getComponent<RigidBody>().getVelocity();
-        
-    // }
-
-private:
-    std::vector<Entity*> entityList;
+    }
 };

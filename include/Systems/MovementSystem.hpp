@@ -1,39 +1,25 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <Components/Declaration.hpp>
-#include <Entity.hpp>
+#include <World.hpp>
+#include <Components/Transform.hpp>
+#include <Components/RigidBody.hpp>
 
-class MovementSystem
+class MovementSystem : public System
 {
 public:
-    void addEntity(Entity* entity)
+    void update(World& world, float dt) override
     {
-        entityList.push_back(entity);
-    }
-
-    void update(float dt)
-    {
-        for (Entity* entity : entityList)
+        for (Entity* entity : world.findAll<Transform, RigidBody>())
         {
-            auto& rb = entity->getComponent<RigidBody>();
             auto& tf = entity->getComponent<Transform>();
+            auto& rb = entity->getComponent<RigidBody>();
 
-            auto vel = rb.getVelocity();
             auto pos = tf.getPosition();
+            auto vel = rb.getVelocity();
             
             pos.x += vel.x * dt;
             pos.y += vel.y * dt;
 
             tf.setPosition(pos);
-
-            // if (entity->hasComponent<BoxCollider2D>())
-            // {
-            //     auto& box = entity->getComponent<BoxCollider2D>();
-            //     box.position = pos;
-            // }
         }
     }
-
-private:
-    std::vector<Entity*> entityList;
 };

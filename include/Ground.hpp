@@ -1,5 +1,5 @@
 #pragma once
-#include <Entity.hpp>
+#include <ECS/Entity.hpp>
 #include <Components/Declaration.hpp>
 
 class Ground : public Entity
@@ -9,7 +9,7 @@ public:
     {
         addComponent<BoxCollider2D>(BoxCollider2D(sf::Vector2f(100.f, 100.f)));
         addComponent<Gravity>(Gravity(90.f));
-        addComponent<Sprite2D>(Sprite2D(sf::Color::Yellow));
+        // addComponent<Sprite2D>(Sprite2D(sf::Color::Yellow));
         addComponent<Transform>(Transform(x, y));
         addComponent<Solid>();
     }
