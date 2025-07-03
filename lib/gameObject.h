@@ -1,0 +1,71 @@
+#pragma once
+#include <raylib.h>
+#include <vector>
+class GameObject
+{
+
+public:
+    enum class ObjectID
+    {
+        Player,
+        Enemy,
+        Block,
+        Pipe
+    };
+    GameObject(float x, float y, ObjectID id, float width, float height, int scale);
+    GameObject(int screenWidth = 0, int screenHeight = 0);
+
+    // Pure virtual method
+    virtual void tick();
+    virtual void render();
+    virtual Rectangle getBounds();      // Get the lower half bounds of the object
+    virtual Rectangle getBoundsTop();   // Get the upper half bounds of the object
+    virtual Rectangle getBoundsRight(); // Get the right half bounds of the object
+    virtual Rectangle getBoundsLeft();  // Get the left half bounds of the object
+    virtual void showBounds();
+    void applyGravity();
+
+    // Setter methods
+    void setX(float x);
+    void setY(float y);
+    void setID(ObjectID id);
+    void setVelX(float velX);
+    void setVelY(float velY);
+    void setWidth(float width);
+    void setHeight(float height);
+
+    // Getter methods
+    float getX();
+    float getY();
+    ObjectID getID();
+    float getVelX();
+    float getVelY();
+    float getWidth();
+    float getHeight();
+    int getScale();
+
+    // Collision checking
+    virtual void collision();
+
+    // Check if the object is dead or not
+    virtual bool isDead();
+
+    // Check if the object is stomped on or not
+    virtual bool isStomped();
+    virtual void setStomped(bool newState);
+
+    // Check if the player is already check for collision
+    virtual bool playerFinishedCollisionChecking();
+    virtual void setPlayerFinishedCollisionChecking(bool finished);
+
+    // Destructor
+    ~GameObject();
+
+private:
+    ObjectID id;
+    int screenWidth;
+    int screenHeight;
+    float x, y, velX, velY;
+    float width, height;
+    int scale;
+};
