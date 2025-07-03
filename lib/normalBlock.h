@@ -21,7 +21,7 @@ private:
     float originalY;
 
 public:
-    NormalBlock(float x = 0, float y = 0, int width = 0, int height = 0, int index = 0, int scale = 0, UI *ui = nullptr);
+    NormalBlock(float x = 0, float y = 0, int scale = 0, UI *ui = nullptr);
 
     // For updating
     void tick();

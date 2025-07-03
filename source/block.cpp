@@ -1,9 +1,11 @@
 #include <iostream>
 #include "block.h"
 using namespace std;
+const float Block::WIDTH = 16.0f;  // Default width of the block
+const float Block::HEIGHT = 16.0f; // Default height of the block
 
-Block::Block(int x, int y, int width, int height, int index, int scale, UI *ui, BlockType type)
-    : GameObject(x, y, ObjectID::Block, width, height, scale), ui(ui), index(index), type(type)
+Block::Block(int x, int y, int scale, UI *ui, BlockType type)
+    : GameObject(x, y, ObjectID::Block, Block::WIDTH, Block::HEIGHT, scale), ui(ui), index(index), type(type)
 {
     // Constructor implementation can be added here if needed
     if (ui == nullptr)
@@ -18,6 +20,27 @@ Block::Block(int x, int y, int width, int height, int index, int scale, UI *ui, 
 
     // Load block textures from UI
     blockTextures = ui->getTile1();
+
+    if (type == BlockType::Star)
+    {
+        index = 2;
+    }
+    else if (type == BlockType::LevelUp)
+    {
+        index = 2;
+    }
+    else if (type == BlockType::Stairs)
+    {
+        index = 28;
+    }
+    else if (type == BlockType::Ground)
+    {
+        index = 0;
+    }
+    else
+    {
+        index = 0;
+    }
 }
 
 void Block::render()
@@ -116,5 +139,4 @@ bool Block::isHit()
 
 void Block::playerCollision(GameObject *object)
 {
-
 }

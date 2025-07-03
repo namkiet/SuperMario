@@ -1,5 +1,19 @@
 #pragma once
 #include "block.h"
+#include "handler.h"
+
+#include "coin.h"
+#include "mushroom.h"
+// #include "flower.h"
+// #include "star.h"
+
+enum class QuestionBlockType
+{
+    Coin,
+    Mushroom, // Bigger
+    Flower,   // Fire
+    Star
+};
 
 enum class QuestionBlockState
 {
@@ -22,9 +36,23 @@ private:
     int timeCount = 0;
 
     float originalY = 0;
+
+    QuestionBlockType type;
+
+    Coin* coin; // For Coin Question Block
+    Mushroom* mushroom; // For Mushroom Question Block
+    // Flower* flower; // For Flower Question Block
+    // Star* star; // For Star Question Block
+
+    // Ui pointer
+    UI *ui;
+
+    // Handler pointer
+    Handler *handler;
+
 public:
     // Constructor
-    QuestionBlock(float x = 0, float y = 0, int width = 0, int height = 0, int index = 0, int scale = 0, UI *ui = nullptr);
+    QuestionBlock(float x = 0, float y = 0, int scale = 0, Handler *handler = nullptr, UI *ui = nullptr, QuestionBlockType type = QuestionBlockType::Coin);
 
     // For updating
     void tick();

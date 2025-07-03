@@ -3,8 +3,8 @@
 #include "player.h"
 using namespace std;
 
-CoinBlock::CoinBlock(float x, float y, int width, int height, int index, int scale, UI *ui)
-    : Block(x, y, width, height, index, scale, ui, BlockType::Coin), coin(nullptr), ui(ui), originalY(y * scale)
+CoinBlock::CoinBlock(float x, float y, int scale, UI *ui)
+    : Block(x, y, scale, ui, BlockType::Coin), coin(nullptr), ui(ui), originalY(y * scale)
 {
     if (ui == nullptr)
     {
@@ -19,9 +19,6 @@ CoinBlock::CoinBlock(float x, float y, int width, int height, int index, int sca
     }
     // Set the initial state
     state = CoinBlockState::BeforeHit;
-
-    firstTime = true;
-    waitingTime = 200;
 }
 
 void CoinBlock::tick()
@@ -39,14 +36,14 @@ void CoinBlock::tick()
 
     if (isHit() && state == CoinBlockState::BeforeHit)
     {
-        coin = new Coin(getX(), getY() - getHeight() - getHeight() / 4, 16, 16, getScale(), ui); // Create a coin at the block's position
+        coin = new Coin(getX(), getY() - getHeight() - getHeight() / 4, getScale(), ui); // Create a coin at the block's position
         state = CoinBlockState::Hit;
     }
-    
     if (state == CoinBlockState::Hit && coin)
     {
         coin->tick();
     }
+
 
     if (isCollected)
     {
@@ -87,14 +84,13 @@ void CoinBlock::playerCollision(GameObject *object)
         }
         --hitCount;
         waitingTime = 200;
-
-        if (firstTime)
-        {
-            firstTime = false;
-        }
-
         if (coin)
             coin->reset();
+    }
+
+    if (firstTime)
+    {
+        firstTime = false;
     }
 
     if (hitCount == 0)
@@ -106,5 +102,14 @@ void CoinBlock::playerCollision(GameObject *object)
     {
         setY(originalY - getHeight() / 4);
         timeCount = 10;
+    }
+}
+
+CoinBlock::~CoinBlock()
+{
+    if (coin != nullptr)
+    {
+        delete coin; // Clean up the coin object
+        coin = nullptr; // Set to nullptr to avoid dangling pointer
     }
 }

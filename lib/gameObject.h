@@ -10,7 +10,8 @@ public:
         Player,
         Enemy,
         Block,
-        Pipe
+        Pipe,
+        Item
     };
     GameObject(float x, float y, ObjectID id, float width, float height, int scale);
     GameObject(int screenWidth = 0, int screenHeight = 0);

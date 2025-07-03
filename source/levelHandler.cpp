@@ -40,25 +40,54 @@ void LevelHandler::setLevel()
             {
                 continue; // Skip white pixels
             }
-            else if (red == 0 && green == 0 && blue == 0) // Black for ground titles
+            else if (red == 0 && green == 0 && blue == 0) // Ground blocks
             {
-                handler.addObject(new Block(j * 16, i * 16, 16, 16, 0, 3, ui));
+                handler.addObject(new Block(j * 16, i * 16, 3, ui, BlockType::Ground));
             }
-            else if (red == 128 && green == 255 && blue == 128) // Question blocks
+            else if (red == 128 && green == 255 && blue == 128) // Question blocks for coin
             {
-                handler.addObject(new QuestionBlock(j * 16, i * 16, 16, 16, 0, 3, ui));
+                handler.addObject(new QuestionBlock(j * 16, i * 16, 3, &handler, ui, QuestionBlockType::Coin));
             }
-            else if (red == 128 && green == 128 && blue == 255) // Breakable blocks
+            else if (red == 128 && green == 128 && blue == 0) // Question blocks for mushroom
             {
-                handler.addObject(new NormalBlock(j * 16, i * 16, 16, 16, 1, 3, ui));
+                handler.addObject(new QuestionBlock(j * 16, i * 16, 3, &handler, ui, QuestionBlockType::Mushroom));
             }
-            else if (red == 255 && green == 0 && blue == 0) // Nap cong
+            else if (red == 239 && green == 116 && blue == 236) // Question blocks for flower
             {
-                handler.addObject(new Pipe(j * 16, i * 16, 32, 32, 0, 3, false, ui));
+                handler.addObject(new QuestionBlock(j * 16, i * 16, 3, &handler, ui, QuestionBlockType::Flower));
+            }
+            else if (red == 242 && green == 234 && blue == 94) // Question blocks for star
+            {
+                handler.addObject(new QuestionBlock(j * 16, i * 16, 3, &handler, ui, QuestionBlockType::Star));
+            }
+            else if (red == 128 && green == 128 && blue == 255) // Normal blocks
+            {
+                handler.addObject(new NormalBlock(j * 16, i * 16, 3, ui));
             }
             else if (red == 0 && green == 128 && blue == 0) // Coin blocks
             {
-                handler.addObject(new CoinBlock(j * 16, i * 16, 16, 16, 2, 3, ui));
+                handler.addObject(new CoinBlock(j * 16, i * 16, 3, ui));
+            }
+            else if (red == 255 && green == 0 && blue == 128) // Stairs
+            {
+                handler.addObject(new Block(j * 16, i * 16, 3, ui, BlockType::Stairs));
+            }
+            else if (red == 255 && green == 128 && blue == 0) // Flag
+            {
+                handler.addObject(new Block(j * 16, i * 16, 3, ui));
+            }
+            else if (red == 255 && green == 128 && blue == 64) // Level-up block
+            {
+                handler.addObject(new Block(j * 16, i * 16, 3, ui, BlockType::LevelUp));
+            }
+            else if (red == 40 && green == 170 && blue == 170) // Star block
+            {
+                handler.addObject(new Block(j * 16, i * 16, 3, ui, BlockType::Star));
+            }
+
+            else if (red == 255 && green == 0 && blue == 0) // Nap cong
+            {
+                handler.addObject(new Pipe(j * 16, i * 16, 32, 32, 0, 3, false, ui));
             }
             else if (red == 0 && green == 128 && blue == 255) // Normal pipes
             {
@@ -71,22 +100,6 @@ void LevelHandler::setLevel()
             else if (red == 185 && green == 122 && blue == 87) // Go-out pipes
             {
                 handler.addObject(new Pipe(j * 16, i * 16, 32, 32, 1, 3, true, ui));
-            }
-            else if (red == 255 && green == 0 && blue == 128) // Unbreakable blocks
-            {
-                handler.addObject(new Block(j * 16, i * 16, 16, 16, 28, 3, ui));
-            }
-            else if (red == 255 && green == 128 && blue == 0) // Flag
-            {
-                handler.addObject(new Block(j * 16, i * 16, 16, 16, 1, 3, ui));
-            }
-            else if (red == 255 && green == 128 && blue == 64) // Level-up block
-            {
-                handler.addObject(new Block(j * 16, i * 16, 16, 16, 2, 3, ui));
-            }
-            else if (red == 40 && green == 170 && blue == 170) // Star block
-            {
-                handler.addObject(new Block(j * 16, i * 16, 16, 16, 2, 3, ui));
             }
         }
     }

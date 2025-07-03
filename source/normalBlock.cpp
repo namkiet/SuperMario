@@ -3,8 +3,8 @@
 #include "player.h"
 using namespace std;
 
-NormalBlock::NormalBlock(float x, float y, int width, int height, int index, int scale, UI *ui)
-    : Block(x, y, width, height, index, scale, ui, BlockType::Normal), originalY(y*scale)
+NormalBlock::NormalBlock(float x, float y,  int scale, UI *ui)
+    : Block(x, y, scale, ui, BlockType::Normal), originalY(y*scale)
 {
     if (ui == nullptr)
     {

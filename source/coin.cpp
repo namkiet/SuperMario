@@ -2,8 +2,8 @@
 #include "coin.h"
 using namespace std;
 
-Coin::Coin(float x, float y, float width, float height, float scale, UI *ui)
-    : scale(scale), width(width), height(height), ui(ui), timeCount1(0), timeCount2(0)
+Coin::Coin(float x, float y, float scale, UI *ui)
+    : Item(x, y, scale, ui, ItemType ::Coin), ui(ui), timeCount1(0), timeCount2(0)
 {
     // cout << "In Coin constructor" << endl;
     if (ui == nullptr)
@@ -46,7 +46,7 @@ void Coin::render()
     }
     else if (state == CoinState::Normal)
     {
-        currentAnimation.drawAnimation(x, y, (float)(width * scale), (float)(height * scale)); // Draw the coin using the current animation
+        currentAnimation.drawAnimation(x, y, (float)getWidth(), (float)getHeight()); // Draw the coin using the current animation
         // DrawTextureEx(coinTextures[3], {x, y}, 0.0f, scale, WHITE); // Draw the first texture of the coin
     }
     else if (state == CoinState::CoinForCoinBlock)

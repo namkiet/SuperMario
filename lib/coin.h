@@ -1,8 +1,5 @@
 #pragma once
-#include "raylib.h"
-#include <vector>
-#include "animation.h"
-#include "UI.h"
+#include "item.h"
 
 enum class CoinState
 {
@@ -12,7 +9,7 @@ enum class CoinState
     Collected
 };
 
-class Coin
+class Coin: public Item
 {
 private:
     // For animation
@@ -37,7 +34,7 @@ private:
     CoinState state;
 
 public:
-    Coin(float x = 0, float y = 0, float width = 0, float height = 0, float scale = 0, UI *ui = nullptr);
+    Coin(float x = 0, float y = 0, float scale = 0, UI *ui = nullptr);
 
     void tick();
     void render();

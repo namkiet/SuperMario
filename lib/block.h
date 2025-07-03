@@ -11,15 +11,19 @@ enum class BlockType
     Normal,
     Question,
     Coin,
-    Brick,
-    Hidden,
-    Ground
+    Stairs,
+    Ground,
+    LevelUp,
+    Star
 };
 
 class Block : public GameObject
 {
 private:
     // Load UI assets
+    static const float WIDTH;
+    static const float HEIGHT;
+
     UI *ui;
 
     // Block textures
@@ -28,6 +32,7 @@ private:
     // Block properties
     float positionX;
     float positionY;
+
     int index = 0;
 
     // For debris
@@ -38,7 +43,7 @@ private:
 
 public:
     // Constructor
-    Block(int x = 0, int y = 0, int width = 0, int height = 0, int index = 0, int scale = 0, UI *ui = nullptr, BlockType type = BlockType::Normal);
+    Block(int x = 0, int y = 0, int scale = 0, UI *ui = nullptr, BlockType type = BlockType::Normal);
 
     // Update
     void tick();
@@ -57,11 +62,11 @@ public:
     //
     BlockType getBlockID();
 
-    // 
+    //
     bool isHit();
 
     //
-    virtual void playerCollision(GameObject* object);
+    virtual void playerCollision(GameObject *object);
 
     // Destructor
     ~Block();

@@ -2,12 +2,19 @@
 #include "questionBlock.h"
 using namespace std;
 
-QuestionBlock::QuestionBlock(float x, float y, int width, int height, int index, int scale, UI *ui)
-    : Block(x, y, width, height, index, scale, ui, BlockType::Question), originalY(y * scale)
+QuestionBlock::QuestionBlock(float x, float y, int scale, Handler *handler, UI *ui, QuestionBlockType type)
+    : Block(x, y, scale, ui, BlockType::Question), originalY(y * scale), type(type),
+      handler(handler), ui(ui), mushroom(nullptr), coin(nullptr)
 {
     if (ui == nullptr)
     {
         cerr << "UI is null in QuestionBlock constructor!" << endl;
+        return;
+    }
+
+    if (handler == nullptr)
+    {
+        cerr << "Handler is null in QuestionBlock constructor!" << endl;
         return;
     }
 
@@ -43,9 +50,34 @@ void QuestionBlock::tick()
             setY(originalY);
         }
     }
+    if (state == QuestionBlockState::BeforeHit && isHit())
+    {
+        if (type == QuestionBlockType ::Coin)
+        {
+            coin = new Coin(getX(), getY() - getHeight() - getHeight() / 4, getScale(), ui);
+        }
+        else if (type == QuestionBlockType::Mushroom)
+        {
+            mushroom = new Mushroom(getX() / getScale(), getY() / getScale(), getScale(), handler, ui);
+            handler->addObject(mushroom);
+        }
+        else if (type == QuestionBlockType::Flower)
+        {
+            // flower = new Flower(getX(), getY(), getScale(), ui);
+        }
+        else if (type == QuestionBlockType::Star)
+        {
+            // star = new Star(getX(), getY(), getScale(), ui);
+        }
+    }
     if (isHit())
     {
         state = QuestionBlockState::AfterHit;
+        if (type==QuestionBlockType::Coin)
+        {
+            coin->tick();
+        }
+        
     }
     currentAnimation.runAnimation();
 }
@@ -58,6 +90,24 @@ void QuestionBlock::render()
     }
     else if (state == QuestionBlockState::AfterHit)
     {
+        if (type == QuestionBlockType::Coin)
+        {
+            if (coin)
+                coin->render();
+        }
+        else if (type == QuestionBlockType::Mushroom)
+        {
+            if (mushroom)
+                mushroom->render();
+        }
+        else if (type == QuestionBlockType::Flower)
+        {
+            // flower->render();
+        }
+        else if (type == QuestionBlockType::Star)
+        {
+            // star->render();
+        }
         DrawTexturePro(questionBlockTextures[3],
                        {0.0f, 0.0f, (float)questionBlockTextures[3].width, (float)questionBlockTextures[3].height},
                        {getX(), getY(), getWidth(), getHeight()},

@@ -91,7 +91,7 @@ void Goomba::pipeCollision(GameObject *object)
     {
         // DrawText("Enemy hits the pipe from the bottom", 10, 30, 20, RED);
         setY(object->getY() + object->getHeight());
-        setVelY(0);
+        setVelY(0.0f);
         // cout << "Enemy hits the pipe from the bottom!" << endl;
         return;
     }
@@ -101,7 +101,7 @@ void Goomba::pipeCollision(GameObject *object)
     {
         // DrawText("Enemy hits the pipe from the top!", 10, 50, 20, RED);
         setY(object->getY() - getHeight());
-        setVelY(0);
+        setVelY(0.0f);
         return;
     }
 
