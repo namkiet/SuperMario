@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10...3.26)
 
-project(DS CXX)
+project(Mario CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
