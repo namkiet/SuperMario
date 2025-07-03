@@ -30,14 +30,14 @@ Koopa::Koopa(float x, float y, int index, int scale, Handler *handler, UI *ui)
     {
         normalKoopaTextures.push_back(koopaTextures[i]);
     }
-    normalKoopa = Animation(3, normalKoopaTextures);
+    normalKoopa = Animation(2, normalKoopaTextures);
 
     std::vector<Texture2D> shellKoopaTextures;
     for (int i = 4; i < 6; ++i)
     {
         shellKoopaTextures.push_back(koopaTextures[i]);
     }
-    shellKoopa = Animation(3, shellKoopaTextures);
+    shellKoopa = Animation(2, shellKoopaTextures);
 
     // Set the initial animation
     state = KoopaState::Normal;

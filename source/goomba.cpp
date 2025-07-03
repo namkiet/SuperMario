@@ -30,7 +30,7 @@ Goomba::Goomba(float x, float y, int index, int scale, Handler *handler, UI *ui)
     {
         normalGoombaTextures.push_back(goombaTextures[i]);
     }
-    normalGoomba = Animation(10, normalGoombaTextures);
+    normalGoomba = Animation(4, normalGoombaTextures);
 
     // Set the initial animation
     state = GoombaState::Normal;

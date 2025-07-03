@@ -8,6 +8,14 @@ Animation::Animation(int speed, std::vector<Texture2D> frameTextures)
 {
     this->frameTextures = frameTextures;
     frames = frameTextures.size();
+    if (frames == 0)
+    {
+        return;
+    }
+    else
+    {
+        currentFrame = this->frameTextures[0]; // Initialize with the first frame
+    }
 }
 
 void Animation::runAnimation()
