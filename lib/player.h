@@ -58,7 +58,7 @@ private:
     // For time count
     int timeCount = 0;
 
-    // 
+    //
     bool finishedCollisionChecking = false;
 
 public:
@@ -91,7 +91,10 @@ public:
     // For checking if the player is already check for collision
     bool playerFinishedCollisionChecking();
     void setPlayerFinishedCollisionChecking(bool finished);
-    
+
+    // For getting small or large mario
+    bool isSmallMario();
+
     // Destructor
     ~Player() = default; // Default destructor
 };

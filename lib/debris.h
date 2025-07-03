@@ -5,7 +5,9 @@
 class Debris
 {
 private:
+    // Debris texture
     std::vector<Texture2D> debris;
+
     Image debris_sheet;
     int scale;
     int width, height;

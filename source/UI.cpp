@@ -212,7 +212,7 @@ void UI::loadImages()
 {
     player_sheet = LoadImage(RES_PATH "character.png");
     enemy_sheet = LoadImage(RES_PATH "enemies.png");
-    npc_sheet = LoadImage(RES_PATH "item.jpg");
+    npc_sheet = LoadImage(RES_PATH "item.png");
     block_sheet = LoadImage(RES_PATH "block.png");
     tile_sheet = LoadImage(RES_PATH "tileset.png");
 
@@ -224,6 +224,7 @@ void UI::loadImages()
     getPipeTextures();
     getDebrisTextures();
     getEnemyTextures();
+    getItemTextures();
 }
 
 void UI::unloadImages()
@@ -285,6 +286,70 @@ void UI::unloadImages()
         UnloadTexture(texture);
     }
     for (auto &texture : enemy4)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : coin1)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : coin2)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : coin3)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : coin4)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : mushroom1)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : mushroom2)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : mushroom3)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : mushroom4)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : flower1)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : flower2)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : flower3)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : flower4)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : star1)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : star2)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : star3)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : star4)
     {
         UnloadTexture(texture);
     }
@@ -414,6 +479,248 @@ void UI::getEnemyTextures()
             else if (j == 3)
             {
                 enemy4[i] = texture;
+            }
+        }
+    }
+}
+
+std::vector<Texture2D> &UI::getCoin1()
+{
+    return coin1;
+}
+
+std::vector<Texture2D> &UI::getCoin2()
+{
+    return coin2;
+}
+
+std::vector<Texture2D> &UI::getCoin3()
+{
+    return coin3;
+}
+
+std::vector<Texture2D> &UI::getCoin4()
+{
+    return coin4;
+}
+
+std::vector<Texture2D> &UI::getMushroom1()
+{
+    return mushroom1;
+}
+
+std::vector<Texture2D> &UI::getMushroom2()
+{
+    return mushroom2;
+}
+
+std::vector<Texture2D> &UI::getMushroom3()
+{
+    return mushroom3;
+}
+
+std::vector<Texture2D> &UI::getMushroom4()
+{
+    return mushroom4;
+}
+
+std::vector<Texture2D> &UI::getFlower1()
+{
+    return flower1;
+}
+
+std::vector<Texture2D> &UI::getFlower2()
+{
+    return flower2;
+}
+
+std::vector<Texture2D> &UI::getFlower3()
+{
+    return flower3;
+}
+
+std::vector<Texture2D> &UI::getFlower4()
+{
+    return flower4;
+}
+
+std::vector<Texture2D> &UI::getStar1()
+{
+    return star1;
+}
+
+std::vector<Texture2D> &UI::getStar2()
+{
+    return star2;
+}
+
+std::vector<Texture2D> &UI::getStar3()
+{
+    return star3;
+}
+
+std::vector<Texture2D> &UI::getStar4()
+{
+    return star4;
+}
+
+void UI::getItemTextures()
+{
+    int x_off = 0;
+    int y_off = 0;
+    int width = 16;
+    int height = 16;
+
+    // For mushrooms
+    for (int j = 0; j < 4; ++j)
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            x_off += 9 * width * j;
+
+            Rectangle cropRect = {x_off + i * (width),
+                                  y_off,
+                                  width,
+                                  height};
+            if (cropRect.x + cropRect.width > npc_sheet.width || cropRect.y + cropRect.height > npc_sheet.height)
+            {
+                continue;
+            }
+            Image cropped = ImageFromImage(npc_sheet, cropRect);
+            Texture2D texture = LoadTextureFromImage(cropped);
+            UnloadImage(cropped);
+            if (j == 0)
+            {
+                mushroom1[i] = texture;
+            }
+            else if (j == 1)
+            {
+                mushroom2[i] = texture;
+            }
+            else if (j == 2)
+            {
+                mushroom3[i] = texture;
+            }
+            else if (j == 3)
+            {
+                mushroom4[i] = texture;
+            }
+        }
+    }
+
+    x_off = 0;
+    y_off += width * 2;
+
+    // For flowers
+    for (int j = 0; j < 4; ++j)
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            x_off += 9 * width * j;
+            Rectangle cropRect = {x_off + i * (width),
+                                  y_off,
+                                  width,
+                                  height};
+            if (cropRect.x + cropRect.width > npc_sheet.width || cropRect.y + cropRect.height > npc_sheet.height)
+            {
+                continue;
+            }
+            Image cropped = ImageFromImage(npc_sheet, cropRect);
+            Texture2D texture = LoadTextureFromImage(cropped);
+            UnloadImage(cropped);
+            if (j == 0)
+            {
+                flower1[i] = texture;
+            }
+            else if (j == 1)
+            {
+                flower2[i] = texture;
+            }
+            else if (j == 2)
+            {
+                flower3[i] = texture;
+            }
+            else if (j == 3)
+            {
+                flower4[i] = texture;
+            }
+        }
+    }
+
+    x_off = 0;
+    y_off += width;
+
+    // For stars
+    for (int j = 0; j < 4; ++j)
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            x_off += 9 * width * j;
+            Rectangle cropRect = {x_off + i * (width),
+                                  y_off,
+                                  width,
+                                  height};
+            if (cropRect.x + cropRect.width > npc_sheet.width || cropRect.y + cropRect.height > npc_sheet.height)
+            {
+                continue;
+            }
+            Image cropped = ImageFromImage(npc_sheet, cropRect);
+            Texture2D texture = LoadTextureFromImage(cropped);
+            UnloadImage(cropped);
+            if (j == 0)
+            {
+                star1[i] = texture;
+            }
+            else if (j == 1)
+            {
+                star2[i] = texture;
+            }
+            else if (j == 2)
+            {
+                star3[i] = texture;
+            }
+            else if (j == 3)
+            {
+                star4[i] = texture;
+            }
+        }
+    }
+
+    x_off = 0;
+    y_off += width * 3;
+
+    // For coins
+    for (int j = 0; j < 4; ++j)
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            x_off += 9 * width * j;
+            Rectangle cropRect = {x_off + i * (width),
+                                  y_off,
+                                  width,
+                                  height};
+            if (cropRect.x + cropRect.width > npc_sheet.width || cropRect.y + cropRect.height > npc_sheet.height)
+            {
+                continue;
+            }
+            Image cropped = ImageFromImage(npc_sheet, cropRect);
+            Texture2D texture = LoadTextureFromImage(cropped);
+            UnloadImage(cropped);
+            if (j == 0)
+            {
+                coin1[i] = texture;
+            }
+            else if (j == 1)
+            {
+                coin2[i] = texture;
+            }
+            else if (j == 2)
+            {
+                coin3[i] = texture;
+            }
+            else if (j == 3)
+            {
+                coin4[i] = texture;
             }
         }
     }

@@ -260,13 +260,15 @@ void Player::blockCollision(GameObject *object)
     Rectangle objectBoundsRight = object->getBoundsRight();
     Rectangle objectBoundsLeft = object->getBoundsLeft();
 
+    Block *block = dynamic_cast<Block *>(object);
+
     if (CheckCollisionRecs(boundsTop, objectBoundsBottom) && getVelY() < 0 && jumped)
     {
         // cout << "Address of the pointer: " << object << endl;
         // DrawText("Player hits the block from the top!", 10, 10, 20, RED);
         setY(object->getY() + object->getHeight());
         setVelY(0);
-        Block *block = dynamic_cast<Block *>(object);
+
         if (block != nullptr)
         {
             // cout << "Block hit detected!" << endl;
@@ -276,12 +278,36 @@ void Player::blockCollision(GameObject *object)
         {
             cerr << "Error: Object is not a Block!" << endl;
         }
-        removedBlocks.push_back(object); // Add to removed blocks
-        // for (auto &block : removedBlocks)
-        // {
-        //     cout << "Removed block address: " << block << endl; // Print addresses of removed blocks
-        // }
-        jumped = false;
+
+        if (block != nullptr && block->getBlockID() == BlockType::Question)
+        {
+            block->playerCollision(this); // Handle question block collision
+        }
+        else if (block != nullptr && block->getBlockID() == BlockType::Normal)
+        {
+            if (state == PlayerState::Small)
+            {
+                // cout << "Here" << endl;
+                block->playerCollision(this);
+            }
+            else if (state == PlayerState::Large)
+            {
+                // cout << "Here 2" << endl;
+                removedBlocks.push_back(object); // Add to removed blocks}
+            }
+        }
+        else if (block != nullptr && block->getBlockID() == BlockType::Coin)
+        {
+            // cout<< "Coin block hit detected!" << endl;
+            block->playerCollision(this);
+        }
+        else
+        {
+            removedBlocks.push_back(object); // Add to removed blocks
+        }
+
+        // Reset the jump state
+        // jumped = false;
     }
     if (CheckCollisionRecs(boundsBottom, objectBoundsTop))
     {
@@ -289,6 +315,7 @@ void Player::blockCollision(GameObject *object)
         // DrawText("Player hits the block from the bottom!", 10, 10, 20, RED);
         setY(object->getY() - getHeight());
         setVelY(0);
+
         jumped = false;
     }
     if (CheckCollisionRecs(boundsRight, objectBoundsLeft) && getVelX() > 0)
@@ -481,4 +508,10 @@ void Player::setPlayerFinishedCollisionChecking(bool finished)
 {
     // cout << "In Player::setPlayerFinishedCollisionChecking()" << endl;
     finishedCollisionChecking = finished;
+}
+
+bool Player::isSmallMario()
+{
+    // cout << "In Player::isSmallMario()" << endl;
+    return state == PlayerState::Small;
 }

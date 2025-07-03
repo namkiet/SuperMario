@@ -10,6 +10,7 @@ Animation::Animation(int speed, std::vector<Texture2D> frameTextures)
     frames = frameTextures.size();
     if (frames == 0)
     {
+        // cout<< "Error: No frames provided for animation." << endl;
         return;
     }
     else

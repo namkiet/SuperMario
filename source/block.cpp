@@ -103,3 +103,18 @@ Rectangle Block::getBoundsLeft()
                          getHeight()};
     return boundsLeft;
 }
+
+BlockType Block::getBlockID()
+{
+    return type;
+}
+
+bool Block::isHit()
+{
+    return hit;
+}
+
+void Block::playerCollision(GameObject *object)
+{
+
+}

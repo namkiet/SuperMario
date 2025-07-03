@@ -4,6 +4,7 @@
 #include "gameObject.h"
 #include "UI.h"
 #include "debris.h"
+#include "animation.h"
 
 enum class BlockType
 {
@@ -11,7 +12,8 @@ enum class BlockType
     Question,
     Coin,
     Brick,
-    Hidden
+    Hidden,
+    Ground
 };
 
 class Block : public GameObject
@@ -51,6 +53,15 @@ public:
     // For debris
     void setHit();
     bool shouldRemoveBlock();
+
+    //
+    BlockType getBlockID();
+
+    // 
+    bool isHit();
+
+    //
+    virtual void playerCollision(GameObject* object);
 
     // Destructor
     ~Block();

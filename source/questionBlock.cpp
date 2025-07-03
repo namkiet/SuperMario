@@ -3,7 +3,7 @@
 using namespace std;
 
 QuestionBlock::QuestionBlock(float x, float y, int width, int height, int index, int scale, UI *ui)
-    : Block(x, y, width, height, index, scale, ui, BlockType::Question)
+    : Block(x, y, width, height, index, scale, ui, BlockType::Question), originalY(y * scale)
 {
     if (ui == nullptr)
     {
@@ -24,16 +24,8 @@ QuestionBlock::QuestionBlock(float x, float y, int width, int height, int index,
         normalQuestionBlockTextures.push_back(questionBlockTextures[i]);
     }
 
-    // Temporary vectors to hold textures for hit animations
-    std::vector<Texture2D> hitQuestionBlockTextures;
-    for (int i = 3; i < 4; ++i)
-    {
-        hitQuestionBlockTextures.push_back(questionBlockTextures[i]);
-    }
-
     // Initialize animations
-    normalQuestionBlock = Animation(10, normalQuestionBlockTextures);
-    hitQuestionBlock = Animation(10, hitQuestionBlockTextures);
+    normalQuestionBlock = Animation(15, normalQuestionBlockTextures);
 
     // Set the initial state and animation
     state = QuestionBlockState::BeforeHit;
@@ -42,11 +34,42 @@ QuestionBlock::QuestionBlock(float x, float y, int width, int height, int index,
 
 void QuestionBlock::tick()
 {
-    Block::tick();
+    // Block::tick();
+    if (timeCount > 0)
+    {
+        --timeCount;
+        if (timeCount == 0)
+        {
+            setY(originalY);
+        }
+    }
+    if (isHit())
+    {
+        state = QuestionBlockState::AfterHit;
+    }
     currentAnimation.runAnimation();
 }
 
 void QuestionBlock::render()
 {
-    currentAnimation.drawAnimation(getX(), getY(), (float)getWidth(), (float)getHeight());
+    if (state == QuestionBlockState::BeforeHit)
+    {
+        currentAnimation.drawAnimation(getX(), getY(), (float)getWidth(), (float)getHeight());
+    }
+    else if (state == QuestionBlockState::AfterHit)
+    {
+        DrawTexturePro(questionBlockTextures[3],
+                       {0.0f, 0.0f, (float)questionBlockTextures[3].width, (float)questionBlockTextures[3].height},
+                       {getX(), getY(), getWidth(), getHeight()},
+                       {0.0f, 0.0f}, 0.0f, WHITE); // Draw the hit question block texture
+    }
+}
+
+void QuestionBlock::playerCollision(GameObject *object)
+{
+    if (state == QuestionBlockState::BeforeHit)
+    {
+        setY(originalY - getHeight() / 4);
+        timeCount = 10;
+    }
 }

@@ -6,7 +6,8 @@
 #include "goomba.h"
 #include "koopa.h"
 #include "questionBlock.h"
-
+#include "normalBlock.h"
+#include "coinBlock.h"
 using namespace std;
 
 LevelHandler::LevelHandler(Handler handler, UI *ui) : handler(handler), ui(ui)
@@ -49,15 +50,15 @@ void LevelHandler::setLevel()
             }
             else if (red == 128 && green == 128 && blue == 255) // Breakable blocks
             {
-                handler.addObject(new Block(j * 16, i * 16, 16, 16, 1, 3, ui));
+                handler.addObject(new NormalBlock(j * 16, i * 16, 16, 16, 1, 3, ui));
             }
             else if (red == 255 && green == 0 && blue == 0) // Nap cong
             {
                 handler.addObject(new Pipe(j * 16, i * 16, 32, 32, 0, 3, false, ui));
             }
-            else if (red == 0 && green == 128 && blue == 0) // Special blocks
+            else if (red == 0 && green == 128 && blue == 0) // Coin blocks
             {
-                handler.addObject(new Block(j * 16, i * 16, 16, 16, 2, 3, ui));
+                handler.addObject(new CoinBlock(j * 16, i * 16, 16, 16, 2, 3, ui));
             }
             else if (red == 0 && green == 128 && blue == 255) // Normal pipes
             {
@@ -80,6 +81,10 @@ void LevelHandler::setLevel()
                 handler.addObject(new Block(j * 16, i * 16, 16, 16, 1, 3, ui));
             }
             else if (red == 255 && green == 128 && blue == 64) // Level-up block
+            {
+                handler.addObject(new Block(j * 16, i * 16, 16, 16, 2, 3, ui));
+            }
+            else if (red == 40 && green == 170 && blue == 170) // Star block
             {
                 handler.addObject(new Block(j * 16, i * 16, 16, 16, 2, 3, ui));
             }
