@@ -2,17 +2,23 @@
 #include "item.h"
 #include "handler.h"
 
-enum class MushroomState
+enum class StarState
 {
-    Normal,   // Normal state
-    Collected // Collected state
+    Normal,
+    Collected
 };
 
-class Mushroom : public Item
+class Star : public Item
 {
 private:
+    // For animation
+    Animation currentAnimation;
+
     // For textures
     std::vector<Texture2D> textures;
+
+    // State
+    StarState state;
 
     // Timer
     int timeCount = 0;
@@ -20,21 +26,20 @@ private:
     //
     bool isCollected = false;
 
-    // state
-    MushroomState state;
-
     // Handler pointer
     Handler *handler;
 
     // UI pointer
     UI *ui;
 
-    //
-    float originalY = 0; // Original Y position for gravity effect
+    // Original Y position for gravity effect
+    float originalY = 0;
+
+    // First time flag for gravity effect
     bool firstTime = true;
 
 public:
-    Mushroom(float x = 0, float y = 0, int scale = 0, Handler *handler = nullptr, UI *ui = nullptr);
+    Star(float x = 0, float y = 0, int scale = 0, Handler *handler = nullptr, UI *ui = nullptr);
 
     // Update
     void tick();

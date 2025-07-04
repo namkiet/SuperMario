@@ -4,8 +4,8 @@
 
 #include "coin.h"
 #include "mushroom.h"
-// #include "flower.h"
-// #include "star.h"
+#include "flower.h"
+#include "star.h"
 
 enum class QuestionBlockType
 {
@@ -41,8 +41,8 @@ private:
 
     Coin* coin; // For Coin Question Block
     Mushroom* mushroom; // For Mushroom Question Block
-    // Flower* flower; // For Flower Question Block
-    // Star* star; // For Star Question Block
+    Flower* flower; // For Flower Question Block
+    Star* star; // For Star Question Block
 
     // Ui pointer
     UI *ui;

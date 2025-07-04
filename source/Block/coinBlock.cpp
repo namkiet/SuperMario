@@ -24,7 +24,8 @@ CoinBlock::CoinBlock(float x, float y, int scale, UI *ui)
 void CoinBlock::tick()
 {
     --waitingTime;
-    // Block::tick(); // Call the base class tick method
+
+    // For bounce effect
     if (timeCount > 0)
     {
         --timeCount;
@@ -36,14 +37,13 @@ void CoinBlock::tick()
 
     if (isHit() && state == CoinBlockState::BeforeHit)
     {
-        coin = new Coin(getX(), getY() - getHeight() - getHeight() / 4, getScale(), ui); // Create a coin at the block's position
+        coin = new Coin(getX() / getScale(), (getY() - getHeight() - getHeight() / 4) / getScale(), getScale(), ui); // Create a coin at the block's position
         state = CoinBlockState::Hit;
     }
     if (state == CoinBlockState::Hit && coin)
     {
         coin->tick();
     }
-
 
     if (isCollected)
     {
@@ -109,7 +109,7 @@ CoinBlock::~CoinBlock()
 {
     if (coin != nullptr)
     {
-        delete coin; // Clean up the coin object
+        delete coin;    // Clean up the coin object
         coin = nullptr; // Set to nullptr to avoid dangling pointer
     }
 }

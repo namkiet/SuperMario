@@ -23,9 +23,6 @@ Mushroom::Mushroom(float x, float y, int scale, Handler *handler, UI *ui)
     // Set the initial state
     state = MushroomState::Normal;
 
-    // Set the initial speed
-    speed = -2.0f;
-
     // cout << "In Mushroom constructor" << endl;
 }
 

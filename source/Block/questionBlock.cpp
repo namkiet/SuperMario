@@ -4,7 +4,7 @@ using namespace std;
 
 QuestionBlock::QuestionBlock(float x, float y, int scale, Handler *handler, UI *ui, QuestionBlockType type)
     : Block(x, y, scale, ui, BlockType::Question), originalY(y * scale), type(type),
-      handler(handler), ui(ui), mushroom(nullptr), coin(nullptr)
+      handler(handler), ui(ui), mushroom(nullptr), coin(nullptr), flower(nullptr), star(nullptr)
 {
     if (ui == nullptr)
     {
@@ -54,7 +54,7 @@ void QuestionBlock::tick()
     {
         if (type == QuestionBlockType ::Coin)
         {
-            coin = new Coin(getX(), getY() - getHeight() - getHeight() / 4, getScale(), ui);
+            coin = new Coin(getX() / getScale(), (getY() - getHeight() - getHeight() / 4) / getScale(), getScale(), ui);
         }
         else if (type == QuestionBlockType::Mushroom)
         {
@@ -63,21 +63,30 @@ void QuestionBlock::tick()
         }
         else if (type == QuestionBlockType::Flower)
         {
-            // flower = new Flower(getX(), getY(), getScale(), ui);
+            if (handler->getPlayer()->isSmallMario())
+            {
+                mushroom = new Mushroom(getX() / getScale(), getY() / getScale(), getScale(), handler, ui);
+                handler->addObject(mushroom);
+            }
+            else
+            {
+                flower = new Flower(getX() / getScale(), (originalY - getHeight()) / getScale(), getScale(), ui);
+                handler->addObject(flower);
+            }
         }
         else if (type == QuestionBlockType::Star)
         {
-            // star = new Star(getX(), getY(), getScale(), ui);
+            star = new Star(getX() / getScale(), getY() / getScale(), getScale(), handler, ui);
+            handler->addObject(star);
         }
     }
     if (isHit())
     {
         state = QuestionBlockState::AfterHit;
-        if (type==QuestionBlockType::Coin)
+        if (type == QuestionBlockType::Coin)
         {
             coin->tick();
         }
-        
     }
     currentAnimation.runAnimation();
 }
@@ -102,11 +111,13 @@ void QuestionBlock::render()
         }
         else if (type == QuestionBlockType::Flower)
         {
-            // flower->render();
+            if (flower)
+                flower->render();
         }
         else if (type == QuestionBlockType::Star)
         {
-            // star->render();
+            if (star)
+                star->render();
         }
         DrawTexturePro(questionBlockTextures[3],
                        {0.0f, 0.0f, (float)questionBlockTextures[3].width, (float)questionBlockTextures[3].height},

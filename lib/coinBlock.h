@@ -43,8 +43,8 @@ public:
     CoinBlock(float x = 0, float y = 0, int scale = 0, UI *ui = nullptr);
 
     // Update
-    void tick() override;
-    void render() override;
+    void tick();
+    void render();
 
     void playerCollision(GameObject *object);
 

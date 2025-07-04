@@ -8,6 +8,8 @@
 #include "questionBlock.h"
 #include "normalBlock.h"
 #include "coinBlock.h"
+#include "starBlock.h"
+
 using namespace std;
 
 LevelHandler::LevelHandler(Handler handler, UI *ui) : handler(handler), ui(ui)
@@ -82,9 +84,8 @@ void LevelHandler::setLevel()
             }
             else if (red == 40 && green == 170 && blue == 170) // Star block
             {
-                handler.addObject(new Block(j * 16, i * 16, 3, ui, BlockType::Star));
+                handler.addObject(new StarBlock(j * 16, i * 16, 3, &handler, ui));
             }
-
             else if (red == 255 && green == 0 && blue == 0) // Nap cong
             {
                 handler.addObject(new Pipe(j * 16, i * 16, 32, 32, 0, 3, false, ui));

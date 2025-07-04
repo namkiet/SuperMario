@@ -12,9 +12,9 @@ Coin::Coin(float x, float y, float scale, UI *ui)
         return;
     }
 
-    // Set the position of the coin
-    this->x = x;
-    this->y = y;
+    // Set the position of the coin -> Different from other
+    // this->x = x;
+    // this->y = y;
 
     // Load textures
     coinTextures = ui->getCoin1(); // Get the coin textures from UI
@@ -46,7 +46,7 @@ void Coin::render()
     }
     else if (state == CoinState::Normal)
     {
-        currentAnimation.drawAnimation(x, y, (float)getWidth(), (float)getHeight()); // Draw the coin using the current animation
+        currentAnimation.drawAnimation(getX(), getY(), (float)getWidth(), (float)getHeight()); // Draw the coin using the current animation
         // DrawTextureEx(coinTextures[3], {x, y}, 0.0f, scale, WHITE); // Draw the first texture of the coin
     }
     else if (state == CoinState::CoinForCoinBlock)

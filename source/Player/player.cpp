@@ -298,7 +298,12 @@ void Player::blockCollision(GameObject *object)
         }
         else if (block != nullptr && block->getBlockID() == BlockType::Coin)
         {
-            // cout<< "Coin block hit detected!" << endl;
+            // cout << "Coin block hit detected!" << endl;
+            block->playerCollision(this);
+        }
+        else if (block != nullptr && block->getBlockID() == BlockType::Star)
+        {
+            // cout << "Star block hit detected!" << endl;
             block->playerCollision(this);
         }
         else
@@ -349,7 +354,7 @@ void Player::pipeCollision(GameObject *object)
         // DrawText("Player hits the pipe from the bottom", 10, 30, 20, RED);
         setY(object->getY() + object->getHeight());
         setVelY(0);
-        jumped = false;
+        // jumped = false;
     }
 
     // Check for collision with the top bounds of the object
