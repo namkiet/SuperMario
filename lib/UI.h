@@ -1,6 +1,7 @@
 #pragma once
 #include <raylib.h>
 #include <vector>
+#include <stdio.h>
 // #define RES_PATH "C:\\Minh Tam\\CS202_Project\\res\\"
 
 class UI
@@ -95,6 +96,10 @@ private:
     Image levelImage;
     Image characterImage;
 
+    Music overworldBackGround;
+    Music levelup;
+    Music gameover;
+
 public:
     // Constructor
     UI();
@@ -144,10 +149,15 @@ public:
     std::vector<Texture2D> &getBlueLarge();
     std::vector<Texture2D> &getBlueSmall();
 
+    Music &getOverworldBackGround();
+    Music &getLevelUp();
+    Music &getGameOver();
     Image &getLevelImage();
     Image &getCharacterImage();
 
     // Load and unload images
     void loadImages();
+    void loadAudio();
     void unloadImages();
+    void unloadAudio();
 };

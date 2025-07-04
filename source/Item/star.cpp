@@ -174,18 +174,19 @@ void Star::blockCollision(GameObject *object)
     }
     else
     {
-    }
-    if (CheckCollisionRecs(boundsTop, objectBoundsBottom))
-    {
-        setY(object->getY() + object->getHeight());
-        setVelY(0.0f);
-    }
+        if (CheckCollisionRecs(boundsTop, objectBoundsBottom))
+        {
+            setY(object->getY() + object->getHeight());
+            setVelY(0.0f);
+        }
 
-    if (CheckCollisionRecs(boundsBottom, objectBoundsTop))
-    {
-        setY(object->getY() - getHeight());
-        setVelY(0.0f);
-        GameObject::collision();
+        if (CheckCollisionRecs(boundsBottom, objectBoundsTop))
+        {
+            setY(object->getY() - getHeight() * 2.0f);
+            setVelX(2.0f);
+            setVelY(0.0f);
+            GameObject::collision();
+        }
     }
 }
 

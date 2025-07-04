@@ -256,14 +256,14 @@ UI::UI() : tile_sheet{nullptr}, game_over_sheet{nullptr}, intro_sheet{nullptr},
 
 void UI::loadImages()
 {
-    player_sheet = LoadImage(RES_PATH "character.png");
-    enemy_sheet = LoadImage(RES_PATH "enemies.png");
-    npc_sheet = LoadImage(RES_PATH "item.png");
-    block_sheet = LoadImage(RES_PATH "block.png");
-    tile_sheet = LoadImage(RES_PATH "tileset.png");
+    player_sheet = LoadImage(RES_PATH "Sprites/character.png");
+    enemy_sheet = LoadImage(RES_PATH "Sprites/enemies.png");
+    npc_sheet = LoadImage(RES_PATH "Sprites/item.png");
+    block_sheet = LoadImage(RES_PATH "Sprites/block.png");
+    tile_sheet = LoadImage(RES_PATH "Sprites/tileset.png");
 
-    levelImage = LoadImage(RES_PATH "map11.png");
-    characterImage = LoadImage(RES_PATH "map11c.png");
+    levelImage = LoadImage(RES_PATH "Levels/map11.png");
+    characterImage = LoadImage(RES_PATH "Levels/map11c.png");
 
     getLargePlayerTextures();
     getSmallPlayerTextures();
@@ -884,4 +884,33 @@ std::vector<Texture2D> &UI::getGreenSmall()
 std::vector<Texture2D> &UI::getBlueSmall()
 {
     return marioSmallBlue;
+}
+
+void UI::loadAudio()
+{
+    overworldBackGround = LoadMusicStream(RES_PATH "Sounds/Background.mp3");
+    levelup = LoadMusicStream(RES_PATH "Sounds/1up.wav");
+    gameover = LoadMusicStream(RES_PATH "Sounds/gameover.wav");
+}
+
+void UI::unloadAudio()
+{
+    UnloadMusicStream(overworldBackGround);
+    UnloadMusicStream(levelup);
+    UnloadMusicStream(gameover);
+}
+
+Music &UI::getOverworldBackGround()
+{
+    return overworldBackGround;
+}
+
+Music &UI::getLevelUp()
+{
+    return levelup;
+}
+
+Music &UI::getGameOver()
+{
+    return gameover;
 }
