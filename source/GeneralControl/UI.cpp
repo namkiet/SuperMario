@@ -35,37 +35,84 @@ UI::~UI()
 {
 }
 
-void UI::getPlayerTextures()
+void UI::getLargePlayerTextures()
 {
     int x_off = 80;
     int y_off = 1;
     int width = 16;
     int height = 32;
-    for (int i = 0; i < MARIO_L_COUNT; ++i)
-    {
-        Rectangle cropRect = {x_off + i * (width + 1),
-                              y_off,
-                              width,
-                              height};
-        Image cropped = ImageFromImage(player_sheet, cropRect);
-        Texture2D texture = LoadTextureFromImage(cropped);
-        UnloadImage(cropped);
 
-        marioLarge[i] = texture;
+    // Large Mario
+    for (int j = 0; j < 7; ++j)
+    {
+        for (int i = 0; i < MARIO_L_COUNT; ++i)
+        {
+            Rectangle cropRect = {x_off + i * (width + 1),
+                                  y_off,
+                                  width,
+                                  height};
+            Image cropped = ImageFromImage(player_sheet, cropRect);
+            Texture2D texture = LoadTextureFromImage(cropped);
+            UnloadImage(cropped);
+
+            if (j == 0)
+                marioLarge[i] = texture;
+            else if (j == 1)
+                luigiLarge[i] = texture; // Luigi textures
+            else if (j == 2)
+                marioLargeFire[i] = texture;
+            else if (j == 3)
+                marioLargeRed[i] = texture;
+            else if (j == 4)
+                marioLargeBlack[i] = texture;
+            else if (j == 5)
+                marioLargeGreen[i] = texture;
+            else if (j == 6)
+                marioLargeBlue[i] = texture;
+        }
+        if (j == 0)
+            y_off += height * 2 + 1;
+        else if (j == 1 || j == 2 || j == 3 || j == 4 || j == 5)
+            y_off += height * 2 - 1;
     }
+}
 
-    y_off += height + 1;
-    height = 16;
-    for (int i = 0; i < MARIO_S_COUNT; ++i)
+void UI::getSmallPlayerTextures()
+{
+    int x_off = 80;
+    int y_off = 34;
+    int width = 16;
+    int height = 16;
+    for (int j = 0; j < 7; ++j)
     {
-        Rectangle cropRect = {x_off + i * (width + 1),
-                              y_off,
-                              width,
-                              height};
-        Image cropped = ImageFromImage(player_sheet, cropRect);
-        Texture2D texture = LoadTextureFromImage(cropped);
-        UnloadImage(cropped);
-        marioSmall[i] = texture;
+        for (int i = 0; i < MARIO_S_COUNT; ++i)
+        {
+            Rectangle cropRect = {x_off + i * (width + 1),
+                                  y_off,
+                                  width,
+                                  height};
+            Image cropped = ImageFromImage(player_sheet, cropRect);
+            Texture2D texture = LoadTextureFromImage(cropped);
+            UnloadImage(cropped);
+            if (j == 0)
+                marioSmall[i] = texture; // Mario small textures
+            else if (j == 1)
+                luigiSmall[i] = texture; // Luigi small textures
+            else if (j == 2)
+                marioSmallFire[i] = texture;
+            else if (j == 3)
+                marioSmallRed[i] = texture;
+            else if (j == 4)
+                marioSmallBlack[i] = texture;
+            else if (j == 5)
+                marioSmallGreen[i] = texture;
+            else if (j == 6)
+                marioSmallBlue[i] = texture;
+        }
+        if (j == 0)
+            y_off += height * 4 + 1;
+        else if (j == 1 || j == 2 || j == 3 || j == 4 || j == 5)
+            y_off += height * 4 - 1;
     }
 }
 
@@ -103,7 +150,6 @@ void UI::getTileTextures()
             }
             else if (j == 2)
             {
-
                 tile3[i] = texture;
             }
             else if (j == 3)
@@ -219,7 +265,8 @@ void UI::loadImages()
     levelImage = LoadImage(RES_PATH "map11.png");
     characterImage = LoadImage(RES_PATH "map11c.png");
 
-    getPlayerTextures();
+    getLargePlayerTextures();
+    getSmallPlayerTextures();
     getTileTextures();
     getPipeTextures();
     getDebrisTextures();
@@ -350,6 +397,61 @@ void UI::unloadImages()
         UnloadTexture(texture);
     }
     for (auto &texture : star4)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : marioLargeFire)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : marioLargeRed)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : marioLargeBlack)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : marioLargeGreen)
+    {
+        UnloadTexture(texture);
+    }
+    for (auto &texture : marioLargeBlue)
+    {
+        UnloadTexture(texture);
+    }
+
+    for (auto &texture : luigiLarge)
+    {
+        UnloadTexture(texture);
+    }
+
+    for (auto &texture : luigiSmall)
+    {
+        UnloadTexture(texture);
+    }
+
+    for (auto &texture : marioSmallFire)
+    {
+        UnloadTexture(texture);
+    }
+
+    for (auto &texture : marioSmallRed)
+    {
+        UnloadTexture(texture);
+    }
+
+    for (auto &texture : marioSmallBlack)
+    {
+        UnloadTexture(texture);
+    }
+
+    for (auto &texture : marioSmallGreen)
+    {
+        UnloadTexture(texture);
+    }
+
+    for (auto &texture : marioSmallBlue)
     {
         UnloadTexture(texture);
     }
@@ -724,4 +826,62 @@ void UI::getItemTextures()
             }
         }
     }
+}
+
+std::vector<Texture2D> &UI::getLuigiLarge()
+{
+    return luigiLarge;
+}
+
+std::vector<Texture2D> &UI::getLuigiSmall()
+{
+    return luigiSmall;
+}
+
+std::vector<Texture2D> &UI::getFireLarge()
+{
+    return marioLargeFire;
+}
+std::vector<Texture2D> &UI::getRedLarge()
+{
+    return marioLargeRed;
+}
+std::vector<Texture2D> &UI::getBlackLarge()
+{
+    return marioLargeBlack;
+}
+
+std::vector<Texture2D> &UI::getGreenLarge()
+{
+    return marioLargeGreen;
+}
+
+std::vector<Texture2D> &UI::getBlueLarge()
+{
+    return marioLargeBlue;
+}
+
+std::vector<Texture2D> &UI::getFireSmall()
+{
+    return marioSmallFire;
+}
+
+std::vector<Texture2D> &UI::getRedSmall()
+{
+    return marioSmallRed;
+}
+
+std::vector<Texture2D> &UI::getBlackSmall()
+{
+    return marioSmallBlack;
+}
+
+std::vector<Texture2D> &UI::getGreenSmall()
+{
+    return marioSmallGreen;
+}
+
+std::vector<Texture2D> &UI::getBlueSmall()
+{
+    return marioSmallBlue;
 }

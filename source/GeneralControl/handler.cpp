@@ -58,7 +58,7 @@ void Handler::render()
             cerr << "Warning: Found nullptr in gameObjects during render!" << endl;
             continue;
         }
-        if (gameObject->getID() == GameObject::ObjectID::Player)
+        if (gameObject->getID() == ObjectID::Player)
         {
             continue;
         }

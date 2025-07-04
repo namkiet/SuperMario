@@ -70,3 +70,8 @@ void Animation::reset()
     count = 0;
     currentFrame = frameTextures[0]; // Start at the beginning
 }
+
+int Animation::getCurrentFrameIndex()
+{
+    return count + 1;
+}

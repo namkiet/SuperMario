@@ -49,3 +49,13 @@ void Flower::playerCollision()
 {
     isCollected = true;
 }
+
+bool Flower::shouldRemoveItem()
+{
+    return state == FlowerState::Collected;
+}
+
+bool Flower::isStomped() // meaning that the flower is collected
+{
+    return isCollected;
+}

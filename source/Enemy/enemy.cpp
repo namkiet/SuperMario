@@ -92,6 +92,7 @@ Enemy::~Enemy()
 
 void Enemy::collision()
 {
+
     const auto &gameObjects = handler->getGameObjects();
 
     for (const auto &object : gameObjects)
@@ -119,6 +120,7 @@ void Enemy::collision()
             pipeCollision(object);
         }
     }
+
 }
 
 void Enemy::pipeCollision(GameObject *object)

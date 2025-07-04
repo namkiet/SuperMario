@@ -1,5 +1,6 @@
 #include <iostream>
 #include "star.h"
+#include "block.h"
 using namespace std;
 
 Star::Star(float x, float y, int scale, Handler *handler, UI *ui)
@@ -65,7 +66,7 @@ void Star::tick()
             firstTime = false;
             setY(originalY - getHeight() + getHeight() / 4);
             setVelY(0.0f);
-            setVelX(2.0f);
+            setVelX(4.0f);
         }
         currentAnimation.runAnimation();
     }
@@ -77,19 +78,20 @@ void Star::tick()
 
 void Star::collision()
 {
+
     const auto &objects = handler->getGameObjects();
 
     for (auto &object : objects)
     {
-        if (object->getID() == GameObject::ObjectID::Block)
+        if (object->getID() == ObjectID::Block)
         {
             blockCollision(object);
         }
-        else if (object->getID() == GameObject::ObjectID::Pipe)
+        else if (object->getID() == ObjectID::Pipe)
         {
             pipeCollision(object);
         }
-        else if (object->getID() == GameObject::ObjectID::Player)
+        else if (object->getID() == ObjectID::Player)
         {
             continue;
         }
@@ -154,6 +156,25 @@ void Star::blockCollision(GameObject *object)
     Rectangle objectBoundsRight = object->getBoundsRight();
     Rectangle objectBoundsLeft = object->getBoundsLeft();
 
+    Block *block = dynamic_cast<Block *>(object);
+
+    if (block && block->getBlockID() == BlockType::Stairs)
+    {
+        if (CheckCollisionRecs(boundsRight, objectBoundsLeft))
+        {
+            setX(object->getX() - getWidth());
+            setVelX(-abs(getVelX())); // Move left after hitting right wall
+        }
+
+        if (CheckCollisionRecs(boundsLeft, objectBoundsRight))
+        {
+            setX(object->getX() + object->getWidth());
+            setVelX(abs(getVelX())); // Move right after hitting left wall
+        }
+    }
+    else
+    {
+    }
     if (CheckCollisionRecs(boundsTop, objectBoundsBottom))
     {
         setY(object->getY() + object->getHeight());
@@ -164,13 +185,16 @@ void Star::blockCollision(GameObject *object)
     {
         setY(object->getY() - getHeight());
         setVelY(0.0f);
+        GameObject::collision();
     }
+}
 
-    if (CheckCollisionRecs(boundsRight, objectBoundsLeft))
-    {
-    }
+bool Star::shouldRemoveItem()
+{
+    return state == StarState::Collected;
+}
 
-    if (CheckCollisionRecs(boundsLeft, objectBoundsRight))
-    {
-    }
+bool Star::isStomped()
+{
+    return isCollected;
 }

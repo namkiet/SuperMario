@@ -2,14 +2,14 @@
 #include <raylib.h>
 #include "player.h"
 #include "block.h"
+#include "item.h"
 using namespace std;
 
 const float Player::WIDTH = 16.0f;
 const float Player::HEIGHT = 16.0f;
 
-Player::Player(float x, float y, int index, int scale, Handler *handler, UI *ui)
-    : GameObject(x, y, ObjectID::Player, WIDTH, HEIGHT, scale),
-      handler(handler), ui(ui), index(index), playerWalkL(), playerWalkS()
+Player::Player(float x, float y, int scale, Handler *handler, UI *ui, PlayerID id, PlayerType type, PlayerState state)
+    : GameObject(x, y, ObjectID::Player, WIDTH, HEIGHT, scale), handler(handler), ui(ui), originalScale(scale), originalHeight(HEIGHT)
 {
     if (handler == nullptr)
     {
@@ -23,29 +23,14 @@ Player::Player(float x, float y, int index, int scale, Handler *handler, UI *ui)
         return;
     }
 
-    playerTexturesLarge = ui->getMarioLarge();
-    playerTexturesSmall = ui->getMarioSmall();
+    // Load player textures from UI
+    LoadPlayerTextures();
+    LoadRandomTextures();
 
-    if (playerTexturesLarge.empty() || playerTexturesSmall.empty())
-    {
-        cerr << "Player textures not loaded correctly!" << endl;
-    }
-
-    // Temporary vectors to hold textures for animations
-    for (int i = 1; i < 4; ++i)
-    {
-        largeTemp.push_back(playerTexturesLarge[i]);
-        smallTemp.push_back(playerTexturesSmall[i]);
-    }
-
-    // Initialize animations with the temporary texture vectors
-    playerWalkL = Animation(5, largeTemp);
-    playerWalkS = Animation(5, smallTemp);
-
-    // Set the initial animation
-    state = PlayerState::Small;                  // Start with large player
-    currentPlayerTextures = playerTexturesSmall; // Start with small player textures
-    currentAnimation = playerWalkS;              // Start with small player animation
+    // Set the player ID, state and type
+    setPlayerID(id);
+    setState(state);
+    setType(type);
 
     // Player forward direction
     forward = true;
@@ -53,9 +38,33 @@ Player::Player(float x, float y, int index, int scale, Handler *handler, UI *ui)
 
 void Player::tick()
 {
+    --timeCountForRandomTextures;
+    --timeCountForGrowingUp;
+
+    if (type == PlayerType::RandomBeforeFire && timeCountForRandomTextures <= 0) // For flower
+    {
+        setType(PlayerType::Fire);
+        timeCountForRandomTextures = 0;
+    }
+    else if (type == PlayerType::Star && timeCountForRandomTextures <= 0)
+    {
+        setType(previousType); // Set to previous type
+        timeCountForRandomTextures = 0;
+    }
+    else if (state == PlayerState::GrowingUp && getHeight() < originalHeight * 2 * originalScale && timeCountForGrowingUp <= 0)
+    {
+        setState(PlayerState::GrowingUp); // Continue growing up
+        timeCountForGrowingUp = 15;       // Reset the timer for growing up
+    }
+    else if (state == PlayerState::GrowingUp && getHeight() >= originalHeight * 2 * originalScale)
+    {
+        setState(PlayerState::Large); // Finished growing up
+    }
+
     // finishedCollisionChecking = false;
     // cout<<"In Player::tick()" << endl;
     applyGravity();
+
     if (!isPlayingDeath)
         collision();
 
@@ -69,27 +78,97 @@ void Player::render()
 {
     if (isPlayingDeath)
     {
-        DrawTexturePro(currentPlayerTextures[6],
-                       {0.0f, 0.0f, (float)currentPlayerTextures[6].width, (float)currentPlayerTextures[6].height},
-                       {getX(), getY(), getWidth(), getHeight()},
-                       {0.0f, 0.0f}, 0.0f, WHITE); // Draw small player texture}
-        ++timeCount;
+        // if Mario is large, turn to small Mario
+        // if Mario is small, die
+        if (state == PlayerState::Large)
+        {
+            setState(PlayerState::Small);
+            setType(PlayerType::Normal);
+            if (forward)
+            {
+                DrawTexturePro(idleTexture,
+                               {0.0f, 0.0f, (float)idleTexture.width, (float)idleTexture.height},
+                               {getX(), getY(), getWidth(), getHeight()},
+                               {0.0f, 0.0f}, 0.0f, WHITE); // Draw small player texture}
+            }
+            else
+            {
+                DrawTexturePro(idleTexture,
+                               {(float)idleTexture.width, 0.0f, -(float)idleTexture.width, (float)idleTexture.height},
+                               {getX(), getY(), (getWidth()), getHeight()},
+                               {0.0f, 0.0f}, 0.0f, WHITE); // Draw small player texture
+            }
+            isPlayingDeath = false;
+        }
+        else
+        {
+            DrawTexturePro(deadTexture,
+                           {0.0f, 0.0f, (float)deadTexture.width, (float)deadTexture.height},
+                           {getX(), getY(), getWidth(), getHeight()},
+                           {0.0f, 0.0f}, 0.0f, WHITE); // Draw small player texture}
+            ++timeCountForDeath;
+        }
     }
     else if (jumped)
     {
         if (forward)
         {
-            DrawTexturePro(currentPlayerTextures[5],
-                           {0.0f, 0.0f, (float)currentPlayerTextures[5].width, (float)currentPlayerTextures[5].height},
-                           {getX(), getY(), getWidth(), getHeight()},
-                           {0.0f, 0.0f}, 0.0f, WHITE); // Draw small player texture
+            if (type == PlayerType::Star)
+            {
+                // cout << "Drawing star mode jump texture" << endl;
+                if (state == PlayerState::Large)
+                {
+                    currentAnimation = Animation(1, starModeLargeTexturesJump);
+                    currentAnimation.reset();
+                    currentAnimation.drawAnimation(getX(), getY(), (float)getWidth(), (float)getHeight());
+                    if (timeCountForRandomTextures > 0)
+                        currentAnimation = Animation(1, starModeLargeTexturesWalk); // Reset to normal star mode textures
+                }
+                else if (state == PlayerState::Small)
+                {
+                    currentAnimation = Animation(1, starModeSmallTexturesJump);
+                    currentAnimation.reset();
+                    currentAnimation.drawAnimation(getX(), getY(), (float)getWidth(), (float)getHeight());
+                    if (timeCountForRandomTextures > 0)
+                        currentAnimation = Animation(1, starModeSmallTexturesWalk); // Reset to normal star mode textures
+                }
+            }
+            else
+            {
+                DrawTexturePro(jumpTexture,
+                               {0.0f, 0.0f, (float)jumpTexture.width, (float)jumpTexture.height},
+                               {getX(), getY(), getWidth(), getHeight()},
+                               {0.0f, 0.0f}, 0.0f, WHITE); // Draw small player texture
+            }
         }
         else
         {
-            DrawTexturePro(currentPlayerTextures[5],
-                           {(float)currentPlayerTextures[5].width, 0.0f, -(float)currentPlayerTextures[5].width, (float)currentPlayerTextures[5].height},
-                           {getX(), getY(), (getWidth()), getHeight()},
-                           {0.0f, 0.0f}, 0.0f, WHITE); // Draw small player texture
+            if (type == PlayerType::Star)
+            {
+                if (state == PlayerState::Large)
+                {
+                    currentAnimation = Animation(1, starModeLargeTexturesJump);
+                    currentAnimation.reset();
+                    currentAnimation.drawAnimation(getX(), getY(), -(float)getWidth(), (float)getHeight());
+                    if (timeCountForRandomTextures > 0)
+                        currentAnimation = Animation(1, starModeLargeTexturesWalk); // Reset to normal star mode textures
+                }
+                else if (state == PlayerState::Small)
+                {
+                    currentAnimation = Animation(1, starModeSmallTexturesJump);
+                    currentAnimation.reset();
+                    currentAnimation.drawAnimation(getX(), getY(), -(float)getWidth(), (float)getHeight());
+                    if (timeCountForRandomTextures > 0)
+                        currentAnimation = Animation(1, starModeSmallTexturesWalk); // Reset to normal star mode textures
+                }
+            }
+            else
+            {
+                DrawTexturePro(jumpTexture,
+                               {(float)jumpTexture.width, 0.0f, -(float)jumpTexture.width, (float)jumpTexture.height},
+                               {getX(), getY(), (getWidth()), getHeight()},
+                               {0.0f, 0.0f}, 0.0f, WHITE); // Draw small player texture
+            }
         }
     }
     else if (getVelX() > 0)
@@ -102,24 +181,74 @@ void Player::render()
         currentAnimation.drawAnimation(getX(), getY(), (float)(-getWidth()), (float)getHeight());
         forward = false;
     }
+    else if (type == PlayerType::RandomBeforeFire || type == PlayerType::Star)
+    {
+        currentAnimation.drawAnimation(getX(), getY(), (float)getWidth(), (float)getHeight());
+    }
     else
     {
+        // cout << getX() << " " << getY() << " " << getWidth() << " " << getHeight() << endl;
         if (forward)
         {
-            DrawTexturePro(currentPlayerTextures[0],
-                           {0.0f, 0.0f, (float)currentPlayerTextures[0].width, (float)currentPlayerTextures[0].height},
-                           {getX(), getY(), getWidth(), getHeight()},
-                           {0.0f, 0.0f}, 0.0f, WHITE); // Draw small player texture}
+            if (type == PlayerType::Star)
+            {
+                if (state == PlayerState::Large)
+                {
+                    currentAnimation = Animation(1, starModeLargeTextures);
+                    currentAnimation.reset();
+                    currentAnimation.drawAnimation(getX(), getY(), (float)getWidth(), (float)getHeight());
+                    if (timeCountForRandomTextures > 0)
+                        currentAnimation = Animation(1, starModeLargeTexturesWalk); // Reset to normal star mode textures
+                }
+                else if (state == PlayerState::Small)
+                {
+                    currentAnimation = Animation(1, starModeSmallTextures);
+                    currentAnimation.reset();
+                    currentAnimation.drawAnimation(getX(), getY(), (float)getWidth(), (float)getHeight());
+                    if (timeCountForRandomTextures > 0)
+                        currentAnimation = Animation(1, starModeSmallTexturesWalk); // Reset to normal star mode textures
+                }
+            }
+            else
+            {
+                DrawTexturePro(idleTexture,
+                               {0.0f, 0.0f, (float)idleTexture.width, (float)idleTexture.height},
+                               {getX(), getY(), getWidth(), getHeight()},
+                               {0.0f, 0.0f}, 0.0f, WHITE); // Draw small player texture}
+            }
         }
         else
         {
-            DrawTexturePro(currentPlayerTextures[0],
-                           {(float)currentPlayerTextures[0].width, 0.0f, -(float)currentPlayerTextures[0].width, (float)currentPlayerTextures[0].height},
-                           {getX(), getY(), (getWidth()), getHeight()},
-                           {0.0f, 0.0f}, 0.0f, WHITE); // Draw small player texture
+            if (type == PlayerType::Star)
+            {
+                if (state == PlayerState::Large)
+                {
+                    currentAnimation = Animation(1, starModeLargeTextures);
+                    currentAnimation.reset();
+                    currentAnimation.drawAnimation(getX(), getY(), -(float)getWidth(), (float)getHeight());
+                    if (timeCountForRandomTextures > 0)
+                        currentAnimation = Animation(1, starModeLargeTexturesWalk); // Reset to normal star mode textures
+                }
+                else if (state == PlayerState::Small)
+                {
+                    currentAnimation = Animation(1, starModeSmallTextures);
+                    currentAnimation.reset();
+                    currentAnimation.drawAnimation(getX(), getY(), -(float)getWidth(), (float)getHeight());
+                    if (timeCountForRandomTextures > 0)
+                        currentAnimation = Animation(1, starModeSmallTexturesWalk); // Reset to normal star mode textures
+                }
+            }
+            else
+            {
+                DrawTexturePro(idleTexture,
+                               {(float)idleTexture.width, 0.0f, -(float)idleTexture.width, (float)idleTexture.height},
+                               {getX(), getY(), (getWidth()), getHeight()},
+                               {0.0f, 0.0f}, 0.0f, WHITE); // Draw small player texture
+            }
         }
     }
 }
+
 Rectangle Player::getBounds()
 {
     // cout << "In Player::getBounds()" << endl;
@@ -161,29 +290,13 @@ Rectangle Player::getBoundsLeft()
     return boundsLeft;
 }
 
-void Player::showBounds()
-{
-    // cout << "In Player::showBounds()" << endl;
-    Color color = {255, 0, 0, 255}; // Semi-transparent red color
-    // DrawRectangleLines(getBounds().x, getBounds().y, getBounds().width, getBounds().height, color);
-    // DrawRectangleLines(getBoundsTop().x, getBoundsTop().y, getBoundsTop().width, getBoundsTop().height, color);
-    // DrawRectangleLines(getBoundsRight().x, getBoundsRight().y, getBoundsRight().width, getBoundsRight().height, color);
-    // DrawRectangleLines(getBoundsLeft().x, getBoundsLeft().y, getBoundsLeft().width, getBoundsLeft().height, color);
-    // DrawRectangleRec(getBounds(), color);      // Draw the main bounds rectangle
-    // DrawRectangleRec(getBoundsTop(), color);   // Draw the top bounds rectangle
-    // DrawRectangleRec(getBoundsRight(), color); // Draw the right bounds rectangle
-    // DrawRectangleRec(getBoundsLeft(), color);  // Draw the left bounds rectangle
-}
-
 bool Player::hasJumped()
 {
-    // cout << "In Player::hasJumped()" << endl;
     return jumped;
 }
 
 void Player::setJump(bool jump)
 {
-    // cout << "In Player::setJump()" << endl;
     this->jumped = jump;
 }
 
@@ -214,6 +327,11 @@ void Player::collision()
         if (id == ObjectID::Enemy)
         {
             enemyCollision(object);
+        }
+
+        if (id == ObjectID::Item)
+        {
+            itemCollision(object);
         }
     }
 }
@@ -279,36 +397,14 @@ void Player::blockCollision(GameObject *object)
             cerr << "Error: Object is not a Block!" << endl;
         }
 
-        if (block != nullptr && block->getBlockID() == BlockType::Question)
+        block->playerCollision(this); // Handle question block collision
+
+        if (block != nullptr && block->getBlockID() == BlockType::Normal)
         {
-            block->playerCollision(this); // Handle question block collision
-        }
-        else if (block != nullptr && block->getBlockID() == BlockType::Normal)
-        {
-            if (state == PlayerState::Small)
+            if (state == PlayerState::Large)
             {
-                // cout << "Here" << endl;
-                block->playerCollision(this);
-            }
-            else if (state == PlayerState::Large)
-            {
-                // cout << "Here 2" << endl;
                 removedBlocks.push_back(object); // Add to removed blocks}
             }
-        }
-        else if (block != nullptr && block->getBlockID() == BlockType::Coin)
-        {
-            // cout << "Coin block hit detected!" << endl;
-            block->playerCollision(this);
-        }
-        else if (block != nullptr && block->getBlockID() == BlockType::Star)
-        {
-            // cout << "Star block hit detected!" << endl;
-            block->playerCollision(this);
-        }
-        else
-        {
-            removedBlocks.push_back(object); // Add to removed blocks
         }
 
         // Reset the jump state
@@ -322,6 +418,7 @@ void Player::blockCollision(GameObject *object)
         setVelY(0);
 
         jumped = false;
+        GameObject::collision();
     }
     if (CheckCollisionRecs(boundsRight, objectBoundsLeft) && getVelX() > 0)
     {
@@ -492,7 +589,7 @@ std::vector<GameObject *> Player::getAndResetRemovedEnemies()
 
 bool Player::isDead()
 {
-    if (isPlayingDeath && timeCount > 20)
+    if (isPlayingDeath && timeCountForDeath > 20)
         return true;
     return false;
 }
@@ -519,4 +616,397 @@ bool Player::isSmallMario()
 {
     // cout << "In Player::isSmallMario()" << endl;
     return state == PlayerState::Small;
+}
+
+void Player::setState(PlayerState newState)
+{
+    state = newState;
+    if (state == PlayerState::Large)
+    {
+        // setHeight(2 * originalHeight);
+        setPlayerScale(2 * originalScale);
+        // cout << getX() << endl;
+        // cout << getY() << endl;
+        // cout << getWidth() << endl;
+        // cout << getHeight() << endl;
+        // cout << getScale() << endl;
+    }
+    else if (state == PlayerState::GrowingUp)
+    {
+        float newScale = getPlayerScale() + 0.5f;
+        float newHeight = getHeight() * (newScale / getPlayerScale());
+
+        if (newHeight <= originalHeight * 2 * originalScale)
+        {
+            setPlayerScale(newScale);
+        }
+    }
+    else if (state == PlayerState::Small)
+    {
+        setPlayerScale(originalScale);
+    }
+}
+
+void Player::setType(PlayerType newType)
+{
+    type = newType;
+    currentPlayerTextures.clear(); // Always clear before repopulating!
+    switch (type)
+    {
+    case PlayerType::Normal:
+        for (int i = 1; i < 4; ++i)
+        {
+            if (id == PlayerID::Mario)
+            {
+                if (state == PlayerState::Small)
+                {
+                    currentPlayerTextures.push_back(normalMarioSmallTextures[i]);
+                }
+                else if (state == PlayerState::Large || state == PlayerState::GrowingUp)
+                {
+                    currentPlayerTextures.push_back(normalMarioLargeTextures[i]);
+                }
+            }
+            else if (id == PlayerID::Luigi)
+            {
+                if (state == PlayerState::Small)
+                {
+                    currentPlayerTextures.push_back(normalLuigiSmallTextures[i]);
+                }
+                else if (state == PlayerState::Large || state == PlayerState::GrowingUp)
+                {
+                    currentPlayerTextures.push_back(normalLuigiLargeTextures[i]);
+                }
+            }
+        }
+        if (state == PlayerState::Small && id == PlayerID::Mario)
+        {
+            idleTexture = normalMarioSmallTextures[0];
+            jumpTexture = normalMarioSmallTextures[5];
+            deadTexture = normalMarioSmallTextures[6];
+        }
+        else if (state == PlayerState::Large && id == PlayerID::Mario)
+        {
+            idleTexture = normalMarioLargeTextures[0];
+            jumpTexture = normalMarioLargeTextures[5];
+            deadTexture = normalMarioLargeTextures[6];
+        }
+        else if (state == PlayerState::Small && id == PlayerID::Luigi)
+        {
+            idleTexture = normalLuigiSmallTextures[0];
+            jumpTexture = normalLuigiSmallTextures[5];
+            deadTexture = normalLuigiSmallTextures[6];
+        }
+        else if (state == PlayerState::Large && id == PlayerID::Luigi)
+        {
+            idleTexture = normalLuigiLargeTextures[0];
+            jumpTexture = normalLuigiLargeTextures[5];
+            deadTexture = normalLuigiLargeTextures[6];
+        }
+        else if (state == PlayerState::GrowingUp && id == PlayerID::Mario)
+        {
+            idleTexture = normalMarioLargeTextures[0];
+            jumpTexture = normalMarioLargeTextures[5];
+            deadTexture = normalMarioLargeTextures[6];
+        }
+        else if (state == PlayerState::GrowingUp && id == PlayerID::Luigi)
+        {
+            idleTexture = normalLuigiLargeTextures[0];
+            jumpTexture = normalLuigiLargeTextures[5];
+            deadTexture = normalLuigiLargeTextures[6];
+        }
+        break;
+
+    case PlayerType::Fire:
+        for (int i = 1; i < 4; ++i)
+        {
+            currentPlayerTextures.push_back(fireLargeTextures[i]);
+        }
+        idleTexture = fireLargeTextures[0];
+        jumpTexture = fireLargeTextures[5];
+        deadTexture = fireLargeTextures[6];
+        break;
+
+    case PlayerType::Star:
+        if (state == PlayerState::Small)
+        {
+            currentPlayerTextures = starModeSmallTexturesWalk;
+            // idleTexture = starModeSmallTextures[0];
+            // jumpTexture = starModeSmallTextures[5];
+            // deadTexture = starModeSmallTextures[6]; // wont died in this mode
+        }
+        else if (state == PlayerState::Large)
+        {
+            currentPlayerTextures = starModeLargeTexturesWalk;
+            // idleTexture = starModeLargeTextures[0];
+            // jumpTexture = starModeLargeTextures[5];
+            // deadTexture = starModeLargeTextures[6]; // wont died in this mode
+        }
+    default:
+        cerr << "Unknown player type!" << endl;
+    }
+    if (type == PlayerType::Star)
+        currentAnimation = Animation(1, currentPlayerTextures);
+    else
+        currentAnimation = Animation(5, currentPlayerTextures);
+    currentAnimation.reset();
+}
+
+void Player::setPlayerID(PlayerID newID)
+{
+    id = newID;
+}
+
+void Player::LoadPlayerTextures()
+{
+    if (ui == nullptr)
+    {
+        cerr << "UI is null in LoadPlayerTextures!" << endl;
+        return;
+    }
+    // Load player textures from UI
+    normalMarioLargeTextures = ui->getMarioLarge();
+    normalMarioSmallTextures = ui->getMarioSmall();
+    normalLuigiLargeTextures = ui->getLuigiLarge();
+    normalLuigiSmallTextures = ui->getLuigiSmall();
+    fireLargeTextures = ui->getFireLarge();
+    fireSmallTextures = ui->getFireSmall();
+}
+
+void Player::LoadRandomTextures()
+{
+    if (ui == nullptr)
+    {
+        cerr << "UI is null in LoadRandomTextures!" << endl;
+        return;
+    }
+    // Load random textures for player animations
+    for (int i = 0; i < 6; ++i)
+    {
+        if (i == 0) // Idle -> 0
+        {
+            randomTextures1.push_back(ui->getFireLarge()[i]);
+            randomTextures1.push_back(ui->getRedLarge()[i]);
+            randomTextures1.push_back(ui->getBlackLarge()[i]);
+            randomTextures1.push_back(ui->getGreenLarge()[i]);
+            randomTextures1.push_back(ui->getBlueLarge()[i]);
+
+            starModeLargeTextures.push_back(ui->getFireLarge()[i]);
+            starModeLargeTextures.push_back(ui->getRedLarge()[i]);
+            starModeLargeTextures.push_back(ui->getBlackLarge()[i]);
+            starModeLargeTextures.push_back(ui->getGreenLarge()[i]);
+            starModeLargeTextures.push_back(ui->getBlueLarge()[i]);
+
+            starModeSmallTextures.push_back(ui->getFireSmall()[i]);
+            starModeSmallTextures.push_back(ui->getRedSmall()[i]);
+            starModeSmallTextures.push_back(ui->getBlackSmall()[i]);
+            starModeSmallTextures.push_back(ui->getGreenSmall()[i]);
+            starModeSmallTextures.push_back(ui->getBlueSmall()[i]);
+        }
+        else if (i == 1) // Walk1 -> 1
+        {
+            randomTextures2.push_back(ui->getFireLarge()[i]);
+            randomTextures2.push_back(ui->getRedLarge()[i]);
+            randomTextures2.push_back(ui->getBlackLarge()[i]);
+            randomTextures2.push_back(ui->getGreenLarge()[i]);
+            randomTextures2.push_back(ui->getBlueLarge()[i]);
+
+            starModeLargeTexturesWalk.push_back(ui->getFireLarge()[i]);
+            starModeLargeTexturesWalk.push_back(ui->getRedLarge()[i]);
+            starModeLargeTexturesWalk.push_back(ui->getBlackLarge()[i]);
+            starModeLargeTexturesWalk.push_back(ui->getGreenLarge()[i]);
+            starModeLargeTexturesWalk.push_back(ui->getBlueLarge()[i]);
+
+            starModeSmallTexturesWalk.push_back(ui->getFireSmall()[i]);
+            starModeSmallTexturesWalk.push_back(ui->getRedSmall()[i]);
+            starModeSmallTexturesWalk.push_back(ui->getBlackSmall()[i]);
+            starModeSmallTexturesWalk.push_back(ui->getGreenSmall()[i]);
+            starModeSmallTexturesWalk.push_back(ui->getBlueSmall()[i]);
+        }
+        else if (i == 2) // Walk2 -> 2
+        {
+            randomTextures3.push_back(ui->getFireLarge()[i]);
+            randomTextures3.push_back(ui->getRedLarge()[i]);
+            randomTextures3.push_back(ui->getBlackLarge()[i]);
+            randomTextures3.push_back(ui->getGreenLarge()[i]);
+            randomTextures3.push_back(ui->getBlueLarge()[i]);
+
+            starModeLargeTexturesWalk.push_back(ui->getFireLarge()[i]);
+            starModeLargeTexturesWalk.push_back(ui->getRedLarge()[i]);
+            starModeLargeTexturesWalk.push_back(ui->getBlackLarge()[i]);
+            starModeLargeTexturesWalk.push_back(ui->getGreenLarge()[i]);
+            starModeLargeTexturesWalk.push_back(ui->getBlueLarge()[i]);
+
+            starModeSmallTexturesWalk.push_back(ui->getFireSmall()[i]);
+            starModeSmallTexturesWalk.push_back(ui->getRedSmall()[i]);
+            starModeSmallTexturesWalk.push_back(ui->getBlackSmall()[i]);
+            starModeSmallTexturesWalk.push_back(ui->getGreenSmall()[i]);
+            starModeSmallTexturesWalk.push_back(ui->getBlueSmall()[i]);
+        }
+        else if (i == 3) // Walk3 -> 3
+        {
+            randomTextures4.push_back(ui->getFireLarge()[i]);
+            randomTextures4.push_back(ui->getRedLarge()[i]);
+            randomTextures4.push_back(ui->getBlackLarge()[i]);
+            randomTextures4.push_back(ui->getGreenLarge()[i]);
+            randomTextures4.push_back(ui->getBlueLarge()[i]);
+
+            starModeLargeTexturesWalk.push_back(ui->getFireLarge()[i]);
+            starModeLargeTexturesWalk.push_back(ui->getRedLarge()[i]);
+            starModeLargeTexturesWalk.push_back(ui->getBlackLarge()[i]);
+            starModeLargeTexturesWalk.push_back(ui->getGreenLarge()[i]);
+            starModeLargeTexturesWalk.push_back(ui->getBlueLarge()[i]);
+
+            starModeSmallTexturesWalk.push_back(ui->getFireSmall()[i]);
+            starModeSmallTexturesWalk.push_back(ui->getRedSmall()[i]);
+            starModeSmallTexturesWalk.push_back(ui->getBlackSmall()[i]);
+            starModeSmallTexturesWalk.push_back(ui->getGreenSmall()[i]);
+            starModeSmallTexturesWalk.push_back(ui->getBlueSmall()[i]);
+        }
+        else if (i == 4) // Walk4 -> 4
+        {
+            randomTextures5.push_back(ui->getFireLarge()[i]);
+            randomTextures5.push_back(ui->getRedLarge()[i]);
+            randomTextures5.push_back(ui->getBlackLarge()[i]);
+            randomTextures5.push_back(ui->getGreenLarge()[i]);
+            randomTextures5.push_back(ui->getBlueLarge()[i]);
+        }
+        else if (i == 5) // Jumping -> 5
+        {
+            randomTextures6.push_back(ui->getFireLarge()[i]);
+            randomTextures6.push_back(ui->getRedLarge()[i]);
+            randomTextures6.push_back(ui->getBlackLarge()[i]);
+            randomTextures6.push_back(ui->getGreenLarge()[i]);
+            randomTextures6.push_back(ui->getBlueLarge()[i]);
+
+            starModeLargeTexturesJump.push_back(ui->getBlackLarge()[i]);
+            starModeLargeTexturesJump.push_back(ui->getFireLarge()[i]);
+            starModeLargeTexturesJump.push_back(ui->getRedLarge()[i]);
+            starModeLargeTexturesJump.push_back(ui->getGreenLarge()[i]);
+            starModeLargeTexturesJump.push_back(ui->getBlueLarge()[i]);
+
+            starModeSmallTexturesJump.push_back(ui->getBlackSmall()[i]);
+            starModeSmallTexturesJump.push_back(ui->getFireSmall()[i]);
+            starModeSmallTexturesJump.push_back(ui->getRedSmall()[i]);
+            starModeSmallTexturesJump.push_back(ui->getGreenSmall()[i]);
+            starModeSmallTexturesJump.push_back(ui->getBlueSmall()[i]);
+        }
+    }
+}
+
+void Player::itemCollision(GameObject *object)
+{
+    Rectangle boundsBottom = getBounds();
+    Rectangle boundsTop = getBoundsTop();
+    Rectangle boundsRight = getBoundsRight();
+    Rectangle boundsLeft = getBoundsLeft();
+
+    Rectangle objectBoundsBottom = object->getBounds();
+    Rectangle objectBoundsTop = object->getBoundsTop();
+    Rectangle objectBoundsRight = object->getBoundsRight();
+    Rectangle objectBoundsLeft = object->getBoundsLeft();
+
+    Item *item = dynamic_cast<Item *>(object);
+
+    if ((CheckCollisionRecs(boundsTop, objectBoundsBottom) || CheckCollisionRecs(boundsBottom, objectBoundsTop) ||
+         CheckCollisionRecs(boundsRight, objectBoundsLeft) || CheckCollisionRecs(boundsLeft, objectBoundsRight)) &&
+        !object->isStomped())
+    {
+        if (item->getItemType() == ItemType::Star)
+        {
+            // Reset the timer
+            timeCountForRandomTextures = 500;
+
+            // Random texture first
+            int randomIndex = currentAnimation.getCurrentFrameIndex();
+            setRandomTextures(randomIndex);
+
+            // Store the previous type
+            previousType = type;
+
+            setType(PlayerType::Star);
+
+            // Turn to the fire Mario
+        }
+        else if (item->getItemType() == ItemType::Flower)
+        {
+            // Reset the timer
+            timeCountForRandomTextures = 100;
+
+            // Random texture until timer runs out
+            int randomIndex = currentAnimation.getCurrentFrameIndex();
+            setRandomTextures(randomIndex);
+            setState(PlayerState::Large);
+            type = PlayerType::RandomBeforeFire;
+        }
+        else if (item->getItemType() == ItemType::Mushroom)
+        {
+            if (state == PlayerState::Small)
+            {
+                setState(PlayerState::GrowingUp);
+                setType(PlayerType::Normal);
+                timeCountForGrowingUp = 15;
+            }
+            else if (state == PlayerState::Large)
+            {
+                // Do nothing
+            }
+        }
+        item->playerCollision();
+    }
+}
+
+std::vector<GameObject *> Player::getAndResetRemovedItems()
+{
+    std::vector<GameObject *> temp;
+    return temp;
+}
+
+void Player::setRandomTextures(int index)
+{
+    if (index <= 0 || index >= 4)
+    {
+        cerr << "Random index out of bounds!" << endl;
+        return;
+    }
+
+    if (jumped)
+    {
+        index = 5;
+    }
+    else if (getVelX() != 0)
+    {
+        index = index;
+    }
+    else
+    {
+        index = 0; // Default to idle texture if no movement or jump
+    }
+    currentPlayerTextures.clear(); // Clear the current textures before setting new ones
+    // Set the random textures based on the index
+    switch (index)
+    {
+    case 0:
+        currentPlayerTextures = randomTextures1;
+        break;
+    case 1:
+        currentPlayerTextures = randomTextures2;
+        break;
+    case 2:
+        currentPlayerTextures = randomTextures3;
+        break;
+    case 3:
+        currentPlayerTextures = randomTextures4;
+        break;
+    case 4:
+        currentPlayerTextures = randomTextures5;
+        break;
+    case 5:
+        currentPlayerTextures = randomTextures6;
+        break;
+    default:
+        cerr << "Invalid index for random textures!" << endl;
+    }
+    currentAnimation = Animation(5, currentPlayerTextures);
+    currentAnimation.reset();
 }

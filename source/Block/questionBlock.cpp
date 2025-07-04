@@ -41,7 +41,6 @@ QuestionBlock::QuestionBlock(float x, float y, int scale, Handler *handler, UI *
 
 void QuestionBlock::tick()
 {
-    // Block::tick();
     if (timeCount > 0)
     {
         --timeCount;
@@ -50,6 +49,7 @@ void QuestionBlock::tick()
             setY(originalY);
         }
     }
+
     if (state == QuestionBlockState::BeforeHit && isHit())
     {
         if (type == QuestionBlockType ::Coin)
@@ -58,7 +58,7 @@ void QuestionBlock::tick()
         }
         else if (type == QuestionBlockType::Mushroom)
         {
-            mushroom = new Mushroom(getX() / getScale(), getY() / getScale(), getScale(), handler, ui);
+            mushroom = new Mushroom(getX() / getScale(), getY() / getScale(), getScale(), handler, ui, MushroomType::Normal);
             handler->addObject(mushroom);
         }
         else if (type == QuestionBlockType::Flower)

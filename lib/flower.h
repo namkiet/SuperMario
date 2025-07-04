@@ -33,5 +33,7 @@ public:
 
     // Check collision
     void playerCollision();
-    
+
+    bool shouldRemoveItem();
+    bool isStomped();
 };

@@ -1,6 +1,6 @@
 #pragma once
 #include "block.h"
-
+#include "debris.h"
 enum class NormalBlockState
 {
     BeforeHit,
@@ -14,11 +14,21 @@ private:
     NormalBlockState state;
 
     bool notBroken = true;
-    int timeCount =0;
 
+    // Timer
+    int timeCount = 0;
+
+    // For textures
     std::vector<Texture2D> textures;
 
+    // Original position
     float originalY;
+
+    // UI pointer
+    UI *ui;
+
+    // For debris
+    Debris *debris;
 
 public:
     NormalBlock(float x = 0, float y = 0, int scale = 0, UI *ui = nullptr);
@@ -29,4 +39,10 @@ public:
 
     // Check collision
     void playerCollision(GameObject *object);
+
+    // For debris
+    bool shouldRemoveBlock();
+
+    // Destructor
+    ~NormalBlock();
 };

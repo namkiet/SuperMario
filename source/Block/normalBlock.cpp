@@ -3,8 +3,8 @@
 #include "player.h"
 using namespace std;
 
-NormalBlock::NormalBlock(float x, float y,  int scale, UI *ui)
-    : Block(x, y, scale, ui, BlockType::Normal), originalY(y*scale)
+NormalBlock::NormalBlock(float x, float y, int scale, UI *ui)
+    : Block(x, y, scale, ui, BlockType::Normal), originalY(y * scale), debris(nullptr), ui(ui)
 {
     if (ui == nullptr)
     {
@@ -27,10 +27,19 @@ void NormalBlock::tick()
             setY(originalY);
         }
     }
-    if (isHit() && !notBroken)
+    if (isHit() && notBroken) // Small Mario
     {
         state = NormalBlockState::AfterHit;
-        Block::tick();
+    }
+    else if (isHit() && !notBroken && state == NormalBlockState::BeforeHit) // Large Mario
+    {
+        state = NormalBlockState::AfterHit;
+        debris = new Debris(getX(), getY(), getWidth(), getHeight(), getScale(), ui); // Create debris when the block is hit
+    }
+
+    if (isHit() && !notBroken && debris)
+    {
+        debris->tick();
     }
 }
 
@@ -42,7 +51,15 @@ void NormalBlock::render()
     }
     else if (state == NormalBlockState::AfterHit)
     {
-        Block::render();
+        if (notBroken)
+        {
+            DrawTextureEx(textures[0], {getX(), getY()}, 0.0f, (float)getScale(), WHITE); 
+        }
+        else if (!notBroken && debris)
+        {
+            debris->draw();
+            // cout << "Debris is drawn." << endl;
+        }
     }
 }
 
@@ -63,5 +80,24 @@ void NormalBlock::playerCollision(GameObject *object)
     else if (player != nullptr && !player->isSmallMario())
     {
         notBroken = false;
+    }
+}
+
+bool NormalBlock::shouldRemoveBlock()
+{
+    if (debris && debris->shouldRemove())
+    {
+        // cout<< "Debris should be removed." << endl;
+        return true; // Remove the block if it has been hit and debris should be removed
+    }
+    return false; // Keep the block if it is not hit or debris is still visible
+}
+
+NormalBlock::~NormalBlock()
+{
+    if (debris != nullptr)
+    {
+        delete debris; // Clean up the debris object
+        debris = nullptr;
     }
 }

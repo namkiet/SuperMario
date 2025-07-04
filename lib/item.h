@@ -43,4 +43,9 @@ public:
     Rectangle getBoundsTop();
     Rectangle getBoundsRight();
     Rectangle getBoundsLeft();
+
+    virtual bool shouldRemoveItem();
+    bool isStomped();
+
+    ItemType getItemType();
 };

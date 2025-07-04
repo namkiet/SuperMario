@@ -1,18 +1,18 @@
 #pragma once
 #include <raylib.h>
 #include <vector>
+enum class ObjectID
+{
+    Player,
+    Enemy,
+    Block,
+    Pipe,
+    Item
+};
+
 class GameObject
 {
-
 public:
-    enum class ObjectID
-    {
-        Player,
-        Enemy,
-        Block,
-        Pipe,
-        Item
-    };
     GameObject(float x, float y, ObjectID id, float width, float height, int scale);
     GameObject(int screenWidth = 0, int screenHeight = 0);
 
@@ -34,6 +34,7 @@ public:
     void setVelY(float velY);
     void setWidth(float width);
     void setHeight(float height);
+    void setPlayerScale(float scale);
 
     // Getter methods
     float getX();
@@ -44,6 +45,13 @@ public:
     float getWidth();
     float getHeight();
     int getScale();
+
+    // For player specific methods
+    float getPlayerScale();
+    float getPlayerHeight();
+    float getPlayerWidth();
+    float getPlayerX();
+    float getPlayerY();
 
     // Collision checking
     virtual void collision();
@@ -69,4 +77,5 @@ private:
     float x, y, velX, velY;
     float width, height;
     int scale;
+    float playerScale; // Since they need to grow up slowly
 };

@@ -11,19 +11,16 @@ private:
     void nextFrame();
 
 public:
-    enum class AnimationID
-    {
-        MarioLWalk, // Large Mario walking
-        MarioSWalk, // Smalk Mario working
-        MarioSSwim
-    };
     // Constructor
     Animation(int speed = 0, std::vector<Texture2D> frameTextures = {});
-  
+
     // Run and draw animation
     void runAnimation();
     void drawAnimation(int x, int y, float scaleX, float scaleY);
 
     // Reset the animation
     void reset();
+
+    // For player
+    int getCurrentFrameIndex();
 };

@@ -6,7 +6,8 @@ using namespace std;
 GameObject::GameObject(float x, float y, ObjectID id, float width, float height, int scale)
     : x(x * scale), y(y * scale), id(id), width(width * scale), height(height * scale), scale(scale), velX(0.0f), velY(0.0f)
 {
-    // cout << "Game Object constructor called" << endl;
+    if (id == ObjectID::Player)
+        playerScale = scale;
 }
 
 GameObject::GameObject(int screenWidth, int screenHeight)
@@ -80,7 +81,7 @@ float GameObject::getY()
     return y;
 }
 
-GameObject::ObjectID GameObject::getID()
+ObjectID GameObject::getID()
 {
     // cout << "In GameObject::getID()" << endl;
     return id;
@@ -158,9 +159,13 @@ void GameObject::showBounds()
 
 void GameObject::collision()
 {
-    // cout << "In GameObject::collision()" << endl;
-    // This method can be overridden in derived classes to handle collisions
-    // For now, it does nothing
+    float groundY = 13 * 16 * 3;
+    float bottom = getY() + getHeight();
+    if (bottom > groundY && getY() <= GetScreenHeight())
+    {
+        setY(groundY - getHeight());
+        setVelY(0); // Stop downward movement
+    }
 }
 
 bool GameObject::isDead()
@@ -189,4 +194,59 @@ void GameObject::setPlayerFinishedCollisionChecking(bool finished)
 {
     // cout << "In GameObject::setPlayerFinishedCollisionChecking()" << endl;
     // This method can be overridden in derived classes to set collision checking state
+}
+
+void GameObject::setPlayerScale(float scale)
+{
+    if (id == ObjectID::Player)
+    {
+        this->y = this->y - this->height * ((scale / this->playerScale) - 1);
+        this->height = (this->height / this->playerScale) * scale;
+        this->playerScale = scale;
+    }
+}
+
+float GameObject::getPlayerScale()
+{
+    if (id == ObjectID::Player)
+    {
+        return playerScale;
+    }
+    return scale; // Default scale for non-player objects
+}
+
+float GameObject::getPlayerHeight()
+{
+    if (id == ObjectID::Player)
+    {
+        return height * playerScale;
+    }
+    return height; // Default height for non-player objects
+}
+
+float GameObject::getPlayerWidth()
+{
+    if (id == ObjectID::Player)
+    {
+        return width * playerScale;
+    }
+    return width; // Default width for non-player objects
+}
+
+float GameObject::getPlayerX()
+{
+    if (id == ObjectID::Player)
+    {
+        return x * playerScale;
+    }
+    return x; // Default x for non-player objects
+}
+
+float GameObject::getPlayerY()
+{
+    if (id == ObjectID::Player)
+    {
+        return y * playerScale;
+    }
+    return y; // Default y for non-player objects
 }

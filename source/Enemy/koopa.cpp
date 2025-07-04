@@ -153,6 +153,7 @@ void Koopa::pipeCollision(GameObject *object)
         setY(object->getY() - getHeight());
         setVelY(0);
         // cout << "Enemy hits the pipe from the top!" << endl;
+        GameObject::collision();
         return;
     }
 

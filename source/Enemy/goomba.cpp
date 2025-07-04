@@ -152,6 +152,7 @@ void Goomba::blockCollision(GameObject *object)
         // cout << "y coordinate of enemy in block collision is = " << getY() << endl;
         setVelY(0.0f);
         // setVelX(-8.0f);
+        GameObject::collision();
     }
     if (CheckCollisionRecs(boundsRight, objectBoundsLeft))
     {

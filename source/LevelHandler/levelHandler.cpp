@@ -9,7 +9,7 @@
 #include "normalBlock.h"
 #include "coinBlock.h"
 #include "starBlock.h"
-
+#include "levelUpBlock.h"
 using namespace std;
 
 LevelHandler::LevelHandler(Handler handler, UI *ui) : handler(handler), ui(ui)
@@ -80,7 +80,7 @@ void LevelHandler::setLevel()
             }
             else if (red == 255 && green == 128 && blue == 64) // Level-up block
             {
-                handler.addObject(new Block(j * 16, i * 16, 3, ui, BlockType::LevelUp));
+                handler.addObject(new LevelUpBlock(j * 16, i * 16, 3, &handler, ui));
             }
             else if (red == 40 && green == 170 && blue == 170) // Star block
             {
@@ -130,7 +130,7 @@ void LevelHandler::levelCharacter()
             else if (red == 0 && green == 0 && blue == 0) // Black for player
             {
                 // std::cout << "Player starting position found at: (" << j << ", " << i << ")" << std::endl;
-                handler.setPlayer(*new Player(j * 16, i * 16, 0, 3, &handler, ui));
+                handler.setPlayer(*new Player(j * 16, i * 16, 3, &handler, ui, PlayerID::Mario, PlayerType::Normal, PlayerState::Small));
                 playerSet = true;
             }
         }

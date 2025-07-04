@@ -2,6 +2,12 @@
 #include "item.h"
 #include "handler.h"
 
+enum class MushroomType
+{
+    Normal, // Normal mushroom
+    LevelUp // Level-up mushroom
+};
+
 enum class MushroomState
 {
     Normal,   // Normal state
@@ -33,8 +39,11 @@ private:
     float originalY = 0; // Original Y position for gravity effect
     bool firstTime = true;
 
+    // Mushroom type
+    MushroomType type;
+
 public:
-    Mushroom(float x = 0, float y = 0, int scale = 0, Handler *handler = nullptr, UI *ui = nullptr);
+    Mushroom(float x = 0, float y = 0, int scale = 0, Handler *handler = nullptr, UI *ui = nullptr, MushroomType type = MushroomType::Normal);
 
     // Update
     void tick();
@@ -45,4 +54,7 @@ public:
     void playerCollision();
     void pipeCollision(GameObject *object);
     void blockCollision(GameObject *object);
+
+    bool shouldRemoveItem();
+    bool isStomped();
 };

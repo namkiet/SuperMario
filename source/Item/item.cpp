@@ -70,3 +70,18 @@ Rectangle Item::getBoundsLeft()
 void Item::blockCollision(GameObject *GameObject) {}
 
 void Item::pipeCollision(GameObject *GameObject) {}
+
+bool Item::shouldRemoveItem()
+{
+    return false; // Default implementation, can be overridden in derived classes
+}
+
+bool Item::isStomped()
+{
+    return false; // Default implementation, can be overridden in derived classes
+}
+
+ItemType Item::getItemType()
+{
+    return type; // Return the item type
+}

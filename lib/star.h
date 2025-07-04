@@ -50,4 +50,8 @@ public:
     void playerCollision();
     void pipeCollision(GameObject *object);
     void blockCollision(GameObject *object);
+
+    // 
+    bool shouldRemoveItem();
+    bool isStomped();
 };

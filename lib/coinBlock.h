@@ -23,7 +23,7 @@ private:
     // UI pointer
     UI *ui;
 
-    //
+    // Timer
     int timeCount = 0;
     int waitingTime = 200; // Time to wait between hits,
                            // if the block is hit again in this interval, timer will be reset

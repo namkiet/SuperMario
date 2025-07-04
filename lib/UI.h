@@ -22,10 +22,28 @@ private:
     Image game_over_sheet;
     Image intro_sheet;
 
-    // Textures for the player Mario
+    // Textures for the player
     std::vector<Texture2D> marioLarge{MARIO_L_COUNT};
+    std::vector<Texture2D> luigiLarge{MARIO_L_COUNT};
+
     std::vector<Texture2D> marioSmall{MARIO_S_COUNT};
-    
+    std::vector<Texture2D> luigiSmall{MARIO_S_COUNT};
+
+    std::vector<Texture2D> marioLargeFire{MARIO_L_COUNT};
+    std::vector<Texture2D> marioSmallFire{MARIO_S_COUNT};
+
+    std::vector<Texture2D> marioLargeRed{MARIO_L_COUNT};
+    std::vector<Texture2D> marioSmallRed{MARIO_S_COUNT};
+
+    std::vector<Texture2D> marioLargeBlack{MARIO_L_COUNT};
+    std::vector<Texture2D> marioSmallBlack{MARIO_S_COUNT};
+
+    std::vector<Texture2D> marioLargeGreen{MARIO_L_COUNT};
+    std::vector<Texture2D> marioSmallGreen{MARIO_S_COUNT};
+
+    std::vector<Texture2D> marioLargeBlue{MARIO_L_COUNT};
+    std::vector<Texture2D> marioSmallBlue{MARIO_S_COUNT};
+
     // Textures for tiles and blocks
     std::vector<Texture2D> tile1{TILE_1_COUNT + TILE_2_COUNT};
     std::vector<Texture2D> tile2{TILE_1_COUNT + TILE_2_COUNT};
@@ -63,15 +81,16 @@ private:
     std::vector<Texture2D> star2{4};
     std::vector<Texture2D> star3{4};
     std::vector<Texture2D> star4{4};
-    
+
     // Load textures from images
-    void getPlayerTextures();
+    void getLargePlayerTextures();
+    void getSmallPlayerTextures();
     void getTileTextures();
     void getPipeTextures();
     void getDebrisTextures();
     void getEnemyTextures();
     void getItemTextures();
-    
+
     // For levelHandler.cpp
     Image levelImage;
     Image characterImage;
@@ -112,6 +131,18 @@ public:
     std::vector<Texture2D> &getStar2();
     std::vector<Texture2D> &getStar3();
     std::vector<Texture2D> &getStar4();
+    std::vector<Texture2D> &getLuigiLarge();
+    std::vector<Texture2D> &getLuigiSmall();
+    std::vector<Texture2D> &getFireLarge();
+    std::vector<Texture2D> &getFireSmall();
+    std::vector<Texture2D> &getRedLarge();
+    std::vector<Texture2D> &getRedSmall();
+    std::vector<Texture2D> &getBlackLarge();
+    std::vector<Texture2D> &getBlackSmall();
+    std::vector<Texture2D> &getGreenLarge();
+    std::vector<Texture2D> &getGreenSmall();
+    std::vector<Texture2D> &getBlueLarge();
+    std::vector<Texture2D> &getBlueSmall();
 
     Image &getLevelImage();
     Image &getCharacterImage();

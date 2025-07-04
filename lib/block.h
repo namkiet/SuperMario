@@ -24,21 +24,18 @@ private:
     static const float WIDTH;
     static const float HEIGHT;
 
+    // UI pointer
     UI *ui;
 
     // Block textures
     std::vector<Texture2D> blockTextures;
 
-    // Block properties
-    float positionX;
-    float positionY;
-
     int index = 0;
 
-    // For debris
+    // For checking if the block is hit
     bool hit = false;
-    Debris *debris = nullptr;
 
+    // Block type
     BlockType type;
 
 public:
@@ -46,7 +43,6 @@ public:
     Block(int x = 0, int y = 0, int scale = 0, UI *ui = nullptr, BlockType type = BlockType::Normal);
 
     // Update
-    void tick();
     void render();
 
     // Check collision
@@ -55,19 +51,16 @@ public:
     Rectangle getBoundsRight();
     Rectangle getBoundsLeft();
 
-    // For debris
+    // For normal blocks only
     void setHit();
-    bool shouldRemoveBlock();
+    virtual bool shouldRemoveBlock();
 
-    //
+    // Get the block ID
     BlockType getBlockID();
 
-    //
+    // Return true if the block is hit
     bool isHit();
 
     //
     virtual void playerCollision(GameObject *object);
-
-    // Destructor
-    ~Block();
 };

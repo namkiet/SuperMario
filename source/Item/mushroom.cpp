@@ -1,9 +1,10 @@
 #include <iostream>
 #include "mushroom.h"
+#include "block.h"
 using namespace std;
 
-Mushroom::Mushroom(float x, float y, int scale, Handler *handler, UI *ui)
-    : Item(x, y, scale, ui, ItemType::Mushroom), handler(handler), ui(ui), originalY(y * scale)
+Mushroom::Mushroom(float x, float y, int scale, Handler *handler, UI *ui, MushroomType type)
+    : Item(x, y, scale, ui, ItemType::Mushroom), handler(handler), ui(ui), originalY(y * scale), type(type)
 {
     if (ui == nullptr)
     {
@@ -47,7 +48,7 @@ void Mushroom::tick()
             firstTime = false;
             setY(originalY - getHeight() + getHeight() / 4);
             setVelY(0.0f);
-            setVelX(2.0f);
+            setVelX(4.0f);
         }
     }
 
@@ -60,12 +61,16 @@ void Mushroom::render()
 {
     if (state == MushroomState::Normal)
     {
-        // cout << getX() << " " << getY() << endl;
-        //  cout<< "In Mushroom::render()" << endl;
-        DrawTexturePro(textures[0],
-                       {0, 0, (float)textures[0].width, (float)textures[0].height},
-                       {getX(), getY(), (float)(getWidth()), (float)(getHeight())},
-                       {0, 0}, 0.0f, WHITE); // Draw the mushroom texture
+        if (type == MushroomType::LevelUp)
+        {
+            // Draw the level-up mushroom texture
+            DrawTextureEx(textures[1], {getX(), getY()}, 0.0f, getScale(), WHITE);
+        }
+        else if (type == MushroomType::Normal)
+        {
+            // Draw the normal mushroom texture
+            DrawTextureEx(textures[0], {getX(), getY()}, 0.0f, getScale(), WHITE);
+        }
     }
     else if (state == MushroomState::Collected)
     {
@@ -90,6 +95,25 @@ void Mushroom::blockCollision(GameObject *object)
     Rectangle objectBoundsRight = object->getBoundsRight();
     Rectangle objectBoundsLeft = object->getBoundsLeft();
 
+    Block *block = dynamic_cast<Block *>(object);
+
+    if (block && block->getBlockID() == BlockType::Stairs)
+    {
+        if (CheckCollisionRecs(boundsRight, objectBoundsLeft))
+        {
+            setX(object->getX() - getWidth());
+            setVelX(-abs(getVelX())); // Move left after hitting right wall
+        }
+
+        if (CheckCollisionRecs(boundsLeft, objectBoundsRight))
+        {
+            setX(object->getX() + object->getWidth());
+            setVelX(abs(getVelX())); // Move right after hitting left wall
+        }
+    }
+    else
+    {
+    }
     if (CheckCollisionRecs(boundsTop, objectBoundsBottom))
     {
         setY(object->getY() + object->getHeight());
@@ -100,14 +124,9 @@ void Mushroom::blockCollision(GameObject *object)
     {
         setY(object->getY() - getHeight());
         setVelY(0.0f);
-    }
-
-    if (CheckCollisionRecs(boundsRight, objectBoundsLeft))
-    {
-    }
-
-    if (CheckCollisionRecs(boundsLeft, objectBoundsRight))
-    {
+        // cout << "Mushroom position: (" << getX() << ", " << getY() << ")" << endl;
+        GameObject::collision();
+        // cout << "Mushroom position after trick: (" << getX() << ", " << getY() << ")" << endl;
     }
 }
 
@@ -158,17 +177,27 @@ void Mushroom::collision()
 
     for (auto &object : objects)
     {
-        if (object->getID() == GameObject::ObjectID::Block)
+        if (object->getID() == ObjectID::Block)
         {
             blockCollision(object);
         }
-        else if (object->getID() == GameObject::ObjectID::Pipe)
+        else if (object->getID() == ObjectID::Pipe)
         {
             pipeCollision(object);
         }
-        else if (object->getID() == GameObject::ObjectID::Player)
+        else if (object->getID() == ObjectID::Player)
         {
             continue;
         }
     }
+}
+
+bool Mushroom::shouldRemoveItem()
+{
+    return state == MushroomState::Collected;
+}
+
+bool Mushroom::isStomped()
+{
+    return isCollected;
 }

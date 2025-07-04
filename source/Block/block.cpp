@@ -14,10 +14,6 @@ Block::Block(int x, int y, int scale, UI *ui, BlockType type)
         return;
     }
 
-    // Set the position of the block
-    positionX = (float)getX();
-    positionY = (float)getY();
-
     // Load block textures from UI
     blockTextures = ui->getTile1();
 
@@ -45,16 +41,7 @@ Block::Block(int x, int y, int scale, UI *ui, BlockType type)
 
 void Block::render()
 {
-    if (!hit)
-        DrawTextureEx(blockTextures[index], {positionX, positionY}, 0.0f, (float)getScale(), WHITE); // Draw the block texture
-    else
-        debris->draw();
-}
-
-void Block::tick()
-{
-    if (hit)
-        debris->tick();
+    DrawTextureEx(blockTextures[index], {getX(), getY()}, 0.0f, (float)getScale(), WHITE); // Draw the block texture
 }
 
 Rectangle Block::getBounds()
@@ -70,34 +57,11 @@ Rectangle Block::getBounds()
 void Block::setHit()
 {
     hit = true;
-    if (ui == nullptr)
-    {
-        cerr << "UI is null in Block constructor!" << endl;
-        return;
-    }
-    debris = new Debris(getX(), getY(), getWidth(), getHeight(), getScale(), ui);
 }
 
 bool Block::shouldRemoveBlock()
 {
-    // cout << "In Block::shouldRemoveBlock()" << endl;
-    if (debris->shouldRemove())
-    {
-        // cout<< "Debris should be removed." << endl;
-        return true; // Remove the block if it has been hit and debris should be removed
-    }
-    return false; // Keep the block if it is not hit or debris is still visible
-}
-
-Block::~Block()
-{
-    if (debris != nullptr)
-    {
-        delete debris; // Clean up the debris object
-        debris = nullptr;
-    }
-    // No need to clean up ui, as it is managed by the UI class
-    // blockTextures will be cleaned up by raylib when the program exits
+    return false;
 }
 
 Rectangle Block::getBoundsTop()
@@ -140,3 +104,4 @@ bool Block::isHit()
 void Block::playerCollision(GameObject *object)
 {
 }
+
