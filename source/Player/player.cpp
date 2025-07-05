@@ -3,6 +3,7 @@
 #include "player.h"
 #include "block.h"
 #include "item.h"
+#include "fire.h"
 using namespace std;
 
 const float Player::WIDTH = 16.0f;
@@ -45,6 +46,10 @@ void Player::tick()
     {
         setType(PlayerType::Fire);
         timeCountForRandomTextures = 0;
+        // cout << getX() << " " << getY() << " " << getWidth() << " " << getHeight() << " " << getScale() << endl;
+
+        isLocked = false;
+        // cout<< "Player::tick() - Fire bullets created!" << endl;
     }
     else if (type == PlayerType::Star && timeCountForRandomTextures <= 0)
     {
@@ -53,12 +58,23 @@ void Player::tick()
     }
     else if (state == PlayerState::GrowingUp && getHeight() < originalHeight * 2 * originalScale && timeCountForGrowingUp <= 0)
     {
+        // Set the player to growing up state
         setState(PlayerState::GrowingUp); // Continue growing up
         timeCountForGrowingUp = 15;       // Reset the timer for growing up
+        isLocked = true;
     }
     else if (state == PlayerState::GrowingUp && getHeight() >= originalHeight * 2 * originalScale)
     {
-        setState(PlayerState::Large); // Finished growing up
+        // Stop the power-up music
+        StopSound(ui->getPowerUpSound());
+
+        // Increase the background music
+        SetMusicVolume(ui->getOverworldBackGroundMusic(), 1.0f);
+
+        // Set the player to large state
+        setState(PlayerState::Large);
+
+        isLocked = false;
     }
 
     // finishedCollisionChecking = false;
@@ -938,14 +954,22 @@ void Player::itemCollision(GameObject *object)
             setRandomTextures(randomIndex);
             setState(PlayerState::Large);
             type = PlayerType::RandomBeforeFire;
+            isLocked = true;
         }
         else if (item->getItemType() == ItemType::Mushroom)
         {
             if (state == PlayerState::Small)
             {
+                // Decrease the background music
+                SetMusicVolume(ui->getOverworldBackGroundMusic(), 0.2f);
+
+                // Play the power-up music
+                PlaySound(ui->getPowerUpSound());
+
                 setState(PlayerState::GrowingUp);
                 setType(PlayerType::Normal);
                 timeCountForGrowingUp = 15;
+                // StopMusicStream(ui->getPowerUp());
             }
             else if (state == PlayerState::Large)
             {
@@ -953,12 +977,36 @@ void Player::itemCollision(GameObject *object)
             }
         }
         item->playerCollision();
+        // cout << "Item collision detected!" << endl;
+        if (std::find(removedItems.begin(), removedItems.end(), object) == removedItems.end())
+        {
+            removedItems.push_back(object);
+        }
     }
 }
 
 std::vector<GameObject *> Player::getAndResetRemovedItems()
 {
     std::vector<GameObject *> temp;
+
+    for (auto &item : removedItems)
+    {
+        Item *removedItemPointer = dynamic_cast<Item *>(item);
+        if (removedItemPointer == nullptr || !removedItemPointer->shouldRemoveItem())
+        {
+            continue; // Skip if the item is not valid or should not be removed
+        }
+        if (removedItemPointer->getItemType() == ItemType::Fire)
+        {
+            --fireCount;
+        }
+        temp.push_back(item);
+        auto it = std::find(removedItems.begin(), removedItems.end(), item);
+        if (it != removedItems.end())
+        {
+            it = removedItems.erase(it); // Remove the item from the removeItems vector
+        }
+    }
     return temp;
 }
 
@@ -1009,4 +1057,37 @@ void Player::setRandomTextures(int index)
     }
     currentAnimation = Animation(5, currentPlayerTextures);
     currentAnimation.reset();
+}
+
+void Player::fire()
+{
+    // cout << Fire::count << endl;
+
+    // For the first fire bullet
+    if (Fire::count >= 2)
+        return;
+    else
+    {
+        fireBullet1 = new Fire((getX() - getWidth() / 2) / getScale(), (getY() + getHeight() / 8) / getScale(), originalScale, handler, ui);
+        handler->addObject(fireBullet1);
+    }
+
+    // For the second fire bullet
+    if (Fire::count >= 2)
+        return;
+    else
+    {
+        fireBullet2 = new Fire(getX() / getScale(), (getY() + getHeight() / 8) / getScale(), originalScale, handler, ui);
+        handler->addObject(fireBullet2);
+    }
+}
+
+bool Player::isFireMario()
+{
+    return type == PlayerType::Fire;
+}
+
+bool Player::isPlayerLocked()
+{
+    return isLocked;
 }

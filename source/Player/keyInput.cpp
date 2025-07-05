@@ -13,50 +13,52 @@ KeyInput::KeyInput(Handler &handler) : handler(handler)
 
 void KeyInput::keyPressed()
 {
-    // DrawText("In KeyInput::keyPressed()", 100, 100, 20, WHITE);
-    int key = 0;
-    key = GetKeyPressed();
-    if (key > 0)
-    {
-        // DrawText(TextFormat("Key pressed: %d", key), 10, 10, 20, WHITE);
-    }
-
     if (IsKeyPressed(KEY_ESCAPE))
     {
         exit(0);
     }
 
-    // W for jump
-    if (IsKeyDown(KEY_W))
+    if (!handler.getPlayer()->isPlayerLocked())
     {
-        // DrawText("W key pressed", 10, 10, 20, WHITE);
-        if (handler.getPlayer() != nullptr && !handler.getPlayer()->hasJumped())
+        // W for jump
+        if (IsKeyDown(KEY_W))
         {
-            handler.getPlayer()->setVelY(-15.0f); // Jump
-            handler.getPlayer()->setJump(true);
-            keyDown[0] = true;
+            // DrawText("W key pressed", 10, 10, 20, WHITE);
+            if (handler.getPlayer() != nullptr && !handler.getPlayer()->hasJumped())
+            {
+                handler.getPlayer()->setVelY(-15.0f); // Jump
+                handler.getPlayer()->setJump(true);
+                keyDown[0] = true;
+            }
         }
-    }
 
-    // A for move left
-    if (IsKeyDown(KEY_A))
-    {
-        if (handler.getPlayer() != nullptr)
+        // A for move left
+        if (IsKeyDown(KEY_A))
         {
-            // DrawText("A key pressed", 10, 30, 20, WHITE);
-            handler.getPlayer()->setVelX(-8.0f); // Move left
-            keyDown[1] = true;
+            if (handler.getPlayer() != nullptr)
+            {
+                // DrawText("A key pressed", 10, 30, 20, WHITE);
+                handler.getPlayer()->setVelX(-8.0f); // Move left
+                keyDown[1] = true;
+            }
         }
-    }
 
-    // D for move right
-    if (IsKeyDown(KEY_D))
-    {
-        if (handler.getPlayer() != nullptr)
+        // D for move right
+        if (IsKeyDown(KEY_D))
         {
-            // DrawText("D key pressed", 10, 50, 20, WHITE);
-            handler.getPlayer()->setVelX(8.0f); // Move right
-            keyDown[2] = true;
+            if (handler.getPlayer() != nullptr)
+            {
+                // DrawText("D key pressed", 10, 50, 20, WHITE);
+                handler.getPlayer()->setVelX(8.0f); // Move right
+                keyDown[2] = true;
+            }
+        }
+
+        // Only for fire Mario
+        if (IsKeyDown(KEY_M) && handler.getPlayer()->isFireMario())
+        {
+            handler.getPlayer()->fire();
+            keyDown[3] = true;
         }
     }
 }
@@ -68,7 +70,7 @@ void KeyInput::keyReleased()
     {
         // DrawText("W key released", 10, 70, 20, WHITE);
         keyDown[0] = false;
-        //cout << handler.getPlayer()->getVelX() + handler.getPlayer()->getX() << endl;
+        // cout << handler.getPlayer()->getVelX() + handler.getPlayer()->getX() << endl;
     }
 
     // A for move left
@@ -83,6 +85,12 @@ void KeyInput::keyReleased()
     {
         // DrawText("D key released", 10, 110, 20, WHITE);
         keyDown[2] = false;
+    }
+
+    if (IsKeyReleased(KEY_M) && handler.getPlayer()->isFireMario())
+    {
+        // DrawText("M key released", 10, 130, 20, WHITE);
+        keyDown[3] = false;
     }
 
     if (!keyDown[1] && !keyDown[2])

@@ -34,6 +34,8 @@ public:
     void setVelY(float velY);
     void setWidth(float width);
     void setHeight(float height);
+    void setScale(int scale);
+
     void setPlayerScale(float scale);
 
     // Getter methods
@@ -48,10 +50,6 @@ public:
 
     // For player specific methods
     float getPlayerScale();
-    float getPlayerHeight();
-    float getPlayerWidth();
-    float getPlayerX();
-    float getPlayerY();
 
     // Collision checking
     virtual void collision();
@@ -68,7 +66,7 @@ public:
     virtual void setPlayerFinishedCollisionChecking(bool finished);
 
     // Destructor
-    ~GameObject();
+    virtual ~GameObject();
 
 private:
     ObjectID id;

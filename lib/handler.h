@@ -25,7 +25,8 @@ public:
     void addObject(GameObject *obj);
     void removeObject(GameObject *obj);
     std::vector<GameObject *> &getGameObjects();
-
+    bool isObjectRemoved(GameObject*obj);
+    
     // Player management
     int setPlayer(Player &player);
     int removePlayer();

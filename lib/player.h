@@ -5,7 +5,9 @@
 #include "handler.h"
 #include "UI.h"
 #include "animation.h"
+
 class Handler;
+class Fire;
 
 enum class PlayerID
 {
@@ -118,7 +120,7 @@ private:
     // For removed blocks
     std::vector<GameObject *> removedBlocks;
     std::vector<GameObject *> removedEnemies;
-    std::vector<GameObject *> removeItems;
+    std::vector<GameObject *> removedItems;
 
     // For time count
     int timeCountForDeath = 0;
@@ -136,6 +138,14 @@ private:
     // Original scale
     int originalScale = 0;
     float originalHeight = 0.0f;
+
+    // For fire mario
+    Fire *fireBullet1 = nullptr;
+    Fire *fireBullet2 = nullptr;
+    int fireCount = 0; // Maximum 2 fire bullets at a time
+
+    // For locking the mario for a while when growing up and random
+    bool isLocked = false;
 
 public:
     // Constructor
@@ -176,6 +186,13 @@ public:
 
     // Set random
     void setRandomTextures(int index);
+
+    // For fire mario
+    void fire();
+    bool isFireMario();
+
+    // Checking if the player is locked
+    bool isPlayerLocked();
 
     // Destructor
     ~Player() = default; // Default destructor

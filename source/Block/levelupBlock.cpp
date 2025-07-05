@@ -72,3 +72,13 @@ void LevelUpBlock::playerCollision(GameObject *object)
         timeCount = 10; // Set a timer for the bounce effect
     }
 }
+
+GameObject *LevelUpBlock::getMushroom()
+{
+    return mushroom;
+}
+
+void LevelUpBlock::setMushroom()
+{
+    mushroom = nullptr; // Clear the mushroom pointer
+}

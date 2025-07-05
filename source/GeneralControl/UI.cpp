@@ -261,7 +261,8 @@ void UI::loadImages()
     npc_sheet = LoadImage(RES_PATH "Sprites/item.png");
     block_sheet = LoadImage(RES_PATH "Sprites/block.png");
     tile_sheet = LoadImage(RES_PATH "Sprites/tileset.png");
-
+    fire_sheet = LoadImage(RES_PATH "Sprites/fire.png");
+    
     levelImage = LoadImage(RES_PATH "Levels/map11.png");
     characterImage = LoadImage(RES_PATH "Levels/map11c.png");
 
@@ -272,6 +273,7 @@ void UI::loadImages()
     getDebrisTextures();
     getEnemyTextures();
     getItemTextures();
+    getFireBulletTextures();
 }
 
 void UI::unloadImages()
@@ -452,6 +454,11 @@ void UI::unloadImages()
     }
 
     for (auto &texture : marioSmallBlue)
+    {
+        UnloadTexture(texture);
+    }
+
+    for (auto &texture : fireBullet)
     {
         UnloadTexture(texture);
     }
@@ -888,29 +895,65 @@ std::vector<Texture2D> &UI::getBlueSmall()
 
 void UI::loadAudio()
 {
-    overworldBackGround = LoadMusicStream(RES_PATH "Sounds/Background.mp3");
-    levelup = LoadMusicStream(RES_PATH "Sounds/1up.wav");
-    gameover = LoadMusicStream(RES_PATH "Sounds/gameover.wav");
+    // Load music for longer audio files
+    overWorldBackGround = LoadMusicStream(RES_PATH "Sounds/Background.mp3");
+    gameOver = LoadMusicStream(RES_PATH "Sounds/gameover.wav");
+
+    // Load sound effects for shorter audio files
+    levelUp = LoadSound(RES_PATH "Sounds/1up.wav");
+    powerUp = LoadSound(RES_PATH "Sounds/powerup.wav");
 }
 
 void UI::unloadAudio()
 {
-    UnloadMusicStream(overworldBackGround);
-    UnloadMusicStream(levelup);
-    UnloadMusicStream(gameover);
+    UnloadMusicStream(overWorldBackGround);
+    UnloadMusicStream(gameOver);
+
+    UnloadSound(levelUp);
+    UnloadSound(powerUp);
 }
 
-Music &UI::getOverworldBackGround()
+Music &UI::getOverworldBackGroundMusic()
 {
-    return overworldBackGround;
+    return overWorldBackGround;
 }
 
-Music &UI::getLevelUp()
+Music &UI::getGameOverMusic()
 {
-    return levelup;
+    return gameOver;
 }
 
-Music &UI::getGameOver()
+Sound &UI::getLevelUpSound()
 {
-    return gameover;
+    return levelUp;
+}
+
+Sound &UI::getPowerUpSound()
+{
+    return powerUp;
+}
+
+void UI::getFireBulletTextures()
+{
+    int x_off = 189;
+    int y_off = 240;
+    int width = 8;
+    int height = 8;
+
+    for (int i = 0; i < 4; ++i)
+    {
+        Rectangle cropRect = {x_off + i * 35,
+                              y_off,
+                              width,
+                              height};
+        Image cropped = ImageFromImage(fire_sheet, cropRect);
+        Texture2D texture = LoadTextureFromImage(cropped);
+        UnloadImage(cropped);
+        fireBullet[i] = texture;
+    }
+}
+
+std::vector<Texture2D> &UI::getFireBullet()
+{
+    return fireBullet;
 }

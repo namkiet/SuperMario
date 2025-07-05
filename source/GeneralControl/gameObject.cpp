@@ -215,38 +215,12 @@ float GameObject::getPlayerScale()
     return scale; // Default scale for non-player objects
 }
 
-float GameObject::getPlayerHeight()
+void GameObject::setScale(int scale)
 {
-    if (id == ObjectID::Player)
-    {
-        return height * playerScale;
-    }
-    return height; // Default height for non-player objects
-}
-
-float GameObject::getPlayerWidth()
-{
-    if (id == ObjectID::Player)
-    {
-        return width * playerScale;
-    }
-    return width; // Default width for non-player objects
-}
-
-float GameObject::getPlayerX()
-{
-    if (id == ObjectID::Player)
-    {
-        return x * playerScale;
-    }
-    return x; // Default x for non-player objects
-}
-
-float GameObject::getPlayerY()
-{
-    if (id == ObjectID::Player)
-    {
-        return y * playerScale;
-    }
-    return y; // Default y for non-player objects
+    // cout << "In GameObject::setScale()" << endl;
+    this->scale = scale;
+    this->width *= scale;
+    this->height *= scale;
+    this->x *= scale;
+    this->y *= scale;
 }

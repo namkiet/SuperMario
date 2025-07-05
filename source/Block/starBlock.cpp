@@ -74,3 +74,13 @@ void StarBlock::playerCollision(GameObject *object)
         timeCount = 10;
     }
 }
+
+GameObject *StarBlock::getStar()
+{
+    return star;
+}
+
+void StarBlock::setStar()
+{
+    star = nullptr;
+}

@@ -9,7 +9,7 @@ enum class CoinState
     Collected
 };
 
-class Coin: public Item
+class Coin : public Item
 {
 private:
     // For animation
@@ -20,10 +20,8 @@ private:
     std::vector<Texture2D> coinTextures;
 
     // Properties
-    float x, y;
-    int scale;
-    int width, height;
 
+    // UI pointer
     UI *ui;
 
     // Timer
@@ -34,11 +32,13 @@ private:
     CoinState state;
 
 public:
+    // Constructor
     Coin(float x = 0, float y = 0, float scale = 0, UI *ui = nullptr);
 
+    // Update
     void tick();
     void render();
 
-    void draw1(); // Use for coin block
+    // Use 1 coin many times
     void reset();
 };

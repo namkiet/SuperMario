@@ -20,6 +20,7 @@ private:
     Image npc_sheet;    // NPC and items spritesheet
     Image block_sheet;  // Block spritesheet
     Image tile_sheet;   // Tile and pipes spritesheet
+    Image fire_sheet;   // For mario fire mode
     Image game_over_sheet;
     Image intro_sheet;
 
@@ -83,6 +84,9 @@ private:
     std::vector<Texture2D> star3{4};
     std::vector<Texture2D> star4{4};
 
+    // Textures for fire mode
+    std::vector<Texture2D> fireBullet{4};
+
     // Load textures from images
     void getLargePlayerTextures();
     void getSmallPlayerTextures();
@@ -91,14 +95,22 @@ private:
     void getDebrisTextures();
     void getEnemyTextures();
     void getItemTextures();
+    void getFireBulletTextures();
 
     // For levelHandler.cpp
     Image levelImage;
     Image characterImage;
 
-    Music overworldBackGround;
-    Music levelup;
-    Music gameover;
+    // Music for the game
+    Music overWorldBackGround;
+    Music gameOver;
+
+    // Sound effects
+    Sound coin;
+    Sound death;
+
+    Sound levelUp;
+    Sound powerUp;
 
 public:
     // Constructor
@@ -148,10 +160,14 @@ public:
     std::vector<Texture2D> &getGreenSmall();
     std::vector<Texture2D> &getBlueLarge();
     std::vector<Texture2D> &getBlueSmall();
+    std::vector<Texture2D> &getFireBullet();
+    
+    Music &getOverworldBackGroundMusic();
+    Music &getGameOverMusic();
 
-    Music &getOverworldBackGround();
-    Music &getLevelUp();
-    Music &getGameOver();
+    Sound &getLevelUpSound();
+    Sound &getPowerUpSound();
+
     Image &getLevelImage();
     Image &getCharacterImage();
 

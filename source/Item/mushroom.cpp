@@ -80,6 +80,7 @@ void Mushroom::render()
 
 void Mushroom::playerCollision()
 {
+    // cout << "Mushroom collected!" << endl;
     isCollected = true;
 }
 
@@ -194,6 +195,7 @@ void Mushroom::collision()
 
 bool Mushroom::shouldRemoveItem()
 {
+    // cout << "In Mushroom::shouldRemoveItem()" << endl;
     return state == MushroomState::Collected;
 }
 

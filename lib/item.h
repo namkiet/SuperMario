@@ -9,7 +9,8 @@ enum class ItemType
     Coin,
     Mushroom, // Bigger
     Flower,   // Fire
-    Star
+    Star,
+    Fire
 };
 
 class Item : public GameObject

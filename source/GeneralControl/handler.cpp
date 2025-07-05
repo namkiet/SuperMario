@@ -1,6 +1,12 @@
 #include <iostream>
 #include <raylib.h>
 #include "handler.h"
+#include "block.h"
+#include "questionBlock.h"
+#include "levelupBlock.h"
+#include "starBlock.h"
+#include "item.h"
+#include "fire.h"
 using namespace std;
 
 Handler::Handler() : player(nullptr)
@@ -46,6 +52,74 @@ void Handler::tick()
             continue;
         }
         removeObject(enemy);
+    }
+
+    std::vector<GameObject *> removedItems = player->getAndResetRemovedItems();
+    for (auto &item : removedItems)
+    {
+        // cout << "Address of item to remove in tick(): " << item << endl;
+        if (item == nullptr)
+        {
+            cerr << "Warning: Found nullptr in removedItems!" << endl;
+            continue;
+        }
+        removeObject(item);
+    }
+
+    for (auto &gameObject : gameObjects)
+    {
+        if (gameObject->getID() == ObjectID::Block)
+        {
+            Block *block = dynamic_cast<Block *>(gameObject);
+            if (block != nullptr && block->getBlockID() == BlockType::Question)
+            {
+                QuestionBlock *questionBlock = dynamic_cast<QuestionBlock *>(gameObject);
+                if (questionBlock != nullptr)
+                {
+                    if (isObjectRemoved(questionBlock->getMushroom()))
+                    {
+                        questionBlock->setMushroom();
+                    }
+                    if (isObjectRemoved(questionBlock->getFlower()))
+                    {
+                        questionBlock->setFlower();
+                    }
+                }
+            }
+            else if (block != nullptr && block->getBlockID() == BlockType::LevelUp)
+            {
+                LevelUpBlock *levelUpBlock = dynamic_cast<LevelUpBlock *>(gameObject);
+                if (levelUpBlock != nullptr)
+                {
+                    if (isObjectRemoved(levelUpBlock->getMushroom()))
+                    {
+                        levelUpBlock->setMushroom();
+                    }
+                }
+            }
+            else if (block != nullptr && block->getBlockID() == BlockType::Star)
+            {
+                StarBlock *starBlock = dynamic_cast<StarBlock *>(gameObject);
+                if (starBlock != nullptr)
+                {
+                    if (isObjectRemoved(starBlock->getStar()))
+                    {
+                        starBlock->setStar();
+                    }
+                }
+            }
+        }
+        else if (gameObject->getID() == ObjectID::Item)
+        {
+            Item *item = dynamic_cast<Item *>(gameObject);
+            if (item->getItemType() == ItemType::Fire)
+            {
+                if (item->shouldRemoveItem())
+                {
+                    removeObject(gameObject);
+                }
+            }
+        }
     }
 }
 
@@ -96,7 +170,9 @@ void Handler::removeObject(GameObject *obj)
     auto it = std::remove(gameObjects.begin(), gameObjects.end(), obj);
     if (it != gameObjects.end())
     {
+        // cout << "Removing object from gameObjects: " << obj << endl;
         delete obj;
+        obj = nullptr;
         gameObjects.erase(it, gameObjects.end());
         // cout << "Object removed from gameObjects." << endl;
     }
@@ -160,5 +236,23 @@ Handler::~Handler()
     {
         delete player; // Clean up Player if it was dynamically allocated
         player = nullptr;
+    }
+}
+
+bool Handler::isObjectRemoved(GameObject *obj)
+{
+    if (obj == nullptr)
+    {
+        // cerr << "Error: Attempted to check if a null GameObject is removed." << endl;
+        return true;
+    }
+    auto it = std::find(gameObjects.begin(), gameObjects.end(), obj);
+    if (it != gameObjects.end())
+    {
+        return false; // Object is still in the gameObjects list
+    }
+    else
+    {
+        return true; // Object has been removed
     }
 }

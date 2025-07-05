@@ -38,4 +38,7 @@ public:
     void render();
 
     void playerCollision(GameObject *object);
+
+    GameObject *getStar();
+    void setStar();
 };

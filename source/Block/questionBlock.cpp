@@ -80,6 +80,7 @@ void QuestionBlock::tick()
             handler->addObject(star);
         }
     }
+
     if (isHit())
     {
         state = QuestionBlockState::AfterHit;
@@ -133,4 +134,24 @@ void QuestionBlock::playerCollision(GameObject *object)
         setY(originalY - getHeight() / 4);
         timeCount = 10;
     }
+}
+
+GameObject *QuestionBlock::getMushroom()
+{
+    return mushroom;
+}
+
+GameObject *QuestionBlock::getFlower()
+{
+    return flower;
+}
+
+void QuestionBlock::setMushroom()
+{
+    mushroom = nullptr;
+}
+
+void QuestionBlock::setFlower()
+{
+    flower = nullptr;
 }

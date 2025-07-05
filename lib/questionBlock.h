@@ -39,10 +39,10 @@ private:
 
     QuestionBlockType type;
 
-    Coin* coin; // For Coin Question Block
-    Mushroom* mushroom; // For Mushroom Question Block
-    Flower* flower; // For Flower Question Block
-    Star* star; // For Star Question Block
+    Coin *coin;         // For Coin Question Block
+    Mushroom *mushroom; // For Mushroom Question Block
+    Flower *flower;     // For Flower Question Block
+    Star *star;         // For Star Question Block
 
     // Ui pointer
     UI *ui;
@@ -59,4 +59,9 @@ public:
     void render();
 
     void playerCollision(GameObject *object);
+
+    GameObject *getMushroom();
+    GameObject *getFlower();
+    void setMushroom();
+    void setFlower();
 };

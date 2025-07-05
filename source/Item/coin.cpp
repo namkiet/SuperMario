@@ -57,15 +57,6 @@ void Coin::render()
     }
 }
 
-void Coin::draw1()
-{
-    ++timeCount1;
-    if (timeCount1 >= 10)
-    {
-        // timeCount1 = 0; // Reset the timer
-        return; // Exit if the timer has reached the limit
-    }
-}
 
 void Coin::reset()
 {

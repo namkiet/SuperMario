@@ -49,7 +49,7 @@ void App::control()
     if (IsKeyPressed(KEY_B))
     {
         gameState = GameState::Play; // Change game state to 
-        PlayMusicStream(ui.getOverworldBackGround()); 
+        PlayMusicStream(ui.getOverworldBackGroundMusic()); 
         game = new Game(screenWidth, screenHeight, &ui);
     }
     else if (IsKeyPressed(KEY_ESCAPE))
@@ -63,14 +63,14 @@ void App::control()
 
     if (gameState == GameState::Play)
     {
-        UpdateMusicStream(ui.getOverworldBackGround()); // Play background music
+        UpdateMusicStream(ui.getOverworldBackGroundMusic()); // Play background music
         game->run();                                    // Because this did not stop, cancel it here first
         if (game->shouldExit())
         {
             delete game;
             game = nullptr;
             gameState = GameState::GameOver;              // Change game state to GameOver
-            StopMusicStream(ui.getOverworldBackGround()); // Stop background music
+            StopMusicStream(ui.getOverworldBackGroundMusic()); // Stop background music
         }
     }
 
@@ -83,6 +83,6 @@ void App::control()
     if (gameState == GameState::GameOver)
     {
         cout << "Game Over: Press B to restart or ESC to exit." << endl;
-        UpdateMusicStream(ui.getGameOver()); // Play game over music
+        UpdateMusicStream(ui.getGameOverMusic()); // Play game over music
     }
 }

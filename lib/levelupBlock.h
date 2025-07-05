@@ -43,4 +43,7 @@ public:
 
     // Player collision
     void playerCollision(GameObject *object);
+
+    GameObject *getMushroom();
+    void setMushroom();
 };
