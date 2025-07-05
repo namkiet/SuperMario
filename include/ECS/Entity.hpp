@@ -8,6 +8,8 @@
 class Entity 
 {
 public:
+    virtual ~Entity() = default;
+    
     template<typename T, typename... Args>
     void addComponent(Args&&... args) 
     {
@@ -33,6 +35,12 @@ public:
         // assert(it != components.end() && "Component not found");
         return *static_cast<T*>(it->second.get());
     }
+    
+    // Entity clone() const
+    // {
+    //     Entity newEntity;
+
+    // }
 
 private:
     std::unordered_map<std::type_index, std::unique_ptr<Component>> components;

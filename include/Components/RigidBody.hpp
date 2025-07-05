@@ -2,26 +2,12 @@
 #include <SFML/Graphics.hpp>
 #include <ECS/Component.hpp>
 
-class RigidBody : public Component
+struct RigidBody : public Component
 {
-public:
-    RigidBody(float vx = 0.f, float vy = 0.f) : velocity(vx, vy) {}
-
-    void setVelocity(const sf::Vector2f& vec)
-    {
-        velocity = vec;
-    }
-
-    void setVelocity(float x, float y)
-    {
-        velocity = { x, y };
-    }
-
-    const sf::Vector2f& getVelocity() const
-    {
-        return velocity;
-    }
-
-private:
     sf::Vector2f velocity;
+    bool applyGravity;
+    bool onGround = false;
+
+    RigidBody(sf::Vector2f velocity = sf::Vector2f(0, 0), bool applyGravity = true) 
+        : velocity(velocity), applyGravity(applyGravity) {}
 };

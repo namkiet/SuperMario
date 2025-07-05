@@ -1,18 +1,19 @@
 #pragma once
 #include <World.hpp>
 #include <Components/Animation.hpp>
-#include <Components/Sprite2D.hpp>
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class AnimationSystem : public System
 {
 public:
     void update(World& world, float dt) override
     {
-        for (Entity* entity : world.findAll<Animation, Sprite2D>())
+        for (Entity* entity : world.findAll<Animation>())
         {
             auto& anim = entity->getComponent<Animation>();
-            auto& sp = entity->getComponent<Sprite2D>();
+
+            if (anim.frameCount == 1) continue;
 
             anim.timer += dt;
             if (anim.timer >= anim.frameDuration) 
@@ -28,7 +29,7 @@ public:
             }
 
             // Set texture rect
-            sp.sprite.setTextureRect(sf::IntRect(
+            anim.sprite.setTextureRect(sf::IntRect(
                 anim.currentFrame * anim.frameWidth,
                 anim.row * anim.frameHeight,
                 anim.frameWidth,

@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <unordered_map>
 #include <typeindex>
+#include <vector>
 
 class World {
 public:
@@ -16,8 +17,24 @@ public:
 
     Entity* createEntity(std::unique_ptr<Entity> entity)
     {
+        Entity* newEntity = entity.get();
         entities.push_back(std::move(entity));
-        return entities.back().get();
+        return newEntity;
+    }
+    
+    void deleteEntity(Entity* entity)
+    {
+        auto it = std::remove_if(entities.begin(), entities.end(), [entity](const std::unique_ptr<Entity>& e) { return e.get() == entity; });
+        if (it != entities.end()) 
+        {
+            entities.erase(it, entities.end());
+        }
+    }
+
+    void destroyEntity(Entity* entity)
+    {
+        // destroyPending.push_back(entity);
+        deleteEntity(entity);
     }
 
     std::vector<Entity*> findAll() const
@@ -61,31 +78,42 @@ public:
     void addSystem()
     {
         // static_assert(std::is_base_of<System, T>::value, "T must inherit from System");
-        systems[typeid(T)] = std::make_shared<T>();
+
+        auto system = std::make_shared<T>();
+        systems[typeid(T)] = system;
+        orderedSystems.push_back(system);
     }
 
     template<typename T>
     std::shared_ptr<T> getSystem() const
     {
-        // static_assert(std::is_base_of<System, T>::value, "T must inherit from System");
         auto it = systems.find(typeid(T));
-        if (it == systems.end()) 
+        if (it == systems.end())
         {
             throw std::runtime_error("System not found");
         }
+
         return std::static_pointer_cast<T>(it->second);
     }
     
-    void update(float deltaTime) 
+    void update(float deltaTime)
     {
-        for (auto& [id, system] : systems) 
+        for (auto& system : orderedSystems)
         {
             system->update(*this, deltaTime);
         }
-    }
 
+        for (Entity* entity : destroyPending)
+        {
+            deleteEntity(entity);
+        }
+
+        destroyPending.clear();
+    }
 
 private:
     std::vector<std::unique_ptr<Entity>> entities;
     std::unordered_map<std::type_index, std::shared_ptr<System>> systems;
+    std::vector<std::shared_ptr<System>> orderedSystems;
+    std::vector<Entity*> destroyPending;
 };

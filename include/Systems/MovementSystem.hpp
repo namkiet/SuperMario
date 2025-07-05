@@ -2,6 +2,7 @@
 #include <World.hpp>
 #include <Components/Transform.hpp>
 #include <Components/RigidBody.hpp>
+#include <Core/Variables.hpp>
 
 class MovementSystem : public System
 {
@@ -10,16 +11,21 @@ public:
     {
         for (Entity* entity : world.findAll<Transform, RigidBody>())
         {
+            auto& vel = entity->getComponent<RigidBody>().velocity;
             auto& tf = entity->getComponent<Transform>();
-            auto& rb = entity->getComponent<RigidBody>();
+            auto& pos = tf.position;
+            auto& prev = tf.prevPos;
 
-            auto pos = tf.getPosition();
-            auto vel = rb.getVelocity();
+            prev.x = pos.x;
+            prev.y = pos.y;
             
             pos.x += vel.x * dt;
             pos.y += vel.y * dt;
 
-            tf.setPosition(pos);
+            if (pos.y >= SIZE::SCREEN.y)
+            {
+                entity->addComponent<DeadTag>();
+            }
         }
     }
 };

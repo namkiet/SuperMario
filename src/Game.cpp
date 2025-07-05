@@ -3,10 +3,11 @@
 #include <States/MenuState.hpp>
 #include <States/PlayingState.hpp>
 #include <States/SettingsState.hpp>
+#include <Core/Variables.hpp>
 
 Game::Game() 
     : contextSettings(0, 0, 16)
-    , window(sf::VideoMode(800, 600), "Game", sf::Style::Default, contextSettings)
+    , window(sf::VideoMode(SIZE::SCREEN.x, SIZE::SCREEN.y), "Game", sf::Style::Default, contextSettings)
 {
     registry.registerInstance("menu", std::make_shared<MenuState>());
     registry.registerInstance("play", std::make_shared<PlayingState>());
@@ -29,7 +30,7 @@ void Game::run()
         float dt = clock.restart().asSeconds();
         if (currentState()) currentState()->update(*this, dt);
 
-        window.clear();
+        window.clear(sf::Color(101, 153, 248));
         if (currentState()) currentState()->render(*this, window);
         window.display();
     }

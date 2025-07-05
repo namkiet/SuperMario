@@ -1,12 +1,7 @@
 #pragma once
 
-class Component
+struct Component
 {
-public:
     virtual ~Component() = default;
+    // virtual Component* clone() const = 0;
 };
-
-class PlayerTag : public Component {};
-class EnemyTag : public Component {};
-
-class Solid : public Component {};
