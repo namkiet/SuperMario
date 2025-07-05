@@ -62,7 +62,8 @@ void StarBlock::render()
     else if (state == StarBlockState::AfterHit)
     {
         DrawTextureEx(textures[1], {getX(), getY()}, 0.0f, (float)getScale(), WHITE); // Draw the star block after hit
-        star->render();                                                               // Render the star animation
+        if (star)
+            star->render(); // Render the star animation
     }
 }
 

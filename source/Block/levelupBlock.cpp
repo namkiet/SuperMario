@@ -57,10 +57,11 @@ void LevelUpBlock::render()
     {
         DrawTextureEx(textures[0], {getX(), getY()}, 0.0f, (float)getScale(), WHITE); // Draw the star block texture
     }
-    else if (state == LevelUpBlockState::AfterHit && mushroom)
+    else if (state == LevelUpBlockState::AfterHit)
     {
         DrawTextureEx(textures[1], {getX(), getY()}, 0.0f, (float)getScale(), WHITE);
-        mushroom->render();
+        if (mushroom)
+            mushroom->render();
     }
 }
 
