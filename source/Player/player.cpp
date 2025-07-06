@@ -41,21 +41,30 @@ void Player::tick()
 {
     --timeCountForRandomTextures;
     --timeCountForGrowingUp;
+    --timeCountForFire;
+    --timeCountForStar;
 
+    // For flower item
     if (type == PlayerType::RandomBeforeFire && timeCountForRandomTextures <= 0) // For flower
     {
         setType(PlayerType::Fire);
         timeCountForRandomTextures = 0;
-        // cout << getX() << " " << getY() << " " << getWidth() << " " << getHeight() << " " << getScale() << endl;
-
         isLocked = false;
-        // cout<< "Player::tick() - Fire bullets created!" << endl;
     }
-    else if (type == PlayerType::Star && timeCountForRandomTextures <= 0)
+    // For star item
+    else if (type == PlayerType::RandomBeforeStar && timeCountForRandomTextures <= 0)
+    {
+        isLocked = false;
+        timeCountForStar = 500; // Begin the timer for star mode
+        type = PlayerType::Star;
+    }
+    else if (type == PlayerType::Star && timeCountForStar <= 0)
     {
         setType(previousType); // Set to previous type
         timeCountForRandomTextures = 0;
     }
+
+    // For mushroom item
     else if (state == PlayerState::GrowingUp && getHeight() < originalHeight * 2 * originalScale && timeCountForGrowingUp <= 0)
     {
         // Set the player to growing up state
@@ -77,8 +86,6 @@ void Player::tick()
         isLocked = false;
     }
 
-    // finishedCollisionChecking = false;
-    // cout<<"In Player::tick()" << endl;
     applyGravity();
 
     if (!isPlayingDeath)
@@ -197,9 +204,12 @@ void Player::render()
         currentAnimation.drawAnimation(getX(), getY(), (float)(-getWidth()), (float)getHeight());
         forward = false;
     }
-    else if (type == PlayerType::RandomBeforeFire || type == PlayerType::Star)
+    else if (type == PlayerType::RandomBeforeFire || type == PlayerType::RandomBeforeStar)
     {
-        currentAnimation.drawAnimation(getX(), getY(), (float)getWidth(), (float)getHeight());
+        if (forward)
+            currentAnimation.drawAnimation(getX(), getY(), (float)getWidth(), (float)getHeight());
+        else
+            currentAnimation.drawAnimation(getX(), getY(), (float)(-getWidth()), (float)getHeight());
     }
     else
     {
@@ -931,7 +941,7 @@ void Player::itemCollision(GameObject *object)
         if (item->getItemType() == ItemType::Star)
         {
             // Reset the timer
-            timeCountForRandomTextures = 500;
+            timeCountForRandomTextures = 100;
 
             // Random texture first
             int randomIndex = currentAnimation.getCurrentFrameIndex();
@@ -940,9 +950,11 @@ void Player::itemCollision(GameObject *object)
             // Store the previous type
             previousType = type;
 
-            setType(PlayerType::Star);
+            // Set type
+            type = PlayerType::RandomBeforeStar;
 
-            // Turn to the fire Mario
+            // Lock for a while
+            isLocked = true;
         }
         else if (item->getItemType() == ItemType::Flower)
         {
@@ -952,8 +964,13 @@ void Player::itemCollision(GameObject *object)
             // Random texture until timer runs out
             int randomIndex = currentAnimation.getCurrentFrameIndex();
             setRandomTextures(randomIndex);
-            setState(PlayerState::Large);
+
+            // setState(PlayerState::Large);
+
+            // Set type
             type = PlayerType::RandomBeforeFire;
+
+            // Lock for a while
             isLocked = true;
         }
         else if (item->getItemType() == ItemType::Mushroom)
@@ -996,10 +1013,6 @@ std::vector<GameObject *> Player::getAndResetRemovedItems()
         {
             continue; // Skip if the item is not valid or should not be removed
         }
-        if (removedItemPointer->getItemType() == ItemType::Fire)
-        {
-            --fireCount;
-        }
         temp.push_back(item);
         auto it = std::find(removedItems.begin(), removedItems.end(), item);
         if (it != removedItems.end())
@@ -1030,6 +1043,7 @@ void Player::setRandomTextures(int index)
     {
         index = 0; // Default to idle texture if no movement or jump
     }
+
     currentPlayerTextures.clear(); // Clear the current textures before setting new ones
     // Set the random textures based on the index
     switch (index)
@@ -1066,19 +1080,12 @@ void Player::fire()
     // For the first fire bullet
     if (Fire::count >= 2)
         return;
-    else
+    else if (Fire::count < 2 && timeCountForFire <= 0)
     {
-        fireBullet1 = new Fire((getX() - getWidth() / 2) / getScale(), (getY() + getHeight() / 8) / getScale(), originalScale, handler, ui);
-        handler->addObject(fireBullet1);
-    }
-
-    // For the second fire bullet
-    if (Fire::count >= 2)
-        return;
-    else
-    {
-        fireBullet2 = new Fire(getX() / getScale(), (getY() + getHeight() / 8) / getScale(), originalScale, handler, ui);
-        handler->addObject(fireBullet2);
+        fireBullet = new Fire((getX() - getWidth() / 2) / getScale(), (getY() + getHeight() / 8) / getScale(), originalScale, handler, ui);
+        handler->addObject(fireBullet);
+        timeCountForFire = 10;
+        // cout << "Fire bullet 1 created" << endl;
     }
 }
 

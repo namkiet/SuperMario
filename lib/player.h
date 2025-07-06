@@ -20,6 +20,7 @@ enum class PlayerType
     Normal,
     RandomBeforeFire,
     Fire,
+    RandomBeforeStar,
     Star
 };
 
@@ -126,6 +127,8 @@ private:
     int timeCountForDeath = 0;
     int timeCountForRandomTextures = 0;
     int timeCountForGrowingUp = 0;
+    int timeCountForFire = 0;
+    int timeCountForStar = 0;
 
     //
     bool finishedCollisionChecking = false;
@@ -140,9 +143,7 @@ private:
     float originalHeight = 0.0f;
 
     // For fire mario
-    Fire *fireBullet1 = nullptr;
-    Fire *fireBullet2 = nullptr;
-    int fireCount = 0; // Maximum 2 fire bullets at a time
+    Fire *fireBullet = nullptr;
 
     // For locking the mario for a while when growing up and random
     bool isLocked = false;
