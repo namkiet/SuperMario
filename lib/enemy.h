@@ -20,7 +20,11 @@ class Enemy : public GameObject
 private:
     // Constant values
     static const float WIDTH;
-    static const float HEIGHT;
+    static const float GOOMBA_HEIGHT;
+    static const float STOMPED_GOOMBA_HEIGHT;
+    static const float KOOPA_HEIGHT;
+    static const float SHELL_HEIGHT;
+    static const float SHELL_WIDTH;
 
     // Load UI assets
 
@@ -42,7 +46,7 @@ protected:
 
 public:
     // Constructor
-    Enemy(float x = 0, float y = 0, int index = 0, int scale = 0, Handler *handler = nullptr, UI *ui = nullptr, EnemyCharacter id = EnemyCharacter::Goomba);
+    Enemy(float x = 0, float y = 0, int scale = 0, Handler *handler = nullptr, UI *ui = nullptr, EnemyCharacter id = EnemyCharacter::Goomba);
 
     // Update:
     void tick();
@@ -60,6 +64,7 @@ public:
     virtual void pipeCollision(GameObject *object);
     virtual void playerCollision(GameObject *object);
     virtual void enemyCollision(GameObject *object);
+    virtual void itemCollision(GameObject *object);
 
     // Getters and setters
     void setEnemyID(EnemyCharacter id);
@@ -76,6 +81,11 @@ public:
 
     //
     virtual bool isShell();
+
+    float getShellHeight();
+    float getKoopaHeight();
+    float getShellWidth();
+    float getStompedGoombaHeight();
 
     // Destructor
     ~Enemy();

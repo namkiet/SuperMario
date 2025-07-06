@@ -46,6 +46,8 @@ public:
     Rectangle getBoundsLeft();
 
     virtual bool shouldRemoveItem();
+    virtual void enemyCollision();
+
     bool isStomped();
 
     ItemType getItemType();

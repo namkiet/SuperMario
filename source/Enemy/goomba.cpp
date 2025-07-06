@@ -1,10 +1,11 @@
 #include <iostream>
 #include <cmath>
 #include "goomba.h"
+#include "item.h"
 using namespace std;
 
-Goomba::Goomba(float x, float y, int index, int scale, Handler *handler, UI *ui)
-    : Enemy(x, y, index, scale, handler, ui, EnemyCharacter::Goomba)
+Goomba::Goomba(float x, float y, int scale, Handler *handler, UI *ui)
+    : Enemy(x, y, scale, handler, ui, EnemyCharacter::Goomba)
 {
     if (handler == nullptr)
     {
@@ -19,7 +20,7 @@ Goomba::Goomba(float x, float y, int index, int scale, Handler *handler, UI *ui)
     }
 
     // Load Goomba textures from UI
-    for (int i = 0; i < 4; ++i)
+    for (int i = 0; i < 3; ++i)
     {
         goombaTextures.push_back(ui->getEnemy1()[i]);
     }
@@ -38,6 +39,13 @@ Goomba::Goomba(float x, float y, int index, int scale, Handler *handler, UI *ui)
 
     // Backward direction
     setVelX(-2.0f);
+
+    // cout << "Goomba created at position: (" << getX() << ", " << getY() << ") with width: " << getWidth() << " and height: " << getHeight() << endl;
+
+    // setY((getY() + 48.0f));
+    // setHeight(16.0f); // Set Goomba height to 48
+
+    // cout << getX() << ", " << getY() << ", " << getWidth() << ", " << getHeight() << endl;
 }
 
 void Goomba::tick()
@@ -49,6 +57,8 @@ void Goomba::tick()
 
 void Goomba::render()
 {
+    // cout << timeCount << endl;
+    // cout << "Rendering Goomba at position: (" << getX() << ", " << getY() << ") with width: " << getWidth() << " and height: " << getHeight() << endl;
     if (state == GoombaState::Normal)
     {
         currentAnimation.drawAnimation(getX(), getY(), (float)getWidth(), (float)getHeight());
@@ -61,12 +71,13 @@ void Goomba::render()
                        {0.0f, 0.0f}, 0.0f, WHITE);
         ++timeCount;
     }
-    else if (state == GoombaState ::DeadByEnemy)
+    else if (state == GoombaState ::DeadByEnemy || state == GoombaState::DeadByFire)
     {
-        DrawTexturePro(goombaTextures[2],
-                       {0.0f, (float)goombaTextures[2].height, (float)goombaTextures[2].width, -(float)goombaTextures[2].height},
+        DrawTexturePro(goombaTextures[1],
+                       {0.0f, (float)goombaTextures[1].height, (float)goombaTextures[1].width, -(float)goombaTextures[1].height},
                        {getX(), getY(), getWidth(), getHeight()},
                        {0.0f, 0.0f}, 0.0f, WHITE);
+        ++timeCount;
     }
 }
 
@@ -183,7 +194,7 @@ void Goomba::playerCollision(GameObject *object)
     if (CheckCollisionRecs(boundsTop, objectBoundsBottom) && !object->isStomped())
     {
         // Player hits the Goomba from the top
-        state = GoombaState::Stomped;
+        setState(GoombaState::Stomped);
         setVelY(0);
         setVelX(0);
     }
@@ -191,9 +202,10 @@ void Goomba::playerCollision(GameObject *object)
 
 bool Goomba::shouldRemove()
 {
-    if ((state == GoombaState::Stomped || state == GoombaState::DeadByEnemy) && timeCount > 20)
+    // cout << (state == GoombaState::DeadByEnemy) << endl;
+    if ((state == GoombaState::Stomped || state == GoombaState::DeadByEnemy || state == GoombaState::DeadByFire) && timeCount > 20)
     {
-        state = GoombaState::Dead;
+        setState(GoombaState::Dead);
         return true;
     }
     return false;
@@ -222,11 +234,11 @@ void Goomba::enemyCollision(GameObject *object)
     {
         if (enemy != nullptr && enemy->getEnemyID() == EnemyCharacter::Koopa && enemy->isShell())
         {
-            state = GoombaState::DeadByEnemy;
+            setState(GoombaState::DeadByEnemy);
             timeCount = 0; // Reset timer for dead state
             // isPlayingDeath = true; // Player is dead
-            setY(getY() + getHeight() - getHeight() / 8);
-            setVelY(0);
+            setY(getY() - getHeight());
+            setVelY(-8.0f);
             setVelX(0.0f);
         }
         else
@@ -239,11 +251,11 @@ void Goomba::enemyCollision(GameObject *object)
     {
         if (enemy != nullptr && enemy->getEnemyID() == EnemyCharacter::Koopa && enemy->isShell())
         {
-            state = GoombaState::DeadByEnemy;
+            setState(GoombaState::DeadByEnemy);
             timeCount = 0; // Reset timer for death state
             // isPlayingDeath = true; // Player is dead
-            setY(getY() + getHeight() - getHeight() / 8);
-            setVelY(0);
+            setY(getY() - getHeight());
+            setVelY(-8.0f);
             setVelX(0.0f);
         }
         else
@@ -260,12 +272,12 @@ bool Goomba::isStomped()
 
 Rectangle Goomba::getBounds()
 {
-    if (state == GoombaState::Stomped || state == GoombaState::DeadByEnemy)
+    if (state == GoombaState::Stomped)
     {
         Rectangle boundsBottom = {getX(),
-                                  getY() + getHeight() / 2 + getHeight() / 4 + getHeight() / 8,
+                                  getY() + getHeight() - getHeight() / 4,
                                   getWidth(),
-                                  getHeight() / 8};
+                                  getHeight() / 4};
 
         return boundsBottom;
     }
@@ -281,35 +293,27 @@ Rectangle Goomba::getBounds()
 
 Rectangle Goomba::getBoundsTop()
 {
-    if (state == GoombaState::Stomped || state == GoombaState::DeadByEnemy)
+    if (state == GoombaState::Stomped)
     {
         Rectangle boundsTop = {getX(),
-                               getY() + getHeight() / 2 + getHeight() / 4,
+                               getY(),
                                getWidth(),
-                               getHeight() / 8};
+                               getHeight() / 4};
         return boundsTop;
     }
     else
     {
         Rectangle boundsTop = {getX(),
-                               getY() + getHeight() / 2,
+                               getY(),
                                getWidth(),
-                               getHeight() / 4};
+                               getHeight() / 2};
         return boundsTop;
     }
 }
 
 Rectangle Goomba::getBoundsRight()
 {
-    if (state == GoombaState::Stomped || state == GoombaState::DeadByEnemy)
-    {
-        Rectangle boundsRight = {getX() + getWidth() - getWidth() / 4,
-                                 getY() + getHeight() / 2 + getHeight() / 4,
-                                 getWidth() / 4,
-                                 getHeight() / 4};
-        return boundsRight;
-    }
-    else
+    if (state == GoombaState::Stomped)
     {
         Rectangle boundsRight = {getX() + getWidth() - getWidth() / 4,
                                  getY() + getHeight() / 2,
@@ -317,19 +321,19 @@ Rectangle Goomba::getBoundsRight()
                                  getHeight() / 2};
         return boundsRight;
     }
+    else
+    {
+        Rectangle boundsRight = {getX() + getWidth() - getWidth() / 4,
+                                 getY(),
+                                 getWidth() / 4,
+                                 getHeight()};
+        return boundsRight;
+    }
 }
 
 Rectangle Goomba::getBoundsLeft()
 {
-    if (state == GoombaState::Stomped || state == GoombaState::DeadByEnemy)
-    {
-        Rectangle boundsLeft = {getX(),
-                                getY() + getHeight() / 2 + getHeight() / 4,
-                                getWidth() / 4,
-                                getHeight() / 4};
-        return boundsLeft;
-    }
-    else
+    if (state == GoombaState::Stomped)
     {
         Rectangle boundsLeft = {getX(),
                                 getY() + getHeight() / 2,
@@ -337,4 +341,54 @@ Rectangle Goomba::getBoundsLeft()
                                 getHeight() / 2};
         return boundsLeft;
     }
+    else
+    {
+        Rectangle boundsLeft = {getX(),
+                                getY(),
+                                getWidth() / 4,
+                                getHeight()};
+        return boundsLeft;
+    }
+}
+
+void Goomba::itemCollision(GameObject *object)
+{
+    Rectangle boundsBottom = getBounds();
+    Rectangle boundsTop = getBoundsTop();
+    Rectangle boundsRight = getBoundsRight();
+    Rectangle boundsLeft = getBoundsLeft();
+
+    Rectangle objectBoundsBottom = object->getBounds(); // Get the lower 1/4 bounds of the object
+    Rectangle objectBoundsTop = object->getBoundsTop();
+    Rectangle objectBoundsRight = object->getBoundsRight();
+    Rectangle objectBoundsLeft = object->getBoundsLeft();
+
+    Item *item = dynamic_cast<Item *>(object);
+
+    if (item && item->getItemType() == ItemType::Fire)
+    {
+        if (CheckCollisionRecs(boundsTop, objectBoundsBottom) || CheckCollisionRecs(boundsBottom, objectBoundsTop) ||
+            CheckCollisionRecs(boundsRight, objectBoundsLeft) || CheckCollisionRecs(boundsLeft, objectBoundsRight) && !item->isStomped())
+        {
+            setState(GoombaState::DeadByFire);
+
+            timeCount = 0;
+
+            setY(getY() - getHeight());
+
+            setVelY(0);
+
+            item->enemyCollision(); // Handle item collision with player
+        }
+    }
+}
+
+void Goomba::setState(GoombaState newState)
+{
+    if (state != GoombaState::Stomped && newState == GoombaState::Stomped)
+    {
+        setY(getY() + getHeight() - getStompedGoombaHeight());
+        setHeight(getStompedGoombaHeight());
+    }
+    state = newState;
 }

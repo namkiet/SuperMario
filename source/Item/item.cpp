@@ -85,3 +85,10 @@ ItemType Item::getItemType()
 {
     return type; // Return the item type
 }
+
+void Item::enemyCollision()
+{
+    // Default implementation, can be overridden in derived classes
+    // This is called when an item collides with an enemy
+    // For example, a mushroom might grow the player when it collides with an enemy
+}

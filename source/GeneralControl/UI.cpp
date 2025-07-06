@@ -262,7 +262,7 @@ void UI::loadImages()
     block_sheet = LoadImage(RES_PATH "Sprites/block.png");
     tile_sheet = LoadImage(RES_PATH "Sprites/tileset.png");
     fire_sheet = LoadImage(RES_PATH "Sprites/fire.png");
-    
+
     levelImage = LoadImage(RES_PATH "Levels/map11.png");
     characterImage = LoadImage(RES_PATH "Levels/map11c.png");
 
@@ -555,15 +555,17 @@ std::vector<Texture2D> &UI::getEnemy4()
 void UI::getEnemyTextures()
 {
     int x_off = 0;
-    int y_off = 0;
+    int y_off = 16;
     int width = 16;
-    int height = 32;
+    int height = 16;
+
+    // Get the normal mushroom
     for (int j = 0; j < 4; ++j)
     {
-        for (int i = 0; i < ENEMY_COUNT; ++i)
+        for (int i = 0; i < 2; ++i)
         {
             Rectangle cropRect = {x_off + i * (width),
-                                  y_off + j * height,
+                                  y_off * (j + 1) + j * height,
                                   width,
                                   height};
             if (cropRect.x + cropRect.width > enemy_sheet.width || cropRect.y + cropRect.height > enemy_sheet.height)
@@ -588,6 +590,504 @@ void UI::getEnemyTextures()
             else if (j == 3)
             {
                 enemy4[i] = texture;
+            }
+        }
+    }
+
+    // Get the stomped mushroom
+    x_off = 32;
+    y_off = 24;
+    height = 8;
+    width = 16;
+    for (int j = 0; j < 4; ++j)
+    {
+        Rectangle cropRect = {x_off,
+                              y_off * (j + 1) + j * height,
+                              width,
+                              height};
+        if (cropRect.x + cropRect.width > enemy_sheet.width || cropRect.y + cropRect.height > enemy_sheet.height)
+        {
+            continue;
+        }
+        Image cropped = ImageFromImage(enemy_sheet, cropRect);
+        Texture2D texture = LoadTextureFromImage(cropped);
+        UnloadImage(cropped);
+        if (j == 0)
+        {
+            enemy1[2] = texture; // Stomped enemy1
+        }
+        else if (j == 1)
+        {
+            enemy2[2] = texture; // Stomped enemy2
+        }
+        else if (j == 2)
+        {
+            enemy3[2] = texture; // Stomped enemy3
+        }
+        else if (j == 3)
+        {
+            enemy4[2] = texture; // Stomped enemy4
+        }
+    }
+
+    // For normal and flying koopa
+    x_off = 96;
+    y_off = 8;
+    height = 24;
+    width = 16;
+    for (int j = 0; j < 4; ++j)
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            Rectangle cropRect = {x_off + i * (width),
+                                  y_off * (j + 1) + j * height,
+                                  width,
+                                  height};
+            if (cropRect.x + cropRect.width > enemy_sheet.width || cropRect.y + cropRect.height > enemy_sheet.height)
+            {
+                continue;
+            }
+            Image cropped = ImageFromImage(enemy_sheet, cropRect);
+            Texture2D texture = LoadTextureFromImage(cropped);
+            UnloadImage(cropped);
+            if (j == 0)
+            {
+                enemy1[i + 3] = texture; // Normal koopa
+            }
+            else if (j == 1)
+            {
+                enemy2[i + 3] = texture; // Normal koopa
+            }
+            else if (j == 2)
+            {
+                enemy3[i + 3] = texture; // Flying koopa
+            }
+            else if (j == 3)
+            {
+                enemy4[i + 3] = texture; // Flying koopa
+            }
+        }
+    }
+
+    // For stomped koopa without legs
+    x_off = 161;
+    y_off = 17;
+    height = 12;
+    width = 14;
+
+    for (int j = 0; j < 4; ++j)
+    {
+        Rectangle cropRect = {x_off,
+                              y_off * (j + 1) + j * height,
+                              width,
+                              height};
+        if (cropRect.x + cropRect.width > enemy_sheet.width || cropRect.y + cropRect.height > enemy_sheet.height)
+        {
+            continue;
+        }
+        Image cropped = ImageFromImage(enemy_sheet, cropRect);
+        Texture2D texture = LoadTextureFromImage(cropped);
+        UnloadImage(cropped);
+        if (j == 0)
+        {
+            enemy1[7] = texture; // Stomped koopa without legs
+        }
+        else if (j == 1)
+        {
+            enemy2[7] = texture; // Stomped koopa without legs
+        }
+        else if (j == 2)
+        {
+            enemy3[7] = texture; // Stomped koopa without legs
+        }
+        else if (j == 3)
+        {
+            enemy4[7] = texture; // Stomped koopa without legs
+        }
+    }
+
+    // For stomped koopa with legs
+    x_off = 177;
+    y_off = 17;
+    height = 16;
+    width = 14;
+
+    for (int j = 0; j < 4; ++j)
+    {
+        Rectangle cropRect = {x_off,
+                              y_off * (j + 1) + j * height,
+                              width,
+                              height};
+        if (cropRect.x + cropRect.width > enemy_sheet.width || cropRect.y + cropRect.height > enemy_sheet.height)
+        {
+            continue;
+        }
+        Image cropped = ImageFromImage(enemy_sheet, cropRect);
+        Texture2D texture = LoadTextureFromImage(cropped);
+        UnloadImage(cropped);
+        if (j == 0)
+        {
+            enemy1[8] = texture; // Stomped koopa with legs
+        }
+        else if (j == 1)
+        {
+            enemy2[8] = texture; // Stomped koopa with legs
+        }
+        else if (j == 2)
+        {
+            enemy3[8] = texture; // Stomped koopa with legs
+        }
+        else if (j == 3)
+        {
+            enemy4[8] = texture; // Stomped koopa with legs
+        }
+    }
+
+    // For upright plants
+    x_off = 192;
+    y_off = 8;
+    height = 25;
+    width = 16;
+
+    for (int j = 0; j < 4; ++j)
+    {
+        for (int i = 0; i < 2; ++i)
+        {
+            Rectangle cropRect = {x_off + i * (width),
+                                  y_off * (j + 1) + j * height,
+                                  width,
+                                  height};
+            if (cropRect.x + cropRect.width > enemy_sheet.width || cropRect.y + cropRect.height > enemy_sheet.height)
+            {
+                continue;
+            }
+            Image cropped = ImageFromImage(enemy_sheet, cropRect);
+            Texture2D texture = LoadTextureFromImage(cropped);
+            UnloadImage(cropped);
+            if (j == 0)
+            {
+                enemy1[i + 9] = texture; // Upright plant
+            }
+            else if (j == 1)
+            {
+                enemy2[i + 9] = texture; // Upright plant
+            }
+            else if (j == 2)
+            {
+                enemy3[i + 9] = texture; // Upright plant
+            }
+            else if (j == 3)
+            {
+                enemy4[i + 9] = texture; // Upright plant
+            }
+        }
+    }
+
+    // For inverted plants
+    x_off = 256;
+    y_off = 8;
+    height = 25;
+    width = 16;
+
+    for (int j = 0; j < 4; ++j)
+    {
+        for (int i = 0; i < 2; ++i)
+        {
+            Rectangle cropRect = {x_off + i * (width),
+                                  y_off * (j + 1) + j * height,
+                                  width,
+                                  height};
+            if (cropRect.x + cropRect.width > enemy_sheet.width || cropRect.y + cropRect.height > enemy_sheet.height)
+            {
+                continue;
+            }
+            Image cropped = ImageFromImage(enemy_sheet, cropRect);
+            Texture2D texture = LoadTextureFromImage(cropped);
+            UnloadImage(cropped);
+            if (j == 0)
+            {
+                enemy1[i + 11] = texture; // Inverted plant
+            }
+            else if (j == 1)
+            {
+                enemy2[i + 11] = texture; // Inverted plant
+            }
+            else if (j == 2)
+            {
+                enemy3[i + 11] = texture; // Inverted plant
+            }
+            else if (j == 3)
+            {
+                enemy4[i + 11] = texture; // Inverted plant
+            }
+        }
+    }
+
+    // For monkey
+    x_off = 320;
+    y_off = 8;
+    height = 24;
+    width = 16;
+
+    for (int j = 0; j < 4; ++j)
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            Rectangle cropRect = {x_off + i * (width),
+                                  y_off * (j + 1) + j * height,
+                                  width,
+                                  height};
+            if (cropRect.x + cropRect.width > enemy_sheet.width || cropRect.y + cropRect.height > enemy_sheet.height)
+            {
+                continue;
+            }
+            Image cropped = ImageFromImage(enemy_sheet, cropRect);
+            Texture2D texture = LoadTextureFromImage(cropped);
+            UnloadImage(cropped);
+            if (j == 0)
+            {
+                enemy1[i + 13] = texture; // Monkey
+            }
+            else if (j == 1)
+            {
+                enemy2[i + 13] = texture; // Monkey
+            }
+            else if (j == 3)
+            {
+                enemy4[i + 13] = texture; // Monkey
+            }
+        }
+    }
+
+    // For sun
+    x_off = 416;
+    y_off = 8;
+    height = 24;
+    width = 16;
+
+    for (int j = 0; j < 4; ++j)
+    {
+        for (int i = 0; i < 2; ++i)
+        {
+            Rectangle cropRect = {x_off + i * (width),
+                                  y_off * (j + 1) + j * height,
+                                  width,
+                                  height};
+            if (cropRect.x + cropRect.width > enemy_sheet.width || cropRect.y + cropRect.height > enemy_sheet.height)
+            {
+                continue;
+            }
+            Image cropped = ImageFromImage(enemy_sheet, cropRect);
+            Texture2D texture = LoadTextureFromImage(cropped);
+            UnloadImage(cropped);
+            if (j == 0)
+            {
+                enemy1[i + 17] = texture; // Sun
+            }
+            else if (j == 1)
+            {
+                enemy2[i + 17] = texture; // Sun
+            }
+            else if (j == 2)
+            {
+                enemy3[i + 17] = texture; // Sun
+            }
+            else if (j == 3)
+            {
+                enemy4[i + 17] = texture; // Sun
+            }
+        }
+    }
+
+    // For hedgehog and bullets
+    x_off = 512;
+    y_off = 16;
+    height = 16;
+    width = 16;
+
+    for (int j = 0; j < 4; ++j)
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            Rectangle cropRect = {x_off + i * (width),
+                                  y_off * (j + 1) + j * height,
+                                  width,
+                                  height};
+            if (cropRect.x + cropRect.width > enemy_sheet.width || cropRect.y + cropRect.height > enemy_sheet.height)
+            {
+                continue;
+            }
+            Image cropped = ImageFromImage(enemy_sheet, cropRect);
+            Texture2D texture = LoadTextureFromImage(cropped);
+            UnloadImage(cropped);
+            if (j == 0)
+            {
+                enemy1[i + 19] = texture; // Hedgehog
+            }
+            else if (j == 1)
+            {
+                enemy2[i + 19] = texture; // Hedgehog
+            }
+            else if (j == 2)
+            {
+                enemy3[i + 19] = texture; // Bullet
+            }
+            else if (j == 3)
+            {
+                enemy4[i + 19] = texture; // Bullet
+            }
+        }
+    }
+
+    // For stomped jellyfish
+    x_off = 592;
+    y_off = 8;
+    height = 16;
+    width = 16;
+    for (int j = 0; j < 4; ++j)
+    {
+        Rectangle cropRect = {x_off,
+                              y_off * (j + 1) + j * height,
+                              width,
+                              height};
+        if (cropRect.x + cropRect.width > enemy_sheet.width || cropRect.y + cropRect.height > enemy_sheet.height)
+        {
+            continue;
+        }
+        Image cropped = ImageFromImage(enemy_sheet, cropRect);
+        Texture2D texture = LoadTextureFromImage(cropped);
+        UnloadImage(cropped);
+        if (j == 0)
+        {
+            enemy1[23] = texture; // Jellyfish
+        }
+        else if (j == 1)
+        {
+            enemy2[23] = texture; // Jellyfish
+        }
+        else if (j == 2)
+        {
+            enemy3[23] = texture; // Jellyfish
+        }
+        else if (j == 3)
+        {
+            enemy4[23] = texture; // Jellyfish
+        }
+    }
+
+    // For jellyfish
+    x_off = 608;
+    y_off = 8;
+    height = 24;
+    width = 16;
+
+    for (int j = 0; j < 4; ++j)
+    {
+        Rectangle cropRect = {x_off,
+                              y_off * (j + 1) + j * height,
+                              width,
+                              height};
+        if (cropRect.x + cropRect.width > enemy_sheet.width || cropRect.y + cropRect.height > enemy_sheet.height)
+        {
+            continue;
+        }
+        Image cropped = ImageFromImage(enemy_sheet, cropRect);
+        Texture2D texture = LoadTextureFromImage(cropped);
+        UnloadImage(cropped);
+        if (j == 0)
+        {
+            enemy1[24] = texture; // Jellyfish
+        }
+        else if (j == 1)
+        {
+            enemy2[24] = texture; // Jellyfish
+        }
+        else if (j == 2)
+        {
+            enemy3[24] = texture; // Jellyfish
+        }
+        else if (j == 3)
+        {
+            enemy4[24] = texture; // Jellyfish
+        }
+    }
+
+    // For cheep cheep
+    x_off = 624;
+    y_off = 16;
+    height = 16;
+    width = 16;
+
+    for (int j = 0; j < 4; ++j)
+    {
+        for (int i = 0; i < 2; ++i)
+        {
+            Rectangle cropRect = {x_off + i * (width),
+                                  y_off * (j + 1) + j * height,
+                                  width,
+                                  height};
+            if (cropRect.x + cropRect.width > enemy_sheet.width || cropRect.y + cropRect.height > enemy_sheet.height)
+            {
+                continue;
+            }
+            Image cropped = ImageFromImage(enemy_sheet, cropRect);
+            Texture2D texture = LoadTextureFromImage(cropped);
+            UnloadImage(cropped);
+            if (j == 0)
+            {
+                enemy1[i + 25] = texture; // Cheep cheep
+            }
+            else if (j == 1)
+            {
+                enemy2[i + 25] = texture; // Cheep cheep
+            }
+            else if (j == 2)
+            {
+                enemy3[i + 25] = texture; // Cheep cheep
+            }
+            else if (j == 3)
+            {
+                enemy4[i + 25] = texture; // Cheep cheep
+            }
+        }
+    }
+
+    // For dragon
+    x_off = 656;
+    y_off = 0;
+    height = 32;
+    width = 32;
+
+    for (int j = 0; j < 4; ++j)
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            Rectangle cropRect = {x_off + i * (width),
+                                  y_off + j * height,
+                                  width,
+                                  height};
+            if (cropRect.x + cropRect.width > enemy_sheet.width || cropRect.y + cropRect.height > enemy_sheet.height)
+            {
+                continue;
+            }
+            Image cropped = ImageFromImage(enemy_sheet, cropRect);
+            Texture2D texture = LoadTextureFromImage(cropped);
+            UnloadImage(cropped);
+            if (j == 0)
+            {
+                enemy1[i + 27] = texture; // Dragon
+            }
+            else if (j == 1)
+            {
+                enemy2[i + 27] = texture; // Dragon
+            }
+            else if (j == 2)
+            {
+                enemy3[i + 27] = texture; // Dragon
+            }
+            else if (j == 3)
+            {
+                enemy4[i + 27] = texture; // Dragon
             }
         }
     }
@@ -951,6 +1451,19 @@ void UI::getFireBulletTextures()
         UnloadImage(cropped);
         fireBullet[i] = texture;
     }
+
+    x_off = 395;
+    y_off = 236;
+    width = 16;
+    height = 16;
+    Rectangle cropRect = {x_off,
+                          y_off,
+                          width,
+                          height};
+    Image cropped = ImageFromImage(fire_sheet, cropRect);
+    Texture2D texture = LoadTextureFromImage(cropped);
+    UnloadImage(cropped);
+    fireBullet[4] = texture;
 }
 
 std::vector<Texture2D> &UI::getFireBullet()

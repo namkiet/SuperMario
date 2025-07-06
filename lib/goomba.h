@@ -6,8 +6,9 @@ enum class GoombaState
 {
     Normal,
     Stomped,
-    Dead,       // by player
-    DeadByEnemy // by other enemies such as shell and bullet
+    Dead,        // by player
+    DeadByEnemy, // by other enemies such as shell
+    DeadByFire   // by fire bullet
 };
 
 class Goomba : public Enemy
@@ -27,9 +28,11 @@ private:
     //
     // bool isPlayingDeath = false;
 
+    void setState(GoombaState newState);
+
 public:
     // Constructor
-    Goomba(float x = 0, float y = 0, int index = 0, int scale = 0, Handler *handler = nullptr, UI *ui = nullptr);
+    Goomba(float x = 0, float y = 0, int scale = 0, Handler *handler = nullptr, UI *ui = nullptr);
 
     // Update:
     void render();
@@ -41,6 +44,7 @@ public:
     void pipeCollision(GameObject *object);
     void playerCollision(GameObject *object);
     void enemyCollision(GameObject *object);
+    void itemCollision(GameObject *object);
 
     // Check if the Goomba should be removed
     bool shouldRemove();
@@ -51,7 +55,7 @@ public:
     // Check if the Goomba is stomped on or not
     bool isStomped();
 
-    // Check bounds for Goomba
+    // Check bounds
     Rectangle getBounds();
     Rectangle getBoundsTop();
     Rectangle getBoundsRight();

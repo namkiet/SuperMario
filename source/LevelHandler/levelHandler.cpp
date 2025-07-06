@@ -130,7 +130,7 @@ void LevelHandler::levelCharacter()
             else if (red == 0 && green == 0 && blue == 0) // Black for player
             {
                 // std::cout << "Player starting position found at: (" << j << ", " << i << ")" << std::endl;
-                handler.setPlayer(*new Player(j * 16, i * 16, 3, &handler, ui, PlayerID::Mario, PlayerType::Normal, PlayerState::Small));
+                handler.setPlayer(*new Player(j * 16, i * 16, 3, &handler, ui, PlayerID::Luigi, PlayerType::Normal, PlayerState::Small));
                 playerSet = true;
             }
         }
@@ -174,7 +174,7 @@ void LevelHandler::setEnemy()
                 if (count >= 1)
                 {
                     // cout<< "Enemy starting position found at: (" << j << ", " << i << ")" << endl;
-                    handler.addObject(new Goomba(j * 16, i * 16, 0, 3, &handler, ui));
+                    handler.addObject(new Goomba(j * 16, i * 16, 3, &handler, ui));
                 }
             }
             else if (red == 255 && green == 174 && blue == 201)
@@ -182,7 +182,7 @@ void LevelHandler::setEnemy()
                 if (count >= 1)
                 {
                     // cout<< "Enemy starting position found at: (" << j << ", " << i << ")" << endl;
-                    handler.addObject(new Koopa(j * 16, i * 16, 6, 3, &handler, ui));
+                    handler.addObject(new Koopa(j * 16, i * 16, 3, &handler, ui));
                 }
             }
             ++count;

@@ -120,6 +120,14 @@ void Handler::tick()
                 }
             }
         }
+        else if (gameObject->getID() == ObjectID::Enemy)
+        {
+            Enemy *enemy = dynamic_cast<Enemy *>(gameObject);
+            if (enemy->shouldRemove())
+            {
+                removeObject(gameObject);
+            }
+        }
     }
 }
 

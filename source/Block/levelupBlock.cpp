@@ -55,7 +55,8 @@ void LevelUpBlock::render()
 {
     if (state == LevelUpBlockState::BeforeHit)
     {
-        DrawTextureEx(textures[0], {getX(), getY()}, 0.0f, (float)getScale(), WHITE); // Draw the star block texture
+        // It will be hidden away
+        // DrawTextureEx(textures[0], {getX(), getY()}, 0.0f, (float)getScale(), WHITE); // Draw the star block texture
     }
     else if (state == LevelUpBlockState::AfterHit)
     {

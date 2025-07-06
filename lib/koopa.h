@@ -34,7 +34,7 @@ private:
     bool isForward = false;
 
 public:
-    Koopa(float x = 0, float y = 0, int index = 0, int scale = 0, Handler *handler = nullptr, UI *ui = nullptr);
+    Koopa(float x = 0, float y = 0, int scale = 0, Handler *handler = nullptr, UI *ui = nullptr);
 
     // Update:
     void render();

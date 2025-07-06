@@ -12,7 +12,7 @@ private:
     static const int MARIO_S_COUNT = 14;
     static const int TILE_1_COUNT = 28;
     static const int TILE_2_COUNT = 33;
-    static const int ENEMY_COUNT = 44;
+    static const int ENEMY_COUNT = 31;
 
     // Images and textures
     Image player_sheet; // Character spritesheet
@@ -85,7 +85,7 @@ private:
     std::vector<Texture2D> star4{4};
 
     // Textures for fire mode
-    std::vector<Texture2D> fireBullet{4};
+    std::vector<Texture2D> fireBullet{5}; // 4 normal + 1 boomed
 
     // Load textures from images
     void getLargePlayerTextures();
@@ -161,7 +161,7 @@ public:
     std::vector<Texture2D> &getBlueLarge();
     std::vector<Texture2D> &getBlueSmall();
     std::vector<Texture2D> &getFireBullet();
-    
+
     Music &getOverworldBackGroundMusic();
     Music &getGameOverMusic();
 

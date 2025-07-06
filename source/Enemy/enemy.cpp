@@ -3,10 +3,14 @@
 using namespace std;
 
 const float Enemy::WIDTH = 16.0f;
-const float Enemy::HEIGHT = 32.0f;
+const float Enemy::KOOPA_HEIGHT = 24.0f;
+const float Enemy::GOOMBA_HEIGHT = 16.0f;
+const float Enemy::SHELL_HEIGHT = 14.0f;
+const float Enemy::SHELL_WIDTH = 14.0f;
+const float Enemy::STOMPED_GOOMBA_HEIGHT = 8.0f; // Height of a stomped Goomba
 
-Enemy::Enemy(float x, float y, int index, int scale, Handler *handler, UI *ui, EnemyCharacter id)
-    : GameObject(x, y, ObjectID::Enemy, WIDTH, HEIGHT, scale), ui(ui), index(index), handler(handler), enemyID(id)
+Enemy::Enemy(float x, float y, int scale, Handler *handler, UI *ui, EnemyCharacter id)
+    : GameObject(x, y, ObjectID::Enemy, WIDTH, GOOMBA_HEIGHT, scale), ui(ui), index(index), handler(handler), enemyID(id)
 {
     if (ui == nullptr)
     {
@@ -24,6 +28,16 @@ Enemy::Enemy(float x, float y, int index, int scale, Handler *handler, UI *ui, E
     // Set velX and velY to 0
     setVelX(0.0f);
     setVelY(0.0f);
+
+    // Set the height of the enemy
+    if (enemyID == EnemyCharacter::Koopa)
+    {
+        setHeight(KOOPA_HEIGHT);
+    }
+    else if (enemyID == EnemyCharacter::Goomba)
+    {
+        setHeight(GOOMBA_HEIGHT);
+    }
 
     // cout << "Enemy created at position: (" << positionX << ", " << positionY << ")" << endl;
 }
@@ -119,8 +133,13 @@ void Enemy::collision()
             // cout << "In Enemy::collision() with Pipe" << endl;
             pipeCollision(object);
         }
-    }
 
+        if (id == ObjectID::Item)
+        {
+            // cout << "In Enemy::collision() with Item" << endl;
+            itemCollision(object);
+        }
+    }
 }
 
 void Enemy::pipeCollision(GameObject *object)
@@ -169,4 +188,30 @@ bool Enemy::isStomped()
 bool Enemy::isShell()
 {
     return false; // Default implementation, can be overridden in derived classes
+}
+
+void Enemy::itemCollision(GameObject *object)
+{
+    // This method should be overridden in derived classes
+    // cerr << "Error: itemCollision not implemented in Enemy class!" << endl;
+}
+
+float Enemy::getShellHeight()
+{
+    return SHELL_HEIGHT; // Default implementation, can be overridden in derived classes
+}
+
+float Enemy::getKoopaHeight()
+{
+    return KOOPA_HEIGHT; // Default implementation, can be overridden in derived classes
+}
+
+float Enemy::getShellWidth()
+{
+    return SHELL_WIDTH; // Default implementation, can be overridden in derived classes
+}
+
+float Enemy::getStompedGoombaHeight()
+{
+    return STOMPED_GOOMBA_HEIGHT; // Default implementation, can be overridden in derived classes
 }

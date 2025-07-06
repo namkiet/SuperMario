@@ -206,9 +206,9 @@ void Player::render()
     }
     else if (type == PlayerType::RandomBeforeFire || type == PlayerType::RandomBeforeStar)
     {
-        if (forward)
+        if (forward || getVelX() > 0)
             currentAnimation.drawAnimation(getX(), getY(), (float)getWidth(), (float)getHeight());
-        else
+        else if (!forward || getVelX() < 0)
             currentAnimation.drawAnimation(getX(), getY(), (float)(-getWidth()), (float)getHeight());
     }
     else
@@ -958,6 +958,28 @@ void Player::itemCollision(GameObject *object)
         }
         else if (item->getItemType() == ItemType::Flower)
         {
+            // Check the state of the player
+            if (state == PlayerState::Small)
+            {
+                // Decrease the background music
+                SetMusicVolume(ui->getOverworldBackGroundMusic(), 0.2f);
+
+                // Play the power-up music
+                PlaySound(ui->getPowerUpSound());
+
+                // Set the player to the growing up state
+                setState(PlayerState::GrowingUp);
+
+                // Set the player type to normal
+                setType(PlayerType::Normal);
+
+                // Set the time count for growing up
+                timeCountForGrowingUp = 15;
+
+                isLocked = true;
+
+                return;
+            }
             // Reset the timer
             timeCountForRandomTextures = 100;
 
@@ -1082,6 +1104,7 @@ void Player::fire()
         return;
     else if (Fire::count < 2 && timeCountForFire <= 0)
     {
+        // cout << "Player position: " << getX() << " " << getY() << endl;
         fireBullet = new Fire((getX() - getWidth() / 2) / getScale(), (getY() + getHeight() / 8) / getScale(), originalScale, handler, ui);
         handler->addObject(fireBullet);
         timeCountForFire = 10;

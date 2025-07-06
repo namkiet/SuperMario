@@ -30,6 +30,10 @@ private:
     bool isBoomed = false;
 
     int timeCountForBoomed = 0; // For the time count of boomed state
+    int timeCountForNormal = 0;
+    
+    bool renderBoomedFinished = false;
+    bool renderNormalFinished = false;
 
 public:
     // Constructor
@@ -42,9 +46,11 @@ public:
     void collision();
     void enemyCollision();
     void blockCollision(GameObject *object);
-
+    void pipeCollision(GameObject *object);
+    
     bool shouldRemoveItem();
     bool isStomped();
+    
     // Maximum number of fire bullets
     static int count;
     ~Fire();

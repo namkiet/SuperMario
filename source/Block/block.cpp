@@ -17,15 +17,7 @@ Block::Block(int x, int y, int scale, UI *ui, BlockType type)
     // Load block textures from UI
     blockTextures = ui->getTile1();
 
-    if (type == BlockType::Star)
-    {
-        index = 2;
-    }
-    else if (type == BlockType::LevelUp)
-    {
-        index = 2;
-    }
-    else if (type == BlockType::Stairs)
+    if (type == BlockType::Stairs)
     {
         index = 28;
     }

@@ -3,8 +3,8 @@
 #include "koopa.h"
 using namespace std;
 
-Koopa::Koopa(float x, float y, int index, int scale, Handler *handler, UI *ui)
-    : Enemy(x, y, index, scale, handler, ui, EnemyCharacter::Koopa)
+Koopa::Koopa(float x, float y, int scale, Handler *handler, UI *ui)
+    : Enemy(x, y, scale, handler, ui, EnemyCharacter::Koopa)
 {
     if (handler == nullptr)
     {
@@ -19,7 +19,7 @@ Koopa::Koopa(float x, float y, int index, int scale, Handler *handler, UI *ui)
     }
 
     // Load koopa textures from UI
-    for (int i = 6; i < 12; ++i)
+    for (int i = 3; i < 9; ++i)
     {
         koopaTextures.push_back(ui->getEnemy1()[i]);
     }
@@ -57,7 +57,7 @@ void Koopa::tick()
         ++timeCount;
         if (timeCount == 400)
         {
-            cout << timeCount << endl;
+            //cout << timeCount << endl;
             setState(KoopaState::ShellMoving);
             timeCount = 0;
 
@@ -88,6 +88,7 @@ void Koopa::render()
     {
         if (timeCount < 200)
         {
+            //cout << getX() << ", " << getY() << ", " << getWidth() << ", " << getHeight() << endl;
             DrawTexturePro(koopaTextures[4],
                            {0.0f, 0.0f, (float)koopaTextures[4].width, (float)koopaTextures[4].height},
                            {getX(), getY(), getWidth(), getHeight()},
@@ -95,6 +96,7 @@ void Koopa::render()
         }
         else
         {
+            setHeight(getKoopaHeight());
             currentAnimation.drawAnimation(getX(), getY(), (float)getWidth(), (float)getHeight());
         }
     }
@@ -247,6 +249,7 @@ void Koopa::playerCollision(GameObject *object)
                 // object->setPlayerFinishedCollisionChecking(false); // Reset player collision checking statesetState(KoopaState::Stomped)
                 setVelY(0);
                 setVelX(0);
+
                 mode = 0; // Reset mode
             }
             else if (object->playerFinishedCollisionChecking())
@@ -290,11 +293,12 @@ void Koopa::playerCollision(GameObject *object)
 
 bool Koopa::shouldRemove()
 {
-    if (state == KoopaState::Stomped && timeCount > 100)
-    {
-        state = KoopaState::Dead;
-        return true;
-    }
+    // Only die if the Koopa is hit by a fire or its y coordinate is more than the screen height
+    // if (state == KoopaState::Stomped && timeCount > 100)
+    // {
+    //     state = KoopaState::Dead;
+    //     return true;
+    // }
     return false;
 }
 
@@ -337,6 +341,21 @@ bool Koopa::isStomped()
 
 void Koopa::setState(KoopaState newState)
 {
+    if (state != KoopaState::Shell && newState == KoopaState::Shell)
+    {
+        // cout << "Origin height: " << getHeight() << endl;
+        setY(getY() + getKoopaHeight() - getShellHeight());
+        
+        setHeight(getShellHeight());
+        setWidth(getShellWidth());
+
+        // cout << "New height: " << getHeight() << endl;
+    }
+    else if (state != KoopaState::Stomped && newState == KoopaState::Stomped)
+    {
+        setY(getY() + getKoopaHeight() - getShellHeight());
+        setHeight(getShellHeight());
+    }
     state = newState;
     if (state == KoopaState::Normal)
     {
@@ -438,7 +457,7 @@ void Koopa::setStomped(bool newState)
 {
     if (newState)
     {
-        cout << "Here" << endl;
+        // cout << "Here" << endl;
         DrawTexturePro(koopaTextures[4],
                        {0.0f, 0.0f, (float)koopaTextures[4].width, (float)koopaTextures[4].height},
                        {getX(), getY(), getWidth(), getHeight()},
