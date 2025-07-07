@@ -2,6 +2,7 @@
 #include <cmath>
 #include "goomba.h"
 #include "item.h"
+#include "koopa.h"
 using namespace std;
 
 Goomba::Goomba(float x, float y, int scale, Handler *handler, UI *ui)
@@ -230,30 +231,13 @@ void Goomba::enemyCollision(GameObject *object)
     Rectangle objectBoundsLeft = object->getBoundsLeft();
 
     Enemy *enemy = dynamic_cast<Enemy *>(object);
-    if (CheckCollisionRecs(boundsRight, objectBoundsLeft))
+    if (CheckCollisionRecs(boundsRight, objectBoundsLeft) || CheckCollisionRecs(boundsLeft, objectBoundsRight))
     {
-        if (enemy != nullptr && enemy->getEnemyID() == EnemyCharacter::Koopa && enemy->isShell())
+        Koopa *koopa = dynamic_cast<Koopa *>(enemy);
+        if (enemy != nullptr && enemy->getEnemyID() == EnemyCharacter::Koopa && koopa->getState() != KoopaState::Normal)
         {
             setState(GoombaState::DeadByEnemy);
             timeCount = 0; // Reset timer for dead state
-            // isPlayingDeath = true; // Player is dead
-            setY(getY() - getHeight());
-            setVelY(-8.0f);
-            setVelX(0.0f);
-        }
-        else
-        {
-            setVelX(-getVelX());
-        }
-    }
-
-    if (CheckCollisionRecs(boundsLeft, objectBoundsRight))
-    {
-        if (enemy != nullptr && enemy->getEnemyID() == EnemyCharacter::Koopa && enemy->isShell())
-        {
-            setState(GoombaState::DeadByEnemy);
-            timeCount = 0; // Reset timer for death state
-            // isPlayingDeath = true; // Player is dead
             setY(getY() - getHeight());
             setVelY(-8.0f);
             setVelX(0.0f);
@@ -367,18 +351,18 @@ void Goomba::itemCollision(GameObject *object)
 
     if (item && item->getItemType() == ItemType::Fire)
     {
-        if (CheckCollisionRecs(boundsTop, objectBoundsBottom) || CheckCollisionRecs(boundsBottom, objectBoundsTop) ||
-            CheckCollisionRecs(boundsRight, objectBoundsLeft) || CheckCollisionRecs(boundsLeft, objectBoundsRight) && !item->isStomped())
+        if ((CheckCollisionRecs(boundsTop, objectBoundsBottom) || CheckCollisionRecs(boundsBottom, objectBoundsTop) ||
+             CheckCollisionRecs(boundsRight, objectBoundsLeft) || CheckCollisionRecs(boundsLeft, objectBoundsRight)) &&
+            !item->isStomped())
         {
             setState(GoombaState::DeadByFire);
 
             timeCount = 0;
-
             setY(getY() - getHeight());
 
             setVelY(0);
 
-            item->enemyCollision(); // Handle item collision with player
+            item->enemyCollision();
         }
     }
 }

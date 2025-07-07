@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include "koopa.h"
+#include "item.h"
 using namespace std;
 
 Koopa::Koopa(float x, float y, int scale, Handler *handler, UI *ui)
@@ -52,20 +53,16 @@ void Koopa::tick()
 {
     Enemy::tick();
 
-    if (state == KoopaState::Shell)
-    {
-        ++timeCount;
-        if (timeCount == 400)
-        {
-            //cout << timeCount << endl;
-            setState(KoopaState::ShellMoving);
-            timeCount = 0;
+    // Update the timer
+    ++timeCountForDeath;
+    ++timeCountForShell;
+    ++timeCountForShellMoving;
 
-            // Reset the player's collision checking state
-            handler->getPlayer()->setPlayerFinishedCollisionChecking(false);
-        }
+    // If
+    if ((state == KoopaState::Shell && timeCountForShell == 400) || (state == KoopaState::ShellMoving && timeCountForShellMoving == 400))
+    {
+        setState(KoopaState::Normal);
     }
-    // cout << "Tick: state = " << (int)state << ", timeCount = " << timeCount << endl;
 
     currentAnimation.runAnimation();
 }
@@ -86,45 +83,49 @@ void Koopa::render()
     }
     else if (state == KoopaState::Shell)
     {
-        if (timeCount < 200)
+        if (timeCountForShell < 200) // No legs
         {
-            //cout << getX() << ", " << getY() << ", " << getWidth() << ", " << getHeight() << endl;
             DrawTexturePro(koopaTextures[4],
                            {0.0f, 0.0f, (float)koopaTextures[4].width, (float)koopaTextures[4].height},
                            {getX(), getY(), getWidth(), getHeight()},
                            {0.0f, 0.0f}, 0.0f, WHITE);
         }
-        else
-        {
-            setHeight(getKoopaHeight());
+        else // With legs
             currentAnimation.drawAnimation(getX(), getY(), (float)getWidth(), (float)getHeight());
-        }
     }
-    else if (state == KoopaState::ShellMoving)
-    {
-        if (isForward)
-        {
-            // cout << "Koopa is moving forward in shell state" << endl;
-            currentAnimation.drawAnimation(getX(), getY(), -(float)getWidth(), (float)getHeight());
-        }
-        else
-        {
-            currentAnimation.drawAnimation(getX(), getY(), (float)getWidth(), (float)getHeight());
-        }
-    }
-    else if (state == KoopaState::Stomped)
+    else if (state == KoopaState::ShellMoving) // No legs
     {
         DrawTexturePro(koopaTextures[4],
                        {0.0f, 0.0f, (float)koopaTextures[4].width, (float)koopaTextures[4].height},
                        {getX(), getY(), getWidth(), getHeight()},
                        {0.0f, 0.0f}, 0.0f, WHITE);
     }
-    // cout << "Render: state = " << (int)state << ", timeCount = " << timeCount << endl;
+    else if (state == KoopaState::DeadByFire)
+    {
+        DrawTexturePro(koopaTextures[4],
+                       {0.0f, (float)koopaTextures[4].height, (float)koopaTextures[4].width, -(float)koopaTextures[4].height},
+                       {getX(), getY(), getWidth(), getHeight()},
+                       {0.0f, 0.0f}, 0.0f, WHITE);
+    }
 }
 
 void Koopa::collision()
 {
-    Enemy::collision();
+    const auto &gameObjects = handler->getGameObjects();
+    // Check collision with all game objects
+    for (auto &object : gameObjects)
+    {
+        if (object->getID() == ObjectID::Block)
+            blockCollision(object);
+        if (object->getID() == ObjectID::Pipe)
+            pipeCollision(object);
+        if (object->getID() == ObjectID::Player)
+            continue;
+        if (object->getID() == ObjectID::Enemy)
+            enemyCollision(object);
+        if (object->getID() == ObjectID::Item)
+            itemCollision(object);
+    }
 }
 
 void Koopa::pipeCollision(GameObject *object)
@@ -219,93 +220,50 @@ void Koopa::blockCollision(GameObject *object)
     }
 }
 
-void Koopa::playerCollision(GameObject *object)
+void Koopa::playerCollision(int mode)
 {
-    ++mode;
-
-    Rectangle boundsBottom = getBounds();
-    Rectangle boundsTop = getBoundsTop();
-    Rectangle boundsRight = getBoundsRight();
-    Rectangle boundsLeft = getBoundsLeft();
-
-    Rectangle objectBoundsBottom = object->getBounds(); // Get the lower 1/4 bounds of the object
-    Rectangle objectBoundsTop = object->getBoundsTop();
-    Rectangle objectBoundsRight = object->getBoundsRight();
-    Rectangle objectBoundsLeft = object->getBoundsLeft();
+    // Only call in player collision check
 
     // cout << playerFinishedCollisionChecking() << endl;
 
     // Normal case
-    if (CheckCollisionRecs(boundsTop, objectBoundsBottom) && !object->isStomped())
+    if (state == KoopaState::Normal)
     {
-        // cout << "Koopa is hit in playerCollision()" << endl;
-        if ((state == KoopaState::Normal || state == KoopaState::ShellMoving || state == KoopaState::Shell))
+        if (mode == 1)
         {
-
-            if (!object->playerFinishedCollisionChecking())
-            {
-                cout << "The order that i expected: 1" << endl;
-                setState(KoopaState::Shell);
-                // object->setPlayerFinishedCollisionChecking(false); // Reset player collision checking statesetState(KoopaState::Stomped)
-                setVelY(0);
-                setVelX(0);
-
-                mode = 0; // Reset mode
-            }
-            else if (object->playerFinishedCollisionChecking())
-            {
-                cout << "The order that i expected: 3" << endl;
-                setState(KoopaState::Stomped); // Use setState instead of direct assignment
-                // object->setPlayerFinishedCollisionChecking(false); // Reset player collision checking state
-                timeCount = 0; // Reset timer for stomped state}
-                return;
-            }
-        }
-        else if (state == KoopaState::Stomped)
-        {
-            if (isForward)
-            {
-                setVelX(4.0f);
-            }
-            else
-            {
-                setVelX(-4.0f);
-            }
+            // Koopa turn to shell
+            setState(KoopaState::Shell);
         }
     }
-    if (CheckCollisionRecs(boundsLeft, objectBoundsRight))
+
+    else if (state == KoopaState::Shell)
     {
-        if (state == KoopaState::Shell)
+        if (mode == 2)
         {
-            setVelX(4.0f);
-            timeCount = 0; // Reset timer for shell state
+            setState(KoopaState::ShellMoving);
         }
     }
-    if (CheckCollisionRecs(boundsRight, objectBoundsLeft))
+
+    else if (state == KoopaState::ShellMoving)
     {
-        if (state == KoopaState::Shell)
+        if (mode == 1 && timeCountForShellMoving > 200) // player bottom
         {
-            setVelX(-4.0f);
-            timeCount = 0; // Reset timer for shell state
+            setState(KoopaState::Shell);
         }
     }
 }
 
 bool Koopa::shouldRemove()
 {
-    // Only die if the Koopa is hit by a fire or its y coordinate is more than the screen height
-    // if (state == KoopaState::Stomped && timeCount > 100)
-    // {
-    //     state = KoopaState::Dead;
-    //     return true;
-    // }
+    if (state == KoopaState::DeadByFire && timeCountForDeath > 20)
+        return true;
     return false;
 }
 
 bool Koopa::isDead()
 {
     // cout << "In Koopa::isDead()" << endl;
-    return state == KoopaState::Dead;
+    return state == KoopaState::DeadByFire;
 }
 
 void Koopa::enemyCollision(GameObject *object)
@@ -336,37 +294,46 @@ void Koopa::enemyCollision(GameObject *object)
 
 bool Koopa::isStomped()
 {
-    return state == KoopaState::Stomped;
+    return state == KoopaState::DeadByFire;
 }
 
 void Koopa::setState(KoopaState newState)
 {
     if (state != KoopaState::Shell && newState == KoopaState::Shell)
     {
-        // cout << "Origin height: " << getHeight() << endl;
-        setY(getY() + getKoopaHeight() - getShellHeight());
-        
+        // Set the height and width
         setHeight(getShellHeight());
         setWidth(getShellWidth());
 
-        // cout << "New height: " << getHeight() << endl;
+        // Reset the timer for shell state
+        timeCountForShell = 0;
     }
-    else if (state != KoopaState::Stomped && newState == KoopaState::Stomped)
+    else if (state != KoopaState::ShellMoving && newState == KoopaState::ShellMoving)
     {
-        setY(getY() + getKoopaHeight() - getShellHeight());
+        // Set the x coordinate
+        setX(getX() + getWidth() / 2);
         setHeight(getShellHeight());
+
+        // Reset the timer for shell moving state
+        timeCountForShellMoving = 0;
     }
+    else if (state != KoopaState ::Normal && newState == KoopaState::Normal)
+    {
+        setHeight(getKoopaHeight());
+        setWidth(16.0f);
+    }
+    else if (state != KoopaState::DeadByFire && newState == KoopaState::DeadByFire)
+    {
+        // Set the height and width
+        setHeight(getShellHeight());
+        setWidth(getShellWidth());
+    }
+
     state = newState;
     if (state == KoopaState::Normal)
     {
         currentAnimation = normalKoopa;
         currentAnimation.reset();
-    }
-    else if (state == KoopaState::ShellMoving)
-    {
-        currentAnimation = normalKoopa;
-        currentAnimation.reset();
-
         if (isForward)
         {
             setVelX(-2.0f);
@@ -382,16 +349,29 @@ void Koopa::setState(KoopaState newState)
     {
         currentAnimation = shellKoopa;
         currentAnimation.reset();
+
+        setVelX(0.0f);
     }
-    else if (state == KoopaState::Dead)
+    else if (state == KoopaState::ShellMoving)
     {
-        timeCount = 0;
+        currentAnimation = shellKoopa;
+        currentAnimation.reset();
+
+        // Set the velocity
+        if (isForward)
+        {
+            setVelX(-8.0f);
+        }
+        else
+        {
+            setVelX(8.0f);
+        }
     }
 }
 
 Rectangle Koopa::getBounds()
 {
-    if (state == KoopaState ::Shell || state == KoopaState::Stomped)
+    if (state == KoopaState ::Shell)
     {
         Rectangle boundsBottom = {getX(),
                                   getY() + getHeight() / 2,
@@ -407,10 +387,10 @@ Rectangle Koopa::getBounds()
 
 Rectangle Koopa::getBoundsTop()
 {
-    if (state == KoopaState::Shell || state == KoopaState::Stomped)
+    if (state == KoopaState::Shell)
     {
         Rectangle boundsTop = {getX(),
-                               getY() + getHeight() / 2,
+                               getY(),
                                getWidth(),
                                getHeight() / 4};
         return boundsTop;
@@ -423,12 +403,12 @@ Rectangle Koopa::getBoundsTop()
 
 Rectangle Koopa::getBoundsRight()
 {
-    if (state == KoopaState::Shell | state == KoopaState::Stomped)
+    if (state == KoopaState::Shell)
     {
         Rectangle boundsRight = {getX() + getWidth() - getWidth() / 4,
-                                 getY() + getHeight() / 2,
+                                 getY(),
                                  getWidth() / 4,
-                                 getHeight() / 2};
+                                 getHeight()};
         return boundsRight;
     }
     else
@@ -439,12 +419,12 @@ Rectangle Koopa::getBoundsRight()
 
 Rectangle Koopa::getBoundsLeft()
 {
-    if (state == KoopaState::Shell || state == KoopaState::Stomped)
+    if (state == KoopaState::Shell)
     {
         Rectangle boundsLeft = {getX(),
-                                getY() + getHeight() / 2,
+                                getY(),
                                 getWidth() / 4,
-                                getHeight() / 2};
+                                getHeight()};
         return boundsLeft;
     }
     else
@@ -472,4 +452,43 @@ void Koopa::setStomped(bool newState)
 bool Koopa::isShell()
 {
     return state == KoopaState::Shell;
+}
+
+KoopaState Koopa::getState()
+{
+    return state;
+}
+
+void Koopa::itemCollision(GameObject *object)
+{
+    Rectangle boundsBottom = getBounds();
+    Rectangle boundsTop = getBoundsTop();
+    Rectangle boundsRight = getBoundsRight();
+    Rectangle boundsLeft = getBoundsLeft();
+
+    Rectangle objectBoundsBottom = object->getBounds(); // Get the lower 1/4 bounds of the object
+    Rectangle objectBoundsTop = object->getBoundsTop();
+    Rectangle objectBoundsRight = object->getBoundsRight();
+    Rectangle objectBoundsLeft = object->getBoundsLeft();
+
+    Item *item = dynamic_cast<Item *>(object);
+
+    if (item && item->getItemType() == ItemType::Fire)
+    {
+        if ((CheckCollisionRecs(boundsTop, objectBoundsBottom) || CheckCollisionRecs(boundsBottom, objectBoundsTop) ||
+             CheckCollisionRecs(boundsRight, objectBoundsLeft) || CheckCollisionRecs(boundsLeft, objectBoundsRight)) &&
+            !object->isStomped())
+        {
+            setState(KoopaState::DeadByFire);
+
+            timeCountForDeath = 0;
+
+            setY(getY() - getHeight());
+
+            setVelY(-4.0f);
+            setVelX(0.0f);
+
+            item->enemyCollision();
+        }
+    }
 }

@@ -195,6 +195,9 @@ public:
     // Checking if the player is locked
     bool isPlayerLocked();
 
+    // Check the direction of the player
+    bool isPlayerForward();
+
     // Destructor
     ~Player() = default; // Default destructor
 };

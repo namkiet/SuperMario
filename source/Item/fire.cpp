@@ -37,12 +37,20 @@ Fire::Fire(float x, float y, int scale, Handler *handler, UI *ui)
 
     state = FireState::Normal; // Initialize the fire state
 
-    // Initialize the velocity
-    setVelX(10.0f);
-    setVelY(5.0f);
+    if (handler->getPlayer()->isPlayerForward() || handler->getPlayer()->getVelX() > 0)
+    {
+        // Initialize the velocity
+        setVelX(10.0f);
+        // Initialize the position
+        setX(getX() + getWidth());
+    }
+    else if (!handler->getPlayer()->isPlayerForward() || handler->getPlayer()->getVelX() < 0)
+    {
+        // Initialize the velocity
+        setVelX(-10.0f);
+    }
 
-    // Initialize the position
-    setX(getX() + getWidth());
+    setVelY(5.0f);
 
     // Initialize the width and height
     setWidth(getWidth() / 6);
@@ -174,7 +182,14 @@ void Fire::blockCollision(GameObject *object)
         if (CheckCollisionRecs(boundsBottom, objectBoundsTop))
         {
             setY(object->getY() - getHeight() * 2.0f);
-            setVelX(10.0f);
+            if (handler->getPlayer()->isPlayerForward() || handler->getPlayer()->getVelX() > 0)
+            {
+                setVelX(10.0f);
+            }
+            else if (!handler->getPlayer()->isPlayerForward() || handler->getPlayer()->getVelX() < 0)
+            {
+                setVelX(-10.0f);
+            }
             setVelY(-5.0f);
             GameObject::collision();
         }
@@ -224,7 +239,7 @@ bool Fire::shouldRemoveItem()
 
 bool Fire::isStomped() // I just call like this but it is just for checking if the fire is boomed and cant use that for another purpose
 {
-    return renderBoomedFinished;
+    return isBoomed;
 }
 
 Fire::~Fire()

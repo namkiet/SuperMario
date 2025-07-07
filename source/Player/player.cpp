@@ -4,6 +4,8 @@
 #include "block.h"
 #include "item.h"
 #include "fire.h"
+#include "koopa.h"
+
 using namespace std;
 
 const float Player::WIDTH = 16.0f;
@@ -521,9 +523,9 @@ void Player::enemyCollision(GameObject *object)
 
     Enemy *enemy = dynamic_cast<Enemy *>(object);
 
-    if ((CheckCollisionRecs(boundsRight, objectBoundsLeft) || CheckCollisionRecs(boundsLeft, objectBoundsRight)) && !object->isDead() && !object->isStomped())
+    if ((CheckCollisionRecs(boundsRight, objectBoundsLeft) || CheckCollisionRecs(boundsLeft, objectBoundsRight)) && !object->isDead())
     {
-        if (enemy != nullptr && enemy->getEnemyID() == EnemyCharacter::Goomba)
+        if (enemy != nullptr && enemy->getEnemyID() == EnemyCharacter::Goomba && !object->isStomped())
         {
             isPlayingDeath = true; // Player is dead
             setY(getY() - getHeight());
@@ -531,14 +533,20 @@ void Player::enemyCollision(GameObject *object)
         }
         else if (enemy != nullptr && enemy->getEnemyID() == EnemyCharacter::Koopa)
         {
-            if (!enemy->isShell())
+            Koopa *koopa = dynamic_cast<Koopa *>(object);
+            if (koopa && (koopa->getState() == KoopaState::Normal || koopa->getState() == KoopaState::ShellMoving))
             {
-                isPlayingDeath = true; // Player is dead
+                isPlayingDeath = true;
                 setY(getY() - getHeight());
                 setVelY(0);
+
+                koopa->playerCollision(0); // Nothing happens with koopa
             }
-            else
+            else if (koopa && koopa->getState() == KoopaState::Shell)
             {
+                isPlayingDeath = false;
+
+                koopa->playerCollision(2);
             }
         }
     }
@@ -552,32 +560,39 @@ void Player::enemyCollision(GameObject *object)
         {
             setY(object->getY() + object->getHeight() - getHeight());
             setVelY(0);
+            object->collision();
         }
 
         // Koopa
         else if (enemy != nullptr && enemy->getEnemyID() == EnemyCharacter::Koopa)
         {
-            if (!object->isStomped())
+            Koopa *koopa = dynamic_cast<Koopa *>(object);
+            if (koopa && (koopa->getState() == KoopaState::Normal || koopa->getState() == KoopaState::ShellMoving))
             {
-                cout << "The order that i expected: 2" << endl;
+                cout << "In Player::enemyCollision() - Koopa in normal or shell moving state" << endl;
+
+                // Wont dead
+                isPlayingDeath = false;
+
+                // Set the position
                 setY(object->getY() - getHeight() - getHeight() / 4);
+
+                // Set the velocity
                 setVelY(-8.0f);
 
-                // Freeze the Koopa shell
-                // object->setVelX(0.0f);
-                // object->setVelY(0.0f);
+                // Call playerCollision in koopa class
+                koopa->playerCollision(1);
 
-                // Allow enemy to update collision
-                finishedCollisionChecking = true;
+                return;
             }
-            else
+            else if (koopa && koopa->getState() == KoopaState::Shell)
             {
-                cout << "The order that i expected: 4. It should only be when the Koopa shell is hit!" << endl;
-                setY(object->getY() + object->getHeight() / 2 - getHeight());
+                isPlayingDeath = false;
+                cout << "In Player::enemyCollision() - Koopa in shell state" << endl;
+                koopa->playerCollision(2);
+                return;
             }
         }
-
-        object->collision();
 
         // Find and push to the removedEnemies vector if not already present
         if (std::find(removedEnemies.begin(), removedEnemies.end(), object) == removedEnemies.end())
@@ -1120,4 +1135,10 @@ bool Player::isFireMario()
 bool Player::isPlayerLocked()
 {
     return isLocked;
+}
+
+bool Player::isPlayerForward()
+{
+    // Check if the player is facing forward
+    return forward;
 }

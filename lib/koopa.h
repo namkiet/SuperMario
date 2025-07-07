@@ -5,9 +5,9 @@ enum class KoopaState
 {
     Normal,
     Flying,
-    Stomped,
-    Shell, // Normal turle but in shell
-    ShellMoving,
+    Shell,       // In shell state, not moving
+    ShellMoving, // In shell state, not moving, but have legs
+    DeadByFire,
     Dead
 };
 
@@ -28,8 +28,10 @@ private:
     std::vector<Texture2D> koopaTextures;
 
     // For position and speed
-    int timeCount = 0; // For stomp
-    int mode = 0;      // 0: Not continue to stomp, 1: Continue to stomp
+
+    int timeCountForDeath = 0;       // If this one run out, the koopa will be removed
+    int timeCountForShell = 0;       // Timer for shell state
+    int timeCountForShellMoving = 0; // Timer for shell moving state
 
     bool isForward = false;
 
@@ -44,8 +46,9 @@ public:
     void collision();
     void blockCollision(GameObject *object);
     void pipeCollision(GameObject *object);
-    void playerCollision(GameObject *object);
+    void playerCollision(int mode);
     void enemyCollision(GameObject *object);
+    void itemCollision(GameObject *object);
 
     // Check if the Koopa should be removed
     bool shouldRemove();
@@ -65,7 +68,9 @@ public:
 
     //
     bool isShell();
-    
+
     // Set state of koopa from player
     void setState(KoopaState newState);
+
+    KoopaState getState();
 };
