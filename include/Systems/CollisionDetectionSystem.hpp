@@ -2,48 +2,60 @@
 #include <ECS/System.hpp>
 #include <Core/Physics.hpp>
 
-class CollisionSystem : public System
+class CollisionDetectionSystem : public System
 {   
 public:
     void update(World& world, float dt) override
     {
         for (Entity* entity1 : world.findAll<BoxCollider2D, Transform, RigidBody>())
         {
-            if (!entity1->getComponent<BoxCollider2D>().isSolid) continue;
-            auto& tf1 = entity1->getComponent<Transform>();
-            auto& rb1 = entity1->getComponent<RigidBody>();
-            rb1.onGround = false;
+            // if (!entity1->getComponent<BoxCollider2D>().isSolid) continue;
+            auto& tf = entity1->getComponent<Transform>();
+            auto& rb = entity1->getComponent<RigidBody>();
+            auto& box = entity1->getComponent<BoxCollider2D>();
+
+            // rb.onGround = false;
+            box.colInfo = CollisionInfo();
 
             for (Entity* entity2 : world.findAll<BoxCollider2D, Transform>())
             {
-                if (!entity2->getComponent<BoxCollider2D>().isSolid || entity1 == entity2) continue;
+                if (entity1 == entity2) continue;
+                // if (!entity2->getComponent<BoxCollider2D>().isSolid || entity1 == entity2) continue;
 
                 auto info = Physics::AABBOverlap2(entity1, entity2);
-                switch (info.direction)
+                if (info.collider)
                 {
-                    case Physics::CollisionDirection::Top:
-                        tf1.position.y -= info.overlap.y;
-                        rb1.velocity.y = 0.0f;
-                        rb1.onGround = true;
-                        
-                        break;
-                    
-                    case Physics::CollisionDirection::Bottom:
-                        tf1.position.y += info.overlap.y;
-                        rb1.velocity.y = 0.0f;
-                        break;
-                    
-                    case Physics::CollisionDirection::Left:
-                        tf1.position.x -= info.overlap.x;
-                        break;
-                    
-                    case Physics::CollisionDirection::Right:
-                        tf1.position.x += info.overlap.x;
-                        break;
-                    
-                    default:
-                        break;
+                    box.colInfo = info;
+                    break;
                 }
+
+                // auto info = Physics::AABBOverlap2(entity1, entity2);
+                // switch (info.direction)
+                // {
+                //     case Physics::CollisionDirection::Top:
+                //         tf1.position.y -= info.overlap.y;
+                //         rb1.velocity.y = 0.0f;
+                //         rb1.onGround = true;
+                        
+                //         break;
+                    
+                //     case Physics::CollisionDirection::Bottom:
+                //         tf1.position.y += info.overlap.y;
+                //         rb1.velocity.y = 0.0f;
+                //         break;
+                    
+                //     case Physics::CollisionDirection::Left:
+                //         tf1.position.x -= info.overlap.x;
+                //         break;
+                    
+                //     case Physics::CollisionDirection::Right:
+                //         tf1.position.x += info.overlap.x;
+                //         break;
+                    
+                //     default:
+                //         break;
+                // }
+
             }
         }
     }

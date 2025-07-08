@@ -1,8 +1,10 @@
 #pragma once
 #include <Systems/AnimationSystem.hpp>
 #include <Systems/CameraSystem.hpp>
-#include <Systems/CollisionSystem.hpp>
+#include <Systems/CollisionDetectionSystem.hpp>
+#include <Systems/CollisionResolutionSystem.hpp>
 #include <Systems/PlayerEnemyCollisionSystem.hpp>
+#include <Systems/PlayerMovementSystem.hpp>
 #include <Systems/GravitySystem.hpp>
 #include <Systems/LifeSystem.hpp>
 #include <Systems/MovementSystem.hpp>

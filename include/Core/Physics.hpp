@@ -6,21 +6,6 @@
 
 namespace Physics 
 {
-    enum class CollisionDirection
-    {
-        None,
-        Top,
-        Bottom,
-        Left,
-        Right
-    };
-
-    struct CollisionInfo
-    {
-        sf::Vector2f overlap = sf::Vector2f(0, 0);
-        CollisionDirection direction = CollisionDirection::None;
-    };
-
     inline CollisionInfo AABBOverlap2(Entity* a, Entity* b)
     {
         auto& boxA = a->getComponent<BoxCollider2D>();
@@ -35,7 +20,6 @@ namespace Physics
         auto prevA = tfA.prevPos + boxA.offset + 0.5f * sizeA;
         auto prevB = tfB.prevPos + boxB.offset + 0.5f * sizeB;
 
-
         float dx = abs(posA.x - posB.x);
         float dy = abs(posA.y - posB.y);
         float dxPrev = abs(prevA.x - prevB.x);
@@ -49,6 +33,8 @@ namespace Physics
         if (overlap.x > 0.0f && overlap.y > 0.0f)
         {
             info.overlap = overlap;
+            info.collider = b;
+
             if (yo > dyPrev)
             {
                 if (prevA.x < posB.x)

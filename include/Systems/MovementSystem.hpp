@@ -1,31 +1,31 @@
-#pragma once
-#include <World.hpp>
-#include <Components/Transform.hpp>
-#include <Components/RigidBody.hpp>
-#include <Core/Variables.hpp>
+// #pragma once
+// #include <World.hpp>
+// #include <Components/Transform.hpp>
+// #include <Components/RigidBody.hpp>
+// #include <Core/Variables.hpp>
 
-class MovementSystem : public System
-{
-public:
-    void update(World& world, float dt) override
-    {
-        for (Entity* entity : world.findAll<Transform, RigidBody>())
-        {
-            auto& vel = entity->getComponent<RigidBody>().velocity;
-            auto& tf = entity->getComponent<Transform>();
-            auto& pos = tf.position;
-            auto& prev = tf.prevPos;
+// class MovementSystem : public System
+// {
+// public:
+//     void update(World& world, float dt) override
+//     {
+//         for (Entity* entity : world.findAll<Transform, RigidBody>())
+//         {
+//             auto& vel = entity->getComponent<RigidBody>().velocity;
+//             auto& tf = entity->getComponent<Transform>();
+//             auto& pos = tf.position;
+//             auto& prev = tf.prevPos;
 
-            prev.x = pos.x;
-            prev.y = pos.y;
+//             prev.x = pos.x;
+//             prev.y = pos.y;
             
-            pos.x += vel.x * dt;
-            pos.y += vel.y * dt;
+//             pos.x += vel.x * dt;
+//             pos.y += vel.y * dt;
 
-            if (pos.y >= SIZE::SCREEN.y)
-            {
-                entity->addComponent<DeadTag>();
-            }
-        }
-    }
-};
+//             if (pos.y >= SIZE::SCREEN.y)
+//             {
+//                 entity->addComponent<DeadTag>();
+//             }
+//         }
+//     }
+// };
