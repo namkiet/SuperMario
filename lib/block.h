@@ -14,7 +14,8 @@ enum class BlockType
     Stairs,
     Ground,
     LevelUp,
-    Star
+    Star,
+    Flag
 };
 
 class Block : public GameObject

@@ -231,10 +231,12 @@ void Goomba::enemyCollision(GameObject *object)
     Rectangle objectBoundsLeft = object->getBoundsLeft();
 
     Enemy *enemy = dynamic_cast<Enemy *>(object);
-    if (CheckCollisionRecs(boundsRight, objectBoundsLeft) || CheckCollisionRecs(boundsLeft, objectBoundsRight))
+    if (CheckCollisionRecs(boundsRight, objectBoundsLeft) || CheckCollisionRecs(boundsLeft, objectBoundsRight) ||
+        CheckCollisionRecs(boundsTop, objectBoundsBottom) || CheckCollisionRecs(boundsBottom, objectBoundsTop))
+
     {
         Koopa *koopa = dynamic_cast<Koopa *>(enemy);
-        if (enemy != nullptr && enemy->getEnemyID() == EnemyCharacter::Koopa && koopa->getState() != KoopaState::Normal)
+        if (koopa && koopa->getState() != KoopaState::Normal)
         {
             setState(GoombaState::DeadByEnemy);
             timeCount = 0; // Reset timer for dead state

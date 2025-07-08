@@ -17,7 +17,7 @@ Block::Block(int x, int y, int scale, UI *ui, BlockType type)
     // Load block textures from UI
     blockTextures = ui->getTile1();
 
-    if (type == BlockType::Stairs)
+    if (type == BlockType::Stairs || type == BlockType::Flag)
     {
         index = 28;
     }
@@ -96,4 +96,3 @@ bool Block::isHit()
 void Block::playerCollision(GameObject *object)
 {
 }
-

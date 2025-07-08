@@ -5,7 +5,7 @@
 #include "item.h"
 #include "fire.h"
 #include "koopa.h"
-
+#include "background.h"
 using namespace std;
 
 const float Player::WIDTH = 16.0f;
@@ -72,7 +72,6 @@ void Player::tick()
         // Set the player to growing up state
         setState(PlayerState::GrowingUp); // Continue growing up
         timeCountForGrowingUp = 15;       // Reset the timer for growing up
-        isLocked = true;
     }
     else if (state == PlayerState::GrowingUp && getHeight() >= originalHeight * 2 * originalScale)
     {
@@ -88,6 +87,7 @@ void Player::tick()
         isLocked = false;
     }
 
+    // cout << "Current vel X: " << getVelX() << endl;
     applyGravity();
 
     if (!isPlayingDeath)
@@ -132,6 +132,32 @@ void Player::render()
                            {getX(), getY(), getWidth(), getHeight()},
                            {0.0f, 0.0f}, 0.0f, WHITE); // Draw small player texture}
             ++timeCountForDeath;
+        }
+    }
+    else if (type == PlayerType::Win)
+    {
+        if (previousType == PlayerType::Fire)
+        {
+            // cout << "Drawing fire mode win texture" << endl;
+            DrawTexturePro(currentPlayerTextures[2],
+                           {0.0f, 0.0f, (float)currentPlayerTextures[2].width, (float)currentPlayerTextures[2].height},
+                           {getX(), getY(), getWidth(), getHeight()},
+                           {0.0f, 0.0f}, 0.0f, WHITE); // Draw win texture
+        }
+        else if (previousType == PlayerType::Normal && id == PlayerID::Luigi)
+        {
+            // cout << "Drawing Luigi win texture" << endl;
+            DrawTexturePro(currentPlayerTextures[1],
+                           {0.0f, 0.0f, (float)currentPlayerTextures[1].width, (float)currentPlayerTextures[1].height},
+                           {getX(), getY(), getWidth(), getHeight()},
+                           {0.0f, 0.0f}, 0.0f, WHITE); // Draw win texture
+        }
+        else if (previousType == PlayerType::Normal && id == PlayerID::Mario)
+        {
+            DrawTexturePro(currentPlayerTextures[0],
+                           {0.0f, 0.0f, (float)currentPlayerTextures[0].width, (float)currentPlayerTextures[0].height},
+                           {getX(), getY(), getWidth(), getHeight()},
+                           {0.0f, 0.0f}, 0.0f, WHITE); // Draw win texture
         }
     }
     else if (jumped)
@@ -215,59 +241,39 @@ void Player::render()
     }
     else
     {
-        // cout << getX() << " " << getY() << " " << getWidth() << " " << getHeight() << endl;
-        if (forward)
+        if (type == PlayerType::Star)
         {
-            if (type == PlayerType::Star)
-            {
-                if (state == PlayerState::Large)
-                {
-                    currentAnimation = Animation(1, starModeLargeTextures);
-                    currentAnimation.reset();
-                    currentAnimation.drawAnimation(getX(), getY(), (float)getWidth(), (float)getHeight());
-                    if (timeCountForRandomTextures > 0)
-                        currentAnimation = Animation(1, starModeLargeTexturesWalk); // Reset to normal star mode textures
-                }
-                else if (state == PlayerState::Small)
-                {
-                    currentAnimation = Animation(1, starModeSmallTextures);
-                    currentAnimation.reset();
-                    currentAnimation.drawAnimation(getX(), getY(), (float)getWidth(), (float)getHeight());
-                    if (timeCountForRandomTextures > 0)
-                        currentAnimation = Animation(1, starModeSmallTexturesWalk); // Reset to normal star mode textures
-                }
-            }
+            if (state == PlayerState::Small)
+                currentAnimation = Animation(1, starModeSmallTextures);
+            else if (state == PlayerState::Large)
+                currentAnimation = Animation(1, starModeLargeTextures);
+
+            currentAnimation.reset();
+            if (forward)
+                currentAnimation.drawAnimation(getX(), getY(), (float)getWidth(), (float)getHeight());
             else
+                currentAnimation.drawAnimation(getX(), getY(), (float)(-getWidth()), (float)getHeight());
+
+            if (timeCountForStar > 0)
+            {
+                if (state == PlayerState::Small)
+                    currentAnimation = Animation(1, starModeSmallTexturesWalk); // Reset to normal star mode textures
+                else if (state == PlayerState::Large)
+                    currentAnimation = Animation(1, starModeLargeTexturesWalk); // Reset to normal star mode textures
+            }
+        }
+        else
+        {
+            if (forward)
             {
                 DrawTexturePro(idleTexture,
                                {0.0f, 0.0f, (float)idleTexture.width, (float)idleTexture.height},
                                {getX(), getY(), getWidth(), getHeight()},
                                {0.0f, 0.0f}, 0.0f, WHITE); // Draw small player texture}
             }
-        }
-        else
-        {
-            if (type == PlayerType::Star)
-            {
-                if (state == PlayerState::Large)
-                {
-                    currentAnimation = Animation(1, starModeLargeTextures);
-                    currentAnimation.reset();
-                    currentAnimation.drawAnimation(getX(), getY(), -(float)getWidth(), (float)getHeight());
-                    if (timeCountForRandomTextures > 0)
-                        currentAnimation = Animation(1, starModeLargeTexturesWalk); // Reset to normal star mode textures
-                }
-                else if (state == PlayerState::Small)
-                {
-                    currentAnimation = Animation(1, starModeSmallTextures);
-                    currentAnimation.reset();
-                    currentAnimation.drawAnimation(getX(), getY(), -(float)getWidth(), (float)getHeight());
-                    if (timeCountForRandomTextures > 0)
-                        currentAnimation = Animation(1, starModeSmallTexturesWalk); // Reset to normal star mode textures
-                }
-            }
             else
             {
+
                 DrawTexturePro(idleTexture,
                                {(float)idleTexture.width, 0.0f, -(float)idleTexture.width, (float)idleTexture.height},
                                {getX(), getY(), (getWidth()), getHeight()},
@@ -361,6 +367,11 @@ void Player::collision()
         {
             itemCollision(object);
         }
+
+        if (id == ObjectID::Background)
+        {
+            backgroundCollision(object);
+        }
     }
 }
 
@@ -440,10 +451,17 @@ void Player::blockCollision(GameObject *object)
     }
     if (CheckCollisionRecs(boundsBottom, objectBoundsTop))
     {
-        // Check for collision with the bottom bounds of the block
-        // DrawText("Player hits the block from the bottom!", 10, 10, 20, RED);
-        setY(object->getY() - getHeight());
-        setVelY(0);
+        if (block && block->getBlockID() == BlockType::Flag)
+        {
+            setType(previousType); // Set to previous type
+            setVelX(4.0f);
+            setX(object->getX() + object->getWidth() + object->getWidth() / 2);
+        }
+        else
+        {
+            setY(object->getY() - getHeight());
+            setVelY(0);
+        }
 
         jumped = false;
         GameObject::collision();
@@ -452,12 +470,14 @@ void Player::blockCollision(GameObject *object)
     {
         // Check for collision with the right bounds of the block
         // DrawText("Player hits the block from the right!", 10, 10, 20, RED);
+
         setX(object->getX() - getWidth());
     }
     if (CheckCollisionRecs(boundsLeft, objectBoundsRight) && getVelX() < 0)
     {
         // Check for collision with the left bounds of the block
         // DrawText("Player hits the block from the left!", 10, 10, 20, RED);
+
         setX(object->getX() + object->getWidth());
     }
 }
@@ -569,7 +589,7 @@ void Player::enemyCollision(GameObject *object)
             Koopa *koopa = dynamic_cast<Koopa *>(object);
             if (koopa && (koopa->getState() == KoopaState::Normal || koopa->getState() == KoopaState::ShellMoving))
             {
-                cout << "In Player::enemyCollision() - Koopa in normal or shell moving state" << endl;
+                //  << "In Player::enemyCollision() - Koopa in normal or shell moving state" << endl;
 
                 // Wont dead
                 isPlayingDeath = false;
@@ -588,7 +608,7 @@ void Player::enemyCollision(GameObject *object)
             else if (koopa && koopa->getState() == KoopaState::Shell)
             {
                 isPlayingDeath = false;
-                cout << "In Player::enemyCollision() - Koopa in shell state" << endl;
+                // cout << "In Player::enemyCollision() - Koopa in shell state" << endl;
                 koopa->playerCollision(2);
                 return;
             }
@@ -685,6 +705,11 @@ void Player::setState(PlayerState newState)
     else if (state == PlayerState::Small)
     {
         setPlayerScale(originalScale);
+    }
+    else if (type == PlayerType::Win)
+    {
+        if (getVelY() == 0)
+            setVelX(2.0f);
     }
 }
 
@@ -783,6 +808,11 @@ void Player::setType(PlayerType newType)
             // jumpTexture = starModeLargeTextures[5];
             // deadTexture = starModeLargeTextures[6]; // wont died in this mode
         }
+    case PlayerType::Win:
+        if (state == PlayerState::Small)
+            currentPlayerTextures = winSmallTextures;
+        else if (state == PlayerState::Large)
+            currentPlayerTextures = winLargeTextures;
     default:
         cerr << "Unknown player type!" << endl;
     }
@@ -822,7 +852,7 @@ void Player::LoadRandomTextures()
         return;
     }
     // Load random textures for player animations
-    for (int i = 0; i < 6; ++i)
+    for (int i = 0; i < 7; ++i)
     {
         if (i == 0) // Idle -> 0
         {
@@ -932,6 +962,15 @@ void Player::LoadRandomTextures()
             starModeSmallTexturesJump.push_back(ui->getGreenSmall()[i]);
             starModeSmallTexturesJump.push_back(ui->getBlueSmall()[i]);
         }
+        else if (i == 6) // Flag pole
+        {
+            winLargeTextures.push_back(ui->getMarioLarge()[i + 2]);
+            winLargeTextures.push_back(ui->getLuigiLarge()[i + 2]);
+            winLargeTextures.push_back(ui->getFireLarge()[i + 2]);
+
+            winSmallTextures.push_back(ui->getMarioSmall()[i + 2]);
+            winSmallTextures.push_back(ui->getLuigiSmall()[i + 2]);
+        }
     }
 }
 
@@ -968,6 +1007,10 @@ void Player::itemCollision(GameObject *object)
             // Set type
             type = PlayerType::RandomBeforeStar;
 
+            // Set the velocity to 0
+            setVelX(0.0f);
+            setVelY(0.0f);
+
             // Lock for a while
             isLocked = true;
         }
@@ -991,6 +1034,11 @@ void Player::itemCollision(GameObject *object)
                 // Set the time count for growing up
                 timeCountForGrowingUp = 15;
 
+                // Set the velocity to 0
+                setVelX(0.0f);
+                setVelY(0.0f);
+
+                // Lock the player for a while
                 isLocked = true;
 
                 return;
@@ -1007,6 +1055,10 @@ void Player::itemCollision(GameObject *object)
             // Set type
             type = PlayerType::RandomBeforeFire;
 
+            // Set the velocity to 0
+            setVelX(0.0f);
+            setVelY(0.0f);
+
             // Lock for a while
             isLocked = true;
         }
@@ -1022,8 +1074,14 @@ void Player::itemCollision(GameObject *object)
 
                 setState(PlayerState::GrowingUp);
                 setType(PlayerType::Normal);
+
+                // Set the velocity to 0
+                setVelX(0.0f);
+                setVelY(0.0f);
+
                 timeCountForGrowingUp = 15;
-                // StopMusicStream(ui->getPowerUp());
+
+                isLocked = true;
             }
             else if (state == PlayerState::Large)
             {
@@ -1141,4 +1199,53 @@ bool Player::isPlayerForward()
 {
     // Check if the player is facing forward
     return forward;
+}
+
+void Player::backgroundCollision(GameObject *object)
+{
+    // Handle background collision if needed
+    Rectangle boundsBottom = getBounds();
+    Rectangle boundsTop = getBoundsTop();
+    Rectangle boundsRight = getBoundsRight();
+    Rectangle boundsLeft = getBoundsLeft();
+
+    Rectangle objectBoundsBottom = object->getBounds();
+    Rectangle objectBoundsTop = object->getBoundsTop();
+    Rectangle objectBoundsRight = object->getBoundsRight();
+    Rectangle objectBoundsLeft = object->getBoundsLeft();
+
+    BackGround *background = dynamic_cast<BackGround *>(object);
+    if (background && background->getBackGroundID() == BackGroundType::FlagPole)
+    {
+        if (CheckCollisionRecs(boundsBottom, objectBoundsTop) || CheckCollisionRecs(boundsTop, objectBoundsBottom) ||
+            CheckCollisionRecs(boundsRight, objectBoundsLeft) || CheckCollisionRecs(boundsLeft, objectBoundsRight))
+        {
+            // cout << "Player hits the flagpole!" << endl;
+            // Player hits the background from the top
+
+            // setY(object->getY() - getHeight());
+            setX(object->getX() - object->getWidth() / 2);
+            setVelY(4.0f);
+            setVelX(0.0f);
+
+            jumped = false;
+
+            isLocked = true;
+
+            if (type != PlayerType::Win)
+            {
+                // Only set once
+                previousType = type;
+            }
+
+            setType(PlayerType::Win);
+
+            // if (getY() > object->getY() + object->getHeight() - object->getHeight() / 8)
+            // {
+            //     setType(PlayerType::Normal);
+            //     setVelX(2.0f);
+            //     setX(object->getX() + object->getWidth() + object->getWidth() / 2);
+            // }
+        }
+    }
 }

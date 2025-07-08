@@ -23,6 +23,8 @@ private:
     Image fire_sheet;   // For mario fire mode
     Image game_over_sheet;
     Image intro_sheet;
+    Image background_sheet; // Background spritesheet
+    Image background_sheet2; 
 
     // Textures for the player
     std::vector<Texture2D> marioLarge{MARIO_L_COUNT};
@@ -87,6 +89,9 @@ private:
     // Textures for fire mode
     std::vector<Texture2D> fireBullet{5}; // 4 normal + 1 boomed
 
+    // Textures for background
+    std::vector<Texture2D> backgroundTextures{10};
+
     // Load textures from images
     void getLargePlayerTextures();
     void getSmallPlayerTextures();
@@ -96,10 +101,12 @@ private:
     void getEnemyTextures();
     void getItemTextures();
     void getFireBulletTextures();
+    void getBackgroundTextures();
 
     // For levelHandler.cpp
     Image levelImage;
     Image characterImage;
+    Image backgroundImage;
 
     // Music for the game
     Music overWorldBackGround;
@@ -161,6 +168,7 @@ public:
     std::vector<Texture2D> &getBlueLarge();
     std::vector<Texture2D> &getBlueSmall();
     std::vector<Texture2D> &getFireBullet();
+    std::vector<Texture2D> &getBackground();
 
     Music &getOverworldBackGroundMusic();
     Music &getGameOverMusic();
@@ -170,7 +178,8 @@ public:
 
     Image &getLevelImage();
     Image &getCharacterImage();
-
+    Image &getBackgroundImage();
+    
     // Load and unload images
     void loadImages();
     void loadAudio();

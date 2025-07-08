@@ -21,7 +21,9 @@ enum class PlayerType
     RandomBeforeFire,
     Fire,
     RandomBeforeStar,
-    Star
+    Star,
+    Dead,
+    Win
 };
 
 enum class PlayerState
@@ -91,6 +93,10 @@ private:
     std::vector<Texture2D> starModeLargeTextures;     // Textures for large star mode
     std::vector<Texture2D> starModeSmallTextures;     // Textures for small
 
+    // Textures for win state
+    std::vector<Texture2D> winLargeTextures; // Textures for win state
+    std::vector<Texture2D> winSmallTextures; // Textures for win state
+
     // Load textures from UI
     void LoadPlayerTextures();
     void LoadRandomTextures();
@@ -114,6 +120,7 @@ private:
     void pipeCollision(GameObject *object);
     void enemyCollision(GameObject *object);
     void itemCollision(GameObject *object);
+    void backgroundCollision(GameObject *object);
 
     // For player texture animation
     int index = 0; // Index for player texture animation

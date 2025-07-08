@@ -93,7 +93,7 @@ void KeyInput::keyReleased()
         keyDown[3] = false;
     }
 
-    if (!keyDown[1] && !keyDown[2])
+    if (!keyDown[1] && !keyDown[2] && !handler.getPlayer()->isPlayerLocked())
     {
         if (handler.getPlayer() != nullptr)
         {

@@ -7,7 +7,8 @@ enum class ObjectID
     Enemy,
     Block,
     Pipe,
-    Item
+    Item, 
+    Background
 };
 
 class GameObject

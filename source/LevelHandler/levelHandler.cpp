@@ -10,6 +10,7 @@
 #include "coinBlock.h"
 #include "starBlock.h"
 #include "levelUpBlock.h"
+#include "background.h"
 using namespace std;
 
 LevelHandler::LevelHandler(Handler handler, UI *ui) : handler(handler), ui(ui)
@@ -21,6 +22,7 @@ void LevelHandler::loadImage()
 {
     levelImage = ui->getLevelImage();
     characterImage = ui->getCharacterImage();
+    backgroundImage = ui->getBackgroundImage();
 }
 
 void LevelHandler::setLevel()
@@ -102,6 +104,10 @@ void LevelHandler::setLevel()
             {
                 handler.addObject(new Pipe(j * 16, i * 16, 32, 32, 1, 3, true, ui));
             }
+            else if (red == 163 && green == 73 && blue == 164)
+            {
+                handler.addObject(new Block(j * 16, i * 16, 3, ui, BlockType::Flag));
+            }
         }
     }
     UnloadImageColors(pixels);
@@ -140,6 +146,7 @@ void LevelHandler::levelCharacter()
 
 void LevelHandler::start()
 {
+    setBackground();
     setLevel();
     levelCharacter();
     setEnemy();
@@ -189,4 +196,67 @@ void LevelHandler::setEnemy()
         }
     }
     UnloadImageColors(pixels);
+}
+
+void LevelHandler::setBackground()
+{
+    int width = backgroundImage.width;
+    int height = backgroundImage.height;
+    Color *pixels = LoadImageColors(backgroundImage);
+    for (int j = 0; j < width; ++j)
+    {
+        for (int i = 0; i < height; ++i)
+        {
+            int index = i * width + j;
+            Color pixelColor = pixels[index];
+            int red = pixelColor.r;
+            int green = pixelColor.g;
+            int blue = pixelColor.b;
+
+            if (red == 255 && green == 255 && blue == 255) // White
+            {
+                continue; // Skip white pixels
+            }
+            else if (red == 0 && green == 128 && blue == 0) // Big hill
+            {
+                handler.addObject(new BackGround(j * 16, i * 16, 80, 35, 3, ui, BackGroundType::BigHill));
+            }
+            else if (red == 34 && green == 177 && blue == 76)
+            {
+                handler.addObject(new BackGround(j * 16, i * 16, 48, 20, 3, ui, BackGroundType::SmallHill));
+            }
+            else if (red == 200 && green == 191 && blue == 231)
+            {
+                handler.addObject(new BackGround(j * 16, i * 16, 32, 16, 3, ui, BackGroundType::Plant1));
+            }
+            else if (red == 0 && green == 162 && blue == 232)
+            {
+                handler.addObject(new BackGround(j * 16, i * 16, 48, 16, 3, ui, BackGroundType::Plant2));
+            }
+            else if (red == 255 && green == 174 && blue == 201)
+            {
+                handler.addObject(new BackGround(j * 16, i * 16, 64, 16, 3, ui, BackGroundType::Plant3));
+            }
+            else if (red == 0 && green == 0 && blue == 0)
+            {
+                handler.addObject(new BackGround(j * 16, i * 16, 32, 24, 3, ui, BackGroundType::Cloud1));
+            }
+            else if (red == 195 && green == 195 && blue == 195)
+            {
+                handler.addObject(new BackGround(j * 16, i * 16, 48, 24, 3, ui, BackGroundType::Cloud2));
+            }
+            else if (red == 127 && green == 127 && blue == 127)
+            {
+                handler.addObject(new BackGround(j * 16, i * 16, 64, 24, 3, ui, BackGroundType::Cloud3));
+            }
+            else if (red == 255 && green == 0 && blue == 128)
+            {
+                handler.addObject(new BackGround(j * 16, i * 16, 80, 80, 3, ui, BackGroundType::Castle));
+            }
+            else if (red == 185 && green == 122 && blue == 87)
+            {
+                handler.addObject(new BackGround(j * 16, i * 16, 16, 162, 3, ui, BackGroundType::FlagPole));
+            }
+        }
+    }
 }

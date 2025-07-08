@@ -250,7 +250,8 @@ void UI::getPipeTextures()
 }
 
 UI::UI() : tile_sheet{nullptr}, game_over_sheet{nullptr}, intro_sheet{nullptr},
-           player_sheet{nullptr}, enemy_sheet{nullptr}, block_sheet{nullptr}, npc_sheet{nullptr}
+           player_sheet{nullptr}, enemy_sheet{nullptr}, block_sheet{nullptr}, npc_sheet{nullptr},
+           background_sheet{nullptr}, background_sheet2{nullptr}
 {
 }
 
@@ -262,8 +263,11 @@ void UI::loadImages()
     block_sheet = LoadImage(RES_PATH "Sprites/block.png");
     tile_sheet = LoadImage(RES_PATH "Sprites/tileset.png");
     fire_sheet = LoadImage(RES_PATH "Sprites/fire.png");
+    background_sheet = LoadImage(RES_PATH "Sprites/background.png");
+    background_sheet2 = LoadImage(RES_PATH "Sprites/background2.png");
 
     levelImage = LoadImage(RES_PATH "Levels/map11.png");
+    backgroundImage = LoadImage(RES_PATH "Levels/map11b.png");
     characterImage = LoadImage(RES_PATH "Levels/map11c.png");
 
     getLargePlayerTextures();
@@ -274,6 +278,7 @@ void UI::loadImages()
     getEnemyTextures();
     getItemTextures();
     getFireBulletTextures();
+    getBackgroundTextures();
 }
 
 void UI::unloadImages()
@@ -289,6 +294,7 @@ void UI::unloadImages()
 
     UnloadImage(levelImage);
     UnloadImage(characterImage);
+    UnloadImage(backgroundImage);
 
     for (auto &texture : marioLarge)
     {
@@ -459,6 +465,11 @@ void UI::unloadImages()
     }
 
     for (auto &texture : fireBullet)
+    {
+        UnloadTexture(texture);
+    }
+
+    for (auto &texture : backgroundTextures)
     {
         UnloadTexture(texture);
     }
@@ -1469,4 +1480,124 @@ void UI::getFireBulletTextures()
 std::vector<Texture2D> &UI::getFireBullet()
 {
     return fireBullet;
+}
+
+void UI::getBackgroundTextures()
+{
+    int x_off = 272;
+    int y_off = 218;
+    int width = 80;
+    int height = 80;
+
+    Rectangle cropRect = {x_off,
+                          y_off,
+                          width,
+                          height};
+    Image cropped = ImageFromImage(background_sheet, cropRect);
+    Texture2D texture = LoadTextureFromImage(cropped);
+    UnloadImage(cropped);
+    backgroundTextures[0] = texture;
+
+    x_off = 48;
+    y_off = 176;
+    width = 48;
+    height = 20;
+    Rectangle cropRect1 = {x_off,
+                           y_off,
+                           width,
+                           height};
+    cropped = ImageFromImage(background_sheet, cropRect1);
+    texture = LoadTextureFromImage(cropped);
+    UnloadImage(cropped);
+    backgroundTextures[1] = texture;
+    
+    x_off = 99;
+    y_off = 160;
+    width = 80;
+    height = 35;
+    Rectangle cropRect2 = {x_off,
+                           y_off,
+                           width,
+                           height};
+    cropped = ImageFromImage(background_sheet, cropRect2);
+    texture = LoadTextureFromImage(cropped);
+    UnloadImage(cropped);
+    backgroundTextures[2] = texture;
+
+    x_off = 46;
+    y_off = 198;
+    width = 48;
+    height = 24;
+    for (int i = 3; i < 6; ++i)
+    {
+        Rectangle cropRect3 = {x_off,
+                               y_off,
+                               width,
+                               height};
+        cropped = ImageFromImage(background_sheet, cropRect3);
+        texture = LoadTextureFromImage(cropped);
+        UnloadImage(cropped);
+        backgroundTextures[i] = texture;
+
+        if (i == 3)
+        {
+            x_off = 96;
+            width = 64;
+        }
+        else if (i == 4)
+        {
+            x_off = 162;
+            width = 32;
+        }
+    }
+
+    x_off = 51;
+    y_off = 253;
+    width = 32;
+    height = 16;
+    for (int i = 6; i < 9; ++i)
+    {
+        Rectangle cropRect4 = {x_off,
+                               y_off,
+                               width,
+                               height};
+        cropped = ImageFromImage(background_sheet, cropRect4);
+        texture = LoadTextureFromImage(cropped);
+        UnloadImage(cropped);
+        backgroundTextures[i] = texture;
+
+        if (i == 6)
+        {
+            x_off = 85;
+            width = 64;
+        }
+        else if (i == 7)
+        {
+            x_off = 151;
+            width = 48;
+        }
+    }
+
+    x_off = 70;
+    y_off = 31;
+    width = 16;
+    height = 325;
+    Rectangle cropRect5 = {x_off,
+                           y_off,
+                           width,
+                           height};
+    cropped = ImageFromImage(background_sheet2, cropRect5);
+    texture = LoadTextureFromImage(cropped);
+    UnloadImage(cropped);
+    backgroundTextures[9] = texture;
+}
+
+std::vector<Texture2D> &UI::getBackground()
+{
+    return backgroundTextures;
+}
+
+Image &UI::getBackgroundImage()
+{
+    return backgroundImage;
 }
