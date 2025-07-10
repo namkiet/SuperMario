@@ -7,5 +7,7 @@ class System
 {
 public:
     virtual ~System() = default;
-    virtual void update(World&, float) = 0;
+    virtual void preUpdate(World&, float) {};
+    virtual void update(World&, float) {};
+    virtual void postUpdate(World&, float) {};
 };

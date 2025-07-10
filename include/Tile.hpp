@@ -11,6 +11,7 @@ public:
     {
         addComponent<Animation>(Animation(TextureManager::load(img)));
         addComponent<BoxCollider2D>(SIZE::GRID);
+        addComponent<BlockTag>("Tile");
         addComponent<Transform>(Transform(sf::Vector2f(x, y), SIZE::GRID));
     }
 };

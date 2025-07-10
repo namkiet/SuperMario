@@ -10,7 +10,6 @@ public:
     Coin(float x, float y)
     {
         BoxCollider2D box(SIZE::GRID);
-        box.isSolid = false;
 
         addComponent<Animation>(Animation(TextureManager::load("assets/coin.png"), 16, 16, 4, 0.125, false));
         addComponent<BoxCollider2D>(box);

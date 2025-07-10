@@ -1,24 +1,25 @@
 #pragma once
 #include <World.hpp>
-#include <Components/Input.hpp>
+#include <Components/EnemyTag.hpp>
 #include <Components/RigidBody.hpp>
-#include <Core/Variables.hpp>
+#include <algorithm>
 
 class EnemyAISystem : public System
 {
 public:
     void update(World& world, float dt) override
     {
-        for (Entity* entity : world.findAll<EnemyTag>())
+        for (Entity* enemy : world.findAll<EnemyTag, EnemyAI, RigidBody>())
         {
-            if (!input.moveLeft && !input.moveRight)
+            auto& ai = enemy->getComponent<EnemyAI>();
+            auto& rb = enemy->getComponent<RigidBody>();
+            
+            if (rb.velocity.x == 0.0f)
             {
-                input.moveRight = true;
+                ai.isMovingRight = !ai.isMovingRight;
             }
-            else
-            {
-                
-            }
+
+            rb.velocity.x = ai.moveSpeed * (ai.isMovingRight ? 1 : -1);
         }
     }
 };

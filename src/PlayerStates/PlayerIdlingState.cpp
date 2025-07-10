@@ -30,14 +30,9 @@ std::shared_ptr<PlayerState> PlayerIdlingState::getNewState(Entity* entity)
         {
             return std::make_shared<PlayerJumpingState>();
         }
-    }
 
-    if (entity->hasComponent<Input>()) 
-    {
-        auto& input = entity->getComponent<Input>();
-        if (input.moveLeft || input.moveRight)
+        if (rb.velocity.x != 0.0f)
         {
-            std::cout << "HELLo\n";
             return std::make_shared<PlayerRunningState>();
         }
     }

@@ -10,48 +10,55 @@
 
 GameManager::GameManager()
 {
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < 50; i++)
     {
+        // if (i == 3)
         world.createEntity(std::make_unique<Tile>(i * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y, "assets/floor_block.png"));
     }
-    auto player = world.createEntity(std::make_unique<Mario>(200, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 100)); 
+    auto player = world.createEntity(std::make_unique<Mario>(200, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 50)); 
     auto goomba = world.createEntity(std::make_unique<Enemy>(300, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 200));
 
-    // // world.createEntity(std::make_unique<Tile>(5 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 2, "assets/platform_block.png"));    
+    // world.createEntity(std::make_unique<Tile>(5 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 2, "assets/platform_block.png"));    
     // world.createEntity(std::make_unique<Tile>(6 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 2, "assets/platform_block.png"));    
     // world.createEntity(std::make_unique<Tile>(6 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 3, "assets/platform_block.png"));   
     // world.createEntity(std::make_unique<Tile>(7 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 2, "assets/platform_block.png"));   
     // world.createEntity(std::make_unique<Tile>(7 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 3, "assets/platform_block.png"));   
-    // world.createEntity(std::make_unique<Tile>(7 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 4, "assets/platform_block.png"));     
+    // world.createEntity(std::make_unique<Tile>(7 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 4, "assets/platform_block.png"));   
     // world.createEntity(std::make_unique<Tile>(8 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 2, "assets/platform_block.png"));     
     // world.createEntity(std::make_unique<Tile>(8 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 3, "assets/platform_block.png"));     
     // world.createEntity(std::make_unique<Tile>(8 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 4, "assets/platform_block.png"));     
-    // world.createEntity(std::make_unique<Tile>(8 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 5, "assets/platform_block.png"));  
-
-    // pipe = world.createEntity(std::make_unique<Pipe>(15 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 3));  
+    // world.createEntity(std::make_unique<Tile>(8 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 5, "assets/platform_block.png"));
     
-    auto camera = world.createEntity();
-    camera->addComponent<Camera>();
+    auto block = world.createEntity();
+    block->addComponent<BlockTag>("QuestionBlock");
+    block->addComponent<Transform>(sf::Vector2f(7 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 4), SIZE::GRID);
+    block->addComponent<BoxCollider2D>(SIZE::GRID);
+    block->addComponent<Animation>(TextureManager::load("assets/coin_block.png"), 16, 16, 3, 0.3f);
 
-
-    // world.addSystem<GravitySystem>();
-    // world.addSystem<MovementSystem>();
+    pipe = world.createEntity(std::make_unique<Pipe>(15 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 3));  
     
-    // world.addSystem<PlayerEnemyCollisionSystem>();
-    world.addSystem<PlayerMovementSystem>();
+    world.createEntity()->addComponent<Camera>();
+
+
+    world.addSystem<GravitySystem>();
+    world.addSystem<MovementSystem>();
+    
+    // world.addSystem<PlayerMovementSystem>();
 
     world.addSystem<CollisionDetectionSystem>();
-
     world.addSystem<CollisionResolutionSystem>();
+    world.addSystem<PlayerCollisionSystem>();
 
     world.addSystem<PlayerInputSystem>();
+    world.addSystem<EnemyAISystem>();
     // world.addSystem<ControlSystem>();
+
     world.addSystem<PlayerStateSystem>();
 
     world.addSystem<CameraSystem>();
     world.addSystem<AnimationSystem>();
+    
     world.addSystem<LifeSystem>();
-
     world.addSystem<RenderSystem>();
 }
 
@@ -68,15 +75,13 @@ void GameManager::handleEvent(const sf::Event& event)
 
 void GameManager::update(float dt)
 {
-    auto player = world.findFirst<PlayerTag>();
-    // std::cout << player->getComponent<RigidBody>().onGround << "\n";
-    auto& posP = player->getComponent<Transform>().position;
-    auto& velP = player->getComponent<RigidBody>().velocity;
-    // std::cout << posP.x << " " << posP.y << "\n";
-    std::cout << velP.x << " " << velP.y << "\n";
-
-    // std::cout << pipe->getComponent<Transform>().position.x << " " << pipe->getComponent<Transform>().position.y << "\n";
-    // std::cout << pipe->getComponent<BoxCollider2D>().size.x << " " << pipe->getComponent<BoxCollider2D>().size.y << "\n";
+    auto player = world.findFirst<EnemyTag>();
+    if (player)
+    {
+        std::cout << player->getComponent<RigidBody>().velocity.x << "\n";
+    }
+    // // std::cout << player->getComponent<BoxCollider2D>().collisions.size() << "\n";
+    // std::cout << player->getComponent<RigidBody>().velocity.y << " " << player->getComponent<RigidBody>().velocity.y << "\n";
 
     world.update(dt);
 }

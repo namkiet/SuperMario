@@ -22,10 +22,9 @@ void PlayerJumpingState::onEnter(Entity* entity)
 
 std::shared_ptr<PlayerState> PlayerJumpingState::getNewState(Entity* entity)
 {
-    if (entity->hasComponent<RigidBody>() && entity->hasComponent<Input>())
+    if (entity->hasComponent<RigidBody>())
     {
         auto& rb = entity->getComponent<RigidBody>();
-        auto& input = entity->getComponent<Input>();
         if (rb.onGround)
         {
             return std::make_shared<PlayerIdlingState>();

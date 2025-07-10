@@ -3,11 +3,11 @@
 #include <Components/BoxCollider2D.hpp>
 #include <Components/Camera.hpp>
 #include <Components/DeadTag.hpp>
+#include <Components/EnemyAI.hpp>
 #include <Components/EnemyTag.hpp>
 #include <Components/Health.hpp>
 #include <Components/Input.hpp>
 #include <Components/LifeSpan.hpp>
+#include <Components/PlayerTag.hpp>
 #include <Components/RigidBody.hpp>
 #include <Components/Transform.hpp>
-#include <Components/Tags.hpp>
-#include <Components/PlayerTag.hpp>

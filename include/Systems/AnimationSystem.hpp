@@ -1,6 +1,7 @@
 #pragma once
 #include <World.hpp>
 #include <Components/Animation.hpp>
+#include <Components/RigidBody.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -12,6 +13,19 @@ public:
         for (Entity* entity : world.findAll<Animation>())
         {
             auto& anim = entity->getComponent<Animation>();
+
+            if (entity->hasComponent<RigidBody>())
+            {
+                auto& rb = entity->getComponent<RigidBody>();
+                if (rb.velocity.x > 0.0f)
+                {
+                    anim.flipX = false;
+                }
+                else if (rb.velocity.x < 0.0f)
+                {
+                    anim.flipX = true;
+                }
+            }
 
             if (anim.frameCount == 1) continue;
 
@@ -25,7 +39,6 @@ public:
                 {
                     anim.currentFrame = anim.loop ? 0 : anim.frameCount - 1;
                 }
-
             }
 
             // Set texture rect

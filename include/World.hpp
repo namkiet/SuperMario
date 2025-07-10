@@ -100,7 +100,17 @@ public:
     {
         for (auto& system : orderedSystems)
         {
+            system->preUpdate(*this, deltaTime);
+        }
+
+        for (auto& system : orderedSystems)
+        {
             system->update(*this, deltaTime);
+        }
+
+        for (auto& system : orderedSystems)
+        {
+            system->postUpdate(*this, deltaTime);
         }
 
         for (Entity* entity : destroyPending)

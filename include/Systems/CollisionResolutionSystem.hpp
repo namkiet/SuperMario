@@ -3,6 +3,7 @@
 #include <Components/BoxCollider2D.hpp>
 #include <Components/Transform.hpp>
 #include <Components/RigidBody.hpp>
+#include <Components/BlockTag.hpp>
 #include <Core/Physics.hpp>
 
 class CollisionResolutionSystem : public System
@@ -17,39 +18,42 @@ public:
             auto& box = entity->getComponent<BoxCollider2D>();
 
             rb.onGround = false;
-            
-            // Check if the current entity is solid
-            if (!box.isSolid) continue;
-
-            // Check if it collided with any entity
-            if (!box.colInfo.collider) continue;
-
-            // Check if the entity it collided is solid
-            if (!box.colInfo.collider->getComponent<BoxCollider2D>().isSolid) continue;
-
-            switch (box.colInfo.direction)
+            for (auto& [collider, direction] : box.collisions)
             {
-                case CollisionDirection::Top:
-                    tf.position.y -= box.colInfo.overlap.y;
-                    rb.velocity.y = 0.0f;
-                    rb.onGround = true;
-                    break;
-                
-                case CollisionDirection::Bottom:
-                    tf.position.y += box.colInfo.overlap.y;
-                    rb.velocity.y = 0.0f;
-                    break;
-                
-                case CollisionDirection::Left:
-                    tf.position.x -= box.colInfo.overlap.x;
-                    break;
-                
-                case CollisionDirection::Right:
-                    tf.position.x += box.colInfo.overlap.x;
-                    break;
-                
-                default:
-                    break;
+                // Check if the entity it collides with is solid
+                if (!collider->hasComponent<BlockTag>()) continue;
+
+                sf::Vector2f overlap = Physics::GetCollisionOverlap(entity, collider);
+
+                // Check if they are still colliding
+                if (overlap.x <= 0.0f || overlap.y <= 0.0f) continue;
+
+                switch (direction)
+                {
+                    case Direction::Top:
+                        tf.position.y -= overlap.y;
+                        rb.velocity.y = 0.0f;
+                        rb.onGround = true;
+                        break;
+                    
+                    case Direction::Bottom:
+                        tf.position.y += overlap.y;
+                        rb.velocity.y = 0.0f;
+                        break;
+                    
+                    case Direction::Left:
+                        tf.position.x -= overlap.x;
+                        rb.velocity.x = 0.0f;
+                        break;
+                    
+                    case Direction::Right:
+                        tf.position.x += overlap.x;
+                        rb.velocity.x = 0.0f;
+                        break;
+                    
+                    default:
+                        break;
+                }
             }
         }
     }

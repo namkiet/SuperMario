@@ -1,10 +1,13 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <ECS/Component.hpp>
+#include <vector>
+
+#include <iostream>
 
 class Entity;
 
-enum class CollisionDirection
+enum class Direction
 {
     None,
     Top,
@@ -15,9 +18,11 @@ enum class CollisionDirection
 
 struct CollisionInfo
 {
-    Entity* collider = nullptr;
-    sf::Vector2f overlap = sf::Vector2f(0, 0);
-    CollisionDirection direction = CollisionDirection::None;
+    CollisionInfo(Entity* collider = nullptr, Direction direction = Direction::None)
+        : collider(collider), direction(direction) {}
+        
+    Entity* collider;
+    Direction direction;
 };
 
 class BoxCollider2D : public Component
@@ -28,7 +33,17 @@ public:
 
     sf::Vector2f size;
     sf::Vector2f offset;
-    bool isSolid = true;     
     bool isTrigger = false;
-    CollisionInfo colInfo;
+    std::vector<CollisionInfo> collisions;
 };
+
+inline std::ostream& operator<<(std::ostream& os, Direction dir) {
+    switch (dir) {
+        case Direction::None:   return os << "None";
+        case Direction::Top:    return os << "Top";
+        case Direction::Bottom: return os << "Bottom";
+        case Direction::Left:   return os << "Left";
+        case Direction::Right:  return os << "Right";
+        default:                         return os << "Unknown";
+    }
+}

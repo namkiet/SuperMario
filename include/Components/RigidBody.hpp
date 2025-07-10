@@ -5,6 +5,7 @@
 struct RigidBody : public Component
 {
     sf::Vector2f velocity;
+    sf::Vector2f acceleration = sf::Vector2f(0, 0);
     bool applyGravity;
     bool onGround = false;
 
