@@ -13,7 +13,6 @@ public:
 
         addComponent<Animation>(Animation(TextureManager::load("assets/coin.png"), 16, 16, 4, 0.125, false));
         addComponent<BoxCollider2D>(box);
-        addComponent<CollectibleTag>();
         addComponent<LifeSpan>(0.5f);
         addComponent<Transform>(Transform(sf::Vector2f(x, y), SIZE::GRID));
     }

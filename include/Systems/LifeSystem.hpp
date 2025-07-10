@@ -3,6 +3,7 @@
 #include <Components/DeadTag.hpp>
 #include <Components/Health.hpp>
 #include <Components/LifeSpan.hpp>
+#include <Mario.hpp>
 
 class LifeSystem : public System
 {
@@ -34,7 +35,7 @@ public:
             world.destroyEntity(entity);
             if (isPlayer)
             {
-                world.createEntity(std::make_unique<Mario>(200, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 100)); 
+                world.createEntity<Mario>(200, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 100);
             }
         }
     }

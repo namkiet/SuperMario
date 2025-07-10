@@ -15,11 +15,11 @@ public:
         return entities.back().get();
     }
 
-    Entity* createEntity(std::unique_ptr<Entity> entity)
+    template<typename T, typename... Args>
+    Entity* createEntity(Args&&... args)
     {
-        Entity* newEntity = entity.get();
-        entities.push_back(std::move(entity));
-        return newEntity;
+        entities.push_back(std::make_unique<T>(std::forward<Args>(args)...));
+        return entities.back().get();
     }
     
     void deleteEntity(Entity* entity)

@@ -1,10 +1,6 @@
 #pragma once
-
-#include <SFML/Graphics.hpp>
-#include <Mario.hpp>
-#include <Enemy.hpp>
-#include <Ground.hpp>
 #include <World.hpp>
+#include <SFML/Graphics.hpp>
 
 class GameManager
 {
@@ -16,5 +12,4 @@ public:
 
 private:
     World                   world;
-    Entity* pipe;
 };

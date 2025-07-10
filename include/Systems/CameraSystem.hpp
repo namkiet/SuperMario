@@ -1,8 +1,8 @@
 #pragma once
 #include <World.hpp>
 #include <Components/Camera.hpp>
-#include <Components/Tags.hpp>
 #include <Components/Transform.hpp>
+#include <Core/Variables.hpp>
 #include <SFML/Graphics.hpp>
 
 class CameraSystem : public System

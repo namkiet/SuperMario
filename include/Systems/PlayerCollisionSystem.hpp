@@ -68,7 +68,7 @@ private:
             auto& pos = tf.position;
             auto& sz = tf.size;
 
-            world.createEntity(std::make_unique<Coin>(pos.x, pos.y - sz.y));
+            world.createEntity<Coin>(pos.x, pos.y - sz.y);
         }
     }
 
