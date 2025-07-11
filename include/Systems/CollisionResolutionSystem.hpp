@@ -13,41 +13,40 @@ public:
     {
         for (Entity* entity : world.findAll<BoxCollider2D, Transform, RigidBody>())
         {
-            auto& tf = entity->getComponent<Transform>();
+            const auto& box = entity->getComponent<BoxCollider2D>();
             auto& rb = entity->getComponent<RigidBody>();
-            auto& box = entity->getComponent<BoxCollider2D>();
+            auto& tf = entity->getComponent<Transform>();
 
             rb.onGround = false;
-            for (auto& [collider, direction] : box.collisions)
+            for (auto& [block, direction] : box.collisions)
             {
                 // Check if the entity it collides with is solid
-                if (!collider->hasComponent<BlockTag>()) continue;
+                if (!block->hasComponent<BlockTag>()) continue;
+                if (!block->hasComponent<Transform>()) continue;
+                if (!block->hasComponent<BoxCollider2D>()) continue;
 
-                sf::Vector2f overlap = Physics::GetCollisionOverlap(entity, collider);
-
-                // Check if they are still colliding
-                if (overlap.x <= 0.0f || overlap.y <= 0.0f) continue;
-
+                const auto& blockPos = block->getComponent<Transform>().position + block->getComponent<BoxCollider2D>().offset;
+                const auto& blockSize = block->getComponent<BoxCollider2D>().size;
                 switch (direction)
                 {
                     case Direction::Top:
-                        tf.position.y -= overlap.y;
+                        tf.position.y = blockPos.y - box.size.y;
                         rb.velocity.y = 0.0f;
                         rb.onGround = true;
                         break;
                     
                     case Direction::Bottom:
-                        tf.position.y += overlap.y;
+                        tf.position.y = blockPos.y + blockSize.y;
                         rb.velocity.y = 0.0f;
                         break;
                     
                     case Direction::Left:
-                        tf.position.x -= overlap.x;
+                        tf.position.x = blockPos.x - box.size.x;
                         rb.velocity.x = 0.0f;
                         break;
                     
                     case Direction::Right:
-                        tf.position.x += overlap.x;
+                        tf.position.x = blockPos.x + blockSize.x;
                         rb.velocity.x = 0.0f;
                         break;
                     

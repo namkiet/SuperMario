@@ -30,7 +30,7 @@ GameManager::GameManager()
     // world.createEntity<Tile>(8 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 5, "assets/platform_block.png");
     
     auto block = world.createEntity();
-    block->addComponent<BlockTag>("QuestionBlock");
+    block->addComponent<BlockTag>(BlockType::QUESTION_BLOCK);
     block->addComponent<Transform>(sf::Vector2f(7 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 4), SIZE::GRID);
     block->addComponent<BoxCollider2D>(SIZE::GRID);
     block->addComponent<Animation>(TextureManager::load("assets/coin_block.png"), 16, 16, 3, 0.3f);

@@ -34,15 +34,6 @@ namespace Physics
 
     inline Direction GetCollisionDirection(Entity* a, Entity* b)
     {
-        sf::Vector2f overlap = GetCollisionOverlap(a, b);
-        if (isColliding(a, b))
-        {
-            if (overlap.x > overlap.y)
-            {
-                
-            }
-        }
-
         auto& boxA = a->getComponent<BoxCollider2D>();
         auto& boxB = b->getComponent<BoxCollider2D>();
         auto& tfA = a->getComponent<Transform>();

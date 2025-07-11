@@ -23,10 +23,10 @@ public:
             else if (collider->hasComponent<BlockTag>())
             {
                 auto& tag = collider->getComponent<BlockTag>();
-                if (tag.type == "QuestionBlock")
+                if (tag.type == BlockType::QUESTION_BLOCK)
                 {
-                    tag.type = "NormalBlock";
-                    handleQuestionBlockCollision(collider, world);
+                    tag.type = BlockType::NORMAL;
+                    handleQuestionBlockCollision(collider, direction, world);
                 }
             }
         }
@@ -48,8 +48,10 @@ private:
         }
     }
 
-    void handleQuestionBlockCollision(Entity* block, World& world)
+    void handleQuestionBlockCollision(Entity* block, Direction direction, World& world)
     {
+        if (direction != Direction::Bottom) return;
+
         // Change texture of the block after hit
         if (block->hasComponent<Animation>()) 
         {
