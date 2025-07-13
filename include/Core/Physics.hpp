@@ -1,8 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <ECS/Entity.hpp>
-#include <Components/BoxCollider2D.hpp>
-#include <Components/Transform.hpp>
+#include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Core/Transform.hpp>
 
 namespace Physics 
 {

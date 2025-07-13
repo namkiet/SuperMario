@@ -35,12 +35,6 @@ public:
         // assert(it != components.end() && "Component not found");
         return *static_cast<T*>(it->second.get());
     }
-    
-    // Entity clone() const
-    // {
-    //     Entity newEntity;
-
-    // }
 
 private:
     std::unordered_map<std::type_index, std::unique_ptr<Component>> components;

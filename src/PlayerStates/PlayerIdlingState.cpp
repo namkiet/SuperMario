@@ -1,12 +1,10 @@
 #include <PlayerStates/PlayerIdlingState.hpp>
 #include <PlayerStates/PlayerJumpingState.hpp>
 #include <PlayerStates/PlayerRunningState.hpp>
-#include <Components/Animation.hpp>
-#include <Components/Input.hpp>
-#include <Components/RigidBody.hpp>
+#include <Engine/Animation/Animation.hpp>
+#include <Engine/Core/RigidBody.hpp>
 #include <ECS/Entity.hpp>
 #include <Core/TextureManager.hpp>
-#include <iostream>
 
 void PlayerIdlingState::onEnter(Entity* entity)
 {   
