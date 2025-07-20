@@ -27,36 +27,48 @@ public:
                 if (!block->hasComponent<BlockTag>()) continue;
                 if (!block->hasComponent<BoxCollider2D>()) continue;
                 if (!block->hasComponent<Transform>()) continue;
+
                 
                 const auto& blockPos = block->getComponent<Transform>().position + block->getComponent<BoxCollider2D>().offset;
                 const auto& blockSize = block->getComponent<BoxCollider2D>().size;
                 switch (direction)
                 {
                     case Direction::Top:
-                        tf.position.y = blockPos.y - box.size.y;
-                        rb.velocity.y = 0.0f;
-                        rb.onGround = true;
+                        {
+                            float finalPosY_Top = blockPos.y - box.size.y;
+                            rb.velocity.y = (finalPosY_Top - tf.position.y) / dt;
+                            rb.onGround = true;
+                            std::cout << "collided with top of block" << std::endl;
+                        }
                         break;
-                    
+
                     case Direction::Bottom:
-                        tf.position.y = blockPos.y + blockSize.y;
-                        rb.velocity.y = 0.0f;
+                        {
+                            float finalPosY_Bottom = blockPos.y + blockSize.y;
+                            rb.velocity.y = (finalPosY_Bottom - tf.position.y) / dt;
+                        }
                         break;
-                    
+
                     case Direction::Left:
-                        tf.position.x = blockPos.x - box.size.x;
-                        rb.velocity.x = 0.0f;
+                        {
+                            float finalPosX_Left = blockPos.x - box.size.x;
+                            rb.velocity.x = (finalPosX_Left - tf.position.x) / dt;
+                        }
                         break;
-                    
+
                     case Direction::Right:
-                        tf.position.x = blockPos.x + blockSize.x;
-                        rb.velocity.x = 0.0f;
+                        {
+                            float finalPosX_Right = blockPos.x + blockSize.x;
+                            rb.velocity.x = (finalPosX_Right - tf.position.x) / dt;
+                        }
                         break;
-                    
+
                     default:
                         break;
                 }
+
             }
+            std::cout <<"at the end of hitblock, onGround = " << rb.onGround << std::endl;
         }
     }
 };

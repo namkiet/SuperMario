@@ -11,5 +11,6 @@ public:
     {
         if (world.findFirst<PlayerTag>()) return;
         world.createEntity<Mario>(200, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 50);
+        std::cout << "Player respawned!" << std::endl;
     }
 };

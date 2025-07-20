@@ -29,5 +29,6 @@ public:
         addComponent<StomperTag>();
         addComponent<CanHitQuestionBlockTag>();
         addComponent<CanGetDamageTag>();
+        addComponent<InputTag>();
     }
 };

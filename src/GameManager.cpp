@@ -9,9 +9,11 @@
 #include <Engine/Rendering/RenderSystem.hpp>
 #include <Gameplay/Patrol/PatrolSystem.hpp>
 #include <Gameplay/LifeSpan/LifeSpanSystem.hpp>
-#include <Gameplay/Player/PlayerInputSystem.hpp>
+#include <Gameplay/Player/InputSystem.hpp>
+#include <Gameplay/Player/HandlePlayerInputSystem.hpp>
 #include <Gameplay/Player/PlayerRespawnSystem.hpp>
 #include <Gameplay/Player/PlayerStateSystem.hpp>
+#include <Gameplay/Reset/ResetSystem.hpp>
 #include <Gameplay/Stomp/StompSystem.hpp>
 #include <Gameplay/HitQuestionBlock/HitQuestionBlockSystem.hpp>
 #include <Gameplay/Popup/PopupSystem.hpp>
@@ -22,6 +24,7 @@
 #include <Prefabs/Piranha.hpp>
 #include <Prefabs/Tile.hpp>
 #include <Prefabs/Pipe.hpp>
+#include <cassert>
 #include <iostream>
 
 GameManager::GameManager()
@@ -65,30 +68,59 @@ GameManager::GameManager()
     world.createEntity()->addComponent<Camera>();
 
     // Register Systems
-    world.addSystem<GravitySystem>();
-    world.addSystem<MovementSystem>();
+    // world.addSystem<GravitySystem>();
+    // world.addSystem<MovementSystem>();
 
+    // world.addSystem<CollisionDetectionSystem>();
+    // world.addSystem<HitBlockSystem>(); 
+
+
+    // world.addSystem<PlayerInputSystem>();
+    // world.addSystem<PlayerStateSystem>();
+
+    // world.addSystem<CameraSystem>();
+    // world.addSystem<AnimationSystem>();
+    // world.addSystem<RenderSystem>();
+    
+    // world.addSystem<LifeSystem>();
+   
+    // world.addSystem<PopupSystem>();
+    // world.addSystem<PatrolSystem>();
+    // world.addSystem<StompSystem>();
+    // world.addSystem<HitQuestionBlockSystem>();
+    // world.addSystem<DamageOnContactSystem>();
+
+
+    // world.addSystem<DespawnSystem>();
+    // world.addSystem<PlayerRespawnSystem>();
+
+    // phase 1
+    world.addSystem<ResetSystem>();
+    world.addSystem<InputSystem>();
+    // phase 2
+    world.addSystem<HandlePlayerInputSystem>();
+    world.addSystem<GravitySystem>();
+
+    // phase 
     world.addSystem<CollisionDetectionSystem>();
     world.addSystem<HitBlockSystem>();
-
-
-    world.addSystem<PlayerInputSystem>();
-    world.addSystem<PlayerStateSystem>();
-
-    world.addSystem<CameraSystem>();
-    world.addSystem<AnimationSystem>();
-    world.addSystem<RenderSystem>();
-    
-    world.addSystem<LifeSystem>();
-
     world.addSystem<PopupSystem>();
     world.addSystem<PatrolSystem>();
     world.addSystem<StompSystem>();
     world.addSystem<HitQuestionBlockSystem>();
     world.addSystem<DamageOnContactSystem>();
+    world.addSystem<LifeSystem>();
 
+   // phase 4
+    world.addSystem<MovementSystem>();
+    world.addSystem<PlayerStateSystem>();
     world.addSystem<DespawnSystem>();
     world.addSystem<PlayerRespawnSystem>();
+    // phase 5
+    world.addSystem<CameraSystem>();
+    world.addSystem<AnimationSystem>();
+    world.addSystem<RenderSystem>();
+
 }
 
 void GameManager::handleEvent(const sf::Event& event)
@@ -97,7 +129,7 @@ void GameManager::handleEvent(const sf::Event& event)
     {
         if (event.key.code == sf::Keyboard::N)
         {
-            auto goomba = world.createEntity<Enemy>(300, SIZE::SCREEN.y - 2 * SIZE::GRID.y );
+            auto goomba = world.createEntity<Enemy>(350, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 300.f );
         }
     }
 }

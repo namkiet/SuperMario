@@ -17,7 +17,7 @@ public:
             {
                 if (entity1 == entity2) continue;
 
-                auto dir = Physics::GetCollisionDirection(entity1, entity2);
+                auto dir = Physics::GetCollisionDirection(entity1, entity2, dt);
                 if (dir != Direction::None)
                 {
                     coll.push_back(CollisionInfo(entity2, dir));

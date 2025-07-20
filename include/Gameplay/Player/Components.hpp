@@ -10,3 +10,7 @@ struct PlayerTag : public Component
     PlayerTag(std::shared_ptr<PlayerState> state) : state(state) {}
     std::shared_ptr<PlayerState> state;
 };
+
+struct InputTag: public Component
+{
+};

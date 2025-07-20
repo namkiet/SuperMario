@@ -30,6 +30,7 @@ public:
                 if (validHit)
                 {
                     entity->addComponent<DespawnTag>();
+                    std::cout << "despawned in damageOnContace system" << std::endl;
                 }
             }
         }
