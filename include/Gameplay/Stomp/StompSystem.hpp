@@ -17,11 +17,11 @@ public:
                 if (direction == Direction::Top)
                 {
                     stomper->getComponent<RigidBody>().velocity.y = -1000.0f;
-                    std::cout << "Stomp system: stomper. velocity = " 
-                              << stomper->getComponent<RigidBody>().velocity.y << std::endl;
-                    stompable->addComponent<DespawnTag>();
-                    std::cout << "despawn at stomp system" << std::endl;
-                    // assert(false);
+                    // std::cout << "Stomp system: stomper. velocity = " 
+                    //           << stomper->getComponent<RigidBody>().velocity.y << std::endl;
+                    // stompable->addComponent<DespawnTag>();
+                    // std::cout << "despawn at stomp system" << std::endl;
+                    // // assert(false);
                 }
             }
         }

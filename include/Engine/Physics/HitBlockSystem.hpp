@@ -38,7 +38,7 @@ public:
                             float finalPosY_Top = blockPos.y - box.size.y;
                             rb.velocity.y = (finalPosY_Top - tf.position.y) / dt;
                             rb.onGround = true;
-                            std::cout << "collided with top of block" << std::endl;
+                            //std::cout << "collided with top of block" << std::endl;
                         }
                         break;
 
@@ -68,7 +68,7 @@ public:
                 }
 
             }
-            std::cout <<"at the end of hitblock, onGround = " << rb.onGround << std::endl;
+            //std::cout <<"at the end of hitblock, onGround = " << rb.onGround << std::endl;
         }
     }
 };

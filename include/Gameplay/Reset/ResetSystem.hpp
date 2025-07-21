@@ -20,10 +20,10 @@ class ResetSystem : public System
         if (rigid.onGround)
         {
             rigid.velocity.y = std::min(rigid.velocity.y, 0.0f);
-            std::cout << "Still on the ground" << std::endl;
+            // std::cout << "Still on the ground" << std::endl;
         }
 
-        std::cout << "at the end of reset system, velocity: " 
-                  << rigid.velocity.x << ", " << rigid.velocity.y << std::endl;
+        // std::cout << "at the end of reset system, velocity: " 
+        //           << rigid.velocity.x << ", " << rigid.velocity.y << std::endl;
     }
 };

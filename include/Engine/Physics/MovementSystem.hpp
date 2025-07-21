@@ -13,7 +13,7 @@ public:
         for (Entity* entity : world.findAll<Transform, RigidBody>())
         {
             auto& vel = entity->getComponent<RigidBody>().velocity;
-std::cout << "MovementSystem: velocity = " << vel.x << ", " << vel.y << std::endl;
+//std::cout << "MovementSystem: velocity = " << vel.x << ", " << vel.y << std::endl;
 
             auto& tf = entity->getComponent<Transform>();
             auto& pos = tf.position;
@@ -23,11 +23,11 @@ std::cout << "MovementSystem: velocity = " << vel.x << ", " << vel.y << std::end
             // prev.y = pos.y;
             pos.x += vel.x * dt;
             pos.y += vel.y * dt;
-            std::cout << "pos: " << pos.x << ", " << pos.y << std::endl;
+            //std::cout << "pos: " << pos.x << ", " << pos.y << std::endl;
             if (pos.y >= SIZE::SCREEN.y)
             {
                 entity->addComponent<DespawnTag>();
-                std::cout << "despawned in movement system" << std::endl;
+                //std::cout << "despawned in movement system" << std::endl;
             }
         }
     }

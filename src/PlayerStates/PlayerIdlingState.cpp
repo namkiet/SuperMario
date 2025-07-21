@@ -6,12 +6,12 @@
 #include <ECS/Entity.hpp>
 #include <Core/TextureManager.hpp>
 
-void PlayerIdlingState::onEnter(Entity* entity)
-{   
-    if (entity->hasComponent<Animation>()) 
+void PlayerIdlingState::onEnter(Entity *entity)
+{
+    if (entity->hasComponent<Animation>())
     {
-        auto& anim = entity->getComponent<Animation>();
-        anim.sprite = sf::Sprite(TextureManager::load("assets/mario_idling.png"));
+        auto &anim = entity->getComponent<Animation>();
+        anim.sprite = sf::Sprite(TextureManager::load("assets/Player/SmallPlayer/marioSmall_0.png"));
         anim.frameWidth = 16;
         anim.frameHeight = 28;
         anim.frameCount = 1;
@@ -19,11 +19,11 @@ void PlayerIdlingState::onEnter(Entity* entity)
     }
 }
 
-std::shared_ptr<PlayerState> PlayerIdlingState::getNewState(Entity* entity)
+std::shared_ptr<PlayerState> PlayerIdlingState::getNewState(Entity *entity)
 {
-    if (entity->hasComponent<RigidBody>()) 
+    if (entity->hasComponent<RigidBody>())
     {
-        auto& rb = entity->getComponent<RigidBody>();
+        auto &rb = entity->getComponent<RigidBody>();
         if (!rb.onGround)
         {
             return std::make_shared<PlayerJumpingState>();

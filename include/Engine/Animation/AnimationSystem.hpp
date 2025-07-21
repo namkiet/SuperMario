@@ -8,15 +8,15 @@
 class AnimationSystem : public System
 {
 public:
-    void update(World& world, float dt) override
+    void update(World &world, float dt) override
     {
-        for (Entity* entity : world.findAll<Animation>())
+        for (Entity *entity : world.findAll<Animation>())
         {
-            auto& anim = entity->getComponent<Animation>();
+            auto &anim = entity->getComponent<Animation>();
 
             if (entity->hasComponent<RigidBody>())
             {
-                auto& rb = entity->getComponent<RigidBody>();
+                auto &rb = entity->getComponent<RigidBody>();
                 if (rb.velocity.x > 0.0f)
                 {
                     anim.flipX = false;
@@ -27,27 +27,35 @@ public:
                 }
             }
 
-            if (anim.frameCount == 1) continue;
+            if (anim.frameCount == 1)
+                continue;
+
+            if (anim.textures.empty())
+            {
+                std::cerr << "Animation textures are empty for entity: " << entity << std::endl;
+                continue;
+            }
 
             anim.timer += dt;
-            if (anim.timer >= anim.frameDuration) 
+            if (anim.timer >= anim.frameDuration)
             {
                 anim.timer -= anim.frameDuration;
                 anim.currentFrame++;
 
-                if (anim.currentFrame >= anim.frameCount) 
+                if (anim.currentFrame >= anim.frameCount)
                 {
                     anim.currentFrame = anim.loop ? 0 : anim.frameCount - 1;
                 }
+                anim.sprite.setTexture(*anim.textures[anim.currentFrame]);
             }
 
             // Set texture rect
-            anim.sprite.setTextureRect(sf::IntRect(
-                anim.currentFrame * anim.frameWidth,
-                anim.row * anim.frameHeight,
-                anim.frameWidth,
-                anim.frameHeight
-            ));
+            // anim.sprite.setTextureRect(sf::IntRect(
+            //     anim.currentFrame * anim.frameWidth,
+            //     anim.row * anim.frameHeight,
+            //     anim.frameWidth,
+            //     anim.frameHeight
+            // ));
         }
     }
 };
