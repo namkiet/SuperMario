@@ -286,38 +286,38 @@ void LevelHandler::setBackground()
             {
                 world.createEntity<Background>(j * 16, i * 16, 80, 80, 3, 0);
             }
-            else if (red == 34 && green == 177 && blue == 76)
-            {
-                world.createEntity<Background>(j * 16, i * 16, 48, 20, 3, 1);
-            }
-            else if (red == 0 && green == 128 && blue == 0) // Big hill
-            {
-                world.createEntity<Background>(j * 16, i * 16, 80, 35, 3, 2);
-            }
-            else if (red == 195 && green == 195 && blue == 195)
-            {
-                world.createEntity<Background>(j * 16, i * 16, 48, 24, 3, 3);
-            }
-            else if (red == 127 && green == 127 && blue == 127)
-            {
-                world.createEntity<Background>(j * 16, i * 16, 64, 24, 3, 4);
-            }
-            else if (red == 0 && green == 0 && blue == 0)
-            {
-                world.createEntity<Background>(j * 16, i * 16, 32, 24, 3, 5);
-            }
-            else if (red == 200 && green == 191 && blue == 231)
-            {
-                world.createEntity<Background>(j * 16, i * 16, 32, 16, 3, 6);
-            }
-            else if (red == 255 && green == 174 && blue == 201)
-            {
-                world.createEntity<Background>(j * 16, i * 16, 64, 16, 3, 7);
-            }
-            else if (red == 0 && green == 162 && blue == 232)
-            {
-                world.createEntity<Background>(j * 16, i * 16, 48, 16, 3, 8);
-            }
+            // else if (red == 34 && green == 177 && blue == 76)
+            // {
+            //     world.createEntity<Background>(j * 16, i * 16, 48, 20, 3, 1);
+            // }
+            // else if (red == 0 && green == 128 && blue == 0) // Big hill
+            // {
+            //     world.createEntity<Background>(j * 16, i * 16, 80, 35, 3, 2);
+            // }
+            // else if (red == 195 && green == 195 && blue == 195)
+            // {
+            //     world.createEntity<Background>(j * 16, i * 16, 48, 24, 3, 3);
+            // }
+            // else if (red == 127 && green == 127 && blue == 127)
+            // {
+            //     world.createEntity<Background>(j * 16, i * 16, 64, 24, 3, 4);
+            // }
+            // else if (red == 0 && green == 0 && blue == 0)
+            // {
+            //     world.createEntity<Background>(j * 16, i * 16, 32, 24, 3, 5);
+            // }
+            // else if (red == 200 && green == 191 && blue == 231)
+            // {
+            //     world.createEntity<Background>(j * 16, i * 16, 32, 16, 3, 6);
+            // }
+            // else if (red == 255 && green == 174 && blue == 201)
+            // {
+            //     world.createEntity<Background>(j * 16, i * 16, 64, 16, 3, 7);
+            // }
+            // else if (red == 0 && green == 162 && blue == 232)
+            // {
+            //     world.createEntity<Background>(j * 16, i * 16, 48, 16, 3, 8);
+            // }
             else if (red == 185 && green == 122 && blue == 87)
             {
                 world.createEntity<Background>(j * 16, i * 16, 16, 162, 3, 9);

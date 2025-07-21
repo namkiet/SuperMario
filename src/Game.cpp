@@ -46,7 +46,7 @@ void Game::run()
         if (currentState()) currentState()->update(*this, dt);
 
         // --- Vẽ chỉ 1 lần ---
-        window.clear(sf::Color(101, 153, 248));
+        window.clear(sf::Color(146, 144, 255, 255));
         if (currentState()) currentState()->render(*this, window);
         window.display();
     }
