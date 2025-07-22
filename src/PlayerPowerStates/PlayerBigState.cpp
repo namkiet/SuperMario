@@ -16,6 +16,7 @@ const std::string PlayerBigState::getName() const
 void PlayerBigState::onEnter(Entity* entity)
 {   
     entity->addComponent<CanBreakBrickTag>();
+    entity->addComponent<BigMarioTag>();
 
     if (entity->hasComponent<BoxCollider2D>())
     {
@@ -27,6 +28,7 @@ void PlayerBigState::onEnter(Entity* entity)
 void PlayerBigState::onExit(Entity* entity)
 {  
     entity->removeComponent<CanBreakBrickTag>();
+    entity->removeComponent<BigMarioTag>();
 
     if (entity->hasComponent<Transform>())
     {
@@ -44,9 +46,9 @@ void PlayerBigState::onExit(Entity* entity)
 
 std::shared_ptr<PlayerPowerState> PlayerBigState::getNewState(Entity* entity)
 {
-    // if (!entity->hasComponent<BigTag>()) 
+    // if (!entity->hasComponent<ShrinkTag>()) 
     // {
-    //     return std::make_shared<PlayerSmallState>();
+    //     return std::make_shared<PlayerShrinkingState>();
     // }
 
     return nullptr;

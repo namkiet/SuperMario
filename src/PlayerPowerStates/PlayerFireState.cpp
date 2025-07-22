@@ -1,19 +1,30 @@
-// #include <PlayerPowerStates/PlayerFireState.hpp>
-// #include <Gameplay/Player/Components.hpp>
-// #include <ECS/Entity.hpp>
-// #include <Core/TextureManager.hpp>
+#include <PlayerPowerStates/PlayerFireState.hpp>
+#include <Gameplay/Player/Components.hpp>
+#include <Gameplay/Fireball/Components.hpp>
+#include <ECS/Entity.hpp>
+#include <Core/TextureManager.hpp>
 
-// const std::string PlayerSmallState::getName() const
-// {
-//     return "Fire";
-// }
+const std::string PlayerFireState::getName() const
+{
+    return "Fire";
+}
 
-// std::shared_ptr<PlayerPowerState> PlayerSmallState::getNewState(Entity* entity)
-// {
-//     if (entity->hasComponent<GrowUpTag>()) 
-//     {
-//         return std::make_shared<PlayerGrowingUpState>();
-//     }
+void PlayerFireState::onEnter(Entity* entity)
+{   
+    entity->addComponent<CanShootTag>();
+}
 
-//     return nullptr;
-// }
+void PlayerFireState::onExit(Entity* entity)
+{  
+    entity->removeComponent<CanShootTag>();
+}
+
+std::shared_ptr<PlayerPowerState> PlayerFireState::getNewState(Entity* entity)
+{
+    // if (entity->hasComponent<ShrinkTag>()) 
+    // {
+    //     return std::make_shared<PlayerShrinkingState>();
+    // }
+
+    return nullptr;
+}

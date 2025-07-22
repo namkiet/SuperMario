@@ -27,6 +27,15 @@ public:
             {
                 entity->addComponent<DespawnTag>();
             }
+
+            if (vel.x > 0.0f)
+            {
+                tf.isFacingRight = true;
+            }
+            else if (vel.x < 0.0f)
+            {
+                tf.isFacingRight = false;
+            }
         }
     }
 };

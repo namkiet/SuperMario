@@ -1,11 +1,9 @@
 #pragma once
 #include <ECS/Component.hpp>
-#include <PlayerMovementStates/PlayerMovementState.hpp>
-#include <PlayerMovementStates/PlayerIdlingState.hpp>
-#include <PlayerMovementStates/PlayerRunningState.hpp>
-#include <PlayerPowerStates/PlayerBigState.hpp>
-#include <PlayerPowerStates/PlayerSmallState.hpp>
 #include <memory>
+
+class PlayerMovementState;
+class PlayerPowerState;
 
 struct PlayerTag : public Component 
 {
@@ -16,5 +14,7 @@ struct PlayerTag : public Component
     std::shared_ptr<PlayerPowerState> powerState;
 };
 
-struct BigTag : public Component {};
+struct BigMarioTag : public Component {};
 struct GrowUpTag : public Component{};
+
+// struct FireMarioTag : public Component {};

@@ -10,6 +10,8 @@
 #include <Gameplay/Stomp/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/BreakBrick/Components.hpp>
+#include <PlayerMovementStates/PlayerIdlingState.hpp>
+#include <PlayerPowerStates/PlayerSmallState.hpp>
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 
