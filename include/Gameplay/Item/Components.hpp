@@ -33,3 +33,8 @@ struct StarTag : public Component
 {
     // This tag is used to identify the star item
 };
+
+struct FireBulletTag : public Component
+{
+    // This tag is used to identify the fire bullet item
+};

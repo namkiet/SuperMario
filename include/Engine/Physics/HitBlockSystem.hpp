@@ -20,6 +20,10 @@ public:
 
             if (entity->hasComponent<StarTag>())
                 continue;
+            
+            if (entity->hasComponent<FireBulletTag>())
+                continue;
+            
             const auto &box = entity->getComponent<BoxCollider2D>();
             auto &rb = entity->getComponent<RigidBody>();
             auto &tf = entity->getComponent<Transform>();

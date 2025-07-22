@@ -34,11 +34,13 @@
 
 #include <Gameplay/Item/ItemEmergingSystem.hpp>
 #include <Gameplay/Item/CoinJumpingSystem.hpp>
-
 #include <Gameplay/Item/DebrisSystem.hpp>
 #include <Gameplay/Item/StarJumpingSystem.hpp>
+#include <Gameplay/Item/FireBulletSystem.hpp>
 
 #include <Gameplay/Collect/CollectSystem.hpp>
+
+#include <Gameplay/Fire/FireSystem.hpp>
 
 #include <cassert>
 #include <iostream>
@@ -136,6 +138,8 @@ GameManager::GameManager():levelHandler(world)
     world.addSystem<HitStarBlockSystem>();
     world.addSystem<StarJumpingSystem>();
     world.addSystem<HitCoinBlockSystem>();
+    world.addSystem<FireSystem>();
+    world.addSystem<FireBulletSystem>();
 
     // phase 4
     world.addSystem<MovementSystem>();

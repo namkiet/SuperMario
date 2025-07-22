@@ -10,6 +10,7 @@
 #include <Gameplay/Stomp/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Collect/Components.hpp>
+#include <Gameplay/Fire/Components.hpp>
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 
@@ -45,5 +46,6 @@ public:
         addComponent<CanHitStarBlockTag>();
         addComponent<CanHitCoinBlockTag>();
         addComponent<InputTag>();
+        addComponent<CanFireTag>();
     }
 };
