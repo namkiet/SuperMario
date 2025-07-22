@@ -7,12 +7,19 @@
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Gameplay/Item/Components.hpp>
+#include <fstream>
 
 class HitBlockSystem : public System
 {
 public:
     void update(World &world, float dt) override
     {
+        std::ofstream fout("output.txt", std::ios::app);
+        if (fout.fail())
+        {
+            std::cerr << "Failed to open output.txt for writing." << std::endl;
+            return;
+        }
         for (Entity *entity : world.findAll<BoxCollider2D, Transform, RigidBody>())
         {
             if (entity->hasComponent<PassThroughTag>())
@@ -48,7 +55,7 @@ public:
                     float finalPosY_Top = blockPos.y - box.size.y;
                     rb.velocity.y = (finalPosY_Top - tf.position.y) / dt;
                     rb.onGround = true;
-                    // std::cout << "collided with top of block" << std::endl;
+                    //fout << "Entity collided with block from the top." << std::endl;
                 }
                 break;
 
@@ -56,6 +63,7 @@ public:
                 {
                     float finalPosY_Bottom = blockPos.y + blockSize.y;
                     rb.velocity.y = (finalPosY_Bottom - tf.position.y) / dt;
+                    //fout<< "Entity collided with block from the bottom." << std::endl;
                 }
                 break;
 
@@ -63,6 +71,7 @@ public:
                 {
                     float finalPosX_Left = blockPos.x - box.size.x;
                     rb.velocity.x = (finalPosX_Left - tf.position.x) / dt;
+                    //fout << "Entity collided with block from the left." << std::endl;
                 }
                 break;
 
@@ -70,6 +79,7 @@ public:
                 {
                     float finalPosX_Right = blockPos.x + blockSize.x;
                     rb.velocity.x = (finalPosX_Right - tf.position.x) / dt;
+                    //fout << "Entity collided with block from the right." << std::endl;
                 }
                 break;
 
@@ -79,5 +89,6 @@ public:
             }
             // std::cout <<"at the end of hitblock, onGround = " << rb.onGround << std::endl;
         }
+        fout.close();
     }
 };

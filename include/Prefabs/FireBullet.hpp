@@ -6,6 +6,7 @@
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/Item/Components.hpp>
+#include <Engine/Physics/BoxCollider2D.hpp>
 #include <vector>
 
 class FireBullet : public Entity
@@ -27,6 +28,14 @@ public:
                 &TextureManager::load("assets/Item/FireBullet/FireBullet_2.png"),
                 &TextureManager::load("assets/Item/FireBullet/FireBullet_3.png")};
         addComponent<Animation>(textures, width, height, 0.15f, true);
+
+        addComponent<BoxCollider2D>(sf::Vector2f(width, height));
+
+        addComponent<PatrolComponent>();
+        getComponent<PatrolComponent>().moveSpeed = 200.0f;
+
+        addComponent<RigidBody>(sf::Vector2f(0, 50));
+
 
         // Add the fire bullet tag
         addComponent<FireBulletTag>();
