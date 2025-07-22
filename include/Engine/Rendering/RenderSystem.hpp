@@ -50,11 +50,12 @@ public:
             sp.setOrigin(sp.getLocalBounds().width / 2.f, sp.getLocalBounds().height / 2.f);
 
             // Position sprite centered within the tf area
-            sf::Vector2f center = tf.position + 0.5f * tf.size;
-            sp.setPosition(center);
+            sf::Vector2f center;
+            center.x = tf.position.x + 0.5f * tf.size.x;
+            center.y = tf.position.y + tf.size.y - 0.5f * sp.getGlobalBounds().height;
 
-            // resizeSprite(sp, tf.size);
-            // sp.setPosition(tf.position);
+            sp.setPosition(center);
+            
             window.draw(sp);
 
             // Draw box collider if exists

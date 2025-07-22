@@ -37,7 +37,15 @@ public:
 
                 if (anim.currentFrame >= anim.frameCount) 
                 {
-                    anim.currentFrame = anim.loop ? 0 : anim.frameCount - 1;
+                    if (anim.loop)
+                    {
+                        anim.currentFrame = 0;
+                    }
+                    else
+                    {
+                        anim.currentFrame = anim.frameCount - 1;
+                        anim.hasEnded = true;
+                    }
                 }
             }
 

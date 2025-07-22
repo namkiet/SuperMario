@@ -6,6 +6,8 @@
 
 struct Animation : public Component
 {
+    Animation() = default;
+
     Animation(const sf::Texture& texture)
         : sprite(texture)
         , frameWidth(texture.getSize().x)
@@ -33,6 +35,7 @@ struct Animation : public Component
     int row = 0; 
     bool flipX = false;
     bool flipY = false;
+    bool hasEnded = false;
 
 // private:
 //     std::unordered_map<std::string, 

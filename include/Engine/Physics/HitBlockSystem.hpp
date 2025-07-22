@@ -12,10 +12,8 @@ class HitBlockSystem : public System
 public:
     void update(World& world, float dt) override
     {
-        for (Entity* entity : world.findAll<BoxCollider2D, Transform, RigidBody>())
+        for (Entity* entity : world.findAll<CanHitBlockTag, BoxCollider2D, Transform, RigidBody>())
         {
-            if (entity->hasComponent<PassThroughTag>()) continue;
-
             const auto& box = entity->getComponent<BoxCollider2D>();
             auto& rb = entity->getComponent<RigidBody>();
             auto& tf = entity->getComponent<Transform>();

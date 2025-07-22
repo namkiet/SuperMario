@@ -9,6 +9,7 @@
 #include <Gameplay/HitQuestionBlock/Components.hpp>
 #include <Gameplay/Stomp/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
+#include <Gameplay/BreakBrick/Components.hpp>
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 
@@ -17,17 +18,19 @@ class Mario : public Entity
 public:
     Mario(float x, float y)
     {
-        addComponent<Animation>(TextureManager::load("assets/mario_idling.png"));
+        addComponent<Animation>(TextureManager::load("assets/Mario/mario_idling_small.png"));
         addComponent<FollowByCameraTag>();
 
         addComponent<BoxCollider2D>(SIZE::MARIO);
         addComponent<RigidBody>(sf::Vector2f(0, 0));
         addComponent<Transform>(sf::Vector2f(x, y), SIZE::MARIO);
 
-        addComponent<PlayerTag>(std::make_shared<PlayerIdlingState>());
+        addComponent<PlayerTag>(std::make_shared<PlayerIdlingState>(), std::make_shared<PlayerSmallState>());
+        // addComponent<BigTag>();
         
         addComponent<StomperTag>();
         addComponent<CanHitQuestionBlockTag>();
         addComponent<CanGetDamageTag>();
+        addComponent<CanHitBlockTag>();
     }
 };

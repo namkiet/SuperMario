@@ -7,6 +7,7 @@
 #include <Gameplay/Patrol/Components.hpp>
 #include <Gameplay/Stomp/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
+#include <Gameplay/Fireball/Components.hpp>
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 
@@ -22,12 +23,14 @@ public:
         addComponent<Animation>(Animation(TextureManager::load("assets/goomba.png"), 16, 16, 2, 0.5f / 2));
 
 
-        addComponent<BlockTag>();
+        addComponent<CanHitBlockTag>();
 
         addComponent<PatrolComponent>();
         addComponent<StompableTag>();
 
         std::vector<Direction> directions = { Direction::Left, Direction::Right, Direction::Bottom };
         addComponent<DamageOnContactComponent>(directions);
+
+        addComponent<FlammableTag>();
     }
 };

@@ -20,7 +20,7 @@ public:
         addComponent<Transform>(sf::Vector2f(x, y), SIZE::GRID);
 
         addComponent<BoxCollider2D>(SIZE::GRID - sf::Vector2f(10, 10), sf::Vector2f(5, 5));
-        addComponent<PassThroughTag>();
+        // addComponent<PassThroughTag>();
 
         
         std::vector<Direction> directions = { Direction::Left, Direction::Right, Direction::Top, Direction::Bottom };

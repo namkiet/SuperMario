@@ -1,24 +1,74 @@
 #pragma once
-#include <ECS/Component.hpp>
+#include <ECS/System.hpp>
 #include <World.hpp>
 #include <Gameplay/Player/Components.hpp>
+#include <Core/AnimationManager.hpp>
+#include <string>
+#include <unordered_map>
 
 class PlayerStateSystem : public System
 {
 public:
     void update(World& world, float dt) override
     {
-        for (Entity* entity : world.findAll<PlayerTag>())
+        for (Entity* entity : world.findAll<PlayerTag, Animation>())
         {
             auto& tag = entity->getComponent<PlayerTag>();
-            auto newState = tag.state->getNewState(entity);
+            auto newMovementState = tag.movementState->getNewState(entity);
+            auto newPowerState = tag.powerState->getNewState(entity);
 
-            if (newState)
+            if (!newMovementState && !newPowerState) continue;
+
+            if (newMovementState)
             {
-                // tag.state->onExit(entity);
-                tag.state = newState;
-                tag.state->onEnter(entity);
+                tag.movementState->onExit(entity);
+                tag.movementState = newMovementState;
+                tag.movementState->onEnter(entity);
+            }
+
+            if (newPowerState)
+            {
+                tag.powerState->onExit(entity);
+                tag.powerState = newPowerState;
+                tag.powerState->onEnter(entity);
+            }
+
+            entity->removeComponent<Animation>();
+
+            if (tag.powerState->getName() == "GrowingUp")
+            {
+                entity->addComponent<Animation>(getAnimation("GrowingUp"));
+            }
+            else
+            {
+                entity->addComponent<Animation>(getAnimation(tag.movementState->getName() + tag.powerState->getName()));
             }
         }
     }
+
+public:
+    PlayerStateSystem()
+    {
+        animMap["IdlingSmall"] = Animation(TextureManager::load("assets/Mario/mario_idling_small.png"));
+        animMap["JumpingSmall"] = Animation(TextureManager::load("assets/Mario/mario_jumping_small.png"));
+        animMap["RunningSmall"] = Animation(TextureManager::load("assets/Mario/mario_running_small.png"), 16, 16, 3, 0.15f);
+
+        animMap["IdlingBig"] = Animation(TextureManager::load("assets/Mario/mario_idling_big.png"));
+        animMap["JumpingBig"] = Animation(TextureManager::load("assets/Mario/mario_jumping_big.png"));
+        animMap["RunningBig"] = Animation(TextureManager::load("assets/Mario/mario_running_big.png"), 16, 32, 3, 0.15f);
+
+        animMap["GrowingUp"] = Animation(TextureManager::load("assets/Mario/mario_grow_up.png"), 16, 32, 7, 0.1f, false);
+    }
+
+private:
+    Animation getAnimation(const std::string& name) const
+    {
+        if (animMap.find(name) == animMap.end())
+        {
+            throw std::runtime_error("Cannot find Animation: " + name);
+        }
+
+        return animMap.at(name);
+    }
+    std::unordered_map<std::string, Animation> animMap;
 };
