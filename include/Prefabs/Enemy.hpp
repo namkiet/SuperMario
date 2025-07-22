@@ -17,8 +17,8 @@ public:
     Enemy(float x, float y)
     {
         addComponent<RigidBody>(RigidBody(sf::Vector2f(0, 0)));
-        addComponent<Transform>(Transform(sf::Vector2f(x, y), 0.5f * SIZE::GRID));
-        addComponent<BoxCollider2D>(BoxCollider2D(0.5f * SIZE::GRID));
+        addComponent<Transform>(Transform(sf::Vector2f(x, y), SIZE::GRID));
+        addComponent<BoxCollider2D>(BoxCollider2D(SIZE::GRID));
 
         addComponent<Animation>(Animation(TextureManager::load("assets/goomba.png"), 16, 16, 2, 0.5f / 2));
 

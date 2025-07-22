@@ -1,7 +1,5 @@
 #pragma once
 #include <ECS/Component.hpp>
 
-struct CanBreakTag : public Component {};
-struct BreakableTag : public Component {
-    Animatino
-};
+struct CanBreakBrickTag : public Component {};
+struct BrickTag : public Component {};
