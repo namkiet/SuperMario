@@ -21,7 +21,9 @@ public:
         if (!world.findFirst<Camera>()) return;
         auto& camera = world.findFirst<Camera>()->getComponent<Camera>();
 
+        // target pos
         const float targetCenterX = tf.position.x + 0.5f * tf.size.x;
+        // cur pos
         float& camX = camera.target.x;
 
         // Define trap zone (dead zone margins from screen center)

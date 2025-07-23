@@ -3,6 +3,7 @@
 #include <Gameplay/Patrol/Components.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
+#include <Gameplay/Player/Components.hpp>
 #include <algorithm>
 
 class PatrolSystem : public System
@@ -17,6 +18,8 @@ public:
             
             for (const auto& [collider, direction] : entity->getComponent<BoxCollider2D>().collisions)
             {
+                if (collider->hasComponent<PlayerTag>())
+                    continue;
                 // If it collides with something on the left or on the right, it will reverse direction
                 if (direction == Direction::Left || direction == Direction::Right)
                 {

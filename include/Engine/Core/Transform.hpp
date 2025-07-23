@@ -4,7 +4,7 @@
 
 struct Transform : public Component
 {
-    sf::Vector2f prevPos;
+    // sf::Vector2f prevPos;
     sf::Vector2f position;
     sf::Vector2f size;
     bool isFacingRight;

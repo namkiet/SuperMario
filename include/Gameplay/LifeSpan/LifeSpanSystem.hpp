@@ -16,6 +16,7 @@ public:
             if (ls.value <= 0.0f)
             {
                 entity->addComponent<DespawnTag>();
+                //std::cout << "Entity despawned at lifespan system" << std::endl;
             }
         }
     }
