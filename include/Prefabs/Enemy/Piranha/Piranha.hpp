@@ -8,23 +8,26 @@
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
+#include <Prefabs/Enemy/Piranha/Components.hpp>
+#include <Prefabs/Enemy/Piranha/PiranhaNormalState.hpp>
+#include <Prefabs/Enemy/Piranha/PiranhaBehaviour.hpp>
 
 class Piranha : public Entity
 {
 public:
     Piranha(float x, float y)
     {
-        addComponent<Animation>(Animation(TextureManager::load("assets/piranha.png"), 16, 24, 2, 0.25f));
-
         addComponent<RigidBody>(sf::Vector2f(0, 0), false);
         addComponent<Transform>(sf::Vector2f(x, y), SIZE::GRID);
-
         addComponent<BoxCollider2D>(SIZE::GRID - sf::Vector2f(10, 10), sf::Vector2f(5, 5));
+        
+        addComponent<Animation>(Animation(TextureManager::load("assets/piranha.png"), 16, 24, 2, 0.25f));
+
+        addComponent<EnemyTag>(std::make_shared<PiranhaNormalState>(), std::make_shared<PiranhaBehaviour>());
+        addComponent<PiranhaPatrol>(SIZE::GRID.y, 2.0f, 2.0f);
         addComponent<PassThroughTag>();
 
-        
         std::vector<Direction> directions = { Direction::Left, Direction::Right, Direction::Top, Direction::Bottom };
         addComponent<DamageOnContactComponent>(directions);
-        addComponent<PopupComponent>(2.0f * SIZE::GRID.y, 2.0f);
     }
 };

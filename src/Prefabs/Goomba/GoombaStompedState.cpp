@@ -1,0 +1,35 @@
+#include <ECS/Entity.hpp>
+#include <Prefabs/Enemy/EnemyState.hpp>
+#include <Prefabs/Enemy/Components.hpp>
+#include <Prefabs/Enemy/Goomba/Components.hpp>
+#include <Prefabs/Enemy/Goomba/GoombaStompedState.hpp>
+#include <Engine/Animation/Animation.hpp>
+#include <Core/TextureManager.hpp>
+#include <Gameplay/DamageOnContact/Components.hpp>
+#include <Gameplay/Stomp/Components.hpp>
+#include <Gameplay/LifeSpan/Components.hpp>
+
+void GoombaStompedState::onEnter(Entity* entity)
+{
+    entity->addComponent<LifeSpan>(0.3f);
+
+    if (entity->hasComponent<Animation>()) 
+    {
+        auto& anim = entity->getComponent<Animation>();
+        anim.sprite = sf::Sprite(TextureManager::load("assets/goomba_stomped.png"));
+        anim.frameWidth = 16;
+        anim.frameHeight = 16;
+        anim.frameCount = 1;
+        anim.frameDuration = 0.0f;
+    }
+
+    entity->getComponent<GoombaPatrol>().velocity = sf::Vector2f(0, 0);
+
+    entity->removeComponent<StompableTag>();
+    entity->removeComponent<DamageOnContactComponent>();
+}
+
+std::shared_ptr<EnemyState> GoombaStompedState::getNewState(Entity* entity, float dt)
+{
+    return nullptr;
+}

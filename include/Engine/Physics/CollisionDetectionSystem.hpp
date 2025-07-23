@@ -8,7 +8,7 @@ class CollisionDetectionSystem : public System
 public:
     void update(World& world, float dt) override
     {
-        for (Entity* entity1 : world.findAll<BoxCollider2D, Transform>())
+        for (Entity* entity1 : world.findAll<BoxCollider2D, Transform, RigidBody>())
         {
             auto& coll = entity1->getComponent<BoxCollider2D>().collisions;
             coll.clear();

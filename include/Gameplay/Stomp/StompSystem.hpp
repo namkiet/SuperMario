@@ -17,7 +17,6 @@ public:
                 if (direction == Direction::Top)
                 {
                     stomper->getComponent<RigidBody>().velocity.y = -1000.0f;
-                    stompable->addComponent<DespawnTag>();
                 }
             }
         }
