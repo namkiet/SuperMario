@@ -19,18 +19,21 @@
 
 #include <Gameplay/Reset/ResetSystem.hpp>
 #include <Gameplay/Stomp/StompSystem.hpp>
-
-#include <Gameplay/HitBlock/Hit1UpBlockSystem.hpp>
-#include <Gameplay/HitBlock/HitStarBlockSystem.hpp>
-#include <Gameplay/HitBlock/HitNormalBlockSystem.hpp>
-#include <Gameplay/HitBlock/HitQuestionBlockSystem.hpp>
-#include <Gameplay/HitBlock/HitCoinBlockSystem.hpp>
-
+#include <Gameplay/HitBlock/HitSpecialBlockSystem.hpp>
 #include <Gameplay/Block/BounceBlockSystem.hpp>
-
 #include <Gameplay/Popup/PopupSystem.hpp>
-
 #include <Gameplay/DamageOnContact/DamageOnContactSystem.hpp>
+#include <Gameplay/Item/ItemEmergingSystem.hpp>
+#include <Gameplay/Item/CoinJumpingSystem.hpp>
+#include <Gameplay/Item/DebrisSystem.hpp>
+#include <Gameplay/Item/StarJumpingSystem.hpp>
+#include <Gameplay/Item/FireBulletSystem.hpp>
+#include <Gameplay/Collect/CollectSystem.hpp>
+#include <Gameplay/Fire/FireSystem.hpp>
+
+#include <cassert>
+#include <iostream>
+
 // <<<<<<< HEAD
 // #include <Gameplay/BreakBrick/BreakBrickSystem.hpp>
 // #include <Gameplay/Fireball/BlockCollisionSystem.hpp>
@@ -51,20 +54,7 @@
 // GameManager::GameManager()
 // =======
 
-#include <Gameplay/Item/ItemEmergingSystem.hpp>
-#include <Gameplay/Item/CoinJumpingSystem.hpp>
-#include <Gameplay/Item/DebrisSystem.hpp>
-#include <Gameplay/Item/StarJumpingSystem.hpp>
-#include <Gameplay/Item/FireBulletSystem.hpp>
-
-#include <Gameplay/Collect/CollectSystem.hpp>
-
-#include <Gameplay/Fire/FireSystem.hpp>
-
-#include <cassert>
-#include <iostream>
-
-GameManager::GameManager():levelHandler(world)
+GameManager::GameManager() : levelHandler(world)
 {
 
     // Add some Entities
@@ -79,7 +69,7 @@ GameManager::GameManager():levelHandler(world)
     //     auto goomba = world.createEntity<Enemy>(2000 + 100 * i, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 200);
     // }
 
-    // auto brick = world.createEntity<Tile>(50, SIZE::SCREEN.y - 5 * SIZE::GRID.y, "assets/platform_block.png");  
+    // auto brick = world.createEntity<Tile>(50, SIZE::SCREEN.y - 5 * SIZE::GRID.y, "assets/platform_block.png");
     // brick->addComponent<BrickTag>();
 
     // world.createEntity<Tile>(5 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 2, "assets/platform_block.png");
@@ -146,28 +136,24 @@ GameManager::GameManager():levelHandler(world)
     world.addSystem<PopupSystem>();
     world.addSystem<PatrolSystem>();
     world.addSystem<StompSystem>();
-    world.addSystem<HitQuestionBlockSystem>();
     world.addSystem<BounceBlockSystem>();
     world.addSystem<DamageOnContactSystem>();
     world.addSystem<LifeSystem>();
     world.addSystem<CollectSystem>();
     world.addSystem<ItemEmergingSystem>();
     world.addSystem<CoinJumpingSystem>();
-    world.addSystem<HitNormalBlockSystem>();
     world.addSystem<DebrisSystem>();
-    world.addSystem<Hit1UpBlockSystem>();
-    world.addSystem<HitStarBlockSystem>();
     world.addSystem<StarJumpingSystem>();
-    world.addSystem<HitCoinBlockSystem>();
+    world.addSystem<HitSpecialBlockSystem>();
     world.addSystem<FireSystem>();
     world.addSystem<FireBulletSystem>();
 
-// <<<<<<< HEAD
-//     world.addSystem<BreakBrickSystem>();
+    // <<<<<<< HEAD
+    //     world.addSystem<BreakBrickSystem>();
 
-//     world.addSystem<Fireball::BlockCollisionSystem>();
-//     world.addSystem<Fireball::ExplosionSystem>();
-//     world.addSystem<Fireball::DamageSystem>();
+    //     world.addSystem<Fireball::BlockCollisionSystem>();
+    //     world.addSystem<Fireball::ExplosionSystem>();
+    //     world.addSystem<Fireball::DamageSystem>();
 
     // phase 4
     world.addSystem<MovementSystem>();
