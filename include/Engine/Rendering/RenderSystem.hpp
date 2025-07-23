@@ -51,14 +51,14 @@ public:
             sp.setScale(scale);
 
             // Set origin to center (important for correct flipping)
-            sp.setOrigin(sp.getLocalBounds().width / 2.f, sp.getLocalBounds().height / 2.f);
+            // sp.setOrigin(sp.getLocalBounds().width / 2.f, sp.getLocalBounds().height / 2.f);
 
-            // Position sprite centered within the tf area
-            sf::Vector2f center;
-            center.x = tf.position.x + 0.5f * tf.size.x;
-            center.y = tf.position.y + tf.size.y - 0.5f * sp.getGlobalBounds().height;
+            // // Position sprite centered within the tf area
+            // sf::Vector2f center;
+            // center.x = tf.position.x + 0.5f * tf.size.x;
+            // center.y = tf.position.y + tf.size.y - 0.5f * sp.getGlobalBounds().height;
 
-            sp.setPosition(center);
+            // sp.setPosition(center);
             
             window.draw(sp);
 
