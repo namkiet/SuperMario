@@ -6,10 +6,12 @@ struct KoopaTag : public Component {};
 struct KoopaNormalTag : public Component {};
 struct KoopaFlippedTag : public Component {};
 struct KoopaShellTag : public Component {};
+struct KoopaReviveTag : public Component {};
 struct KoopaSlideTag : public Component {};
 struct ChangeToKoopaNormalTag : public Component {};
 struct ChangeToKoopaFlippedTag : public Component {};
 struct ChangeToKoopaShellTag : public Component {};
+struct ChangeToKoopaReviveTag : public Component {};
 struct ChangeToKoopaSlideTag : public Component {};
 
 struct KoopaPatrol : public Component

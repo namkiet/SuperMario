@@ -26,7 +26,7 @@ void KoopaBehaviour::collideWithPlayer(Entity* entity)
             }
         }
 
-        if (entity->hasComponent<KoopaShellTag>())
+        if (entity->hasComponent<KoopaShellTag>() || entity->hasComponent<KoopaReviveTag>())
         {
             if (direction == Direction::Left)
             {
@@ -87,12 +87,12 @@ void KoopaBehaviour::collideWithOther(Entity* entity)
 
         if (entity->hasComponent<CanKillEnemyTag>() && collider->hasComponent<EnemyTag>()) continue;
         
-        if (direction == Direction::Left && patrol.lastDirection == Direction::Right)
+        if (direction == Direction::Left && patrol.lastDirection == Direction::Right && patrol.velocity.x != 0)
         {
             patrol.velocity.x *= -1;
             patrol.lastDirection = Direction::Left;
         }
-        if (direction == Direction::Right && patrol.lastDirection == Direction::Left)
+        if (direction == Direction::Right && patrol.lastDirection == Direction::Left && patrol.velocity.x != 0)
         {
             patrol.velocity.x *= -1;
             patrol.lastDirection = Direction::Right;

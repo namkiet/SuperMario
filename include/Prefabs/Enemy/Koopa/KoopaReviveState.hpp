@@ -2,7 +2,7 @@
 #include <ECS/Entity.hpp>
 #include <Prefabs/Enemy/EnemyState.hpp>
 
-class KoopaShellState : public EnemyState
+class KoopaReviveState : public EnemyState
 {
 public:
     void onEnter(Entity* entity) override;
@@ -10,7 +10,7 @@ public:
 
 private:
     float timer = 0;
-    float stateDuration = 7;
+    float stateDuration = 3;
 };
 
 

@@ -26,6 +26,8 @@ void KoopaFlippedState::onEnter(Entity* entity)
         anim.frameHeight = 16;
         anim.frameCount = 1;
         anim.frameDuration = 0.0f;
+        anim.currentFrame = 0;
+        anim.timer = 0;
     }
     
     entity->getComponent<RigidBody>().velocity.y = -300;

@@ -22,6 +22,8 @@ void GoombaFlippedState::onEnter(Entity* entity)
         anim.frameHeight = 16;
         anim.frameCount = 2;
         anim.frameDuration = 0.25f;
+        anim.currentFrame = 0;
+        anim.timer = 0;
     }
     
     entity->getComponent<RigidBody>().velocity.y = -300;

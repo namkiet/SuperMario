@@ -18,11 +18,13 @@ void KoopaSlideState::onEnter(Entity* entity)
     if (entity->hasComponent<Animation>()) 
     {
         auto& anim = entity->getComponent<Animation>();
-        anim.sprite = sf::Sprite(TextureManager::load("assets/koopa_slide.png"));
+        anim.sprite = sf::Sprite(TextureManager::load("assets/koopa_shell.png"));
         anim.frameWidth = 16;
         anim.frameHeight = 16;
         anim.frameCount = 1;
         anim.frameDuration = 0.0f;
+        anim.currentFrame = 0;
+        anim.timer = 0;
     }
 
     auto& patrol = entity->getComponent<KoopaPatrol>();
