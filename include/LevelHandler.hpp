@@ -21,7 +21,7 @@ private:
     void setBackground();
 
 public:
-    LevelHandler() = default;
+    LevelHandler() = delete;
     LevelHandler(World &world);
     void start();
 };

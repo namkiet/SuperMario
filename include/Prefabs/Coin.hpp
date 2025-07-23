@@ -17,13 +17,15 @@ public:
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x, y), sf::Vector2f(width, height));
 
-        // Set the animation for the coin
-        std::vector<const sf::Texture *> textures = {
-            &TextureManager::load("assets/Item/Coin/Coin1_0.png"),
-            &TextureManager::load("assets/Item/Coin/Coin1_1.png"),
-            &TextureManager::load("assets/Item/Coin/Coin1_2.png"),
-            &TextureManager::load("assets/Item/Coin/Coin1_3.png")};
-        addComponent<Animation>(textures, width, height, 0.15, true);
+        // // Set the animation for the coin
+        // std::vector<const sf::Texture *> textures = {
+        //     &TextureManager::load("assets/Item/Coin/Coin1_0.png"),
+        //     &TextureManager::load("assets/Item/Coin/Coin1_1.png"),
+        //     &TextureManager::load("assets/Item/Coin/Coin1_2.png"),
+        //     &TextureManager::load("assets/Item/Coin/Coin1_3.png")};
+        // addComponent<Animation>(textures, width, height, 0.15, true);
+
+        addComponent<Animation>(TextureManager::load("assets/Item/Coin/coin.png"), 16, 16, 16, 0.15);
 
         // addComponent<CollectableTag>();
 

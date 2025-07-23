@@ -188,6 +188,7 @@ void GameManager::handleEvent(const sf::Event &event)
         if (event.key.code == sf::Keyboard::N)
         {
             // do nothing
+            std::cout << "HELLO\n";
         }
     }
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include <ECS/System.hpp>
 #include <World.hpp>
-#include <Gameplay/Hitblock/Components.hpp>
+#include <Gameplay/HitBlock/Components.hpp>
 #include <Gameplay/Block/Components.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Animation/Animation.hpp>

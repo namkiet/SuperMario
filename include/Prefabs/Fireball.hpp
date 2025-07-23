@@ -15,7 +15,7 @@ namespace Prefab
     public:
         Fireball(float x, float y)
         {
-            addComponent<Animation>(TextureManager::load("assets/Mario/mario_idling_small.png"));
+            // addComponent<Animation>(TextureManager::load("assets/Mario/mario_idling_small.png"));
 
             addComponent<BoxCollider2D>(0.25f * SIZE::GRID, sf::Vector2f(0, 0), true);
             addComponent<RigidBody>(sf::Vector2f(400, 0));

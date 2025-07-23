@@ -49,15 +49,15 @@ public:
 public:
     PlayerStateSystem()
     {
-        animMap["IdlingSmall"] = Animation(TextureManager::load("assets/Mario/mario_idling_small.png"));
-        animMap["JumpingSmall"] = Animation(TextureManager::load("assets/Mario/mario_jumping_small.png"));
-        animMap["RunningSmall"] = Animation(TextureManager::load("assets/Mario/mario_running_small.png"), 16, 16, 3, 0.15f);
+        animMap["IdlingSmall"] = Animation(TextureManager::load("assets/Mario/Small/mario_idling_small.png"));
+        animMap["JumpingSmall"] = Animation(TextureManager::load("assets/Mario/Small/mario_jumping_small.png"));
+        animMap["RunningSmall"] = Animation(TextureManager::load("assets/Mario/Small/mario_running_small.png"), 16, 16, 3, 0.15f);
 
-        animMap["IdlingBig"] = Animation(TextureManager::load("assets/Mario/mario_idling_big.png"));
-        animMap["JumpingBig"] = Animation(TextureManager::load("assets/Mario/mario_jumping_big.png"));
-        animMap["RunningBig"] = Animation(TextureManager::load("assets/Mario/mario_running_big.png"), 16, 32, 3, 0.15f);
+        animMap["IdlingBig"] = Animation(TextureManager::load("assets/Mario/Big/mario_idling_big.png"));
+        animMap["JumpingBig"] = Animation(TextureManager::load("assets/Mario/Big/mario_jumping_big.png"));
+        animMap["RunningBig"] = Animation(TextureManager::load("assets/Mario/Big/mario_running_big.png"), 16, 32, 3, 0.15f);
 
-        animMap["GrowingUp"] = Animation(TextureManager::load("assets/Mario/mario_grow_up.png"), 16, 32, 7, 0.1f, false);
+        animMap["GrowingUp"] = Animation(TextureManager::load("assets/Mario/GrowUp/mario_grow_up.png"), 16, 32, 7, 0.1f, false);
     }
 
 private:

@@ -30,11 +30,11 @@ public:
             if (anim.frameCount == 1)
                 continue;
 
-            if (anim.textures.empty())
-            {
-                std::cerr << "Animation textures are empty for entity: " << entity << std::endl;
-                continue;
-            }
+            // if (anim.textures.empty())
+            // {
+            //     std::cerr << "Animation textures are empty for entity: " << entity << std::endl;
+            //     continue;
+            // }
 
             anim.timer += dt;
             if (anim.timer >= anim.frameDuration)
@@ -54,16 +54,16 @@ public:
                         anim.hasEnded = true;
                     }
                 }
-                anim.sprite.setTexture(*anim.textures[anim.currentFrame]);
+                // anim.sprite.setTexture(*anim.textures[anim.currentFrame]);
             }
 
             // Set texture rect
-            // anim.sprite.setTextureRect(sf::IntRect(
-            //     anim.currentFrame * anim.frameWidth,
-            //     anim.row * anim.frameHeight,
-            //     anim.frameWidth,
-            //     anim.frameHeight
-            // ));
+            anim.sprite.setTextureRect(sf::IntRect(
+                anim.currentFrame * anim.frameWidth,
+                anim.row * anim.frameHeight,
+                anim.frameWidth,
+                anim.frameHeight
+            ));
         }
     }
 };

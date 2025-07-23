@@ -6,7 +6,7 @@
 #include <Engine/Physics/BlockTag.hpp>
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
-#include <GamePlay/Pipe/Components.hpp>
+#include <Gameplay/Pipe/Components.hpp>
 
 class Pipe : public Entity
 {
