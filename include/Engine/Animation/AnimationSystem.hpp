@@ -54,16 +54,23 @@ public:
                         anim.hasEnded = true;
                     }
                 }
-                // anim.sprite.setTexture(*anim.textures[anim.currentFrame]);
-            }
 
-            // Set texture rect
-            anim.sprite.setTextureRect(sf::IntRect(
-                anim.currentFrame * anim.frameWidth,
-                anim.row * anim.frameHeight,
-                anim.frameWidth,
-                anim.frameHeight
-            ));
+            }
+            if (!anim.textures.empty())
+            {
+                anim.sprite.setTexture(*anim.textures[anim.currentFrame]);
+            }
+            else
+            {
+
+                // Set texture rect
+                anim.sprite.setTextureRect(sf::IntRect(
+                    anim.currentFrame * anim.frameWidth,
+                    anim.row * anim.frameHeight,
+                    anim.frameWidth,
+                    anim.frameHeight
+                ));
+            }
         }
     }
 };

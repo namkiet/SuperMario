@@ -24,7 +24,7 @@ public:
             pos.x += vel.x * dt;
             pos.y += vel.y * dt;
             //std::cout << "pos: " << pos.x << ", " << pos.y << std::endl;
-            if (pos.y >= SIZE::SCREEN.y)
+            if (pos.y >= SIZE::SCREEN.y || pos.x < 0.0f)
             {
                 entity->addComponent<DespawnTag>();
                 //std::cout << "despawned in movement system" << std::endl;
