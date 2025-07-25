@@ -78,7 +78,6 @@ namespace Physics
                 }
             }
         }
-
         return Direction::None;
     }
 

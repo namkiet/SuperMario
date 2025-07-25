@@ -44,22 +44,20 @@ public:
                     break;
 
                 case Direction::Bottom:
-                    if (!block->hasComponent<PipeTag>())
-                    {
-                        // If the block is not passable, set the position to the bottom of the block
-                        tf.position.y = blockPos.y + blockSize.y;
-                        rb.velocity.y = 0.0f;
-                    }
+                    tf.position.y = blockPos.y + blockSize.y;
+                    rb.velocity.y = 0.0f;
                     break;
 
                 case Direction::Left:
-                    tf.position.x = blockPos.x - box.size.x;
-                    rb.velocity.x = 0.0f;
+                    tf.position.x = blockPos.x - box.size.x - box.offset.x;
+                    // rb.velocity.x = 0.0f;
+                    rb.onGround = true;
                     break;
 
                 case Direction::Right:
                     tf.position.x = blockPos.x + blockSize.x - box.offset.x;
-                    rb.velocity.x = 0.0f;
+                    // rb.velocity.x = 0.0f;
+                    rb.onGround = true;
                     break;
 
                 default:

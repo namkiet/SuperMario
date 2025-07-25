@@ -99,12 +99,13 @@ GameManager::GameManager() : levelHandler(world)
     world.createEntity()->addComponent<Camera>();
 
     // Register Systems
+
     world.addSystem<GravitySystem>();
     world.addSystem<MovementSystem>();
-
+   
     world.addSystem<CollisionDetectionSystem>();
     world.addSystem<HitBlockSystem>();
-
+       
     world.addSystem<InputSystem>();
     world.addSystem<HandlePlayerInputSystem>();
     world.addSystem<PlayerStateSystem>();

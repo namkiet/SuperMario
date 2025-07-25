@@ -11,6 +11,7 @@
 #include <Gameplay/Stomp/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Collect/Components.hpp>
+#include <Gameplay/Score/Components.hpp>
 #include <Gameplay/Fire/Components.hpp>
 #include <Gameplay/BreakBrick/Components.hpp>
 
@@ -59,5 +60,7 @@ public:
         addComponent<CanFireTag>();
 
         addComponent<CanHitBlockTag>();
+
+        addComponent<ScoreComponent>();
     }
 };

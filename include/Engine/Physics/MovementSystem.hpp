@@ -22,7 +22,7 @@ public:
 
             pos.x += vel.x * dt;
             pos.y += vel.y * dt;
-
+            
             if (pos.y >= SIZE::SCREEN.y)
             {
                 entity->addComponent<DespawnTag>();
