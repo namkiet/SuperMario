@@ -6,7 +6,7 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Core/Transform.hpp>
-
+#include <Gameplay/Item/Components.hpp>
 class HitBlockSystem : public System
 {
 public:
@@ -18,6 +18,10 @@ public:
             auto &rb = entity->getComponent<RigidBody>();
             auto &tf = entity->getComponent<Transform>();
 
+            if (entity->hasComponent<StarTag>())
+                continue;
+            if (entity->hasComponent<FireBulletTag>())
+                continue;
             rb.onGround = false;
             for (auto &[block, direction] : box.collisions)
             {

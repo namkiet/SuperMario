@@ -43,6 +43,9 @@ public:
                     // Add collectable tag
                     item->addComponent<CollectableTag>();
 
+                    // Add block collision detection
+                    item->addComponent<CanHitBlockTag>();
+
                     // Apply direction to the mushroom
                     // std::vector<Direction> directions = {Direction::Left, Direction::Right, Direction::Bottom};
                     // mushroom->addComponent<DamageOnContactComponent>(directions);

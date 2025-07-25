@@ -35,7 +35,8 @@ public:
         addComponent<FollowByCameraTag>();
 
         // Set the size of the collision box for the player
-        addComponent<BoxCollider2D>(sf::Vector2f(width * scale, height * scale));
+        addComponent<BoxCollider2D>(sf::Vector2f((width - 4) * scale, height * scale));
+        getComponent<BoxCollider2D>().offset = sf::Vector2f(2 * scale, 0);
 
         addComponent<PlayerTag>(std::make_shared<PlayerIdlingState>(), std::make_shared<PlayerSmallState>());
 
