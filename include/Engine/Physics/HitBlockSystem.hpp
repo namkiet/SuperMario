@@ -44,8 +44,12 @@ public:
                     break;
 
                 case Direction::Bottom:
-                    tf.position.y = blockPos.y + blockSize.y;
-                    rb.velocity.y = 0.0f;
+                    if (!block->hasComponent<PipeTag>())
+                    {
+                        // If the block is not passable, set the position to the bottom of the block
+                        tf.position.y = blockPos.y + blockSize.y;
+                        rb.velocity.y = 0.0f;
+                    }
                     break;
 
                 case Direction::Left:

@@ -163,34 +163,34 @@ void LevelHandler::setLevel()
             else if (red == 255 && green == 0 && blue == 0) // Nap cong
             {
                 // cout << "Before adding pipe block" << endl;
-                world.createEntity<Pipe>(j * 16, i * 16, 32, 32, 3, 0, false);
+                world.createEntity<Pipe>(j * 16, i * 16, 32, 16, 3, 0, false);
                 // cout << "Pipe block added" << endl;
             }
             else if (red == 0 && green == 128 && blue == 255) // Normal pipes
             {
                 // cout << "Before adding normal pipe block" << endl;
-                world.createEntity<Pipe>(j * 16, i * 16, 32, 32, 3, 1, false);
+                world.createEntity<Pipe>(j * 16, i * 16, 32, 16, 3, 1, false);
                 // cout << "Normal pipe added" << endl;
             }
             else if (red == 255 && green == 128 && blue == 128) // Go-in pipes
             {
                 // cout << "Before adding go-in pipe block" << endl;
-                world.createEntity<Pipe>(j * 16, i * 16, 32, 32, 3, 1, true);
+                world.createEntity<Pipe>(j * 16, i * 16, 32, 16, 3, 1, true);
                 // cout << "Go-in pipe added" << endl;
             }
             else if (red == 185 && green == 122 && blue == 87) // Go-out pipes
             {
                 // cout << "Before adding go-out pipe block" << endl;
-                world.createEntity<Pipe>(j * 16, i * 16, 32, 32, 3, 1, true);
+                world.createEntity<Pipe>(j * 16, i * 16, 32, 16, 3, 1, true);
                 // cout << "Go-out pipe added" << endl;
             }
             else if (red == 128 && green == 0 && blue == 64)
             {
-                world.createEntity<Pipe>(j * 16, i * 16, 32, 32, 3, 2, true);
+                world.createEntity<Pipe>(j * 16, i * 16, 32, 16, 3, 2, true);
             }
             else if (red == 0 && green == 64 && blue == 128)
             {
-                world.createEntity<Pipe>(j * 16, i * 16, 32, 32, 3, 3, true);
+                world.createEntity<Pipe>(j * 16, i * 16, 32, 16, 3, 3, true);
             }
         }
     }
