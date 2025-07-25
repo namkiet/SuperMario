@@ -4,14 +4,14 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/Transform.hpp>
 
-namespace Physics 
+namespace Physics
 {
-    inline sf::Vector2f GetCollisionOverlap(Entity* a, Entity* b)
+    inline sf::Vector2f GetCollisionOverlap(Entity *a, Entity *b)
     {
-        auto& boxA = a->getComponent<BoxCollider2D>();
-        auto& boxB = b->getComponent<BoxCollider2D>();
-        auto& tfA = a->getComponent<Transform>();
-        auto& tfB = b->getComponent<Transform>();
+        auto &boxA = a->getComponent<BoxCollider2D>();
+        auto &boxB = b->getComponent<BoxCollider2D>();
+        auto &tfA = a->getComponent<Transform>();
+        auto &tfB = b->getComponent<Transform>();
 
         auto sizeA = boxA.size;
         auto sizeB = boxB.size;
@@ -26,27 +26,25 @@ namespace Physics
         return sf::Vector2f(xo - dx, yo - dy);
     }
 
-    inline bool isColliding(Entity* a, Entity* b)
+    inline bool isColliding(Entity *a, Entity *b)
     {
         sf::Vector2f overlap = GetCollisionOverlap(a, b);
         return overlap.x > 0.0f && overlap.y > 0.0f;
     }
 
-    inline Direction GetCollisionDirection(Entity* a, Entity* b, float dt)
+    inline Direction GetCollisionDirection(Entity *a, Entity *b)
     {
-        auto& boxA = a->getComponent<BoxCollider2D>();
-        auto& boxB = b->getComponent<BoxCollider2D>();
-        auto& tfA = a->getComponent<Transform>();
-        auto& tfB = b->getComponent<Transform>();
-        auto velA = (a->hasComponent<RigidBody>()) ? a->getComponent<RigidBody>().velocity : sf::Vector2f(0, 0);
-        auto velB = (b->hasComponent<RigidBody>()) ? b->getComponent<RigidBody>().velocity : sf::Vector2f(0, 0);
+        auto &boxA = a->getComponent<BoxCollider2D>();
+        auto &boxB = b->getComponent<BoxCollider2D>();
+        auto &tfA = a->getComponent<Transform>();
+        auto &tfB = b->getComponent<Transform>();
 
         auto sizeA = boxA.size;
         auto sizeB = boxB.size;
-        auto posA = tfA.position + velA * dt + boxA.offset + 0.5f * sizeA;
-        auto posB = tfB.position + velB * dt + boxB.offset + 0.5f * sizeB;
-        auto prevA = tfA.position + boxA.offset + 0.5f * sizeA;
-        auto prevB = tfB.position + boxB.offset + 0.5f * sizeB;
+        auto posA = tfA.position + boxA.offset + 0.5f * sizeA;
+        auto posB = tfB.position + boxB.offset + 0.5f * sizeB;
+        auto prevA = tfA.prevPos + boxA.offset + 0.5f * sizeA;
+        auto prevB = tfB.prevPos + boxB.offset + 0.5f * sizeB;
 
         float dx = abs(posA.x - posB.x);
         float dy = abs(posA.y - posB.y);

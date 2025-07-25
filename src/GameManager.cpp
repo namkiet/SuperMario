@@ -99,54 +99,63 @@ GameManager::GameManager() : levelHandler(world)
     world.createEntity()->addComponent<Camera>();
 
     // Register Systems
-    // world.addSystem<GravitySystem>();
-    // world.addSystem<MovementSystem>();
-
-    // world.addSystem<CollisionDetectionSystem>();
-    // world.addSystem<HitBlockSystem>();
-
-    // world.addSystem<PlayerInputSystem>();
-    // world.addSystem<PlayerStateSystem>();
-
-    // world.addSystem<CameraSystem>();
-    // world.addSystem<AnimationSystem>();
-    // world.addSystem<RenderSystem>();
-
-    // world.addSystem<LifeSystem>();
-
-    // world.addSystem<PopupSystem>();
-    // world.addSystem<PatrolSystem>();
-    // world.addSystem<StompSystem>();
-    // world.addSystem<HitQuestionBlockSystem>();
-    // world.addSystem<DamageOnContactSystem>();
-
-    // world.addSystem<DespawnSystem>();
-    // world.addSystem<PlayerRespawnSystem>();
-
-    // phase 1
-    world.addSystem<ResetSystem>();
-    world.addSystem<InputSystem>();
-    // phase 2
-    world.addSystem<HandlePlayerInputSystem>();
     world.addSystem<GravitySystem>();
+    world.addSystem<MovementSystem>();
 
-    // phase
     world.addSystem<CollisionDetectionSystem>();
     world.addSystem<HitBlockSystem>();
+
+    world.addSystem<InputSystem>();
+    world.addSystem<HandlePlayerInputSystem>();
+    world.addSystem<PlayerStateSystem>();
+
+    world.addSystem<CameraSystem>();
+    world.addSystem<AnimationSystem>();
+    world.addSystem<RenderSystem>();
+
+    world.addSystem<LifeSystem>();
+
     world.addSystem<PopupSystem>();
     world.addSystem<PatrolSystem>();
     world.addSystem<StompSystem>();
-    world.addSystem<BounceBlockSystem>();
-    world.addSystem<DamageOnContactSystem>();
-    world.addSystem<LifeSystem>();
+    world.addSystem<HitSpecialBlockSystem>();
     world.addSystem<CollectSystem>();
     world.addSystem<ItemEmergingSystem>();
     world.addSystem<CoinJumpingSystem>();
     world.addSystem<DebrisSystem>();
-    world.addSystem<StarJumpingSystem>();
-    world.addSystem<HitSpecialBlockSystem>();
+    world.addSystem<StarJumpingSystem>(); 
     world.addSystem<FireSystem>();
     world.addSystem<FireBulletSystem>();
+    world.addSystem<BounceBlockSystem>();
+    world.addSystem<DamageOnContactSystem>();
+
+    world.addSystem<DespawnSystem>();
+    world.addSystem<PlayerRespawnSystem>();
+
+    // phase 1
+    // world.addSystem<ResetSystem>();
+    // world.addSystem<InputSystem>();
+    // phase 2
+    // world.addSystem<HandlePlayerInputSystem>();
+    // world.addSystem<GravitySystem>();
+
+    // phase
+    // world.addSystem<CollisionDetectionSystem>();
+    // world.addSystem<HitBlockSystem>();
+    // world.addSystem<PopupSystem>();
+    // world.addSystem<PatrolSystem>();
+    // world.addSystem<StompSystem>();
+    // world.addSystem<BounceBlockSystem>();
+    // world.addSystem<DamageOnContactSystem>();
+    // world.addSystem<LifeSystem>();
+    // world.addSystem<CollectSystem>();
+    // world.addSystem<ItemEmergingSystem>();
+    // world.addSystem<CoinJumpingSystem>();
+    // world.addSystem<DebrisSystem>();
+    // world.addSystem<StarJumpingSystem>();
+    // world.addSystem<HitSpecialBlockSystem>();
+    // world.addSystem<FireSystem>();
+    // world.addSystem<FireBulletSystem>();
 
     // <<<<<<< HEAD
     //     world.addSystem<BreakBrickSystem>();
@@ -156,15 +165,15 @@ GameManager::GameManager() : levelHandler(world)
     //     world.addSystem<Fireball::DamageSystem>();
 
     // phase 4
-    world.addSystem<MovementSystem>();
-    world.addSystem<PlayerStateSystem>();
-    world.addSystem<DespawnSystem>();
-    world.addSystem<PlayerRespawnSystem>();
+    // world.addSystem<MovementSystem>();
+    // world.addSystem<PlayerStateSystem>();
+    // world.addSystem<DespawnSystem>();
+    // world.addSystem<PlayerRespawnSystem>();
 
     // phase 5
-    world.addSystem<CameraSystem>();
-    world.addSystem<AnimationSystem>();
-    world.addSystem<RenderSystem>();
+    // world.addSystem<CameraSystem>();
+    // world.addSystem<AnimationSystem>();
+    // world.addSystem<RenderSystem>();
 }
 
 void GameManager::handleEvent(const sf::Event &event)

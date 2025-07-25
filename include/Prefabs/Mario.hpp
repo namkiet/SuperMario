@@ -57,5 +57,6 @@ public:
 
         addComponent<CanFireTag>();
 
+        addComponent<CanHitBlockTag>();
     }
 };
