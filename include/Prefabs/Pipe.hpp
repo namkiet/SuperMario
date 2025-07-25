@@ -15,7 +15,8 @@ public:
     {
         // Set the size of the collision box for the pipe
         addComponent<BoxCollider2D>(sf::Vector2f(width * scale, height * scale));
-
+        // getComponent<BoxCollider2D>().offset = sf::Vector2f(2 * scale, 0);
+        // getComponent<BoxCollider2D>().size = sf::Vector2f((width - 4) * scale, height * scale);
         // Set the transform for the pipe
         addComponent<Transform>(sf::Vector2f(x * scale, y * scale), sf::Vector2f(width * scale, height * scale));
 
@@ -30,6 +31,7 @@ public:
 
         else if (index == 1)
         {
+            getComponent<BoxCollider2D>().size = sf::Vector2f((width - 2) * scale, height * scale);
             addComponent<Animation>(TextureManager::load("assets/Pipe/Pipe1_1.png"));
         }
 
@@ -42,7 +44,7 @@ public:
         {
             addComponent<Animation>(TextureManager::load("assets/Pipe/Pipe1_3.png"));
         }
-        
+
         if (enterable)
         {
             addComponent<enterablePipe>();

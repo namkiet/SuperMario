@@ -54,7 +54,7 @@ public:
                     break;
 
                 case Direction::Right:
-                    tf.position.x = blockPos.x + blockSize.x;
+                    tf.position.x = blockPos.x + blockSize.x - box.offset.x;
                     rb.velocity.x = 0.0f;
                     break;
 
