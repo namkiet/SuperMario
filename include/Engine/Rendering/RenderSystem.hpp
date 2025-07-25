@@ -6,10 +6,19 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Rendering/Utility.hpp>
 #include <SFML/Graphics.hpp>
+#include <Gameplay/Score/Components.hpp>
 
 class RenderSystem : public System
 {
+private:
+    sf::Font font;
+    void scoreRender(const World &world, sf::RenderWindow &window, sf::Font font) const;
+
 public:
+    RenderSystem()
+    {
+        font.loadFromFile("SuperMarioBros.ttf");
+    }
     void update(World &, float) override
     {
         // no-op
@@ -17,6 +26,8 @@ public:
 
     void draw(const World &world, sf::RenderWindow &window) const
     {
+        scoreRender(world, window, font);
+
         if (world.findFirst<Camera>())
         {
             auto &cam = world.findFirst<Camera>()->getComponent<Camera>();

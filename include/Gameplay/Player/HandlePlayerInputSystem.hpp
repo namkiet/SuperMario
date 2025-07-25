@@ -36,11 +36,15 @@ public:
 
             if (pool.isKeyPressed(sf::Keyboard::A)) // Move left
             {
-                rb.velocity.x -= PLAYER::HORIZONTAL_SPEED;
+                rb.velocity.x = -PLAYER::HORIZONTAL_SPEED;
             }
             else if (pool.isKeyPressed(sf::Keyboard::D)) // Move right
             {
-                rb.velocity.x += PLAYER::HORIZONTAL_SPEED;
+                rb.velocity.x = PLAYER::HORIZONTAL_SPEED;
+            }
+            else // Standing
+            {
+                rb.velocity.x = 0.f;
             }
 
             if (pool.isKeyPressed(sf::Keyboard::W) && rb.onGround) // Jump

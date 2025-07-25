@@ -4,3 +4,5 @@
 struct CanHitBlockTag : public Component {};
 
 struct BlockTag : public Component {};
+
+struct PipeTag : public Component {};
