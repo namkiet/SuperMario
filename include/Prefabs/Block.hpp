@@ -18,15 +18,21 @@ public:
         // Add the block tag
         addComponent<BlockTag>();
 
+        // Set the size of the collision box for the block
+        addComponent<BoxCollider2D>(sf::Vector2f(width * scale, height * scale));
+
+        // Set the transform for the player
+        addComponent<Transform>(sf::Vector2f(x * scale, y * scale), sf::Vector2f(width * scale, height * scale));
+
         // Add different types for different block types
         if (index < 0)
         {
             // Add the ground block tag
             addComponent<GroundBlock>();
 
-            addComponent<BoxCollider2D>(sf::Vector2f(width, height));
+            // addComponent<BoxCollider2D>(sf::Vector2f(width, height));
 
-            addComponent<Transform>(sf::Vector2f(x * scale, y * scale), sf::Vector2f(width, height));
+            // addComponent<Transform>(sf::Vector2f(x * scale, y * scale), sf::Vector2f(width, height));
 
             if (index == -1)
                 // Get the texture for the block
@@ -56,11 +62,7 @@ public:
             return;
         }
 
-        // Set the size of the collision box for the block
-        addComponent<BoxCollider2D>(sf::Vector2f(width * scale, height * scale));
-
-        // Set the transform for the player
-        addComponent<Transform>(sf::Vector2f(x * scale, y * scale), sf::Vector2f(width * scale, height * scale));
+        
 
         if (index == 1)
         {
