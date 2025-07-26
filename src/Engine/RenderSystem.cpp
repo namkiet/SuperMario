@@ -33,3 +33,32 @@ void RenderSystem::scoreRender(const World &world, sf::RenderWindow &window, sf:
         window.draw(scoreText);
     }
 }
+
+void RenderSystem::timeRender(const World &world, sf::RenderWindow &window, sf::Font font) const
+{
+    window.setView(window.getDefaultView());
+
+    for (Entity *entity : world.findAll<TimeComponent>())
+    {
+        auto &timeComponent = entity->getComponent<TimeComponent>();
+        sf::Text timeText;
+
+        timeText.setFont(font);
+        timeText.setString("TIME");
+        timeText.setCharacterSize(25);
+        timeText.setPosition(700.f, 10.f);
+        timeText.setFillColor(sf::Color::White);
+        std::ostringstream oss;
+        oss << std::setw(3) << std::setfill('0') << timeComponent.timer;
+
+        sf::Text timeValueText;
+        timeValueText.setFont(font);
+        timeValueText.setString(oss.str());
+        timeValueText.setCharacterSize(25);
+        timeValueText.setPosition(720.f, 35.0f);
+        timeValueText.setFillColor(sf::Color::White);
+
+        window.draw(timeText);
+        window.draw(timeValueText);
+    }
+}

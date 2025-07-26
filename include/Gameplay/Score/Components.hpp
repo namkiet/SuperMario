@@ -6,3 +6,8 @@ struct ScoreComponent : public Component
 {
     int score = 0; // Initialize score to 0
 };
+
+struct TimeComponent : public Component
+{
+    int timer = 300; // Initialize time to 300 seconds (5 minutes)
+};

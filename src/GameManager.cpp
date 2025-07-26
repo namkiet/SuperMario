@@ -30,7 +30,7 @@
 #include <Gameplay/Item/FireBulletSystem.hpp>
 #include <Gameplay/Collect/CollectSystem.hpp>
 #include <Gameplay/Fire/FireSystem.hpp>
-
+#include <Gameplay/Score/PlayTimeSystem.hpp>
 #include <cassert>
 #include <iostream>
 
@@ -99,13 +99,13 @@ GameManager::GameManager() : levelHandler(world)
     world.createEntity()->addComponent<Camera>();
 
     // Register Systems
-
+    world.addSystem<PlayTimeSystem>();
     world.addSystem<GravitySystem>();
     world.addSystem<MovementSystem>();
-   
+
     world.addSystem<CollisionDetectionSystem>();
     world.addSystem<HitBlockSystem>();
-       
+
     world.addSystem<InputSystem>();
     world.addSystem<HandlePlayerInputSystem>();
     world.addSystem<PlayerStateSystem>();
@@ -124,7 +124,7 @@ GameManager::GameManager() : levelHandler(world)
     world.addSystem<ItemEmergingSystem>();
     world.addSystem<CoinJumpingSystem>();
     world.addSystem<DebrisSystem>();
-    world.addSystem<StarJumpingSystem>(); 
+    world.addSystem<StarJumpingSystem>();
     world.addSystem<FireSystem>();
     world.addSystem<FireBulletSystem>();
     world.addSystem<BounceBlockSystem>();

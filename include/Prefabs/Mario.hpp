@@ -62,5 +62,7 @@ public:
         addComponent<CanHitBlockTag>();
 
         addComponent<ScoreComponent>();
+
+        addComponent<TimeComponent>();
     }
 };

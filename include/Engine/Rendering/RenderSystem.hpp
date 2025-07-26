@@ -13,6 +13,7 @@ class RenderSystem : public System
 private:
     sf::Font font;
     void scoreRender(const World &world, sf::RenderWindow &window, sf::Font font) const;
+    void timeRender(const World &world, sf::RenderWindow &window, sf::Font font) const;
 
 public:
     RenderSystem()
@@ -26,6 +27,7 @@ public:
 
     void draw(const World &world, sf::RenderWindow &window) const
     {
+        timeRender(world, window, font);
         scoreRender(world, window, font);
 
         if (world.findFirst<Camera>())
