@@ -330,7 +330,7 @@ void LevelHandler::setBackground()
 void LevelHandler::start()
 {
     setBackground();
-    world.createEntity<SmallCoin>(325, 45, 15, 24);
+    world.createEntity<SmallCoin>(325, 65, 15, 24);
     setLevel();
     setPlayer();
     setEnemy();

@@ -16,7 +16,7 @@ void RenderSystem::scoreRender(const World &world, sf::RenderWindow &window, sf:
         scoreText.setFont(font);
         scoreText.setString("MARIO");
         scoreText.setCharacterSize(25);
-        scoreText.setPosition(100.f, 20.f);
+        scoreText.setPosition(100.f, 35.f);
         scoreText.setFillColor(sf::Color::White);
 
         // Format score as 6 digits with leading zeros
@@ -27,7 +27,7 @@ void RenderSystem::scoreRender(const World &world, sf::RenderWindow &window, sf:
         scoreValueText.setFont(font);
         scoreValueText.setString(oss.str());
         scoreValueText.setCharacterSize(25);
-        scoreValueText.setPosition(100.f, 45.f);
+        scoreValueText.setPosition(100.f, 65.f);
         scoreValueText.setFillColor(sf::Color::White);
 
         window.draw(scoreValueText);
@@ -47,7 +47,7 @@ void RenderSystem::timeRender(const World &world, sf::RenderWindow &window, sf::
         timeText.setFont(font);
         timeText.setString("TIME");
         timeText.setCharacterSize(25);
-        timeText.setPosition(700.f, 20.f);
+        timeText.setPosition(700.f, 35.f);
         timeText.setFillColor(sf::Color::White);
         std::ostringstream oss;
         oss << std::setw(3) << std::setfill('0') << timeComponent.timer;
@@ -56,7 +56,7 @@ void RenderSystem::timeRender(const World &world, sf::RenderWindow &window, sf::
         timeValueText.setFont(font);
         timeValueText.setString(oss.str());
         timeValueText.setCharacterSize(25);
-        timeValueText.setPosition(720.f, 45.0f);
+        timeValueText.setPosition(720.f, 65.0f);
         timeValueText.setFillColor(sf::Color::White);
 
         window.draw(timeText);
@@ -92,7 +92,7 @@ void RenderSystem::coinRender(const World &world, sf::RenderWindow &window, sf::
         coinValueText.setFont(font);
         coinValueText.setString("x" + oss.str());
         coinValueText.setCharacterSize(25);
-        coinValueText.setPosition(350.f, 45.0f);
+        coinValueText.setPosition(350.f, 65.0f);
         coinValueText.setFillColor(sf::Color::White);
 
         window.draw(coinValueText);
@@ -130,14 +130,14 @@ void RenderSystem::mapNameRender(const World &world, sf::RenderWindow &window, s
     mapNameText.setFont(font);
     mapNameText.setString("WORLD");
     mapNameText.setCharacterSize(25);
-    mapNameText.setPosition(500.f, 20.f);
+    mapNameText.setPosition(500.f, 35.f);
     mapNameText.setFillColor(sf::Color::White);
 
     sf::Text mapNameValueText;
     mapNameValueText.setFont(font);
     mapNameValueText.setString("1-1");
     mapNameValueText.setCharacterSize(25);
-    mapNameValueText.setPosition(520.f, 45.f);
+    mapNameValueText.setPosition(520.f, 65.f);
     mapNameValueText.setFillColor(sf::Color::White);
 
     window.draw(mapNameText);

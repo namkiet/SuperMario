@@ -22,6 +22,19 @@ public:
         entities.push_back(std::make_unique<T>(std::forward<Args>(args)...));
         return entities.back().get();
     }
+
+    Entity *createEntityAtFront()
+    {
+        entities.insert(entities.begin(), std::make_unique<Entity>());
+        return entities.front().get();
+    }
+
+    template <typename T, typename... Args>
+    Entity *createEntityAtFront(Args &&...args)
+    {
+        entities.insert(entities.begin(), std::make_unique<T>(std::forward<Args>(args)...));
+        return entities.front().get();
+    }
     
     void deleteEntity(Entity* entity)
     {

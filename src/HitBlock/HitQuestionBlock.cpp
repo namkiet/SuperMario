@@ -26,7 +26,7 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
         }
         else
         {
-            auto mushroom = world.createEntity<Mushroom1>(pos.x, pos.y, 48, 48);
+            auto mushroom = world.createEntityAtFront<Mushroom1>(pos.x, pos.y - 20, 48, 48);
             ItemEmerging emerging;
             emerging.finalY = pos.y - 48;
             mushroom->addComponent<ItemEmerging>(emerging);
@@ -37,7 +37,7 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
         // Remove MushroomQuestionBlock component
         block->removeComponent<MushroomQuestionBlock>();
 
-        auto mushroom = world.createEntity<Mushroom1>(pos.x, pos.y, 48, 48);
+        auto mushroom = world.createEntityAtFront<Mushroom1>(pos.x, pos.y - 20, 48, 48);
         ItemEmerging emerging;
         emerging.finalY = pos.y - 48;
         mushroom->addComponent<ItemEmerging>(emerging);
