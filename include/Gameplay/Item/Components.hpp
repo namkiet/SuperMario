@@ -38,3 +38,8 @@ struct FireBulletTag : public Component
 {
     // This tag is used to identify the fire bullet item
 };
+
+struct SmallCoinTag : public Component
+{
+    // This tag is used to identify the small coin item
+};

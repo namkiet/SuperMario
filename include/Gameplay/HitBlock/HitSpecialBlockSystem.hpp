@@ -9,12 +9,13 @@
 #include <Gameplay/Block/BounceBlock.hpp>
 #include <Gameplay/Block/Components.hpp>
 #include <Gameplay/Player/Components.hpp>
+#include <Gameplay/Score/Components.hpp>
 
 class HitSpecialBlockSystem : public System
 {
 private:
     void Hit1UpBlock(World &world, float dt, Entity *block);
-    void HitQuestionBlock(World &world, float dt, Entity *block);
+    void HitQuestionBlock(World &world, float dt, Entity *block, Entity *player);
     void HitCoinBlock(World &world, float dt, Entity *block);
     void HitNormalBlock(World &world, float dt, Entity *block); // Only for large mario
     void HitStarBlock(World &world, float dt, Entity *block);
@@ -76,7 +77,7 @@ public:
                         block->removeComponent<QuestionBlockTag>();
 
                         // Update
-                        HitQuestionBlock(world, dt, block);
+                        HitQuestionBlock(world, dt, block, player);
                     }
                     else if (block->hasComponent<CoinBlock>())
                     {
@@ -85,6 +86,12 @@ public:
 
                         // Update
                         HitCoinBlock(world, dt, block);
+
+                        if (player->hasComponent<CoinComponent>())
+                        {
+                            auto &coinComp = player->getComponent<CoinComponent>();
+                            ++coinComp.coins; // Increment coins
+                        }
                     }
                     else if (block->hasComponent<StarBlock>())
                     {

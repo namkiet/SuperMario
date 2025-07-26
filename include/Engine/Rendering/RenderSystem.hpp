@@ -7,6 +7,7 @@
 #include <Engine/Rendering/Utility.hpp>
 #include <SFML/Graphics.hpp>
 #include <Gameplay/Score/Components.hpp>
+#include <Gameplay/Item/Components.hpp>
 
 class RenderSystem : public System
 {
@@ -14,6 +15,9 @@ private:
     sf::Font font;
     void scoreRender(const World &world, sf::RenderWindow &window, sf::Font font) const;
     void timeRender(const World &world, sf::RenderWindow &window, sf::Font font) const;
+    void coinRender(const World &world, sf::RenderWindow &window, sf::Font font) const;
+    void textRender(const World &world, sf::RenderWindow &window, sf::Font font) const;
+    void mapNameRender(const World &world, sf::RenderWindow &window, sf::Font font) const;
 
 public:
     RenderSystem()
@@ -29,7 +33,9 @@ public:
     {
         timeRender(world, window, font);
         scoreRender(world, window, font);
-
+        coinRender(world, window, font);
+        mapNameRender(world, window, font);
+        
         if (world.findFirst<Camera>())
         {
             auto &cam = world.findFirst<Camera>()->getComponent<Camera>();
@@ -37,9 +43,14 @@ public:
             sf::View view(cam.target, sf::Vector2f(size.x, size.y));
             window.setView(view);
         }
-
+        textRender(world, window, font);
         for (Entity *entity : world.findAll<Transform, Animation>())
         {
+            if (entity->hasComponent<SmallCoinTag>())
+            {
+                continue; //
+            }
+
             auto &tf = entity->getComponent<Transform>();
             auto &anim = entity->getComponent<Animation>();
             auto &sp = anim.sprite;

@@ -8,6 +8,7 @@
 #include <Gameplay/Item/Components.hpp>
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
+#include <Engine/Physics/PassThroughTag.hpp>
 #include <vector>
 class Coin1 : public Entity
 {
@@ -38,6 +39,22 @@ public:
     }
 };
 
-class Coin2 : public Entity
+class SmallCoin : public Entity
 {
+public:
+    SmallCoin(float x, float y, float width, float height)
+    {
+        // Set the transform for positioning
+        addComponent<Transform>(sf::Vector2f(x, y), sf::Vector2f(width, height));
+
+        // Set the animation for the coin
+        std::vector<const sf::Texture *> textures = {
+            &TextureManager::load("assets/Item/Coin/SmallCoin1_0.png"),
+            &TextureManager::load("assets/Item/Coin/SmallCoin1_1.png"),
+            &TextureManager::load("assets/Item/Coin/SmallCoin1_2.png")};
+        addComponent<Animation>(textures, width, height, 0.3, true);
+
+        addComponent<PassThroughTag>();
+        addComponent<SmallCoinTag>();
+    }
 };

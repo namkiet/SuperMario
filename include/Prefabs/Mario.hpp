@@ -57,12 +57,14 @@ public:
 
         addComponent<InputTag>();
 
-        addComponent<CanFireTag>();
+        // addComponent<CanFireTag>();
 
         addComponent<CanHitBlockTag>();
 
         addComponent<ScoreComponent>();
 
         addComponent<TimeComponent>();
+
+        addComponent<CoinComponent>();
     }
 };

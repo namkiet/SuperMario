@@ -20,8 +20,16 @@ class CollectSystem : public System
                 if (collider->hasComponent<ScoreComponent>())
                 {
                     auto &scoreComponent = collider->getComponent<ScoreComponent>();
-                    scoreComponent.score += 100; // Increment score by 100 for each collectable item
+                    scoreComponent.score += 1000; // Increment score by 100 for each collectable item
                 }
+
+                Entity *scoreTextEntity = world.createEntity();
+                scoreTextEntity->addComponent<TextComponent>();
+                auto &textComponent = scoreTextEntity->getComponent<TextComponent>();
+                textComponent.content = "1000"; // Example score text
+                textComponent.x = item->getComponent<Transform>().position.x;
+                textComponent.y = item->getComponent<Transform>().position.y - item->getComponent<Transform>().size.y / 2;
+                
                 // Check if the entity can collect the item
                 item->addComponent<DespawnTag>();
             }

@@ -76,7 +76,7 @@ public:
                 &TextureManager::load("assets/Tile/Tile1/Tile1_25.png"),
                 &TextureManager::load("assets/Tile/Tile1/Tile1_26.png")};
 
-            addComponent<Animation>(textures, width, height, 0.15f, true);
+            addComponent<Animation>(textures, width, height, 0.3f, true);
         }
         else if (index == 2)
         {
@@ -92,7 +92,7 @@ public:
                 &TextureManager::load("assets/Tile/Tile1/Tile1_25.png"),
                 &TextureManager::load("assets/Tile/Tile1/Tile1_26.png")};
 
-            addComponent<Animation>(textures, width, height, 0.15f, true);
+            addComponent<Animation>(textures, width, height, 0.3f, true);
         }
         else if (index == 3)
         {
@@ -108,7 +108,7 @@ public:
                 &TextureManager::load("assets/Tile/Tile1/Tile1_25.png"),
                 &TextureManager::load("assets/Tile/Tile1/Tile1_26.png")};
 
-            addComponent<Animation>(textures, width, height, 0.15f, true);
+            addComponent<Animation>(textures, width, height, 0.3f, true);
         }
         else if (index == 4)
         {
@@ -124,7 +124,7 @@ public:
                 &TextureManager::load("assets/Tile/Tile1/Tile1_25.png"),
                 &TextureManager::load("assets/Tile/Tile1/Tile1_26.png")};
 
-            addComponent<Animation>(textures, width, height, 0.15f, true);
+            addComponent<Animation>(textures, width, height, 0.3f, true);
         }
         else if (index == 5)
         {

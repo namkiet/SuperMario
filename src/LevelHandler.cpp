@@ -5,6 +5,7 @@
 #include <Prefabs/Enemy.hpp>
 #include <Prefabs/Mario.hpp>
 #include <Prefabs/Background.hpp>
+#include <Prefabs/Coin.hpp>
 #include <iostream>
 using namespace std;
 
@@ -329,6 +330,7 @@ void LevelHandler::setBackground()
 void LevelHandler::start()
 {
     setBackground();
+    world.createEntity<SmallCoin>(325, 45, 15, 24);
     setLevel();
     setPlayer();
     setEnemy();
