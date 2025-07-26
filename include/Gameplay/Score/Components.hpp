@@ -9,5 +9,6 @@ struct ScoreComponent : public Component
 
 struct TimeComponent : public Component
 {
-    int timer = 300; // Initialize time to 300 seconds (5 minutes)
+    int timer = 300;  // Initialize time to 300 seconds (5 minutes)
+    int subtimer = 0; // Initialize sub-timer to 0
 };

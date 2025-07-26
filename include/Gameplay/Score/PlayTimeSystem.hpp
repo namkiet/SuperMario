@@ -14,7 +14,12 @@ class PlayTimeSystem : public System
             TimeComponent &timeComponent = entity->getComponent<TimeComponent>();
             if (timeComponent.timer > 0)
             {
-                --timeComponent.timer; // Decrement the timer by 1 second
+               ++timeComponent.subtimer;
+               if (timeComponent.subtimer >= 30) // Increment timer every 60 frames
+               {
+                   timeComponent.timer--;
+                   timeComponent.subtimer = 0; // Reset sub-timer
+               }
             }
             else
             {
