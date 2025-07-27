@@ -1,6 +1,5 @@
 #include <PlayerPowerStates/PlayerBigState.hpp>
-#include <PlayerPowerStates/PlayerSmallState.hpp>
-#include <PlayerPowerStates/PlayerGrowingUpState.hpp>
+#include <PlayerPowerStates/PlayerFireState.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Gameplay/Player/Components.hpp>
@@ -25,31 +24,12 @@ void PlayerBigState::onEnter(Entity* entity)
     }
 }
 
-void PlayerBigState::onExit(Entity* entity)
-{  
-    entity->removeComponent<CanBreakBrickTag>();
-    entity->removeComponent<BigMarioTag>();
-
-    if (entity->hasComponent<Transform>())
-    {
-        auto& tf = entity->getComponent<Transform>();
-        tf.size.y *= 0.5f;
-        tf.position.y += tf.size.y;
-    }
-
-    if (entity->hasComponent<BoxCollider2D>())
-    {
-        auto& box = entity->getComponent<BoxCollider2D>();
-        box.size.y *= 0.5f;
-    }
-}
-
 std::shared_ptr<PlayerPowerState> PlayerBigState::getNewState(Entity* entity)
 {
-    // if (!entity->hasComponent<ShrinkTag>()) 
-    // {
-    //     return std::make_shared<PlayerShrinkingState>();
-    // }
+    if (entity->hasComponent<FireMarioTag>()) 
+    {
+        return std::make_shared<PlayerFireState>();
+    }
 
     return nullptr;
 }

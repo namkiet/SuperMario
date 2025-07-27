@@ -8,6 +8,7 @@
 #include <Engine/Physics/GravitySystem.hpp>
 #include <Engine/Physics/MovementSystem.hpp>
 #include <Engine/Rendering/RenderSystem.hpp>
+#include <Engine/Rendering/DrawBoxColliderSystem.hpp>
 
 #include <Gameplay/Patrol/PatrolSystem.hpp>
 #include <Gameplay/LifeSpan/LifeSpanSystem.hpp>
@@ -29,6 +30,8 @@
 #include <Gameplay/Item/StarJumpingSystem.hpp>
 #include <Gameplay/Item/FireBulletSystem.hpp>
 #include <Gameplay/Collect/CollectSystem.hpp>
+#include <Gameplay/Collect/CollectMushroomSystem.hpp>
+#include <Gameplay/Collect/CollectFlowerSystem.hpp>
 #include <Gameplay/Fire/FireSystem.hpp>
 
 #include <cassert>
@@ -113,6 +116,7 @@ GameManager::GameManager() : levelHandler(world)
     world.addSystem<CameraSystem>();
     world.addSystem<AnimationSystem>();
     world.addSystem<RenderSystem>();
+    world.addSystem<DrawBoxColliderSystem>();
 
     world.addSystem<LifeSystem>();
 
@@ -120,7 +124,11 @@ GameManager::GameManager() : levelHandler(world)
     world.addSystem<PatrolSystem>();
     world.addSystem<StompSystem>();
     world.addSystem<HitSpecialBlockSystem>();
+
     world.addSystem<CollectSystem>();
+    world.addSystem<CollectMushroomSystem>();
+    world.addSystem<CollectFlowerSystem>();
+
     world.addSystem<ItemEmergingSystem>();
     world.addSystem<CoinJumpingSystem>();
     world.addSystem<DebrisSystem>();
@@ -191,10 +199,12 @@ void GameManager::handleEvent(const sf::Event &event)
 
 void GameManager::update(float dt)
 {
+    std::cout << 1.0f / dt << "\n";
     world.update(dt);
 }
 
 void GameManager::draw(sf::RenderWindow &window) const
 {
     world.getSystem<RenderSystem>()->draw(world, window);
+    world.getSystem<DrawBoxColliderSystem>()->draw(world, window);
 }

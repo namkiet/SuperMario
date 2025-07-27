@@ -157,6 +157,8 @@ public:
             // Add the level up block tag
             addComponent<LevelUpBlock>();
 
+            removeComponent<BlockTag>();
+
             // Get the texture for the block
             // addComponent<Animation>(TextureManager::load("assets/Tile/Tile1/Tile1_2.png"));
         }

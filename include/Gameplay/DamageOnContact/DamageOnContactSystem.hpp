@@ -29,8 +29,14 @@ public:
 
                 if (validHit)
                 {
-                    entity->addComponent<DespawnTag>();
-                    //std::cout << "despawned in damageOnContace system" << std::endl;
+                    if (entity->hasComponent<BigMarioTag>())
+                    {
+                        // entity->addCompnent<ShrinkTag>();
+                    }
+                    else
+                    {
+                        entity->addComponent<DespawnTag>();
+                    }
                 }
             }
         }

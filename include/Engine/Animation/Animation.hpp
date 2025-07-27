@@ -47,4 +47,5 @@ struct Animation : public Component
     bool flipY = false;
     bool hasEnded = false;
     std::vector<const sf::Texture *> textures;
+    int zIndex = 0;
 };

@@ -7,6 +7,7 @@
 #include <Engine/Rendering/Utility.hpp>
 #include <SFML/Graphics.hpp>
 #include <Gameplay/Score/Components.hpp>
+#include <algorithm>
 
 class RenderSystem : public System
 {
@@ -36,7 +37,12 @@ public:
             window.setView(view);
         }
 
-        for (Entity *entity : world.findAll<Transform, Animation>())
+        auto entities = world.findAll<Transform, Animation>();
+        std::sort(entities.begin(), entities.end(), [](Entity* a, Entity* b) { // sort by z-index (to allow which entity lie in front of other)
+            return a->template getComponent<Animation>().zIndex < b->template getComponent<Animation>().zIndex;
+        });
+
+        for (Entity *entity : entities)
         {
             auto &tf = entity->getComponent<Transform>();
             auto &anim = entity->getComponent<Animation>();
@@ -72,18 +78,6 @@ public:
             // sp.setPosition(center);
             
             window.draw(sp);
-
-            // Draw box collider if exists
-            if (entity->hasComponent<BoxCollider2D>())
-            {
-                auto &box = entity->getComponent<BoxCollider2D>();
-                sf::RectangleShape rect(box.size);
-                rect.setPosition(tf.position + box.offset);
-                rect.setOutlineColor(sf::Color::Red);
-                rect.setOutlineThickness(2.f);
-                rect.setFillColor(sf::Color::Transparent);
-                window.draw(rect);
-            }
         }
     }
 };
