@@ -39,7 +39,7 @@ void HitSpecialBlockSystem::HitCoinBlock(World &world, float dt, Entity *block)
 
     if (coinBlockComponent.hitCount > 0)
     {
-        world.createEntity<Coin1>(pos.x, pos.y - sz.y - sz.y / 4, 48, 48);
+        auto coin = world.createEntity<Coin1>(pos.x, pos.y - sz.y - sz.y / 4, 48, 48);
 
         coinBlockComponent.timer = 0.0f;
         --coinBlockComponent.hitCount;

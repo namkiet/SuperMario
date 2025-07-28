@@ -47,7 +47,8 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
         // Remove CoinQuestionBlock component
         block->removeComponent<CoinQuestionBlock>();
 
-        world.createEntity<Coin1>(pos.x, pos.y - sz.y, 48, 48);
+        auto coin = world.createEntity<Coin1>(pos.x, pos.y - sz.y, 48, 48);
+
         if (player->hasComponent<CoinComponent>())
         {
             auto &coinComp = player->getComponent<CoinComponent>();

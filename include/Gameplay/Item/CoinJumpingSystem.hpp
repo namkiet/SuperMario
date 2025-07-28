@@ -2,27 +2,26 @@
 #include <World.hpp>
 #include <Prefabs/Coin.hpp>
 #include <Engine/Core/Transform.hpp>
+#include <Gameplay/LifeSpan/Components.hpp>
 #include <Gameplay/Score/Components.hpp>
 #include <iostream>
 
 class CoinJumpingSystem : public System
 {
 private:
-    int count = 0;
-
 public:
     void update(World &world, float dt) override
     {
-        for (Entity *coin : world.findAll<Coin1Tag, Transform>())
+        for (Entity *coin : world.findAll<Coin1Tag, Transform, LifeSpan>())
         {
-            ++count;
             auto &pos = coin->getComponent<Transform>().position;
             auto &size = coin->getComponent<Transform>().size;
+            auto &lifeSpan = coin->getComponent<LifeSpan>();
 
             // Make the coin jump
             pos.y -= 100.0f * dt; // Adjust the jump height and speed as needed
 
-            if (count % 14 == 0)
+            if (lifeSpan.value <= dt)
             {
                 Entity *scoreTextEntity = world.createEntity();
                 scoreTextEntity->addComponent<TextComponent>();
@@ -30,7 +29,6 @@ public:
                 textComponent.content = "200"; // Example score text
                 textComponent.x = pos.x;
                 textComponent.y = pos.y + size.y;
-                count = 0; // Reset count after displaying score
 
                 Entity *player = nullptr;
                 for (Entity *entity : world.findAll<PlayerTag>())
@@ -49,7 +47,7 @@ public:
                 }
             }
 
-                        // Reset position after jumping
+            // Reset position after jumping
             // if (pos.y < coin->getComponent<CoinComponent>())
             // {
             //     cout << "Coin jumped and reset position." << endl;
