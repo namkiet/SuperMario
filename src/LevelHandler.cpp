@@ -248,7 +248,7 @@ void LevelHandler::setEnemy()
             {
                 if (count >= 1)
                 {
-                    // // cout<< "Enemy starting position found at: (" << j << ", " << i << ")" << endl;
+                    cout<< "Enemy starting position found at: (" << j << ", " << i << ")" << endl;
                     auto goomba = world.createEntity<Enemy>(j * 16, i * 16, 16, 16, 3, 0);
                 }
             }

@@ -10,6 +10,8 @@ public:
     {
         for (Entity *entity1 : world.findAll<BoxCollider2D, Transform>())
         {
+            if (entity1->getComponent<BoxCollider2D>().isDisabled)
+                continue;
             auto &coll = entity1->getComponent<BoxCollider2D>().collisions;
             coll.clear();
 

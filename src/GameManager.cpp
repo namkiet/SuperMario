@@ -30,7 +30,7 @@
 #include <Gameplay/Item/FireBulletSystem.hpp>
 #include <Gameplay/Collect/CollectSystem.hpp>
 #include <Gameplay/Fire/FireSystem.hpp>
-
+#include <Gameplay/Tele/TeleSystem.hpp>
 #include <cassert>
 #include <iostream>
 
@@ -120,6 +120,7 @@ GameManager::GameManager() : levelHandler(world)
     world.addSystem<PatrolSystem>();
     world.addSystem<StompSystem>();
     world.addSystem<HitSpecialBlockSystem>();
+    world.addSystem<TeleSystem>();
     world.addSystem<CollectSystem>();
     world.addSystem<ItemEmergingSystem>();
     world.addSystem<CoinJumpingSystem>();
