@@ -8,6 +8,7 @@
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/Background/Components.hpp>
+#include <iostream>
 
 class Background : public Entity
 {
@@ -18,7 +19,7 @@ public:
         // addComponent<BlockTag>();
 
         // Set the size of the collision box for the background
-        // addComponent<BoxCollider2D>(sf::Vector2f(width * scale, height * scale));
+        addComponent<BoxCollider2D>(sf::Vector2f(width * scale, height * scale));
 
         // Set the transform for the background
         addComponent<Transform>(sf::Vector2f(x * scale, y * scale), sf::Vector2f(width * scale, height * scale));
@@ -99,6 +100,8 @@ public:
         {
             // Add the flagpole tag
             addComponent<FlagPole>();
+
+            // addComponent<BoxCollider2D>(sf::Vector2f(width * scale, height * scale));
 
             // Set the texture for the background
             // addComponent<Animation>(TextureManager::load("assets/Background/FlagPole.png"));
