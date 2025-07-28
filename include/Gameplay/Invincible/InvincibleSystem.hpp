@@ -3,6 +3,7 @@
 #include <World.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/Invincible/Components.hpp>
+#include <Gameplay/Enemy/Components.hpp>
 #include <iostream>
 
 class InvincibleSystem : public System
@@ -19,12 +20,12 @@ public:
 
             if (timer == 0.0f)
             {
-                // entity->addComponent<CanKillEnemyTag>();
+                entity->addComponent<CanKillEnemyTag>();
                 entity->removeComponent<CanGetDamageTag>();
             }
             else if (timer >= duration)
             {
-                // entity->removeComponent<CanKillEnemyTag>();
+                entity->removeComponent<CanKillEnemyTag>();
                 entity->addComponent<CanGetDamageTag>();
                 entity->removeComponent<InvincibleTag>();
                 continue;

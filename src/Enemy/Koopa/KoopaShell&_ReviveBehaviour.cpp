@@ -66,8 +66,6 @@ void KoopaShell_ReviveBehaviour::collideWithOther(Entity* entity)
 
     for (auto& [collider, direction] : box.collisions)
     {
-        if (collider->hasComponent<PlayerTag>()) continue;
-
         if (collider->hasComponent<CanKillEnemyTag>())
         {
             entity->addComponent<ChangeToKoopaFlippedTag>();
