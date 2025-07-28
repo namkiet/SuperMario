@@ -18,13 +18,13 @@
 #include <Prefabs/Mario.hpp>
 #include <Prefabs/Tile.hpp>
 #include <Prefabs/Pipe.hpp>
-#include <Prefabs/Enemy/Goomba/Goomba.hpp>
-#include <Prefabs/Enemy/Koopa/Koopa.hpp> 
-#include <Prefabs/Enemy/Koopa/KoopaJumping.hpp>
-#include <Prefabs/Enemy/Koopa/KoopaFlying.hpp>
-#include <Prefabs/Enemy/Piranha/Piranha.hpp>
-#include <Prefabs/Enemy/EnemyBehaviourSystem.hpp>
-#include <Prefabs/Enemy/EnemyStateSystem.hpp>
+#include <Gameplay/Enemy/Goomba/Goomba.hpp>
+#include <Gameplay/Enemy/Koopa/Koopa.hpp> 
+#include <Gameplay/Enemy/Koopa/KoopaJumping.hpp>
+#include <Gameplay/Enemy/Koopa/KoopaFlying.hpp>
+#include <Gameplay/Enemy/Piranha/Piranha.hpp>
+#include <Gameplay/Enemy/EnemyBehaviourSystem.hpp>
+#include <Gameplay/Enemy/EnemyStateSystem.hpp>
 #include <iostream>
 
 GameManager::GameManager()
