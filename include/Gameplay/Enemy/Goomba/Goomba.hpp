@@ -21,7 +21,7 @@ public:
     {
         addComponent<RigidBody>(RigidBody(sf::Vector2f(0, 0)));
         addComponent<Transform>(Transform(sf::Vector2f(x, y), sf::Vector2f(16 * scale, 16 * scale)));
-        addComponent<BoxCollider2D>(BoxCollider2D(0.5f * SIZE::GRID));
+        addComponent<BoxCollider2D>(sf::Vector2f(16 * scale, 16 * scale));
 
         addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Goomba/goomba_walk.png"), 16, 16, 2, 0.5f / 2));
 
@@ -29,6 +29,7 @@ public:
         addComponent<GoombaPatrol>(sf::Vector2f(30, 0));
         addComponent<NotOnPatrolYet>();
 
+        addComponent<CanHitBlockTag>();
         addComponent<BlockTag>();
         addComponent<StompableTag>();
 

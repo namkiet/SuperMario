@@ -5,6 +5,7 @@
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/PassThroughTag.hpp>
 #include <Engine/Physics/BlockTag.hpp>
+#include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
@@ -13,6 +14,7 @@
 void GoombaFlippedState::onEnter(Entity* entity)
 {
     entity->addComponent<PassThroughTag>();
+    entity->removeComponent<CanHitBlockTag>();
 
     if (entity->hasComponent<Animation>()) 
     {

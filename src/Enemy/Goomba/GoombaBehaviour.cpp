@@ -41,10 +41,12 @@ void GoombaBehaviour::collideWithOther(Entity* entity)
         }
         else if (direction == Direction::Left && patrol.velocity.x > 0)
         {
+            // exit(0);
             patrol.velocity.x *= -1;
         }
         else if (direction == Direction::Right && patrol.velocity.x < 0)
         {
+            // exit(0);
             patrol.velocity.x *= -1;
         }
     }
