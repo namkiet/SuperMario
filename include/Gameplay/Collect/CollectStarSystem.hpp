@@ -4,6 +4,7 @@
 #include <Gameplay/Collect/Components.hpp>
 #include <Gameplay/Item/Components.hpp>
 #include <Gameplay/Player/Components.hpp>
+#include <Gameplay/Invincible/Components.hpp>
 
 class CollectStarSystem : public System
 {
@@ -17,7 +18,7 @@ class CollectStarSystem : public System
                 if (!item->hasComponent<CollectableTag>()) continue;
                 if (!item->hasComponent<StarTag>()) continue;
 
-                // player->addComponent<CanKillEnemyTag>();
+                player->addComponent<InvincibleTag>(10.0f);
             }
         }
     }

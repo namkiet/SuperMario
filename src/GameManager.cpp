@@ -24,14 +24,19 @@
 #include <Gameplay/Block/BounceBlockSystem.hpp>
 #include <Gameplay/Popup/PopupSystem.hpp>
 #include <Gameplay/DamageOnContact/DamageOnContactSystem.hpp>
+#include <Gameplay/Invincible/InvincibleSystem.hpp>
+
 #include <Gameplay/Item/ItemEmergingSystem.hpp>
 #include <Gameplay/Item/CoinJumpingSystem.hpp>
 #include <Gameplay/Item/DebrisSystem.hpp>
 #include <Gameplay/Item/StarJumpingSystem.hpp>
 #include <Gameplay/Item/FireBulletSystem.hpp>
+
 #include <Gameplay/Collect/CollectSystem.hpp>
 #include <Gameplay/Collect/CollectMushroomSystem.hpp>
 #include <Gameplay/Collect/CollectFlowerSystem.hpp>
+#include <Gameplay/Collect/CollectStarSystem.hpp>
+
 #include <Gameplay/Fire/FireSystem.hpp>
 
 #include <cassert>
@@ -128,6 +133,7 @@ GameManager::GameManager() : levelHandler(world)
     world.addSystem<CollectSystem>();
     world.addSystem<CollectMushroomSystem>();
     world.addSystem<CollectFlowerSystem>();
+    world.addSystem<CollectStarSystem>();
 
     world.addSystem<ItemEmergingSystem>();
     world.addSystem<CoinJumpingSystem>();
@@ -137,6 +143,7 @@ GameManager::GameManager() : levelHandler(world)
     world.addSystem<FireBulletSystem>();
     world.addSystem<BounceBlockSystem>();
     world.addSystem<DamageOnContactSystem>();
+    world.addSystem<InvincibleSystem>();
 
     world.addSystem<DespawnSystem>();
     world.addSystem<PlayerRespawnSystem>();
@@ -192,6 +199,9 @@ void GameManager::handleEvent(const sf::Event &event)
         if (event.key.code == sf::Keyboard::N)
         {
             // do nothing
+
+            world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(3.0f);
+
             std::cout << "HELLO\n";
         }
     }
@@ -200,6 +210,7 @@ void GameManager::handleEvent(const sf::Event &event)
 void GameManager::update(float dt)
 {
     std::cout << 1.0f / dt << "\n";
+
     world.update(dt);
 }
 

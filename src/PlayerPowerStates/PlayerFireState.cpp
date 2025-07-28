@@ -1,8 +1,9 @@
 #include <PlayerPowerStates/PlayerFireState.hpp>
+#include <PlayerPowerStates/PlayerBigInvincibleState.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/Fire/Components.hpp>
+#include <Gameplay/Invincible/Components.hpp>
 #include <ECS/Entity.hpp>
-#include <Core/TextureManager.hpp>
 
 const std::string PlayerFireState::getName() const
 {
@@ -25,6 +26,11 @@ std::shared_ptr<PlayerPowerState> PlayerFireState::getNewState(Entity* entity)
     // {
     //     return std::make_shared<PlayerShrinkingState>();
     // }
+    
+    if (entity->hasComponent<InvincibleTag>())
+    {
+        return std::make_shared<PlayerBigInvincibleState>();
+    }
 
     return nullptr;
 }
