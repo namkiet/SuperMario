@@ -34,6 +34,18 @@ public:
                     velocity.y = 200;
                     velocity.x = 0;
                 }
+
+                Entity *flag = nullptr;
+                for (Entity *entity : world.findAll<Flag>())
+                {
+                    flag = entity;
+                    break;
+                }
+
+                if (flag)
+                {
+                    flag->addComponent<RigidBody>(sf::Vector2f(0, 200));
+                }
             }
         }
     }

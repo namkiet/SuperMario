@@ -55,3 +55,8 @@ struct FlagPole : public Component
 {
     // This component can be used to tag entities that represent a flagpole background
 };
+
+struct Flag : public Component
+{
+    // This component can be used to tag entities that represent a flag background
+};

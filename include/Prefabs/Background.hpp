@@ -106,5 +106,13 @@ public:
             // Set the texture for the background
             // addComponent<Animation>(TextureManager::load("assets/Background/FlagPole.png"));
         }
+        else if (index == 10)
+        {
+            addComponent<Flag>();
+
+            addComponent<CanHitBlockTag>();
+            
+            addComponent<Animation>(TextureManager::load("assets/Background/Flag.png"));
+        }
     }
 };
