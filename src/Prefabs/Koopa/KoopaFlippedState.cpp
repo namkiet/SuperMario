@@ -5,6 +5,7 @@
 #include <Prefabs/Enemy/Koopa/KoopaNormalState.hpp>
 #include <Prefabs/Enemy/Koopa/KoopaShellState.hpp>
 #include <Prefabs/Enemy/Koopa/KoopaSlideState.hpp>
+#include <Prefabs/Enemy/Koopa/KoopaFlippedBehaviour.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/PassThroughTag.hpp>
 #include <Engine/Physics/BlockTag.hpp>
@@ -29,6 +30,10 @@ void KoopaFlippedState::onEnter(Entity* entity)
         anim.currentFrame = 0;
         anim.timer = 0;
     }
+
+    auto& tag = entity->getComponent<EnemyTag>();
+    tag.behaviour.reset();
+    tag.behaviour = std::make_shared<KoopaFlippedBehaviour>();
     
     entity->getComponent<RigidBody>().velocity.y = -300;
     entity->getComponent<KoopaPatrol>().velocity = sf::Vector2f(0, 0);

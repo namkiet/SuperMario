@@ -8,6 +8,8 @@ struct KoopaFlippedTag : public Component {};
 struct KoopaShellTag : public Component {};
 struct KoopaReviveTag : public Component {};
 struct KoopaSlideTag : public Component {};
+struct KoopaJumpingTag : public Component {};
+struct KoopaFlyingTag : public Component {};
 struct ChangeToKoopaNormalTag : public Component {};
 struct ChangeToKoopaFlippedTag : public Component {};
 struct ChangeToKoopaShellTag : public Component {};
@@ -21,4 +23,13 @@ struct KoopaPatrol : public Component
     
     sf::Vector2f velocity;
     Direction lastDirection;
+};
+
+struct KoopaFlyingPatrol : public Component
+{
+    KoopaFlyingPatrol() : velocity(sf::Vector2f(0, 0)) {}
+    
+    sf::Vector2f velocity;
+    float phaseDuration = 5;
+    float timer = 0;
 };

@@ -6,6 +6,7 @@
 #include <Prefabs/Enemy/Koopa/KoopaShellState.hpp>
 #include <Prefabs/Enemy/Koopa/KoopaReviveState.hpp>
 #include <Prefabs/Enemy/Koopa/KoopaSlideState.hpp>
+#include <Prefabs/Enemy/Koopa/KoopaShell_ReviveBehaviour.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
@@ -28,6 +29,10 @@ void KoopaShellState::onEnter(Entity* entity)
         anim.currentFrame = 0;
         anim.timer = 0;
     }
+
+    auto& tag = entity->getComponent<EnemyTag>();
+    tag.behaviour.reset();
+    tag.behaviour = std::make_shared<KoopaShell_ReviveBehaviour>();
 
     entity->getComponent<Transform>().size = SIZE::GRID;
     entity->getComponent<BoxCollider2D>().size = SIZE::GRID;

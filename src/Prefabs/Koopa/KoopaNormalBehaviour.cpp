@@ -1,0 +1,112 @@
+#include <ECS/Entity.hpp>
+#include <Prefabs/Enemy/Koopa/KoopaNormalBehaviour.hpp>
+#include <Prefabs/Enemy/Components.hpp>
+#include <Prefabs/Enemy/Koopa/Components.hpp>
+#include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Physics/BlockTag.hpp>
+#include <Engine/Core/RigidBody.hpp>
+#include <Core/Physics.hpp>
+#include <Core/Variables.hpp>
+#include <Gameplay/Player/Components.hpp>
+#include <iostream>
+
+void KoopaNormalBehaviour::collideWithPlayer(Entity* entity)
+{
+    if (!entity->hasComponent<KoopaNormalTag>()) return;
+
+    const auto& box = entity->getComponent<BoxCollider2D>();
+
+    for (auto& [collider, direction] : box.collisions)
+    {
+        if (!collider->hasComponent<PlayerTag>()) continue;
+
+        if (direction == Direction::Bottom)
+        {
+            entity->addComponent<ChangeToKoopaShellTag>();
+        }
+        break;
+    }
+}
+
+
+void KoopaNormalBehaviour::collideWithOther(Entity* entity)
+{
+    if (!entity->hasComponent<KoopaNormalTag>()) return;
+
+    const auto& box = entity->getComponent<BoxCollider2D>();
+    auto& patrol = entity->getComponent<KoopaPatrol>();
+
+    for (auto& [collider, direction] : box.collisions)
+    {
+        if (collider->hasComponent<PlayerTag>()) continue;
+
+        if (collider->hasComponent<CanKillEnemyTag>())
+        {
+            entity->addComponent<ChangeToKoopaFlippedTag>();
+        }
+
+        if (direction == Direction::Left && patrol.lastDirection == Direction::Right && patrol.velocity.x != 0)
+        {
+            patrol.velocity.x *= -1;
+            patrol.lastDirection = Direction::Left;
+        }
+        else if (direction == Direction::Right && patrol.lastDirection == Direction::Left && patrol.velocity.x != 0)
+        {
+            patrol.velocity.x *= -1;
+            patrol.lastDirection = Direction::Right;
+        }
+    }
+}
+
+
+void KoopaNormalBehaviour::patrol(Entity* entity, float dt, Entity* camera)
+{
+    if (!entity->hasComponent<KoopaNormalTag>()) return;
+    if (!entity->hasComponent<KoopaPatrol>()) return;
+
+    auto& cam = camera->getComponent<Camera>();
+    auto& patrol = entity->getComponent<KoopaPatrol>();
+    auto& box = entity->getComponent<BoxCollider2D>();
+    auto& rb = entity->getComponent<RigidBody>();
+    auto& tf = entity->getComponent<Transform>();
+    auto& pox = tf.position;
+
+    // Koopa starts patrolling when it is a suitable distance from the camera
+    if (entity->hasComponent<NotOnPatrolYet>())
+    {
+        if (tf.position.x - (cam.target.x + SIZE::SCREEN.x/2) <= 100)
+        {
+            patrol.velocity = sf::Vector2f(-30, 0);
+            patrol.lastDirection = Direction::Left;
+            entity->removeComponent<NotOnPatrolYet>();
+        }
+    }
+
+    // Koopa will turn back when it will fall if it is still moving in current direction
+    pox.x += (patrol.velocity.x + rb.velocity.x) * dt;
+    pox.y += (patrol.velocity.y + rb.velocity.y) * dt;
+        
+    bool stillOnGround = false;
+    for (auto& [collider, direction] : box.collisions)
+        if (Physics::GetCollisionDirection(entity, collider) == Direction::Top)
+        {
+            stillOnGround = true;
+            break;
+        }
+        
+    pox.x -= (patrol.velocity.x + rb.velocity.x) * dt;
+    pox.y -= (patrol.velocity.y + rb.velocity.y) * dt;
+        
+    if (stillOnGround == false && rb.onGround == true)
+    {
+        patrol.velocity.x *= -1;
+        patrol.lastDirection = (patrol.velocity.x > 0 ? Direction::Right : Direction::Left);
+    }
+
+    // Apply patrol velocity
+    rb.velocity.x = patrol.velocity.x;
+    if (patrol.velocity.y != 0)
+    {
+        rb.velocity.y = patrol.velocity.y;
+    }
+}

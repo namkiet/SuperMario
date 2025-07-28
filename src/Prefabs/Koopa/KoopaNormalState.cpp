@@ -5,6 +5,7 @@
 #include <Prefabs/Enemy/Koopa/KoopaNormalState.hpp>
 #include <Prefabs/Enemy/Koopa/KoopaShellState.hpp>
 #include <Prefabs/Enemy/Koopa/KoopaSlideState.hpp>
+#include <Prefabs/Enemy/Koopa/KoopaNormalBehaviour.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/RigidBody.hpp>
@@ -30,13 +31,9 @@ void KoopaNormalState::onEnter(Entity* entity)
         anim.timer = 0;
     }
 
-    entity->getComponent<RigidBody>().velocity.y = -300;
-    entity->getComponent<RigidBody>().onGround = false;
-
-    entity->getComponent<Transform>().position.y -= SIZE::GRID.x/16 * (24 - 16);
-    entity->getComponent<Transform>().size = SIZE::GRID.x/16 * sf::Vector2f(16, 24);
-    
-    entity->getComponent<BoxCollider2D>().size = SIZE::GRID.x/16 * sf::Vector2f(16, 24);
+    auto& tag = entity->getComponent<EnemyTag>();
+    tag.behaviour.reset();
+    tag.behaviour = std::make_shared<KoopaNormalBehaviour>();
 
     auto& patrol = entity->getComponent<KoopaPatrol>();
     patrol.velocity.x = 30 * (patrol.lastDirection == Direction::Right ? 1 : -1);

@@ -6,8 +6,10 @@
 #include <Prefabs/Enemy/Koopa/KoopaShellState.hpp>
 #include <Prefabs/Enemy/Koopa/KoopaReviveState.hpp>
 #include <Prefabs/Enemy/Koopa/KoopaSlideState.hpp>
+#include <Prefabs/Enemy/Koopa/KoopaShell_ReviveBehaviour.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Core/Transform.hpp>
+#include <Engine/Core/RigidBody.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
@@ -24,10 +26,14 @@ void KoopaReviveState::onEnter(Entity* entity)
         anim.frameWidth = 16;
         anim.frameHeight = 16;
         anim.frameCount = 2;
-        anim.frameDuration = stateDuration / anim.frameCount / 6;
+        anim.frameDuration = stateDuration / anim.frameCount / 9;
         anim.currentFrame = 0;
         anim.timer = 0;
     }
+
+    auto& tag = entity->getComponent<EnemyTag>();
+    tag.behaviour.reset();
+    tag.behaviour = std::make_shared<KoopaShell_ReviveBehaviour>();
 
     entity->getComponent<Transform>().size = SIZE::GRID;
     entity->getComponent<BoxCollider2D>().size = SIZE::GRID;
@@ -43,6 +49,14 @@ std::shared_ptr<EnemyState> KoopaReviveState::getNewState(Entity* entity, float 
     if (timer > stateDuration)
     {
         entity->addComponent<ChangeToKoopaNormalTag>();
+
+        entity->getComponent<RigidBody>().velocity.y = -300;
+        entity->getComponent<RigidBody>().onGround = false;
+
+        entity->getComponent<Transform>().position.y -= SIZE::GRID.x/16 * (24 - 16);
+        entity->getComponent<Transform>().size = SIZE::GRID.x/16 * sf::Vector2f(16, 24);
+
+        entity->getComponent<BoxCollider2D>().size = SIZE::GRID.x/16 * sf::Vector2f(16, 24);
     }
 
     if (entity->hasComponent<ChangeToKoopaNormalTag>())

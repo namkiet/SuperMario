@@ -11,25 +11,26 @@
 #include <Core/Variables.hpp>
 #include <Prefabs/Enemy/Components.hpp>
 #include <Prefabs/Enemy/Koopa/Components.hpp>
-#include <Prefabs/Enemy/Koopa/KoopaNormalState.hpp>
-#include <Prefabs/Enemy/Koopa/KoopaNormalBehaviour.hpp>
+#include <Prefabs/Enemy/Koopa/KoopaFlyingState.hpp>
+#include <Prefabs/Enemy/Koopa/KoopaFlyingBehaviour.hpp>
 
-class Koopa : public Entity
+class KoopaFlying : public Entity
 {
 public:
-    Koopa() = default;
+    KoopaFlying() = default;
     
-    Koopa(float x, float y)
+    KoopaFlying(float x, float y)
     {
         addComponent<RigidBody>(RigidBody(sf::Vector2f(0, 0)));
         addComponent<Transform>(Transform(sf::Vector2f(x, y), SIZE::GRID.x/16 * sf::Vector2f(16, 24)));
         addComponent<BoxCollider2D>(BoxCollider2D(SIZE::GRID.x/16 * sf::Vector2f(16, 24)));
 
-        addComponent<Animation>(Animation(TextureManager::load("assets/koopa_walk.png"), 16, 24, 2, 0.5f / 2));
+        addComponent<Animation>(Animation(TextureManager::load("assets/koopa_fly.png"), 16, 24, 2, 0.5f / 2));
 
-        addComponent<EnemyTag>(std::make_shared<KoopaNormalState>(), std::make_shared<KoopaNormalBehaviour>());
+        addComponent<EnemyTag>(std::make_shared<KoopaFlyingState>(), std::make_shared<KoopaFlyingBehaviour>());
         addComponent<KoopaPatrol>();
-        addComponent<KoopaNormalTag>();
+        addComponent<KoopaFlyingPatrol>();
+        addComponent<KoopaFlyingTag>();
         addComponent<NotOnPatrolYet>();
 
         addComponent<BlockTag>();

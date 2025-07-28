@@ -20,6 +20,8 @@
 #include <Prefabs/Pipe.hpp>
 #include <Prefabs/Enemy/Goomba/Goomba.hpp>
 #include <Prefabs/Enemy/Koopa/Koopa.hpp> 
+#include <Prefabs/Enemy/Koopa/KoopaJumping.hpp>
+#include <Prefabs/Enemy/Koopa/KoopaFlying.hpp>
 #include <Prefabs/Enemy/Piranha/Piranha.hpp>
 #include <Prefabs/Enemy/EnemyBehaviourSystem.hpp>
 #include <Prefabs/Enemy/EnemyStateSystem.hpp>
@@ -37,7 +39,7 @@ GameManager::GameManager()
     for (int i = 0; i < 3; i++)
     {
         auto goomba = world.createEntity<Goomba>(2000 + 100 * i, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 200);
-        auto koopa = world.createEntity<Koopa>(1500 + 100 * i, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 200);
+        auto koopa = world.createEntity<KoopaFlying>(1500 + 100 * i, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 200);
     }
 
     world.createEntity<Tile>(50, SIZE::SCREEN.y - 2 * SIZE::GRID.y, "assets/platform_block.png");  

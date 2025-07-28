@@ -21,7 +21,6 @@ void GoombaBehaviour::collideWithPlayer(Entity* entity)
         {
             entity->addComponent<ChangeToGoombaStompedTag>();
         }
-
         break;
     }
 }
@@ -52,29 +51,27 @@ void GoombaBehaviour::collideWithOther(Entity* entity)
 }
 
 
-void GoombaBehaviour::activatePatrol(Entity* entity, Entity* camera)
-{
-    if (!entity->hasComponent<NotOnPatrolYet>()) return;
-
-    auto& patrol = entity->getComponent<GoombaPatrol>();
-    auto& tf = entity->getComponent<Transform>();
-    auto& cam = camera->getComponent<Camera>();
-
-    if (tf.position.x - (cam.target.x + SIZE::SCREEN.x/2) <= 100)
-    {
-        patrol.velocity = sf::Vector2f(-30, 0);
-        entity->removeComponent<NotOnPatrolYet>();
-    }
-}
-
-
-void GoombaBehaviour::patrol(Entity* entity, float dt)
+void GoombaBehaviour::patrol(Entity* entity, float dt, Entity* camera)
 {
     if (!entity->hasComponent<GoombaPatrol>()) return;
 
     auto& patrol = entity->getComponent<GoombaPatrol>();
     auto& rb = entity->getComponent<RigidBody>();
 
+    // Goomba starts patrolling when it is a suitable distance from the camera
+    if (entity->hasComponent<NotOnPatrolYet>())
+    {
+        auto& tf = entity->getComponent<Transform>();
+        auto& cam = camera->getComponent<Camera>();
+        
+        if (tf.position.x - (cam.target.x + SIZE::SCREEN.x/2) <= 100)
+        {
+            patrol.velocity = sf::Vector2f(-30, 0);
+            entity->removeComponent<NotOnPatrolYet>();
+        }
+    }    
+
+    // Apply patrol velocity
     rb.velocity.x = patrol.velocity.x;
     if (patrol.velocity.y != 0)
     {

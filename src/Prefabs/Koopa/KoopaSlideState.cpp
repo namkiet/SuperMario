@@ -5,6 +5,7 @@
 #include <Prefabs/Enemy/Koopa/KoopaNormalState.hpp>
 #include <Prefabs/Enemy/Koopa/KoopaShellState.hpp>
 #include <Prefabs/Enemy/Koopa/KoopaSlideState.hpp>
+#include <Prefabs/Enemy/Koopa/KoopaSlideBehaviour.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Core/TextureManager.hpp>
@@ -27,8 +28,12 @@ void KoopaSlideState::onEnter(Entity* entity)
         anim.timer = 0;
     }
 
+    auto& tag = entity->getComponent<EnemyTag>();
+    tag.behaviour.reset();
+    tag.behaviour = std::make_shared<KoopaSlideBehaviour>();
+
     auto& patrol = entity->getComponent<KoopaPatrol>();
-    patrol.velocity.x = 800 * (patrol.lastDirection == Direction::Right ? 1 : -1);
+    patrol.velocity.x = 1000 * (patrol.lastDirection == Direction::Right ? 1 : -1);
 
     std::vector<Direction> directions = { Direction::Left, Direction::Right, Direction::Bottom };
     entity->addComponent<DamageOnContactComponent>(directions);
