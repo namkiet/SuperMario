@@ -1,12 +1,23 @@
 #pragma once
 #include <ECS/Component.hpp>
-#include <PlayerStates/PlayerState.hpp>
-#include <PlayerStates/PlayerIdlingState.hpp>
-#include <PlayerStates/PlayerRunningState.hpp>
 #include <memory>
+
+class PlayerMovementState;
+class PlayerPowerState;
 
 struct PlayerTag : public Component 
 {
-    PlayerTag(std::shared_ptr<PlayerState> state) : state(state) {}
-    std::shared_ptr<PlayerState> state;
+    PlayerTag(std::shared_ptr<PlayerMovementState> movementState, std::shared_ptr<PlayerPowerState> powerState) 
+        : movementState(movementState), powerState(powerState) {}
+
+    std::shared_ptr<PlayerMovementState> movementState;
+    std::shared_ptr<PlayerPowerState> powerState;
+};
+
+struct BigMarioTag : public Component {};
+struct GrowUpTag : public Component{};
+
+
+struct InputTag: public Component
+{
 };

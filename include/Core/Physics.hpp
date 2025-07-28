@@ -4,14 +4,14 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/Transform.hpp>
 
-namespace Physics 
+namespace Physics
 {
-    inline sf::Vector2f GetCollisionOverlap(Entity* a, Entity* b)
+    inline sf::Vector2f GetCollisionOverlap(Entity *a, Entity *b)
     {
-        auto& boxA = a->getComponent<BoxCollider2D>();
-        auto& boxB = b->getComponent<BoxCollider2D>();
-        auto& tfA = a->getComponent<Transform>();
-        auto& tfB = b->getComponent<Transform>();
+        auto &boxA = a->getComponent<BoxCollider2D>();
+        auto &boxB = b->getComponent<BoxCollider2D>();
+        auto &tfA = a->getComponent<Transform>();
+        auto &tfB = b->getComponent<Transform>();
 
         auto sizeA = boxA.size;
         auto sizeB = boxB.size;
@@ -26,18 +26,18 @@ namespace Physics
         return sf::Vector2f(xo - dx, yo - dy);
     }
 
-    inline bool isColliding(Entity* a, Entity* b)
+    inline bool isColliding(Entity *a, Entity *b)
     {
         sf::Vector2f overlap = GetCollisionOverlap(a, b);
         return overlap.x > 0.0f && overlap.y > 0.0f;
     }
 
-    inline Direction GetCollisionDirection(Entity* a, Entity* b)
+    inline Direction GetCollisionDirection(Entity *a, Entity *b)
     {
-        auto& boxA = a->getComponent<BoxCollider2D>();
-        auto& boxB = b->getComponent<BoxCollider2D>();
-        auto& tfA = a->getComponent<Transform>();
-        auto& tfB = b->getComponent<Transform>();
+        auto &boxA = a->getComponent<BoxCollider2D>();
+        auto &boxB = b->getComponent<BoxCollider2D>();
+        auto &tfA = a->getComponent<Transform>();
+        auto &tfB = b->getComponent<Transform>();
 
         auto sizeA = boxA.size;
         auto sizeB = boxB.size;
@@ -78,7 +78,6 @@ namespace Physics
                 }
             }
         }
-
         return Direction::None;
     }
 

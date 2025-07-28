@@ -1,6 +1,6 @@
 #include <Game.hpp>
 #include <States/PlayingState.hpp>
-
+#include <Core/Variables.hpp>
 PlayingState::PlayingState() 
 {
     // no-op
@@ -31,5 +31,12 @@ void PlayingState::update(Game&, float dt)
 
 void PlayingState::render(Game&, sf::RenderWindow& window)
 {
+    // window.setView(view);
+    sf::Sprite backgroundSprite(TextureManager::load("assets/Background/map11_1.png"));
+    // float scaleX = SIZE::SCREEN.x / backgroundSprite.getGlobalBounds().width;
+    float scaleY = SIZE::SCREEN.y / backgroundSprite.getGlobalBounds().height;
+    backgroundSprite.setScale(1, scaleY);
+    window.draw(backgroundSprite);
+
     gameManager.draw(window);
 }

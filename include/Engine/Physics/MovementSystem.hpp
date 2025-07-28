@@ -8,21 +8,21 @@
 class MovementSystem : public System
 {
 public:
-    void update(World& world, float dt) override
+    void update(World &world, float dt) override
     {
-        for (Entity* entity : world.findAll<Transform, RigidBody>())
+        for (Entity *entity : world.findAll<Transform, RigidBody>())
         {
-            auto& vel = entity->getComponent<RigidBody>().velocity;
-            auto& tf = entity->getComponent<Transform>();
-            auto& pos = tf.position;
-            auto& prev = tf.prevPos;
+            auto &vel = entity->getComponent<RigidBody>().velocity;
+            auto &tf = entity->getComponent<Transform>();
+            auto &pos = tf.position;
+            auto &prev = tf.prevPos;
 
             prev.x = pos.x;
             prev.y = pos.y;
-            
+
             pos.x += vel.x * dt;
             pos.y += vel.y * dt;
-
+            
             if (pos.y >= SIZE::SCREEN.y)
             {
                 entity->addComponent<DespawnTag>();

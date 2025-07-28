@@ -1,4 +1,6 @@
+
 #include <GameManager.hpp>
+
 #include <Engine/Animation/AnimationSystem.hpp>
 #include <Engine/Camera/CameraSystem.hpp>
 #include <Engine/Core/DespawnSystem.hpp>
@@ -7,131 +9,190 @@
 #include <Engine/Physics/GravitySystem.hpp>
 #include <Engine/Physics/MovementSystem.hpp>
 #include <Engine/Rendering/RenderSystem.hpp>
+
+#include <Gameplay/Patrol/PatrolSystem.hpp>
 #include <Gameplay/LifeSpan/LifeSpanSystem.hpp>
-#include <Gameplay/Player/PlayerInputSystem.hpp>
+
+#include <Gameplay/Player/InputSystem.hpp>
+#include <Gameplay/Player/HandlePlayerInputSystem.hpp>
 #include <Gameplay/Player/PlayerRespawnSystem.hpp>
 #include <Gameplay/Player/PlayerStateSystem.hpp>
+
+#include <Gameplay/Reset/ResetSystem.hpp>
 #include <Gameplay/Stomp/StompSystem.hpp>
-#include <Gameplay/HitQuestionBlock/HitQuestionBlockSystem.hpp>
+#include <Gameplay/HitBlock/HitSpecialBlockSystem.hpp>
+#include <Gameplay/Block/BounceBlockSystem.hpp>
+#include <Gameplay/Popup/PopupSystem.hpp>
 #include <Gameplay/DamageOnContact/DamageOnContactSystem.hpp>
-#include <Prefabs/Coin.hpp>
-#include <Prefabs/Mario.hpp>
-#include <Prefabs/Tile.hpp>
-#include <Prefabs/Pipe.hpp>
-#include <Gameplay/Enemy/Goomba/Goomba.hpp>
-#include <Gameplay/Enemy/Koopa/Koopa.hpp> 
-#include <Gameplay/Enemy/Koopa/KoopaJumping.hpp>
-#include <Gameplay/Enemy/Koopa/KoopaFlying.hpp>
-#include <Gameplay/Enemy/Piranha/Piranha.hpp>
-#include <Gameplay/Enemy/EnemyBehaviourSystem.hpp>
+#include <Gameplay/Item/ItemEmergingSystem.hpp>
+#include <Gameplay/Item/CoinJumpingSystem.hpp>
+#include <Gameplay/Item/DebrisSystem.hpp>
+#include <Gameplay/Item/StarJumpingSystem.hpp>
+#include <Gameplay/Item/FireBulletSystem.hpp>
+#include <Gameplay/Collect/CollectSystem.hpp>
+#include <Gameplay/Fire/FireSystem.hpp>
+#include <Gameplay/Tele/TeleSystem.hpp>
+
 #include <Gameplay/Enemy/EnemyStateSystem.hpp>
+#include <Gameplay/Enemy/EnemyBehaviourSystem.hpp>
+
+#include <cassert>
 #include <iostream>
 
-GameManager::GameManager()
+// <<<<<<< HEAD
+// #include <Gameplay/BreakBrick/BreakBrickSystem.hpp>
+// #include <Gameplay/Fireball/BlockCollisionSystem.hpp>
+// #include <Gameplay/Fireball/ExplosionSystem.hpp>
+// #include <Gameplay/Fireball/DamageSystem.hpp>
+// #include <Prefabs/Coin.hpp>
+// #include <Prefabs/Mario.hpp>
+// #include <Prefabs/Enemy.hpp>
+// #include <Prefabs/Piranha.hpp>
+// #include <Prefabs/Tile.hpp>
+// #include <Prefabs/Pipe.hpp>
+// #include <Prefabs/Fireball.hpp>
+// #include <iostream>
+
+// #include <Core/AnimationManager.hpp>
+// #include <Core/TextureManager.hpp>
+
+// GameManager::GameManager()
+// =======
+
+GameManager::GameManager() : levelHandler(world)
 {
+
     // Add some Entities
-    for (int i = 0; i < 50; i++)
-    {
-        world.createEntity<Tile>(i * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y, "assets/floor_block.png");
-    }
-    auto player = world.createEntity<Mario>(200, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 50); 
+    // for (int i = 0; i < 50; i++)
+    // {
+    //     world.createEntity<Tile>(i * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y, "assets/floor_block.png");
+    // }
+    // auto player = world.createEntity<Mario>(200, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 50);
 
-    for (int i = 0; i < 3; i++)
-    {
-        auto goomba = world.createEntity<Goomba>(2000 + 100 * i, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 200);
-        auto koopa = world.createEntity<KoopaFlying>(1500 + 100 * i, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 200);
-    }
+    // for (int i = 0; i < 3; i++)
+    // {
+    //     auto goomba = world.createEntity<Enemy>(2000 + 100 * i, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 200);
+    // }
 
-    world.createEntity<Tile>(50, SIZE::SCREEN.y - 2 * SIZE::GRID.y, "assets/platform_block.png");  
+    // auto brick = world.createEntity<Tile>(50, SIZE::SCREEN.y - 5 * SIZE::GRID.y, "assets/platform_block.png");
+    // brick->addComponent<BrickTag>();
 
-    world.createEntity<Tile>(5 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 2, "assets/platform_block.png");    
-    world.createEntity<Tile>(6 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 2, "assets/platform_block.png");    
-    world.createEntity<Tile>(6 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 3, "assets/platform_block.png");   
-    world.createEntity<Tile>(7 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 2, "assets/platform_block.png");   
-    world.createEntity<Tile>(7 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 3, "assets/platform_block.png");   
-    world.createEntity<Tile>(7 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 4, "assets/platform_block.png");   
-    world.createEntity<Tile>(8 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 2, "assets/platform_block.png");     
-    world.createEntity<Tile>(8 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 3, "assets/platform_block.png");     
-    world.createEntity<Tile>(8 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 4, "assets/platform_block.png");     
-    world.createEntity<Tile>(8 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 5, "assets/platform_block.png");
+    // world.createEntity<Tile>(5 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 2, "assets/platform_block.png");
+    // world.createEntity<Tile>(6 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 2, "assets/platform_block.png");
+    // world.createEntity<Tile>(6 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 3, "assets/platform_block.png");
+    // world.createEntity<Tile>(7 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 2, "assets/platform_block.png");
+    // world.createEntity<Tile>(7 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 3, "assets/platform_block.png");
+    // world.createEntity<Tile>(7 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 4, "assets/platform_block.png");
+    // world.createEntity<Tile>(8 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 2, "assets/platform_block.png");
+    // world.createEntity<Tile>(8 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 3, "assets/platform_block.png");
+    // world.createEntity<Tile>(8 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 4, "assets/platform_block.png");
+    // world.createEntity<Tile>(8 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 5, "assets/platform_block.png");
 
-    world.createEntity<Piranha>(15 * SIZE::GRID.x, SIZE::SCREEN.y - 3 * SIZE::GRID.y);
-    
-    auto block = world.createEntity();
-    block->addComponent<BlockTag>();
-    block->addComponent<QuestionBlockTag>();
-    block->addComponent<Transform>(sf::Vector2f(7 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 4), SIZE::GRID);
-    block->addComponent<BoxCollider2D>(SIZE::GRID);
-    block->addComponent<Animation>(TextureManager::load("assets/coin_block.png"), 16, 16, 3, 0.3f);
+    // world.createEntity<Piranha>(15 * SIZE::GRID.x, SIZE::SCREEN.y - 2 * SIZE::GRID.y);
 
-    world.createEntity<Pipe>(15 * SIZE::GRID.x, SIZE::SCREEN.y - 3 * SIZE::GRID.y);
+    // auto block = world.createEntity();
+    // block->addComponent<BlockTag>();
+    // block->addComponent<QuestionBlockTag>();
+    // block->addComponent<Transform>(sf::Vector2f(7 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 4), SIZE::GRID);
+    // block->addComponent<BoxCollider2D>(SIZE::GRID);
+    // block->addComponent<Animation>(TextureManager::load("assets/coin_block.png"), 16, 16, 3, 0.3f);
+
+    // world.createEntity<Pipe>(15 * SIZE::GRID.x, SIZE::SCREEN.y - 3 * SIZE::GRID.y);
+
+    levelHandler.start();
 
     world.createEntity()->addComponent<Camera>();
 
-    // // Register Systems
-    // world.addSystem<GravitySystem>();
-    // world.addSystem<MovementSystem>();
+    // Register Systems
 
-    // world.addSystem<CollisionDetectionSystem>();
-    // world.addSystem<HitBlockSystem>();
+    world.addSystem<GravitySystem>();
+    world.addSystem<MovementSystem>();
+   
+    world.addSystem<CollisionDetectionSystem>();
+    world.addSystem<HitBlockSystem>();
+       
+    world.addSystem<InputSystem>();
+    world.addSystem<HandlePlayerInputSystem>();
+    world.addSystem<PlayerStateSystem>();
 
+    world.addSystem<CameraSystem>();
+    world.addSystem<AnimationSystem>();
+    world.addSystem<RenderSystem>();
 
-    // world.addSystem<PlayerInputSystem>();
-    // world.addSystem<PlayerStateSystem>();
+    world.addSystem<LifeSystem>();
 
-    // world.addSystem<CameraSystem>();
-    // world.addSystem<AnimationSystem>();
-    // world.addSystem<RenderSystem>();
-    
-    // world.addSystem<LifeSystem>();
+    world.addSystem<PopupSystem>();
+    world.addSystem<PatrolSystem>();
+    world.addSystem<StompSystem>();
+    world.addSystem<HitSpecialBlockSystem>();
+    world.addSystem<TeleSystem>();
+    world.addSystem<CollectSystem>();
+    world.addSystem<ItemEmergingSystem>();
+    world.addSystem<CoinJumpingSystem>();
+    world.addSystem<DebrisSystem>();
+    world.addSystem<StarJumpingSystem>(); 
+    world.addSystem<FireSystem>();
+    world.addSystem<FireBulletSystem>();
+    world.addSystem<BounceBlockSystem>();
+    world.addSystem<DamageOnContactSystem>();
+    world.addSystem<EnemyStateSystem>();
+    world.addSystem<EnemyBehaviourSystem>();
 
-    // world.addSystem<PopupSystem>();
-    // // world.addSystem<PatrolSystem>();
-    // world.addSystem<StompSystem>();
-    // world.addSystem<HitQuestionBlockSystem>();
-    // world.addSystem<DamageOnContactSystem>();
-
-    // world.addSystem<DespawnSystem>();
-    // world.addSystem<PlayerRespawnSystem>();
+    world.addSystem<DespawnSystem>();
+    world.addSystem<PlayerRespawnSystem>();
 
     // phase 1
     // world.addSystem<ResetSystem>();
     // world.addSystem<InputSystem>();
     // phase 2
     // world.addSystem<HandlePlayerInputSystem>();
-    world.addSystem<GravitySystem>();
+    // world.addSystem<GravitySystem>();
 
-    // phase 3
-    world.addSystem<CollisionDetectionSystem>();
-    world.addSystem<HitBlockSystem>();
+    // phase
+    // world.addSystem<CollisionDetectionSystem>();
+    // world.addSystem<HitBlockSystem>();
+    // world.addSystem<PopupSystem>();
+    // world.addSystem<PatrolSystem>();
+    // world.addSystem<StompSystem>();
+    // world.addSystem<BounceBlockSystem>();
+    // world.addSystem<DamageOnContactSystem>();
+    // world.addSystem<LifeSystem>();
+    // world.addSystem<CollectSystem>();
+    // world.addSystem<ItemEmergingSystem>();
+    // world.addSystem<CoinJumpingSystem>();
+    // world.addSystem<DebrisSystem>();
+    // world.addSystem<StarJumpingSystem>();
+    // world.addSystem<HitSpecialBlockSystem>();
+    // world.addSystem<FireSystem>();
+    // world.addSystem<FireBulletSystem>();
 
-    world.addSystem<PlayerInputSystem>();
+    // <<<<<<< HEAD
+    //     world.addSystem<BreakBrickSystem>();
 
-    world.addSystem<StompSystem>();
-    world.addSystem<HitQuestionBlockSystem>();
-    world.addSystem<DamageOnContactSystem>();
-    world.addSystem<LifeSystem>();
-    world.addSystem<EnemyStateSystem>();
-    world.addSystem<EnemyBehaviourSystem>();
+    //     world.addSystem<Fireball::BlockCollisionSystem>();
+    //     world.addSystem<Fireball::ExplosionSystem>();
+    //     world.addSystem<Fireball::DamageSystem>();
 
-   // phase 4
-    world.addSystem<MovementSystem>();
-    world.addSystem<PlayerStateSystem>();
-    world.addSystem<DespawnSystem>();
-    world.addSystem<PlayerRespawnSystem>();
+    // phase 4
+    // world.addSystem<MovementSystem>();
+    // world.addSystem<PlayerStateSystem>();
+    // world.addSystem<DespawnSystem>();
+    // world.addSystem<PlayerRespawnSystem>();
+
     // phase 5
-    world.addSystem<CameraSystem>();
-    world.addSystem<AnimationSystem>();
-    world.addSystem<RenderSystem>();
+    // world.addSystem<CameraSystem>();
+    // world.addSystem<AnimationSystem>();
+    // world.addSystem<RenderSystem>();
 }
 
-void GameManager::handleEvent(const sf::Event& event)
+void GameManager::handleEvent(const sf::Event &event)
 {
     if (event.type == sf::Event::KeyPressed)
     {
         if (event.key.code == sf::Keyboard::N)
         {
-            auto goomba = world.createEntity<Goomba>(300, SIZE::SCREEN.y - 2 * SIZE::GRID.y );
+            // do nothing
+            std::cout << "HELLO\n";
         }
     }
 }
@@ -141,7 +202,7 @@ void GameManager::update(float dt)
     world.update(dt);
 }
 
-void GameManager::draw(sf::RenderWindow& window) const
+void GameManager::draw(sf::RenderWindow &window) const
 {
     world.getSystem<RenderSystem>()->draw(world, window);
 }

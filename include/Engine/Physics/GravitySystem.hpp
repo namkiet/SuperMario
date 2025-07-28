@@ -13,7 +13,7 @@ public:
         for (Entity* entity : world.findAll<RigidBody>())
         {
             auto& rb = entity->getComponent<RigidBody>();
-            if (rb.applyGravity) 
+            if (rb.applyGravity) // now, applyGravity is always true
             {
                 rb.velocity.y += PHYSICS::GRAVITY * dt;
             }

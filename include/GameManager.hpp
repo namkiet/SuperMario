@@ -1,7 +1,7 @@
 #pragma once
 #include <World.hpp>
 #include <SFML/Graphics.hpp>
-
+#include <LevelHandler.hpp>
 class GameManager
 {
 public:
@@ -12,4 +12,5 @@ public:
 
 private:
     World                   world;
+    LevelHandler levelHandler;
 };

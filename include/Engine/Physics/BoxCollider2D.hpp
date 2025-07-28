@@ -21,16 +21,20 @@ struct CollisionInfo
         
     Entity* collider;
     Direction direction;
+    // bool operator==(const CollisionInfo& other) const
+    // {
+    //     return collider == other.collider && direction == other.direction;
+    // }
 };
 
 class BoxCollider2D : public Component
 {
 public:
-    BoxCollider2D(const sf::Vector2f& size = sf::Vector2f(0, 0), const sf::Vector2f& offset = sf::Vector2f(0, 0))
-        : size(size), offset(offset) {}
-
+    BoxCollider2D(const sf::Vector2f& size = sf::Vector2f(0, 0), const sf::Vector2f& offset = sf::Vector2f(0, 0), bool bounce = false)
+        : size(size), offset(offset), bounce(bounce), isDisabled(false) {}
+    bool isDisabled;
     sf::Vector2f size;
     sf::Vector2f offset;
-    bool isTrigger = false;
+    bool bounce = false;
     std::vector<CollisionInfo> collisions;
 };
