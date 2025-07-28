@@ -43,36 +43,3 @@ struct TeleChanneling: public Component // for player
             TeleTime = teleInfo.intime + teleInfo.outtime;
         }
 };
-
-
-/// CHUA XOA RIGID BODY NEN VAN CAN THIEP DUOC
-/*
-auto player = world.findFirst<PlayerTag>()
-for (auto [box, collider]: player.collision)
-{
-    dir = direction
-    if totally collide (helper func)
-    if collider enterable and (dir == collider.enterable.dir) -> addComponent<teleTag> to player
-
-}
-
-struct Enterable: public Component
-{
-    auto direction (where to enter)
-    destination (where to tele to)
-
-}
-
-hoi ban khoan chuyen delegate cac thuoc tinh cho ben nao?
-
-tele trong thoi gian co dinh
-
-TeleTag 
-{
-time
-}
-Enterable se cho distancePerSec
-
-co 2 loai, 1 la release lock control ngay luon
-tuy thuoc vao loai enterable
-*/
