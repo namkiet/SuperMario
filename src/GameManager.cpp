@@ -1,3 +1,5 @@
+#include <Gameplay/Enemy/Koopa/Koopa.hpp>
+#include <Gameplay/Enemy/Goomba/Goomba.hpp>
 #include <GameManager.hpp>
 
 #include <Engine/Animation/AnimationSystem.hpp>
@@ -38,6 +40,10 @@
 #include <Gameplay/Collect/CollectStarSystem.hpp>
 
 #include <Gameplay/Fire/FireSystem.hpp>
+#include <Gameplay/Tele/TeleSystem.hpp>
+
+#include <Gameplay/Enemy/EnemyStateSystem.hpp>
+#include <Gameplay/Enemy/EnemyBehaviourSystem.hpp>
 
 #include <cassert>
 #include <iostream>
@@ -72,10 +78,7 @@ GameManager::GameManager() : levelHandler(world)
     // }
     // auto player = world.createEntity<Mario>(200, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 50);
 
-    // for (int i = 0; i < 3; i++)
-    // {
-    //     auto goomba = world.createEntity<Enemy>(2000 + 100 * i, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 200);
-    // }
+    
 
     // auto brick = world.createEntity<Tile>(50, SIZE::SCREEN.y - 5 * SIZE::GRID.y, "assets/platform_block.png");
     // brick->addComponent<BrickTag>();
@@ -130,6 +133,7 @@ GameManager::GameManager() : levelHandler(world)
     world.addSystem<StompSystem>();
     world.addSystem<HitSpecialBlockSystem>();
 
+    world.addSystem<TeleSystem>();
     world.addSystem<CollectSystem>();
     world.addSystem<CollectMushroomSystem>();
     world.addSystem<CollectFlowerSystem>();
@@ -144,6 +148,8 @@ GameManager::GameManager() : levelHandler(world)
     world.addSystem<BounceBlockSystem>();
     world.addSystem<DamageOnContactSystem>();
     world.addSystem<InvincibleSystem>();
+    world.addSystem<EnemyStateSystem>();
+    world.addSystem<EnemyBehaviourSystem>();
 
     world.addSystem<DespawnSystem>();
     world.addSystem<PlayerRespawnSystem>();
@@ -201,8 +207,17 @@ void GameManager::handleEvent(const sf::Event &event)
             // do nothing
 
             world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(3.0f);
+        }
 
+        if (event.key.code == sf::Keyboard::X)
+        {
             std::cout << "HELLO\n";
+            auto koopa = world.createEntity<Koopa>(5 * 16, 24 * 16, 3);
+        }
+
+        if (event.key.code == sf::Keyboard::T)
+        {
+            auto goomba = world.createEntity<Goomba>(5 * 16, 24 * 16, 3);
         }
     }
 }

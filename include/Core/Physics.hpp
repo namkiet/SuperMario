@@ -53,7 +53,7 @@ namespace Physics
         float xo = 0.5f * (sizeA.x + sizeB.x);
         float yo = 0.5f * (sizeA.y + sizeB.y);
 
-        if (xo > dx && yo > dy)
+        if (xo >= dx && yo >= dy)
         {
             if (yo > dyPrev)
             {
@@ -66,7 +66,7 @@ namespace Physics
                     return Direction::Right;
                 }
             }
-            else
+            else if (xo > dx)
             {
                 if (prevA.y < posB.y)
                 {
