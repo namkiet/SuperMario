@@ -19,10 +19,10 @@ class KoopaJumping : public Entity
 public:
     KoopaJumping() = default;
     
-    KoopaJumping(float x, float y)
+    KoopaJumping(float x, float y, float scale)
     {
         addComponent<RigidBody>(RigidBody(sf::Vector2f(0, 0)));
-        addComponent<Transform>(Transform(sf::Vector2f(x, y), SIZE::GRID.x/16 * sf::Vector2f(16, 24)));
+        addComponent<Transform>(Transform(sf::Vector2f(x, y), sf::Vector2f(16 * scale, 24 * scale)));
         addComponent<BoxCollider2D>(BoxCollider2D(SIZE::GRID.x/16 * sf::Vector2f(16, 24)));
 
         addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Koopa/koopa_fly.png"), 16, 24, 2, 0.5f / 2));

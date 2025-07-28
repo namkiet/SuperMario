@@ -35,8 +35,8 @@ void KoopaReviveState::onEnter(Entity* entity)
     tag.behaviour.reset();
     tag.behaviour = std::make_shared<KoopaShell_ReviveBehaviour>();
 
-    entity->getComponent<Transform>().size = SIZE::GRID;
-    entity->getComponent<BoxCollider2D>().size = SIZE::GRID;
+    entity->getComponent<Transform>().size = sf::Vector2f(48, 48);
+    entity->getComponent<BoxCollider2D>().size = sf::Vector2f(48, 48);
     entity->getComponent<KoopaPatrol>().velocity = sf::Vector2f(0, 0);
 
     entity->removeComponent<DamageOnContactComponent>();
@@ -53,10 +53,10 @@ std::shared_ptr<EnemyState> KoopaReviveState::getNewState(Entity* entity, float 
         entity->getComponent<RigidBody>().velocity.y = -300;
         entity->getComponent<RigidBody>().onGround = false;
 
-        entity->getComponent<Transform>().position.y -= SIZE::GRID.x/16 * (24 - 16);
-        entity->getComponent<Transform>().size = SIZE::GRID.x/16 * sf::Vector2f(16, 24);
+        entity->getComponent<Transform>().position.y -= 3 * (24 - 16);
+        entity->getComponent<Transform>().size = sf::Vector2f(16 * 3, 24 * 3);
 
-        entity->getComponent<BoxCollider2D>().size = SIZE::GRID.x/16 * sf::Vector2f(16, 24);
+        entity->getComponent<BoxCollider2D>().size = sf::Vector2f(16 * 3, 24 * 3);
     }
 
     if (entity->hasComponent<ChangeToKoopaNormalTag>())

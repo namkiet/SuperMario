@@ -2,7 +2,11 @@
 #include <LevelHandler.hpp>
 #include <Prefabs/Block.hpp>
 #include <Prefabs/Pipe.hpp>
-#include <Prefabs/Enemy.hpp>
+#include <Gameplay/Enemy/Goomba/Goomba.hpp>
+#include <Gameplay/Enemy/Koopa/Koopa.hpp>
+#include <Gameplay/Enemy/Koopa/KoopaJumping.hpp>
+#include <Gameplay/Enemy/Koopa/KoopaFlying.hpp>
+#include <Gameplay/Enemy/Piranha/Piranha.hpp>
 #include <Prefabs/Mario.hpp>
 #include <Prefabs/Background.hpp>
 #include <iostream>
@@ -248,8 +252,8 @@ void LevelHandler::setEnemy()
             {
                 if (count >= 1)
                 {
-                    cout<< "Enemy starting position found at: (" << j << ", " << i << ")" << endl;
-                    auto goomba = world.createEntity<Enemy>(j * 16, i * 16, 16, 16, 3, 0);
+                    // cout<< "Enemy starting position found at: (" << j << ", " << i << ")" << endl;
+                    // auto goomba = world.createEntity<Goomba>(j * 16, i * 16, 3);
                 }
             }
             else if (red == 255 && green == 174 && blue == 201)
@@ -257,7 +261,7 @@ void LevelHandler::setEnemy()
                 if (count >= 1)
                 {
                     // cout<< "Enemy starting position found at: (" << j << ", " << i << ")" << endl;
-                    auto koopa = world.createEntity<Enemy>(j * 16, i * 16, 16, 24, 3, 1);
+                    // auto koopa = world.createEntity<Koopa>(j * 16, i * 16, 3);
                 }
             }
             ++count;
