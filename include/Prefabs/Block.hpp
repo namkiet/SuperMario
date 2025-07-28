@@ -34,37 +34,35 @@ public:
 
             // addComponent<Transform>(sf::Vector2f(x * scale, y * scale), sf::Vector2f(width, height));
 
-            if (index == -1)
-                // Get the texture for the block
-                addComponent<Animation>(TextureManager::load("assets/Tile/Ground/Map11/Map11_0.png"));
-            else if (index == -2)
-                // Get the texture for the block
-                addComponent<Animation>(TextureManager::load("assets/Tile/Ground/Map11/Map11_1.png"));
-            else if (index == -3)
-                // Get the texture for the block
-                addComponent<Animation>(TextureManager::load("assets/Tile/Ground/Map11/Map11_2.png"));
-            else if (index == -4)
-                // Get the texture for the block
-                addComponent<Animation>(TextureManager::load("assets/Tile/Ground/Map11/Map11_3.png"));
-            else if (index == -5)
-                // Get the texture for the block
-                addComponent<Animation>(TextureManager::load("assets/Tile/Ground/Map11/Map11_5.png"));
-            else if (index == -6)
-                // Get the texture for the block
-                addComponent<Animation>(TextureManager::load("assets/Tile/Ground/Map11/Map11_7.png"));
-            else if (index == -7)
-                // Get the texture for the block
-                addComponent<Animation>(TextureManager::load("assets/Tile/Ground/Map11/Map11_6.png"));
-            else if (index == -8)
-                // Get the texture for the block
-                addComponent<Animation>(TextureManager::load("assets/Tile/Ground/Map11/Map11_8.png"));
+            // if (index == -1)
+            //     // Get the texture for the block
+            //     addComponent<Animation>(TextureManager::load("assets/Tile/Ground/Map11/Map11_0.png"));
+            // else if (index == -2)
+            //     // Get the texture for the block
+            //     addComponent<Animation>(TextureManager::load("assets/Tile/Ground/Map11/Map11_1.png"));
+            // else if (index == -3)
+            //     // Get the texture for the block
+            //     addComponent<Animation>(TextureManager::load("assets/Tile/Ground/Map11/Map11_2.png"));
+            // else if (index == -4)
+            //     // Get the texture for the block
+            //     addComponent<Animation>(TextureManager::load("assets/Tile/Ground/Map11/Map11_3.png"));
+            // else if (index == -5)
+            //     // Get the texture for the block
+            //     addComponent<Animation>(TextureManager::load("assets/Tile/Ground/Map11/Map11_5.png"));
+            // else if (index == -6)
+            //     // Get the texture for the block
+            //     addComponent<Animation>(TextureManager::load("assets/Tile/Ground/Map11/Map11_7.png"));
+            // else if (index == -7)
+            //     // Get the texture for the block
+            //     addComponent<Animation>(TextureManager::load("assets/Tile/Ground/Map11/Map11_6.png"));
+            // else if (index == -8)
+            //     // Get the texture for the block
+            //     addComponent<Animation>(TextureManager::load("assets/Tile/Ground/Map11/Map11_8.png"));
 
             return;
         }
 
-        
-
-        if (index == 1)
+                if (index == 1)
         {
             // Add the coin question block tag
             addComponent<CoinQuestionBlock>();

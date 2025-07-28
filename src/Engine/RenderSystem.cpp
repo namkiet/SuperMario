@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <sstream>
 #include <Engine/Core/DespawnTag.hpp>
+#include <Core/TextureManager.hpp>
 
 void RenderSystem::scoreRender(const World &world, sf::RenderWindow &window, sf::Font font) const
 {
@@ -142,4 +143,15 @@ void RenderSystem::mapNameRender(const World &world, sf::RenderWindow &window, s
 
     window.draw(mapNameText);
     window.draw(mapNameValueText);
+}
+
+void RenderSystem::backgroundRender(sf::RenderWindow &window) const
+{
+    // window.setView(view);
+    sf::Sprite sky(TextureManager::load("assets/Background/map11_1.png"));
+    window.draw(sky);
+    sf::Sprite backgroundSprite(TextureManager::load("assets/Background/map11.png"));
+    // float scaleX = SIZE::SCREEN.x / backgroundSprite.getGlobalBounds().width;
+    backgroundSprite.setScale(3, 3);
+    window.draw(backgroundSprite);
 }

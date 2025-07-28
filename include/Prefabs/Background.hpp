@@ -29,7 +29,7 @@ public:
             addComponent<Castle>();
 
             // Set the texture for the background
-            addComponent<Animation>(TextureManager::load("assets/Background/Castle.png"));
+            // addComponent<Animation>(TextureManager::load("assets/Background/Castle.png"));
         }
         // else if (index == 1)
         // {
@@ -101,7 +101,7 @@ public:
             addComponent<FlagPole>();
 
             // Set the texture for the background
-            addComponent<Animation>(TextureManager::load("assets/Background/FlagPole.png"));
+            // addComponent<Animation>(TextureManager::load("assets/Background/FlagPole.png"));
         }
     }
 };

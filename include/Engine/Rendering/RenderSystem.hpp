@@ -18,6 +18,7 @@ private:
     void coinRender(const World &world, sf::RenderWindow &window, sf::Font font) const;
     void textRender(const World &world, sf::RenderWindow &window, sf::Font font) const;
     void mapNameRender(const World &world, sf::RenderWindow &window, sf::Font font) const;
+    void backgroundRender(sf::RenderWindow &window) const;
 
 public:
     RenderSystem()
@@ -31,11 +32,6 @@ public:
 
     void draw(const World &world, sf::RenderWindow &window) const
     {
-        timeRender(world, window, font);
-        scoreRender(world, window, font);
-        coinRender(world, window, font);
-        mapNameRender(world, window, font);
-        
         if (world.findFirst<Camera>())
         {
             auto &cam = world.findFirst<Camera>()->getComponent<Camera>();
@@ -43,7 +39,10 @@ public:
             sf::View view(cam.target, sf::Vector2f(size.x, size.y));
             window.setView(view);
         }
+        backgroundRender(window);
         textRender(world, window, font);
+        
+
         for (Entity *entity : world.findAll<Transform, Animation>())
         {
             if (entity->hasComponent<SmallCoinTag>())
@@ -98,5 +97,9 @@ public:
                 window.draw(rect);
             }
         }
+        timeRender(world, window, font);
+        scoreRender(world, window, font);
+        coinRender(world, window, font);
+        mapNameRender(world, window, font);
     }
 };
