@@ -62,7 +62,7 @@ public:
             return;
         }
 
-                if (index == 1)
+        if (index == 1)
         {
             // Add the coin question block tag
             addComponent<CoinQuestionBlock>();

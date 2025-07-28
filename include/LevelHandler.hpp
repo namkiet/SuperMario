@@ -30,13 +30,14 @@ class LevelHandler
 {
 private:
     World &world;
-        sf::Image levelImage;
-        sf::Image enemyImage;
-        sf::Image playerImage;
-        sf::Image backgroundImage;
+    sf::Image levelImage;
+    sf::Image enemyImage;
+    sf::Image playerImage;
+    sf::Image backgroundImage;
     void tileLoad(World &world, std::string tilename, float x, float y, float width, float height);
     void pipeLoad(World &world, std::string tilename, float x, float y, float width, float height);
     void groundLoad(World &world, std::string tilename, float x, float y, float width, float height);
+    void itemLoad(World &world, std::string tilename, float x, float y, float width, float height);
     void loadImage();
     // void setLevel();
     void setPlayer();

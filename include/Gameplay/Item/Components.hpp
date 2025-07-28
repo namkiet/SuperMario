@@ -43,3 +43,8 @@ struct SmallCoinTag : public Component
 {
     // This tag is used to identify the small coin item
 };
+
+struct Coin2Tag : public Component
+{
+    // This tag is used to identify the second type of coin item
+};

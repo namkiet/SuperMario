@@ -58,3 +58,33 @@ public:
         addComponent<SmallCoinTag>();
     }
 };
+
+class Coin2 : public Entity
+{
+public:
+    Coin2(float x, float y, float width, float height, float scale)
+    {
+        // Set the transform for positioning
+        addComponent<Transform>(sf::Vector2f(x * scale, y * scale), sf::Vector2f(width * scale, height * scale));
+
+        addComponent<BoxCollider2D>(sf::Vector2f(width * scale, height * scale));
+
+        // // Set the animation for the coin
+        std::vector<const sf::Texture *> textures = {
+            &TextureManager::load("assets/Item/Coin/Coin2_4.png"),
+            &TextureManager::load("assets/Item/Coin/Coin2_5.png"),
+            &TextureManager::load("assets/Item/Coin/Coin2_6.png"),
+            &TextureManager::load("assets/Item/Coin/Coin2_7.png")};
+        addComponent<Animation>(textures, width, height, 0.3, true);
+
+        // addComponent<Animation>(TextureManager::load("assets/Item/Coin/coin.png"), 16, 16, 16, 0.15);
+
+        addComponent<CollectableTag>();
+
+        // addComponent<LifeSpan>(0.5f);
+
+        addComponent<Coin2Tag>();
+
+        // addComponent<RigidBody>(sf::Vector2f(0, -600));
+    }
+};

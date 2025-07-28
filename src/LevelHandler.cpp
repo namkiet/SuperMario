@@ -383,6 +383,7 @@ void LevelHandler::loadMap(const std::string &filename, World &world)
                 }
                 tileLoad(world, tileName, x, y, tileWidth, tileHeight);
                 pipeLoad(world, tileName, x, y, tileWidth, tileHeight);
+                itemLoad(world, tileName, x, y, tileWidth, tileHeight);
             }
         }
 
@@ -504,5 +505,13 @@ void LevelHandler::groundLoad(World &world, std::string tilename, float x, float
     else if (tilename == "Ground8") // Ground block with a different texture
     {
         world.createEntity<Block>(x, y, width, height, 3, -8);
+    }
+}
+
+void LevelHandler::itemLoad(World &world, std::string tilename, float x, float y, float width, float height)
+{
+    if (tilename == "Coin2_5") // Coin
+    {
+        world.createEntity<Coin2>(x, y, width, height, 3);
     }
 }
