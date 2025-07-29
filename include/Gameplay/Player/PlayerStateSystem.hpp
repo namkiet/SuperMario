@@ -35,9 +35,9 @@ public:
 
             entity->removeComponent<Animation>();
 
-            if (tag.powerState->getName() == "GrowingUp")
+            if (tag.powerState->getName() == "GrowingUp" || tag.powerState->getName() == "Dead")
             {
-                entity->addComponent<Animation>(getAnimation("GrowingUp"));
+                entity->addComponent<Animation>(getAnimation(tag.powerState->getName()));
             }
             else
             {
@@ -70,6 +70,7 @@ public:
         animMap["RunningFire"] = Animation(TextureManager::load("assets/Mario/Fire/running.png"), 16, 32, 3, 0.15f);
 
         animMap["GrowingUp"] = Animation(TextureManager::load("assets/Mario/GrowUp/grow_up.png"), 16, 32, 7, 0.1f, false);
+        animMap["Dead"] = Animation(TextureManager::load("assets/Mario/Small/dead.png"));
     }
 
 private:

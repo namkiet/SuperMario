@@ -107,6 +107,7 @@ class TeleSystem: public System
         // player not in tele Channeling
         else
         {
+            if (!player->hasComponent<BoxCollider2D>()) return;
             auto& box = player->getComponent<BoxCollider2D>();
 
             for (auto &[block, direction] : box.collisions)

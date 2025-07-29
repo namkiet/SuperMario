@@ -34,6 +34,14 @@ namespace Physics
 
     inline Direction GetCollisionDirection(Entity *a, Entity *b)
     {
+        if (!a->hasComponent<BoxCollider2D>() || 
+            !b->hasComponent<BoxCollider2D>() || 
+            !a->hasComponent<Transform>() || 
+            !b->hasComponent<Transform>())
+        {
+            return Direction::None;
+        }
+        
         auto &boxA = a->getComponent<BoxCollider2D>();
         auto &boxB = b->getComponent<BoxCollider2D>();
         auto &tfA = a->getComponent<Transform>();

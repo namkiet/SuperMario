@@ -48,6 +48,10 @@
 #include <cassert>
 #include <iostream>
 
+
+#include <Gameplay/Enemy/Koopa/KoopaJumping.hpp>
+#include <Gameplay/Enemy/Koopa/KoopaFlying.hpp>
+
 // <<<<<<< HEAD
 // #include <Gameplay/BreakBrick/BreakBrickSystem.hpp>
 // #include <Gameplay/Fireball/BlockCollisionSystem.hpp>
@@ -108,8 +112,6 @@ GameManager::GameManager() : levelHandler(world)
     levelHandler.start();
 
     world.createEntity()->addComponent<Camera>();
-
-    // Register Systems
 
     world.addSystem<GravitySystem>();
     world.addSystem<MovementSystem>();
@@ -212,21 +214,41 @@ void GameManager::handleEvent(const sf::Event &event)
         if (event.key.code == sf::Keyboard::X)
         {
             std::cout << "HELLO\n";
-            auto koopa = world.createEntity<Koopa>(5 * 16, 24 * 16, 3);
+            auto koopa = world.createEntity<KoopaJumping>(30 * 16, 24 * 16, 3);
         }
 
         if (event.key.code == sf::Keyboard::T)
         {
-            auto goomba = world.createEntity<Goomba>(5 * 16, 24 * 16, 3);
+            auto goomba = world.createEntity<Goomba>(20 * 16, 24 * 16, 3);
+        }
+
+        if (event.key.code == sf::Keyboard::P)
+        {
+            oneFrame = !oneFrame;
+        }
+
+        if (event.key.code == sf::Keyboard::O)
+        {
+            shouldPlay = true;
         }
     }
 }
 
 void GameManager::update(float dt)
 {
-    std::cout << 1.0f / dt << "\n";
+
+
+    if (oneFrame && !shouldPlay) return;
+
+    // std::cout << 1.0f / dt << "\n";
+    
 
     world.update(dt);
+    
+    if (oneFrame)
+    {
+        shouldPlay = false;  
+    }
 }
 
 void GameManager::draw(sf::RenderWindow &window) const

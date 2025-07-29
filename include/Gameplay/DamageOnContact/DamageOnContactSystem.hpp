@@ -29,14 +29,7 @@ public:
 
                 if (validHit)
                 {
-                    if (entity->hasComponent<BigMarioTag>())
-                    {
-                        // entity->addCompnent<ShrinkTag>();
-                    }
-                    else
-                    {
-                        entity->addComponent<DespawnTag>();
-                    }
+                    entity->addComponent<DamagedTag>();
                 }
             }
         }
