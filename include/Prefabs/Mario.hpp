@@ -63,7 +63,7 @@ public:
 
         addComponent<ScoreComponent>();
 
-        addComponent<TimeComponent>();
+        addComponent<TimeComponent>(400);
 
         addComponent<CoinComponent>();
     }

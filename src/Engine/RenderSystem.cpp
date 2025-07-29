@@ -5,69 +5,47 @@
 #include <Engine/Core/DespawnTag.hpp>
 #include <Core/TextureManager.hpp>
 
-void RenderSystem::scoreRender(const World &world, sf::RenderWindow &window, sf::Font font) const
+void RenderSystem::gameComponentRender(const World &world, sf::RenderWindow &window) const
 {
-    window.setView(window.getDefaultView());
+    for (Entity *entity : world.findAll<TextComponent>())
+    {
+        auto &textComponent = entity->getComponent<TextComponent>();
+        sf::Text text = textRender(textComponent.content, textComponent.x, textComponent.y, font, textComponent.size);
+        window.draw(text);
+    }
 
+    window.setView(window.getDefaultView());
     for (Entity *entity : world.findAll<ScoreComponent>())
     {
+        // Render player name
+        sf::Text player = textRender("MARIO", 100.f, 35.f, font, 25);
+
+        // Render score
         auto &scoreComponent = entity->getComponent<ScoreComponent>();
-        sf::Text scoreText;
-
-        scoreText.setFont(font);
-        scoreText.setString("MARIO");
-        scoreText.setCharacterSize(25);
-        scoreText.setPosition(100.f, 35.f);
-        scoreText.setFillColor(sf::Color::White);
-
-        // Format score as 6 digits with leading zeros
         std::ostringstream oss;
         oss << std::setw(6) << std::setfill('0') << scoreComponent.score;
+        sf::Text score = textRender(oss.str(), 100.f, 65.f, font, 25);
 
-        sf::Text scoreValueText;
-        scoreValueText.setFont(font);
-        scoreValueText.setString(oss.str());
-        scoreValueText.setCharacterSize(25);
-        scoreValueText.setPosition(100.f, 65.f);
-        scoreValueText.setFillColor(sf::Color::White);
-
-        window.draw(scoreValueText);
-        window.draw(scoreText);
+        // Draw player name and score
+        window.draw(player);
+        window.draw(score);
     }
-}
-
-void RenderSystem::timeRender(const World &world, sf::RenderWindow &window, sf::Font font) const
-{
-    window.setView(window.getDefaultView());
 
     for (Entity *entity : world.findAll<TimeComponent>())
     {
-        auto &timeComponent = entity->getComponent<TimeComponent>();
-        sf::Text timeText;
+        // Render time
+        sf::Text time = textRender("TIME", 700.f, 35.f, font, 25);
 
-        timeText.setFont(font);
-        timeText.setString("TIME");
-        timeText.setCharacterSize(25);
-        timeText.setPosition(700.f, 35.f);
-        timeText.setFillColor(sf::Color::White);
+        // Render time value
+        auto &timeComponent = entity->getComponent<TimeComponent>();
         std::ostringstream oss;
         oss << std::setw(3) << std::setfill('0') << timeComponent.timer;
+        sf::Text timeValue = textRender(oss.str(), 700.f, 65.f, font, 25);
 
-        sf::Text timeValueText;
-        timeValueText.setFont(font);
-        timeValueText.setString(oss.str());
-        timeValueText.setCharacterSize(25);
-        timeValueText.setPosition(720.f, 65.0f);
-        timeValueText.setFillColor(sf::Color::White);
-
-        window.draw(timeText);
-        window.draw(timeValueText);
+        // Draw time and time value
+        window.draw(time);
+        window.draw(timeValue);
     }
-}
-
-void RenderSystem::coinRender(const World &world, sf::RenderWindow &window, sf::Font font) const
-{
-    window.setView(window.getDefaultView());
 
     for (Entity *entity : world.findAll<SmallCoinTag>())
     {
@@ -83,66 +61,21 @@ void RenderSystem::coinRender(const World &world, sf::RenderWindow &window, sf::
         sp.setScale(scale);
         window.draw(sp);
     }
+
     for (Entity *entity : world.findAll<CoinComponent>())
     {
         auto &coinComponent = entity->getComponent<CoinComponent>();
         std::ostringstream oss;
         oss << std::setw(2) << std::setfill('0') << coinComponent.coins;
+        sf::Text coinValue = textRender(oss.str(), 350.f, 65.f, font, 25);
 
-        sf::Text coinValueText;
-        coinValueText.setFont(font);
-        coinValueText.setString("x" + oss.str());
-        coinValueText.setCharacterSize(25);
-        coinValueText.setPosition(350.f, 65.0f);
-        coinValueText.setFillColor(sf::Color::White);
-
-        window.draw(coinValueText);
+        window.draw(coinValue);
     }
-}
 
-void RenderSystem::textRender(const World &world, sf::RenderWindow &window, sf::Font font) const
-{
-    for (Entity *entity : world.findAll<TextComponent>())
-    {
-        auto &textComponent = entity->getComponent<TextComponent>();
-        ++textComponent.timer;
-        if (textComponent.timer > 15) // Display for 60 frames
-        {
-            entity->addComponent<DespawnTag>();
-            continue;
-        }
-        sf::Text text;
-        text.setFont(font);
-        text.setString(textComponent.content);
-        text.setCharacterSize(15);
-        textComponent.y -= 5;
-        text.setPosition(textComponent.x, textComponent.y);
-        text.setFillColor(sf::Color::White);
-
-        window.draw(text);
-    }
-}
-
-void RenderSystem::mapNameRender(const World &world, sf::RenderWindow &window, sf::Font font) const
-{
-    window.setView(window.getDefaultView());
-
-    sf::Text mapNameText;
-    mapNameText.setFont(font);
-    mapNameText.setString("WORLD");
-    mapNameText.setCharacterSize(25);
-    mapNameText.setPosition(500.f, 35.f);
-    mapNameText.setFillColor(sf::Color::White);
-
-    sf::Text mapNameValueText;
-    mapNameValueText.setFont(font);
-    mapNameValueText.setString("1-1");
-    mapNameValueText.setCharacterSize(25);
-    mapNameValueText.setPosition(520.f, 65.f);
-    mapNameValueText.setFillColor(sf::Color::White);
-
-    window.draw(mapNameText);
-    window.draw(mapNameValueText);
+    sf::Text worldName = textRender("WORLD", 500.f, 35.f, font, 25);
+    sf::Text mapName = textRender("1-1", 520.f, 65.f, font, 25);
+    window.draw(worldName);
+    window.draw(mapName);
 }
 
 void RenderSystem::backgroundRender(sf::RenderWindow &window) const

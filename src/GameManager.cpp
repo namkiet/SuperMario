@@ -31,6 +31,7 @@
 #include <Gameplay/Collect/CollectSystem.hpp>
 #include <Gameplay/Fire/FireSystem.hpp>
 #include <Gameplay/Score/PlayTimeSystem.hpp>
+#include <Gameplay/Score/TextPoppingSystem.hpp>
 #include <Gameplay/Background/FlagPoleSystem.hpp>
 #include <cassert>
 #include <iostream>
@@ -130,6 +131,7 @@ GameManager::GameManager() : levelHandler(world)
     world.addSystem<FireBulletSystem>();
     world.addSystem<BounceBlockSystem>();
     world.addSystem<FlagPoleCollisionSystem>();
+    world.addSystem<TextPoppingSystem>();
     world.addSystem<DamageOnContactSystem>();
 
     world.addSystem<DespawnSystem>();

@@ -8,3 +8,14 @@ void resizeSprite(sf::Sprite &sprite, const sf::Vector2f &targetSize)
     float scale = std::min(scaleX, scaleY);
     sprite.setScale(scale, scale);
 }
+
+sf::Text textRender(std::string text, float x, float y, const sf::Font &font, float size)
+{
+    sf::Text Text;
+    Text.setFont(font);
+    Text.setString(text);
+    Text.setCharacterSize(size);
+    Text.setPosition(x, y);
+    Text.setFillColor(sf::Color::White);
+    return Text;
+}

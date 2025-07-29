@@ -27,15 +27,13 @@ class CollectSystem : public System
                         scoreComponent.score += 200; // Increment score by 2000 for Coin2
                 }
 
-                Entity *scoreTextEntity = world.createEntity();
-                scoreTextEntity->addComponent<TextComponent>();
-                auto &textComponent = scoreTextEntity->getComponent<TextComponent>();
-                textComponent.x = item->getComponent<Transform>().position.x;
-                textComponent.y = item->getComponent<Transform>().position.y - item->getComponent<Transform>().size.y / 2;
-
                 if (!item->hasComponent<Coin2Tag>())
-                    textComponent.content = "1000"; // Example score text for other collectables
-
+                {
+                    Entity *scoreTextEntity = world.createEntity();
+                    float x = item->getComponent<Transform>().position.x;
+                    float y = item->getComponent<Transform>().position.y - item->getComponent<Transform>().size.y / 2;
+                    scoreTextEntity->addComponent<TextComponent>("1000", x, y, 15);
+                }
                 if (collider->hasComponent<CoinComponent>())
                 {
                     auto &coinComp = collider->getComponent<CoinComponent>();

@@ -13,12 +13,8 @@ class RenderSystem : public System
 {
 private:
     sf::Font font;
-    void scoreRender(const World &world, sf::RenderWindow &window, sf::Font font) const;
-    void timeRender(const World &world, sf::RenderWindow &window, sf::Font font) const;
-    void coinRender(const World &world, sf::RenderWindow &window, sf::Font font) const;
-    void textRender(const World &world, sf::RenderWindow &window, sf::Font font) const;
-    void mapNameRender(const World &world, sf::RenderWindow &window, sf::Font font) const;
     void backgroundRender(sf::RenderWindow &window) const;
+    void gameComponentRender(const World &world, sf::RenderWindow &window) const;
 
 public:
     RenderSystem()
@@ -40,8 +36,6 @@ public:
             window.setView(view);
         }
         backgroundRender(window);
-        textRender(world, window, font);
-        
 
         for (Entity *entity : world.findAll<Transform, Animation>())
         {
@@ -97,9 +91,6 @@ public:
                 window.draw(rect);
             }
         }
-        timeRender(world, window, font);
-        scoreRender(world, window, font);
-        coinRender(world, window, font);
-        mapNameRender(world, window, font);
+        gameComponentRender(world, window);
     }
 };
