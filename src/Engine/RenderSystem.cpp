@@ -40,7 +40,7 @@ void RenderSystem::gameComponentRender(const World &world, sf::RenderWindow &win
         auto &timeComponent = entity->getComponent<TimeComponent>();
         std::ostringstream oss;
         oss << std::setw(3) << std::setfill('0') << timeComponent.timer;
-        sf::Text timeValue = textRender(oss.str(), 700.f, 65.f, font, 25);
+        sf::Text timeValue = textRender(oss.str(), 720.f, 65.f, font, 25);
 
         // Draw time and time value
         window.draw(time);
@@ -66,7 +66,7 @@ void RenderSystem::gameComponentRender(const World &world, sf::RenderWindow &win
     {
         auto &coinComponent = entity->getComponent<CoinComponent>();
         std::ostringstream oss;
-        oss << std::setw(2) << std::setfill('0') << coinComponent.coins;
+        oss << "x" << std::setw(2) << std::setfill('0') << coinComponent.coins;
         sf::Text coinValue = textRender(oss.str(), 350.f, 65.f, font, 25);
 
         window.draw(coinValue);

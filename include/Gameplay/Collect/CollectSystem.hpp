@@ -32,7 +32,7 @@ class CollectSystem : public System
                     Entity *scoreTextEntity = world.createEntity();
                     float x = item->getComponent<Transform>().position.x;
                     float y = item->getComponent<Transform>().position.y - item->getComponent<Transform>().size.y / 2;
-                    scoreTextEntity->addComponent<TextComponent>("1000", x, y, 15);
+                    scoreTextEntity->addComponent<TextComponent>("1000", x, y, 15, 15, 5);
                 }
                 if (collider->hasComponent<CoinComponent>())
                 {

@@ -12,12 +12,12 @@ class TextPoppingSystem : public System
         {
             auto &textComponent = entity->getComponent<TextComponent>();
             ++textComponent.timer;
-            if (textComponent.timer > 15) // Display for 60 frames
+            if (textComponent.timer > textComponent.dt)
             {
                 entity->addComponent<DespawnTag>();
                 continue;
             }
-            textComponent.y -= 5;
+            textComponent.y -= textComponent.dy;
         }
     }
 };

@@ -14,17 +14,26 @@ class PlayTimeSystem : public System
             TimeComponent &timeComponent = entity->getComponent<TimeComponent>();
             if (timeComponent.timer > 0)
             {
-               ++timeComponent.dt;
-               if (timeComponent.dt >= 30) // Increment timer every 60 frames
-               {
-                   timeComponent.timer--;
-                   timeComponent.dt = 0; // Reset sub-timer
-               }
+                ++timeComponent.subtimer;
+                if (timeComponent.subtimer >= timeComponent.dt && !timeComponent.isPaused) // Increment timer every 60 frames
+                {
+                    --timeComponent.timer;
+                    timeComponent.subtimer = 0; // Reset sub-timer
+                }
+                else if (timeComponent.goesFaster)
+                {
+                    --timeComponent.timer;
+                }
             }
-            else
+            else if (timeComponent.timer <= 0 && !timeComponent.goesFaster)
             {
-                timeComponent.timer = 0; // Ensure it doesn't go negative
+                timeComponent.timer = 0;            // Ensure it doesn't go negative
                 entity->addComponent<DespawnTag>(); // Add a tag to despawn the entity
+            }
+            else if (timeComponent.timer <= 0 && timeComponent.goesFaster)
+            {
+                // If the timer is already at 0 and goesFaster is true, we can reset it or handle it as needed
+                timeComponent.timer = 0; // Reset to 0 if needed
             }
         }
     }

@@ -6,6 +6,7 @@
 #include <Prefabs/Mario.hpp>
 #include <Prefabs/Background.hpp>
 #include <Prefabs/Coin.hpp>
+#include <Prefabs/Fireworks.hpp>
 #include <iostream>
 using namespace std;
 
@@ -198,6 +199,10 @@ void LevelHandler::itemLoad(World &world, std::string tilename, float x, float y
     {
         world.createEntity<Coin2>(x, y, width, height, 3);
     }
+    else if (tilename == "FireBullet_4")
+    {
+        Fireworks::positions.push_back(sf::Vector2f(x, y));
+    }
 }
 
 void LevelHandler::backgroundLoad(World &world, std::string tilename, float x, float y, float width, float height)
@@ -208,6 +213,10 @@ void LevelHandler::backgroundLoad(World &world, std::string tilename, float x, f
         float flagPosX = x - width / 2;
         float flagPosY = y + 17;
         world.createEntity<Background>(flagPosX, flagPosY, 16, 16, 3, 10);
+    }
+    else if (tilename == "Castle")
+    {
+        world.createEntityAtFront<Background>(x, y, width, height, 3, 0);
     }
 }
 

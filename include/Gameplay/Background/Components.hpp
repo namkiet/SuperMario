@@ -60,3 +60,8 @@ struct Flag : public Component
 {
     // This component can be used to tag entities that represent a flag background
 };
+
+struct CastleFlag : public Component
+{
+    // This component can be used to tag entities that represent a castle flag background
+};

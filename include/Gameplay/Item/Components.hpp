@@ -48,3 +48,9 @@ struct Coin2Tag : public Component
 {
     // This tag is used to identify the second type of coin item
 };
+
+struct FireworkComponent : public Component
+{
+    FireworkComponent(int n) : fireworksLeft(n) {}
+    int fireworksLeft = 0; // Number of fireworks left to display
+};
