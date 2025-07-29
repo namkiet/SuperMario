@@ -261,7 +261,7 @@ void LevelHandler::setEnemy()
                 if (count >= 1)
                 {
                     // cout<< "Enemy starting position found at: (" << j << ", " << i << ")" << endl;
-                    // auto koopa = world.createEntity<Koopa>(j * 16, i * 16, 3);
+                    // auto koopa = world.createEntity<Koopa>(j * 16, i * 24, 3);
                 }
             }
             ++count;

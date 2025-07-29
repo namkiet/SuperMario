@@ -10,6 +10,7 @@
 #include <Engine/Physics/PassThroughTag.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Core/RigidBody.hpp>
+#include <Engine/Core/Transform.hpp>
 #include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Stomp/Components.hpp>
@@ -34,11 +35,15 @@ void KoopaFlippedState::onEnter(Entity* entity)
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();
     tag.behaviour = std::make_shared<KoopaFlippedBehaviour>();
+
+    entity->getComponent<Transform>().size = sf::Vector2f(16, 16) * 3.0f;
+    entity->getComponent<BoxCollider2D>().size = sf::Vector2f(16, 16) * 3.0f;
     
     entity->getComponent<RigidBody>().velocity.y = -300;
     entity->getComponent<KoopaPatrol>().velocity = sf::Vector2f(0, 0);
 
     entity->removeComponent<BlockTag>();
+    entity->removeComponent<CanHitBlockTag>();
     entity->removeComponent<StompableTag>();
     entity->removeComponent<DamageOnContactComponent>();
 }

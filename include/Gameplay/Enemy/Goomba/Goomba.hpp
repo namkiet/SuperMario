@@ -20,16 +20,17 @@ public:
     Goomba(float x, float y, float scale)
     {
         addComponent<RigidBody>(RigidBody(sf::Vector2f(0, 0)));
-        addComponent<Transform>(Transform(sf::Vector2f(x, y), sf::Vector2f(16 * scale, 16 * scale)));
-        addComponent<BoxCollider2D>(BoxCollider2D(0.5f * SIZE::GRID));
+        addComponent<Transform>(Transform(sf::Vector2f(x, y), sf::Vector2f(16, 16) * scale));
+        addComponent<BoxCollider2D>(BoxCollider2D(sf::Vector2f(16, 16) * scale));
 
         addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Goomba/goomba_walk.png"), 16, 16, 2, 0.5f / 2));
 
         addComponent<EnemyTag>(std::make_shared<GoombaNormalState>(), std::make_shared<GoombaBehaviour>());
-        addComponent<GoombaPatrol>(sf::Vector2f(30, 0));
+        addComponent<GoombaPatrol>();
         addComponent<NotOnPatrolYet>();
 
         addComponent<BlockTag>();
+        addComponent<CanHitBlockTag>();
         addComponent<StompableTag>();
 
         std::vector<Direction> directions = { Direction::Left, Direction::Right, Direction::Bottom };
