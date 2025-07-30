@@ -121,15 +121,15 @@ public:
         {
             system->preUpdate(*this, deltaTime);
         }
-        int i = 0;
+        // int i = 0;
         for (auto &system : orderedSystems)
         {
-            i += 1;
+            // i += 1;
             system->update(*this, deltaTime);
-            auto player = findFirst<PlayerTag>();
-            if (!player) continue;
-            auto rb = player->getComponent<RigidBody>();
-            std::cout << i <<" rb.velocity.y = " << rb.velocity.y << std::endl;
+            // auto player = findFirst<PlayerTag>();
+            // if (!player) continue;
+            // auto rb = player->getComponent<RigidBody>();
+            // std::cout << i <<" rb.velocity.y = " << rb.velocity.y << std::endl;
         }
 
         for (auto &system : orderedSystems)
