@@ -11,7 +11,7 @@
 #include <Gameplay/Block/Components.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/Score/Components.hpp>
-
+#include <cmath>
 class HitSpecialBlockSystem : public System
 {
 private:

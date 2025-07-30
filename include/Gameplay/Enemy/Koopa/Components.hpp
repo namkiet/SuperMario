@@ -30,6 +30,6 @@ struct KoopaFlyingPatrol : public Component
     KoopaFlyingPatrol() : velocity(sf::Vector2f(0, 0)) {}
     
     sf::Vector2f velocity;
-    float phaseDuration = 5;
+    float phaseDuration = 3;
     float timer = 0;
 };

@@ -40,11 +40,19 @@ public:
                 case Direction::Top:
                     tf.position.y = blockPos.y - box.size.y;
                     rb.velocity.y = 0.0f;
+                    // if (entity->hasComponent<PlayerTag>())
+                    // {
+                    //     std::cout << "top collide" << std::endl;
+                    // }
                     rb.onGround = true;
                     break;
 
                 case Direction::Bottom:
                     tf.position.y = blockPos.y + blockSize.y;
+                    // if (entity->hasComponent<PlayerTag>())
+                    // {
+                    //     std::cout << "bot collide" << std::endl;
+                    // }
                     rb.velocity.y = 0.0f;
                     break;
 

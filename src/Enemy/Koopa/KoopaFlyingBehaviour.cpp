@@ -24,6 +24,7 @@ void KoopaFlyingBehaviour::collideWithPlayer(Entity* entity)
         {
             entity->addComponent<ChangeToKoopaNormalTag>();
             entity->getComponent<RigidBody>().velocity.y += 500;
+            entity->getComponent<RigidBody>().applyGravity = true;
         }
         break;
     }
@@ -42,6 +43,7 @@ void KoopaFlyingBehaviour::collideWithOther(Entity* entity)
         if (collider->hasComponent<CanKillEnemyTag>())
         {
             entity->addComponent<ChangeToKoopaFlippedTag>();
+            entity->getComponent<RigidBody>().applyGravity = true;
         }
     }
 }
@@ -82,4 +84,5 @@ void KoopaFlyingBehaviour::patrol(Entity* entity, float dt, Entity* camera)
 
     // Apply patrol velocity
     rb.velocity = flying.velocity;
+    rb.applyGravity = false;
 }

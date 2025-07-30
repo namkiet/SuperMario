@@ -35,6 +35,9 @@ void KoopaNormalState::onEnter(Entity* entity)
     tag.behaviour.reset();
     tag.behaviour = std::make_shared<KoopaNormalBehaviour>();
 
+    entity->getComponent<Transform>().size = sf::Vector2f(16, 24) * 3.0f;
+    entity->getComponent<BoxCollider2D>().size = sf::Vector2f(16, 24) * 3.0f;
+
     auto& patrol = entity->getComponent<KoopaPatrol>();
     patrol.velocity.x = 30 * (patrol.lastDirection == Direction::Right ? 1 : -1);
 

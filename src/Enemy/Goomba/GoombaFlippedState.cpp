@@ -32,6 +32,7 @@ void GoombaFlippedState::onEnter(Entity* entity)
     entity->getComponent<GoombaPatrol>().velocity = sf::Vector2f(0, 0);
 
     entity->removeComponent<BlockTag>();
+    entity->removeComponent<CanHitBlockTag>();
     entity->removeComponent<StompableTag>();
     entity->removeComponent<DamageOnContactComponent>();
 }
