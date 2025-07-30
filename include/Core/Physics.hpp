@@ -3,6 +3,8 @@
 #include <ECS/Entity.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/Transform.hpp>
+#include <iostream>
+#include <Gameplay/Player/Components.hpp>
 
 namespace Physics
 {
@@ -60,9 +62,23 @@ namespace Physics
         float dyPrev = abs(prevA.y - prevB.y);
         float xo = 0.5f * (sizeA.x + sizeB.x);
         float yo = 0.5f * (sizeA.y + sizeB.y);
-
+// if (a->hasComponent<PlayerTag>())
+//                     {
+//                         std::cout << "prevA.y " << prevA.y << std::endl;
+//                         std::cout << "posB.y " << posB.y << std::endl;
+//                         std::cout << "posA.y " << posA.y << std::endl;
+//                         std::cout << "prevB.y = " << prevB.y << std::endl; 
+//                     }
         if (xo >= dx && yo >= dy)
         {
+            // if (a->hasComponent<PlayerTag>())
+            // {
+            // std::cout << "xo = " << xo << std::endl;
+            // std::cout << "yo = " << yo << std::endl;
+            // std::cout << "dx = " << dx << std::endl;
+            // std::cout << "dy = " << dy << std::endl;
+            // }
+
             if (yo > dyPrev)
             {
                 if (prevA.x < posB.x)
@@ -82,10 +98,15 @@ namespace Physics
                 }
                 else
                 {
+                    // if (a->hasComponent<PlayerTag>())
+                    //     std::cout << "collide right here" << std::endl;
                     return Direction::Bottom;
+
                 }
             }
         }
+        // if (a->hasComponent<PlayerTag>())
+        //     std::cout << "it should be none" << std::endl;
         return Direction::None;
     }
 
