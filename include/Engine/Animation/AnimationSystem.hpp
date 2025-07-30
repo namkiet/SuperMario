@@ -19,11 +19,17 @@ public:
                 auto &rb = entity->getComponent<RigidBody>();
                 if (rb.velocity.x > 0.0f)
                 {
-                    anim.flipX = false;
+                    if (entity->hasComponent<FlipXTag>())
+                    {
+                        entity->removeComponent<FlipXTag>();
+                    }
                 }
                 else if (rb.velocity.x < 0.0f)
                 {
-                    anim.flipX = true;
+                    if (!entity->hasComponent<FlipXTag>())
+                    {
+                        entity->addComponent<FlipXTag>();
+                    }
                 }
             }
 

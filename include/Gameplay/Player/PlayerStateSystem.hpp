@@ -33,8 +33,6 @@ public:
                 tag.powerState->onEnter(entity);
             }
 
-            entity->removeComponent<Animation>();
-
             if (tag.powerState->getName() == "GrowingUp" || tag.powerState->getName() == "Dead")
             {
                 entity->addComponent<Animation>(getAnimation(tag.powerState->getName()));

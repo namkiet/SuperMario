@@ -8,6 +8,7 @@
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/Background/Components.hpp>
+#include <Gameplay/CaptureFlag/Components.hpp>
 
 class Background : public Entity
 {
@@ -99,6 +100,8 @@ public:
         {
             // Add the flagpole tag
             addComponent<FlagPole>();
+            addComponent<FlagPoleTag>();
+            addComponent<BoxCollider2D>(sf::Vector2f(5, 480), sf::Vector2f(11, 0));
 
             // Set the texture for the background
             addComponent<Animation>(TextureManager::load("assets/Background/FlagPole.png"));

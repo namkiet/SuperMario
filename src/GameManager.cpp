@@ -41,6 +41,8 @@
 
 #include <Gameplay/Fire/FireSystem.hpp>
 #include <Gameplay/Tele/TeleSystem.hpp>
+#include <Gameplay/CaptureFlag/CaptureFlagSystem.hpp>
+#include <Gameplay/CaptureFlag/SlideOnFlagPoleSystem.hpp>
 
 #include <Gameplay/Enemy/EnemyStateSystem.hpp>
 #include <Gameplay/Enemy/EnemyBehaviourSystem.hpp>
@@ -100,12 +102,12 @@ GameManager::GameManager() : levelHandler(world)
 
     // world.createEntity<Piranha>(15 * SIZE::GRID.x, SIZE::SCREEN.y - 2 * SIZE::GRID.y);
 
-    // auto block = world.createEntity();
-    // block->addComponent<BlockTag>();
-    // block->addComponent<QuestionBlockTag>();
-    // block->addComponent<Transform>(sf::Vector2f(7 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 4), SIZE::GRID);
-    // block->addComponent<BoxCollider2D>(SIZE::GRID);
-    // block->addComponent<Animation>(TextureManager::load("assets/coin_block.png"), 16, 16, 3, 0.3f);
+    // auto flag = world.createEntity();
+    // flag->addComponent<Transform>(sf::Vector2f(7 * SIZE::GRID.x, SIZE::SCREEN.y - SIZE::GRID.y * 4), SIZE::GRID);
+    // flag->addComponent<BoxCollider2D>();
+    // flag->addComponent<QuestionBlockTag>();
+    // flag->addComponent<BoxCollider2D>(SIZE::GRID);
+    // flag->addComponent<Animation>(TextureManager::load("assets/coin_block.png"), 16, 16, 3, 0.3f);
 
     // world.createEntity<Pipe>(15 * SIZE::GRID.x, SIZE::SCREEN.y - 3 * SIZE::GRID.y);
 
@@ -136,10 +138,14 @@ GameManager::GameManager() : levelHandler(world)
     world.addSystem<HitSpecialBlockSystem>();
 
     world.addSystem<TeleSystem>();
+
     world.addSystem<CollectSystem>();
     world.addSystem<CollectMushroomSystem>();
     world.addSystem<CollectFlowerSystem>();
     world.addSystem<CollectStarSystem>();
+
+    world.addSystem<CaptureFlagSystem>();
+    world.addSystem<SlideOnFlagPoleSystem>();
 
     world.addSystem<ItemEmergingSystem>();
     world.addSystem<CoinJumpingSystem>();
@@ -208,7 +214,7 @@ void GameManager::handleEvent(const sf::Event &event)
         {
             // do nothing
 
-            world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(3.0f);
+            // world.findFirst<PlayerTag>()->addComponent<WaitComponent>(3.0f);
         }
 
         if (event.key.code == sf::Keyboard::X)

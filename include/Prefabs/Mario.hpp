@@ -14,6 +14,7 @@
 #include <Gameplay/Score/Components.hpp>
 #include <Gameplay/Fire/Components.hpp>
 #include <Gameplay/BreakBrick/Components.hpp>
+#include <Gameplay/CaptureFlag/Components.hpp>
 
 #include <PlayerMovementStates/PlayerIdlingState.hpp>
 #include <PlayerPowerStates/PlayerSmallState.hpp>
@@ -59,5 +60,7 @@ public:
         addComponent<CanHitBlockTag>();
 
         addComponent<ScoreComponent>();
+        
+        addComponent<CanCaptureFlagTag>();
     }
 };
