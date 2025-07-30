@@ -235,9 +235,15 @@ void LevelHandler::playerLoad(World &world, std::string tilename, float x, float
     {
         world.createEntityAtFront<Mario>(x, y, width, height, 3);
     }
-    else if (tilename == "CheckPoint")
+    else if (tilename == "CheckPoint1")
     {
         // world.createEntity<Mario>(x, y, width, height, 3);
+    }
+    else if (tilename == "CheckPoint2")
+    {
+    }
+    else if (tilename == "CheckPoint3")
+    {
     }
 }
 
