@@ -42,13 +42,6 @@ public:
                     scoreComp.score += 200; // Increment score by 100
                 }
             }
-
-            // Reset position after jumping
-            // if (pos.y < coin->getComponent<CoinComponent>())
-            // {
-            //     cout << "Coin jumped and reset position." << endl;
-            //     pos.y = 600.0f; // Reset to a specific height
-            // }
         }
     }
 };
