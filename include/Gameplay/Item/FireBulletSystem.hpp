@@ -53,6 +53,11 @@ public:
                         // fout << "FireBullet collided with player in direction top." << std::endl;
                         continue;
                     }
+                    if (block->hasComponent<FireBulletTag>())
+                    {
+                        // fout << "FireBullet collided with another FireBullet." << std::endl;
+                        continue;
+                    }
 
                     pos.y = blockPos.y - size.y * 2;
                     rb.velocity.y = -100.0f;
@@ -72,6 +77,11 @@ public:
                     if (block->hasComponent<PlayerTag>())
                     {
                         // fout << "FireBullet collided with player in direction left/ right." << std::endl;
+                        continue;
+                    }
+                    if (block->hasComponent<FireBulletTag>())
+                    {
+                        // fout << "FireBullet collided with another FireBullet." << std::endl;
                         continue;
                     }
                     // Remove the old animation

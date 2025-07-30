@@ -5,6 +5,7 @@
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Camera/FollowByCameraTag.hpp>
 
 #include <Gameplay/Player/Components.hpp>
@@ -63,5 +64,7 @@ public:
         addComponent<TimeComponent>(400);
 
         addComponent<CoinComponent>();
+
+        addComponent<FireCooldown>();
     }
 };

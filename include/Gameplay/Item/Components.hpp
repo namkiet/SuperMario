@@ -36,7 +36,11 @@ struct StarTag : public Component
 
 struct MushroomTag : public Component
 {
-    enum Buff { GIVE_ONE_MORE_LIFE, GROW_UP };
+    enum Buff
+    {
+        GIVE_ONE_MORE_LIFE,
+        GROW_UP
+    };
     Buff buff;
 
     MushroomTag(Buff buff) : buff(buff) {}
@@ -44,7 +48,6 @@ struct MushroomTag : public Component
 
 struct FlowerTag : public Component
 {
-
 };
 
 struct FireBulletTag : public Component
