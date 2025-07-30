@@ -55,7 +55,7 @@ public:
 
             // Flip horizontally if needed
             sf::Vector2f scale = sp.getScale();
-            if (anim.flipX)
+            if (entity->hasComponent<FlipXTag>())
             {
                 sp.setOrigin(sp.getLocalBounds().width, 0);
                 scale.x = -std::abs(scale.x); // flip horizontally
