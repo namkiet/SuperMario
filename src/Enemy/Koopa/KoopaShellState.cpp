@@ -34,8 +34,8 @@ void KoopaShellState::onEnter(Entity* entity)
     tag.behaviour.reset();
     tag.behaviour = std::make_shared<KoopaShell_ReviveBehaviour>();
 
-    entity->getComponent<Transform>().size = sf::Vector2f(48, 48);
-    entity->getComponent<BoxCollider2D>().size = sf::Vector2f(48, 48);
+    entity->getComponent<Transform>().size = sf::Vector2f(16, 16) * 3.0f;
+    entity->getComponent<BoxCollider2D>().size = sf::Vector2f(16, 16) * 3.0f;
     entity->getComponent<KoopaPatrol>().velocity = sf::Vector2f(0, 0);
 
     entity->removeComponent<DamageOnContactComponent>();

@@ -8,6 +8,7 @@
 #include <Gameplay/Enemy/Koopa/KoopaSlideBehaviour.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Core/Transform.hpp>
 #include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 
@@ -31,6 +32,9 @@ void KoopaSlideState::onEnter(Entity* entity)
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();
     tag.behaviour = std::make_shared<KoopaSlideBehaviour>();
+
+    entity->getComponent<Transform>().size = sf::Vector2f(16, 16) * 3.0f;
+    entity->getComponent<BoxCollider2D>().size = sf::Vector2f(16, 16) * 3.0f;
 
     auto& patrol = entity->getComponent<KoopaPatrol>();
     patrol.velocity.x = 1000 * (patrol.lastDirection == Direction::Right ? 1 : -1);
