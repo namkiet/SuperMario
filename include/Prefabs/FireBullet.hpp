@@ -1,12 +1,17 @@
 #pragma once
 #include <ECS/Entity.hpp>
+
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Animation/Animation.hpp>
+#include <Engine/Physics/BoxCollider2D.hpp>
+
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
+
 #include <Gameplay/Item/Components.hpp>
-#include <Engine/Physics/BoxCollider2D.hpp>
+#include <Gameplay/Enemy/Components.hpp>
+
 #include <vector>
 
 class FireBullet : public Entity
@@ -36,10 +41,11 @@ public:
 
         addComponent<RigidBody>(sf::Vector2f(0, 50));
 
-
         // Add the fire bullet tag
         addComponent<FireBulletTag>();
 
+        // Add the can kill enemy tag
+        addComponent<CanKillEnemyTag>();
         ++count;
     }
     ~FireBullet()

@@ -17,12 +17,12 @@ class FireBulletSystem : public System
 public:
     void update(World &world, float dt) override
     {
-        std::ofstream fout("output.txt", std::ios::app);
-        if (fout.fail())
-        {
-            std::cerr << "Failed to open output.txt for writing." << std::endl;
-            return;
-        }
+        // std::ofstream fout("output.txt", std::ios::app);
+        // if (fout.fail())
+        // {
+        //     std::cerr << "Failed to open output.txt for writing." << std::endl;
+        //     return;
+        // }
 
         for (Entity *fireBullet : world.findAll<FireBulletTag, Transform, BoxCollider2D, RigidBody>())
         {
@@ -38,6 +38,11 @@ public:
                     // fout << "FireBullet collided with player." << std::endl;
                     continue;
                 }
+                if (block->hasComponent<FireBulletTag>())
+                {
+                    // fout << "FireBullet collided with another FireBullet." << std::endl;
+                    continue;
+                }
                 // fout << "Fire Bullet collided with blocks" << std::endl;
                 auto &blockPos = block->getComponent<Transform>().position;
                 auto &blockSize = block->getComponent<BoxCollider2D>().size;
@@ -48,6 +53,7 @@ public:
                         // fout << "FireBullet collided with player in direction top." << std::endl;
                         continue;
                     }
+
                     pos.y = blockPos.y - size.y * 2;
                     rb.velocity.y = -100.0f;
                     // rb.velocity.x = 0.0f;
@@ -65,7 +71,7 @@ public:
                 {
                     if (block->hasComponent<PlayerTag>())
                     {
-                        //fout << "FireBullet collided with player in direction left/ right." << std::endl;
+                        // fout << "FireBullet collided with player in direction left/ right." << std::endl;
                         continue;
                     }
                     // Remove the old animation
@@ -88,12 +94,12 @@ public:
                     // rb.velocity.x = 0.0f;
                     // rb.velocity.y = 0.0f;
 
-                    //fout << "FireBullet collided with block from the side." << std::endl;
-                    //fout << "New fire bullet position: (" << pos.x << ", " << pos.y << ")" << std::endl;
+                    // fout << "FireBullet collided with block from the side." << std::endl;
+                    // fout << "New fire bullet position: (" << pos.x << ", " << pos.y << ")" << std::endl;
                 }
                 // fout << "New star position: (" << pos.x << ", " << pos.y << ")" << std::endl;
             }
         }
-        fout.close();
+        // fout.close();
     }
 };

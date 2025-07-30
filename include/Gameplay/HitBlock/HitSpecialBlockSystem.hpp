@@ -2,6 +2,7 @@
 #include <ECS/System.hpp>
 #include <World.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/DespawnTag.hpp>
@@ -21,6 +22,14 @@ private:
     void HitStarBlock(World &world, float dt, Entity *block);
     void CoinBlockUpdate(World &world, float dt, Entity *block);
 
+    static sf::FloatRect getColliderBounds(Entity* entity)
+    {
+        const auto& tf = entity->getComponent<Transform>();
+        const auto& box = entity->getComponent<BoxCollider2D>();
+
+        return sf::FloatRect(tf.position + box.offset, box.size);
+    }
+
 public:
     void update(World &world, float dt) override
     {
@@ -28,13 +37,21 @@ public:
         {
             CoinBlockUpdate(world, dt, block);
         }
-        for (Entity *player : world.findAll<PlayerTag, BoxCollider2D>())
+        for (Entity *player : world.findAll<PlayerTag, BoxCollider2D, Transform>())
         {
+            auto bounds1 = getColliderBounds(player);
             for (auto &[block, direction] : player->getComponent<BoxCollider2D>().collisions)
             {
                 if (direction != Direction::Bottom)
                     continue;
 
+                auto bounds2 = getColliderBounds(block);
+
+
+                float left = std::fmax(bounds1.left, bounds2.left);
+                float right = std::fmin(bounds1.left + bounds1.width, bounds2.left + bounds2.width);
+
+                if (right - left < 0.5f * bounds1.width) continue; // at least half of the size of the player must hit the block (to avoid hitting 2 blocks at the same time)
                 if (!block->hasComponent<NormalBlock>() && !block->hasComponent<QuestionBlockTag>() &&
                     !block->hasComponent<CoinBlock>() && !block->hasComponent<StarBlock>() &&
                     !block->hasComponent<LevelUpBlock>())
@@ -66,7 +83,10 @@ public:
                     if (block->hasComponent<LevelUpBlock>())
                     {
                         // Remove LevelUpBlock component
+                        block->addComponent<BlockTag>();
                         block->removeComponent<LevelUpBlock>();
+
+                        // player->
 
                         // Update
                         Hit1UpBlock(world, dt, block);

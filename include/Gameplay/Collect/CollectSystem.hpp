@@ -11,10 +11,11 @@ class CollectSystem : public System
 {
     void update(World &world, float dt) override
     {
-        for (Entity *item : world.findAll<CollectableTag, Transform>())
+        for (Entity *item : world.findAll<CollectableTag, BoxCollider2D>())
         {
             for (const auto &[collider, direction] : item->getComponent<BoxCollider2D>().collisions)
             {
+                // Check if the entity can collect the item
                 if (!collider->hasComponent<CanCollectTag>())
                     continue;
 
@@ -32,14 +33,13 @@ class CollectSystem : public System
                     Entity *scoreTextEntity = world.createEntity();
                     float x = item->getComponent<Transform>().position.x;
                     float y = item->getComponent<Transform>().position.y - item->getComponent<Transform>().size.y / 2;
-                    scoreTextEntity->addComponent<TextComponent>("1000", x, y, 15, 15, 5);
+                    scoreTextEntity->addComponent<TextComponent>("1000", x, y, y - 48, 15, 1);
                 }
                 if (collider->hasComponent<CoinComponent>())
                 {
                     auto &coinComp = collider->getComponent<CoinComponent>();
                     ++coinComp.coins; // Increment coins
                 }
-                // Check if the entity can collect the item
                 item->addComponent<DespawnTag>();
             }
         }

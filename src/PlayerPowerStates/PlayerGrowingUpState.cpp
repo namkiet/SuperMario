@@ -22,11 +22,17 @@ void PlayerGrowingUpState::onEnter(Entity* entity)
         tf.position.y -= tf.size.y;
         tf.size.y *= 2.0f;
     }
+
+    if (entity->hasComponent<BoxCollider2D>())
+    {
+        auto& box = entity->getComponent<BoxCollider2D>();
+        box.size.y *= 2.0f;
+    }
 }
 
 void PlayerGrowingUpState::onExit(Entity* entity)
 {  
-    entity->addComponent<RigidBody>(sf::Vector2f(0, 0));
+    entity->addComponent<RigidBody>();
     entity->removeComponent<GrowUpTag>();
 }
 

@@ -34,6 +34,19 @@ struct StarTag : public Component
     // This tag is used to identify the star item
 };
 
+struct MushroomTag : public Component
+{
+    enum Buff { GIVE_ONE_MORE_LIFE, GROW_UP };
+    Buff buff;
+
+    MushroomTag(Buff buff) : buff(buff) {}
+};
+
+struct FlowerTag : public Component
+{
+
+};
+
 struct FireBulletTag : public Component
 {
     // This tag is used to identify the fire bullet item

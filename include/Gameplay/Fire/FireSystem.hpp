@@ -16,12 +16,12 @@ private:
 public:
     void update(World &world, float dt) override
     {
-        std::ofstream fout("output.txt", std::ios::app);
-        if (fout.fail())
-        {
-            std::cerr << "Failed to open output.txt for writing." << std::endl;
-            return;
-        }
+        // std::ofstream fout("output.txt", std::ios::app);
+        // if (fout.fail())
+        // {
+        //     std::cerr << "Failed to open output.txt for writing." << std::endl;
+        //     return;
+        // }
 
         --timeCount;
 
@@ -35,13 +35,13 @@ public:
             if (pool.isKeyPressed(sf::Keyboard::M) && FireBullet::getCount() < 2 && timeCount <= 0)
             {
                 // std::cout << "Firing bullet at position: " << pos.x << ", " << pos.y << std::endl;
-                auto fireBullet = world.createEntity<FireBullet>(pos.x - size.x / 2, pos.y + size.y / 8, 24, 24);
-                
+                auto fireBullet = world.createEntity<FireBullet>(pos.x + size.x / 2, pos.y + size.y / 8, 24, 24);
+
                 timeCount = 10;
 
-                //fout << "Fired a fire bullet at position: " << pos.x - size.x / 2 << " " << pos.y + size.y / 8 << std::endl;
+                // fout << "Fired a fire bullet at position: " << pos.x - size.x / 2 << " " << pos.y + size.y / 8 << std::endl;
             }
         }
-        fout.close();
+        // fout.close();
     }
 };

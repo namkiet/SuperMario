@@ -4,6 +4,7 @@
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Gameplay/Collect/Components.hpp>
+#include <Gameplay/Item/Components.hpp>
 #include <Core/TextureManager.hpp>
 #include <vector>
 
@@ -21,7 +22,11 @@ public:
         // Set the animation for the flower
         addComponent<Animation>(TextureManager::load("assets/Item/Mushroom/Mushroom1_0.png"));
 
-        // addComponent<CollectableTag>();
+        // Animation anim(TextureManager::load("assets/Item/Mushroom/Mushroom1_0.png"));
+        // anim.zIndex = -1;
+        // addComponent<Animation>(anim);
+
+        addComponent<MushroomTag>(MushroomTag::Buff::GROW_UP);
     }
 };
 
@@ -39,6 +44,10 @@ class Mushroom2 : public Entity
         // Set the animation for the flower
         addComponent<Animation>(TextureManager::load("assets/Item/Mushroom/Mushroom1_1.png"));
 
-        // addComponent<CollectableTag>();
+        // Animation anim(TextureManager::load("assets/Item/Mushroom/Mushroom1_1.png"));
+        // anim.zIndex = -1;
+        // addComponent<Animation>(anim);
+
+        addComponent<MushroomTag>(MushroomTag::Buff::GIVE_ONE_MORE_LIFE);
     }
 };

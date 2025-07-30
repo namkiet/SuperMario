@@ -12,12 +12,12 @@ class StarJumpingSystem : public System
 public:
     void update(World &world, float dt) override
     {
-        std::ofstream fout("output.txt", std::ios::app);
-        if (fout.fail())
-        {
-            std::cerr << "Failed to open output.txt for writing." << std::endl;
-            return;
-        }
+        // std::ofstream fout("output.txt", std::ios::app);
+        // if (fout.fail())
+        // {
+        //     std::cerr << "Failed to open output.txt for writing." << std::endl;
+        //     return;
+        // }
         for (Entity *star : world.findAll<StarTag, Transform, BoxCollider2D, RigidBody>())
         {
             auto &pos = star->getComponent<Transform>().position;
@@ -48,6 +48,6 @@ public:
                 // fout << "New star position: (" << pos.x << ", " << pos.y << ")" << std::endl;
             }
         }
-        fout.close();
+        // fout.close();
     }
 };

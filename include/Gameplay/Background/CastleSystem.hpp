@@ -7,6 +7,7 @@
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/Item/Components.hpp>
 #include <Gameplay/Patrol/Components.hpp>
+#include <Gameplay/DamageOnContact/Components.hpp>
 
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/RigidBody.hpp>
@@ -25,6 +26,10 @@ public:
     {
         for (Entity *player : world.findAll<PlayerTag>())
         {
+            if (player->hasComponent<DamagedTag>())
+            {
+                continue; // Skip if the player is marked for despawn
+            }
             for (const auto &[collider, direction] : player->getComponent<BoxCollider2D>().collisions)
             {
                 if (!collider->hasComponent<Castle>())

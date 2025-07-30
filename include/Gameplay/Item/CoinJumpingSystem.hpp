@@ -24,7 +24,7 @@ public:
             if (lifeSpan.value <= dt)
             {
                 Entity *scoreTextEntity = world.createEntity();
-                scoreTextEntity->addComponent<TextComponent>("200", pos.x, pos.y + size.y, 15, 15,5);
+                scoreTextEntity->addComponent<TextComponent>("200", pos.x, pos.y + size.y, pos.y + size.y - 48, 15, 1);
 
                 Entity *player = nullptr;
                 for (Entity *entity : world.findAll<PlayerTag>())

@@ -13,4 +13,7 @@ public:
 private:
     World                   world;
     LevelHandler levelHandler;
+
+    bool oneFrame = false;
+    bool shouldPlay = true;
 };

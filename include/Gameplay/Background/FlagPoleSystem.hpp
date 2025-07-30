@@ -7,7 +7,7 @@
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
-
+#include <Gameplay/DamageOnContact/Components.hpp>
 class FlagPoleCollisionSystem : public System
 {
 public:
@@ -15,6 +15,10 @@ public:
     {
         for (Entity *player : world.findAll<PlayerTag>())
         {
+            if (player->hasComponent<DamagedTag>())
+            {
+                continue; // Skip if the player is marked for despawn
+            }
             for (const auto &[collider, direction] : player->getComponent<BoxCollider2D>().collisions)
             {
                 if (!collider->hasComponent<FlagPole>())
@@ -33,6 +37,7 @@ public:
                     pos.x = flagPolePos.x - flagPoleSize.x / 2;
                     velocity.y = 200;
                     velocity.x = 0;
+                    // std::cout << "Player reached the flagpole!" << std::endl;
                 }
 
                 if (player->hasComponent<TimeComponent>())
@@ -44,6 +49,25 @@ public:
                         timeComponent.isPaused = true;
                     }
                     // Pause the timer when reaching the flagpole
+                }
+
+                Entity *flag = nullptr;
+                for (Entity *entity : world.findAll<Flag>())
+                {
+                    flag = entity;
+                    break;
+                }
+
+                if (flag)
+                {
+                    if (!flag->hasComponent<RigidBody>())
+                    {
+                        flag->addComponent<RigidBody>(sf::Vector2f(0, 300));
+                    }
+                    else
+                    {
+                        flag->getComponent<RigidBody>().velocity = sf::Vector2f(0, 300);
+                    }
                 }
 
                 // For score
@@ -62,31 +86,19 @@ public:
                     if (pos.y <= flagPolePos.y)
                     {
                         scoreComponent.score += 5000;
-                        scoreTextEntity->addComponent<TextComponent>("5000", x, y, 30, 15, 25);
+                        scoreTextEntity->addComponent<TextComponent>("5000", x, y, flagPolePos.y + 48, 25, 2);
                     }
                     else if (pos.y > flagPolePos.y && pos.y <= flagPolePos.y + flagPoleSize.y)
                     {
                         scoreComponent.score += 800; // Increment score by 100
-                        scoreTextEntity->addComponent<TextComponent>("800", x, y, 30, 15, 25);
+                        scoreTextEntity->addComponent<TextComponent>("800", x, y, flagPolePos.y + 48, 25, 2);
                     }
                     else
                     {
                         scoreComponent.score += 100; // Increment score by 100
-                        scoreTextEntity->addComponent<TextComponent>("100", x, y, 30, 15, 25);
+                        scoreTextEntity->addComponent<TextComponent>("100", x, y, flagPolePos.y + 48, 25, 2);
                     }
                     timeComponent.firstTimePause = true;
-                }
-
-                Entity *flag = nullptr;
-                for (Entity *entity : world.findAll<Flag>())
-                {
-                    flag = entity;
-                    break;
-                }
-
-                if (flag)
-                {
-                    flag->addComponent<RigidBody>(sf::Vector2f(0, 200));
                 }
             }
         }

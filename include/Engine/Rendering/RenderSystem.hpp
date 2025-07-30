@@ -14,7 +14,7 @@ class RenderSystem : public System
 private:
     sf::Font font;
     void backgroundRender(sf::RenderWindow &window) const;
-    void gameComponentRender(const World &world, sf::RenderWindow &window) const;
+    void textComponentRender(const World &world, sf::RenderWindow &window) const;
 
 public:
     RenderSystem()
@@ -36,8 +36,14 @@ public:
             window.setView(view);
         }
         backgroundRender(window);
+        textComponentRender(world, window);
 
-        for (Entity *entity : world.findAll<Transform, Animation>())
+        auto entities = world.findAll<Transform, Animation>();
+        std::sort(entities.begin(), entities.end(), [](Entity *a, Entity *b) { // sort by z-index (to allow which entity lie in front of other)
+            return a->template getComponent<Animation>().zIndex < b->template getComponent<Animation>().zIndex;
+        });
+
+        for (Entity *entity : entities)
         {
             if (entity->hasComponent<SmallCoinTag>())
             {
@@ -67,7 +73,7 @@ public:
             }
             sp.setScale(scale);
 
-            // // Set origin to center (important for correct flipping)
+            // Set origin to center (important for correct flipping)
             // sp.setOrigin(sp.getLocalBounds().width / 2.f, sp.getLocalBounds().height / 2.f);
 
             // // Position sprite centered within the tf area
@@ -78,19 +84,6 @@ public:
             // sp.setPosition(center);
 
             window.draw(sp);
-
-            // Draw box collider if exists
-            if (entity->hasComponent<BoxCollider2D>())
-            {
-                auto &box = entity->getComponent<BoxCollider2D>();
-                sf::RectangleShape rect(box.size);
-                rect.setPosition(tf.position + box.offset);
-                rect.setOutlineColor(sf::Color::Red);
-                rect.setOutlineThickness(2.f);
-                rect.setFillColor(sf::Color::Transparent);
-                window.draw(rect);
-            }
         }
-        gameComponentRender(world, window);
     }
 };

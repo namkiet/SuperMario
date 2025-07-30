@@ -7,11 +7,11 @@
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/Pipe/Components.hpp>
-
+#include <Gameplay/Tele/Components.hpp>
 class Pipe : public Entity
 {
 public:
-    Pipe(float x, float y, float width, float height, int scale, int index, bool enterable)
+    Pipe(float x, float y, float width, float height, int scale, int index, bool allowTeleport = false)
     {
         // Set the size of the collision box for the pipe
         addComponent<BoxCollider2D>(sf::Vector2f(width * scale, height * scale));
@@ -41,14 +41,9 @@ public:
             addComponent<Animation>(TextureManager::load("assets/Pipe/Pipe1_2.png"));
         }
 
-        else if (index == 3)
+        if (allowTeleport)
         {
-            addComponent<Animation>(TextureManager::load("assets/Pipe/Pipe1_3.png"));
-        }
-
-        if (enterable)
-        {
-            addComponent<enterablePipe>();
+            addComponent<TelePort>();
         }
         else
         {

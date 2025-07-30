@@ -8,12 +8,12 @@ class DebrisSystem : public System
 public:
     void update(World &world, float dt) override
     {
-        std::ofstream fout("output.txt", std::ios::app);
-        if (fout.fail())
-        {
-            cerr << "Failed to open output.txt for writing." << std::endl;
-            return;
-        }
+        // std::ofstream fout("output.txt", std::ios::app);
+        // if (fout.fail())
+        // {
+        //     cerr << "Failed to open output.txt for writing." << std::endl;
+        //     return;
+        // }
         for (Entity *debris : world.findAll<DebrisTag, Transform>())
         {
             auto &pos = debris->getComponent<Transform>().position;
@@ -44,6 +44,6 @@ public:
                 // fout << "Debris4Tag: Position updated to (" << pos.x << ", " << pos.y << ")" << std::endl;
             }
         }
-        fout.close();
+        // fout.close();
     }
 };

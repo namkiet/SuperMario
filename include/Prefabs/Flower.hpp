@@ -4,8 +4,10 @@
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Gameplay/Collect/Components.hpp>
+#include <Gameplay/Item/Components.hpp>
 #include <Core/TextureManager.hpp>
 #include <vector>
+
 class Flower : public Entity
 {
 public:
@@ -26,6 +28,6 @@ public:
         
         addComponent<Animation>(textures, width, height, 0.15f, true);
 
-        // addComponent<CollectableTag>();
+        addComponent<FlowerTag>();
     }
 };

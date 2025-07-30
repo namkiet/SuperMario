@@ -15,9 +15,7 @@ struct PlayerTag : public Component
 };
 
 struct BigMarioTag : public Component {};
+struct FireMarioTag : public Component {};
 struct GrowUpTag : public Component{};
 
-
-struct InputTag: public Component
-{
-};
+struct InputTag: public Component {};

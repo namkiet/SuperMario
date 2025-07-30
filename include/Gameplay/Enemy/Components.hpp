@@ -1,12 +1,16 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 #include <ECS/Component.hpp>
+#include <Gameplay/Enemy/EnemyState.hpp>
+#include <Gameplay/Enemy/EnemyBehaviour.hpp>
+#include <memory>
 
-struct Goomba : public Component
+struct EnemyTag : public Component 
 {
-    // Goomba specific properties can be added here
+    EnemyTag(std::shared_ptr<EnemyState> state, std::shared_ptr<EnemyBehaviour> behaviour) : state(state), behaviour(behaviour) {}
+    std::shared_ptr<EnemyState> state;
+    std::shared_ptr<EnemyBehaviour> behaviour;
 };
 
-struct Koopa : public Component
-{
-    // Koopa specific properties can be added here
-};
+struct CanKillEnemyTag : public Component {};
+struct NotOnPatrolYet : public Component {};

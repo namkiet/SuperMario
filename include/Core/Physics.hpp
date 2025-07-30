@@ -34,6 +34,14 @@ namespace Physics
 
     inline Direction GetCollisionDirection(Entity *a, Entity *b)
     {
+        if (!a->hasComponent<BoxCollider2D>() || 
+            !b->hasComponent<BoxCollider2D>() || 
+            !a->hasComponent<Transform>() || 
+            !b->hasComponent<Transform>())
+        {
+            return Direction::None;
+        }
+        
         auto &boxA = a->getComponent<BoxCollider2D>();
         auto &boxB = b->getComponent<BoxCollider2D>();
         auto &tfA = a->getComponent<Transform>();
@@ -53,7 +61,7 @@ namespace Physics
         float xo = 0.5f * (sizeA.x + sizeB.x);
         float yo = 0.5f * (sizeA.y + sizeB.y);
 
-        if (xo > dx && yo > dy)
+        if (xo >= dx && yo >= dy)
         {
             if (yo > dyPrev)
             {
@@ -66,7 +74,7 @@ namespace Physics
                     return Direction::Right;
                 }
             }
-            else
+            else if (xo > dx)
             {
                 if (prevA.y < posB.y)
                 {

@@ -35,9 +35,9 @@ public:
 
             entity->removeComponent<Animation>();
 
-            if (tag.powerState->getName() == "GrowingUp")
+            if (tag.powerState->getName() == "GrowingUp" || tag.powerState->getName() == "Dead")
             {
-                entity->addComponent<Animation>(getAnimation("GrowingUp"));
+                entity->addComponent<Animation>(getAnimation(tag.powerState->getName()));
             }
             else
             {
@@ -49,15 +49,28 @@ public:
 public:
     PlayerStateSystem()
     {
-        animMap["IdlingSmall"] = Animation(TextureManager::load("assets/Mario/Small/mario_idling_small.png"));
-        animMap["JumpingSmall"] = Animation(TextureManager::load("assets/Mario/Small/mario_jumping_small.png"));
-        animMap["RunningSmall"] = Animation(TextureManager::load("assets/Mario/Small/mario_running_small.png"), 16, 16, 3, 0.15f);
+        animMap["IdlingSmall"] = Animation(TextureManager::load("assets/Mario/Small/idling.png"));
+        animMap["JumpingSmall"] = Animation(TextureManager::load("assets/Mario/Small/jumping.png"));
+        animMap["RunningSmall"] = Animation(TextureManager::load("assets/Mario/Small/running.png"), 16, 16, 3, 0.15f);
+        animMap["IdlingSmallInvincible"] = Animation(TextureManager::load("assets/Mario/Small/idling_invincible.png"), 16, 16, 4, 0.1f);
+        animMap["JumpingSmallInvincible"] = Animation(TextureManager::load("assets/Mario/Small/jumping_invincible.png"), 16, 16, 4, 0.1f);
+        animMap["RunningSmallInvincible"] = Animation(TextureManager::load("assets/Mario/Small/running_invincible.png"), 16, 16, 12, 0.1f);
 
-        animMap["IdlingBig"] = Animation(TextureManager::load("assets/Mario/Big/mario_idling_big.png"));
-        animMap["JumpingBig"] = Animation(TextureManager::load("assets/Mario/Big/mario_jumping_big.png"));
-        animMap["RunningBig"] = Animation(TextureManager::load("assets/Mario/Big/mario_running_big.png"), 16, 32, 3, 0.15f);
+        animMap["CrouchingBig"] = Animation(TextureManager::load("assets/Mario/Big/crouching.png"));
+        animMap["IdlingBig"] = Animation(TextureManager::load("assets/Mario/Big/idling.png"));
+        animMap["JumpingBig"] = Animation(TextureManager::load("assets/Mario/Big/jumping.png"));
+        animMap["RunningBig"] = Animation(TextureManager::load("assets/Mario/Big/running.png"), 16, 32, 3, 0.15f);
+        animMap["IdlingBigInvincible"] = Animation(TextureManager::load("assets/Mario/Big/idling_invincible.png"), 16, 32, 4, 0.1f);
+        animMap["JumpingBigInvincible"] = Animation(TextureManager::load("assets/Mario/Big/jumping_invincible.png"), 16, 32, 4, 0.1f);
+        animMap["RunningBigInvincible"] = Animation(TextureManager::load("assets/Mario/Big/running_invincible.png"), 16, 32, 12, 0.1f);
 
-        animMap["GrowingUp"] = Animation(TextureManager::load("assets/Mario/GrowUp/mario_grow_up.png"), 16, 32, 7, 0.1f, false);
+        animMap["CrouchingFire"] = Animation(TextureManager::load("assets/Mario/Fire/crouching.png"));
+        animMap["IdlingFire"] = Animation(TextureManager::load("assets/Mario/Fire/idling.png"));
+        animMap["JumpingFire"] = Animation(TextureManager::load("assets/Mario/Fire/jumping.png"));
+        animMap["RunningFire"] = Animation(TextureManager::load("assets/Mario/Fire/running.png"), 16, 32, 3, 0.15f);
+
+        animMap["GrowingUp"] = Animation(TextureManager::load("assets/Mario/GrowUp/grow_up.png"), 16, 32, 7, 0.1f, false);
+        animMap["Dead"] = Animation(TextureManager::load("assets/Mario/Small/dead.png"));
     }
 
 private:

@@ -11,13 +11,12 @@ class TextPoppingSystem : public System
         for (Entity *entity : world.findAll<TextComponent>())
         {
             auto &textComponent = entity->getComponent<TextComponent>();
-            ++textComponent.timer;
-            if (textComponent.timer > textComponent.dt)
+            if (textComponent.startY < textComponent.finalY)
             {
                 entity->addComponent<DespawnTag>();
                 continue;
             }
-            textComponent.y -= textComponent.dy;
+            textComponent.startY -= textComponent.dy * dt;
         }
     }
 };

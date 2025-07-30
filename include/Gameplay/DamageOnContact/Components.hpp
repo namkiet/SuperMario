@@ -12,3 +12,5 @@ struct DamageOnContactComponent : public Component
         : validDirections(validDirections) {}
     std::vector<Direction> validDirections;
 };
+
+struct DamagedTag : public Component {};

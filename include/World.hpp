@@ -8,16 +8,17 @@
 #include <vector>
 #include <algorithm>
 
-class World {
+class World
+{
 public:
-    Entity* createEntity() 
+    Entity *createEntity()
     {
         entities.push_back(std::make_unique<Entity>());
         return entities.back().get();
     }
 
-    template<typename T, typename... Args>
-    Entity* createEntity(Args&&... args)
+    template <typename T, typename... Args>
+    Entity *createEntity(Args &&...args)
     {
         entities.push_back(std::make_unique<T>(std::forward<Args>(args)...));
         return entities.back().get();
@@ -35,39 +36,40 @@ public:
         entities.insert(entities.begin(), std::make_unique<T>(std::forward<Args>(args)...));
         return entities.front().get();
     }
-    
-    void deleteEntity(Entity* entity)
+
+    void deleteEntity(Entity *entity)
     {
-        auto it = std::remove_if(entities.begin(), entities.end(), [entity](const std::unique_ptr<Entity>& e) { return e.get() == entity; });
-        if (it != entities.end()) 
+        auto it = std::remove_if(entities.begin(), entities.end(), [entity](const std::unique_ptr<Entity> &e)
+                                 { return e.get() == entity; });
+        if (it != entities.end())
         {
             entities.erase(it, entities.end());
         }
     }
 
-    void destroyEntity(Entity* entity)
+    void destroyEntity(Entity *entity)
     {
         // destroyPending.push_back(entity);
         deleteEntity(entity);
     }
 
-    std::vector<Entity*> findAll() const
+    std::vector<Entity *> findAll() const
     {
-        std::vector<Entity*> result;
-        for (auto& e : entities) 
+        std::vector<Entity *> result;
+        for (auto &e : entities)
         {
             result.push_back(e.get());
         }
         return result;
     }
 
-    template<typename... T>
-    std::vector<Entity*> findAll() const
+    template <typename... T>
+    std::vector<Entity *> findAll() const
     {
-        std::vector<Entity*> result;
-        for (auto& e : entities) 
+        std::vector<Entity *> result;
+        for (auto &e : entities)
         {
-            if ((e->hasComponent<T>() && ...)) 
+            if ((e->hasComponent<T>() && ...))
             {
                 result.push_back(e.get());
             }
@@ -75,12 +77,12 @@ public:
         return result;
     }
 
-    template<typename... T>
-    Entity* findFirst() const
+    template <typename... T>
+    Entity *findFirst() const
     {
-        for (auto& e : entities) 
+        for (auto &e : entities)
         {
-            if ((e->hasComponent<T>() && ...)) 
+            if ((e->hasComponent<T>() && ...))
             {
                 return e.get();
             }
@@ -88,7 +90,7 @@ public:
         return nullptr;
     }
 
-    template<typename T>
+    template <typename T>
     void addSystem()
     {
         // static_assert(std::is_base_of<System, T>::value, "T must inherit from System");
@@ -98,7 +100,7 @@ public:
         orderedSystems.push_back(system);
     }
 
-    template<typename T>
+    template <typename T>
     std::shared_ptr<T> getSystem() const
     {
         auto it = systems.find(typeid(T));
@@ -109,25 +111,25 @@ public:
 
         return std::static_pointer_cast<T>(it->second);
     }
-    
+
     void update(float deltaTime)
     {
-        for (auto& system : orderedSystems)
+        for (auto &system : orderedSystems)
         {
             system->preUpdate(*this, deltaTime);
         }
 
-        for (auto& system : orderedSystems)
+        for (auto &system : orderedSystems)
         {
             system->update(*this, deltaTime);
         }
 
-        for (auto& system : orderedSystems)
+        for (auto &system : orderedSystems)
         {
             system->postUpdate(*this, deltaTime);
         }
 
-        for (Entity* entity : destroyPending)
+        for (Entity *entity : destroyPending)
         {
             deleteEntity(entity);
         }
@@ -139,5 +141,5 @@ private:
     std::vector<std::unique_ptr<Entity>> entities;
     std::unordered_map<std::type_index, std::shared_ptr<System>> systems;
     std::vector<std::shared_ptr<System>> orderedSystems;
-    std::vector<Entity*> destroyPending;
+    std::vector<Entity *> destroyPending;
 };

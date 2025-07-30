@@ -2,7 +2,11 @@
 #include <LevelHandler.hpp>
 #include <Prefabs/Block.hpp>
 #include <Prefabs/Pipe.hpp>
-#include <Prefabs/Enemy.hpp>
+#include <Gameplay/Enemy/Goomba/Goomba.hpp>
+#include <Gameplay/Enemy/Koopa/Koopa.hpp>
+#include <Gameplay/Enemy/Koopa/KoopaJumping.hpp>
+#include <Gameplay/Enemy/Koopa/KoopaFlying.hpp>
+#include <Gameplay/Enemy/Piranha/Piranha.hpp>
 #include <Prefabs/Mario.hpp>
 #include <Prefabs/Background.hpp>
 #include <Prefabs/Coin.hpp>
@@ -15,10 +19,15 @@ LevelHandler::LevelHandler(World &world) : world(world) {}
 void LevelHandler::start()
 {
     world.createEntity<SmallCoin>(325, 65, 15, 24);
-    loadMap("assets/Levels/map11.json", world);
+
+    // Load the level setup from a JSON file
+    load("assets/Levels/map11.json", world);
+
+    // Load character setup from a JSON file
+    load("assets/Levels/map11b.json", world);
 }
 
-void LevelHandler::loadMap(const std::string &filename, World &world)
+void LevelHandler::load(const std::string &filename, World &world)
 {
     std::ifstream file(filename);
     nlohmann::json mapJson;
@@ -224,7 +233,7 @@ void LevelHandler::playerLoad(World &world, std::string tilename, float x, float
 {
     if (tilename == "StartingPoint") // Player
     {
-        world.createEntity<Mario>(x, y, width, height, 3);
+        world.createEntityAtFront<Mario>(x, y, width, height, 3);
     }
     else if (tilename == "CheckPoint")
     {
@@ -236,10 +245,11 @@ void LevelHandler::enemyLoad(World &world, std::string tilename, float x, float 
 {
     if (tilename == "Goomba") // Goomba
     {
-        world.createEntity<Enemy>(x, y, width, height, 3, 0);
+        // cout<< "Enemy starting position found at: (" << j << ", " << i << ")" << endl;
+        auto goomba = world.createEntity<Goomba>(x, y, 3);
     }
     else if (tilename == "Koopa") // Koopa
     {
-        world.createEntity<Enemy>(x, y, width, height, 3, 1);
+        auto koopa = world.createEntity<Koopa>(x, y, 3);
     }
 }
