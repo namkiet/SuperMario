@@ -179,7 +179,7 @@ class TeleSystem: public System
                 if(tele.teleEntity->hasComponent<hasPipeDestination>())
                 {
 
-                    auto PipeDestination = tele.teleEntity->getComponent<hasPipeDestination>();
+                    auto& PipeDestination = tele.teleEntity->getComponent<hasPipeDestination>();
                     // PipeDestination.pipe = findPipeDestination(world, player);
                     if (Physics::GetCollisionDirection(player, PipeDestination.pipe) == Direction::None)
                     {
@@ -281,7 +281,7 @@ class TeleSystem: public System
             if (!player->hasComponent<BoxCollider2D>()) return;
             auto& box = player->getComponent<BoxCollider2D>();
 
-            for (auto &[block, direction] : box.collisions)
+            for (auto &[block, direction, overlap] : box.collisions)
             {
                 if (!block->hasComponent<TelePort>()) continue;
                 if (direction != block->getComponent<TelePort>().requireCollisionDirection

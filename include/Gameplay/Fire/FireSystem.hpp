@@ -11,8 +11,6 @@
 class FireSystem : public System
 {
 private:
-    int timeCount = 0;
-
 public:
     void update(World &world, float dt) override
     {
@@ -23,21 +21,22 @@ public:
         //     return;
         // }
 
-        --timeCount;
-
-        for (Entity *entity : world.findAll<CanFireTag, Transform>())
+        for (Entity *entity : world.findAll<CanFireTag, Transform, FireCooldown>())
         {
             auto &pos = entity->getComponent<Transform>().position;
             auto &size = entity->getComponent<Transform>().size;
             auto &pool = KeyPressPool::Instance();
+            auto &cooldown = entity->getComponent<FireCooldown>();
 
-            // cout << FireBullet::getCount() << endl;
-            if (pool.isKeyPressed(sf::Keyboard::M) && FireBullet::getCount() < 2 && timeCount <= 0)
+            // Update the cooldown time
+            cooldown.timeCount += dt;
+
+            if (pool.isKeyPressed(sf::Keyboard::M) && FireBullet::getCount() < 2 && cooldown.timeCount > 0.5f)
             {
                 // std::cout << "Firing bullet at position: " << pos.x << ", " << pos.y << std::endl;
                 auto fireBullet = world.createEntity<FireBullet>(pos.x + size.x / 2, pos.y + size.y / 8, 24, 24);
 
-                timeCount = 10;
+                cooldown.timeCount = 0;
 
                 // fout << "Fired a fire bullet at position: " << pos.x - size.x / 2 << " " << pos.y + size.y / 8 << std::endl;
             }

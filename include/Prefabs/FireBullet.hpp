@@ -37,7 +37,7 @@ public:
         addComponent<BoxCollider2D>(sf::Vector2f(width, height));
 
         addComponent<PatrolComponent>();
-        getComponent<PatrolComponent>().moveSpeed = 200.0f;
+        getComponent<PatrolComponent>().moveSpeed = 400.0f;
 
         addComponent<RigidBody>(sf::Vector2f(0, 50));
 

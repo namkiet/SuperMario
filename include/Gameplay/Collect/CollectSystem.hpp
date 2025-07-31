@@ -13,7 +13,7 @@ class CollectSystem : public System
     {
         for (Entity *item : world.findAll<CollectableTag, BoxCollider2D>())
         {
-            for (const auto &[collider, direction] : item->getComponent<BoxCollider2D>().collisions)
+            for (const auto &[collider, direction, overlap] : item->getComponent<BoxCollider2D>().collisions)
             {
                 // Check if the entity can collect the item
                 if (!collider->hasComponent<CanCollectTag>())

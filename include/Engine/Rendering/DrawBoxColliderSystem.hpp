@@ -14,6 +14,7 @@ public:
 
     void draw(const World &world, sf::RenderWindow &window) const
     {
+        // return;
         for (Entity* entity : world.findAll<Transform, BoxCollider2D>())
         {
             auto &tf = entity->getComponent<Transform>();

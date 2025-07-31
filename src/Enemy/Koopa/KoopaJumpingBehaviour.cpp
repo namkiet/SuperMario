@@ -16,7 +16,7 @@ void KoopaJumpingBehaviour::collideWithPlayer(Entity* entity)
 
     const auto& box = entity->getComponent<BoxCollider2D>();
 
-    for (auto& [collider, direction] : box.collisions)
+    for (auto& [collider, direction, overlap] : box.collisions)
     {
         if (!collider->hasComponent<PlayerTag>()) continue;
 
@@ -37,7 +37,7 @@ void KoopaJumpingBehaviour::collideWithOther(Entity* entity)
     const auto& box = entity->getComponent<BoxCollider2D>();
     auto& patrol = entity->getComponent<KoopaPatrol>();
 
-    for (auto& [collider, direction] : box.collisions)
+    for (auto& [collider, direction, overlap] : box.collisions)
     {
         if (collider->hasComponent<CanKillEnemyTag>())
         {

@@ -5,6 +5,7 @@
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Camera/FollowByCameraTag.hpp>
 
 #include <Gameplay/Player/Components.hpp>
@@ -14,6 +15,7 @@
 #include <Gameplay/Score/Components.hpp>
 #include <Gameplay/Fire/Components.hpp>
 #include <Gameplay/BreakBrick/Components.hpp>
+#include <Gameplay/CaptureFlag/Components.hpp>
 
 #include <PlayerMovementStates/PlayerIdlingState.hpp>
 #include <PlayerPowerStates/PlayerSmallState.hpp>
@@ -26,15 +28,8 @@ class Mario : public Entity
 public:
     Mario(float x, float y, float width, float height, int scale)
     {
-        // <<<<<<< HEAD
-        //         addComponent<Animation>(TextureManager::load("assets/Mario/mario_idling_small.png"));
-        // =======
-        // Get the textures for the player
-        Animation anim(TextureManager::load("assets/Player/SmallPlayer/marioSmall_0.png"));
-        anim.zIndex = -1000;
-        addComponent<Animation>(anim);
+        addComponent<Animation>(TextureManager::load("assets/Player/SmallPlayer/marioSmall_0.png"));
 
-        //
         addComponent<FollowByCameraTag>();
 
         // Set the size of the collision box for the player
@@ -65,5 +60,9 @@ public:
         addComponent<TimeComponent>(400);
 
         addComponent<CoinComponent>();
+
+        addComponent<FireCooldown>();
+        
+        addComponent<CanCaptureFlagTag>();
     }
 };

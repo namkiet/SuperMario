@@ -41,7 +41,7 @@ void KoopaFlippedState::onEnter(Entity* entity)
     entity->getComponent<Transform>().size = sf::Vector2f(16, 16) * 3.0f;
     entity->getComponent<BoxCollider2D>().size = sf::Vector2f(16, 16) * 3.0f;
     
-    entity->getComponent<RigidBody>().velocity.y = -300;
+    entity->getComponent<RigidBody>().velocity.y = -500;
     entity->getComponent<KoopaPatrol>().velocity = sf::Vector2f(0, 0);
 
     entity->removeComponent<BlockTag>();

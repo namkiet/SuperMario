@@ -12,7 +12,7 @@ class CollectStarSystem : public System
     {
         for (Entity* player : world.findAll<CanCollectTag, PlayerTag, BoxCollider2D>())
         {
-            for (const auto &[item, _] : player->getComponent<BoxCollider2D>().collisions)
+            for (const auto &[item, direction, overlap] : player->getComponent<BoxCollider2D>().collisions)
             {
                 // Check if the entity can collect the item
                 if (!item->hasComponent<CollectableTag>()) continue;

@@ -35,11 +35,18 @@ public:
 
             entity->removeComponent<Animation>();
 
-            if (tag.powerState->getName() == "GrowingUp" || tag.powerState->getName() == "Dead")
+            bool isSpecialState = false;
+            for (const auto& stateName : specialStates)
             {
-                entity->addComponent<Animation>(getAnimation(tag.powerState->getName()));
+                if (tag.movementState->getName() == stateName || tag.powerState->getName() == stateName)
+                {
+                    entity->addComponent<Animation>(getAnimation(stateName));
+                    isSpecialState = true;
+                    break;
+                }
             }
-            else
+
+            if (!isSpecialState)
             {
                 entity->addComponent<Animation>(getAnimation(tag.movementState->getName() + tag.powerState->getName()));
             }
@@ -69,8 +76,11 @@ public:
         animMap["JumpingFire"] = Animation(TextureManager::load("assets/Mario/Fire/jumping.png"));
         animMap["RunningFire"] = Animation(TextureManager::load("assets/Mario/Fire/running.png"), 16, 32, 3, 0.15f);
 
-        animMap["GrowingUp"] = Animation(TextureManager::load("assets/Mario/GrowUp/grow_up.png"), 16, 32, 7, 0.1f, false);
+        animMap["Shrinking"] = Animation(TextureManager::load("assets/Mario/Big/shrinking.png"), 16, 32, 10, 0.1f, false);
+        animMap["GrowingUp"] = Animation(TextureManager::load("assets/Mario/Small/grow_up.png"), 16, 32, 7, 0.1f, false);
         animMap["Dead"] = Animation(TextureManager::load("assets/Mario/Small/dead.png"));
+
+        specialStates = {"Dead", "GrowingUp", "Shrinking"};
     }
 
 private:
@@ -84,4 +94,5 @@ private:
         return animMap.at(name);
     }
     std::unordered_map<std::string, Animation> animMap;
+    std::vector<std::string> specialStates;
 };

@@ -25,7 +25,7 @@ public:
             auto &size = star->getComponent<Transform>().size;
             auto &collider = star->getComponent<BoxCollider2D>();
             auto &patrolComponent = star->getComponent<PatrolComponent>();
-            for (const auto &[block, direction] : collider.collisions)
+            for (const auto &[block, direction, overlap] : collider.collisions)
             {
                 auto &blockPos = block->getComponent<Transform>().position;
                 if (direction == Direction::Top)

@@ -7,6 +7,7 @@
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Gameplay/Item/Components.hpp>
+
 class HitBlockSystem : public System
 {
 public:
@@ -23,7 +24,7 @@ public:
             if (entity->hasComponent<FireBulletTag>())
                 continue;
             rb.onGround = false;
-            for (auto &[block, direction] : box.collisions)
+            for (auto &[block, direction, overlap] : box.collisions)
             {
                 // Check if the entity it collides with is solid
                 if (!block->hasComponent<BlockTag>())
@@ -37,36 +38,28 @@ public:
                 const auto &blockSize = block->getComponent<BoxCollider2D>().size;
                 switch (direction)
                 {
-                case Direction::Top:
-                    tf.position.y = blockPos.y - box.size.y;
-                    rb.velocity.y = 0.0f;
-                    // if (entity->hasComponent<PlayerTag>())
-                    // {
-                    //     std::cout << "top collide" << std::endl;
-                    // }
-                    rb.onGround = true;
-                    break;
+                    case Direction::Top:
+                        tf.position.y = blockPos.y - box.size.y;
+                        rb.velocity.y = 0.0f;
+                        rb.onGround = true;
+                        break;
 
-                case Direction::Bottom:
-                    tf.position.y = blockPos.y + blockSize.y;
-                    // if (entity->hasComponent<PlayerTag>())
-                    // {
-                    //     std::cout << "bot collide" << std::endl;
-                    // }
-                    rb.velocity.y = 0.0f;
-                    break;
+                    case Direction::Bottom:
+                        tf.position.y = blockPos.y + blockSize.y;
+                        rb.velocity.y = 0.0f;
+                        break;
 
-                case Direction::Left:
-                    tf.position.x = blockPos.x - box.size.x - box.offset.x;
-                    // rb.velocity.x = 0.0f;
-                    rb.onGround = true;
-                    break;
+                    case Direction::Left:
+                        tf.position.x = blockPos.x - box.size.x - box.offset.x;
+                        rb.velocity.x = 0.0f;
+                        rb.onGround = true;
+                        break;
 
-                case Direction::Right:
-                    tf.position.x = blockPos.x + blockSize.x - box.offset.x;
-                    // rb.velocity.x = 0.0f;
-                    rb.onGround = true;
-                    break;
+                    case Direction::Right:
+                        tf.position.x = blockPos.x + blockSize.x - box.offset.x;
+                        rb.velocity.x = 0.0f;
+                        rb.onGround = true;
+                        break;
 
                 default:
                     break;

@@ -28,7 +28,7 @@ void GoombaFlippedState::onEnter(Entity* entity)
         anim.timer = 0;
     }
     
-    entity->getComponent<RigidBody>().velocity.y = -300;
+    entity->getComponent<RigidBody>().velocity.y = -600;
     entity->getComponent<GoombaPatrol>().velocity = sf::Vector2f(0, 0);
 
     entity->removeComponent<BlockTag>();

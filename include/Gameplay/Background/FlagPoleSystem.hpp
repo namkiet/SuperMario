@@ -8,18 +8,15 @@
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
+
 class FlagPoleCollisionSystem : public System
 {
 public:
     void update(World &world, float dt) override
     {
-        for (Entity *player : world.findAll<PlayerTag>())
+        for (Entity *player : world.findAll<PlayerTag, BoxCollider2D>())
         {
-            if (player->hasComponent<DamagedTag>())
-            {
-                continue; // Skip if the player is marked for despawn
-            }
-            for (const auto &[collider, direction] : player->getComponent<BoxCollider2D>().collisions)
+            for (const auto &[collider, direction, overlap] : player->getComponent<BoxCollider2D>().collisions)
             {
                 if (!collider->hasComponent<FlagPole>())
                     continue;
@@ -34,9 +31,9 @@ public:
 
                 if (direction != Direction::None)
                 {
-                    pos.x = flagPolePos.x - flagPoleSize.x / 2;
-                    velocity.y = 200;
-                    velocity.x = 0;
+                    // pos.x = flagPolePos.x - flagPoleSize.x / 2;
+                    // velocity.y = 200;
+                    // velocity.x = 0;
                     // std::cout << "Player reached the flagpole!" << std::endl;
                 }
 
