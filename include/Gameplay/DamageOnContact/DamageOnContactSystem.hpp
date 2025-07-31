@@ -12,7 +12,7 @@ public:
     {
         for (Entity* entity : world.findAll<CanGetDamageTag, BoxCollider2D>())
         {
-            for (const auto& [collider, direction] : entity->getComponent<BoxCollider2D>().collisions)
+            for (const auto& [collider, direction, overlap] : entity->getComponent<BoxCollider2D>().collisions)
             {   
                 if (!collider->hasComponent<DamageOnContactComponent>()) continue;
                 auto& dmg = collider->getComponent<DamageOnContactComponent>();

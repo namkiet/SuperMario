@@ -11,7 +11,7 @@ public:
     {
         for (Entity* entity : world.findAll<BoxCollider2D, CanBreakBrickTag>())
         {
-            for (auto& [brick, direction] : entity->getComponent<BoxCollider2D>().collisions)
+            for (auto& [brick, direction, overlap] : entity->getComponent<BoxCollider2D>().collisions)
             {
                 if (!brick->hasComponent<BrickTag>()) continue;
                 if (direction != Direction::Bottom) continue;

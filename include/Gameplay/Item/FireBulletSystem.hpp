@@ -31,7 +31,7 @@ public:
             auto &size = fireBullet->getComponent<Transform>().size;
             auto &collider = fireBullet->getComponent<BoxCollider2D>();
             auto &patrolComponent = fireBullet->getComponent<PatrolComponent>();
-            for (const auto &[block, direction] : collider.collisions)
+            for (const auto &[block, direction, overlap] : collider.collisions)
             {
                 if (block->hasComponent<PlayerTag>())
                 {

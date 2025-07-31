@@ -13,7 +13,7 @@ void GoombaBehaviour::collideWithPlayer(Entity* entity)
 {
     const auto& box = entity->getComponent<BoxCollider2D>();
 
-    for (auto& [collider, direction] : box.collisions)
+    for (auto& [collider, direction, overlap] : box.collisions)
     {
         if (!collider->hasComponent<PlayerTag>()) continue;
 
@@ -31,7 +31,7 @@ void GoombaBehaviour::collideWithOther(Entity* entity)
     const auto& box = entity->getComponent<BoxCollider2D>();
     auto& patrol = entity->getComponent<GoombaPatrol>();
 
-    for (auto& [collider, direction] : box.collisions)
+    for (auto& [collider, direction, overlap] : box.collisions)
     {
         if (collider->hasComponent<CanKillEnemyTag>())
         {

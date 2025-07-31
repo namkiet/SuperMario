@@ -16,7 +16,7 @@ void KoopaSlideBehaviour::collideWithPlayer(Entity* entity)
 
     const auto& box = entity->getComponent<BoxCollider2D>();
 
-    for (auto& [collider, direction] : box.collisions)
+    for (auto& [collider, direction, overlap] : box.collisions)
         if (collider->hasComponent<PlayerTag>())
         {
             if (direction == Direction::Bottom)
@@ -35,7 +35,7 @@ void KoopaSlideBehaviour::collideWithOther(Entity* entity)
     const auto& box = entity->getComponent<BoxCollider2D>();
     auto& patrol = entity->getComponent<KoopaPatrol>();
 
-    for (auto& [collider, direction] : box.collisions)
+    for (auto& [collider, direction, overlap] : box.collisions)
     {
         if (collider->hasComponent<EnemyTag>()) continue;
 

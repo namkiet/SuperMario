@@ -8,6 +8,7 @@
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/Background/Components.hpp>
+#include <Gameplay/CaptureFlag/Components.hpp>
 #include <iostream>
 
 class Background : public Entity
@@ -35,7 +36,7 @@ public:
         else if (index == 9)
         {
             // Add the flagpole tag
-            addComponent<FlagPole>();
+            addComponent<FlagPoleTag>();
 
             // addComponent<BoxCollider2D>(sf::Vector2f(width * scale, height * scale));
 

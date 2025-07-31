@@ -16,7 +16,7 @@ void KoopaNormalBehaviour::collideWithPlayer(Entity* entity)
 
     const auto& box = entity->getComponent<BoxCollider2D>();
 
-    for (auto& [collider, direction] : box.collisions)
+    for (auto& [collider, direction, overlap] : box.collisions)
     {
         if (!collider->hasComponent<PlayerTag>()) continue;
 
@@ -36,7 +36,7 @@ void KoopaNormalBehaviour::collideWithOther(Entity* entity)
     const auto& box = entity->getComponent<BoxCollider2D>();
     auto& patrol = entity->getComponent<KoopaPatrol>();
 
-    for (auto& [collider, direction] : box.collisions)
+    for (auto& [collider, direction, overlap] : box.collisions)
     {
         if (collider->hasComponent<CanKillEnemyTag>())
         {
@@ -80,21 +80,25 @@ void KoopaNormalBehaviour::patrol(Entity* entity, float dt, Entity* camera)
         }
     }
 
-    // Koopa will turn back when it will fall if it is still moving in current direction
-    pox.x += (patrol.velocity.x + rb.velocity.x) * dt;
-    pox.y += (patrol.velocity.y + rb.velocity.y) * dt;
-        
     bool stillOnGround = false;
-    for (auto& [collider, direction] : box.collisions)
-        if (Physics::GetCollisionDirection(entity, collider) == Direction::Top)
+    for (auto& [collider, direction, overlap] : box.collisions)
+    {
+        if (direction != Direction::Top) continue;
+
+        auto bounds1 = Physics::GetCollisionBounds(entity);
+        auto bounds2 = Physics::GetCollisionBounds(collider);
+        auto centerX1 = bounds1.left + 0.5f * bounds1.width;
+        auto centerX2 = bounds2.left + 0.5f * bounds2.width;
+        auto dx = abs(centerX1 - centerX2);
+        auto overlapX = 0.5f * (bounds1.width + bounds2.width) - dx;
+        
+        if (overlapX >= 0.25f * bounds1.width)
         {
             stillOnGround = true;
             break;
         }
-        
-    pox.x -= (patrol.velocity.x + rb.velocity.x) * dt;
-    pox.y -= (patrol.velocity.y + rb.velocity.y) * dt;
-        
+    }
+
     if (stillOnGround == false && rb.onGround == true)
     {
         patrol.velocity.x *= -1;

@@ -10,7 +10,7 @@ public:
     {
         for (Entity* stomper : world.findAll<StomperTag, BoxCollider2D>())
         {
-            for (auto& [stompable, direction] : stomper->getComponent<BoxCollider2D>().collisions)
+            for (auto& [stompable, direction, overlap] : stomper->getComponent<BoxCollider2D>().collisions)
             {
                 if (!stompable->hasComponent<StompableTag>()) continue;
                 

@@ -15,6 +15,7 @@
 #include <Gameplay/Score/Components.hpp>
 #include <Gameplay/Fire/Components.hpp>
 #include <Gameplay/BreakBrick/Components.hpp>
+#include <Gameplay/CaptureFlag/Components.hpp>
 
 #include <PlayerMovementStates/PlayerIdlingState.hpp>
 #include <PlayerPowerStates/PlayerSmallState.hpp>
@@ -27,13 +28,8 @@ class Mario : public Entity
 public:
     Mario(float x, float y, float width, float height, int scale)
     {
-        // <<<<<<< HEAD
-        //         addComponent<Animation>(TextureManager::load("assets/Mario/mario_idling_small.png"));
-        // =======
-        // Get the textures for the player
         addComponent<Animation>(TextureManager::load("assets/Player/SmallPlayer/marioSmall_0.png"));
 
-        //
         addComponent<FollowByCameraTag>();
 
         // Set the size of the collision box for the player
@@ -66,5 +62,7 @@ public:
         addComponent<CoinComponent>();
 
         addComponent<FireCooldown>();
+        
+        addComponent<CanCaptureFlagTag>();
     }
 };

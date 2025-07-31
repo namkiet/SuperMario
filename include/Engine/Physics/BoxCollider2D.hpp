@@ -14,17 +14,35 @@ enum class Direction
     Right
 };
 
+inline Direction opposite(Direction dir)
+{
+    switch (dir)
+    {
+        case Direction::Top: 
+            return Direction::Bottom;
+        
+        case Direction::Bottom: 
+            return Direction::Top;
+        
+        case Direction::Left: 
+            return Direction::Right;
+        
+        case Direction::Right: 
+            return Direction::Left;
+        
+        default: 
+            return Direction::None;
+    }
+}
+
 struct CollisionInfo
 {
-    CollisionInfo(Entity* collider = nullptr, Direction direction = Direction::None)
-        : collider(collider), direction(direction) {}
+    CollisionInfo(Entity* collider = nullptr, Direction direction = Direction::None, sf::FloatRect overlap = sf::FloatRect())
+        : collider(collider), direction(direction), overlap(overlap) {}
         
     Entity* collider;
     Direction direction;
-    // bool operator==(const CollisionInfo& other) const
-    // {
-    //     return collider == other.collider && direction == other.direction;
-    // }
+    sf::FloatRect overlap;
 };
 
 class BoxCollider2D : public Component

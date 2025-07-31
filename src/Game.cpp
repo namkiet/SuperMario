@@ -9,7 +9,7 @@ Game::Game()
     : contextSettings(0, 0, 16)
     , window(sf::VideoMode(SIZE::SCREEN.x, SIZE::SCREEN.y), "Game", sf::Style::Default, contextSettings)
 {
-    // window.setFramerateLimit(60);
+    window.setFramerateLimit(90);
 
     registry.registerInstance("menu", std::make_shared<MenuState>());
     registry.registerInstance("play", std::make_shared<PlayingState>());

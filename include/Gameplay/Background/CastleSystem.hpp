@@ -26,7 +26,7 @@ public:
     {
         for (Entity *player : world.findAll<PlayerTag, BoxCollider2D>())
         {
-            for (const auto &[collider, direction] : player->getComponent<BoxCollider2D>().collisions)
+            for (const auto &[collider, direction, overlap] : player->getComponent<BoxCollider2D>().collisions)
             {
                 if (!collider->hasComponent<Castle>())
                     continue;
@@ -40,6 +40,7 @@ public:
                 {
                     // Make the player disappear
                     player->removeComponent<Animation>();
+                    player->removeComponent<RigidBody>();
                 }
                 else
                     continue;

@@ -17,7 +17,7 @@ void PiranhaBehaviour::collideWithOther(Entity* entity)
 {
     const auto& box = entity->getComponent<BoxCollider2D>();
 
-    for (auto& [collider, direction] : box.collisions)
+    for (auto& [collider, direction, overlap] : box.collisions)
     {
         if (collider->hasComponent<CanKillEnemyTag>())
         {

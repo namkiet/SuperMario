@@ -41,6 +41,8 @@
 #include <Gameplay/Fire/FireSystem.hpp>
 #include <Gameplay/Tele/TeleSystem.hpp>
 
+#include <Gameplay/CaptureFlag/CaptureFlagSystem.hpp>
+
 #include <Gameplay/Enemy/EnemyStateSystem.hpp>
 #include <Gameplay/Enemy/EnemyBehaviourSystem.hpp>
 #include <Gameplay/Enemy/Koopa/Koopa.hpp>
@@ -93,6 +95,8 @@ GameManager::GameManager() : levelHandler(world)
     world.addSystem<CollectMushroomSystem>();
     world.addSystem<CollectFlowerSystem>();
     world.addSystem<CollectStarSystem>();
+
+    world.addSystem<CaptureFlagSystem>();
 
     world.addSystem<ItemEmergingSystem>();
     world.addSystem<CoinJumpingSystem>();
@@ -171,7 +175,7 @@ void GameManager::handleEvent(const sf::Event &event)
         if (event.key.code == sf::Keyboard::X)
         {
             std::cout << "HELLO\n";
-            auto koopa = world.createEntity<KoopaJumping>(30 * 16, 24 * 16, 3);
+            auto koopa = world.createEntity<Koopa>(10 * 16, 24 * 16, 3);
         }
 
         if (event.key.code == sf::Keyboard::T)
@@ -193,11 +197,9 @@ void GameManager::handleEvent(const sf::Event &event)
 
 void GameManager::update(float dt)
 {
-
-
     if (oneFrame && !shouldPlay) return;
 
-    // std::cout << 1.0f / dt << "\n";
+    std::cout << 1.0f / dt << "\n";
     
 
     world.update(dt);

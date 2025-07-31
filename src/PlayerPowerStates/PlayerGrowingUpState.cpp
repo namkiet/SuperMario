@@ -33,7 +33,6 @@ void PlayerGrowingUpState::onEnter(Entity* entity)
 void PlayerGrowingUpState::onExit(Entity* entity)
 {  
     entity->addComponent<RigidBody>();
-    entity->removeComponent<GrowUpTag>();
 }
 
 std::shared_ptr<PlayerPowerState> PlayerGrowingUpState::getNewState(Entity* entity)

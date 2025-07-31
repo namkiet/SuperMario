@@ -38,6 +38,7 @@ std::shared_ptr<PlayerPowerState> PlayerSmallState::getNewState(Entity* entity)
 {
     if (entity->hasComponent<GrowUpTag>()) 
     {
+        entity->removeComponent<GrowUpTag>();
         return std::make_shared<PlayerGrowingUpState>();
     }
 
@@ -48,6 +49,7 @@ std::shared_ptr<PlayerPowerState> PlayerSmallState::getNewState(Entity* entity)
 
     if (entity->hasComponent<DamagedTag>())
     {
+        entity->removeComponent<DamagedTag>();
         return std::make_shared<PlayerDeadState>();
     }
 

@@ -17,7 +17,7 @@ public:
             auto& patrol = entity->getComponent<PatrolComponent>();
             auto& rb = entity->getComponent<RigidBody>();
             
-            for (const auto& [collider, direction] : entity->getComponent<BoxCollider2D>().collisions)
+            for (const auto& [collider, direction, overlap] : entity->getComponent<BoxCollider2D>().collisions)
             {
                 if (collider->hasComponent<PlayerTag>())
                     continue;

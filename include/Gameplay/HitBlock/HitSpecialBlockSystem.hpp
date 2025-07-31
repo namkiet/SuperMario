@@ -40,7 +40,7 @@ public:
         for (Entity *player : world.findAll<PlayerTag, BoxCollider2D, Transform>())
         {
             auto bounds1 = getColliderBounds(player);
-            for (auto &[block, direction] : player->getComponent<BoxCollider2D>().collisions)
+            for (auto &[block, direction, overlap] : player->getComponent<BoxCollider2D>().collisions)
             {
                 if (direction != Direction::Bottom)
                     continue;

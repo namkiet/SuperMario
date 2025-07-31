@@ -43,9 +43,10 @@ struct Animation : public Component
     float timer = 0.f;
     bool loop = true;
     int row = 0;
-    bool flipX = false;
-    bool flipY = false;
     bool hasEnded = false;
     std::vector<const sf::Texture *> textures;
     int zIndex = 0;
 };
+
+struct FlipXTag : public Component {};
+struct FlipYTag : public Component {};
