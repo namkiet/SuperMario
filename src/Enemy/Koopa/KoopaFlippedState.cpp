@@ -48,6 +48,11 @@ void KoopaFlippedState::onEnter(Entity* entity)
     entity->removeComponent<CanHitBlockTag>();
     entity->removeComponent<StompableTag>();
     entity->removeComponent<DamageOnContactComponent>();
+
+    if (entity->hasComponent<ScoreAddedTag>()) 
+    {
+        entity->removeComponent<ScoreAddedTag>();
+    }
 }
 
 std::shared_ptr<EnemyState> KoopaFlippedState::getNewState(Entity* entity, float dt)

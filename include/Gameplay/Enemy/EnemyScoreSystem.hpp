@@ -2,6 +2,7 @@
 #include <World.hpp>
 #include <Prefabs/Coin.hpp>
 #include <Engine/Core/Transform.hpp>
+#include <Engine/Core/RigidBody.hpp>
 #include <Gameplay/LifeSpan/Components.hpp>
 #include <Gameplay/Score/Components.hpp>
 #include <Gameplay/Enemy/Components.hpp>
@@ -12,41 +13,98 @@
 class EnemyScoreSystem : public System
 {
 private:
+    void GoombaScore(World &world, float dt, Entity *enemy)
+    {
+        auto &pos = enemy->getComponent<Transform>().position;
+        auto &size = enemy->getComponent<Transform>().size;
+
+        Entity *player = world.findFirst<PlayerTag, ScoreComponent>();
+        if (!player)
+        {
+            return;
+        }
+        auto &scoreComp = player->getComponent<ScoreComponent>();
+
+        // If it has life span component
+        if (enemy->hasComponent<LifeSpan>() && enemy->getComponent<LifeSpan>().value <= dt && !enemy->hasComponent<ScoreAddedTag>())
+        {
+            Entity *scoreTextEntity = world.createEntity();
+            scoreTextEntity->addComponent<TextComponent>("100", pos.x, pos.y, pos.y - 48, 15, 1);
+            scoreComp.score += 100;
+            enemy->addComponent<ScoreAddedTag>();
+        }
+
+        auto &rb = enemy->getComponent<RigidBody>();
+        if (rb.velocity.y < 0 && !enemy->hasComponent<ScoreAddedTag>())
+        {
+            Entity *scoreTextEntity = world.createEntity();
+            scoreTextEntity->addComponent<TextComponent>("100", pos.x, pos.y, pos.y - 48, 15, 1);
+            scoreComp.score += 100;
+            enemy->addComponent<ScoreAddedTag>();
+        }
+    }
+    void KoopaScore(World &world, float dt, Entity *enemy)
+    {
+        auto &pos = enemy->getComponent<Transform>().position;
+        auto &size = enemy->getComponent<Transform>().size;
+        Entity *scoreTextEntity = world.createEntity();
+        Entity *player = world.findFirst<PlayerTag, ScoreComponent>();
+        if (!player)
+        {
+            return;
+        }
+        auto &scoreComp = player->getComponent<ScoreComponent>();
+
+        // If it has life span component
+        if (enemy->hasComponent<LifeSpan>() && enemy->getComponent<LifeSpan>().value <= dt)
+        {
+            Entity *scoreTextEntity = world.createEntity();
+            scoreTextEntity->addComponent<TextComponent>("200", pos.x, pos.y, pos.y - 48, 15, 1);
+            scoreComp.score += 200;
+        }
+
+        auto &rb = enemy->getComponent<RigidBody>();
+        if (rb.velocity.y < 0 && !enemy->hasComponent<ScoreAddedTag>())
+        {
+            Entity *scoreTextEntity = world.createEntity();
+            scoreTextEntity->addComponent<TextComponent>("200", pos.x, pos.y, pos.y - 48, 15, 1);
+            scoreComp.score += 200;
+            enemy->addComponent<ScoreAddedTag>();
+        }
+
+        if (!enemy->hasComponent<NotOnPatrolYet>() && enemy->hasComponent<KoopaPatrol>() && !enemy->hasComponent<ScoreAddedTag>())
+        {
+            auto &koopa = enemy->getComponent<KoopaPatrol>();
+
+            if (koopa.velocity.x == 0)
+            {
+                Entity *scoreTextEntity = world.createEntity();
+                scoreTextEntity->addComponent<TextComponent>("100", pos.x, pos.y, pos.y - 48, 15, 1);
+                scoreComp.score += 100;
+                enemy->addComponent<ScoreAddedTag>();
+            }
+            else if (std::abs(koopa.velocity.x) == 1000)
+            {
+                Entity *scoreTextEntity = world.createEntity();
+                scoreTextEntity->addComponent<TextComponent>("500", pos.x, pos.y, pos.y - 48, 15, 1);
+                scoreComp.score += 500; // Increment score by 500 for Koopa
+                enemy->addComponent<ScoreAddedTag>();
+            }
+        }
+    }
+
 public:
     void update(World &world, float dt) override
     {
-        for (Entity *enemy : world.findAll<EnemyTag, Transform, LifeSpan>())
+        for (Entity *enemy : world.findAll<EnemyTag, Transform, RigidBody>())
         {
-            auto &pos = enemy->getComponent<Transform>().position;
-            auto &size = enemy->getComponent<Transform>().size;
-            auto &lifeSpan = enemy->getComponent<LifeSpan>();
-
-            if (lifeSpan.value <= dt)
+            if (enemy->hasComponent<GoombaPatrol>())
             {
-                Entity *scoreTextEntity = world.createEntity();
-                if (enemy->hasComponent<GoombaPatrol>())
-                    scoreTextEntity->addComponent<TextComponent>("100", pos.x, pos.y, pos.y - 48, 15, 1);
-                else if (enemy->hasComponent<KoopaPatrol>())
-                    scoreTextEntity->addComponent<TextComponent>("200", pos.x, pos.y, pos.y - 48, 15, 1);
-
-                Entity *player = nullptr;
-                for (Entity *entity : world.findAll<PlayerTag>())
-                {
-                    if (entity->hasComponent<ScoreComponent>())
-                    {
-                        player = entity;
-                        break;
-                    }
-                }
-
-                if (player)
-                {
-                    auto &scoreComp = player->getComponent<ScoreComponent>();
-                    if (enemy->hasComponent<GoombaPatrol>())
-                        scoreComp.score += 100; // Increment score by 100 for Goomba
-                    else if (enemy->hasComponent<KoopaPatrol>())
-                        scoreComp.score += 200; // Increment score by 100
-                }
+                GoombaScore(world, dt, enemy);
+            }
+            else if (enemy->hasComponent<KoopaPatrol>())
+            {
+                KoopaScore(world, dt, enemy);
             }
         }
     }

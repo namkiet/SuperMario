@@ -63,17 +63,7 @@ public:
                     rb.velocity.y = -100.0f;
                     // rb.velocity.x = 0.0f;
                     patrolComponent.moveSpeed = 400.0f;
-                    Entity *player = world.findFirst<PlayerTag, Transform>();
-                    if (player)
-                    {
-                        if (player->getComponent<Transform>().isFacingRight)
-                            patrolComponent.isMovingRight = true;
-                        else
-                            patrolComponent.isMovingRight = false;
-                    }
-                    // fout << "FireBullet collided with block from the top." << std::endl;
-                    // fout << "New fire bullet position: (" << pos.x << ", " << pos.y << ")" << std::endl;
-                    //  fout << "Star collided with block from bottom." << std::endl;
+                    
                 }
                 if (direction == Direction::Bottom)
                 {
@@ -102,7 +92,7 @@ public:
                     fireBullet->addComponent<Animation>(TextureManager::load("assets/Item/FireBullet/FireBullet_4.png"));
 
                     // Add the life span component
-                    fireBullet->addComponent<LifeSpan>(0.5f); // 1 second lifespan
+                    fireBullet->addComponent<LifeSpan>(0.3f);
 
                     // Stop the fire from moving
                     // pos.x = blockPos.x + blockSize.x / 2;

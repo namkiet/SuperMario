@@ -11,7 +11,7 @@ namespace SIZE
 namespace PHYSICS
 {
     inline float GRAVITY = 2560.0f;
-    inline float JUMP_FORCE = 1280.0f;
+    inline float JUMP_FORCE = 1100.0f;
 }
 
 namespace PLAYER

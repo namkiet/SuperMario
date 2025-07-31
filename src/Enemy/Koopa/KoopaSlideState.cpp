@@ -11,15 +11,16 @@
 #include <Engine/Core/Transform.hpp>
 #include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
+#include <iostream>
 
-void KoopaSlideState::onEnter(Entity* entity)
+void KoopaSlideState::onEnter(Entity *entity)
 {
     entity->addComponent<KoopaSlideTag>();
     entity->addComponent<CanKillEnemyTag>();
 
-    if (entity->hasComponent<Animation>()) 
+    if (entity->hasComponent<Animation>())
     {
-        auto& anim = entity->getComponent<Animation>();
+        auto &anim = entity->getComponent<Animation>();
         anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Koopa/koopa_shell.png"));
         anim.frameWidth = 16;
         anim.frameHeight = 16;
@@ -29,22 +30,27 @@ void KoopaSlideState::onEnter(Entity* entity)
         anim.timer = 0;
     }
 
-    auto& tag = entity->getComponent<EnemyTag>();
+    auto &tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();
     tag.behaviour = std::make_shared<KoopaSlideBehaviour>();
 
     entity->getComponent<Transform>().size = sf::Vector2f(16, 16) * 3.0f;
     entity->getComponent<BoxCollider2D>().size = sf::Vector2f(16, 16) * 3.0f;
 
-    auto& patrol = entity->getComponent<KoopaPatrol>();
+    auto &patrol = entity->getComponent<KoopaPatrol>();
     patrol.velocity.x = 1000 * (patrol.lastDirection == Direction::Right ? 1 : -1);
 
-    std::vector<Direction> directions = { Direction::Left, Direction::Right, Direction::Bottom };
+    std::vector<Direction> directions = {Direction::Left, Direction::Right, Direction::Bottom};
     entity->addComponent<DamageOnContactComponent>(directions);
+
+    // remove the score added tag if it exists
+    if (entity->hasComponent<ScoreAddedTag>())
+    {
+        entity->removeComponent<ScoreAddedTag>();
+    }
 }
 
-
-std::shared_ptr<EnemyState> KoopaSlideState::getNewState(Entity* entity, float dt)
+std::shared_ptr<EnemyState> KoopaSlideState::getNewState(Entity *entity, float dt)
 {
     timer += dt;
     if (timer > stateDuration)

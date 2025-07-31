@@ -14,13 +14,13 @@
 #include <Core/Variables.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 
-void KoopaShellState::onEnter(Entity* entity)
+void KoopaShellState::onEnter(Entity *entity)
 {
     entity->addComponent<KoopaShellTag>();
 
-    if (entity->hasComponent<Animation>()) 
+    if (entity->hasComponent<Animation>())
     {
-        auto& anim = entity->getComponent<Animation>();
+        auto &anim = entity->getComponent<Animation>();
         anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Koopa/koopa_shell.png"));
         anim.frameWidth = 16;
         anim.frameHeight = 16;
@@ -30,7 +30,7 @@ void KoopaShellState::onEnter(Entity* entity)
         anim.timer = 0;
     }
 
-    auto& tag = entity->getComponent<EnemyTag>();
+    auto &tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();
     tag.behaviour = std::make_shared<KoopaShell_ReviveBehaviour>();
 
@@ -41,8 +41,7 @@ void KoopaShellState::onEnter(Entity* entity)
     entity->removeComponent<DamageOnContactComponent>();
 }
 
-
-std::shared_ptr<EnemyState> KoopaShellState::getNewState(Entity* entity, float dt)
+std::shared_ptr<EnemyState> KoopaShellState::getNewState(Entity *entity, float dt)
 {
     timer += dt;
     if (timer > stateDuration)

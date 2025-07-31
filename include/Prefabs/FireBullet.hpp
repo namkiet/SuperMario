@@ -33,6 +33,7 @@ public:
                 &TextureManager::load("assets/Item/FireBullet/FireBullet_2.png"),
                 &TextureManager::load("assets/Item/FireBullet/FireBullet_3.png")};
         addComponent<Animation>(textures, width, height, 0.15f, true);
+        getComponent<Animation>().zIndex = -1; // Set z-index for rendering order
 
         addComponent<BoxCollider2D>(sf::Vector2f(width, height));
 

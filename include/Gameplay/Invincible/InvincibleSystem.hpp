@@ -16,7 +16,7 @@ public:
             auto& timer = entity->getComponent<InvincibleTag>().timer;
             const auto& duration = entity->getComponent<InvincibleTag>().duration;
 
-            std::cout << "Timer: " << timer << ", duration: " << duration << "\n";
+            // std::cout << "Timer: " << timer << ", duration: " << duration << "\n";
 
             if (timer == 0.0f)
             {

@@ -53,6 +53,11 @@ public:
                 {
                     auto &timeComponent = player->getComponent<TimeComponent>();
                     timeComponent.goesFaster = true;
+                    if (player->hasComponent<ScoreComponent>() && timeComponent.timer > 0)
+                    {
+                        auto &scoreComponent = player->getComponent<ScoreComponent>();
+                        scoreComponent.score += 50; // Increment score by 100
+                    }
 
                     if (timeComponent.timer <= 0 && !timeComponent.firstTimeReach0)
                     {

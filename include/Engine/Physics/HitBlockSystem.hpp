@@ -52,13 +52,13 @@ public:
                     case Direction::Left:
                         tf.position.x = blockPos.x - box.size.x - box.offset.x;
                         rb.velocity.x = 0.0f;
-                        rb.onGround = true;
+                        // rb.onGround = true;
                         break;
 
                     case Direction::Right:
                         tf.position.x = blockPos.x + blockSize.x - box.offset.x;
                         rb.velocity.x = 0.0f;
-                        rb.onGround = true;
+                        // rb.onGround = true;
                         break;
 
                 default:

@@ -20,7 +20,7 @@ void RenderSystem::backgroundRender(sf::RenderWindow &window) const
     // window.setView(view);
     sf::Sprite sky(TextureManager::load("assets/Background/map11_1.png"));
     window.draw(sky);
-    sf::Sprite backgroundSprite(TextureManager::load("assets/Background/map11.png"));
+    sf::Sprite backgroundSprite(TextureManager::load("assets/Background/map11_2.png"));
     // float scaleX = SIZE::SCREEN.x / backgroundSprite.getGlobalBounds().width;
     backgroundSprite.setScale(3, 3);
     window.draw(backgroundSprite);

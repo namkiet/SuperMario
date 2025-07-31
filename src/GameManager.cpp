@@ -110,9 +110,9 @@ GameManager::GameManager() : levelHandler(world)
     world.addSystem<TextPoppingSystem>();
     world.addSystem<DamageOnContactSystem>();
     world.addSystem<InvincibleSystem>();
+    world.addSystem<EnemyScoreSystem>();
     world.addSystem<EnemyStateSystem>();
     world.addSystem<EnemyBehaviourSystem>();
-    world.addSystem<EnemyScoreSystem>();
     
     world.addSystem<DespawnSystem>();
     world.addSystem<PlayerRespawnSystem>();
@@ -199,7 +199,7 @@ void GameManager::update(float dt)
 {
     if (oneFrame && !shouldPlay) return;
 
-    std::cout << 1.0f / dt << "\n";
+    // std::cout << 1.0f / dt << "\n";
     
 
     world.update(dt);

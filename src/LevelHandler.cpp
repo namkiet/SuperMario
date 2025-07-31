@@ -21,13 +21,11 @@ void LevelHandler::start()
 {
     world.createEntity<SmallCoin>(325, 65, 15, 24);
 
-    
     // Load character setup from a JSON file
     load("assets/Levels/map11b.json", world);
 
     // Load the level setup from a JSON file
     load("assets/Levels/map11.json", world);
-
 }
 
 void LevelHandler::load(const std::string &filename, World &world)
@@ -111,6 +109,10 @@ void LevelHandler::tileLoad(World &world, std::string tilename, float x, float y
     {
         world.createEntity<Block>(x, y, width, height, 3, 5);
     }
+    else if (tilename == "Tile1_3") // Coin blocks
+    {
+        world.createEntity<Block>(x, y, width, height, 3, 6);
+    }
     else if (tilename == "Tile1_8") // Flag blocks
     {
         world.createEntity<Block>(x, y, width, height, 3, 10);
@@ -151,19 +153,18 @@ void LevelHandler::pipeLoad(World &world, std::string tilename, float x, float y
     {
         auto pipe = world.createEntity<Pipe>(x, y, width * 3, height * 2, 3, 2, true);
         pipe->addComponent<TelePort>();
-        auto& teleport = pipe->getComponent<TelePort>();
+        auto &teleport = pipe->getComponent<TelePort>();
         teleport.setCollideDir(Direction::Left);
         teleport.setDestination(teleMap["CheckPoint2"]);
         teleport.setInTimeTele(sf::Vector2f(200.f, 0.f));
 
         pipe->addComponent<hasPipeDestination>(Direction::Top);
-
     }
     else if (tilename == "Pipe2_0") // Vertical go-in pipes
     {
         auto pipe = world.createEntity<Pipe>(x, y, width * 2, height, 3, 0, true);
         pipe->addComponent<TelePort>();
-        auto& teleport = pipe->getComponent<TelePort>();
+        auto &teleport = pipe->getComponent<TelePort>();
         teleport.setCollideDir(Direction::Top);
         teleport.setDestination(teleMap["CheckPoint1"]);
         teleport.setInTimeTele(sf::Vector2f(0.f, 100.f));
@@ -256,7 +257,7 @@ void LevelHandler::playerLoad(World &world, std::string tilename, float x, float
         // world.createEntity<Mario>(x, y, width, height, 3);
         teleMap[tilename] = sf::Vector2f(x * 3, y * 3);
     }
-    
+
     else if (tilename == "CheckPoint2")
     {
         teleMap[tilename] = sf::Vector2f(x * 3, y * 3);
