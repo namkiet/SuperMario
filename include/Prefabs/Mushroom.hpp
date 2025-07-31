@@ -20,11 +20,11 @@ public:
         // addComponent<BoxCollider2D>(sf::Vector2f(width, height));
 
         // Set the animation for the flower
-        addComponent<Animation>(TextureManager::load("assets/Item/Mushroom/Mushroom1_0.png"));
+        // addComponent<Animation>(TextureManager::load("assets/Item/Mushroom/Mushroom1_0.png"));
 
-        // Animation anim(TextureManager::load("assets/Item/Mushroom/Mushroom1_0.png"));
-        // anim.zIndex = -1;
-        // addComponent<Animation>(anim);
+        Animation anim(TextureManager::load("assets/Item/Mushroom/Mushroom1_0.png"));
+        anim.zIndex = -1;
+        addComponent<Animation>(anim);
 
         addComponent<MushroomTag>(MushroomTag::Buff::GROW_UP);
     }
@@ -32,7 +32,7 @@ public:
 
 class Mushroom2 : public Entity
 {
-    public:
+public:
     Mushroom2(float x, float y, float width, float height)
     {
         // Set the transform for positioning
@@ -42,11 +42,11 @@ class Mushroom2 : public Entity
         // addComponent<BoxCollider2D>(sf::Vector2f(width, height));
 
         // Set the animation for the flower
-        addComponent<Animation>(TextureManager::load("assets/Item/Mushroom/Mushroom1_1.png"));
+        // addComponent<Animation>(TextureManager::load("assets/Item/Mushroom/Mushroom1_1.png"));
 
-        // Animation anim(TextureManager::load("assets/Item/Mushroom/Mushroom1_1.png"));
-        // anim.zIndex = -1;
-        // addComponent<Animation>(anim);
+        Animation anim(TextureManager::load("assets/Item/Mushroom/Mushroom1_1.png"));
+        anim.zIndex = -1;
+        addComponent<Animation>(anim);
 
         addComponent<MushroomTag>(MushroomTag::Buff::GIVE_ONE_MORE_LIFE);
     }
