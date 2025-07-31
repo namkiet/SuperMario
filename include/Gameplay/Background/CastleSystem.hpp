@@ -40,7 +40,11 @@ public:
                 {
                     // Make the player disappear
                     player->removeComponent<Animation>();
-                    player->removeComponent<RigidBody>();
+                    if (player->hasComponent<RigidBody>())
+                    {
+                        player->getComponent<RigidBody>().velocity = sf::Vector2f(0, 0);
+                    }
+                    // player->removeComponent<RigidBody>();
                 }
                 else
                     continue;
@@ -92,16 +96,19 @@ public:
                         }
                     }
                     // Spawn one firework at a time
-                    auto &seq = player->getComponent<FireworkComponent>();
-                    if (seq.fireworksLeft > 0 && Fireworks::getFireworksCount() < 1)
+                    else
                     {
-                        world.createEntity<Fireworks>(48, 48);
-                        if (player->hasComponent<ScoreComponent>())
+                        auto &seq = player->getComponent<FireworkComponent>();
+                        if (seq.fireworksLeft > 0 && Fireworks::getFireworksCount() < 1)
                         {
-                            auto &scoreComponent = player->getComponent<ScoreComponent>();
-                            scoreComponent.score += 100; // Increment score by 100
+                            world.createEntity<Fireworks>(48, 48);
+                            if (player->hasComponent<ScoreComponent>())
+                            {
+                                auto &scoreComponent = player->getComponent<ScoreComponent>();
+                                scoreComponent.score += 100; // Increment score by 100
+                            }
+                            --seq.fireworksLeft;
                         }
-                        --seq.fireworksLeft;
                     }
                 }
             }
