@@ -66,7 +66,7 @@ void GoombaBehaviour::patrol(Entity* entity, float dt, Entity* camera)
         
         if (tf.position.x - (cam.target.x + SIZE::SCREEN.x/2) <= 100)
         {
-            patrol.velocity = sf::Vector2f(-30, 0);
+            patrol.velocity = sf::Vector2f(-60, 0);
             entity->removeComponent<NotOnPatrolYet>();
         }
     }    

@@ -20,7 +20,7 @@ public:
     Goomba(float x, float y, float scale)
     {
         addComponent<RigidBody>(RigidBody(sf::Vector2f(0, 0)));
-        addComponent<Transform>(Transform(sf::Vector2f(x * scale, y), sf::Vector2f(16, 16) * scale));
+        addComponent<Transform>(Transform(sf::Vector2f(x, y) * scale, sf::Vector2f(16, 16) * scale));
         addComponent<BoxCollider2D>(BoxCollider2D(sf::Vector2f(16, 16) * scale));
 
         addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Goomba/goomba_walk.png"), 16, 16, 2, 0.5f / 2));

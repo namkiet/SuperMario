@@ -21,7 +21,7 @@ public:
             prev.y = pos.y;
 
             pos.x += vel.x * dt;
-            pos.y += vel.y * dt;
+            pos.y += std::min(vel.y * dt, 100.0f);
             
             if (pos.y >= SIZE::SCREEN.y)
             {
