@@ -30,7 +30,9 @@ public:
         //         addComponent<Animation>(TextureManager::load("assets/Mario/mario_idling_small.png"));
         // =======
         // Get the textures for the player
-        addComponent<Animation>(TextureManager::load("assets/Player/SmallPlayer/marioSmall_0.png"));
+        Animation anim(TextureManager::load("assets/Player/SmallPlayer/marioSmall_0.png"));
+        anim.zIndex = -1000;
+        addComponent<Animation>(anim);
 
         //
         addComponent<FollowByCameraTag>();

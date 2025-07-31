@@ -16,5 +16,5 @@ namespace PHYSICS
 
 namespace PLAYER
 {
-    inline float HORIZONTAL_SPEED = 200.0f;
+    inline float HORIZONTAL_SPEED = 800.0f;
 }

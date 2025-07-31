@@ -6,12 +6,16 @@
 #include <World.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <string>
-
+#include <string>
+#include <unordered_map>
+#include <SFML/System/Vector2.hpp>
 class LevelHandler
 {
 private:
     World &world;
-   
+    std::unordered_map<std::string, sf::Vector2f> teleMap;
+    
+
     void tileLoad(World &world, std::string tilename, float x, float y, float width, float height);
     void pipeLoad(World &world, std::string tilename, float x, float y, float width, float height);
     void groundLoad(World &world, std::string tilename, float x, float y, float width, float height);
