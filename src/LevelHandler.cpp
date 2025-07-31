@@ -256,6 +256,6 @@ void LevelHandler::enemyLoad(World &world, std::string tilename, float x, float 
     }
     else if (tilename == "Koopa") // Koopa
     {
-        auto koopa = world.createEntity<KoopaJumping>(x, y, 3);
+        auto koopa = world.createEntity<Koopa>(x, y, 3);
     }
 }

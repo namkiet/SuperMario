@@ -24,7 +24,7 @@ public:
         //     return;
         // }
 
-        for (Entity *fireBullet : world.findAll<FireBulletTag, Transform, BoxCollider2D, RigidBody>())
+        for (Entity *fireBullet : world.findAll<FireBulletTag, Transform, BoxCollider2D, RigidBody, PatrolComponent>())
         {
             auto &pos = fireBullet->getComponent<Transform>().position;
             auto &rb = fireBullet->getComponent<RigidBody>();
@@ -62,7 +62,15 @@ public:
                     pos.y = blockPos.y - size.y * 2;
                     rb.velocity.y = -100.0f;
                     // rb.velocity.x = 0.0f;
-                    patrolComponent.moveSpeed = 200.0f;
+                    patrolComponent.moveSpeed = 400.0f;
+                    Entity *player = world.findFirst<PlayerTag, Transform>();
+                    if (player)
+                    {
+                        if (player->getComponent<Transform>().isFacingRight)
+                            patrolComponent.isMovingRight = true;
+                        else
+                            patrolComponent.isMovingRight = false;
+                    }
                     // fout << "FireBullet collided with block from the top." << std::endl;
                     // fout << "New fire bullet position: (" << pos.x << ", " << pos.y << ")" << std::endl;
                     //  fout << "Star collided with block from bottom." << std::endl;
