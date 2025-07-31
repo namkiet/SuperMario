@@ -13,12 +13,8 @@ class FlagPoleCollisionSystem : public System
 public:
     void update(World &world, float dt) override
     {
-        for (Entity *player : world.findAll<PlayerTag>())
+        for (Entity *player : world.findAll<PlayerTag, BoxCollider2D>())
         {
-            if (player->hasComponent<DamagedTag>())
-            {
-                continue; // Skip if the player is marked for despawn
-            }
             for (const auto &[collider, direction] : player->getComponent<BoxCollider2D>().collisions)
             {
                 if (!collider->hasComponent<FlagPole>())
