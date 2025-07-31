@@ -47,6 +47,7 @@
 #include <Gameplay/Enemy/Goomba/Goomba.hpp>
 #include <Gameplay/Enemy/Koopa/KoopaJumping.hpp>
 #include <Gameplay/Enemy/Koopa/KoopaFlying.hpp>
+#include <Gameplay/Enemy/EnemyScoreSystem.hpp>
 
 #include <Gameplay/Score/PlayTimeSystem.hpp>
 #include <Gameplay/Score/TextPoppingSystem.hpp>
@@ -107,7 +108,8 @@ GameManager::GameManager() : levelHandler(world)
     world.addSystem<InvincibleSystem>();
     world.addSystem<EnemyStateSystem>();
     world.addSystem<EnemyBehaviourSystem>();
-
+    world.addSystem<EnemyScoreSystem>();
+    
     world.addSystem<DespawnSystem>();
     world.addSystem<PlayerRespawnSystem>();
 
