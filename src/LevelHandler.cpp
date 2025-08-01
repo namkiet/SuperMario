@@ -15,17 +15,33 @@
 #include <Gameplay/Tele/Components.hpp>
 using namespace std;
 
-LevelHandler::LevelHandler(World &world) : world(world) {}
+LevelHandler::LevelHandler(World &world, int currentLevel) : world(world), currentLevel(currentLevel) {}
 
 void LevelHandler::start()
 {
     world.createEntity<SmallCoin>(325, 65, 15, 24);
-
-    // Load character setup from a JSON file
-    load("assets/Levels/map11b.json", world);
-
-    // Load the level setup from a JSON file
-    load("assets/Levels/map11.json", world);
+    cout << "Current level: " << currentLevel << endl;
+    switch (currentLevel)
+    {
+    case 1:
+        // Load character setup from a JSON file
+        load("assets/Levels/map11b.json", world);
+        // Load the level setup from a JSON file
+        load("assets/Levels/map11.json", world);
+        break;
+    case 2:
+        // Load character setup from a JSON file
+        load("assets/Levels/map54b.json", world);
+        // Load the level setup from a JSON file
+        load("assets/Levels/map54.json", world);
+        break;
+    case 3:
+        // Load character setup from a JSON file
+        load("assets/Levels/map61b.json", world);
+        // Load the level setup from a JSON file
+        load("assets/Levels/map61.json", world);
+        break;
+    }
 }
 
 void LevelHandler::load(const std::string &filename, World &world)
@@ -101,39 +117,39 @@ void LevelHandler::load(const std::string &filename, World &world)
 
 void LevelHandler::tileLoad(World &world, std::string tilename, float x, float y, float width, float height)
 {
-    if (tilename == "Tile1_1") // 1Up blocks
+    if (tilename == "1UpBlock") // 1Up blocks
     {
         world.createEntity<Block>(x, y, width, height, 3, 8);
     }
-    else if (tilename == "Tile1_2") // Normal blocks
+    else if (tilename == "NormalBlock") // Normal blocks
     {
         world.createEntity<Block>(x, y, width, height, 3, 5);
     }
-    else if (tilename == "Tile1_3") // Coin blocks
+    else if (tilename == "CoinBlock") // Coin blocks
     {
         world.createEntity<Block>(x, y, width, height, 3, 6);
     }
-    else if (tilename == "Tile1_8") // Flag blocks
+    else if (tilename == "FlagBlock") // Flag blocks
     {
         world.createEntity<Block>(x, y, width, height, 3, 10);
     }
-    else if (tilename == "Tile1_17") // Star blocks
+    else if (tilename == "StarBlock") // Star blocks
     {
         world.createEntity<Block>(x, y, width, height, 3, 9);
     }
-    else if (tilename == "Tile1_24") // Coin question blocks
+    else if (tilename == "CoinQuestionBlock") // Coin question blocks
     {
         world.createEntity<Block>(x, y, width, height, 3, 1);
     }
-    else if (tilename == "Tile1_25") // Mushroom question blocks
+    else if (tilename == "MushroomQuestionBlock") // Mushroom question blocks
     {
         world.createEntity<Block>(x, y, width, height, 3, 2);
     }
-    else if (tilename == "Tile1_26") // Flower question blocks
+    else if (tilename == "FlowerQuestionBlock") // Flower question blocks
     {
         world.createEntity<Block>(x, y, width, height, 3, 3);
     }
-    else if (tilename == "Tile1_28") // Stairs blocks
+    else if (tilename == "StairsBlock") // Stairs blocks
     {
         world.createEntity<Block>(x, y, width, height, 3, 7);
     }
@@ -141,15 +157,15 @@ void LevelHandler::tileLoad(World &world, std::string tilename, float x, float y
 
 void LevelHandler::pipeLoad(World &world, std::string tilename, float x, float y, float width, float height)
 {
-    if (tilename == "Pipe1_0") // Nap cong
+    if (tilename == "UnenterablePipe") // Nap cong
     {
         world.createEntity<Pipe>(x, y, width * 2, height, 3, 0, false);
     }
-    else if (tilename == "Pipe1_1") // Normal pipes
+    else if (tilename == "Pipe") // Normal pipes
     {
         world.createEntity<Pipe>(x, y, width * 2, height, 3, 1, false);
     }
-    else if (tilename == "Pipe1_2")
+    else if (tilename == "HorizontalEnterablePipe")
     {
         auto pipe = world.createEntity<Pipe>(x, y, width * 3, height * 2, 3, 2, true);
         pipe->addComponent<TelePort>();
@@ -160,7 +176,7 @@ void LevelHandler::pipeLoad(World &world, std::string tilename, float x, float y
 
         pipe->addComponent<hasPipeDestination>(Direction::Top);
     }
-    else if (tilename == "Pipe2_0") // Vertical go-in pipes
+    else if (tilename == "VerticalEnterablePipe") // Vertical go-in pipes
     {
         auto pipe = world.createEntity<Pipe>(x, y, width * 2, height, 3, 0, true);
         pipe->addComponent<TelePort>();
@@ -169,53 +185,13 @@ void LevelHandler::pipeLoad(World &world, std::string tilename, float x, float y
         teleport.setDestination(teleMap["CheckPoint1"]);
         teleport.setInTimeTele(sf::Vector2f(0.f, 100.f));
     }
-    else if (tilename == "Pipe2_1") // Vertical go-out pipes
-    {
-        world.createEntity<Pipe>(x, y, width * 2, height, 3, 1, true);
-    }
-    else if (tilename == "Pipe5_0") // Horizontal go-out pipes
-    {
-        world.createEntity<Pipe>(x, y, width * 2, height, 3, 0, false);
-    }
-    else if (tilename == "Pipe5_1") // Vertical go-out pipes
-    {
-        world.createEntity<Pipe>(x, y, width * 2, height, 3, 1, false);
-    }
 }
 
 void LevelHandler::groundLoad(World &world, std::string tilename, float x, float y, float width, float height)
 {
-    if (tilename == "Ground1") // Ground block
+    if (tilename == "GroundBlock") // Ground block
     {
         world.createEntity<Block>(x, y, width, height, 3, -1);
-    }
-    else if (tilename == "Ground2") // Ground block with different texture
-    {
-        world.createEntity<Block>(x, y, width, height, 3, -2);
-    }
-    else if (tilename == "Ground3") // Ground block with another texture
-    {
-        world.createEntity<Block>(x, y, width, height, 3, -3);
-    }
-    else if (tilename == "Ground4") // Ground block with yet another texture
-    {
-        world.createEntity<Block>(x, y, width, height, 3, -4);
-    }
-    else if (tilename == "Ground5") // Ground block with a different texture
-    {
-        world.createEntity<Block>(x, y, width, height, 3, -5);
-    }
-    else if (tilename == "Ground6") // Ground block with another texture
-    {
-        world.createEntity<Block>(x, y, width, height, 3, -6);
-    }
-    else if (tilename == "Ground7") // Ground block with yet another texture
-    {
-        world.createEntity<Block>(x, y, width, height, 3, -7);
-    }
-    else if (tilename == "Ground8") // Ground block with a different texture
-    {
-        world.createEntity<Block>(x, y, width, height, 3, -8);
     }
 }
 
@@ -278,5 +254,17 @@ void LevelHandler::enemyLoad(World &world, std::string tilename, float x, float 
     else if (tilename == "Koopa") // Koopa
     {
         auto koopa = world.createEntity<Koopa>(x, y, 3);
+    }
+    else if (tilename == "Piranha")
+    {
+        auto piranha = world.createEntity<Piranha>(x + width / 2, y, 3);
+    }
+    else if (tilename == "JumpingKoopa")
+    {
+        auto koopaJumping = world.createEntity<KoopaJumping>(x, y, 3);
+    }
+    else if (tilename == "FlyingKoopa")
+    {
+        auto koopaFlying = world.createEntity<KoopaFlying>(x, y, 3);
     }
 }

@@ -14,7 +14,7 @@ class RenderSystem : public System
 {
 private:
     sf::Font font;
-    void backgroundRender(sf::RenderWindow &window) const;
+    void backgroundRender(sf::RenderWindow &window, int level) const;
     void textComponentRender(const World &world, sf::RenderWindow &window) const;
 
 public:
@@ -27,7 +27,7 @@ public:
         // no-op
     }
 
-    void draw(const World &world, sf::RenderWindow &window) const
+    void draw(const World &world, sf::RenderWindow &window, int level) const
     {
         if (world.findFirst<Camera>())
         {
@@ -36,7 +36,7 @@ public:
             sf::View view(cam.target, sf::Vector2f(size.x, size.y));
             window.setView(view);
         }
-        backgroundRender(window);
+        backgroundRender(window, level);
         textComponentRender(world, window);
 
         auto entities = world.findAll<Transform, Animation>();

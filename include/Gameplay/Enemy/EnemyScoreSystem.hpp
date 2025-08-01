@@ -8,6 +8,7 @@
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/Enemy/Goomba/Components.hpp>
 #include <Gameplay/Enemy/Koopa/Components.hpp>
+#include <Gameplay/Enemy/Piranha/Components.hpp>
 #include <iostream>
 
 class EnemyScoreSystem : public System
@@ -47,7 +48,6 @@ private:
     {
         auto &pos = enemy->getComponent<Transform>().position;
         auto &size = enemy->getComponent<Transform>().size;
-        Entity *scoreTextEntity = world.createEntity();
         Entity *player = world.findFirst<PlayerTag, ScoreComponent>();
         if (!player)
         {
@@ -93,6 +93,24 @@ private:
         }
     }
 
+    void PiranhaScore(World &world, float dt, Entity *enemy)
+    {
+        auto &pos = enemy->getComponent<Transform>().position;
+        auto &size = enemy->getComponent<Transform>().size;
+        Entity *player = world.findFirst<PlayerTag, ScoreComponent>();
+        if (!player)
+        {
+            return;
+        }
+        auto &scoreComp = player->getComponent<ScoreComponent>();
+        if (enemy->hasComponent<DespawnTag>())
+        {
+            Entity *scoreTextEntity = world.createEntity();
+            scoreTextEntity->addComponent<TextComponent>("200", pos.x, pos.y, pos.y - 48, 15, 1);
+            scoreComp.score += 200; // Increment score by 500 for Koopa
+        }
+    }
+
 public:
     void update(World &world, float dt) override
     {
@@ -105,6 +123,10 @@ public:
             else if (enemy->hasComponent<KoopaPatrol>())
             {
                 KoopaScore(world, dt, enemy);
+            }
+            else if (enemy->hasComponent<PiranhaPatrol>())
+            {
+                PiranhaScore(world, dt, enemy);
             }
         }
     }

@@ -145,6 +145,18 @@ public:
         destroyPending.clear();
     }
 
+    void removeAllEntities()
+    {
+        for (auto &entity : entities)
+            deleteEntity(entity.get());
+        entities.clear();
+        for (Entity *entity : destroyPending)
+        {
+            deleteEntity(entity);
+        }
+        destroyPending.clear();
+    }
+
 private:
     std::vector<std::unique_ptr<Entity>> entities;
     std::unordered_map<std::type_index, std::shared_ptr<System>> systems;

@@ -49,7 +49,10 @@ public:
                 {
                     if (fireBullet->hasComponent<PatrolComponent>())
                         fireBullet->getComponent<PatrolComponent>().isMovingRight = false;
+                    if (fireBullet->hasComponent<Transform>())
+                        fireBullet->getComponent<Transform>().position.x = pos.x;
                 }
+
                 cooldown.timeCount = 0;
             }
         }

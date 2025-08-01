@@ -60,8 +60,9 @@
 #include <cassert>
 #include <iostream>
 
-GameManager::GameManager() : levelHandler(world)
+GameManager::GameManager(int level) : levelHandler(world, level), level(level)
 {
+    std::cout << "GameManager initialized with level: " << level << std::endl;
     levelHandler.start();
 
     world.createEntity()->addComponent<Camera>();
@@ -110,10 +111,10 @@ GameManager::GameManager() : levelHandler(world)
     world.addSystem<TextPoppingSystem>();
     world.addSystem<DamageOnContactSystem>();
     world.addSystem<InvincibleSystem>();
-    world.addSystem<EnemyScoreSystem>();
     world.addSystem<EnemyStateSystem>();
     world.addSystem<EnemyBehaviourSystem>();
-    
+    world.addSystem<EnemyScoreSystem>();
+
     world.addSystem<DespawnSystem>();
     world.addSystem<PlayerRespawnSystem>();
 
@@ -197,23 +198,23 @@ void GameManager::handleEvent(const sf::Event &event)
 
 void GameManager::update(float dt)
 {
-    if (oneFrame && !shouldPlay) return;
+    if (oneFrame && !shouldPlay)
+        return;
 
     // std::cout << 1.0f / dt << "\n";
-    
 
     world.update(dt);
-    
+
     if (oneFrame)
     {
-        shouldPlay = false;  
+        shouldPlay = false;
     }
 }
 
-void GameManager::draw(sf::RenderWindow &window) const
+void GameManager::draw(sf::RenderWindow &window, int level) const
 {
     // Set the custom view
-    world.getSystem<RenderSystem>()->draw(world, window);
+    world.getSystem<RenderSystem>()->draw(world, window, level);
 
     // Drawn with custom view
     world.getSystem<DrawBoxColliderSystem>()->draw(world, window);

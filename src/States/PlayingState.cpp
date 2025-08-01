@@ -1,9 +1,9 @@
 #include <Game.hpp>
 #include <States/PlayingState.hpp>
 #include <Core/Variables.hpp>
-PlayingState::PlayingState()
+
+PlayingState::PlayingState() : gameManager(nullptr)
 {
-    // no-op
 }
 
 void PlayingState::handleEvent(Game &game, const sf::Event &event)
@@ -21,15 +21,42 @@ void PlayingState::handleEvent(Game &game, const sf::Event &event)
         }
     }
 
-    gameManager.handleEvent(event);
+    gameManager->handleEvent(event);
 }
 
 void PlayingState::update(Game &, float dt)
 {
-    gameManager.update(dt);
+    gameManager->update(dt);
 }
 
 void PlayingState::render(Game &, sf::RenderWindow &window)
 {
-    gameManager.draw(window);
+    switch (level)
+    {
+    case 1:
+        window.clear(sf::Color(146, 144, 255, 255));
+        break;
+    case 2:
+        window.clear(sf::Color(0, 0, 0, 255));
+        break;
+    case 3:
+        window.clear(sf::Color(0, 0, 0, 255));
+        break;
+    }
+    gameManager->draw(window, level);
+}
+
+void PlayingState::setLevel(int level)
+{
+    this->level = level;
+    if (gameManager)
+        delete gameManager;
+    gameManager = new GameManager(level);
+}
+
+PlayingState::~PlayingState()
+{
+    if (gameManager)
+        delete gameManager;
+    gameManager = nullptr;
 }

@@ -6,21 +6,22 @@
 #include <memory>
 #include <string>
 
-class Game 
+class Game
 {
 private:
-    sf::ContextSettings                         contextSettings;
-    sf::RenderWindow                            window;
-    std::vector<std::shared_ptr<GameState>>     stateStack;
-    bool                                        isRunning = true;
-    StateRegistry                               registry;
+    sf::ContextSettings contextSettings;
+    sf::RenderWindow window;
+    std::vector<std::shared_ptr<GameState>> stateStack;
+    bool isRunning = true;
+    StateRegistry registry;
 
 public:
-                                                Game();
-    void                                        run();
-    void                                        pushState(const std::string& string);
-    void                                        popState();
-    GameState*                                  currentState();
-    sf::RenderWindow&                           getWindow();
-    void                                        quit();
+    Game();
+    void run();
+    void pushState(const std::string &string);
+    void popState();
+    GameState *currentState();
+    sf::RenderWindow &getWindow();
+    void quit();
+    StateRegistry &getRegistry();
 };

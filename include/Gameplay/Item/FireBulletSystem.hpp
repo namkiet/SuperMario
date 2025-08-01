@@ -59,10 +59,10 @@ public:
                         continue;
                     }
 
-                    pos.y = blockPos.y - size.y * 2;
-                    rb.velocity.y = -100.0f;
+                    pos.y = blockPos.y - size.y * 2.5;
+                    rb.velocity.y = -200.0f;
                     // rb.velocity.x = 0.0f;
-                    patrolComponent.moveSpeed = 400.0f;
+                    patrolComponent.moveSpeed = 600.0f;
                     
                 }
                 if (direction == Direction::Bottom)

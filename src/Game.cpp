@@ -5,9 +5,8 @@
 #include <States/SettingsState.hpp>
 #include <Core/Variables.hpp>
 
-Game::Game() 
-    : contextSettings(0, 0, 16)
-    , window(sf::VideoMode(SIZE::SCREEN.x, SIZE::SCREEN.y), "Game", sf::Style::Default, contextSettings)
+Game::Game()
+    : contextSettings(0, 0, 16), window(sf::VideoMode(SIZE::SCREEN.x, SIZE::SCREEN.y), "Game", sf::Style::Default, contextSettings)
 {
     window.setFramerateLimit(90);
 
@@ -18,22 +17,25 @@ Game::Game()
     pushState("menu");
 }
 
-void Game::run() 
+void Game::run()
 {
     sf::Clock clock;
     const float fixedDt = 1.0f / 100.0f; // 60 updates/sec
     float lag = 0.0f;
 
-    while (window.isOpen() && isRunning && (!stateStack.empty() || !currentState())) 
+    while (window.isOpen() && isRunning && (!stateStack.empty() || !currentState()))
     {
         float dt = clock.restart().asSeconds();
         lag += dt;
 
         // --- Input xử lý mỗi frame ---
         sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) window.close();
-            if (currentState()) currentState()->handleEvent(*this, event);
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+            if (currentState())
+                currentState()->handleEvent(*this, event);
         }
 
         // // --- Update logic vật lý nhiều lần nếu cần ---
@@ -42,33 +44,45 @@ void Game::run()
         //     lag -= fixedDt;
         // }
 
-
-        if (currentState()) currentState()->update(*this, dt);
+        if (currentState())
+            currentState()->update(*this, dt);
 
         // --- Vẽ chỉ 1 lần ---
         window.clear(sf::Color(146, 144, 255, 255));
-        if (currentState()) currentState()->render(*this, window);
+        if (currentState())
+            currentState()->render(*this, window);
         window.display();
     }
 }
 
-void Game::pushState(const std::string& name) {
+void Game::pushState(const std::string &name)
+{
     stateStack.push_back(registry.getState(name));
 }
 
-void Game::popState() {
-    if (!stateStack.empty()) stateStack.pop_back();
+void Game::popState()
+{
+    if (!stateStack.empty())
+        stateStack.pop_back();
 }
 
-GameState* Game::currentState() {
+GameState *Game::currentState()
+{
     return stateStack.empty() ? nullptr : stateStack.back().get();
 }
 
-sf::RenderWindow& Game::getWindow() {
+sf::RenderWindow &Game::getWindow()
+{
     return window;
 }
 
-void Game::quit() {
+void Game::quit()
+{
     isRunning = false;
     window.close();
+}
+
+StateRegistry &Game::getRegistry()
+{
+    return registry;
 }

@@ -13,8 +13,12 @@ class LevelHandler
 {
 private:
     World &world;
+    int currentLevel = 0;
+    // 1 for world 1-1
+    // 2 for world 5-4
+    // 3 for world 6-1 + 6-2
+
     std::unordered_map<std::string, sf::Vector2f> teleMap;
-    
 
     void tileLoad(World &world, std::string tilename, float x, float y, float width, float height);
     void pipeLoad(World &world, std::string tilename, float x, float y, float width, float height);
@@ -27,6 +31,6 @@ private:
     void load(const std::string &filename, World &world);
 
 public:
-    LevelHandler(World &world);
+    LevelHandler(World &world, int currentLevel = 0);
     void start();
 };

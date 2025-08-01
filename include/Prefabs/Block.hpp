@@ -10,10 +10,11 @@
 #include <Gameplay/Block/Components.hpp>
 #include <vector>
 #include <iostream>
+
 class Block : public Entity
 {
 public:
-    Block(float x, float y, float width, float height, int scale, int index)
+    Block(float x, float y, float width, float height, int scale, int index, int currentLevel = 1)
     {
         // Add the block tag
         addComponent<BlockTag>();
@@ -32,95 +33,48 @@ public:
             return;
         }
 
-        if (index == 1)
+        std::string tileFolder = "assets/Tile/Tile" + std::to_string(currentLevel) + "/";
+        if (index >= 1 && index <= 4) // Question blocks with animation
         {
-            // Add the coin question block tag
-            addComponent<CoinQuestionBlock>();
-
-            // Add the question block tag
             addComponent<QuestionBlockTag>();
+            switch (index)
+            {
+            case 1:
+                addComponent<CoinQuestionBlock>();
+                break;
+            case 2:
+                addComponent<MushroomQuestionBlock>();
+                break;
+            case 3:
+                addComponent<FlowerQuestionBlock>();
+                break;
+            case 4:
+                addComponent<StarQuestionBlock>();
+                break;
+            }
 
-            // Get the texture for the block
             std::vector<const sf::Texture *> textures = {
-                &TextureManager::load("assets/Tile/Tile1/Tile1_24.png"),
-                &TextureManager::load("assets/Tile/Tile1/Tile1_25.png"),
-                &TextureManager::load("assets/Tile/Tile1/Tile1_26.png")};
-
+                &TextureManager::load(tileFolder + "Tile" + std::to_string(currentLevel) + "_24.png"),
+                &TextureManager::load(tileFolder + "Tile" + std::to_string(currentLevel) + "_25.png"),
+                &TextureManager::load(tileFolder + "Tile" + std::to_string(currentLevel) + "_26.png")};
             addComponent<Animation>(textures, width, height, 0.3f, true);
         }
-        else if (index == 2)
+        else if (index == 5) // Normal block
         {
-            // Add the mushroom question block tag
-            addComponent<MushroomQuestionBlock>();
-
-            // Add the question block tag
-            addComponent<QuestionBlockTag>();
-
-            // Get the texture for the block
-            std::vector<const sf::Texture *> textures = {
-                &TextureManager::load("assets/Tile/Tile1/Tile1_24.png"),
-                &TextureManager::load("assets/Tile/Tile1/Tile1_25.png"),
-                &TextureManager::load("assets/Tile/Tile1/Tile1_26.png")};
-
-            addComponent<Animation>(textures, width, height, 0.3f, true);
-        }
-        else if (index == 3)
-        {
-            // Add the flower question block tag
-            addComponent<FlowerQuestionBlock>();
-
-            // Add the question block tag
-            addComponent<QuestionBlockTag>();
-
-            // Get the texture for the block
-            std::vector<const sf::Texture *> textures = {
-                &TextureManager::load("assets/Tile/Tile1/Tile1_24.png"),
-                &TextureManager::load("assets/Tile/Tile1/Tile1_25.png"),
-                &TextureManager::load("assets/Tile/Tile1/Tile1_26.png")};
-
-            addComponent<Animation>(textures, width, height, 0.3f, true);
-        }
-        else if (index == 4)
-        {
-            // Add the star question block tag
-            addComponent<StarQuestionBlock>();
-
-            // Add the question block tag
-            addComponent<QuestionBlockTag>();
-
-            // Get the texture for the block
-            std::vector<const sf::Texture *> textures = {
-                &TextureManager::load("assets/Tile/Tile1/Tile1_24.png"),
-                &TextureManager::load("assets/Tile/Tile1/Tile1_25.png"),
-                &TextureManager::load("assets/Tile/Tile1/Tile1_26.png")};
-
-            addComponent<Animation>(textures, width, height, 0.3f, true);
-        }
-        else if (index == 5)
-        {
-            // Add the normal block tag
             addComponent<NormalBlock>();
-
-            // Get the texture for the block
-            addComponent<Animation>(TextureManager::load("assets/Tile/Tile1/Tile1_2.png"));
+            addComponent<Animation>(TextureManager::load(tileFolder + "Tile" + std::to_string(currentLevel) + "_2.png"));
         }
-        else if (index == 6)
+        else if (index == 6) // Coin block
         {
-            // Add the coin block tag
             addComponent<CoinBlock>();
-
-            // Get the texture for the block
-            addComponent<Animation>(TextureManager::load("assets/Tile/Tile1/Tile1_2.png"));
-
+            addComponent<Animation>(TextureManager::load(tileFolder + "Tile" + std::to_string(currentLevel) + "_2.png"));
             addComponent<CoinBlockComponent>();
         }
-        else if (index == 7)
-        {
-            // Add the stairs block tag
-            addComponent<StairsBlock>();
 
-            // Get the texture for the block
-            addComponent<Animation>(TextureManager::load("assets/Tile/Tile1/Tile1_28.png"));
+        else if (index == 7) // Stairs block
+        {
+            addComponent<StairsBlock>();
+            addComponent<Animation>(TextureManager::load(tileFolder + "Tile" + std::to_string(currentLevel) + "_28.png"));
         }
         else if (index == 8)
         {
@@ -128,9 +82,6 @@ public:
             addComponent<LevelUpBlock>();
 
             removeComponent<BlockTag>();
-
-            // Get the texture for the block
-            // addComponent<Animation>(TextureManager::load("assets/Tile/Tile1/Tile1_2.png"));
         }
         else if (index == 9)
         {
@@ -138,17 +89,14 @@ public:
             addComponent<StarBlock>();
 
             // Get the texture for the block
-            addComponent<Animation>(TextureManager::load("assets/Tile/Tile1/Tile1_2.png"));
+            addComponent<Animation>(TextureManager::load(tileFolder + "Tile" + std::to_string(currentLevel) + "_2.png"));
 
             // std::cout << "star block added" << std::endl;
         }
-        else if (index == 10)
+        else if (index == 10) // Flag block
         {
-            // Add the flag block tag
             addComponent<FlagBlock>();
-
-            // Get the texture for the block
-            addComponent<Animation>(TextureManager::load("assets/Tile/Tile1/Tile1_28.png"));
+            addComponent<Animation>(TextureManager::load(tileFolder + "Tile" + std::to_string(currentLevel) + "_28.png"));
         }
     }
 };

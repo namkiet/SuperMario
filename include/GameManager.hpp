@@ -5,15 +5,20 @@
 class GameManager
 {
 public:
-                            GameManager();
-    void                    handleEvent(const sf::Event& event);
-    void                    update(float dt);
-    void                    draw(sf::RenderWindow& window) const;
+    // Default constructor
+    GameManager() = default;
+
+    // Constructor with level
+    GameManager(int level);
+
+    void handleEvent(const sf::Event &event);
+    void update(float dt);
+    void draw(sf::RenderWindow &window, int level) const;
 
 private:
-    World                   world;
+    World world;
     LevelHandler levelHandler;
-
+    int level = 1;
     bool oneFrame = false;
     bool shouldPlay = true;
 };
