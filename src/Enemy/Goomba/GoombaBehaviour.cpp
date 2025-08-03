@@ -1,3 +1,4 @@
+#include <World.hpp>
 #include <ECS/Entity.hpp>
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/Enemy/Goomba/Components.hpp>
@@ -51,7 +52,7 @@ void GoombaBehaviour::collideWithOther(Entity* entity)
 }
 
 
-void GoombaBehaviour::patrol(Entity* entity, float dt, Entity* camera)
+void GoombaBehaviour::patrol(Entity* entity, float dt, World& world)
 {
     if (!entity->hasComponent<GoombaPatrol>()) return;
 
@@ -62,7 +63,7 @@ void GoombaBehaviour::patrol(Entity* entity, float dt, Entity* camera)
     if (entity->hasComponent<NotOnPatrolYet>())
     {
         auto& tf = entity->getComponent<Transform>();
-        auto& cam = camera->getComponent<Camera>();
+        auto& cam = world.findFirst<Camera>()->getComponent<Camera>();
         
         if (tf.position.x - (cam.target.x + SIZE::SCREEN.x/2) <= 100)
         {

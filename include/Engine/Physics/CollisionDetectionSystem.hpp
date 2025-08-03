@@ -68,7 +68,7 @@ public:
             const auto& center = camera->getComponent<Camera>().target;
             sf::FloatRect viewArea(center - MAX_DISTANCE * sf::Vector2f(1, 1), MAX_DISTANCE * sf::Vector2f(2, 2));
 
-            std::cout << "Center: " << center.x << " " << center.y << "\n";
+            // std::cout << "Center: " << center.x << " " << center.y << "\n";
 
             entities.erase(
                 std::remove_if(entities.begin(), entities.end(), [&](Entity* entity) {
@@ -79,7 +79,7 @@ public:
             );
         }
 
-        std::cout << entities.size() << "\n";
+        // std::cout << entities.size() << "\n";
 
         // std::cout << world.findAll<BoxCollider2D>().size() << "\n";
         // std::cout << world.findAll<BoxCollider2D, RigidBody>().size() << "\n";

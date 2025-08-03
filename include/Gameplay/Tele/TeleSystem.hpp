@@ -126,7 +126,7 @@ class TeleSystem: public System
 {
     static bool totallyCollide(Entity* a, Entity* b, Direction dir)
     {
-        std::cout << "Check heree" << std::endl;
+        // std::cout << "Check heree" << std::endl;
         if (dir == Direction::Top || dir == Direction::Bottom)
         {
             float leftA = a->getComponent<Transform>().position.x + a->getComponent<BoxCollider2D>().offset.x;
@@ -154,6 +154,8 @@ class TeleSystem: public System
         if (dir == Direction::Bottom) return sf::Vector2f(0.f, speed);
         if (dir == Direction::Right) return sf::Vector2f(speed, 0.f);
         if (dir == Direction::Left) return sf::Vector2f(-speed, 0.f);
+
+        return sf::Vector2f(0, 0);
     }
     Entity* findPipeDestination(World& world, Entity* player)
     {
@@ -218,7 +220,7 @@ class TeleSystem: public System
                 auto teleInfo = tele.teleEntity->getComponent<TelePort>();
                 auto& pos = player->getComponent<Transform>().position;
                 pos += teleInfo.inVel * dt;
-                std::cout << "update pos ok here" << std::endl;
+                // std::cout << "update pos ok here" << std::endl;
                 if (tele.teleInTime < 0.f) // doing tele
                 {
                     
@@ -228,7 +230,7 @@ class TeleSystem: public System
                     {
                         auto& PipeDestination = tele.teleEntity->getComponent<hasPipeDestination>();
                         PipeDestination.pipe = findPipeDestination(world, player);
-                         std::cout << "sth" << std::endl;
+                        //  std::cout << "sth" << std::endl;
                         assert(PipeDestination.pipe != nullptr);
                     }
                 }

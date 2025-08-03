@@ -10,31 +10,26 @@
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/Enemy/Components.hpp>
-#include <Gameplay/Enemy/Koopa/Components.hpp>
-#include <Gameplay/Enemy/Koopa/KoopaNormalState.hpp>
-#include <Gameplay/Enemy/Koopa/KoopaNormalBehaviour.hpp>
+#include <Gameplay/Enemy/Lakitu/Components.hpp>
+#include <Gameplay/Enemy/Lakitu/LakituNormalState.hpp>
+#include <Gameplay/Enemy/Lakitu/LakituNormalBehaviour.hpp>
 
-class Koopa : public Entity
+class Lakitu : public Entity
 {
 public:
-    Koopa() = default;
-
-    Koopa(float x, float y, float scale)
+    Lakitu(float x, float y, float scale)
     {
-        addComponent<RigidBody>(RigidBody(sf::Vector2f(0, 0)));
+        addComponent<RigidBody>(RigidBody(sf::Vector2f(0, 0), false));
         addComponent<Transform>(Transform(sf::Vector2f(x, y) * scale, sf::Vector2f(16, 24) * scale));
         addComponent<BoxCollider2D>(BoxCollider2D(sf::Vector2f(16, 24) * scale));
 
-        addComponent<Animation>(TextureManager::load("assets/Enemy/Koopa/koopa_walk.png"), 16, 24, 2, 0.5f / 2);
+        addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Lakitu/Lakitu_normal.png"), 16, 24, 1, 0));
 
-        addComponent<EnemyTag>(std::make_shared<KoopaNormalState>(), std::make_shared<KoopaNormalBehaviour>());
-        addComponent<KoopaPatrol>();
-        addComponent<KoopaNormalTag>();
-        addComponent<NotOnPatrolYet>();
+        addComponent<EnemyTag>(std::make_shared<LakituNormalState>(), std::make_shared<LakituNormalBehaviour>());
+        addComponent<LakituPatrol>();
+        addComponent<LakituAttack>();
 
-        addComponent<CanHitBlockTag>();
         addComponent<BlockTag>();
-        addComponent<CanHitBlockTag>();
         addComponent<StompableTag>();
 
         std::vector<Direction> directions = {Direction::Left, Direction::Right, Direction::Bottom};

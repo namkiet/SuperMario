@@ -12,7 +12,8 @@ public:
             auto& tag = entity->getComponent<EnemyTag>();
             tag.behaviour->collideWithPlayer(entity);
             tag.behaviour->collideWithOther(entity);
-            tag.behaviour->patrol(entity, dt, world.findFirst<Camera>());
+            tag.behaviour->patrol(entity, dt, world);
+            tag.behaviour->attack(entity, dt, world);
         }
     }
 };

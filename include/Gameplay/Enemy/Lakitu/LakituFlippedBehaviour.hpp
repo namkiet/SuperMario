@@ -3,10 +3,10 @@
 
 class World;
 
-class PiranhaBehaviour : public EnemyBehaviour
+class LakituFlippedBehaviour : public EnemyBehaviour
 {
 public:
-    ~PiranhaBehaviour() = default;
+    ~LakituFlippedBehaviour() = default;
     void collideWithPlayer(Entity* entity) override;
     void collideWithOther(Entity* entity) override;
     void patrol(Entity* entity, float dt, World& world) override;

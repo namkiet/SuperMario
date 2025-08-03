@@ -1,3 +1,4 @@
+#include <World.hpp>
 #include <ECS/Entity.hpp>
 #include <Gameplay/Enemy/Koopa/KoopaNormalBehaviour.hpp>
 #include <Gameplay/Enemy/Components.hpp>
@@ -57,12 +58,12 @@ void KoopaNormalBehaviour::collideWithOther(Entity* entity)
 }
 
 
-void KoopaNormalBehaviour::patrol(Entity* entity, float dt, Entity* camera)
+void KoopaNormalBehaviour::patrol(Entity* entity, float dt, World& world)
 {
     if (!entity->hasComponent<KoopaNormalTag>()) return;
     if (!entity->hasComponent<KoopaPatrol>()) return;
 
-    auto& cam = camera->getComponent<Camera>();
+    auto& cam = world.findFirst<Camera>()->getComponent<Camera>();
     auto& patrol = entity->getComponent<KoopaPatrol>();
     auto& box = entity->getComponent<BoxCollider2D>();
     auto& rb = entity->getComponent<RigidBody>();

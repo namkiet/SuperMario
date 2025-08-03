@@ -49,6 +49,8 @@
 #include <Gameplay/Enemy/Goomba/Goomba.hpp>
 #include <Gameplay/Enemy/Koopa/KoopaJumping.hpp>
 #include <Gameplay/Enemy/Koopa/KoopaFlying.hpp>
+#include <Gameplay/Enemy/Spiny/Spiny.hpp>
+#include <Gameplay/Enemy/Lakitu/Lakitu.hpp>
 #include <Gameplay/Enemy/EnemyScoreSystem.hpp>
 
 #include <Gameplay/Score/PlayTimeSystem.hpp>
@@ -175,12 +177,12 @@ void GameManager::handleEvent(const sf::Event &event)
         if (event.key.code == sf::Keyboard::X)
         {
             std::cout << "HELLO\n";
-            auto koopa = world.createEntity<Koopa>(10 * 16, 24 * 16, 3);
+            auto lakitu = world.createEntity<Lakitu>(20 * 16, 3 * 16, 3);
         }
 
         if (event.key.code == sf::Keyboard::T)
         {
-            auto goomba = world.createEntity<Goomba>(20 * 16, 24 * 16, 3);
+            auto goomba = world.createEntity<Goomba>(7 * 16, 2 * 16, 3);
         }
 
         if (event.key.code == sf::Keyboard::P)
@@ -199,7 +201,7 @@ void GameManager::update(float dt)
 {
     if (oneFrame && !shouldPlay) return;
 
-    std::cout << 1.0f / dt << "\n";
+    // std::cout << 1.0f / dt << "\n";
     
 
     world.update(dt);

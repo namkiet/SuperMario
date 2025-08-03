@@ -74,7 +74,7 @@ void KoopaShell_ReviveBehaviour::collideWithOther(Entity* entity)
 }
 
 
-void KoopaShell_ReviveBehaviour::patrol(Entity* entity, float dt, Entity* camera)
+void KoopaShell_ReviveBehaviour::patrol(Entity* entity, float dt, World& world)
 {
     if (!entity->hasComponent<KoopaShellTag>() && !entity->hasComponent<KoopaReviveTag>()) return;
     if (!entity->hasComponent<KoopaPatrol>()) return;

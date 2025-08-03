@@ -58,7 +58,7 @@ void KoopaSlideBehaviour::collideWithOther(Entity* entity)
 }
 
 
-void KoopaSlideBehaviour::patrol(Entity* entity, float dt, Entity* camera)
+void KoopaSlideBehaviour::patrol(Entity* entity, float dt, World& world)
 {
     if (!entity->hasComponent<KoopaSlideTag>()) return;
     if (!entity->hasComponent<KoopaPatrol>()) return;

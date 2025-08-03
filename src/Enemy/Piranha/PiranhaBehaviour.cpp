@@ -28,7 +28,7 @@ void PiranhaBehaviour::collideWithOther(Entity* entity)
 }
 
 
-void PiranhaBehaviour::patrol(Entity* entity, float dt, Entity* camera)
+void PiranhaBehaviour::patrol(Entity* entity, float dt, World& world)
 {
     if (!entity->hasComponent<PiranhaPatrol>()) return;
 

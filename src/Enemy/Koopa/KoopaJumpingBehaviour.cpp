@@ -1,3 +1,4 @@
+#include <World.hpp>
 #include <ECS/Entity.hpp>
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/Enemy/Koopa/Components.hpp>
@@ -58,12 +59,12 @@ void KoopaJumpingBehaviour::collideWithOther(Entity* entity)
 }
 
 
-void KoopaJumpingBehaviour::patrol(Entity* entity, float dt, Entity* camera)
+void KoopaJumpingBehaviour::patrol(Entity* entity, float dt, World& world)
 {
     if (!entity->hasComponent<KoopaJumpingTag>()) return;
     if (!entity->hasComponent<KoopaPatrol>()) return;
 
-    auto& cam = camera->getComponent<Camera>();
+    auto& cam = world.findFirst<Camera>()->getComponent<Camera>();
     auto& patrol = entity->getComponent<KoopaPatrol>();
     auto& rb = entity->getComponent<RigidBody>();
     auto& tf = entity->getComponent<Transform>();

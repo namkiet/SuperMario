@@ -1,3 +1,4 @@
+#include <World.hpp>
 #include <ECS/Entity.hpp>
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/Enemy/Koopa/Components.hpp>
@@ -49,13 +50,13 @@ void KoopaFlyingBehaviour::collideWithOther(Entity* entity)
 }
 
 
-void KoopaFlyingBehaviour::patrol(Entity* entity, float dt, Entity* camera)
+void KoopaFlyingBehaviour::patrol(Entity* entity, float dt, World& world)
 {
     if (!entity->hasComponent<KoopaFlyingTag>()) return;
     if (!entity->hasComponent<KoopaPatrol>()) return;
     if (!entity->hasComponent<KoopaFlyingPatrol>()) return;
 
-    auto& cam = camera->getComponent<Camera>();
+    auto& cam = world.findFirst<Camera>()->getComponent<Camera>();
     auto& patrol = entity->getComponent<KoopaPatrol>();
     auto& flying = entity->getComponent<KoopaFlyingPatrol>();
     auto& rb = entity->getComponent<RigidBody>();
