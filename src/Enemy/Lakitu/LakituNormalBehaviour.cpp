@@ -50,6 +50,7 @@ void LakituNormalBehaviour::patrol(Entity* entity, float dt, World& world)
     auto& patrol = entity->getComponent<LakituPatrol>();
     auto& rb = entity->getComponent<RigidBody>();
     auto& tf = entity->getComponent<Transform>();
+    auto& towardPlayer = entity->getComponent<TowardPlayer>();
 
     auto playerTf = world.findFirst<PlayerTag>()->getComponent<Transform>();
     auto playerCenter = playerTf.position + (playerTf.size / 2.0f);
@@ -112,6 +113,8 @@ void LakituNormalBehaviour::patrol(Entity* entity, float dt, World& world)
     }
 
     patrol.velocity.x += patrol.accelerate * dt;
+
+    towardPlayer.direction = (tf.position.x < playerTf.position.x ? Direction::Right : Direction::Left);
 
 
     // Apply patrol velocity

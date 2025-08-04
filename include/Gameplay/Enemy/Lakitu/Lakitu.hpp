@@ -28,6 +28,7 @@ public:
         addComponent<EnemyTag>(std::make_shared<LakituNormalState>(), std::make_shared<LakituNormalBehaviour>());
         addComponent<LakituPatrol>();
         addComponent<LakituAttack>();
+        addComponent<TowardPlayer>();
 
         addComponent<BlockTag>();
         addComponent<StompableTag>();

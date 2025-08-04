@@ -51,6 +51,7 @@
 #include <Gameplay/Enemy/Koopa/KoopaFlying.hpp>
 #include <Gameplay/Enemy/Spiny/Spiny.hpp>
 #include <Gameplay/Enemy/Lakitu/Lakitu.hpp>
+#include <Gameplay/Enemy/Bowser/Bowser.hpp>
 #include <Gameplay/Enemy/EnemyScoreSystem.hpp>
 
 #include <Gameplay/Score/PlayTimeSystem.hpp>
@@ -177,7 +178,7 @@ void GameManager::handleEvent(const sf::Event &event)
         if (event.key.code == sf::Keyboard::X)
         {
             std::cout << "HELLO\n";
-            auto lakitu = world.createEntity<Lakitu>(20 * 16, 3 * 16, 3);
+            auto bowser = world.createEntity<Bowser>(10 * 16, 3 * 16, 3);
         }
 
         if (event.key.code == sf::Keyboard::T)
