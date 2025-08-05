@@ -163,7 +163,6 @@ void BowserWalkBehaviour::attack(Entity* entity, float dt, World& world)
     auto playerTF = world.findFirst<PlayerTag>()->getComponent<Transform>();
 
     if (abs(bowserTF.position.x - playerTF.position.x) > attack.distance
-    ||  entity->hasComponent<ChangeToBowserJumpTag>() 
     ||  entity->hasComponent<ChangeToBowserHurtTag>()
     ||  entity->hasComponent<ChangeToBowserDeadTag>())
     {
@@ -213,6 +212,7 @@ void BowserWalkBehaviour::attack(Entity* entity, float dt, World& world)
 
         auto& anim = entity->getComponent<Animation>();
         anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Bowser/bowser_shoot.png")); 
+        anim.frameWidth = 32;
         anim.frameHeight = 36;
         anim.frameCount = 2;
         anim.frameDuration = (attack.delay - attack.timer);
