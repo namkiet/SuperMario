@@ -12,13 +12,14 @@
 class SmallDebris1 : public Entity
 {
 public:
-    SmallDebris1(float x, float y, float width, float height)
+    SmallDebris1(float x, float y, float width, float height, int spriteIndex)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x - width, y + height), sf::Vector2f(width, height));
 
         // Set the animation for the debris
-        addComponent<Animation>(TextureManager::load("assets/Debris/Debris1_0.png"));
+        std::string tileFolder = "assets/Debris/";
+        addComponent<Animation>(TextureManager::load(tileFolder + "Debris" + std::to_string(spriteIndex) + "_0.png"));
 
         // Set the rigid body for physics
         addComponent<RigidBody>(sf::Vector2f(0, -600));
@@ -36,13 +37,14 @@ public:
 class SmallDebris2 : public Entity
 {
 public:
-    SmallDebris2(float x, float y, float width, float height)
+    SmallDebris2(float x, float y, float width, float height, int spriteIndex)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x - width, y - height), sf::Vector2f(width, height));
 
         // Set the animation for the debris
-        addComponent<Animation>(TextureManager::load("assets/Debris/Debris1_1.png"));
+        std::string tileFolder = "assets/Debris/";
+        addComponent<Animation>(TextureManager::load(tileFolder + "Debris" + std::to_string(spriteIndex) + "_1.png"));
 
         // Set the rigid body for physics
         addComponent<RigidBody>(sf::Vector2f(0, -600));
@@ -61,14 +63,15 @@ public:
 class SmallDebris3 : public Entity
 {
 public:
-    SmallDebris3(float x, float y, float width, float height)
+    SmallDebris3(float x, float y, float width, float height, int spriteIndex)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x + width, y + height), sf::Vector2f(width, height));
 
         // Set the animation for the debris
-        addComponent<Animation>(TextureManager::load("assets/Debris/Debris1_2.png"));
-
+        std::string tileFolder = "assets/Debris/";
+        addComponent<Animation>(TextureManager::load(tileFolder + "Debris" + std::to_string(spriteIndex) + "_2.png"));
+        
         // Set the rigid body for physics
         addComponent<RigidBody>(sf::Vector2f(0, -600));
 
@@ -85,13 +88,14 @@ public:
 class SmallDebris4 : public Entity
 {
 public:
-    SmallDebris4(float x, float y, float width, float height)
+    SmallDebris4(float x, float y, float width, float height, int spriteIndex)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x + width, y - height), sf::Vector2f(width, height));
 
         // Set the animation for the debris
-        addComponent<Animation>(TextureManager::load("assets/Debris/Debris1_3.png"));
+        std::string tileFolder = "assets/Debris/";
+        addComponent<Animation>(TextureManager::load(tileFolder + "Debris" + std::to_string(spriteIndex) + "_3.png"));
 
         // Set the rigid body for physics
         addComponent<RigidBody>(sf::Vector2f(0, -600));

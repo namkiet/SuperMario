@@ -6,9 +6,9 @@
 #include <World.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <string>
-#include <string>
 #include <unordered_map>
 #include <SFML/System/Vector2.hpp>
+#include <iostream>
 class LevelHandler
 {
 private:
@@ -17,6 +17,7 @@ private:
     // 1 for world 1-1
     // 2 for world 5-4
     // 3 for world 6-1 + 6-2
+    int spriteIndex = 0;
 
     std::unordered_map<std::string, sf::Vector2f> teleMap;
 

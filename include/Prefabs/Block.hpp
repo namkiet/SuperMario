@@ -98,5 +98,10 @@ public:
             addComponent<FlagBlock>();
             addComponent<Animation>(TextureManager::load(tileFolder + "Tile" + std::to_string(currentLevel) + "_28.png"));
         }
+        else if (index == 11)
+        {
+            addComponent<MushroomBlock>();
+            addComponent<Animation>(TextureManager::load(tileFolder + "Tile" + std::to_string(currentLevel) + "_2.png"));
+        }
     }
 };

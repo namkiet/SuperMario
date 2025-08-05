@@ -97,9 +97,11 @@ public:
         // Insert entities into spatial grid
         for (Entity *e : entities)
         {
-            auto &tf = e->getComponent<Transform>();
             auto &col = e->getComponent<BoxCollider2D>();
+            if (col.rotation != 0.0f)
+                continue;
 
+            auto &tf = e->getComponent<Transform>();
             sf::FloatRect bounds(tf.position + col.offset, col.size);
             grid.insert(e, bounds);
             col.collisions.clear();

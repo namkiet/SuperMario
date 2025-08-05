@@ -3,10 +3,14 @@
 #include <Engine/Animation/AnimationSystem.hpp>
 #include <Engine/Camera/CameraSystem.hpp>
 #include <Engine/Core/DespawnSystem.hpp>
+
 #include <Engine/Physics/CollisionDetectionSystem.hpp>
 #include <Engine/Physics/HitBlockSystem.hpp>
 #include <Engine/Physics/GravitySystem.hpp>
 #include <Engine/Physics/MovementSystem.hpp>
+#include <Engine/Physics/RotateBoxCollider2D.hpp>
+#include <Engine/Physics/OBBCollisionSystem.hpp>
+
 #include <Engine/Rendering/RenderSystem.hpp>
 #include <Engine/Rendering/DrawBoxColliderSystem.hpp>
 #include <Engine/Rendering/DrawGameComponentSystem.hpp>
@@ -55,18 +59,22 @@
 #include <Gameplay/Enemy/Bowser/Bowser.hpp>
 #include <Gameplay/Enemy/EnemyScoreSystem.hpp>
 
-#include <Gameplay/Score/PlayTimeSystem.hpp>
-#include <Gameplay/Score/TextPoppingSystem.hpp>
+#include <Gameplay/GameProperties/PlayTimeSystem.hpp>
+#include <Gameplay/GameProperties/TextPoppingSystem.hpp>
 
 #include <Gameplay/Background/FlagPoleSystem.hpp>
-#include <Gameplay/Background/CastleSystem.hpp>
+#include <Gameplay/Background/LevelCompletionSystem.hpp>
+#include <Gameplay/Background/BridgeSystem.hpp>
+#include <Gameplay/Background/ElevatorSystem.hpp>
+#include <Gameplay/Background/ElevatorCollisionSystem.hpp>
+#include <Gameplay/Obstacles/PodobooSystem.hpp>
+#include <Gameplay/Obstacles/FireBarSystem.hpp>
 
 #include <cassert>
 #include <iostream>
 
 GameManager::GameManager(int level) : levelHandler(world, level), level(level)
 {
-    std::cout << "GameManager initialized with level: " << level << std::endl;
     levelHandler.start();
 
     world.createEntity()->addComponent<Camera>();
@@ -75,8 +83,11 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<GravitySystem>();
     world.addSystem<MovementSystem>();
 
+    world.addSystem<RotateBoxCollider2D>();
     world.addSystem<CollisionDetectionSystem>();
+    world.addSystem<OBBCollisionSystem>();
     world.addSystem<HitBlockSystem>();
+    world.addSystem<ElevatorCollisionSystem>();
 
     world.addSystem<InputSystem>();
     world.addSystem<HandlePlayerInputSystem>();
@@ -102,6 +113,8 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<CollectStarSystem>();
 
     world.addSystem<CaptureFlagSystem>();
+    world.addSystem<BridgeSystem>();
+    world.addSystem<ElevatorSystem>();
 
     world.addSystem<ItemEmergingSystem>();
     world.addSystem<CoinJumpingSystem>();
@@ -109,15 +122,23 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<StarJumpingSystem>();
     world.addSystem<FireSystem>();
     world.addSystem<FireBulletSystem>();
+    world.addSystem<FireBarSystem>();
+    world.addSystem<PodobooSystem>();
     world.addSystem<BounceBlockSystem>();
+
     world.addSystem<FlagPoleCollisionSystem>();
-    world.addSystem<CastleCollisionSystem>();
+    world.addSystem<LevelCompletionSystem>();
+
     world.addSystem<TextPoppingSystem>();
+
     world.addSystem<DamageOnContactSystem>();
+
     world.addSystem<InvincibleSystem>();
+
     world.addSystem<EnemyStateSystem>();
     world.addSystem<EnemyBehaviourSystem>();
     world.addSystem<EnemyScoreSystem>();
+    
 
     world.addSystem<DespawnSystem>();
     world.addSystem<PlayerRespawnSystem>();

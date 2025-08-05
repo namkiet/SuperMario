@@ -51,8 +51,16 @@ public:
     BoxCollider2D(const sf::Vector2f& size = sf::Vector2f(0, 0), const sf::Vector2f& offset = sf::Vector2f(0, 0), bool bounce = false)
         : size(size), offset(offset), bounce(bounce), isDisabled(false) {}
     bool isDisabled;
+
+    // AABB collision detection
     sf::Vector2f size;
     sf::Vector2f offset;
     bool bounce = false;
+
+    // OBB collision detection
+    float rotation = 0.0f;
+    sf::Vector2f origin = {0, 0}; // default: top-left
+    sf::Vector2f corners[4];      // Local corners of the collider
+
     std::vector<CollisionInfo> collisions;
 };

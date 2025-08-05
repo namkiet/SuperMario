@@ -1,9 +1,11 @@
 #include <Gameplay/HitBlock/HitSpecialBlockSystem.hpp>
 #include <Gameplay/Item/ItemEmerging.hpp>
+
 #include <Prefabs/Mushroom.hpp>
 #include <Prefabs/Star.hpp>
 #include <Prefabs/Coin.hpp>
 #include <Prefabs/Flower.hpp>
+
 void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *block, Entity *player)
 {
     if (!block->hasComponent<Transform>())
@@ -21,12 +23,14 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
 
         if (player->hasComponent<BigMarioTag>())
         {
-            auto flower = world.createEntity<Flower>(pos.x, pos.y - sz.y, 48, 48);
-            flower->addComponent<CollectableTag>();
+            auto flower = world.createEntity<Flower>(pos.x, pos.y - sz.y, 48.0f, 48.0f);
+            ItemEmerging emerging;
+            emerging.finalY = pos.y - 48;
+            flower->addComponent<ItemEmerging>(emerging);
         }
         else
         {
-            auto mushroom = world.createEntityAtFront<Mushroom1>(pos.x, pos.y - 20, 48, 48);
+            auto mushroom = world.createEntity<Mushroom1>(pos.x, pos.y - 20, 48.0f, 48.0f);
             ItemEmerging emerging;
             emerging.finalY = pos.y - 48;
             mushroom->addComponent<ItemEmerging>(emerging);
@@ -37,7 +41,7 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
         // Remove MushroomQuestionBlock component
         block->removeComponent<MushroomQuestionBlock>();
 
-        auto mushroom = world.createEntityAtFront<Mushroom1>(pos.x, pos.y - 20, 48, 48);
+        auto mushroom = world.createEntity<Mushroom1>(pos.x, pos.y - 20, 48.0f, 48.0f);
         ItemEmerging emerging;
         emerging.finalY = pos.y - 48;
         mushroom->addComponent<ItemEmerging>(emerging);
@@ -47,7 +51,7 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
         // Remove CoinQuestionBlock component
         block->removeComponent<CoinQuestionBlock>();
 
-        auto coin = world.createEntity<Coin1>(pos.x, pos.y - sz.y, 48, 48);
+        auto coin = world.createEntity<Coin1>(pos.x, pos.y - sz.y, 48.0f, 48.0f);
 
         if (player->hasComponent<CoinComponent>())
         {
@@ -60,7 +64,7 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
         // Remove StarQuestionBlock component
         block->removeComponent<StarQuestionBlock>();
 
-        auto star = world.createEntity<Star>(pos.x, pos.y, 48, 48);
+        auto star = world.createEntity<Star>(pos.x, pos.y, 48.0f, 48.0f);
         ItemEmerging emerging;
         emerging.finalY = pos.y - 48;
         star->addComponent<ItemEmerging>(emerging);

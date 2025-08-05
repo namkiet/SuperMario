@@ -10,6 +10,7 @@
 #include <Core/Variables.hpp>
 #include <Engine/Physics/PassThroughTag.hpp>
 #include <vector>
+
 class Coin1 : public Entity
 {
 public:
@@ -24,7 +25,7 @@ public:
             &TextureManager::load("assets/Item/Coin/Coin1_1.png"),
             &TextureManager::load("assets/Item/Coin/Coin1_2.png"),
             &TextureManager::load("assets/Item/Coin/Coin1_3.png")};
-        addComponent<Animation>(textures, width, height, 0.15, true);
+        addComponent<Animation>(textures, width, height, 0.15f, true);
 
         // addComponent<Animation>(TextureManager::load("assets/Item/Coin/coin.png"), 16, 16, 16, 0.15);
 
@@ -42,17 +43,18 @@ public:
 class SmallCoin : public Entity
 {
 public:
-    SmallCoin(float x, float y, float width, float height)
+    SmallCoin(float x, float y, float width, float height, int currentLevel)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x, y), sf::Vector2f(width, height));
 
         // Set the animation for the coin
+        std::string tileFolder = "assets/Item/Coin/";
         std::vector<const sf::Texture *> textures = {
-            &TextureManager::load("assets/Item/Coin/SmallCoin1_0.png"),
-            &TextureManager::load("assets/Item/Coin/SmallCoin1_1.png"),
-            &TextureManager::load("assets/Item/Coin/SmallCoin1_2.png")};
-        addComponent<Animation>(textures, width, height, 0.3, true);
+            &TextureManager::load(tileFolder + "SmallCoin" + std::to_string(currentLevel) + "_0.png"),
+            &TextureManager::load(tileFolder + "SmallCoin" + std::to_string(currentLevel) + "_1.png"),
+            &TextureManager::load(tileFolder + "SmallCoin" + std::to_string(currentLevel) + "_2.png"),};
+        addComponent<Animation>(textures, width, height, 0.3f, true);
 
         addComponent<PassThroughTag>();
         addComponent<SmallCoinTag>();
@@ -62,20 +64,22 @@ public:
 class Coin2 : public Entity
 {
 public:
-    Coin2(float x, float y, float width, float height, float scale)
+    Coin2(float x, float y, float width, float height, float scale, int currentLevel)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x * scale, y * scale), sf::Vector2f(width * scale, height * scale));
 
         addComponent<BoxCollider2D>(sf::Vector2f(width * scale, height * scale));
 
-        // // Set the animation for the coin
+        std::string tileFolder = "assets/Item/Coin/";
+
+        //
         std::vector<const sf::Texture *> textures = {
-            &TextureManager::load("assets/Item/Coin/Coin2_4.png"),
-            &TextureManager::load("assets/Item/Coin/Coin2_5.png"),
-            &TextureManager::load("assets/Item/Coin/Coin2_6.png"),
-            &TextureManager::load("assets/Item/Coin/Coin2_7.png")};
-        addComponent<Animation>(textures, width, height, 0.3, true);
+            &TextureManager::load(tileFolder + "Coin" + std::to_string(currentLevel) + "_4.png"),
+            &TextureManager::load(tileFolder + "Coin" + std::to_string(currentLevel) + "_5.png"),
+            &TextureManager::load(tileFolder + "Coin" + std::to_string(currentLevel) + "_6.png"),
+            &TextureManager::load(tileFolder + "Coin" + std::to_string(currentLevel) + "_7.png")};
+        addComponent<Animation>(textures, width, height, 0.3f, true);
 
         // addComponent<Animation>(TextureManager::load("assets/Item/Coin/coin.png"), 16, 16, 16, 0.15);
 

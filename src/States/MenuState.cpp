@@ -6,7 +6,7 @@ MenuState::MenuState()
 {
     font.loadFromFile("arial.ttf");
     playText.setFont(font);
-    playText.setString("Press 1 to start World 1-1 \nPress 2 to start World 5-4 \nPress 3 to start World 6-1");
+    playText.setString("Press 1 to start World 1-1 \nPress 2 to start World 6-1 \nPress 3 to start World 5-4");
     playText.setPosition(250, 250);
 }
 

@@ -3,7 +3,7 @@
 #include <Prefabs/Coin.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Gameplay/LifeSpan/Components.hpp>
-#include <Gameplay/Score/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
 #include <iostream>
 
 class CoinJumpingSystem : public System

@@ -12,8 +12,10 @@
 #include <sstream>
 
 #include <Core/TextureManager.hpp>
-#include <Gameplay/Score/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
 #include <Gameplay/Item/Components.hpp>
+
+#include <Prefabs/Mario.hpp>
 
 class DrawGameComponentSystem : public System
 {
@@ -92,7 +94,15 @@ public:
         }
 
         sf::Text worldName = textRender("WORLD", 500.f, 35.f, font, 25);
-        sf::Text mapName = textRender("1-1", 520.f, 65.f, font, 25);
+        sf::Text mapName;
+        
+        if (Mario::currentLevel == 1)
+            mapName = textRender("1-1", 520.f, 65.f, font, 25);
+        else if (Mario::currentLevel == 2)
+            mapName = textRender("6-1", 520.f, 65.f, font, 25);
+        else if (Mario::currentLevel == 3)
+            mapName = textRender("5-4", 520.f, 65.f, font, 25);
+        
         window.draw(worldName);
         window.draw(mapName);
     }

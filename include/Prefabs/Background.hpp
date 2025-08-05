@@ -27,10 +27,11 @@ public:
             // Add the castle tag
             addComponent<Castle>();
 
-            getComponent<BoxCollider2D>().offset = sf::Vector2f(96, 48 * 3);
+            getComponent<BoxCollider2D>().offset = sf::Vector2f(144, 48 * 3);
             getComponent<BoxCollider2D>().size = sf::Vector2f(48, 96);
             // Set the texture for the background
             addComponent<Animation>(TextureManager::load("assets/Background/Castle.png"));
+            getComponent<Animation>().zIndex = -2;
         }
        
         else if (index == 9)
@@ -50,6 +51,7 @@ public:
             addComponent<CanHitBlockTag>();
 
             addComponent<Animation>(TextureManager::load("assets/Background/Flag.png"));
+            getComponent<Animation>().zIndex = -1;
         }
         else if (index == 11)
         {
@@ -58,6 +60,10 @@ public:
             addComponent<Animation>(TextureManager::load("assets/Background/CastleFlag.png"));
 
             // std::cout << "Castle flag created at position: " << x * scale << ", " << y * scale << std::endl;
+        }
+        else if (index == 12)
+        {
+            addComponent<Princess>();
         }
     }
 };

@@ -58,3 +58,8 @@ struct CoinBlockComponent : public Component
     bool isCollected = false;
     bool firstTime = false; // To ensure the first hit is handled correctly
 };
+
+struct MushroomBlock : public Component
+{
+    // This component can be used to identify mushroom blocks specifically
+};

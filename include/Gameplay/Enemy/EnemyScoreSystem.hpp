@@ -4,7 +4,7 @@
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Gameplay/LifeSpan/Components.hpp>
-#include <Gameplay/Score/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/Enemy/Goomba/Components.hpp>
 #include <Gameplay/Enemy/Koopa/Components.hpp>

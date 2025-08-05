@@ -10,7 +10,7 @@
 #include <Gameplay/Block/BounceBlock.hpp>
 #include <Gameplay/Block/Components.hpp>
 #include <Gameplay/Player/Components.hpp>
-#include <Gameplay/Score/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
 #include <cmath>
 class HitSpecialBlockSystem : public System
 {
@@ -21,11 +21,12 @@ private:
     void HitNormalBlock(World &world, float dt, Entity *block); // Only for large mario
     void HitStarBlock(World &world, float dt, Entity *block);
     void CoinBlockUpdate(World &world, float dt, Entity *block);
+    void HitMushroomBlock(World &world, float dt, Entity *block);
 
-    static sf::FloatRect getColliderBounds(Entity* entity)
+    static sf::FloatRect getColliderBounds(Entity *entity)
     {
-        const auto& tf = entity->getComponent<Transform>();
-        const auto& box = entity->getComponent<BoxCollider2D>();
+        const auto &tf = entity->getComponent<Transform>();
+        const auto &box = entity->getComponent<BoxCollider2D>();
 
         return sf::FloatRect(tf.position + box.offset, box.size);
     }
@@ -47,14 +48,14 @@ public:
 
                 auto bounds2 = getColliderBounds(block);
 
-
                 float left = std::fmax(bounds1.left, bounds2.left);
                 float right = std::fmin(bounds1.left + bounds1.width, bounds2.left + bounds2.width);
 
-                if (right - left < 0.5f * bounds1.width) continue; // at least half of the size of the player must hit the block (to avoid hitting 2 blocks at the same time)
+                if (right - left < 0.5f * bounds1.width)
+                    continue; // at least half of the size of the player must hit the block (to avoid hitting 2 blocks at the same time)
                 if (!block->hasComponent<NormalBlock>() && !block->hasComponent<QuestionBlockTag>() &&
                     !block->hasComponent<CoinBlock>() && !block->hasComponent<StarBlock>() &&
-                    !block->hasComponent<LevelUpBlock>())
+                    !block->hasComponent<LevelUpBlock>() && !block->hasComponent<MushroomBlock>())
                     continue;
 
                 // Normal Block
@@ -121,7 +122,14 @@ public:
                         // Update
                         HitStarBlock(world, dt, block);
                     }
+                    else if (block->hasComponent<MushroomBlock>())
+                    {
+                        // Remove MushroomBlock component
+                        block->removeComponent<MushroomBlock>();
 
+                        // Update
+                        HitMushroomBlock(world, dt, block);
+                    }
                     if (block->hasComponent<Transform>() && !block->hasComponent<BounceBlock>())
                     {
                         auto &tf = block->getComponent<Transform>();

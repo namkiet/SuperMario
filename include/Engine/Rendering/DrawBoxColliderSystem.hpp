@@ -25,6 +25,15 @@ public:
             rect.setOutlineThickness(2.f);
             rect.setFillColor(sf::Color::Transparent);
             window.draw(rect);
+
+            // Draw lines between the corners
+            for (int i = 0; i < 4; ++i)
+            {
+                sf::Vertex line[] = {
+                    sf::Vertex(box.corners[i], sf::Color::Red),
+                    sf::Vertex(box.corners[(i + 1) % 4], sf::Color::Red)};
+                window.draw(line, 2, sf::Lines);
+            }
         }
     }
 };

@@ -1,7 +1,7 @@
 #pragma once
 #include <ECS/System.hpp>
 #include <World.hpp>
-#include <Gameplay/Score/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
 #include <Engine/Core/DespawnTag.hpp>
 
 class TextPoppingSystem : public System

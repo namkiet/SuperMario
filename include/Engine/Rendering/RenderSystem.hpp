@@ -7,8 +7,9 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Rendering/Utility.hpp>
 #include <SFML/Graphics.hpp>
-#include <Gameplay/Score/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
 #include <Gameplay/Item/Components.hpp>
+#include <Gameplay/Obstacles/Components.hpp>
 
 class RenderSystem : public System
 {
@@ -16,7 +17,6 @@ private:
     sf::Font font;
     void backgroundRender(sf::RenderWindow &window, int level) const;
     void textComponentRender(const World &world, sf::RenderWindow &window) const;
-
 public:
     RenderSystem()
     {
@@ -84,6 +84,14 @@ public:
 
             // sp.setPosition(center);
 
+            if (entity->hasComponent<FireBarComponent>())
+            {
+                auto &fireBar = entity->getComponent<FireBarComponent>();
+                sp.setRotation(fireBar.angle);
+
+                sp.setOrigin(sp.getLocalBounds().width / 2, 12);
+                sp.setPosition(tf.position.x + tf.size.x / 2, tf.position.y + 12);
+            }
             window.draw(sp);
         }
     }
