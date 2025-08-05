@@ -47,8 +47,6 @@ void BowserSkidBehaviour::patrol(Entity* entity, float dt, World& world)
         return;
     }
 
-    std::cout << patrol.velocity.x << std::endl;
-
     // Apply patrol
     rb.velocity.x = patrol.velocity.x;
     if (patrol.velocity.y != 0)
