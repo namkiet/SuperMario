@@ -74,7 +74,7 @@ void KoopaJumpingBehaviour::patrol(Entity* entity, float dt, World& world)
     {
         if (tf.position.x - (cam.target.x + SIZE::SCREEN.x/2) <= 100)
         {
-            patrol.velocity.x = -70;
+            patrol.velocity.x = -100;
             if (rb.onGround == true) 
             {
                 patrol.velocity.y = -700;

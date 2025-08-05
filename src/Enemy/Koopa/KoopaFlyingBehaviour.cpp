@@ -24,7 +24,7 @@ void KoopaFlyingBehaviour::collideWithPlayer(Entity* entity)
         if (direction == Direction::Bottom)
         {
             entity->addComponent<ChangeToKoopaNormalTag>();
-            entity->getComponent<RigidBody>().velocity.y += 500;
+            entity->getComponent<RigidBody>().velocity.y += 300;
             entity->getComponent<RigidBody>().applyGravity = true;
         }
         break;
@@ -52,6 +52,11 @@ void KoopaFlyingBehaviour::collideWithOther(Entity* entity)
 
 void KoopaFlyingBehaviour::patrol(Entity* entity, float dt, World& world)
 {
+    if (entity->hasComponent<ChangeToKoopaNormalTag>() || entity->hasComponent<ChangeToKoopaFlippedTag>())
+    {
+        return;
+    }
+
     if (!entity->hasComponent<KoopaFlyingTag>()) return;
     if (!entity->hasComponent<KoopaPatrol>()) return;
     if (!entity->hasComponent<KoopaFlyingPatrol>()) return;

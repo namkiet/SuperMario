@@ -49,6 +49,7 @@
 #include <Gameplay/Enemy/Goomba/Goomba.hpp>
 #include <Gameplay/Enemy/Koopa/KoopaJumping.hpp>
 #include <Gameplay/Enemy/Koopa/KoopaFlying.hpp>
+#include <Gameplay/Enemy/Piranha/Piranha.hpp>
 #include <Gameplay/Enemy/Spiny/Spiny.hpp>
 #include <Gameplay/Enemy/Lakitu/Lakitu.hpp>
 #include <Gameplay/Enemy/Bowser/Bowser.hpp>
@@ -176,6 +177,12 @@ void GameManager::handleEvent(const sf::Event &event)
         }
 
         if (event.key.code == sf::Keyboard::X)
+        {
+            std::cout << "HELLO\n";
+            auto lakitu = world.createEntity<Lakitu>(20 * 16, 3 * 16, 3);
+        }
+
+        if (event.key.code == sf::Keyboard::B)
         {
             std::cout << "HELLO\n";
             auto bowser = world.createEntity<Bowser>(10 * 16, 3 * 16, 3);

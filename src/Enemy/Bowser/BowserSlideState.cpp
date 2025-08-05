@@ -43,7 +43,7 @@ void BowserSlideState::onEnter(Entity* entity)
     auto& towardPlayer = entity->getComponent<TowardPlayer>();
     auto& patrol = entity->getComponent<BowserPatrol>();
     patrol.lastDirection = towardPlayer.direction;
-    patrol.velocity.x = 800 * (patrol.lastDirection == Direction::Right ? 1 : -1);
+    patrol.velocity.x = 1000 * (patrol.lastDirection == Direction::Right ? 1 : -1);
     patrol.velocity.y = 0;
 
     entity->addComponent<StateDuration>(5);

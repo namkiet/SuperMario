@@ -38,6 +38,7 @@ void KoopaSlideBehaviour::collideWithOther(Entity* entity)
     for (auto& [collider, direction, overlap] : box.collisions)
     {
         if (collider->hasComponent<EnemyTag>()) continue;
+        if (collider->hasComponent<PlayerTag>()) continue;
 
         if (collider->hasComponent<CanKillEnemyTag>())
         {
