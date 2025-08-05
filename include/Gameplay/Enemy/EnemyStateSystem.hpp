@@ -12,12 +12,15 @@ public:
         for (Entity* entity : world.findAll<EnemyTag>())
         {
             auto& tag = entity->getComponent<EnemyTag>();
-            auto newState = tag.state->getNewState(entity, dt);
-
-            if (newState)
+            if (tag.state)
             {
-                tag.state = newState;
-                tag.state->onEnter(entity);
+                auto newState = tag.state->getNewState(entity, dt);
+                
+                if (newState)
+                {
+                    tag.state = newState;
+                    tag.state->onEnter(entity);
+                }
             }
         }
     }

@@ -10,9 +10,13 @@ public:
         for (Entity* entity : world.findAll<EnemyTag>())
         {
             auto& tag = entity->getComponent<EnemyTag>();
-            tag.behaviour->collideWithPlayer(entity);
-            tag.behaviour->collideWithOther(entity);
-            tag.behaviour->patrol(entity, dt, world.findFirst<Camera>());
+            if (tag.behaviour)
+            {
+                tag.behaviour->collideWithPlayer(entity);
+                tag.behaviour->collideWithOther(entity);
+                tag.behaviour->patrol(entity, dt, world);
+                tag.behaviour->attack(entity, dt, world);
+            }
         }
     }
 };

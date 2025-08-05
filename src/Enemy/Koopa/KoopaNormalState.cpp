@@ -26,7 +26,7 @@ void KoopaNormalState::onEnter(Entity* entity)
         anim.frameWidth = 16;
         anim.frameHeight = 24;
         anim.frameCount = 2;
-        anim.frameDuration = 0.5f;
+        anim.frameDuration = 0.5f / 2;
         anim.currentFrame = 0;
         anim.timer = 0;
     }
@@ -39,7 +39,8 @@ void KoopaNormalState::onEnter(Entity* entity)
     entity->getComponent<BoxCollider2D>().size = sf::Vector2f(16, 24) * 3.0f;
 
     auto& patrol = entity->getComponent<KoopaPatrol>();
-    patrol.velocity.x = 30 * (patrol.lastDirection == Direction::Right ? 1 : -1);
+    patrol.velocity.x = 60 * (patrol.lastDirection == Direction::Right ? 1 : -1);
+    patrol.velocity.y = 0;
 
     entity->removeComponent<DamageOnContactComponent>();
     std::vector<Direction> directions = { Direction::Left, Direction::Right, Direction::Bottom };

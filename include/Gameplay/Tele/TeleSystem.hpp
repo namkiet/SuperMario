@@ -229,6 +229,7 @@ class TeleSystem : public System
                         auto &PipeDestination = tele.teleEntity->getComponent<hasPipeDestination>();
                         PipeDestination.pipe = findPipeDestination(world, player);
                         // std::cout << "sth" << std::endl;
+                        //  std::cout << "sth" << std::endl;
                         assert(PipeDestination.pipe != nullptr);
                     }
                 }

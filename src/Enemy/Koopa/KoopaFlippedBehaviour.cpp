@@ -22,7 +22,7 @@ void KoopaFlippedBehaviour::collideWithOther(Entity* entity)
 }
 
 
-void KoopaFlippedBehaviour::patrol(Entity* entity, float dt, Entity* camera)
+void KoopaFlippedBehaviour::patrol(Entity* entity, float dt, World& world)
 {
     // no-op
 }

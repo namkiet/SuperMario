@@ -1,0 +1,164 @@
+#include <World.hpp>
+#include <ECS/Entity.hpp>
+#include <Gameplay/Enemy/Components.hpp>
+#include <Gameplay/Enemy/Lakitu/Components.hpp>
+#include <Gameplay/Enemy/Lakitu/LakituNormalBehaviour.hpp>
+#include <Gameplay/Enemy/Spiny/Spiny.hpp>
+#include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Physics/BlockTag.hpp>
+#include <Engine/Core/RigidBody.hpp>
+#include <Engine/Core/Transform.hpp>
+#include <Gameplay/Player/Components.hpp>
+#include <Core/Variables.hpp>
+#include <iostream>
+
+void LakituNormalBehaviour::collideWithPlayer(Entity* entity)
+{
+    const auto& box = entity->getComponent<BoxCollider2D>();
+
+    for (auto& [collider, direction, overlap] : box.collisions)
+    {
+        if (!collider->hasComponent<PlayerTag>()) continue;
+
+        if (direction == Direction::Bottom)
+        {
+            entity->addComponent<ChangeToLakituFlippedTag>();
+        }
+        break;
+    }
+}
+
+
+void LakituNormalBehaviour::collideWithOther(Entity* entity)
+{
+    const auto& box = entity->getComponent<BoxCollider2D>();
+
+    for (auto& [collider, direction, overlap] : box.collisions)
+    {
+        if (collider->hasComponent<CanKillEnemyTag>())
+        {
+            entity->addComponent<ChangeToLakituFlippedTag>();
+        }
+    }
+}
+
+
+void LakituNormalBehaviour::patrol(Entity* entity, float dt, World& world)
+{
+    if (!entity->hasComponent<LakituPatrol>()) return;
+
+    auto& patrol = entity->getComponent<LakituPatrol>();
+    auto& rb = entity->getComponent<RigidBody>();
+    auto& tf = entity->getComponent<Transform>();
+    auto& towardPlayer = entity->getComponent<TowardPlayer>();
+
+    auto playerTf = world.findFirst<PlayerTag>()->getComponent<Transform>();
+    auto playerCenter = playerTf.position + (playerTf.size / 2.0f);
+    auto lakituCenter = tf.position + (tf.size / 2.0f);
+
+
+    if (abs(lakituCenter.x - playerCenter.x) > patrol.distance + 200)
+    {
+        if (lakituCenter.x < playerCenter.x)
+        {
+            patrol.lastDirection = Direction::Right;
+        }
+        else patrol.lastDirection = Direction::Left;
+
+        patrol.velocity.x = patrol.fastSpeed * (patrol.lastDirection == Direction::Right ? 1 : -1);
+        patrol.accelerate = 0;
+        patrol.phase = PatrolPhase::Chase;
+    }
+
+    // This is used for the fast speed
+    if (abs(lakituCenter.x - playerCenter.x) < patrol.distance && patrol.phase == PatrolPhase::Chase)
+    {
+        double d;
+        if (patrol.lastDirection == Direction::Left)
+        {
+            d = lakituCenter.x - (playerCenter.x - patrol.distance);
+        }
+        else d = playerCenter.x + patrol.distance - lakituCenter.x;
+
+        patrol.accelerate = (patrol.velocity.x * patrol.velocity.x) / (2 * d);
+        
+        if (patrol.lastDirection == Direction::Right)
+            patrol.accelerate *= -1;
+        
+        patrol.phase = PatrolPhase::Oscillate;
+    }
+
+    // This is used for the slow speed
+    if (abs(lakituCenter.x - playerCenter.x) < 25 && patrol.phase == PatrolPhase::Oscillate)
+    {
+        patrol.accelerate = (patrol.velocity.x * patrol.velocity.x) / (2 * patrol.distance);
+        
+        if (patrol.lastDirection == Direction::Right)
+            patrol.accelerate *= -1;
+        
+        patrol.phase = PatrolPhase::Oscillate;
+    }
+
+    if (patrol.phase == PatrolPhase::Oscillate && abs(lakituCenter.x - (playerCenter.x - patrol.distance)) < 1)
+    {
+        patrol.accelerate = 70.0f;
+        patrol.lastDirection = Direction::Right;
+
+    }
+
+    if (patrol.phase == PatrolPhase::Oscillate && abs(lakituCenter.x - (playerCenter.x + patrol.distance)) < 1)
+    {
+        patrol.accelerate = -70.0f;
+        patrol.lastDirection = Direction::Left;
+    }
+
+    patrol.velocity.x += patrol.accelerate * dt;
+
+    towardPlayer.direction = (tf.position.x < playerTf.position.x ? Direction::Right : Direction::Left);
+
+
+    // Apply patrol velocity
+    rb.velocity.x = patrol.velocity.x;
+    if (patrol.velocity.y != 0)
+    {
+        rb.velocity.y = patrol.velocity.y;
+    }
+}
+
+
+void LakituNormalBehaviour::attack(Entity* entity, float dt, World& world)
+{
+    auto& attack = entity->getComponent<LakituAttack>();
+    auto tf = entity->getComponent<Transform>();
+    auto rb = entity->getComponent<RigidBody>();
+
+    auto playerPos = world.findFirst<PlayerTag>()->getComponent<Transform>().position;
+
+    if (abs(playerPos.x - tf.position.x) > attack.distance) 
+        return;
+
+    attack.timer += dt;
+
+    if (attack.delay - attack.timer <= 0.5f)
+    {
+        auto& anim = entity->getComponent<Animation>();
+        anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Lakitu/lakitu_attack.png"));
+    }
+    
+    if (attack.timer >= attack.delay)
+    {
+        auto& anim = entity->getComponent<Animation>();
+        anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Lakitu/lakitu_normal.png"));
+
+        attack.timer -= attack.delay;
+            
+        auto spiny = world.createEntity<Spiny>(0, 0, 3);
+        auto& spinyTf = spiny->getComponent<Transform>();
+        auto& spinyRb = spiny->getComponent<RigidBody>();
+        auto& spinyPatrol = spiny->getComponent<SpinyPatrol>();
+            
+        spinyTf.position = sf::Vector2f(tf.position.x, tf.position.y - spinyTf.size.y);
+        spinyPatrol.velocity.x = playerPos.x - tf.position.x;
+        spinyRb.velocity.y = -700;
+    }
+}

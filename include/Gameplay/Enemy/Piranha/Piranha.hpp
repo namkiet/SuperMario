@@ -20,11 +20,10 @@ public:
         addComponent<RigidBody>(sf::Vector2f(0, 0), false);
         addComponent<Transform>(sf::Vector2f(x, y) * scale, sf::Vector2f(16, 24) * scale);
         addComponent<BoxCollider2D>(sf::Vector2f(16, 24) * scale);
-
         addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Piranha/piranha.png"), 16, 24, 2, 0.25f));
 
         addComponent<EnemyTag>(std::make_shared<PiranhaNormalState>(), std::make_shared<PiranhaBehaviour>());
-        addComponent<PiranhaPatrol>(SIZE::GRID.y, 2.0f, 2.0f);
+        addComponent<PiranhaPatrol>(24 * 3 + 16, 2.0f, 2.0f);
         addComponent<PassThroughTag>();
 
         std::vector<Direction> directions = {Direction::Left, Direction::Right, Direction::Top, Direction::Bottom};
