@@ -41,7 +41,7 @@ void BowserSkidBehaviour::patrol(Entity* entity, float dt, World& world)
 
     patrol.velocity += patrol.accelerate * dt;
 
-    if (abs(patrol.velocity.x) < 1)
+    if (abs(patrol.velocity.x) < 3)
     {
         entity->addComponent<ChangeToBowserSlideTag>();
         return;

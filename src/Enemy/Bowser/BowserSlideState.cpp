@@ -69,12 +69,14 @@ std::shared_ptr<EnemyState> BowserSlideState::getNewState(Entity* entity, float 
 
     if (entity->hasComponent<ChangeToBowserWalkTag>())
     {
+        entity->removeComponent<CanKillEnemyTag>();
         entity->removeComponent<ChangeToBowserWalkTag>();
         return std::make_shared<BowserWalkState>();
     }
 
     if (entity->hasComponent<ChangeToBowserDeadTag>())
     {
+        entity->removeComponent<CanKillEnemyTag>();
         entity->removeComponent<ChangeToBowserDeadTag>();
         return std::make_shared<BowserDeadState>();
     }
