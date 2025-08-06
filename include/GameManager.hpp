@@ -6,7 +6,7 @@ class GameManager
 {
 public:
     // Default constructor
-    GameManager() = default;
+    GameManager() = delete;
 
     // Constructor with level
     GameManager(int level);
@@ -16,7 +16,7 @@ public:
     void draw(sf::RenderWindow &window, int level) const;
 
 private:
-    World world;
+    World &world = World::getInstance();
     LevelHandler levelHandler;
     int level = 1;
     bool oneFrame = false;

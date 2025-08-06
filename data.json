@@ -1,0 +1,5801 @@
+{
+    "0": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 3936.0,
+                "y": 96.0
+            },
+            "prevPos": {
+                "x": 3936.0,
+                "y": 96.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "1": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 4032.0,
+                "y": 96.0
+            },
+            "prevPos": {
+                "x": 4032.0,
+                "y": 96.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "10": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 2592.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 2592.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "100": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8112.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 8112.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "101": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8160.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 8160.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "102": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8208.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 8208.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "103": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8256.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 8256.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "104": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8880.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 8880.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "105": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8928.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 8928.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "106": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8976.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 8976.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "107": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9024.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 9024.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "108": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9072.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 9072.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "109": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9120.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 9120.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "11": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 4752.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 4752.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "110": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11136.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 11136.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "111": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11184.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 11184.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "112": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11232.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 11232.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "113": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11280.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 11280.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "114": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11328.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 11328.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "115": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11376.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 11376.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "116": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11424.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 11424.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "117": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11664.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 11664.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "118": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 1920.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 1920.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "119": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 2304.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 2304.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "12": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 4848.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 4848.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "120": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 2832.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 2832.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "121": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6624.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 6624.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "122": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6672.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 6672.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "123": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6816.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 6816.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "124": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6864.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 6864.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "125": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7296.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 7296.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "126": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7344.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 7344.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "127": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7488.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 7488.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "128": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7536.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 7536.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "129": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8832.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 8832.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "13": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 5568.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 5568.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "130": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8880.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 8880.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "131": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8928.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 8928.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "132": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8976.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 8976.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "133": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9024.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 9024.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "134": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9072.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 9072.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "135": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9120.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 9120.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "136": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11664.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 11664.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "137": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 1440.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 1440.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "138": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 1920.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 1920.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "139": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 2304.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 2304.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "14": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 5664.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 5664.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "140": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 2832.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 2832.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "141": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6576.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 6576.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "142": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6624.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 6624.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "143": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6672.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 6672.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "144": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6816.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 6816.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "145": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6864.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 6864.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "146": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6912.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 6912.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "147": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7248.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 7248.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "148": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7296.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 7296.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "149": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7344.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 7344.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "15": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6048.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 6048.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "150": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7488.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 7488.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "151": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7536.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 7536.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "152": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7584.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 7584.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "153": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7872.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 7872.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "154": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8640.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 8640.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "155": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8784.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 8784.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "156": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8832.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 8832.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "157": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8880.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 8880.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "158": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8928.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 8928.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "159": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8976.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 8976.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "16": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6144.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 6144.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "160": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9024.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 9024.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "161": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9072.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 9072.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "162": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9120.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 9120.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "163": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 132.0,
+                "y": 96.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11568.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 11568.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 144.0,
+                "y": 96.0
+            }
+        }
+    },
+    "164": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 1440.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 1440.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "165": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 1920.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 1920.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "166": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 2304.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 2304.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "167": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 2832.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 2832.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "168": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6528.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 6528.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "169": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6576.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 6576.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "17": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6240.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 6240.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "170": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6624.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 6624.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "171": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6672.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 6672.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "172": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6816.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 6816.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "173": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6864.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 6864.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "174": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6912.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 6912.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "175": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6960.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 6960.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "176": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7200.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 7200.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "177": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7248.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 7248.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "178": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7296.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 7296.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "179": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7344.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 7344.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "18": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6336.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 6336.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "180": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7488.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 7488.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "181": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7536.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 7536.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "182": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7584.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 7584.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "183": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7632.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 7632.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "184": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7872.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 7872.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "185": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8640.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 8640.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "186": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8736.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 8736.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "187": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8784.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 8784.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "188": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8832.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 8832.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "189": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8880.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 8880.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "19": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8400.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 8400.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "190": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8928.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 8928.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "191": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8976.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 8976.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "192": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9024.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 9024.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "193": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9072.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 9072.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "194": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9120.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 9120.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "195": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9552.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 9552.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "196": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 3408.0,
+                "y": 96.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 0.0,
+                "y": 624.0
+            },
+            "prevPos": {
+                "x": 0.0,
+                "y": 624.0
+            },
+            "size": {
+                "x": 3408.0,
+                "y": 96.0
+            }
+        }
+    },
+    "197": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 3024.0,
+                "y": 96.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 4368.0,
+                "y": 624.0
+            },
+            "prevPos": {
+                "x": 4368.0,
+                "y": 624.0
+            },
+            "size": {
+                "x": 3024.0,
+                "y": 96.0
+            }
+        }
+    },
+    "198": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 720.0,
+                "y": 96.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 3504.0,
+                "y": 624.0
+            },
+            "prevPos": {
+                "x": 3504.0,
+                "y": 624.0
+            },
+            "size": {
+                "x": 720.0,
+                "y": 96.0
+            }
+        }
+    },
+    "199": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 2976.0,
+                "y": 96.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7488.0,
+                "y": 624.0
+            },
+            "prevPos": {
+                "x": 7488.0,
+                "y": 624.0
+            },
+            "size": {
+                "x": 2976.0,
+                "y": 96.0
+            }
+        }
+    },
+    "2": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 72.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 2328.0,
+                "y": 441.0
+            },
+            "prevPos": {
+                "x": 2328.0,
+                "y": 441.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 72.0
+            }
+        }
+    },
+    "20": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8496.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 8496.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "200": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 816.0,
+                "y": 96.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 10944.0,
+                "y": 624.0
+            },
+            "prevPos": {
+                "x": 10944.0,
+                "y": 624.0
+            },
+            "size": {
+                "x": 816.0,
+                "y": 96.0
+            }
+        }
+    },
+    "201": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 528.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 10944.0,
+                "y": 96.0
+            },
+            "prevPos": {
+                "x": 10944.0,
+                "y": 96.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 528.0
+            }
+        }
+    },
+    "202": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 336.0,
+                "y": 144.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11136.0,
+                "y": 480.0
+            },
+            "prevPos": {
+                "x": 11136.0,
+                "y": 480.0
+            },
+            "size": {
+                "x": 336.0,
+                "y": 144.0
+            }
+        }
+    },
+    "203": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 336.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11136.0,
+                "y": 96.0
+            },
+            "prevPos": {
+                "x": 11136.0,
+                "y": 96.0
+            },
+            "size": {
+                "x": 336.0,
+                "y": 48.0
+            }
+        }
+    },
+    "204": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 480.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9552.0,
+                "y": 96.0
+            },
+            "prevPos": {
+                "x": 9552.0,
+                "y": 96.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 480.0
+            }
+        }
+    },
+    "205": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9528.0,
+                "y": 147.0
+            },
+            "prevPos": {
+                "x": 9528.0,
+                "y": 147.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "206": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 144.0,
+                "y": 144.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 96.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9744.0,
+                "y": 384.0
+            },
+            "prevPos": {
+                "x": 9744.0,
+                "y": 384.0
+            },
+            "size": {
+                "x": 240.0,
+                "y": 240.0
+            }
+        }
+    },
+    "21": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11664.0,
+                "y": 96.0
+            },
+            "prevPos": {
+                "x": 11664.0,
+                "y": 96.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "22": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11664.0,
+                "y": 144.0
+            },
+            "prevPos": {
+                "x": 11664.0,
+                "y": 144.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "23": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11664.0,
+                "y": 192.0
+            },
+            "prevPos": {
+                "x": 11664.0,
+                "y": 192.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "24": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 1152.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 1152.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "25": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 3936.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 3936.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "26": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 3984.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 3984.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "27": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 4032.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 4032.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "28": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 4080.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 4080.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "29": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 4128.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 4128.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "3": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 72.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 1944.0,
+                "y": 489.0
+            },
+            "prevPos": {
+                "x": 1944.0,
+                "y": 489.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 72.0
+            }
+        }
+    },
+    "30": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 4176.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 4176.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "31": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 4224.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 4224.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "32": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 4272.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 4272.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "33": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 4464.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 4464.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "34": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 4512.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 4512.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "35": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 4560.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 4560.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "36": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 4608.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 4608.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "37": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 5328.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 5328.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "38": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 5904.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 5904.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "39": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 5952.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 5952.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "4": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 72.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 1464.0,
+                "y": 537.0
+            },
+            "prevPos": {
+                "x": 1464.0,
+                "y": 537.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 72.0
+            }
+        }
+    },
+    "40": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6000.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 6000.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "41": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6240.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 6240.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "42": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6288.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 6288.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "43": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6336.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 6336.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "44": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6384.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 6384.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "45": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9072.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 9072.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "46": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9120.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 9120.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "47": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11184.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 11184.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "48": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11232.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 11232.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "49": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11280.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 11280.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "5": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 72.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 5280.0,
+                "y": 528.0
+            },
+            "prevPos": {
+                "x": 5280.0,
+                "y": 528.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 72.0
+            }
+        }
+    },
+    "50": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11328.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 11328.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "51": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11376.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 11376.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "52": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11664.0,
+                "y": 240.0
+            },
+            "prevPos": {
+                "x": 11664.0,
+                "y": 240.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "53": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9024.0,
+                "y": 288.0
+            },
+            "prevPos": {
+                "x": 9024.0,
+                "y": 288.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "54": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9072.0,
+                "y": 288.0
+            },
+            "prevPos": {
+                "x": 9072.0,
+                "y": 288.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "55": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9120.0,
+                "y": 288.0
+            },
+            "prevPos": {
+                "x": 9120.0,
+                "y": 288.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "56": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11664.0,
+                "y": 288.0
+            },
+            "prevPos": {
+                "x": 11664.0,
+                "y": 288.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "57": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8976.0,
+                "y": 336.0
+            },
+            "prevPos": {
+                "x": 8976.0,
+                "y": 336.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "58": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9024.0,
+                "y": 336.0
+            },
+            "prevPos": {
+                "x": 9024.0,
+                "y": 336.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "59": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9072.0,
+                "y": 336.0
+            },
+            "prevPos": {
+                "x": 9072.0,
+                "y": 336.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "6": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 36.0,
+                "y": 48.0
+            }
+        },
+        "FollowByCameraTag": {},
+        "InputTag": {},
+        "PlayerTag": {},
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 192.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 192.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "60": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9120.0,
+                "y": 336.0
+            },
+            "prevPos": {
+                "x": 9120.0,
+                "y": 336.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "61": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11136.0,
+                "y": 336.0
+            },
+            "prevPos": {
+                "x": 11136.0,
+                "y": 336.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "62": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11184.0,
+                "y": 336.0
+            },
+            "prevPos": {
+                "x": 11184.0,
+                "y": 336.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "63": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11232.0,
+                "y": 336.0
+            },
+            "prevPos": {
+                "x": 11232.0,
+                "y": 336.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "64": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11280.0,
+                "y": 336.0
+            },
+            "prevPos": {
+                "x": 11280.0,
+                "y": 336.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "65": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11328.0,
+                "y": 336.0
+            },
+            "prevPos": {
+                "x": 11328.0,
+                "y": 336.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "66": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11376.0,
+                "y": 336.0
+            },
+            "prevPos": {
+                "x": 11376.0,
+                "y": 336.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "67": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11424.0,
+                "y": 336.0
+            },
+            "prevPos": {
+                "x": 11424.0,
+                "y": 336.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "68": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11664.0,
+                "y": 336.0
+            },
+            "prevPos": {
+                "x": 11664.0,
+                "y": 336.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "69": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 3168.0,
+                "y": 384.0
+            },
+            "prevPos": {
+                "x": 3168.0,
+                "y": 384.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "7": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 1152.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 1152.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "70": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8928.0,
+                "y": 384.0
+            },
+            "prevPos": {
+                "x": 8928.0,
+                "y": 384.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "71": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 8976.0,
+                "y": 384.0
+            },
+            "prevPos": {
+                "x": 8976.0,
+                "y": 384.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "72": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9024.0,
+                "y": 384.0
+            },
+            "prevPos": {
+                "x": 9024.0,
+                "y": 384.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "73": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9072.0,
+                "y": 384.0
+            },
+            "prevPos": {
+                "x": 9072.0,
+                "y": 384.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "74": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 9120.0,
+                "y": 384.0
+            },
+            "prevPos": {
+                "x": 9120.0,
+                "y": 384.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "75": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 11664.0,
+                "y": 384.0
+            },
+            "prevPos": {
+                "x": 11664.0,
+                "y": 384.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "76": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 768.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 768.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "77": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 1056.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 1056.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "78": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 1104.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 1104.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "79": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 1152.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 1152.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "8": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 2016.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 2016.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "80": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 1200.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 1200.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "81": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 1248.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 1248.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "82": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 2304.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 2304.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "83": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 6.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 84.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 2832.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 2832.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 96.0,
+                "y": 48.0
+            }
+        }
+    },
+    "84": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 3792.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 3792.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "85": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 3840.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 3840.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "86": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 3888.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 3888.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "87": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 4608.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 4608.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "88": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 4896.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 4896.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "89": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 4944.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 4944.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "9": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 2496.0,
+                "y": 576.0
+            },
+            "prevPos": {
+                "x": 2496.0,
+                "y": 576.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "90": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 5184.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 5184.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "91": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 5328.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 5328.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "92": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 5472.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 5472.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "93": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 5760.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 5760.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "94": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6288.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 6288.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "95": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6336.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 6336.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "96": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6672.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 6672.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "97": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6816.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 6816.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "98": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7344.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 7344.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    },
+    "99": {
+        "BoxCollider2D": {
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        },
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 7488.0,
+                "y": 432.0
+            },
+            "prevPos": {
+                "x": 7488.0,
+                "y": 432.0
+            },
+            "size": {
+                "x": 48.0,
+                "y": 48.0
+            }
+        }
+    }
+}

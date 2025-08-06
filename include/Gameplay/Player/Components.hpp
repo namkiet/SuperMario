@@ -7,7 +7,7 @@ class PlayerPowerState;
 
 struct PlayerTag : public Component 
 {
-    PlayerTag(std::shared_ptr<PlayerMovementState> movementState, std::shared_ptr<PlayerPowerState> powerState) 
+    PlayerTag(std::shared_ptr<PlayerMovementState> movementState = nullptr, std::shared_ptr<PlayerPowerState> powerState = nullptr) 
         : movementState(movementState), powerState(powerState) {}
 
     std::shared_ptr<PlayerMovementState> movementState;

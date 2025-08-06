@@ -153,6 +153,8 @@ class TeleSystem : public System
             return sf::Vector2f(speed, 0.f);
         if (dir == Direction::Left)
             return sf::Vector2f(-speed, 0.f);
+
+        return sf::Vector2f(0, 0);
     }
     Entity *findPipeDestination(World &world, Entity *player)
     {

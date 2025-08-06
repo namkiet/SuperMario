@@ -8,12 +8,35 @@
 #include <vector>
 #include <algorithm>
 
-#include <Gameplay/Player/Components.hpp>
-#include <Engine/Core/RigidBody.hpp>
 #include <iostream>
+#include <nlohmann/json.hpp>
+
+
 class World
 {
 public:
+    static World& getInstance()
+    {
+        static World instance;
+        return instance;
+    }
+
+private:
+    World() = default;
+    ~World() = default;
+
+    World(const World&) = delete;
+    World(World&&) = delete;
+    World& operator=(const World&) = delete;
+    World& operator=(World&&) = delete;
+
+public:
+    template <typename T>
+    void registerComponent()
+    {
+        std::cout << typeid(T).name() << "\n";
+    }
+
     Entity *createEntity()
     {
         entities.push_back(std::make_unique<Entity>());
