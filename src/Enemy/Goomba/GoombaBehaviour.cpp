@@ -29,6 +29,8 @@ void GoombaBehaviour::collideWithPlayer(Entity* entity)
 
 void GoombaBehaviour::collideWithOther(Entity* entity)
 {
+    if (!entity->hasComponent<GoombaPatrol>()) return;
+    
     const auto& box = entity->getComponent<BoxCollider2D>();
     auto& patrol = entity->getComponent<GoombaPatrol>();
 

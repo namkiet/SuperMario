@@ -73,7 +73,16 @@ public:
 
             }
 
-            if (anim.textures.size() == 1)
+            if (anim.textures.size() == 0)
+            {
+                anim.sprite.setTextureRect(sf::IntRect(
+                    anim.currentFrame * anim.frameWidth,
+                    anim.row * anim.frameHeight,
+                    anim.frameWidth,
+                    anim.frameHeight
+                ));
+            }
+            else if (anim.textures.size() == 1)
             {
                 anim.sprite.setTexture(*anim.textures[0]);
                 anim.sprite.setTextureRect(sf::IntRect(

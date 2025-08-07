@@ -13,17 +13,19 @@ void GoombaStompedState::onEnter(Entity* entity)
 {
     entity->addComponent<LifeSpan>(0.3f);
 
-    if (entity->hasComponent<Animation>()) 
-    {
-        auto& anim = entity->getComponent<Animation>();
-        anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Goomba/goomba_stomped.png"));
-        anim.frameWidth = 16;
-        anim.frameHeight = 16;
-        anim.frameCount = 1;
-        anim.frameDuration = 0.0f;
-        anim.currentFrame = 0;
-        anim.timer = 0;
-    }
+    // if (entity->hasComponent<Animation>()) 
+    // {
+    //     auto& anim = entity->getComponent<Animation>();
+    //     anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Goomba/goomba_stomped.png"));
+    //     anim.frameWidth = 16;
+    //     anim.frameHeight = 16;
+    //     anim.frameCount = 1;
+    //     anim.frameDuration = 0.0f;
+    //     anim.currentFrame = 0;
+    //     anim.timer = 0;
+    // }
+
+    entity->addComponent<Animation>(TextureManager::load("assets/Enemy/Goomba/goomba_stomped.png"));
 
     entity->getComponent<GoombaPatrol>().velocity = sf::Vector2f(0, 0);
 

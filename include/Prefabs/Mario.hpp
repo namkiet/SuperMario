@@ -14,7 +14,6 @@
 #include <Gameplay/Collect/Components.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
 #include <Gameplay/Fire/Components.hpp>
-#include <Gameplay/BreakBrick/Components.hpp>
 #include <Gameplay/CaptureFlag/Components.hpp>
 
 #include <PlayerMovementStates/PlayerIdlingState.hpp>

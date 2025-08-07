@@ -12,5 +12,5 @@ compile:
 	cmake --build build -- -j8
 
 run:
-	./build/bin/main
+	./build/bin/mario
 

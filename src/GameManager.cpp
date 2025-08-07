@@ -23,11 +23,9 @@
 #include <Gameplay/Player/PlayerRespawnSystem.hpp>
 #include <Gameplay/Player/PlayerStateSystem.hpp>
 
-#include <Gameplay/Reset/ResetSystem.hpp>
 #include <Gameplay/Stomp/StompSystem.hpp>
 #include <Gameplay/HitBlock/HitSpecialBlockSystem.hpp>
 #include <Gameplay/Block/BounceBlockSystem.hpp>
-#include <Gameplay/Popup/PopupSystem.hpp>
 #include <Gameplay/DamageOnContact/DamageOnContactSystem.hpp>
 #include <Gameplay/Invincible/InvincibleSystem.hpp>
 
@@ -83,26 +81,19 @@ using json = nlohmann::json;
 GameManager::GameManager(int level) : levelHandler(world, level), level(level)
 {
     bool loadFromJSON = true;
-    // loadFromJSON = false;
+    loadFromJSON = false;
 
     if (loadFromJSON)
     {
-        std::ifstream fin("data.json");
-        json j = json::parse(fin);
+        // std::ifstream fin("data.json");
+        // json j = json::parse(fin);
 
-        world.loadFromJSON(j);
+        world.loadSceneFromFile("data.json");
     }
     else
     {
         levelHandler.start();
         world.createEntity()->addComponent<Camera>();
-
-        json j;
-        world.saveToJSON(j);
-
-        std::ofstream fout("data.json");
-        fout << j.dump(4);
-        fout.close();    
     }
 
 
@@ -128,7 +119,6 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
 
     world.addSystem<LifeSystem>();
 
-    world.addSystem<PopupSystem>();
     world.addSystem<PatrolSystem>();
     world.addSystem<StompSystem>();
     world.addSystem<HitSpecialBlockSystem>();
@@ -175,10 +165,18 @@ void GameManager::handleEvent(const sf::Event &event)
 {
     if (event.type == sf::Event::KeyPressed)
     {
+        if (event.key.code == sf::Keyboard::S)
+        {
+            json j;
+            world.saveToJSON(j);
+
+            std::ofstream fout("save.json");
+            fout << j.dump(4);
+            fout.close();    
+        }
+
         if (event.key.code == sf::Keyboard::N)
         {
-            // do nothing
-
             world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(3.0f);
         }
 
@@ -223,6 +221,8 @@ void GameManager::update(float dt)
     {
         shouldPlay = false;
     }
+
+    world.showSceneEditor();
 }
 
 void GameManager::draw(sf::RenderWindow &window, int level) const

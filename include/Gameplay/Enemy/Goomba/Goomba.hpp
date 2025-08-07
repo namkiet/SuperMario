@@ -31,7 +31,6 @@ public:
 
         addComponent<CanHitBlockTag>();
         addComponent<BlockTag>();
-        addComponent<CanHitBlockTag>();
         addComponent<StompableTag>();
 
         std::vector<Direction> directions = {Direction::Left, Direction::Right, Direction::Bottom};

@@ -13,6 +13,10 @@
 #include <iostream>
 #include <nlohmann/json.hpp>
 
+#include <imgui.h>
+#include <imgui-SFML.h>
+#include <fstream>
+
 using json = nlohmann::json;
 
 template<typename T>
@@ -46,6 +50,132 @@ private:
     // 🧠 Component serialization maps
     std::unordered_map<std::string, std::function<void(World& world, json& j)>> saveByType;
     std::unordered_map<std::string, std::function<void(const json& j, Entity* entity)>> loadByType;
+
+    // Scene editing state
+    json sceneData;
+    std::string selectedEntityId = "";
+    bool forceCollapseHeaders = false;
+    std::string sceneFilename = "scene.json";
+
+public:
+    // ImGui JSON node editor
+    void drawJsonNode(json& node, const std::string& name = "") {
+        std::string label = name.empty() ? "##unnamed" : name;
+        if (node.is_object()) {
+            if (forceCollapseHeaders) {
+                ImGui::SetNextItemOpen(false, ImGuiCond_Always);
+            }
+            if (ImGui::CollapsingHeader(label.c_str())) {
+                ImGui::Indent();
+                for (auto& [key, value] : node.items()) {
+                    drawJsonNode(value, key);
+                }
+                ImGui::Unindent();
+            }
+        } else if (node.is_array()) {
+            if (ImGui::TreeNode((label + " [array]").c_str())) {
+                ImGui::Indent();
+                int i = 0;
+                for (auto& item : node) {
+                    drawJsonNode(item, "[" + std::to_string(i++) + "]");
+                }
+                ImGui::Unindent();
+                ImGui::TreePop();
+            }
+        } else {
+            if (node.is_string()) {
+                std::string value = node.get<std::string>();
+                char buf[256];
+                strncpy(buf, value.c_str(), sizeof(buf));
+                buf[sizeof(buf)-1] = 0;
+                if (ImGui::InputText(label.c_str(), buf, sizeof(buf))) {
+                    node = std::string(buf);
+                }
+            } else if (node.is_number_integer()) {
+                int value = node.get<int>();
+                if (ImGui::InputInt(label.c_str(), &value)) {
+                    node = value;
+                }
+            } else if (node.is_number_float()) {
+                float value = node.get<float>();
+                if (ImGui::InputFloat(label.c_str(), &value)) {
+                    node = value;
+                }
+            } else if (node.is_boolean()) {
+                bool value = node.get<bool>();
+                if (ImGui::Checkbox(label.c_str(), &value)) {
+                    node = value;
+                }
+            } else {
+                ImGui::Text("%s: %s", label.c_str(), node.dump().c_str());
+            }
+        }
+    }
+
+    // ImGui scene editor window
+    void showSceneEditor() {
+        ImGui::Begin("Scene Editor");
+        ImGui::Columns(2, "sceneColumns", true);
+
+        // Entity Explorer
+        ImGui::BeginChild("EntitiesPanel", ImVec2(0, 0), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::Text("\xF0\x9F\x93\xA6 Entities");
+        ImGui::Separator();
+        for (auto& [id, entity] : sceneData.items()) {
+            bool selected = (selectedEntityId == id);
+            if (ImGui::Selectable(("Entity " + id).c_str(), selected)) {
+                if (selectedEntityId != id) {
+                    forceCollapseHeaders = true;
+                }
+                selectedEntityId = id;
+            }
+        }
+        ImGui::EndChild();
+
+        ImGui::NextColumn();
+
+        // Inspector
+        ImGui::BeginChild("InspectorPanel", ImVec2(0, 0), true, ImGuiWindowFlags_HorizontalScrollbar);
+        ImGui::Text("\xF0\x9F\xA7\xA9 Inspector");
+        ImGui::Separator();
+        if (!selectedEntityId.empty()) {
+            json& selectedEntity = sceneData[selectedEntityId];
+            for (auto& [componentName, componentData] : selectedEntity.items()) {
+                drawJsonNode(componentData, componentName);
+            }
+            forceCollapseHeaders = false;
+        } else {
+            ImGui::Text("\xF0\x9F\x91\x89 Select an entity.");
+        }
+
+        if (ImGui::Button("\xF0\x9F\x92\xBE Save")) {
+            saveSceneToFile();
+        }
+        ImGui::EndChild();
+
+        ImGui::Columns(1);
+        ImGui::End();
+    }
+
+    void loadSceneFromFile(const std::string& filename = "scene.json") {
+        sceneFilename = filename;
+        std::ifstream file(filename);
+        if (file.is_open()) {
+            file >> sceneData;
+        }
+
+        loadFromJSON(sceneData);
+    }
+
+    void saveSceneToFile() {
+        std::ofstream outFile(sceneFilename);
+        if (outFile.is_open()) {
+            outFile << sceneData.dump(4);
+            outFile.close();
+        }
+
+        loadFromJSON(sceneData);
+    }
 
 public:
     // ✅ Register a component type
@@ -91,6 +221,7 @@ public:
 
     void loadFromJSON(const json& j)
     {
+        removeAllEntities();
         for (const auto& [id, data] : j.items())
         {
             Entity* entity = createEntity();

@@ -41,9 +41,9 @@ struct MushroomTag : public Component
         GIVE_ONE_MORE_LIFE,
         GROW_UP
     };
+    
     Buff buff;
-
-    MushroomTag(Buff buff) : buff(buff) {}
+    MushroomTag(Buff buff = Buff::GROW_UP) : buff(buff) {}
 };
 
 struct FlowerTag : public Component
@@ -67,6 +67,6 @@ struct Coin2Tag : public Component
 
 struct FireworkComponent : public Component
 {
-    FireworkComponent(int n) : fireworksLeft(n) {}
-    int fireworksLeft = 0; // Number of fireworks left to display
+    FireworkComponent(int n = 0) : fireworksLeft(n) {}
+    int fireworksLeft; // Number of fireworks left to display
 };

@@ -40,7 +40,7 @@ DEFINE_COMPONENT(Animation, frameWidth, frameHeight, frameCount, frameDuration, 
 #include <PlayerPowerStates/PlayerFireState.hpp>
 #include <PlayerPowerStates/PlayerGrowingUpState.hpp>
 
-REGISTER_COMPONENT(PlayerTag)
+REGISTER_COMPONENT(PlayerTag) // need a better way to store states
 
 inline void to_json(json& j, const PlayerTag& tag)
 {
@@ -94,3 +94,61 @@ DEFINE_TAG(FlagBlock)
 DEFINE_TAG(QuestionBlockTag)
 DEFINE_COMPONENT(CoinBlockComponent, waitingTime, timer, hitCount, isCollected, firstTime)
 DEFINE_TAG(MushroomBlock)
+
+#include <Gameplay/Collect/Components.hpp>
+
+DEFINE_TAG(CollectableTag)
+DEFINE_TAG(CanCollectTag)
+
+
+#include <Gameplay/Item/Components.hpp>
+
+DEFINE_TAG(Coin1Tag)
+DEFINE_TAG(DebrisTag)
+DEFINE_TAG(Debris1Tag)
+DEFINE_TAG(Debris2Tag)
+DEFINE_TAG(Debris3Tag)
+DEFINE_TAG(Debris4Tag)
+DEFINE_TAG(StarTag)
+DEFINE_TAG(MushroomTag) // needs BUFF component
+DEFINE_TAG(FlowerTag)
+DEFINE_TAG(FireBulletTag)
+DEFINE_TAG(SmallCoinTag)
+DEFINE_TAG(Coin2Tag)
+DEFINE_COMPONENT(FireworkComponent, fireworksLeft)
+
+
+
+#include <Gameplay/Enemy/Components.hpp>
+#include <Gameplay/Enemy/Goomba/GoombaNormalState.hpp>
+#include <Gameplay/Enemy/Goomba/GoombaBehaviour.hpp>
+
+REGISTER_COMPONENT(EnemyTag)
+
+inline void to_json(json& j, const EnemyTag& tag)
+{
+    j["state"] = "GoombaNormalState";
+    j["behaviour"] = "GoombaBehaviour";
+}
+
+inline void from_json(const json& j, EnemyTag& tag)
+{
+    std::string state = j["state"];
+    std::string behaviour = j["behaviour"];
+
+    tag.state = std::make_shared<GoombaNormalState>();
+    tag.behaviour = std::make_shared<GoombaBehaviour>();
+}
+
+DEFINE_TAG(TowardPlayer) // needs direction
+DEFINE_TAG(CanKillEnemyTag)
+DEFINE_TAG(NotOnPatrolYet)
+DEFINE_TAG(ScoreAddedTag)
+
+
+#include <Gameplay/Enemy/Goomba/Components.hpp>
+
+DEFINE_TAG(ChangeToGoombaNormalTag)
+DEFINE_TAG(ChangeToGoombaFlippedTag)
+DEFINE_TAG(ChangeToGoombaStompedTag)
+DEFINE_COMPONENT(GoombaPatrol, velocity)

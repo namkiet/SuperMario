@@ -5,7 +5,6 @@
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Gameplay/Player/Components.hpp>
-#include <Gameplay/BreakBrick/Components.hpp>
 #include <Gameplay/Invincible/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <ECS/Entity.hpp>
@@ -17,7 +16,6 @@ const std::string PlayerBigState::getName() const
 
 void PlayerBigState::onEnter(Entity* entity)
 {   
-    entity->addComponent<CanBreakBrickTag>();
     entity->addComponent<BigMarioTag>();
 }
 
