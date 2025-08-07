@@ -2,53 +2,29 @@
 #include <ECS/Component.hpp>
 using namespace std;
 
-struct CoinBlock : public Component
-{
-};
+struct CoinBlock : public Component {};
 
-struct GroundBlock : public Component
-{
-};
+struct GroundBlock : public Component {};
 
-struct LevelUpBlock : public Component
-{
-};
+struct LevelUpBlock : public Component {};
 
-struct NormalBlock : public Component
-{
-};
+struct NormalBlock : public Component {};
 
-struct StairsBlock : public Component
-{
-};
+struct StairsBlock : public Component {};
 
-struct StarBlock : public Component
-{
-};
+struct StarBlock : public Component {};
 
-struct CoinQuestionBlock : public Component
-{
-};
+struct CoinQuestionBlock : public Component {};
 
-struct FlowerQuestionBlock : public Component
-{
-};
+struct FlowerQuestionBlock : public Component {};
 
-struct MushroomQuestionBlock : public Component
-{
-};
+struct MushroomQuestionBlock : public Component {};
 
-struct StarQuestionBlock : public Component
-{
-};
+struct StarQuestionBlock : public Component {};
 
-struct FlagBlock : public Component
-{
-};
+struct FlagBlock : public Component {};
 
-struct QuestionBlockTag : public Component
-{
-};
+struct QuestionBlockTag : public Component {};
 
 struct CoinBlockComponent : public Component
 {

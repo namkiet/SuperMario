@@ -1,7 +1,11 @@
 #pragma once
 #include <nlohmann/json.hpp>
 #include <SFML/Graphics.hpp>
-// #include <Core/TextureManager.hpp>
+#include <Core/TextureManager.hpp>
+#include <vector>
+#include <string>
+
+using json = nlohmann::json;
 
 namespace nlohmann {
     template <>
@@ -16,16 +20,24 @@ namespace nlohmann {
         }
     };
 
-    // struct adl_serializer<sf::Sprite> {
-    //     static void to_json(json& j, const sf::Sprite& sprite) {
-    //         j = json{{"x", vec.x}, {"y", vec.y}};
-    //     }
+    template <>
+    struct adl_serializer<std::vector<const sf::Texture*>> {
+        static void to_json(json& j, const std::vector<const sf::Texture*>& textures) {
+            j = json::array();
+            for (const sf::Texture* tex : textures)
+            {
+                j.push_back(TextureManager::getPath(tex));
+            }
+        }
 
-    //     static void from_json(const json& j, sf::Sprite& sprite) {
-    //         j.at("x").get_to(v.x);
-    //         j.at("y").get_to(v.y);
-    //     }
-    // };
+        static void from_json(const json& j, std::vector<const sf::Texture*>& textures) {
+            textures.clear();
+            for (const auto& path : j)
+            {
+                textures.push_back(&TextureManager::load(path.get<std::string>()));
+            }
+        }
+    };
 }
 
 
@@ -50,3 +62,40 @@ namespace nlohmann {
         }; \
     } \
     REGISTER_COMPONENT(TYPE)
+
+
+#include <unordered_map>
+#include <memory>
+#include <string>
+#include <functional>
+#include <stdexcept>
+
+template <typename Base>
+class StateRegistry {
+public:
+    using FactoryFunc = std::function<std::shared_ptr<Base>()>;
+
+    static StateRegistry& instance() {
+        static StateRegistry inst;
+        return inst;
+    }
+
+    void registerType(const std::string& typeName, FactoryFunc factory) {
+        registry[typeName] = std::move(factory);
+    }
+
+    std::shared_ptr<Base> create(const std::string& typeName) const {
+        auto it = registry.find(typeName);
+        if (it == registry.end()) {
+            throw std::runtime_error("Unknown type: " + typeName);
+        }
+        return it->second();
+    }
+
+    const std::unordered_map<std::string, FactoryFunc>& getAll() const {
+        return registry;
+    }
+
+private:
+    std::unordered_map<std::string, FactoryFunc> registry;
+};

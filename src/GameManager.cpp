@@ -83,74 +83,22 @@ using json = nlohmann::json;
 GameManager::GameManager(int level) : levelHandler(world, level), level(level)
 {
     bool loadFromJSON = true;
-    loadFromJSON = false;
+    // loadFromJSON = false;
 
     if (loadFromJSON)
     {
         std::ifstream fin("data.json");
         json j = json::parse(fin);
-        for (auto& [id, data] : j.items())
-        {
-            auto e = world.createEntity();
-            for (auto& [name, compJSON] : data.items())
-            {
-                if (name == "BoxCollider2D")
-                {
-                    BoxCollider2D comp = compJSON;
-                    e->addComponent<BoxCollider2D>(comp);
-                }
-                else if (name == "Transform")
-                {
-                    Transform comp = compJSON;
-                    e->addComponent<Transform>(comp);
-                }
-                else if (name == "PlayerTag")
-                {
-                    PlayerTag comp = compJSON;
-                    e->addComponent<PlayerTag>(comp);
-                }
-                else if (name == "InputTag")
-                {
-                    InputTag comp = compJSON;
-                    e->addComponent<InputTag>(comp);
-                }
-            }
-        }
+
+        world.loadFromJSON(j);
     }
     else
     {
         levelHandler.start();
         world.createEntity()->addComponent<Camera>();
+
         json j;
-        int id = 0;
-        for (Entity* entity : world.findAll<Transform, BoxCollider2D>())
-        {
-            // j[std::to_string(id)]["BlockTag"] = entity->getComponent<BlockTag>();
-            j[std::to_string(id)]["Transform"] = entity->getComponent<Transform>();
-            j[std::to_string(id)]["BoxCollider2D"] = entity->getComponent<BoxCollider2D>();
-
-            if (entity->hasComponent<PlayerTag>())
-            {
-                j[std::to_string(id)]["PlayerTag"] = entity->getComponent<PlayerTag>();
-            }
-
-            if (entity->hasComponent<InputTag>())
-            {
-                j[std::to_string(id)]["InputTag"] = entity->getComponent<InputTag>();
-            }
-
-            if (entity->hasComponent<Camera>())
-            {
-                j[std::to_string(id)]["Camera"] = entity->getComponent<Camera>();
-            }
-
-            if (entity->hasComponent<FollowByCameraTag>())
-            {
-                j[std::to_string(id)]["FollowByCameraTag"] = entity->getComponent<FollowByCameraTag>();
-            }
-
-            id++;
-        }
+        world.saveToJSON(j);
 
         std::ofstream fout("data.json");
         fout << j.dump(4);
@@ -164,7 +112,7 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
 
     world.addSystem<RotateBoxCollider2D>();
     world.addSystem<CollisionDetectionSystem>();
-    world.addSystem<OBBCollisionSystem>();
+    // world.addSystem<OBBCollisionSystem>();
     world.addSystem<HitBlockSystem>();
     world.addSystem<ElevatorCollisionSystem>();
 
