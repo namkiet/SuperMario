@@ -49,7 +49,6 @@ std::shared_ptr<PlayerPowerState> PlayerSmallState::getNewState(Entity* entity)
 
     if (entity->hasComponent<DamagedTag>())
     {
-        entity->removeComponent<DamagedTag>();
         return std::make_shared<PlayerDeadState>();
     }
 

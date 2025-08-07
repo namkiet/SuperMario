@@ -1,6 +1,5 @@
 #include <GameManager.hpp>
 
-#include <Engine/Animation/AnimationSystem.hpp>
 #include <Engine/Camera/CameraSystem.hpp>
 #include <Engine/Core/DespawnSystem.hpp>
 
@@ -11,6 +10,8 @@
 #include <Engine/Physics/RotateBoxCollider2D.hpp>
 #include <Engine/Physics/OBBCollisionSystem.hpp>
 
+#include <Engine/Animation/AnimationSystem.hpp>
+#include <Engine/Animation/BlinkSystem.hpp>
 #include <Engine/Rendering/RenderSystem.hpp>
 #include <Engine/Rendering/DrawBoxColliderSystem.hpp>
 #include <Engine/Rendering/DrawGameComponentSystem.hpp>
@@ -85,7 +86,7 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
 
     world.addSystem<RotateBoxCollider2D>();
     world.addSystem<CollisionDetectionSystem>();
-    world.addSystem<OBBCollisionSystem>();
+    // world.addSystem<OBBCollisionSystem>();
     world.addSystem<HitBlockSystem>();
     world.addSystem<ElevatorCollisionSystem>();
 
@@ -95,6 +96,7 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
 
     world.addSystem<CameraSystem>();
     world.addSystem<AnimationSystem>();
+    world.addSystem<BlinkSystem>();
     world.addSystem<RenderSystem>();
     world.addSystem<DrawBoxColliderSystem>();
     world.addSystem<DrawGameComponentSystem>();

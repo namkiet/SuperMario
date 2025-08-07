@@ -43,7 +43,7 @@ private:
 public:
     void update(World &world, float dt) override
     {
-        auto &entities = world.findAll<BoxCollider2D, Transform>();
+        auto entities = world.findAll<BoxCollider2D, Transform>();
         for (Entity *e : entities)
         {
             auto &colA = e->getComponent<BoxCollider2D>();
