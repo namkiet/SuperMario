@@ -16,6 +16,8 @@
 #include <Engine/Rendering/DrawBoxColliderSystem.hpp>
 #include <Engine/Rendering/DrawGameComponentSystem.hpp>
 
+#include <Engine/Audio/SoundSystem.hpp>
+
 #include <Gameplay/Patrol/PatrolSystem.hpp>
 #include <Gameplay/LifeSpan/LifeSpanSystem.hpp>
 
@@ -71,6 +73,8 @@
 #include <Gameplay/Obstacles/PodobooSystem.hpp>
 #include <Gameplay/Obstacles/FireBarSystem.hpp>
 
+#include <Engine/Audio/SoundManager.hpp>
+
 #include <cassert>
 #include <iostream>
 
@@ -81,6 +85,10 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.createEntity()->addComponent<Camera>();
 
     world.addSystem<PlayTimeSystem>();
+
+    world.addSystem<InputSystem>();
+    world.addSystem<HandlePlayerInputSystem>();
+
     world.addSystem<GravitySystem>();
     world.addSystem<MovementSystem>();
 
@@ -90,9 +98,9 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<HitBlockSystem>();
     world.addSystem<ElevatorCollisionSystem>();
 
-    world.addSystem<InputSystem>();
-    world.addSystem<HandlePlayerInputSystem>();
     world.addSystem<PlayerStateSystem>();
+
+    world.addSystem<SoundSystem>();
 
     world.addSystem<CameraSystem>();
     world.addSystem<AnimationSystem>();
@@ -100,6 +108,7 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<RenderSystem>();
     world.addSystem<DrawBoxColliderSystem>();
     world.addSystem<DrawGameComponentSystem>();
+
 
     world.addSystem<LifeSystem>();
 
@@ -193,6 +202,7 @@ void GameManager::handleEvent(const sf::Event &event)
 {
     if (event.type == sf::Event::KeyPressed)
     {
+
         if (event.key.code == sf::Keyboard::N)
         {
             // do nothing

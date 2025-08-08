@@ -12,18 +12,15 @@ public:
     {
         for (Entity *entity : world.findAll<Transform, RigidBody>())
         {
-            auto &vel = entity->getComponent<RigidBody>().velocity;
-            auto &tf = entity->getComponent<Transform>();
-            auto &pos = tf.position;
-            auto &prev = tf.prevPos;
+            auto& rb = entity->getComponent<RigidBody>();
+            auto& tf = entity->getComponent<Transform>();
 
-            prev.x = pos.x;
-            prev.y = pos.y;
+            tf.prevPos = tf.position;
 
-            pos.x += vel.x * dt;
-            pos.y += std::min(vel.y * dt, 100.0f);
+            tf.position.x += rb.velocity.x * dt;
+            tf.position.y += std::min(rb.velocity.y * dt, 100.0f);
             
-            if (pos.y >= SIZE::SCREEN.y)
+            if (tf.position.y >= SIZE::SCREEN.y)
             {
                 entity->addComponent<DespawnTag>();
             }
