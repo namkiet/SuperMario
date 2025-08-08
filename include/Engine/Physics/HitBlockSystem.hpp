@@ -9,69 +9,45 @@
 #include <Engine/Core/Transform.hpp>
 #include <Gameplay/Item/Components.hpp>
 
+#include <Engine/Animation/Animation.hpp>
+
 class HitBlockSystem : public System
 {
-// private:
 public:
     void update(World &world, float dt) override
     {
         for (Entity *entity : world.findAll<CanHitBlockTag, BoxCollider2D, Transform, RigidBody>())
         {
-            const auto &box = entity->getComponent<BoxCollider2D>();
-            auto &rb = entity->getComponent<RigidBody>();
-            auto &tf = entity->getComponent<Transform>();
-
             if (entity->hasComponent<StarTag>()) continue;
             if (entity->hasComponent<FireBulletTag>()) continue;
 
+            const auto &box = entity->getComponent<BoxCollider2D>();
+            auto &tf = entity->getComponent<Transform>();
+            auto &rb = entity->getComponent<RigidBody>();
             rb.onGround = false;
 
-            for (auto &[block, direction, overlap] : box.collisions)
+            for (auto &[block, direction, _] : box.collisions)
             {
                 // Check if the entity it collides with is solid
                 if (!block->hasComponent<BlockTag>()) continue;
                 if (!block->hasComponent<BoxCollider2D>()) continue;
                 if (!block->hasComponent<Transform>()) continue;
 
+                // Avoid wall stuck
+                if (shouldSkipToAvoidStuck(block, direction, box.collisions)) continue;
+
                 const auto &blockPos = block->getComponent<Transform>().position + block->getComponent<BoxCollider2D>().offset;
                 const auto &blockSize = block->getComponent<BoxCollider2D>().size;
-
-                // if (box.collisions.size() > 1 && (direction == Direction::Top || direction == Direction::Bottom))
-                // {
-                //     bool shouldPass = false;
-
-                //     auto entiesAbove = SpatialHashGrid::getInstance().query(blockPos + sf::Vector2f(10, -10));
-                //     for (Entity* e : entiesAbove)
-                //     {
-                //         exit(0);
-                //         if  (e == block) continue;
-                //         if (!e->hasComponent<BlockTag>()) continue;
-                //         if (!e->hasComponent<BoxCollider2D>()) continue;
-                //         if (!e->hasComponent<Transform>()) continue;
-                //         if (e->hasComponent<RigidBody>()) continue;
-
-                //         auto ePos = e->getComponent<Transform>().position + e->getComponent<BoxCollider2D>().offset;
-
-                //         if (ePos.x == blockPos.x && ePos.y < blockPos.y)
-                //         {
-                //             shouldPass = true;
-                //             break;
-                //         }
-                //     }
-
-                //     if (shouldPass) continue;
-                // }
-
                 switch (direction)
                 {
                     case Direction::Top:
-                        tf.position.y = blockPos.y - box.size.y;
+                        tf.position.y = blockPos.y - box.size.y - box.offset.y;
                         rb.velocity.y = 0.0f;
                         rb.onGround = true;
                         break;
 
                     case Direction::Bottom:
-                        tf.position.y = blockPos.y + blockSize.y;
+                        tf.position.y = blockPos.y + blockSize.y - box.offset.y;
                         rb.velocity.y = 0.0f;
                         break;
 
@@ -90,5 +66,19 @@ public:
                 }
             }
         }
+    }
+
+private:
+    bool shouldSkipToAvoidStuck(Entity* curBlock, const Direction& curDir, const std::vector<CollisionInfo>& otherCollisions)
+    {
+        if (curDir != Direction::Top && curDir != Direction::Bottom) return false;
+        auto bounds1 = Physics::GetCollisionBounds(curBlock);
+        for (auto& [other, dir2, _] : otherCollisions)
+        {
+            auto bounds2 = Physics::GetCollisionBounds(other);
+            if (dir2 == Direction::Left && bounds1.left == bounds2.left) return true;
+            if (dir2 == Direction::Right && bounds1.left + bounds1.width == bounds2.left + bounds2.width) return true;
+        }
+        return false;
     }
 };
