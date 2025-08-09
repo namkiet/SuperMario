@@ -43,5 +43,7 @@ public:
         addComponent<Transform>(sf::Vector2f(x * scale, y * scale), sf::Vector2f(width * scale, height * scale));
 
         addComponent<ElevatorComponent>(x * scale, (x + width * 2) * scale, direction);
+
+        addComponent<BlockTag>();
     }
 };

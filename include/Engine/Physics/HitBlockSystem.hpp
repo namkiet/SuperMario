@@ -21,12 +21,12 @@ public:
             if (entity->hasComponent<StarTag>()) continue;
             if (entity->hasComponent<FireBulletTag>()) continue;
 
-            const auto &box = entity->getComponent<BoxCollider2D>();
+            auto &box = entity->getComponent<BoxCollider2D>();
             auto &tf = entity->getComponent<Transform>();
             auto &rb = entity->getComponent<RigidBody>();
             rb.onGround = false;
 
-            for (auto &[block, direction, _] : box.collisions)
+            for (auto &[block, direction, overlap] : box.collisions)
             {
                 // Check if the entity it collides with is solid
                 if (!block->hasComponent<BlockTag>()) continue;
@@ -36,29 +36,37 @@ public:
                 // Avoid wall stuck
                 if (shouldSkipToAvoidStuck(block, direction, box.collisions)) continue;
 
-                const auto &blockPos = block->getComponent<Transform>().position + block->getComponent<BoxCollider2D>().offset;
-                const auto &blockSize = block->getComponent<BoxCollider2D>().size;
+                auto blockVel = block->hasComponent<RigidBody>() ? block->getComponent<RigidBody>().velocity : sf::Vector2f(0, 0);
+                auto blockPos = block->getComponent<Transform>().position + block->getComponent<BoxCollider2D>().offset;
+                auto blockSize = block->getComponent<BoxCollider2D>().size;
+
+                // Re-calculate direction for moving blocks
+                if (blockVel != sf::Vector2f(0, 0))
+                {
+                    handleMovingBlock(entity, block, overlap, direction);
+                }
+
                 switch (direction)
                 {
                     case Direction::Top:
                         tf.position.y = blockPos.y - box.size.y - box.offset.y;
-                        rb.velocity.y = 0.0f;
+                        rb.velocity.y = blockVel.y;
                         rb.onGround = true;
                         break;
 
                     case Direction::Bottom:
                         tf.position.y = blockPos.y + blockSize.y - box.offset.y;
-                        rb.velocity.y = 0.0f;
+                        rb.velocity.y = std::fmax(blockVel.y, 0.0f);
                         break;
 
                     case Direction::Left:
                         tf.position.x = blockPos.x - box.size.x - box.offset.x;
-                        rb.velocity.x = 0.0f;
+                        rb.velocity.x = std::fmin(blockVel.y, 0.0f);
                         break;
 
                     case Direction::Right:
                         tf.position.x = blockPos.x + blockSize.x - box.offset.x;
-                        rb.velocity.x = 0.0f;
+                        rb.velocity.x = std::fmax(blockVel.y, 0.0f);
                         break;
 
                     default:
@@ -80,5 +88,19 @@ private:
             if (dir2 == Direction::Right && bounds1.left + bounds1.width == bounds2.left + bounds2.width) return true;
         }
         return false;
+    }
+
+    void handleMovingBlock(Entity* entity, Entity* block, const sf::FloatRect& overlap, Direction& direction)
+    {
+        auto entityBounds = Physics::GetCollisionBounds(entity);
+        auto blockBounds = Physics::GetCollisionBounds(block);
+        if (overlap.width < overlap.height)
+        {
+            direction = entityBounds.left < blockBounds.left ? Direction::Left : Direction::Right;
+        }
+        else
+        {
+            direction = entityBounds.top < blockBounds.top ? Direction::Top : Direction::Bottom;
+        }
     }
 };

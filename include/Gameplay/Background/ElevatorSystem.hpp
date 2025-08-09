@@ -27,48 +27,52 @@ public:
             // Check if the elevator is moving up or down
             if (elevator->getComponent<ElevatorComponent>().direction == ElevatorComponent::Direction::Up)
             {
-                if (elevatorPos.y <= 0)
+                if (elevatorPos.y <= 32 * 3)
                 {
                     elevatorPos.y = SIZE::SCREEN.y;
                     continue;
                 }
 
                 // Set the animation back if it was removed
-                if (!elevator->hasComponent<Animation>() && elevatorPos.y > 32 * 3)
-                {
-                    elevator->addComponent<Animation>(elevatorComp.animation);
-                }
+                // if (!elevator->hasComponent<Animation>() && elevatorPos.y > 32 * 3)
+                // {
+                //     elevator->addComponent<Animation>(elevatorComp.animation);
+                // }
 
-                if (elevatorPos.y < 32 * 3)
-                {
-                    // Store the old animation
-                    if (elevator->hasComponent<Animation>())
-                    {
-                        elevatorComp.animation = elevator->getComponent<Animation>();
-                        elevator->removeComponent<Animation>();
-                    }
-                }
-                elevatorPos.y -= 100 * dt; // Move up
+                // if (elevatorPos.y < 32 * 3)
+                // {
+                //     // Store the old animation
+                //     if (elevator->hasComponent<Animation>())
+                //     {
+                //         elevatorComp.animation = elevator->getComponent<Animation>();
+                //         elevator->removeComponent<Animation>();
+                //     }
+                // }
+                // elevatorPos.y -= 100 * dt; // Move up
+
+                elevator->addComponent<RigidBody>(sf::Vector2f(0, -100), false);
             }
             else if (elevator->getComponent<ElevatorComponent>().direction == ElevatorComponent::Direction::Down)
             {
                 if (elevatorPos.y >= SIZE::SCREEN.y)
                 {
-                    elevatorPos.y = 0;
+                    elevatorPos.y = 32*3;
                     // Store the old animation
-                    if (elevator->hasComponent<Animation>())
-                    {
-                        elevatorComp.animation = elevator->getComponent<Animation>();
-                        elevator->removeComponent<Animation>();
-                    }
+                    // if (elevator->hasComponent<Animation>())
+                    // {
+                    //     elevatorComp.animation = elevator->getComponent<Animation>();
+                    //     elevator->removeComponent<Animation>();
+                    // }
                     continue;
                 }
                 // Set the animation back if it was removed
-                if (!elevator->hasComponent<Animation>() && elevatorPos.y > 32 * 3)
-                {
-                    elevator->addComponent<Animation>(elevatorComp.animation);
-                }
-                elevatorPos.y += 100 * dt; // Move down
+                // if (!elevator->hasComponent<Animation>() && elevatorPos.y > 32 * 3)
+                // {
+                //     elevator->addComponent<Animation>(elevatorComp.animation);
+                // }
+                // elevatorPos.y += 100 * dt; // Move down
+
+                elevator->addComponent<RigidBody>(sf::Vector2f(0, 100), false);
             }
             else if (elevator->getComponent<ElevatorComponent>().direction == ElevatorComponent::Direction::Left)
             {
@@ -79,7 +83,10 @@ public:
                     elevatorComp.direction = ElevatorComponent::Direction::Right;
                     continue;
                 }
-                elevatorPos.x -= 100 * dt; // Move left
+                // elevatorPos.x -= 100 * dt; // Move left
+
+
+                elevator->addComponent<RigidBody>(sf::Vector2f(-100, 0), false);
             }
             else if (elevator->getComponent<ElevatorComponent>().direction == ElevatorComponent::Direction::Right)
             {
@@ -90,7 +97,9 @@ public:
                     elevatorComp.direction = ElevatorComponent::Direction::Left;
                     continue;
                 }
-                elevatorPos.x += 100 * dt; // Move right
+                // elevatorPos.x += 100 * dt; // Move right
+
+                elevator->addComponent<RigidBody>(sf::Vector2f(0, 100), false);
             }
         }
     }

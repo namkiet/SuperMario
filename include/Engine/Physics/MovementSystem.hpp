@@ -23,7 +23,7 @@ public:
             }
 
             
-            if (tf.position.x < 0.0f || tf.position.y > SIZE::SCREEN.y)
+            if (tf.position.y > SIZE::SCREEN.y + 200.0f)
             {
                 entity->addComponent<DespawnTag>();
             }

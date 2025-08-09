@@ -98,7 +98,7 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<CollisionDetectionSystem>();
     // world.addSystem<OBBCollisionSystem>();
     world.addSystem<HitBlockSystem>();
-    world.addSystem<ElevatorCollisionSystem>();
+    // world.addSystem<ElevatorCollisionSystem>();
 
     world.addSystem<PlayerStateSystem>();
 
@@ -152,7 +152,7 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<DrawGameComponentSystem>();
 
     world.addSystem<DespawnSystem>();
-    world.addSystem<PlayerRespawnSystem>()
+    world.addSystem<PlayerRespawnSystem>();
 }
 
 void GameManager::handleEvent(const sf::Event &event)
@@ -164,7 +164,7 @@ void GameManager::handleEvent(const sf::Event &event)
         {
             // do nothing
 
-            world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(3.0f);
+            world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(1000.0f);
         }
 
         if (event.key.code == sf::Keyboard::X)
