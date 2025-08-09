@@ -14,6 +14,7 @@ const std::string PlayerGrowingUpState::getName() const
 
 void PlayerGrowingUpState::onEnter(Entity* entity)
 {   
+    entity->removeComponent<GrowUpTag>();
     entity->removeComponent<RigidBody>();
 
     if (entity->hasComponent<Transform>())

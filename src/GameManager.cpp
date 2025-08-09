@@ -92,6 +92,8 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<GravitySystem>();
     world.addSystem<MovementSystem>();
 
+    world.addSystem<BounceBlockSystem>();
+
     world.addSystem<RotateBoxCollider2D>();
     world.addSystem<CollisionDetectionSystem>();
     // world.addSystem<OBBCollisionSystem>();
@@ -135,7 +137,6 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<FireBulletSystem>();
     world.addSystem<FireBarSystem>();
     world.addSystem<PodobooSystem>();
-    world.addSystem<BounceBlockSystem>();
 
     world.addSystem<FlagPoleCollisionSystem>();
     world.addSystem<LevelCompletionSystem>();
