@@ -57,9 +57,7 @@ void LakituNormalBehaviour::patrol(Entity* entity, float dt, World& world)
     auto lakituCenter = tf.position + (tf.size / 2.0f);
     if (targetCenter.x > patrol.limitX)
         targetCenter = patrol.freeTarget;
-
-    std::cout << targetCenter.x << std::endl;
-
+        
 
     if (abs(lakituCenter.x - targetCenter.x) > patrol.distance + 200)
     {
