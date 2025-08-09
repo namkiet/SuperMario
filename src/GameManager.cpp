@@ -103,14 +103,7 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<PlayerStateSystem>();
 
     world.addSystem<SoundSystem>();
-
     world.addSystem<CameraSystem>();
-    world.addSystem<AnimationSystem>();
-    world.addSystem<BlinkSystem>();
-    world.addSystem<RenderSystem>();
-    world.addSystem<DrawBoxColliderSystem>();
-    world.addSystem<DrawGameComponentSystem>();
-
 
     world.addSystem<LifeSystem>();
 
@@ -152,51 +145,14 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<EnemyScoreSystem>();
     
 
+    world.addSystem<AnimationSystem>(); // Animation must be the last one to receive all animation updates
+    world.addSystem<BlinkSystem>();
+    world.addSystem<RenderSystem>();
+    world.addSystem<DrawBoxColliderSystem>();
+    world.addSystem<DrawGameComponentSystem>();
+
     world.addSystem<DespawnSystem>();
-    world.addSystem<PlayerRespawnSystem>();
-
-    // phase 1
-    // world.addSystem<ResetSystem>();
-    // world.addSystem<InputSystem>();
-    // phase 2
-    // world.addSystem<HandlePlayerInputSystem>();
-    // world.addSystem<GravitySystem>();
-
-    // phase
-    // world.addSystem<CollisionDetectionSystem>();
-    // world.addSystem<HitBlockSystem>();
-    // world.addSystem<PopupSystem>();
-    // world.addSystem<PatrolSystem>();
-    // world.addSystem<StompSystem>();
-    // world.addSystem<BounceBlockSystem>();
-    // world.addSystem<DamageOnContactSystem>();
-    // world.addSystem<LifeSystem>();
-    // world.addSystem<CollectSystem>();
-    // world.addSystem<ItemEmergingSystem>();
-    // world.addSystem<CoinJumpingSystem>();
-    // world.addSystem<DebrisSystem>();
-    // world.addSystem<StarJumpingSystem>();
-    // world.addSystem<HitSpecialBlockSystem>();
-    // world.addSystem<FireSystem>();
-    // world.addSystem<FireBulletSystem>();
-
-    // <<<<<<< HEAD
-    //     world.addSystem<BreakBrickSystem>();
-
-    //     world.addSystem<Fireball::BlockCollisionSystem>();
-    //     world.addSystem<Fireball::ExplosionSystem>();
-    //     world.addSystem<Fireball::DamageSystem>();
-
-    // phase 4
-    // world.addSystem<MovementSystem>();
-    // world.addSystem<PlayerStateSystem>();
-    // world.addSystem<DespawnSystem>();
-    // world.addSystem<PlayerRespawnSystem>();
-
-    // phase 5
-    // world.addSystem<CameraSystem>();
-    // world.addSystem<AnimationSystem>();
-    // world.addSystem<RenderSystem>();
+    world.addSystem<PlayerRespawnSystem>()
 }
 
 void GameManager::handleEvent(const sf::Event &event)
