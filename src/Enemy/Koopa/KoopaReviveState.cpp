@@ -19,17 +19,18 @@ void KoopaReviveState::onEnter(Entity* entity)
 {
     entity->addComponent<KoopaReviveTag>();
 
-    if (entity->hasComponent<Animation>()) 
-    {
-        auto& anim = entity->getComponent<Animation>();
-        anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Koopa/koopa_revive.png"));
-        anim.frameWidth = 16;
-        anim.frameHeight = 16;
-        anim.frameCount = 2;
-        anim.frameDuration = stateDuration / anim.frameCount / 9;
-        anim.currentFrame = 0;
-        anim.timer = 0;
-    }
+    // if (entity->hasComponent<Animation>()) 
+    // {
+    //     auto& anim = entity->getComponent<Animation>();
+    //     anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Koopa/koopa_revive.png"));
+    //     anim.frameWidth = 16;
+    //     anim.frameHeight = 16;
+    //     anim.frameCount = 2;
+    //     anim.frameDuration = stateDuration / anim.frameCount / 9;
+    //     anim.currentFrame = 0;
+    //     anim.timer = 0;
+    // }
+    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Koopa/koopa_revive.png"), 16, 16, 2, stateDuration / 2 / 9));
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();

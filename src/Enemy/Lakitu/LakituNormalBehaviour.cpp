@@ -143,14 +143,16 @@ void LakituNormalBehaviour::attack(Entity* entity, float dt, World& world)
 
     if (attack.delay - attack.timer <= 0.5f)
     {
-        auto& anim = entity->getComponent<Animation>();
-        anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Lakitu/lakitu_attack.png"));
+        // auto& anim = entity->getComponent<Animation>();
+        // anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Lakitu/lakitu_attack.png"));
+        entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Lakitu/lakitu_attack.png"), 16, 24, 1, 0));
     }
     
     if (attack.timer >= attack.delay)
     {
-        auto& anim = entity->getComponent<Animation>();
-        anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Lakitu/lakitu_normal.png"));
+        // auto& anim = entity->getComponent<Animation>();
+        // anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Lakitu/lakitu_normal.png"));
+        entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Lakitu/lakitu_normal.png"), 16, 24, 1, 0));
 
         attack.timer -= attack.delay;
             

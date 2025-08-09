@@ -19,17 +19,18 @@
 
 void BowserSkidState::onEnter(Entity* entity)
 {
-    if (entity->hasComponent<Animation>()) 
-    {
-        auto& anim = entity->getComponent<Animation>();
-        anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Bowser/bowser_skid.png"));
-        anim.frameWidth = 32;
-        anim.frameHeight = 35;
-        anim.frameCount = 1;
-        anim.frameDuration = 0;
-        anim.currentFrame = 0;
-        anim.timer = 0;
-    }
+    // if (entity->hasComponent<Animation>()) 
+    // {
+    //     auto& anim = entity->getComponent<Animation>();
+    //     anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Bowser/bowser_skid.png"));
+    //     anim.frameWidth = 32;
+    //     anim.frameHeight = 35;
+    //     anim.frameCount = 1;
+    //     anim.frameDuration = 0;
+    //     anim.currentFrame = 0;
+    //     anim.timer = 0;
+    // }
+    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_skid.png"), 32, 35, 1, 0));
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();
@@ -45,8 +46,9 @@ void BowserSkidState::onEnter(Entity* entity)
     patrol.accelerate.y = 0;
 
     std::vector<Direction> directions = { Direction::Left, Direction::Right, Direction::Bottom, Direction::Top };
-    entity->removeComponent<DamageOnContactComponent>();
     entity->addComponent<DamageOnContactComponent>(directions);
+
+    entity->removeComponent<StompableTag>();
 }
 
 

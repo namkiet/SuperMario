@@ -16,17 +16,18 @@
 
 void SpinyNormalState::onEnter(Entity* entity)
 {
-    if (entity->hasComponent<Animation>()) 
-    {
-        auto& anim = entity->getComponent<Animation>();
-        anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Spiny/spiny_walk.png"));
-        anim.frameWidth = 16;
-        anim.frameHeight = 14;
-        anim.frameCount = 2;
-        anim.frameDuration = 0.25f;
-        anim.currentFrame = 0;
-        anim.timer = 0;
-    }
+    // if (entity->hasComponent<Animation>()) 
+    // {
+    //     auto& anim = entity->getComponent<Animation>();
+    //     anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Spiny/spiny_walk.png"));
+    //     anim.frameWidth = 16;
+    //     anim.frameHeight = 14;
+    //     anim.frameCount = 2;
+    //     anim.frameDuration = 0.25f;
+    //     anim.currentFrame = 0;
+    //     anim.timer = 0;
+    // }
+    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Spiny/spiny_walk.png"), 16, 14, 2, 0.25f));
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();

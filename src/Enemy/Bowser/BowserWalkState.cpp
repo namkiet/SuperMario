@@ -19,24 +19,25 @@
 
 void BowserWalkState::onEnter(Entity* entity)
 {
-    if (entity->hasComponent<Animation>()) 
-    {
-        auto& anim = entity->getComponent<Animation>();
-        anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Bowser/bowser_walk.png"));
-        anim.frameWidth = 32;
-        anim.frameHeight = 35;
-        anim.frameCount = 4;
-        anim.frameDuration = 0.25f;
-        anim.currentFrame = 0;
-        anim.timer = 0;
+    // if (entity->hasComponent<Animation>()) 
+    // {
+    //     auto& anim = entity->getComponent<Animation>();
+    //     anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Bowser/bowser_walk.png"));
+    //     anim.frameWidth = 32;
+    //     anim.frameHeight = 35;
+    //     anim.frameCount = 4;
+    //     anim.frameDuration = 0.25f;
+    //     anim.currentFrame = 0;
+    //     anim.timer = 0;
 
-        anim.sprite.setTextureRect(sf::IntRect(
-            anim.currentFrame * anim.frameWidth,
-            anim.row * anim.frameHeight,
-            anim.frameWidth,
-            anim.frameHeight
-        ));
-    }
+    //     anim.sprite.setTextureRect(sf::IntRect(
+    //         anim.currentFrame * anim.frameWidth,
+    //         anim.row * anim.frameHeight,
+    //         anim.frameWidth,
+    //         anim.frameHeight
+    //     ));
+    // }
+    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_walk.png"), 32, 35, 4, 0.25f));
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();
@@ -50,8 +51,8 @@ void BowserWalkState::onEnter(Entity* entity)
     patrol.velocity.y = 0;
 
     std::vector<Direction> directions = { Direction::Left, Direction::Right, Direction::Bottom };
-    entity->removeComponent<DamageOnContactComponent>();
     entity->addComponent<DamageOnContactComponent>(directions);
+    entity->addComponent<StompableTag>();
 }
 
 

@@ -8,6 +8,8 @@
 #include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>
+#include <Engine/Audio/Components.hpp>
+#include <Engine/Audio/SoundManager.hpp>
 #include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Stomp/Components.hpp>
@@ -17,28 +19,32 @@ void BowserDeadState::onEnter(Entity* entity)
     entity->addComponent<PassThroughTag>();
     entity->removeComponent<CanHitBlockTag>();
 
-    if (entity->hasComponent<Animation>()) 
-    {
-        auto& anim = entity->getComponent<Animation>();
-        anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Bowser/bowser_dead.png"));
-        anim.frameWidth = 32;
-        anim.frameHeight = 39;
-        anim.frameCount = 1;
-        anim.frameDuration = 0;
-        anim.currentFrame = 0;
-        anim.timer = 0;
-    }
+    // if (entity->hasComponent<Animation>()) 
+    // {
+    //     auto& anim = entity->getComponent<Animation>();
+    //     anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Bowser/bowser_dead.png"));
+    //     anim.frameWidth = 32;
+    //     anim.frameHeight = 39;
+    //     anim.frameCount = 1;
+    //     anim.frameDuration = 0;
+    //     anim.currentFrame = 0;
+    //     anim.timer = 0;
+    // }
+    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_dead.png"), 32, 39, 1, 0));
+
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();
     tag.behaviour = std::make_shared<BowserDeadBehaviour>();
     
-    entity->getComponent<RigidBody>().velocity = sf::Vector2f(0, -600);
+    entity->getComponent<RigidBody>().velocity = sf::Vector2f(0, -900);
     
     auto& patrol = entity->getComponent<BowserPatrol>();
     patrol.velocity = sf::Vector2f(0, 0);
     patrol.timerDura = 0;
     patrol.timerJump = 0;
+
+    entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/bowserfall.wav"));
 
     entity->removeComponent<BlockTag>();
     entity->removeComponent<CanHitBlockTag>();

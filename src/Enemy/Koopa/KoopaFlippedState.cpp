@@ -12,6 +12,8 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Core/Transform.hpp>
+#include <Engine/Audio/Components.hpp>
+#include <Engine/Audio/SoundManager.hpp>
 #include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Stomp/Components.hpp>
@@ -22,17 +24,20 @@ void KoopaFlippedState::onEnter(Entity* entity)
     entity->addComponent<PassThroughTag>();
     entity->removeComponent<CanHitBlockTag>();
 
-    if (entity->hasComponent<Animation>()) 
-    {
-        auto& anim = entity->getComponent<Animation>();
-        anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Koopa/koopa_flipped.png"));
-        anim.frameWidth = 16;
-        anim.frameHeight = 16;
-        anim.frameCount = 1;
-        anim.frameDuration = 0.0f;
-        anim.currentFrame = 0;
-        anim.timer = 0;
-    }
+    // if (entity->hasComponent<Animation>()) 
+    // {
+    //     auto& anim = entity->getComponent<Animation>();
+    //     anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Koopa/koopa_flipped.png"));
+    //     anim.frameWidth = 16;
+    //     anim.frameHeight = 16;
+    //     anim.frameCount = 1;
+    //     anim.frameDuration = 0.0f;
+    //     anim.currentFrame = 0;
+    //     anim.timer = 0;
+    // }
+    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Koopa/koopa_flipped.png"), 16, 16, 1, 0));
+
+    entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/kickkill.wav"));
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();
@@ -48,11 +53,7 @@ void KoopaFlippedState::onEnter(Entity* entity)
     entity->removeComponent<CanHitBlockTag>();
     entity->removeComponent<StompableTag>();
     entity->removeComponent<DamageOnContactComponent>();
-
-    if (entity->hasComponent<ScoreAddedTag>()) 
-    {
-        entity->removeComponent<ScoreAddedTag>();
-    }
+    entity->removeComponent<ScoreAddedTag>();
 }
 
 std::shared_ptr<EnemyState> KoopaFlippedState::getNewState(Entity* entity, float dt)

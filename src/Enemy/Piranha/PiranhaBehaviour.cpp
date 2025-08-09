@@ -6,6 +6,8 @@
 #include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Core/DespawnTag.hpp>
+#include <Engine/Audio/Components.hpp>
+#include <Engine/Audio/SoundManager.hpp>
 #include <Gameplay/Player/Components.hpp>
 
 void PiranhaBehaviour::collideWithPlayer(Entity* entity)
@@ -21,6 +23,7 @@ void PiranhaBehaviour::collideWithOther(Entity* entity)
     {
         if (collider->hasComponent<CanKillEnemyTag>())
         {
+            entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/kickkill.wav"));
             entity->addComponent<DespawnTag>();
             break;
         }

@@ -18,17 +18,18 @@ void KoopaShellState::onEnter(Entity *entity)
 {
     entity->addComponent<KoopaShellTag>();
 
-    if (entity->hasComponent<Animation>())
-    {
-        auto &anim = entity->getComponent<Animation>();
-        anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Koopa/koopa_shell.png"));
-        anim.frameWidth = 16;
-        anim.frameHeight = 16;
-        anim.frameCount = 1;
-        anim.frameDuration = 0.0f;
-        anim.currentFrame = 0;
-        anim.timer = 0;
-    }
+    // if (entity->hasComponent<Animation>())
+    // {
+    //     auto &anim = entity->getComponent<Animation>();
+    //     anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Koopa/koopa_shell.png"));
+    //     anim.frameWidth = 16;
+    //     anim.frameHeight = 16;
+    //     anim.frameCount = 1;
+    //     anim.frameDuration = 0.0f;
+    //     anim.currentFrame = 0;
+    //     anim.timer = 0;
+    // }
+    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Koopa/koopa_shell.png"), 16, 16, 1, 0));
 
     auto &tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();
