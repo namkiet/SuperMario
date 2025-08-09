@@ -20,6 +20,8 @@ struct LakituPatrol : Component
     PatrolPhase phase = PatrolPhase::Chase;
     sf::Vector2f velocity = sf::Vector2f(-fastSpeed, 0);
     Direction lastDirection = Direction::Left;
+    sf::Vector2f freeTarget = sf::Vector2f(500, 0);
+    float limitX = 180 * 16 * 3;
 };
 
 struct LakituAttack : Component
