@@ -64,6 +64,15 @@ void BowserIdleBehaviour::attack(Entity* entity, float dt, World& world)
         return;
     }
 
+    if (entity->getComponent<Health>().hp == 2)
+    {
+        attack.delay = 3;
+    }
+    else if (entity->getComponent<Health>().hp == 1)
+    {
+        attack.delay = 2;
+    }
+
     attack.timer += dt;
 
     if (attack.isShooting == 0 && attack.castTime > 0 && attack.timer + dt >= attack.castTime)

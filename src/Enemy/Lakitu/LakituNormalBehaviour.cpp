@@ -53,13 +53,17 @@ void LakituNormalBehaviour::patrol(Entity* entity, float dt, World& world)
     auto& towardPlayer = entity->getComponent<TowardPlayer>();
 
     auto playerTf = world.findFirst<PlayerTag>()->getComponent<Transform>();
-    auto playerCenter = playerTf.position + (playerTf.size / 2.0f);
+    auto targetCenter = playerTf.position + (playerTf.size / 2.0f);
     auto lakituCenter = tf.position + (tf.size / 2.0f);
+    if (targetCenter.x > patrol.limitX)
+        targetCenter = patrol.freeTarget;
+
+    std::cout << targetCenter.x << std::endl;
 
 
-    if (abs(lakituCenter.x - playerCenter.x) > patrol.distance + 200)
+    if (abs(lakituCenter.x - targetCenter.x) > patrol.distance + 200)
     {
-        if (lakituCenter.x < playerCenter.x)
+        if (lakituCenter.x < targetCenter.x)
         {
             patrol.lastDirection = Direction::Right;
         }
@@ -71,14 +75,14 @@ void LakituNormalBehaviour::patrol(Entity* entity, float dt, World& world)
     }
 
     // This is used for the fast speed
-    if (abs(lakituCenter.x - playerCenter.x) < patrol.distance && patrol.phase == PatrolPhase::Chase)
+    if (abs(lakituCenter.x - targetCenter.x) < patrol.distance && patrol.phase == PatrolPhase::Chase)
     {
         double d;
         if (patrol.lastDirection == Direction::Left)
         {
-            d = lakituCenter.x - (playerCenter.x - patrol.distance);
+            d = lakituCenter.x - (targetCenter.x - patrol.distance);
         }
-        else d = playerCenter.x + patrol.distance - lakituCenter.x;
+        else d = targetCenter.x + patrol.distance - lakituCenter.x;
 
         patrol.accelerate = (patrol.velocity.x * patrol.velocity.x) / (2 * d);
         
@@ -89,7 +93,7 @@ void LakituNormalBehaviour::patrol(Entity* entity, float dt, World& world)
     }
 
     // This is used for the slow speed
-    if (abs(lakituCenter.x - playerCenter.x) < 25 && patrol.phase == PatrolPhase::Oscillate)
+    if (abs(lakituCenter.x - targetCenter.x) < 25 && patrol.phase == PatrolPhase::Oscillate)
     {
         patrol.accelerate = (patrol.velocity.x * patrol.velocity.x) / (2 * patrol.distance);
         
@@ -99,14 +103,14 @@ void LakituNormalBehaviour::patrol(Entity* entity, float dt, World& world)
         patrol.phase = PatrolPhase::Oscillate;
     }
 
-    if (patrol.phase == PatrolPhase::Oscillate && abs(lakituCenter.x - (playerCenter.x - patrol.distance)) < 1)
+    if (patrol.phase == PatrolPhase::Oscillate && abs(lakituCenter.x - (targetCenter.x - patrol.distance)) < 1)
     {
         patrol.accelerate = 70.0f;
         patrol.lastDirection = Direction::Right;
 
     }
 
-    if (patrol.phase == PatrolPhase::Oscillate && abs(lakituCenter.x - (playerCenter.x + patrol.distance)) < 1)
+    if (patrol.phase == PatrolPhase::Oscillate && abs(lakituCenter.x - (targetCenter.x + patrol.distance)) < 1)
     {
         patrol.accelerate = -70.0f;
         patrol.lastDirection = Direction::Left;

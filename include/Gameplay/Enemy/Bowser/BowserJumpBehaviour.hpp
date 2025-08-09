@@ -10,6 +10,7 @@ public:
     void collideWithPlayer(Entity* entity) override;
     void collideWithOther(Entity* entity) override;
     void patrol(Entity* entity, float dt, World& world) override;
+    void attack(Entity* entity, float dt, World& world) override;
 };
 
 
