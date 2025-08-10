@@ -59,10 +59,18 @@ public:
                 if (e == other)
                     continue;
 
-                if (!e->hasComponent<RigidBody>() && !other->hasComponent<RigidBody>())
-                    continue;
+                if (!e->hasComponent<RigidBody>() && !other->hasComponent<RigidBody>()) continue;
 
-                auto info = Physics::GetCollisionInfo(e, other);
+                CollisionInfo info;
+                if (e->hasComponent<RigidBody>() && other->hasComponent<RigidBody>())
+                {
+                    info = Physics::GetCollisionInfoMoving(e, other);
+                }
+                else
+                {
+                    info = Physics::GetCollisionInfoStatic(e, other);
+                }
+
                 if (info.collider)
                 {
                     col.collisions.emplace_back(info);

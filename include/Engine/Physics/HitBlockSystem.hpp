@@ -40,12 +40,6 @@ public:
                 auto blockPos = block->getComponent<Transform>().position + block->getComponent<BoxCollider2D>().offset;
                 auto blockSize = block->getComponent<BoxCollider2D>().size;
 
-                // Re-calculate direction for moving blocks
-                if (blockVel != sf::Vector2f(0, 0))
-                {
-                    handleMovingBlock(entity, block, overlap, direction);
-                }
-
                 switch (direction)
                 {
                     case Direction::Top:
@@ -88,19 +82,5 @@ private:
             if (dir2 == Direction::Right && bounds1.left + bounds1.width == bounds2.left + bounds2.width) return true;
         }
         return false;
-    }
-
-    void handleMovingBlock(Entity* entity, Entity* block, const sf::FloatRect& overlap, Direction& direction)
-    {
-        auto entityBounds = Physics::GetCollisionBounds(entity);
-        auto blockBounds = Physics::GetCollisionBounds(block);
-        if (overlap.width < overlap.height)
-        {
-            direction = entityBounds.left < blockBounds.left ? Direction::Left : Direction::Right;
-        }
-        else
-        {
-            direction = entityBounds.top < blockBounds.top ? Direction::Top : Direction::Bottom;
-        }
     }
 };

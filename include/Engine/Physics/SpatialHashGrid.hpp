@@ -34,7 +34,7 @@ public:
 
     int64_t hash(int x, int y)
     {
-        return (static_cast<int64_t>(x) << 32) | static_cast<uint32_t>(y);
+        return (static_cast<int64_t>(abs(x)) << 32) | static_cast<uint32_t>(abs(y));
     }
 
     void insert(Entity *e, const sf::FloatRect &bounds)

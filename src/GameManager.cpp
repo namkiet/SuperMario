@@ -69,7 +69,6 @@
 #include <Gameplay/Background/LevelCompletionSystem.hpp>
 #include <Gameplay/Background/BridgeSystem.hpp>
 #include <Gameplay/Background/ElevatorSystem.hpp>
-#include <Gameplay/Background/ElevatorCollisionSystem.hpp>
 #include <Gameplay/Obstacles/PodobooSystem.hpp>
 #include <Gameplay/Obstacles/FireBarSystem.hpp>
 
@@ -98,7 +97,6 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<CollisionDetectionSystem>();
     // world.addSystem<OBBCollisionSystem>();
     world.addSystem<HitBlockSystem>();
-    // world.addSystem<ElevatorCollisionSystem>();
 
     world.addSystem<PlayerStateSystem>();
 
@@ -143,7 +141,6 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<EnemyStateSystem>();
     world.addSystem<EnemyBehaviourSystem>();
     world.addSystem<EnemyScoreSystem>();
-    
 
     world.addSystem<AnimationSystem>(); // Animation must be the last one to receive all animation updates
     world.addSystem<BlinkSystem>();

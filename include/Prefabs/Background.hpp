@@ -5,6 +5,7 @@
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>
+#include <Engine/Rendering/ZIndex.hpp>
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/Background/Components.hpp>
@@ -31,7 +32,7 @@ public:
             getComponent<BoxCollider2D>().size = sf::Vector2f(48, 96);
             // Set the texture for the background
             addComponent<Animation>(TextureManager::load("assets/Background/Castle.png"));
-            getComponent<Animation>().zIndex = -2;
+            addComponent<ZIndex>(-2);
         }
        
         else if (index == 9)
@@ -51,7 +52,7 @@ public:
             addComponent<CanHitBlockTag>();
 
             addComponent<Animation>(TextureManager::load("assets/Background/Flag.png"));
-            getComponent<Animation>().zIndex = -1;
+            addComponent<ZIndex>(-1);
         }
         else if (index == 11)
         {

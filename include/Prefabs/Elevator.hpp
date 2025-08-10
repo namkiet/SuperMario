@@ -5,6 +5,7 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 #include <Core/TextureManager.hpp>
+#include <Core/Variables.hpp>
 #include <Gameplay/Background/Components.hpp>
 #include <iostream>
 
@@ -16,6 +17,14 @@ public:
     {
         float width = 0;
         float height = 0;
+
+        sf::Vector2f vel(0, 0);
+        if (direction == 1) vel.y = -100.0f;
+        else if (direction == 2) vel.y = 100.0f;
+        else if (direction == 3) vel.x = -100.0f;
+        else if (direction == 4) vel.x = 100.0f;
+        addComponent<RigidBody>(vel, false);
+
         if (index == 1)
         {
             addComponent<Animation>(TextureManager::load("assets/Item/Elevator/Elevator1.png"));
@@ -42,7 +51,14 @@ public:
         // Set the transform for the elevator
         addComponent<Transform>(sf::Vector2f(x * scale, y * scale), sf::Vector2f(width * scale, height * scale));
 
-        addComponent<ElevatorComponent>(x * scale, (x + width * 2) * scale, direction);
+        if (direction == 3 || direction == 4)
+        {
+            addComponent<ElevatorComponent>(x * scale, (x + width * 2) * scale, true);
+        }
+        else
+        {
+            addComponent<ElevatorComponent>(48.0f * 2, SIZE::SCREEN.y, false);
+        }
 
         addComponent<BlockTag>();
     }
