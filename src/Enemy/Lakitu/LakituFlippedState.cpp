@@ -16,8 +16,6 @@
 
 void LakituFlippedState::onEnter(Entity* entity)
 {
-    entity->addComponent<PassThroughTag>();
-
     // if (entity->hasComponent<Animation>()) 
     // {
     //     auto& anim = entity->getComponent<Animation>();
@@ -42,7 +40,6 @@ void LakituFlippedState::onEnter(Entity* entity)
     entity->getComponent<LakituPatrol>().velocity = sf::Vector2f(0, 0);
     entity->getComponent<LakituPatrol>().accelerate = 0;
 
-    entity->removeComponent<BlockTag>();
     entity->removeComponent<StompableTag>();
     entity->removeComponent<DamageOnContactComponent>();
 }

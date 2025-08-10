@@ -21,8 +21,6 @@
 void KoopaFlippedState::onEnter(Entity* entity)
 {
     entity->addComponent<KoopaFlippedTag>();
-    entity->addComponent<PassThroughTag>();
-    entity->removeComponent<CanHitBlockTag>();
 
     // if (entity->hasComponent<Animation>()) 
     // {
@@ -49,7 +47,6 @@ void KoopaFlippedState::onEnter(Entity* entity)
     entity->getComponent<RigidBody>().velocity.y = -500;
     entity->getComponent<KoopaPatrol>().velocity = sf::Vector2f(0, 0);
 
-    entity->removeComponent<BlockTag>();
     entity->removeComponent<CanHitBlockTag>();
     entity->removeComponent<StompableTag>();
     entity->removeComponent<DamageOnContactComponent>();

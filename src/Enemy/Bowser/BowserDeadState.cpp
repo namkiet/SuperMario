@@ -16,9 +16,6 @@
 
 void BowserDeadState::onEnter(Entity* entity)
 {
-    entity->addComponent<PassThroughTag>();
-    entity->removeComponent<CanHitBlockTag>();
-
     // if (entity->hasComponent<Animation>()) 
     // {
     //     auto& anim = entity->getComponent<Animation>();

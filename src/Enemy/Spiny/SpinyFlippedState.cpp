@@ -16,8 +16,6 @@
 
 void SpinyFlippedState::onEnter(Entity* entity)
 {
-    entity->addComponent<PassThroughTag>();
-
     // if (entity->hasComponent<Animation>()) 
     // {
     //     auto& anim = entity->getComponent<Animation>();
@@ -40,7 +38,6 @@ void SpinyFlippedState::onEnter(Entity* entity)
     entity->getComponent<RigidBody>().velocity.y = -600;
     entity->getComponent<SpinyPatrol>().velocity = sf::Vector2f(0, 0);
 
-    entity->removeComponent<BlockTag>();
     entity->removeComponent<CanHitBlockTag>();
     entity->removeComponent<DamageOnContactComponent>();
 }
