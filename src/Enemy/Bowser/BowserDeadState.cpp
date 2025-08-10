@@ -46,7 +46,6 @@ void BowserDeadState::onEnter(Entity* entity)
 
     entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/bowserfall.wav"));
 
-    entity->removeComponent<BlockTag>();
     entity->removeComponent<CanHitBlockTag>();
     entity->removeComponent<StompableTag>();
     entity->removeComponent<DamageOnContactComponent>();

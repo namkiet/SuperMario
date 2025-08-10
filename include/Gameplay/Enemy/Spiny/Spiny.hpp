@@ -29,7 +29,6 @@ public:
         addComponent<EnemyTag>(std::make_shared<SpinyEggState>(), std::make_shared<SpinyEggBehaviour>());
         addComponent<SpinyPatrol>();
 
-        addComponent<BlockTag>();
         addComponent<CanHitBlockTag>();
 
         std::vector<Direction> directions = {Direction::Left, Direction::Right, Direction::Bottom, Direction::Top};
