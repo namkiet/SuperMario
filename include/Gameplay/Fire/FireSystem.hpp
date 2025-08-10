@@ -15,6 +15,7 @@
 
 #include <Core/KeyPressPool.hpp>
 #include <fstream>
+#include <UI/KeyBinding.hpp>
 
 class FireSystem : public System
 {
@@ -31,9 +32,9 @@ public:
 
             // Update the cooldown time
             cooldown.timeCount += dt;
-
             player->removeComponent<ShootingTag>();
-            if (pool.isKeyPressed(sf::Keyboard::M) && FireBullet::getCount() < 2 && cooldown.timeCount > 0.5f)
+            auto& keybinding = KeyBinding::Instance();
+            if (pool.isKeyPressed(keybinding.getKey(KeyBinding::Action::Shoot)) && FireBullet::getCount() < 2 && cooldown.timeCount > 0.5f)
             {
                 world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/fireball.wav"));
                 auto fireBullet = world.createEntity<FireBullet>(pos.x + size.x / 2, pos.y + size.y / 8, 24.0f, 24.0f);

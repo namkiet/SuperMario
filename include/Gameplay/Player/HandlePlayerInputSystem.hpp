@@ -9,7 +9,7 @@
 #include <Core/Variables.hpp>
 #include <Core/KeyPressPool.hpp>
 #include <cassert>
-
+#include <UI/KeyBinding.hpp>
 class HandlePlayerInputSystem : public System
 {
 public:
@@ -36,12 +36,13 @@ public:
             // {
             //     rb.velocity.y = -PHYSICS::JUMP_FORCE;
             // }
+            auto& keybinding = KeyBinding::Instance();
 
-            if (pool.isKeyPressed(sf::Keyboard::A)) // Move left
+            if (pool.isKeyPressed(keybinding.getKey(KeyBinding::Action::MoveLeft))) // Move left
             {
                 rb.velocity.x = -PLAYER::HORIZONTAL_SPEED;
             }
-            else if (pool.isKeyPressed(sf::Keyboard::D)) // Move right
+            else if (pool.isKeyPressed(keybinding.getKey(KeyBinding::Action::MoveRight))) // Move right
             {
                 rb.velocity.x = PLAYER::HORIZONTAL_SPEED;
             }
@@ -50,7 +51,7 @@ public:
                 rb.velocity.x = 0.f;
             }
 
-            if (pool.isKeyPressed(sf::Keyboard::W) && rb.onGround) // Jump
+            if (pool.isKeyPressed(keybinding.getKey(KeyBinding::Action::MoveUp)) && rb.onGround) // Jump
             {
                 player->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/jumpsmall.wav"));
                 rb.velocity.y = -PHYSICS::JUMP_FORCE;
