@@ -76,7 +76,7 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics.hpp>
 #include <Engine/Rendering/Utility.hpp>
-
+#include <iostream>
 struct StateColor
 {
     sf::Color normal;
@@ -113,6 +113,7 @@ class Button
         std::shared_ptr<sf::Shape> shape;
         bool canHover;
         bool canClick;
+        // bool canHandleEventWhileActivate;
 
         bool isHovered;
         bool isClicked;
@@ -123,29 +124,93 @@ class Button
         std::function<void()> func;
 
     public:
-        Button(
-            const sf::Vector2f& size,           
-            const sf::Vector2f& position,       
-            const StateColor& colors,
-            const sf::Text& text,           
-            bool canHover = true,               
-            bool canClick = true
-        )
-            : canHover(canHover), canClick(canClick), isHovered(false), isClicked(false), colorSetting(colors), text(text)
+        bool getIsClicked() 
         {
-            // shape
-            shape = std::make_shared<sf::RectangleShape>(size);
-            setShapeCenter(*shape, position);
-            shape->setFillColor(colorSetting.normal);
-            shape->setOutlineColor(colorSetting.outline); 
-            shape->setOutlineThickness(2.f);
+            return isClicked;
+        }
+        bool getIsHovered()
+        {
+            return isHovered;
+        }
+        // Button(
+        //     const sf::Vector2f& size,           
+        //     const sf::Vector2f& position,       
+        //     const StateColor& colors,
+        //     const sf::Text& text,           
+        //     bool canHover = true,               
+        //     bool canClick = true
+        // )
+        //     : canHover(canHover), canClick(canClick), isHovered(false), isClicked(false), colorSetting(colors), text(text)
+        // {
+        //     // shape
+        //     shape = std::make_shared<sf::RectangleShape>(size);
+        //     shape->setFillColor(colorSetting.normal);
+        //     shape->setOutlineColor(colorSetting.outline); 
+        //     shape->setOutlineThickness(2.f);
+        //     setShapeCenter(*shape, position);
+        //     // text
+        //     this->text.setPosition(
+        //         shape->getPosition().x - text.getGlobalBounds().width,
+        //         shape->getPosition().y - text.getGlobalBounds().height
+        //     );
 
-            // text
-            this->text.setPosition(
-                shape->getPosition().x - text.getGlobalBounds().width,
-                shape->getPosition().y - text.getGlobalBounds().height
+        // }
+        Button(
+            const sf::Text& text,
+            std::shared_ptr<sf::Shape> newShape,
+            const StateColor& newColorSetting,
+            bool canHover = true,
+            bool canClick = true
+            // bool canHandleEventWhileActivate = false
+        ): isHovered(false), isClicked(false)
+        {
+            // this->canHandleEventWhileActivate = canHandleEventWhileActivate;
+            this->canHover = canHover;
+            this->canClick = canClick;
+            setShape(newShape); 
+            setText(text);
+            setColorState(newColorSetting);
+        }
+        
+        void setText(const sf::Text& text)
+        {
+            this->text = text;
+            if (shape)
+            {
+                this->text.setPosition(
+                shape->getPosition().x - text.getGlobalBounds().width / 2,
+                shape->getPosition().y - text.getGlobalBounds().height / 2 - 10.f
             );
-            
+            }
+        }
+
+        void setContent(std::string content)
+        {
+            this->text.setString(content);
+            if (shape)
+            {
+                this->text.setPosition(
+                shape->getPosition().x - this->text.getGlobalBounds().width / 2,
+                shape->getPosition().y - this->text.getGlobalBounds().height / 2 - 10.f
+            );
+            }
+        }
+        void setShape(std::shared_ptr<sf::Shape> newShape)
+        {
+            shape = newShape;
+            setShapeCenter(*shape, newShape->getPosition());
+        }
+
+
+        void setColorState(const StateColor& newColorSetting)
+        {
+            colorSetting = newColorSetting;
+            if (shape) 
+            {
+                shape->setFillColor(colorSetting.normal); 
+                shape->setOutlineColor(colorSetting.outline);
+                shape->setOutlineThickness(2.f);
+            }
         }
         void setFunc(std::function<void()> func)
         {
@@ -161,7 +226,7 @@ class Button
         {
             if (!canClick) return;
             isClicked = true;
-            // func
+            if (func) func();
         }
         void unhover()
         {
@@ -173,28 +238,34 @@ class Button
             if (!canClick) return;
             isClicked = false;
         }
-        void handleEvent(sf::Event& event)
+        void handleEvent(const sf::Event& event)
         {
+            
             if (event.type == sf::Event::MouseButtonPressed 
             && event.mouseButton.button == sf::Mouse::Left) 
             {
                 if (!shape->getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) deactivate();
-                else activate();
+                else {
+                    activate();
+                }
             }
             else if (event.type == sf::Event::MouseMoved)
             {
                 if (!shape->getGlobalBounds().contains(event.mouseMove.x, event.mouseMove.y))
-                    hover();
-                else unhover();
+                    unhover();
+                else hover();
             }
+
         }
         void render(sf::RenderWindow& window)
         {
-            if (!isHovered)
+            if (!isHovered){
                 shape->setFillColor(colorSetting.normal);
+                }
             else
-                shape->setOutlineColor(colorSetting.hover);
-            
+            {
+                shape->setFillColor(colorSetting.hover);
+            }
             if (!isClicked)
                 shape->setOutlineColor(colorSetting.outline);
             else

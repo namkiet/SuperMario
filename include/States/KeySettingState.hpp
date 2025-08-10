@@ -4,13 +4,17 @@
 #include <vector>
 #include <memory>
 #include <UI/Button.hpp>
+#include <UI/ButtonContainer.hpp>
 class KeySettingState: public GameState
 {
+    
 private:
+    sf::Font font;
     sf::Sprite background;
     sf::Texture backgroundTexture;
+    
+    ButtonContainer buttonContainer;
 
-    std::vector<std::shared_ptr<Button>> buttonList;
 public:
     KeySettingState(std::shared_ptr<Game> game);
 
