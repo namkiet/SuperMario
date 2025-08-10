@@ -6,22 +6,22 @@
 #include <LevelState/LevelChosenState.hpp>
 #include <LevelManager.hpp>
 
-PlayingState::PlayingState() : gameManager(nullptr)
+PlayingState::PlayingState(std::shared_ptr<Game> game) : GameState(game), gameManager(nullptr)
 {
 }
 
-void PlayingState::handleEvent(Game &game, const sf::Event& event, sf::RenderWindow& window)
+void PlayingState::handleEvent(const sf::Event &event)
 {
     if (event.type == sf::Event::KeyPressed)
     {
         if (event.key.code == sf::Keyboard::Escape)
         {
-            game.popState();
-            game.pushState("menu");
+            game->popState();
+            game->pushState("menu");
         }
         else if (event.key.code == sf::Keyboard::Space)
         {
-            game.pushState("settings");
+            game->pushState("settings");
         }
     }
 
@@ -29,7 +29,7 @@ void PlayingState::handleEvent(Game &game, const sf::Event& event, sf::RenderWin
         gameManager->handleEvent(event, window);
 }
 
-void PlayingState::update(Game &game, float dt)
+void PlayingState::update(float dt)
 {
     if (LevelManager::instance().getSkipUpdate())
     {
@@ -71,7 +71,7 @@ void PlayingState::update(Game &game, float dt)
     }
 }
 
-void PlayingState::render(Game &, sf::RenderWindow &window)
+void PlayingState::render(sf::RenderWindow &window)
 {
     switch (level)
     {

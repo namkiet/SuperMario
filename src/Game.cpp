@@ -4,15 +4,17 @@
 #include <States/PlayingState.hpp>
 #include <States/SettingsState.hpp>
 #include <Core/Variables.hpp>
+#include <States/KeySettingState.hpp>
 
 Game::Game()
     : contextSettings(0, 0, 16), window(sf::VideoMode(SIZE::SCREEN.x, SIZE::SCREEN.y), "Game", sf::Style::Default, contextSettings)
 {
     window.setFramerateLimit(90);
-
-    registry.registerInstance("menu", std::make_shared<MenuState>());
-    registry.registerInstance("play", std::make_shared<PlayingState>());
-    registry.registerInstance("settings", std::make_shared<SettingsState>());
+    
+registry.registerInstance("menu", std::make_shared<MenuState>(std::shared_ptr<Game>(this)));
+registry.registerInstance("play", std::make_shared<PlayingState>(std::shared_ptr<Game>(this)));
+registry.registerInstance("settings", std::make_shared<SettingsState>(std::shared_ptr<Game>(this)));
+registry.registerInstance("keysettings", std::make_shared<KeySettingState>(std::shared_ptr<Game>(this)));
 
     pushState("menu");
 
@@ -38,7 +40,7 @@ void Game::run()
             if (event.type == sf::Event::Closed)
                 window.close();
             if (currentState())
-                currentState()->handleEvent(*this, event, window);
+                currentState()->handleEvent(event);
         }
 
         // // --- Update logic vật lý nhiều lần nếu cần ---
@@ -49,13 +51,12 @@ void Game::run()
 
         ImGui::SFML::Update(window, clock.restart());
         if (currentState())
-            currentState()->update(*this, dt);
+            currentState()->update(dt);
 
         // --- Vẽ chỉ 1 lần ---
         window.clear(sf::Color(146, 144, 255, 255));
         if (currentState())
-            currentState()->render(*this, window);
-        ImGui::SFML::Render(window);
+            currentState()->render(window);
         window.display();
     }
 

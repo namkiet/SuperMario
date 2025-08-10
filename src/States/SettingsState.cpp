@@ -1,7 +1,7 @@
 #include <Game.hpp>
 #include <States/SettingsState.hpp>
 
-SettingsState::SettingsState() 
+SettingsState::SettingsState(std::shared_ptr<Game> game): GameState(game) 
 {
     font.loadFromFile("arial.ttf");
     info.setFont(font);
@@ -9,19 +9,19 @@ SettingsState::SettingsState()
     info.setPosition(200, 250);
 }
 
-void SettingsState::handleEvent(Game& game,  const sf::Event& event, sf::RenderWindow& window)
+void SettingsState::handleEvent(const sf::Event& event)
 {
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-        game.popState();  // return to PlayGameState
+        game->popState();  // return to PlayGameState
     }
 }
 
-void SettingsState::update(Game&, float dt) 
+void SettingsState::update(float dt) 
 {
     // no-op
 }
 
-void SettingsState::render(Game&, sf::RenderWindow& window)
+void SettingsState::render(sf::RenderWindow& window)
 {
     window.draw(info);
 }
