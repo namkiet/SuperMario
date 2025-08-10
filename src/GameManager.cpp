@@ -152,7 +152,7 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<DrawGameComponentSystem>();
 
     world.addSystem<DespawnSystem>();
-    world.addSystem<PlayerRespawnSystem>()
+    world.addSystem<PlayerRespawnSystem>();
 }
 
 void GameManager::handleEvent(const sf::Event &event)

@@ -19,3 +19,11 @@ sf::Text textRender(std::string text, float x, float y, const sf::Font &font, fl
     Text.setFillColor(sf::Color::White);
     return Text;
 }
+void setShapeCenter(sf::Shape& shape, const sf::Vector2f& position)
+{
+    // Set the origin of the shape to its center
+    shape.setOrigin(shape.getLocalBounds().width / 2.f, shape.getLocalBounds().height / 2.f);
+
+    // Set the position of the shape to the desired center position
+    shape.setPosition(position);
+}

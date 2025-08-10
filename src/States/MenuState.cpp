@@ -2,7 +2,7 @@
 #include <States/MenuState.hpp>
 #include <States/PlayingState.hpp>
 
-MenuState::MenuState()
+MenuState::MenuState(std::shared_ptr<Game> game): GameState(game)
 {
     font.loadFromFile("arial.ttf");
     playText.setFont(font);
@@ -10,47 +10,51 @@ MenuState::MenuState()
     playText.setPosition(250, 250);
 }
 
-void MenuState::handleEvent(Game &game, const sf::Event &event)
+void MenuState::handleEvent(const sf::Event &event)
 {
     if (event.type == sf::Event::KeyPressed)
     {
         int currentLevel = 0;
         if (event.key.code == sf::Keyboard::Num1 || event.key.code == sf::Keyboard::Numpad1)
         {
-            auto playState = game.getRegistry().getState("play");
+            auto playState = game->getRegistry().getState("play");
             if (playState)
             {
                 std::static_pointer_cast<PlayingState>(playState)->setLevel(1);
-                game.pushState("play");
+                game->pushState("play");
             }
         }
         else if (event.key.code == sf::Keyboard::Num2 || event.key.code == sf::Keyboard::Numpad2)
         {
-            auto playState = game.getRegistry().getState("play");
+            auto playState = game->getRegistry().getState("play");
             if (playState)
             {
                 std::static_pointer_cast<PlayingState>(playState)->setLevel(2);
-                game.pushState("play");
+                game->pushState("play");
             }
         }
         else if (event.key.code == sf::Keyboard::Num3 || event.key.code == sf::Keyboard::Numpad3)
         {
-            auto playState = game.getRegistry().getState("play");
+            auto playState = game->getRegistry().getState("play");
             if (playState)
             {
                 std::static_pointer_cast<PlayingState>(playState)->setLevel(3);
-                game.pushState("play");
+                game->pushState("play");
             }
+        }
+        else if (event.key.code == sf::Keyboard::X)
+        {
+            game->pushState("keysettings");
         }
     }
 }
 
-void MenuState::update(Game &, float dt)
+void MenuState::update(float dt)
 {
     // no-op
 }
 
-void MenuState::render(Game &, sf::RenderWindow &window)
+void MenuState::render(sf::RenderWindow &window)
 {
     window.draw(playText);
 }
