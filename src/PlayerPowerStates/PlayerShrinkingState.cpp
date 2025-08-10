@@ -17,7 +17,7 @@ const std::string PlayerShrinkingState::getName() const
 
 void PlayerShrinkingState::onEnter(Entity* entity)
 {   
-    entity->addComponent<BlinkingComponent>(0.1f);
+    entity->addComponent<BlinkingComponent>(0.05f);
     
     entity->removeComponent<RigidBody>();
     entity->removeComponent<DamagedTag>();
