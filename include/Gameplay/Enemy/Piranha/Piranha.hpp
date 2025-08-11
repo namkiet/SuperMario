@@ -5,6 +5,7 @@
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/PassThroughTag.hpp>
+#include <Engine/Rendering/ZIndex.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
@@ -21,9 +22,9 @@ public:
         addComponent<Transform>(sf::Vector2f(x, y) * scale, sf::Vector2f(16, 24) * scale);
         addComponent<BoxCollider2D>(sf::Vector2f(16, 24) * scale);
         addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Piranha/piranha.png"), 16, 24, 2, 0.25f));
-        getComponent<Animation>().zIndex = -1;
+        addComponent<ZIndex>(-1);
         addComponent<EnemyTag>(std::make_shared<PiranhaNormalState>(), std::make_shared<PiranhaBehaviour>());
-        addComponent<PiranhaPatrol>(SIZE::GRID.y, 2.0f, 2.0f);
+        addComponent<PiranhaPatrol>(y * scale, 24 * 3 + 16, 2.0f, 2.0f);
         addComponent<PassThroughTag>();
 
         std::vector<Direction> directions = {Direction::Left, Direction::Right, Direction::Top, Direction::Bottom};

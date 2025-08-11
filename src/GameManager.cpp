@@ -1,6 +1,5 @@
 #include <GameManager.hpp>
 
-#include <Engine/Animation/AnimationSystem.hpp>
 #include <Engine/Camera/CameraSystem.hpp>
 #include <Engine/Core/DespawnSystem.hpp>
 
@@ -11,9 +10,13 @@
 #include <Engine/Physics/RotateBoxCollider2D.hpp>
 #include <Engine/Physics/OBBCollisionSystem.hpp>
 
+#include <Engine/Animation/AnimationSystem.hpp>
+#include <Engine/Animation/BlinkSystem.hpp>
 #include <Engine/Rendering/RenderSystem.hpp>
 #include <Engine/Rendering/DrawBoxColliderSystem.hpp>
 #include <Engine/Rendering/DrawGameComponentSystem.hpp>
+
+#include <Engine/Audio/SoundSystem.hpp>
 
 #include <Gameplay/Patrol/PatrolSystem.hpp>
 #include <Gameplay/LifeSpan/LifeSpanSystem.hpp>
@@ -64,9 +67,10 @@
 #include <Gameplay/Background/LevelCompletionSystem.hpp>
 #include <Gameplay/Background/BridgeSystem.hpp>
 #include <Gameplay/Background/ElevatorSystem.hpp>
-#include <Gameplay/Background/ElevatorCollisionSystem.hpp>
 #include <Gameplay/Obstacles/PodobooSystem.hpp>
 #include <Gameplay/Obstacles/FireBarSystem.hpp>
+
+#include <Engine/Audio/SoundManager.hpp>
 
 #include <cassert>
 #include <iostream>
@@ -98,24 +102,24 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
 
 
     world.addSystem<PlayTimeSystem>();
+
+    world.addSystem<InputSystem>();
+    world.addSystem<HandlePlayerInputSystem>();
+
     world.addSystem<GravitySystem>();
     world.addSystem<MovementSystem>();
+
+    world.addSystem<BounceBlockSystem>();
 
     world.addSystem<RotateBoxCollider2D>();
     world.addSystem<CollisionDetectionSystem>();
     // world.addSystem<OBBCollisionSystem>();
     world.addSystem<HitBlockSystem>();
-    world.addSystem<ElevatorCollisionSystem>();
 
-    world.addSystem<InputSystem>();
-    world.addSystem<HandlePlayerInputSystem>();
     world.addSystem<PlayerStateSystem>();
 
+    world.addSystem<SoundSystem>();
     world.addSystem<CameraSystem>();
-    world.addSystem<AnimationSystem>();
-    world.addSystem<RenderSystem>();
-    world.addSystem<DrawBoxColliderSystem>();
-    world.addSystem<DrawGameComponentSystem>();
 
     world.addSystem<LifeSystem>();
 
@@ -141,7 +145,6 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<FireBulletSystem>();
     world.addSystem<FireBarSystem>();
     world.addSystem<PodobooSystem>();
-    world.addSystem<BounceBlockSystem>();
 
     world.addSystem<FlagPoleCollisionSystem>();
     world.addSystem<LevelCompletionSystem>();
@@ -155,10 +158,15 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<EnemyStateSystem>();
     world.addSystem<EnemyBehaviourSystem>();
     world.addSystem<EnemyScoreSystem>();
-    
+
+    world.addSystem<AnimationSystem>(); // Animation must be the last one to receive all animation updates
+    world.addSystem<BlinkSystem>();
+    world.addSystem<RenderSystem>();
+    world.addSystem<DrawBoxColliderSystem>();
+    world.addSystem<DrawGameComponentSystem>();
+
     world.addSystem<DespawnSystem>();
     world.addSystem<PlayerRespawnSystem>();
-
 }
 
 void GameManager::handleEvent(const sf::Event &event)

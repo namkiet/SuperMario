@@ -30,7 +30,7 @@ public:
         float &camX = camera.target.x;
 
         // Define trap zone (dead zone margins from screen center)
-        const float trapHalfWidth = 100.0f;
+        const float trapHalfWidth = 80.0f;
         const float screenCenterX = camX;
 
         float trapLeft = screenCenterX - trapHalfWidth;
@@ -45,6 +45,8 @@ public:
         {
             camX = targetCenterX - trapHalfWidth;
         }
+
+        camX = std::fmax(camX, 0.5f * SIZE::SCREEN.x);
 
         // Keep Y fixed (side-scroller style)
         camera.target.y = 0.5f * SIZE::SCREEN.y;

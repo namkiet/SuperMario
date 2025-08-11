@@ -4,6 +4,7 @@
 #include <typeindex>
 #include <memory>
 #include <unordered_map>
+#include <string>
 
 class Entity 
 {
@@ -32,7 +33,11 @@ public:
     T& getComponent() 
     {
         auto it = components.find(typeid(T));
-        // assert(it != components.end() && "Component not found");
+        if (it == components.end())
+        {
+            std::string name = typeid(T).name();
+            throw std::runtime_error("Cannot find Component " + name);
+        }
         return *static_cast<T*>(it->second.get());
     }
 

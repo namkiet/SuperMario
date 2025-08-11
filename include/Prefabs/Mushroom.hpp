@@ -3,6 +3,7 @@
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Rendering/ZIndex.hpp>
 #include <Gameplay/Collect/Components.hpp>
 #include <Gameplay/Item/Components.hpp>
 #include <Core/TextureManager.hpp>
@@ -22,9 +23,8 @@ public:
         // Set the animation for the flower
         // addComponent<Animation>(TextureManager::load("assets/Item/Mushroom/Mushroom1_0.png"));
 
-        Animation anim(TextureManager::load("assets/Item/Mushroom/Mushroom1_0.png"));
-        anim.zIndex = -1;
-        addComponent<Animation>(anim);
+        addComponent<Animation>(TextureManager::load("assets/Item/Mushroom/Mushroom1_0.png"));
+        addComponent<ZIndex>(-1);
 
         addComponent<MushroomTag>(MushroomTag::Buff::GROW_UP);
     }
@@ -44,9 +44,8 @@ public:
         // Set the animation for the flower
         // addComponent<Animation>(TextureManager::load("assets/Item/Mushroom/Mushroom1_1.png"));
 
-        Animation anim(TextureManager::load("assets/Item/Mushroom/Mushroom1_1.png"));
-        anim.zIndex = -1;
-        addComponent<Animation>(anim);
+        addComponent<Animation>(TextureManager::load("assets/Item/Mushroom/Mushroom1_1.png"));
+        addComponent<ZIndex>(-1);
 
         addComponent<MushroomTag>(MushroomTag::Buff::GIVE_ONE_MORE_LIFE);
     }

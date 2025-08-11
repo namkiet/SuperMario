@@ -46,7 +46,6 @@ struct Animation : public Component
     int row = 0;
     bool hasEnded = false;
     std::vector<const sf::Texture *> textures;
-    int zIndex = 0;
 };
 
 struct FlipXTag : public Component {};

@@ -31,7 +31,6 @@ public:
         addComponent<BowserAttack>();
         addComponent<TowardPlayer>();
 
-        addComponent<BlockTag>();
         addComponent<CanHitBlockTag>();
         addComponent<StompableTag>();
         addComponent<Health>(Health(4));

@@ -10,20 +10,20 @@ class MovementSystem : public System
 public:
     void update(World &world, float dt) override
     {
-        for (Entity *entity : world.findAll<Transform, RigidBody>())
+        for (Entity *entity : world.findAll<Transform>())
         {
-            auto &vel = entity->getComponent<RigidBody>().velocity;
-            auto &tf = entity->getComponent<Transform>();
-            auto &pos = tf.position;
-            auto &prev = tf.prevPos;
+            auto& tf = entity->getComponent<Transform>();
+            tf.prevPos = tf.position;
 
-            prev.x = pos.x;
-            prev.y = pos.y;
+            if (entity->hasComponent<RigidBody>())
+            {
+                auto& rb = entity->getComponent<RigidBody>();
+                tf.position.x += rb.velocity.x * dt;
+                tf.position.y += std::min(rb.velocity.y * dt, 100.0f);
+            }
 
-            pos.x += vel.x * dt;
-            pos.y += std::min(vel.y * dt, 100.0f);
             
-            if (pos.y >= SIZE::SCREEN.y)
+            if (tf.position.y > SIZE::SCREEN.y + 200.0f)
             {
                 entity->addComponent<DespawnTag>();
             }

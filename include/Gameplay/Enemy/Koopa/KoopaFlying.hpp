@@ -34,7 +34,6 @@ public:
         addComponent<NotOnPatrolYet>();
 
         addComponent<CanHitBlockTag>();
-        addComponent<BlockTag>();
         addComponent<CanHitBlockTag>();
         addComponent<StompableTag>();
 

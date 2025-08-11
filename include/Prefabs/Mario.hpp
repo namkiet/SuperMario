@@ -6,6 +6,7 @@
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>
+#include <Engine/Rendering/ZIndex.hpp>
 #include <Engine/Camera/FollowByCameraTag.hpp>
 
 #include <Gameplay/Player/Components.hpp>
@@ -28,6 +29,7 @@ public:
     Mario(float x, float y, float width, float height, int scale, int currentLevel)
     {
         addComponent<Animation>(TextureManager::load("assets/Player/SmallPlayer/marioSmall_0.png"));
+        addComponent<ZIndex>(-100);
 
         addComponent<FollowByCameraTag>();
 

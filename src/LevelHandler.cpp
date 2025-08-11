@@ -321,7 +321,7 @@ void LevelHandler::enemyLoad(World &world, std::string tilename, float x, float 
     }
     else if (tilename == "Piranha")
     {
-        auto piranha = world.createEntity<Piranha>(x + width / 2, y + 3, 3);
+        auto piranha = world.createEntity<Piranha>(x + width / 2, y + 16/3.0f, 3);
     }
     else if (tilename == "JumpingKoopa")
     {

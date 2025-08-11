@@ -29,8 +29,7 @@ public:
         addComponent<LakituPatrol>();
         addComponent<LakituAttack>();
         addComponent<TowardPlayer>();
-
-        addComponent<BlockTag>();
+        
         addComponent<StompableTag>();
 
         std::vector<Direction> directions = {Direction::Left, Direction::Right, Direction::Bottom};

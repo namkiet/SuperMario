@@ -4,6 +4,7 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/DespawnTag.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
+#include <iostream>
 
 class DamageOnContactSystem : public System
 {
@@ -29,7 +30,11 @@ public:
 
                 if (validHit)
                 {
-                    entity->addComponent<DamagedTag>();
+                    // if (!entity->hasComponent<DamagedTag>())
+                    // {
+                        entity->addComponent<DamagedTag>();
+                        std::cout << "Ouch.\n";
+                    // }
                 }
             }
         }

@@ -24,8 +24,7 @@ void GoombaStompedState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-
-    entity->addComponent<Animation>(TextureManager::load("assets/Enemy/Goomba/goomba_stomped.png"));
+    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Goomba/goomba_stomped.png"), 16, 16, 1, 0));
 
     entity->getComponent<GoombaPatrol>().velocity = sf::Vector2f(0, 0);
 

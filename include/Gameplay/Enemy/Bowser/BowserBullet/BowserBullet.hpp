@@ -5,6 +5,8 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Animation/Animation.hpp>
+#include <Engine/Audio/Components.hpp>
+#include <Engine/Audio/SoundManager.hpp>
 #include <Gameplay/Stomp/Components.hpp>
 #include <Gameplay/LifeSpan/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
@@ -27,6 +29,8 @@ public:
 
         addComponent<EnemyTag>(nullptr, std::make_shared<BowserBulletBehaviour>());
         addComponent<BowserBulletPatrol>();
+
+        addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/fire.wav"));
 
         std::vector<Direction> directions = {Direction::Left, Direction::Right, Direction::Bottom, Direction::Top};
         addComponent<DamageOnContactComponent>(directions);

@@ -14,23 +14,27 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Core/Transform.hpp>
+#include <Engine/Audio/Components.hpp>
+#include <Engine/Audio/SoundManager.hpp>
 #include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Stomp/Components.hpp>
 
 void BowserSlideState::onEnter(Entity* entity)
 {
-    if (entity->hasComponent<Animation>()) 
-    {
-        auto& anim = entity->getComponent<Animation>();
-        anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Bowser/bowser_slide.png"));
-        anim.frameWidth = 24;
-        anim.frameHeight = 21;
-        anim.frameCount = 4;
-        anim.frameDuration = 0.09f;
-        anim.currentFrame = 0;
-        anim.timer = 0;
-    }
+    // if (entity->hasComponent<Animation>()) 
+    // {
+    //     auto& anim = entity->getComponent<Animation>();
+    //     anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Bowser/bowser_slide.png"));
+    //     anim.frameWidth = 24;
+    //     anim.frameHeight = 21;
+    //     anim.frameCount = 4;
+    //     anim.frameDuration = 0.09f;
+    //     anim.currentFrame = 0;
+    //     anim.timer = 0;
+    // }
+    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_slide.png"), 24, 21, 4, 0.09f));
+    
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();
@@ -48,10 +52,12 @@ void BowserSlideState::onEnter(Entity* entity)
 
     entity->addComponent<StateDuration>(5);
     entity->addComponent<CanKillEnemyTag>();
+    entity->addComponent<SoundComponent>(SoundComponent(&SoundManager::load("assets/Sounds/spin.wav"), true));
 
     std::vector<Direction> directions = { Direction::Left, Direction::Right, Direction::Bottom, Direction::Top };
-    entity->removeComponent<DamageOnContactComponent>();
     entity->addComponent<DamageOnContactComponent>(directions);
+
+    entity->removeComponent<StompableTag>();
 }
 
 
@@ -69,6 +75,7 @@ std::shared_ptr<EnemyState> BowserSlideState::getNewState(Entity* entity, float 
 
     if (entity->hasComponent<ChangeToBowserWalkTag>())
     {
+        entity->removeComponent<SoundComponent>();
         entity->removeComponent<CanKillEnemyTag>();
         entity->removeComponent<ChangeToBowserWalkTag>();
         return std::make_shared<BowserWalkState>();
@@ -76,6 +83,7 @@ std::shared_ptr<EnemyState> BowserSlideState::getNewState(Entity* entity, float 
 
     if (entity->hasComponent<ChangeToBowserDeadTag>())
     {
+        entity->removeComponent<SoundComponent>();
         entity->removeComponent<CanKillEnemyTag>();
         entity->removeComponent<ChangeToBowserDeadTag>();
         return std::make_shared<BowserDeadState>();

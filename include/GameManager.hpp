@@ -5,7 +5,6 @@
 class GameManager
 {
 public:
-    // Default constructor
     GameManager() = delete;
 
     // Constructor with level

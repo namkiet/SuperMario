@@ -19,7 +19,7 @@ public:
         if (world.findFirst<PlayerTag>())
             return;
         // world.createEntity<Mario>(200, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 50);
-        world.createEntity<Mario>((float)0 * 16, (float)6 * 16, 16.0f, 16.0f, 3, Mario::currentLevel);
+        world.createEntity<Mario>((float)100 * 16, (float)6 * 16, 16.0f, 16.0f, 3, Mario::currentLevel);
         // fout << "Player respawned at position: (3*16, 12*16)" << std::endl;
         // fout.close();
         // std::cout << "Player respawned!" << std::endl;

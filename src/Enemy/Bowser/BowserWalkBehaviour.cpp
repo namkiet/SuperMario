@@ -163,7 +163,6 @@ void BowserWalkBehaviour::attack(Entity* entity, float dt, World& world)
     auto playerTF = world.findFirst<PlayerTag>()->getComponent<Transform>();
 
     if (abs(bowserTF.position.x - playerTF.position.x) > attack.distance
-    ||  entity->hasComponent<ChangeToBowserJumpTag>() 
     ||  entity->hasComponent<ChangeToBowserHurtTag>()
     ||  entity->hasComponent<ChangeToBowserDeadTag>())
     {
@@ -189,42 +188,47 @@ void BowserWalkBehaviour::attack(Entity* entity, float dt, World& world)
         attack.isShooting = 0;
         attack.castTime = 0;
 
-        auto& anim = entity->getComponent<Animation>();
-        anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Bowser/bowser_walk.png"));
-        anim.textures.clear();
-        anim.frameWidth = 32;
-        anim.frameHeight = 35;
-        anim.frameCount = 4;
-        anim.frameDuration = 0.25f;
-        anim.currentFrame = 0;
-        anim.timer = 0;
+        // auto& anim = entity->getComponent<Animation>();
+        // anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Bowser/bowser_walk.png"));
+        // anim.textures.clear();
+        // anim.frameWidth = 32;
+        // anim.frameHeight = 35;
+        // anim.frameCount = 4;
+        // anim.frameDuration = 0.25f;
+        // anim.currentFrame = 0;
+        // anim.timer = 0;
 
-        anim.sprite.setTextureRect(sf::IntRect(
-            anim.currentFrame * anim.frameWidth,
-            anim.row * anim.frameHeight,
-            anim.frameWidth,
-            anim.frameHeight
-        ));
+        // anim.sprite.setTextureRect(sf::IntRect(
+        //     anim.currentFrame * anim.frameWidth,
+        //     anim.row * anim.frameHeight,
+        //     anim.frameWidth,
+        //     anim.frameHeight
+        // ));
+        entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_walk.png"), 32, 35, 4, 0.25f));
+
     }
     else if (attack.delay > attack.timer && attack.delay - attack.timer <= 0.75f && attack.isShooting == 0)
     {
         attack.isShooting = 1;
         attack.castTime = (attack.delay - attack.timer) / 2;
 
-        auto& anim = entity->getComponent<Animation>();
-        anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Bowser/bowser_shoot.png")); 
-        anim.frameHeight = 36;
-        anim.frameCount = 2;
-        anim.frameDuration = (attack.delay - attack.timer);
-        anim.currentFrame = 0;
-        anim.timer = 0;
+        // auto& anim = entity->getComponent<Animation>();
+        // anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Bowser/bowser_shoot.png")); 
+        // anim.frameWidth = 32;
+        // anim.frameHeight = 36;
+        // anim.frameCount = 2;
+        // anim.frameDuration = (attack.delay - attack.timer);
+        // anim.currentFrame = 0;
+        // anim.timer = 0;
 
-        anim.sprite.setTextureRect(sf::IntRect(
-            anim.currentFrame * anim.frameWidth,
-            anim.row * anim.frameHeight,
-            anim.frameWidth,
-            anim.frameHeight
-        ));
+        // anim.sprite.setTextureRect(sf::IntRect(
+        //     anim.currentFrame * anim.frameWidth,
+        //     anim.row * anim.frameHeight,
+        //     anim.frameWidth,
+        //     anim.frameHeight
+        // ));
+        entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_shoot.png"), 32, 36, 2, attack.delay - attack.timer));
+
     }
     else if (attack.timer >= attack.delay)
     {

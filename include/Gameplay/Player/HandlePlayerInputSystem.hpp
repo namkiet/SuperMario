@@ -2,11 +2,14 @@
 #include <ECS/System.hpp>
 #include <World.hpp>
 #include <Engine/Core/RigidBody.hpp>
+#include <Engine/Audio/Components.hpp>
+#include <Engine/Audio/SoundManager.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <SFML/Graphics.hpp>
 #include <Core/Variables.hpp>
 #include <Core/KeyPressPool.hpp>
 #include <cassert>
+
 class HandlePlayerInputSystem : public System
 {
 public:
@@ -49,6 +52,7 @@ public:
 
             if (pool.isKeyPressed(sf::Keyboard::W) && rb.onGround) // Jump
             {
+                player->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/jumpsmall.wav"));
                 rb.velocity.y = -PHYSICS::JUMP_FORCE;
             }
             // gravity se detect theo thu tu nao
