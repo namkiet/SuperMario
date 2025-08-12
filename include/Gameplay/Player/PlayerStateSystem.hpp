@@ -33,8 +33,6 @@ public:
                 tag.powerState->onEnter(entity);
             }
 
-            entity->removeComponent<Animation>();
-
             bool isSpecialState = false;
             for (const auto& stateName : specialStates)
             {

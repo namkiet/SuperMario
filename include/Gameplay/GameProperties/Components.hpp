@@ -10,7 +10,7 @@ struct ScoreComponent : public Component
 
 struct TimeComponent : public Component
 {
-    TimeComponent(int timeLeft) : timer(timeLeft) {}
+    TimeComponent(int timeLeft = 0) : timer(timeLeft) {}
     int timer = 0;
     float subtimer = 0;
     bool isPaused = false;
@@ -27,6 +27,8 @@ struct CoinComponent : public Component
 
 struct TextComponent : public Component
 {
+    TextComponent() = default;
+
     TextComponent(std::string text, float startX, float startY, float finalY, float size, int seconds)
         : content(text), startX(startX), startY(startY), finalY(finalY), size(size)
     {

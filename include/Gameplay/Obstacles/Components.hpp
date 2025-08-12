@@ -14,7 +14,7 @@ struct PodobooTag : public Component
 
 struct FireBarComponent : public Component
 {
-    FireBarComponent(bool clockwise)
+    FireBarComponent(bool clockwise = true)
         : isClockwise(clockwise)
     {
     }

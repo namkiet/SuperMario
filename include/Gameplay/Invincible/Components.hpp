@@ -3,7 +3,7 @@
 
 struct InvincibleTag : public Component
 {
-    InvincibleTag(float duration) : duration(duration) {}
+    InvincibleTag(float duration = 0.0f) : duration(duration) {}
     float duration;
     float timer = 0.0f;
 };

@@ -8,7 +8,7 @@ struct CanGetDamageTag : public Component {};
 
 struct DamageOnContactComponent : public Component 
 {   
-    DamageOnContactComponent(const std::vector<Direction>& validDirections)
+    DamageOnContactComponent(const std::vector<Direction>& validDirections = {})
         : validDirections(validDirections) {}
     std::vector<Direction> validDirections;
 };

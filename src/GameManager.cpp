@@ -84,15 +84,18 @@ using json = nlohmann::json;
 
 GameManager::GameManager(int level) : levelHandler(world, level), level(level)
 {
-    bool loadFromJSON = true;
-    loadFromJSON = false;
+    std::ifstream in("should_read_from_json.json");
+
+    bool loadFromJSON = json::parse(in)["shouldReadFromJson"];
+
+    // std::cout << loadFromJSON << "\n";
 
     if (loadFromJSON)
     {
         // std::ifstream fin("data.json");
         // json j = json::parse(fin);
 
-        world.loadSceneFromFile("data.json");
+        world.loadSceneFromFile("save.json");
     }
     else
     {
@@ -219,10 +222,11 @@ void GameManager::handleEvent(const sf::Event &event)
 
 void GameManager::update(float dt)
 {
-    if (oneFrame && !shouldPlay)
-        return;
+    if (dt > 0.2f) return;
 
-    // std::cout << 1.0f / dt << "\n";
+    if (oneFrame && !shouldPlay) return;
+
+    std::cout << 1.0f / dt << "\n";
     world.update(dt);
 
     if (oneFrame)

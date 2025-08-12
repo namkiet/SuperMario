@@ -30,11 +30,8 @@ public:
 
                 if (validHit)
                 {
-                    // if (!entity->hasComponent<DamagedTag>())
-                    // {
-                        entity->addComponent<DamagedTag>();
-                        std::cout << "Ouch.\n";
-                    // }
+                    entity->addComponent<DamagedTag>();
+                    std::cout << "Ouch.\n";
                 }
             }
         }

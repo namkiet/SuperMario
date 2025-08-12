@@ -45,15 +45,15 @@ struct ElevatorComponent : public Component
         {
             minX = _min;
             maxX = _max;
-            minY = -INFINITY;
-            maxY = INFINITY;
+            minY = -100000.0;
+            maxY = 100000.0;
         }
         else
         {
             minY = _min;
             maxY = _max;
-            minX = -INFINITY;
-            maxX = INFINITY;
+            minX = -100000.0;
+            maxX = 100000.0;
         }
     }
 

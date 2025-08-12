@@ -87,6 +87,9 @@ struct hasPipeDestination: public Component // for pipe
 {
     Entity* pipe;
     Direction OutDirection;
+
+    hasPipeDestination() = default;
+
     hasPipeDestination(Entity* pipe, Direction dir): pipe(pipe), OutDirection(dir)
     {
         assert (pipe->hasComponent<PipeTag>());   
@@ -100,6 +103,9 @@ struct TeleChanneling: public Component // for player
 {
     float teleInTime;
     Entity* teleEntity; // pipe
+
+    TeleChanneling() = default;
+
     TeleChanneling(Entity* pipe): teleEntity(pipe)
     {
         assert (teleEntity->hasComponent<TelePort>());

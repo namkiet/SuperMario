@@ -1,6 +1,9 @@
 #pragma once
 #include <ECS/System.hpp>
 #include <Core/Physics.hpp>
+#include <Engine/Core/Transform.hpp>
+#include <Engine/Core/RigidBody.hpp>
+#include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/SpatialHashGrid.hpp>
 #include <Gameplay/Player/Components.hpp>
 

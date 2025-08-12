@@ -9,6 +9,6 @@ struct FlagPoleTag : public Component {};
 
 struct HoldingTimer : public Component
 {
-    HoldingTimer(float duration) : duration(duration) {}
+    HoldingTimer(float duration = 0.0f) : duration(duration) {}
     float duration;
 };

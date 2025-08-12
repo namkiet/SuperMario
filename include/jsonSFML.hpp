@@ -21,21 +21,43 @@ namespace nlohmann {
     };
 
     template <>
-    struct adl_serializer<std::vector<const sf::Texture*>> {
-        static void to_json(json& j, const std::vector<const sf::Texture*>& textures) {
-            j = json::array();
-            for (const sf::Texture* tex : textures)
-            {
-                j.push_back(TextureManager::getPath(tex));
-            }
+    struct adl_serializer<sf::FloatRect> {
+        static void to_json(json& j, const sf::FloatRect& rect) {
+            j["left"] = rect.left;
+            j["top"] = rect.top;
+            j["width"] = rect.width;
+            j["height"] = rect.height;
         }
 
-        static void from_json(const json& j, std::vector<const sf::Texture*>& textures) {
-            textures.clear();
-            for (const auto& path : j)
-            {
-                textures.push_back(&TextureManager::load(path.get<std::string>()));
-            }
+        static void from_json(const json& j, sf::FloatRect& rect) {
+            rect.left = j["left"];
+            rect.top = j["top"];
+            rect.width = j["width"];
+            rect.height = j["height"];
+        }
+    };
+
+    template <>
+    struct adl_serializer<const sf::Texture*> {
+        static void to_json(json& j, const sf::Texture* tex) {
+            j = tex ? TextureManager::getPath(tex) : "";
+        }
+        static void from_json(const json& j, const sf::Texture*& tex) {
+            if (j.is_string() && !j.get<std::string>().empty())
+                tex = &TextureManager::load(j.get<std::string>()); 
+            else
+                tex = nullptr;
+        }
+    };
+
+    template <>
+    struct adl_serializer<sf::Sprite> {
+        static void to_json(json& j, const sf::Sprite& sprite) {
+            j = TextureManager::getPath(sprite.getTexture());
+        }
+
+        static void from_json(const json& j, sf::Sprite& sprite) {
+            sprite.setTexture(TextureManager::load(j.get<std::string>()));
         }
     };
 }
@@ -61,7 +83,7 @@ namespace nlohmann {
             static void from_json(const json&, TYPE&) {} \
         }; \
     } \
-    REGISTER_COMPONENT(TYPE)
+    // REGISTER_COMPONENT(TYPE)
 
 
 #include <unordered_map>
@@ -99,3 +121,14 @@ public:
 private:
     std::unordered_map<std::string, FactoryFunc> registry;
 };
+
+
+inline void to_json(json& j, const Entity* entity)
+{
+    j = entity ? entity->getID() : -1;
+}
+
+inline void from_json(const json& j, Entity*& entity)
+{
+    entity = World::getInstance().getEntityByID(j.get<int>());
+}
