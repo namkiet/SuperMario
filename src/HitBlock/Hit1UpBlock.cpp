@@ -11,7 +11,7 @@ void HitSpecialBlockSystem::Hit1UpBlock(World &world, float dt, Entity *block)
     auto &pos = tf.position;
     auto &sz = tf.size;
 
-    auto mushroom = world.createEntityAtFront<Mushroom2>(pos.x, pos.y - 20, 48.0f, 48.0f);
+    auto mushroom = world.createEntity<Mushroom2>(pos.x, pos.y - 20, 48.0f, 48.0f);
     ItemEmerging emerging;
     emerging.finalY = pos.y - 48;
     mushroom->addComponent<ItemEmerging>(emerging);

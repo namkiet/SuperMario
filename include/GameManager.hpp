@@ -1,5 +1,5 @@
 #pragma once
-#include <World.hpp>
+#include <Framework/World.hpp>
 #include <SFML/Graphics.hpp>
 #include <LevelHandler.hpp>
 class GameManager
@@ -14,8 +14,8 @@ public:
     void update(float dt);
     void draw(sf::RenderWindow &window, int level) const;
 
-private:
-    World &world = World::getInstance();
+private:    
+    World world;
     LevelHandler levelHandler;
     int level = 1;
     bool oneFrame = false;

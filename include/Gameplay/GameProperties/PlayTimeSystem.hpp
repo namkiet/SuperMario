@@ -1,6 +1,6 @@
 #pragma once
 #include <ECS/System.hpp>
-#include <World.hpp>
+#include <Framework/World.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
 #include <Gameplay/LifeSpan/Components.hpp>
 #include <Engine/Core/DespawnTag.hpp>

@@ -1,5 +1,5 @@
 #pragma once
-#include <World.hpp>
+#include <Framework/World.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
 #include <Gameplay/Background/Components.hpp>
 #include <Gameplay/Player/Components.hpp>

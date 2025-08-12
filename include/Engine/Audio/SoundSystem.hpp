@@ -1,6 +1,6 @@
 #pragma once
 #include <ECS/System.hpp>
-#include <World.hpp>
+#include <Framework/World.hpp>
 #include <Engine/Audio/Components.hpp>
 #include <SFML/Audio.hpp>
 

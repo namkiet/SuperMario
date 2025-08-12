@@ -92,9 +92,6 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
 
     if (loadFromJSON)
     {
-        // std::ifstream fin("data.json");
-        // json j = json::parse(fin);
-
         world.loadSceneFromFile("save.json");
     }
     else
@@ -178,12 +175,7 @@ void GameManager::handleEvent(const sf::Event &event)
     {
         if (event.key.code == sf::Keyboard::S)
         {
-            json j;
-            world.saveToJSON(j);
-
-            std::ofstream fout("save.json");
-            fout << j.dump(4);
-            fout.close();    
+            world.saveSceneToFile("save.json");  
         }
 
         if (event.key.code == sf::Keyboard::N)
@@ -234,7 +226,7 @@ void GameManager::update(float dt)
         shouldPlay = false;
     }
 
-    world.showSceneEditor();
+    // world.showSceneEditor();
 }
 
 void GameManager::draw(sf::RenderWindow &window, int level) const

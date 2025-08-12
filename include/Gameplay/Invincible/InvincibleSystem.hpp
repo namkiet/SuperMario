@@ -1,6 +1,6 @@
 #pragma once
 #include <ECS/System.hpp>
-#include <World.hpp>
+#include <Framework/World.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/Invincible/Components.hpp>
 #include <Gameplay/Enemy/Components.hpp>

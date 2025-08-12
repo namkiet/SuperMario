@@ -2,6 +2,8 @@
 #include <nlohmann/json.hpp>
 #include <SFML/Graphics.hpp>
 #include <Core/TextureManager.hpp>
+#include <Framework/EntityManager.hpp>
+#include <Framework/ComponentRegistry.hpp>
 #include <vector>
 #include <string>
 
@@ -66,7 +68,7 @@ namespace nlohmann {
 #define REGISTER_COMPONENT(TYPE) \
     namespace { \
         struct TYPE##_registrar { \
-            TYPE##_registrar() { World::getInstance().registerComponent<TYPE>(); } \
+            TYPE##_registrar() { ComponentRegistry::registerComponent<TYPE>(); } \
         }; \
         static TYPE##_registrar global_##TYPE##_registrar_instance; \
     }
@@ -130,5 +132,5 @@ inline void to_json(json& j, const Entity* entity)
 
 inline void from_json(const json& j, Entity*& entity)
 {
-    entity = World::getInstance().getEntityByID(j.get<int>());
+    entity = EntityManager::getEntityByID(j.get<int>());
 }

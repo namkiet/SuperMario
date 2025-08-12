@@ -1,5 +1,5 @@
 #pragma once
-#include <World.hpp>
+#include <Framework/World.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Gameplay/Collect/Components.hpp>
 #include <Gameplay/Item/Components.hpp>
