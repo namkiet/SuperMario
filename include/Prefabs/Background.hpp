@@ -52,7 +52,7 @@ public:
             addComponent<CanHitBlockTag>();
 
             addComponent<Animation>(TextureManager::load("assets/Background/Flag.png"));
-            addComponent<ZIndex>(-1);
+            addComponent<ZIndex>(-3);
         }
         else if (index == 11)
         {

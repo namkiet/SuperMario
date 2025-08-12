@@ -59,6 +59,8 @@ public:
         animMap["IdlingSmall"] = Animation(TextureManager::load("assets/Mario/Small/idling.png"));
         animMap["JumpingSmall"] = Animation(TextureManager::load("assets/Mario/Small/jumping.png"));
         animMap["RunningSmall"] = Animation(TextureManager::load("assets/Mario/Small/running.png"), 16, 16, 3, 0.15f);
+        animMap["ClimbingSmall"] = Animation(TextureManager::load("assets/Mario/Small/climbing.png"), 16, 16, 2, 0.25f);
+
         animMap["IdlingSmallInvincible"] = Animation(TextureManager::load("assets/Mario/Small/idling_invincible.png"), 16, 16, 4, 0.1f);
         animMap["JumpingSmallInvincible"] = Animation(TextureManager::load("assets/Mario/Small/jumping_invincible.png"), 16, 16, 4, 0.1f);
         animMap["RunningSmallInvincible"] = Animation(TextureManager::load("assets/Mario/Small/running_invincible.png"), 16, 16, 12, 0.1f);
@@ -67,6 +69,8 @@ public:
         animMap["IdlingBig"] = Animation(TextureManager::load("assets/Mario/Big/idling.png"));
         animMap["JumpingBig"] = Animation(TextureManager::load("assets/Mario/Big/jumping.png"));
         animMap["RunningBig"] = Animation(TextureManager::load("assets/Mario/Big/running.png"), 16, 32, 3, 0.15f);
+        animMap["ClimbingBig"] = Animation(TextureManager::load("assets/Mario/Big/climbing.png"), 16, 32, 2, 0.25f);
+        
         animMap["IdlingBigInvincible"] = Animation(TextureManager::load("assets/Mario/Big/idling_invincible.png"), 16, 32, 4, 0.1f);
         animMap["JumpingBigInvincible"] = Animation(TextureManager::load("assets/Mario/Big/jumping_invincible.png"), 16, 32, 4, 0.1f);
         animMap["RunningBigInvincible"] = Animation(TextureManager::load("assets/Mario/Big/running_invincible.png"), 16, 32, 12, 0.1f);
@@ -75,6 +79,7 @@ public:
         animMap["IdlingFire"] = Animation(TextureManager::load("assets/Mario/Fire/idling.png"));
         animMap["JumpingFire"] = Animation(TextureManager::load("assets/Mario/Fire/jumping.png"));
         animMap["RunningFire"] = Animation(TextureManager::load("assets/Mario/Fire/running.png"), 16, 32, 3, 0.15f);
+        animMap["ClimbingFire"] = Animation(TextureManager::load("assets/Mario/Fire/climbing.png"), 16, 32, 2, 0.25f);
 
         animMap["Shrinking"] = Animation(TextureManager::load("assets/Mario/Big/shrinking.png"), 16, 32, 10, 0.1f, false);
         animMap["GrowingUp"] = Animation(TextureManager::load("assets/Mario/Small/grow_up.png"), 16, 32, 7, 0.1f, false);

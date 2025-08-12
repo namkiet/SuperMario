@@ -30,7 +30,7 @@ public:
     Mario(float x, float y, float width, float height, int scale, int currentLevel)
     {
         addComponent<Animation>(TextureManager::load("assets/Player/SmallPlayer/marioSmall_0.png"));
-        addComponent<ZIndex>(-100);
+        addComponent<ZIndex>(-1);
 
         addComponent<FollowByCameraTag>();
 
