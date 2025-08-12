@@ -14,7 +14,7 @@ Game::Game()
 registry.registerInstance("menu", std::make_shared<MenuState>(std::shared_ptr<Game>(this)));
 registry.registerInstance("play", std::make_shared<PlayingState>(std::shared_ptr<Game>(this)));
 registry.registerInstance("settings", std::make_shared<SettingsState>(std::shared_ptr<Game>(this)));
-registry.registerInstance("keysettings", std::make_shared<KeySettingState>(std::shared_ptr<Game>(this)));
+// registry.registerInstance("keysettings", std::make_shared<KeySettingState>(std::shared_ptr<Game>(this)));
 
     pushState("menu");
 
