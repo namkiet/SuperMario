@@ -34,7 +34,6 @@ public:
         addComponent<NotOnPatrolYet>();
 
         addComponent<CanHitBlockTag>();
-        addComponent<CanHitBlockTag>();
         addComponent<StompableTag>();
 
         std::vector<Direction> directions = { Direction::Left, Direction::Right, Direction::Bottom };

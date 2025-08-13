@@ -10,5 +10,5 @@ public:
     std::shared_ptr<PlayerMovementState> getNewState(Entity* entity) override;
 
 private:
-    float animationTimer;
+    float animationDuration;
 };

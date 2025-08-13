@@ -4,6 +4,7 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Animation/Animation.hpp>
+#include <Engine/Core/RigidBody.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/DespawnTag.hpp>
 #include <Core/TextureManager.hpp>
@@ -12,6 +13,7 @@
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
 #include <cmath>
+
 class HitSpecialBlockSystem : public System
 {
 private:
@@ -140,6 +142,7 @@ public:
                         bounce.originalY = pos.y;
                         bounce.updateY = pos.y - (sz.y / 4);
                         block->addComponent<BounceBlock>(bounce);
+                        block->addComponent<RigidBody>(sf::Vector2f(0, 0), false);
                         pos.y = bounce.updateY;
 
                         continue;

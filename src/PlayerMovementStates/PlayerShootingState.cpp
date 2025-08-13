@@ -5,7 +5,7 @@
 #include <ECS/Entity.hpp>
 #include <Core/TextureManager.hpp>
 
-PlayerShootingState::PlayerShootingState() : animationTimer(0.125f) {}
+PlayerShootingState::PlayerShootingState() : animationDuration(0.125f) {}
 
 const std::string PlayerShootingState::getName() const
 {
@@ -14,12 +14,12 @@ const std::string PlayerShootingState::getName() const
 
 void PlayerShootingState::update(Entity* entity, float dt)
 {
-    animationTimer -= dt;
+    animationDuration -= dt;
 }
 
 std::shared_ptr<PlayerMovementState> PlayerShootingState::getNewState(Entity* entity)
 {
-    if (animationTimer < 0.0f)
+    if (animationDuration < 0.0f)
     {
         return std::make_shared<PlayerIdlingState>();
     }

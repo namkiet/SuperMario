@@ -7,6 +7,8 @@
 #include <Gameplay/Player/Components.hpp>
 #include <ECS/Entity.hpp>
 
+PlayerGrowingUpState::PlayerGrowingUpState() : animationDuration(0.7f) {}
+
 const std::string PlayerGrowingUpState::getName() const
 {
     return "GrowingUp";
@@ -36,15 +38,16 @@ void PlayerGrowingUpState::onExit(Entity* entity)
     entity->addComponent<RigidBody>();
 }
 
+void PlayerGrowingUpState::update(Entity* entity, float dt)
+{
+    animationDuration -= dt;
+}
+
 std::shared_ptr<PlayerSizeState> PlayerGrowingUpState::getNewState(Entity* entity)
 {
-    if (entity->hasComponent<Animation>())
+    if (animationDuration < 0.0f)
     {
-        auto& anim = entity->getComponent<Animation>();
-        if (anim.hasEnded)
-        {
-            return std::make_shared<PlayerBigState>();
-        }
+        return std::make_shared<PlayerBigState>();
     }
     return nullptr;
 }
