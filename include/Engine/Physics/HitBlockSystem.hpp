@@ -2,7 +2,6 @@
 #include <ECS/System.hpp>
 #include <World.hpp>
 #include <Engine/Physics/BlockTag.hpp>
-#include <Engine/Physics/PassThroughTag.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/SpatialHashGrid.hpp>
 #include <Engine/Core/RigidBody.hpp>

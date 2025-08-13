@@ -6,7 +6,6 @@
 #include <Engine/Animation/BlinkingComponent.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
-#include <Gameplay/BreakBrick/Components.hpp>
 
 #include <ECS/Entity.hpp>
 
@@ -17,7 +16,6 @@ const std::string PlayerSmallState::getName() const
 
 void PlayerSmallState::onEnter(Entity* entity)
 {  
-    entity->removeComponent<CanBreakBrickTag>();
     entity->removeComponent<BigMarioTag>();
 }
 

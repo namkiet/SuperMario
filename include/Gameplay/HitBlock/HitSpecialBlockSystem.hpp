@@ -11,6 +11,8 @@
 #include <Gameplay/Block/BounceBlock.hpp>
 #include <Gameplay/Block/Components.hpp>
 #include <Gameplay/Player/Components.hpp>
+#include <Gameplay/Enemy/Components.hpp>
+#include <Gameplay/LifeSpan/Components.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
 #include <cmath>
 
@@ -66,8 +68,11 @@ public:
                     // Remove NormalBlock component
                     block->removeComponent<NormalBlock>();
 
-                    // Add DespawnTag component
-                    block->addComponent<DespawnTag>();
+                    // This block can still kill enemy
+                    block->removeComponent<Animation>();
+                    block->removeComponent<BlockTag>();
+                    block->addComponent<LifeSpan>(0.5f);
+                    block->addComponent<CanKillEnemyTag>();
 
                     // Update
                     HitNormalBlock(world, dt, block);
