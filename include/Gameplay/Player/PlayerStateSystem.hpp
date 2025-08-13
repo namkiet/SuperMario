@@ -46,15 +46,7 @@ public:
             }
 
             auto stateName = tag.movementState->getName() + tag.sizeState->getName() + tag.powerState->getName();
-            if (player->hasComponent<Animation>())
-            {
-                auto& anim = player->getComponent<Animation>();
-
-                auto newAnim = getAnimation(stateName);
-                newAnim.currentFrame = anim.currentFrame;
-
-                player->addComponent<Animation>(newAnim);
-            }
+            player->addComponent<Animation>(getAnimation(stateName));
         }
     }
 
@@ -70,18 +62,18 @@ public:
         animMap["IdlingDeadNormal"] = Animation(TextureManager::load("assets/Mario/Small/dead.png"));
         animMap["IdlingShrinkingNormal"] = Animation(TextureManager::load("assets/Mario/Big/shrinking.png"), 16, 32, 10, 0.1f, false);
         animMap["IdlingGrowingUpNormal"] = Animation(TextureManager::load("assets/Mario/Small/grow_up.png"), 16, 32, 7, 0.1f, false);
-        // animMap["IdlingGrowingUpInvincible"] = Animation(TextureManager::load("assets/Mario/Small/grow_up.png"), 16, 32, 7, 0.1f, false);
+        animMap["IdlingGrowingUpInvincible"] = Animation(TextureManager::load("assets/Mario/Small/grow_up_invincible.png"), 16, 32, 7, 0.1f, false);
 
         animMap["JumpingSmallNormal"] = Animation(TextureManager::load("assets/Mario/Small/jumping.png"));
         animMap["JumpingSmallInvincible"] = Animation(TextureManager::load("assets/Mario/Small/jumping_invincible.png"), 16, 16, 4, 0.1f);
-        animMap["JumpingBigNormal"] = Animation(TextureManager::load("assets/Mario/Big/jumping.png"));
+        animMap["JumpingBigNormal"] = Animation(TextureManager::load("assets/Mario/Big/jumping.png"));  
         animMap["JumpingBigInvincible"] = Animation(TextureManager::load("assets/Mario/Big/jumping_invincible.png"), 16, 32, 4, 0.1f);
         animMap["JumpingFireNormal"] = Animation(TextureManager::load("assets/Mario/Fire/jumping.png"));
         animMap["JumpingFireInvincible"] = getAnimation("JumpingBigInvincible");
         animMap["JumpingDeadNormal"] = getAnimation("IdlingDeadNormal");
         animMap["JumpingShrinkingNormal"] = getAnimation("IdlingShrinkingNormal");
         animMap["JumpingGrowingUpNormal"] = getAnimation("IdlingGrowingUpNormal");
-        // animMap["JumpingGrowingUpInvincible"] = getAnimation("IdlingGrowingUpInvincible");
+        animMap["JumpingGrowingUpInvincible"] = getAnimation("IdlingGrowingUpInvincible");
 
         animMap["RunningSmallNormal"] = Animation(TextureManager::load("assets/Mario/Small/running.png"), 16, 16, 3, 0.15f);
         animMap["RunningSmallInvincible"] = Animation(TextureManager::load("assets/Mario/Small/running_invincible.png"), 16, 16, 12, 0.1f);
@@ -92,7 +84,7 @@ public:
         animMap["RunningDeadNormal"] = getAnimation("IdlingDeadNormal");
         animMap["RunningShrinkingNormal"] = getAnimation("IdlingShrinkingNormal");
         animMap["RunningGrowingUpNormal"] = getAnimation("IdlingGrowingUpNormal");
-        // animMap["RunningGrowingUpInvincible"] = getAnimation("IdlingGrowingUpInvincible");
+        animMap["RunningGrowingUpInvincible"] = getAnimation("IdlingGrowingUpInvincible");
 
         animMap["ClimbingSmallNormal"] = Animation(TextureManager::load("assets/Mario/Small/climbing.png"), 16, 16, 2, 0.2f);
         animMap["ClimbingSmallInvincible"] = Animation(TextureManager::load("assets/Mario/Small/climbing_invincible.png"), 16, 16, 4, 0.2f);
@@ -102,11 +94,11 @@ public:
         animMap["ClimbingFireInvincible"] = getAnimation("ClimbingBigInvincible");
 
         animMap["CrouchingBigNormal"] = Animation(TextureManager::load("assets/Mario/Big/crouching.png"));
-        // animMap["CrouchingBigInvincible"] = Animation(TextureManager::load("assets/Mario/Big/crouching_invincible.png"), 16, 32, 4, 0.2f);
+        animMap["CrouchingBigInvincible"] = Animation(TextureManager::load("assets/Mario/Big/crouching_invincible.png"), 16, 32, 4, 0.2f);
         animMap["CrouchingFireNormal"] = Animation(TextureManager::load("assets/Mario/Fire/crouching.png"));
-        // animMap["CrouchingFireInvincible"] = getAnimation("CrouchingBigInvincible");
+        animMap["CrouchingFireInvincible"] = getAnimation("CrouchingBigInvincible");
         animMap["CrouchingDeadNormal"] = getAnimation("IdlingDeadNormal");
-        // animMap["CrouchingShrinkingNormal"] = getAnimation("IdlingShrinkingNormal");
+        animMap["CrouchingShrinkingNormal"] = getAnimation("IdlingShrinkingNormal");
 
         animMap["ShootingFireNormal"] = Animation(TextureManager::load("assets/Mario/Fire/shooting.png"));
         animMap["ShootingFireInvincible"] = animMap["ShootingFireNormal"];

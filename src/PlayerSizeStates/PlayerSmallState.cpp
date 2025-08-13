@@ -3,6 +3,7 @@
 #include <Gameplay/Player/PlayerSizeStates/PlayerGrowingUpState.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Animation/BlinkingComponent.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/BreakBrick/Components.hpp>
@@ -18,19 +19,14 @@ void PlayerSmallState::onEnter(Entity* entity)
 {  
     entity->removeComponent<CanBreakBrickTag>();
     entity->removeComponent<BigMarioTag>();
+}
 
-    // if (entity->hasComponent<Transform>())
-    // {
-    //     auto& tf = entity->getComponent<Transform>();
-    //     tf.size.y *= 0.5f;
-    //     tf.position.y += tf.size.y;
-    // }
-
-    // if (entity->hasComponent<BoxCollider2D>())
-    // {
-    //     auto& box = entity->getComponent<BoxCollider2D>();
-    //     box.size.y *= 0.5f;
-    // }
+void PlayerSmallState::update(Entity* entity, float dt)
+{
+    if (!entity->hasComponent<BlinkingComponent>() && !entity->hasComponent<InvincibleTag>())
+    {
+        entity->addComponent<CanGetDamageTag>();
+    }
 }
 
 std::shared_ptr<PlayerSizeState> PlayerSmallState::getNewState(Entity* entity)
@@ -40,7 +36,7 @@ std::shared_ptr<PlayerSizeState> PlayerSmallState::getNewState(Entity* entity)
         return std::make_shared<PlayerGrowingUpState>();
     }
 
-    if (entity->hasComponent<DamagedTag>())
+    if (entity->hasComponent<DamagedTag>()) 
     {
         return std::make_shared<PlayerDeadState>();
     }

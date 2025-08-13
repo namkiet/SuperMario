@@ -157,7 +157,7 @@ void GameManager::handleEvent(const sf::Event &event)
         {
             // do nothing
 
-            world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(3.0f);
+            world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(100.0f);
         }
 
         if (event.key.code == sf::Keyboard::X)
@@ -209,7 +209,7 @@ void GameManager::draw(sf::RenderWindow &window, int level) const
     world.getSystem<RenderSystem>()->draw(world, window, level);
 
     // Drawn with custom view
-    // world.getSystem<DrawBoxColliderSystem>()->draw(world, window);
+    world.getSystem<DrawBoxColliderSystem>()->draw(world, window);
 
     // Set the default view
     world.getSystem<DrawGameComponentSystem>()->draw(world, window);

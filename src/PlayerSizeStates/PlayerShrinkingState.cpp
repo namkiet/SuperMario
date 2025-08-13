@@ -10,8 +10,6 @@
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <ECS/Entity.hpp>
 
-PlayerShrinkingState::PlayerShrinkingState() : animationDuration(3.0f), animationTimer(0.0f) {}
-
 const std::string PlayerShrinkingState::getName() const
 {
     return "Shrinking";
@@ -19,7 +17,7 @@ const std::string PlayerShrinkingState::getName() const
 
 void PlayerShrinkingState::onEnter(Entity* entity)
 {   
-    entity->addComponent<BlinkingComponent>(0.05f);
+    entity->addComponent<BlinkingComponent>(0.05f, 2.5f);
     entity->removeComponent<RigidBody>();
     entity->removeComponent<DamagedTag>();
     entity->removeComponent<CanGetDamageTag>();
@@ -27,8 +25,7 @@ void PlayerShrinkingState::onEnter(Entity* entity)
 
 void PlayerShrinkingState::onExit(Entity* entity)
 {  
-    entity->removeComponent<BlinkingComponent>();
-    entity->addComponent<CanGetDamageTag>();
+    entity->addComponent<RigidBody>();
 
     if (entity->hasComponent<Transform>())
     {
@@ -40,28 +37,17 @@ void PlayerShrinkingState::onExit(Entity* entity)
     if (entity->hasComponent<BoxCollider2D>())
     {
         auto& box = entity->getComponent<BoxCollider2D>();
+        box.offset.x += 6.0f;
+        box.size.x -= 12.0f;
         box.size.y *= 0.5f;
     }
 }
 
-void PlayerShrinkingState::update(Entity* entity, float dt)
-{
-    animationTimer += dt;
-}
-
 std::shared_ptr<PlayerSizeState> PlayerShrinkingState::getNewState(Entity* entity)
 {
-    if (animationTimer >= animationDuration)
+    if (entity->hasComponent<Animation>() && entity->getComponent<Animation>().hasEnded)
     {
         return std::make_shared<PlayerSmallState>();
-    }
-
-    if (animationTimer >= 0.5f * animationDuration)
-    {
-        if (!entity->hasComponent<RigidBody>())
-        {
-            entity->addComponent<RigidBody>();
-        }
     }
 
     return nullptr;

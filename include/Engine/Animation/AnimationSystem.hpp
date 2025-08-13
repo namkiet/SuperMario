@@ -5,7 +5,6 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <SFML/Graphics.hpp>
 #include <Gameplay/Enemy/Components.hpp>
-#include <Gameplay/Player/Components.hpp>
 #include <iostream>
 
 class AnimationSystem : public System
@@ -73,12 +72,6 @@ public:
                     }
                 }
 
-            }
-
-
-            if (entity->hasComponent<PlayerTag>())
-            {
-                std::cout << anim.currentFrame << " " << anim.frameCount << "\n";
             }
 
             if (!anim.textures.empty())
