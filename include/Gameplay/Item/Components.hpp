@@ -39,7 +39,11 @@ struct MushroomTag : public Component
     enum Buff
     {
         GIVE_ONE_MORE_LIFE,
-        GROW_UP
+        GROW_UP,
+        GET_TO_LEVEL_1,
+        GET_TO_LEVEL_2,
+        GET_TO_LEVEL_3,
+        GET_TO_LEVEL_4
     };
     Buff buff;
 

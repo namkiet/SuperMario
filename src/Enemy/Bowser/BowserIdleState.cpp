@@ -13,7 +13,6 @@
 #include <Engine/Core/Transform.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Core/Variables.hpp>
-#include <Core/TextureManager.hpp>
 
 void BowserIdleState::onEnter(Entity* entity)
 {
@@ -29,7 +28,7 @@ void BowserIdleState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_idle.png"), 32, 35, 1, 0));
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("bowser_idle"), 32, 35, 1, 0);
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();

@@ -7,7 +7,6 @@
 #include <Engine/Animation/Animation.hpp>
 #include <Gameplay/Stomp/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
-#include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/Enemy/Spiny/Components.hpp>
@@ -24,7 +23,7 @@ public:
         addComponent<Transform>(Transform(sf::Vector2f(x, y) * scale, sf::Vector2f(14, 16) * scale));
         addComponent<BoxCollider2D>(BoxCollider2D(sf::Vector2f(14, 16) * scale));
 
-        addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Spiny/spiny_egg.png"), 14, 16, 2, 0.5f / 2));
+        addComponent<Animation>(EnemyFactory::getEnemyTexture("spiny_egg"), 14, 16, 2, 0.5f / 2);
 
         addComponent<EnemyTag>(std::make_shared<SpinyEggState>(), std::make_shared<SpinyEggBehaviour>());
         addComponent<SpinyPatrol>();

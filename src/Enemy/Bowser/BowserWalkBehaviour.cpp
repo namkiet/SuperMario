@@ -13,12 +13,12 @@
 #include <Core/Variables.hpp>
 #include <Core/Physics.hpp>
 
-void BowserWalkBehaviour::collideWithPlayer(Entity* entity)
+void BowserWalkBehaviour::collideWithPlayer(Entity *entity)
 {
-    const auto& box = entity->getComponent<BoxCollider2D>();
-    auto& patrol = entity->getComponent<BowserPatrol>();
+    const auto &box = entity->getComponent<BoxCollider2D>();
+    auto &patrol = entity->getComponent<BowserPatrol>();
 
-    for (auto& [collider, direction, overlap] : box.collisions)
+    for (auto &[collider, direction, overlap] : box.collisions)
     {
         if (collider->hasComponent<PlayerTag>())
         {
@@ -29,7 +29,8 @@ void BowserWalkBehaviour::collideWithPlayer(Entity* entity)
                 {
                     entity->addComponent<ChangeToBowserHurtTag>();
                 }
-                else entity->addComponent<ChangeToBowserDeadTag>();
+                else
+                    entity->addComponent<ChangeToBowserDeadTag>();
 
                 break;
             }
@@ -37,36 +38,34 @@ void BowserWalkBehaviour::collideWithPlayer(Entity* entity)
     }
 }
 
-
-void BowserWalkBehaviour::collideWithOther(Entity* entity)
+void BowserWalkBehaviour::collideWithOther(Entity *entity)
 {
-    const auto& box = entity->getComponent<BoxCollider2D>();
-    auto& patrol = entity->getComponent<BowserPatrol>();
+    const auto &box = entity->getComponent<BoxCollider2D>();
+    auto &patrol = entity->getComponent<BowserPatrol>();
 
-    for (auto& [collider, direction, overlap] : box.collisions)
+    for (auto &[collider, direction, overlap] : box.collisions)
     {
         if (collider->hasComponent<CanKillEnemyTag>() && !entity->hasComponent<ChangeToBowserHurtTag>())
         {
             entity->getComponent<Health>().hp--;
-                if (entity->getComponent<Health>().hp > 0)
-                {
-                    entity->addComponent<ChangeToBowserHurtTag>();
-                }
-                else entity->addComponent<ChangeToBowserDeadTag>();
+            if (entity->getComponent<Health>().hp > 0)
+            {
+                entity->addComponent<ChangeToBowserHurtTag>();
+            }
+            else
+                entity->addComponent<ChangeToBowserDeadTag>();
         }
     }
 }
 
-
-void BowserWalkBehaviour::patrol(Entity* entity, float dt, World& world)
+void BowserWalkBehaviour::patrol(Entity *entity, float dt, World &world)
 {
-    auto& patrol = entity->getComponent<BowserPatrol>();
-    auto& attack = entity->getComponent<BowserAttack>();
-    auto& box = entity->getComponent<BoxCollider2D>();
-    auto& tf = entity->getComponent<Transform>();
-    auto& rb = entity->getComponent<RigidBody>();
-    auto& playerTF = world.findFirst<PlayerTag>()->getComponent<Transform>();
-
+    auto &patrol = entity->getComponent<BowserPatrol>();
+    auto &attack = entity->getComponent<BowserAttack>();
+    auto &box = entity->getComponent<BoxCollider2D>();
+    auto &tf = entity->getComponent<Transform>();
+    auto &rb = entity->getComponent<RigidBody>();
+    auto &playerTF = world.findFirst<PlayerTag>()->getComponent<Transform>();
 
     if (attack.castTime > 0)
     {
@@ -76,32 +75,32 @@ void BowserWalkBehaviour::patrol(Entity* entity, float dt, World& world)
     {
         entity->addComponent<ChangeToBowserIdleTag>();
     }
-    else 
+    else
     {
         auto bowserCen = tf.position + tf.size / 2.0f;
         auto playerCen = playerTF.position + playerTF.size / 2.0f;
-        auto& towardPlayer = entity->getComponent<TowardPlayer>();
-        
-        
+        auto &towardPlayer = entity->getComponent<TowardPlayer>();
+
         if (patrol.lastDirection != towardPlayer.direction)
         {
             patrol.timerDura += dt;
         }
-        else patrol.timerJump += dt;
+        else
+            patrol.timerJump += dt;
 
-
-        bool stillOnGround = false;    
-        for (auto& [collider, direction, overlap] : box.collisions)
+        bool stillOnGround = false;
+        for (auto &[collider, direction, overlap] : box.collisions)
         {
-            if (direction != Direction::Top) continue;
-            
+            if (direction != Direction::Top)
+                continue;
+
             auto bounds1 = Physics::GetCollisionBounds(entity);
             auto bounds2 = Physics::GetCollisionBounds(collider);
             auto centerX1 = bounds1.left + 0.5f * bounds1.width;
             auto centerX2 = bounds2.left + 0.5f * bounds2.width;
             auto dx = abs(centerX1 - centerX2);
             auto overlapX = 0.5f * (bounds1.width + bounds2.width) - dx;
-            
+
             if (overlapX >= 0.25f * bounds1.width)
             {
                 stillOnGround = true;
@@ -109,19 +108,17 @@ void BowserWalkBehaviour::patrol(Entity* entity, float dt, World& world)
             }
         }
 
-        
-        if ((rb.onGround == true && stillOnGround == false)
-        ||  (patrol.timerDura > patrol.duration && patrol.lastDirection != towardPlayer.direction)
-        ||  (abs(bowserCen.x - playerCen.x) < patrol.safeDist))
+        if ((rb.onGround == true && stillOnGround == false) || (patrol.timerDura > patrol.duration && patrol.lastDirection != towardPlayer.direction) || (abs(bowserCen.x - playerCen.x) < patrol.safeDist))
         {
             patrol.timerDura = 0;
-            
+
             if (patrol.lastDirection == Direction::Left)
             {
                 patrol.lastDirection = Direction::Right;
             }
-            else patrol.lastDirection = Direction::Left;
-            
+            else
+                patrol.lastDirection = Direction::Left;
+
             if (!entity->hasComponent<ChangeToBowserJumpTag>())
             {
                 entity->addComponent<ChangeToBowserJumpTag>();
@@ -129,7 +126,7 @@ void BowserWalkBehaviour::patrol(Entity* entity, float dt, World& world)
 
             return;
         }
-            
+
         if (patrol.timerJump >= patrol.jumpCooldown)
         {
             patrol.timerJump = 0;
@@ -139,14 +136,12 @@ void BowserWalkBehaviour::patrol(Entity* entity, float dt, World& world)
             }
             return;
         }
-        
-                
+
         patrol.velocity.x = 50 * (patrol.lastDirection == Direction::Right ? 1 : -1);
 
         towardPlayer.direction = (tf.position.x < playerTF.position.x ? Direction::Right : Direction::Left);
     }
 
-    
     // Apply patrol
     rb.velocity.x = patrol.velocity.x;
     if (patrol.velocity.y != 0)
@@ -155,16 +150,13 @@ void BowserWalkBehaviour::patrol(Entity* entity, float dt, World& world)
     }
 }
 
-
-void BowserWalkBehaviour::attack(Entity* entity, float dt, World& world)
+void BowserWalkBehaviour::attack(Entity *entity, float dt, World &world)
 {
-    auto& bowserTF =entity->getComponent<Transform>();
-    auto& attack = entity->getComponent<BowserAttack>();
+    auto &bowserTF = entity->getComponent<Transform>();
+    auto &attack = entity->getComponent<BowserAttack>();
     auto playerTF = world.findFirst<PlayerTag>()->getComponent<Transform>();
 
-    if (abs(bowserTF.position.x - playerTF.position.x) > attack.distance
-    ||  entity->hasComponent<ChangeToBowserHurtTag>()
-    ||  entity->hasComponent<ChangeToBowserDeadTag>())
+    if (abs(bowserTF.position.x - playerTF.position.x) > attack.distance || entity->hasComponent<ChangeToBowserHurtTag>() || entity->hasComponent<ChangeToBowserDeadTag>())
     {
         attack.timer = 0;
         attack.castTime = 0;
@@ -204,8 +196,7 @@ void BowserWalkBehaviour::attack(Entity* entity, float dt, World& world)
         //     anim.frameWidth,
         //     anim.frameHeight
         // ));
-        entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_walk.png"), 32, 35, 4, 0.25f));
-
+        entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("bowser_walk"), 32, 35, 4, 0.25f);
     }
     else if (attack.delay > attack.timer && attack.delay - attack.timer <= 0.75f && attack.isShooting == 0)
     {
@@ -213,7 +204,7 @@ void BowserWalkBehaviour::attack(Entity* entity, float dt, World& world)
         attack.castTime = (attack.delay - attack.timer) / 2;
 
         // auto& anim = entity->getComponent<Animation>();
-        // anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Bowser/bowser_shoot.png")); 
+        // anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Bowser/bowser_shoot.png"));
         // anim.frameWidth = 32;
         // anim.frameHeight = 36;
         // anim.frameCount = 2;
@@ -227,24 +218,23 @@ void BowserWalkBehaviour::attack(Entity* entity, float dt, World& world)
         //     anim.frameWidth,
         //     anim.frameHeight
         // ));
-        entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_shoot.png"), 32, 36, 2, attack.delay - attack.timer));
-
+        entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("bowser_shoot"), 32, 36, 2, attack.delay - attack.timer);
     }
     else if (attack.timer >= attack.delay)
     {
         attack.timer = 0;
         attack.isShooting = 0;
 
-        auto bullet = world.createEntity<BowserBullet>(0, 0, 3);
-        auto& bulletTF = bullet->getComponent<Transform>();
-        auto& bulletPT = bullet->getComponent<BowserBulletPatrol>();
+        auto bullet = world.createEntity<BowserBullet>(0.0f, 0.0f, 3.0f);
+        auto &bulletTF = bullet->getComponent<Transform>();
+        auto &bulletPT = bullet->getComponent<BowserBulletPatrol>();
         auto direction = entity->getComponent<TowardPlayer>().direction;
 
         if (direction == Direction::Left)
         {
             bulletTF.position.x = bowserTF.position.x - bulletTF.size.x;
         }
-        else 
+        else
         {
             bulletTF.position.x = bowserTF.position.x + bowserTF.size.x;
         }

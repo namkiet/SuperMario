@@ -57,66 +57,40 @@ private:
                 // velocity.x = 0;
                 // // std::cout << "Player reached the flagpole!" << std::endl;
 
-                if (player->hasComponent<TimeComponent>())
+                Entity *gameSession = world.findFirst<TimeComponent>();
+                if (!gameSession)
+                    return;
+                auto &timeComponent = gameSession->getComponent<TimeComponent>();
+
+                if (!timeComponent.isPaused)
                 {
-                    auto &timeComponent = player->getComponent<TimeComponent>();
-                    if (!timeComponent.isPaused)
-                    {
-                        timeComponent.timeUnitLeft = timeComponent.timer % 10; // Store the remaining time unit
-                        timeComponent.isPaused = true;
-                    }
-                    // Pause the timer when reaching the flagpole
+                    timeComponent.timeUnitLeft = timeComponent.timer % 10; // Store the remaining time unit
+                    timeComponent.isPaused = true;
                 }
 
-                // Entity *flag = nullptr;
-                // for (Entity *entity : world.findAll<Flag>())
-                // {
-                //     flag = entity;
-                //     break;
-                // }
+                if (timeComponent.firstTimePause)
+                    continue;
 
-                // if (flag)
-                // {
-                //     if (!flag->hasComponent<RigidBody>())
-                //     {
-                //         flag->addComponent<RigidBody>(sf::Vector2f(0, 300));
-                //     }
-                //     else
-                //     {
-                //         flag->getComponent<RigidBody>().velocity = sf::Vector2f(0, 300);
-                //     }
-                // }
+                Entity *scoreTextEntity = world.createEntity();
+                float x = flagPos.x + flagSize.x / 2 + 10;
+                float y = flagPos.y + flagSize.y;
 
-                // // For score
-                if (player->hasComponent<ScoreComponent>())
+                if (playerPos.y <= flagPos.y)
                 {
-                    auto &timeComponent = player->getComponent<TimeComponent>();
-
-                    if (timeComponent.firstTimePause)
-                        continue;
-                    auto &scoreComponent = player->getComponent<ScoreComponent>();
-
-                    Entity *scoreTextEntity = world.createEntity();
-                    float x = flagPos.x + flagSize.x / 2 + 10;
-                    float y = flagPos.y + flagSize.y;
-
-                    if (playerPos.y <= flagPos.y)
-                    {
-                        scoreComponent.score += 5000;
-                        scoreTextEntity->addComponent<TextComponent>("5000", x, y, flagPos.y + 48, 25, 2);
-                    }
-                    else if (playerPos.y > flagPos.y && playerPos.y <= flagPos.y + flagSize.y)
-                    {
-                        scoreComponent.score += 800; // Increment score by 100
-                        scoreTextEntity->addComponent<TextComponent>("800", x, y, flagPos.y + 48, 25, 2);
-                    }
-                    else
-                    {
-                        scoreComponent.score += 100; // Increment score by 100
-                        scoreTextEntity->addComponent<TextComponent>("100", x, y, flagPos.y + 48, 25, 2);
-                    }
-                    timeComponent.firstTimePause = true;
+                    world.getScoreManager().addScore(5000); // Increment score by 5000
+                    scoreTextEntity->addComponent<TextComponent>("5000", x, y, flagPos.y + 48, 25, 2);
                 }
+                else if (playerPos.y > flagPos.y && playerPos.y <= flagPos.y + flagSize.y)
+                {
+                    world.getScoreManager().addScore(800); // Increment score by 800
+                    scoreTextEntity->addComponent<TextComponent>("800", x, y, flagPos.y + 48, 25, 2);
+                }
+                else
+                {
+                    world.getScoreManager().addScore(100); // Increment score by 100
+                    scoreTextEntity->addComponent<TextComponent>("100", x, y, flagPos.y + 48, 25, 2);
+                }
+                timeComponent.firstTimePause = true;
             }
         }
     }

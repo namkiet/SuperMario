@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <Factories/EnemyFactory.hpp>
 
 class Entity;
 

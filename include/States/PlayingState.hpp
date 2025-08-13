@@ -11,6 +11,7 @@ public:
     void update(Game &game, float dt) override;
     void render(Game &game, sf::RenderWindow &window) override;
     void setLevel(int level);
+    void requestLevelReload(int newLevel);
     ~PlayingState() override;
 
 private:

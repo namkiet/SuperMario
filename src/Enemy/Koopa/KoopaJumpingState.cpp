@@ -11,10 +11,10 @@
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
-#include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <iostream>
+#include <Gameplay/GameProperties/Components.hpp>
 
 void KoopaJumpingState::onEnter(Entity* entity)
 {
@@ -28,6 +28,10 @@ std::shared_ptr<EnemyState> KoopaJumpingState::getNewState(Entity* entity, float
     {
         entity->removeComponent<KoopaJumpingTag>();
         entity->removeComponent<ChangeToKoopaNormalTag>();
+
+        // Add score tag to notify the score system
+        entity->addComponent<ShouldUpdateScore>(400);
+
         return std::make_shared<KoopaNormalState>();
     }
 

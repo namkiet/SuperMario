@@ -15,9 +15,9 @@
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Audio/Components.hpp>
 #include <Engine/Audio/SoundManager.hpp>
-#include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Stomp/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
 
 void BowserHurtState::onEnter(Entity* entity)
 {
@@ -38,7 +38,7 @@ void BowserHurtState::onEnter(Entity* entity)
         //     anim.frameWidth,
         //     anim.frameHeight
         // ));
-        entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_hurt.png"), 32, 38, 2, 0.1f));
+        entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("bowser_hurt"), 32, 38, 2, 0.1f);
     }
 
     auto& tag = entity->getComponent<EnemyTag>();
@@ -60,6 +60,9 @@ void BowserHurtState::onEnter(Entity* entity)
     entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/kickkill.wav"));
 
     entity->removeComponent<DamageOnContactComponent>();
+
+    // Add score tag to notify the score system
+    entity->addComponent<ShouldUpdateScore>(5000);
 }
 
 

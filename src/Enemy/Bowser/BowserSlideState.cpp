@@ -16,7 +16,6 @@
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Audio/Components.hpp>
 #include <Engine/Audio/SoundManager.hpp>
-#include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Stomp/Components.hpp>
 
@@ -33,8 +32,7 @@ void BowserSlideState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_slide.png"), 24, 21, 4, 0.09f));
-    
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("bowser_slide"), 24, 21, 4, 0.09f);
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();

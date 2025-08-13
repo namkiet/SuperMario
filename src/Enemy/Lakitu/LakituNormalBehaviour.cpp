@@ -145,18 +145,18 @@ void LakituNormalBehaviour::attack(Entity* entity, float dt, World& world)
     {
         // auto& anim = entity->getComponent<Animation>();
         // anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Lakitu/lakitu_attack.png"));
-        entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Lakitu/lakitu_attack.png"), 16, 24, 1, 0));
+        entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("lakitu_attack"), 16, 24, 1, 0);
     }
     
     if (attack.timer >= attack.delay)
     {
         // auto& anim = entity->getComponent<Animation>();
         // anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Lakitu/lakitu_normal.png"));
-        entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Lakitu/lakitu_normal.png"), 16, 24, 1, 0));
+        entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("lakitu_normal"), 16, 24, 1, 0);
 
         attack.timer -= attack.delay;
             
-        auto spiny = world.createEntity<Spiny>(0, 0, 3);
+        auto spiny = world.createEntity<Spiny>(0.0f, 0.0f, 3.0f);
         auto& spinyTf = spiny->getComponent<Transform>();
         auto& spinyRb = spiny->getComponent<RigidBody>();
         auto& spinyPatrol = spiny->getComponent<SpinyPatrol>();

@@ -8,7 +8,6 @@
 #include <Engine/Physics/GravitySystem.hpp>
 #include <Engine/Physics/MovementSystem.hpp>
 #include <Engine/Physics/RotateBoxCollider2D.hpp>
-#include <Engine/Physics/OBBCollisionSystem.hpp>
 
 #include <Engine/Animation/AnimationSystem.hpp>
 #include <Engine/Animation/BlinkSystem.hpp>
@@ -65,7 +64,6 @@
 #include <Gameplay/GameProperties/PlayTimeSystem.hpp>
 #include <Gameplay/GameProperties/TextPoppingSystem.hpp>
 
-#include <Gameplay/Background/FlagPoleSystem.hpp>
 #include <Gameplay/Background/LevelCompletionSystem.hpp>
 #include <Gameplay/Background/BridgeSystem.hpp>
 #include <Gameplay/Background/ElevatorSystem.hpp>
@@ -77,7 +75,8 @@
 #include <cassert>
 #include <iostream>
 
-GameManager::GameManager(int level) : levelHandler(world, level), level(level)
+GameManager::GameManager(int level, std::function<void(int)> reloadCallback)
+    : levelHandler(world, level), level(level), world(reloadCallback)
 {
     levelHandler.start();
 
@@ -95,7 +94,6 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
 
     world.addSystem<RotateBoxCollider2D>();
     world.addSystem<CollisionDetectionSystem>();
-    // world.addSystem<OBBCollisionSystem>();
     world.addSystem<HitBlockSystem>();
 
     world.addSystem<PlayerStateSystem>();
@@ -129,7 +127,6 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<FireBarSystem>();
     world.addSystem<PodobooSystem>();
 
-    world.addSystem<FlagPoleCollisionSystem>();
     world.addSystem<LevelCompletionSystem>();
 
     world.addSystem<TextPoppingSystem>();
@@ -150,6 +147,9 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
 
     world.addSystem<DespawnSystem>();
     world.addSystem<PlayerRespawnSystem>();
+
+    scoreUI = new ScoreUI();
+    world.getScoreManager().addObserver(scoreUI);
 }
 
 void GameManager::handleEvent(const sf::Event &event)
@@ -217,4 +217,11 @@ void GameManager::draw(sf::RenderWindow &window, int level) const
 
     // Set the default view
     world.getSystem<DrawGameComponentSystem>()->draw(world, window);
+
+    scoreUI->draw(window);
+}
+
+World &GameManager::getWorld()
+{
+    return world;
 }

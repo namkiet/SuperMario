@@ -14,9 +14,9 @@
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Audio/Components.hpp>
 #include <Engine/Audio/SoundManager.hpp>
-#include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Stomp/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
 
 void KoopaFlippedState::onEnter(Entity* entity)
 {
@@ -33,7 +33,7 @@ void KoopaFlippedState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Koopa/koopa_flipped.png"), 16, 16, 1, 0));
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("koopa_flipped"), 16, 16, 1, 0);
 
     entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/kickkill.wav"));
 
@@ -50,7 +50,9 @@ void KoopaFlippedState::onEnter(Entity* entity)
     entity->removeComponent<CanHitBlockTag>();
     entity->removeComponent<StompableTag>();
     entity->removeComponent<DamageOnContactComponent>();
-    entity->removeComponent<ScoreAddedTag>();
+
+    // Add score tag to notify the score system
+    entity->addComponent<ShouldUpdateScore>(200);
 }
 
 std::shared_ptr<EnemyState> KoopaFlippedState::getNewState(Entity* entity, float dt)

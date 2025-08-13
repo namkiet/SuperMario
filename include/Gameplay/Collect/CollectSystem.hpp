@@ -19,14 +19,16 @@ class CollectSystem : public System
                 if (!collider->hasComponent<CanCollectTag>())
                     continue;
 
-                if (collider->hasComponent<ScoreComponent>())
-                {
-                    auto &scoreComponent = collider->getComponent<ScoreComponent>();
-                    if (!item->hasComponent<Coin2Tag>())
-                        scoreComponent.score += 1000; // Increment score by 100 for each collectable item}
-                    else
-                        scoreComponent.score += 200; // Increment score by 2000 for Coin2
-                }
+                Entity *gameSession = world.findFirst<CoinComponent>();
+                if (!gameSession)
+                    continue;
+                auto &coinComponent = gameSession->getComponent<CoinComponent>();
+
+                if (!item->hasComponent<Coin2Tag>())
+                    world.getScoreManager().addScore(1000);
+
+                else
+                    world.getScoreManager().addScore(200);
 
                 if (!item->hasComponent<Coin2Tag>())
                 {
@@ -35,11 +37,8 @@ class CollectSystem : public System
                     float y = item->getComponent<Transform>().position.y - item->getComponent<Transform>().size.y / 2;
                     scoreTextEntity->addComponent<TextComponent>("1000", x, y, y - 48, 15, 1);
                 }
-                if (collider->hasComponent<CoinComponent>())
-                {
-                    auto &coinComp = collider->getComponent<CoinComponent>();
-                    ++coinComp.coins; // Increment coins
-                }
+                ++coinComponent.coins;
+                
                 item->addComponent<DespawnTag>();
             }
         }

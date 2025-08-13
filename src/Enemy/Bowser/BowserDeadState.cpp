@@ -10,9 +10,9 @@
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Audio/Components.hpp>
 #include <Engine/Audio/SoundManager.hpp>
-#include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Stomp/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
 
 void BowserDeadState::onEnter(Entity* entity)
 {
@@ -27,8 +27,7 @@ void BowserDeadState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_dead.png"), 32, 39, 1, 0));
-
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("bowser_dead"), 32, 39, 1, 0);
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();
@@ -46,6 +45,9 @@ void BowserDeadState::onEnter(Entity* entity)
     entity->removeComponent<CanHitBlockTag>();
     entity->removeComponent<StompableTag>();
     entity->removeComponent<DamageOnContactComponent>();
+
+    // Add score tag to notify the score system
+    entity->addComponent<ShouldUpdateScore>(5000);
 }
 
 std::shared_ptr<EnemyState> BowserDeadState::getNewState(Entity* entity, float dt)

@@ -15,6 +15,11 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
     auto &pos = tf.position;
     auto &sz = tf.size;
 
+    Entity *gameSession = world.findFirst<ThemeComponent>();
+    if (!gameSession)
+        return;
+    auto &themeComponent = gameSession->getComponent<ThemeComponent>();
+
     // Spawn a coin entity on top of it
     if (block->hasComponent<FlowerQuestionBlock>())
     {
@@ -23,14 +28,14 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
 
         if (player->hasComponent<BigMarioTag>())
         {
-            auto flower = world.createEntity<Flower>(pos.x, pos.y - sz.y, 48.0f, 48.0f);
+            auto flower = world.createEntity<Flower>(pos.x, pos.y - 20, 48, 48, ItemFactory(themeComponent.currentTheme));
             ItemEmerging emerging;
             emerging.finalY = pos.y - 48;
             flower->addComponent<ItemEmerging>(emerging);
         }
         else
         {
-            auto mushroom = world.createEntity<Mushroom1>(pos.x, pos.y - 20, 48.0f, 48.0f);
+            auto mushroom = world.createEntity<Mushroom1>(pos.x, pos.y - 20, 48, 48, ItemFactory(themeComponent.currentTheme));
             ItemEmerging emerging;
             emerging.finalY = pos.y - 48;
             mushroom->addComponent<ItemEmerging>(emerging);
@@ -41,7 +46,7 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
         // Remove MushroomQuestionBlock component
         block->removeComponent<MushroomQuestionBlock>();
 
-        auto mushroom = world.createEntity<Mushroom1>(pos.x, pos.y - 20, 48.0f, 48.0f);
+        auto mushroom = world.createEntity<Mushroom1>(pos.x, pos.y - 20, 48, 48, ItemFactory(themeComponent.currentTheme));
         ItemEmerging emerging;
         emerging.finalY = pos.y - 48;
         mushroom->addComponent<ItemEmerging>(emerging);
@@ -51,20 +56,20 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
         // Remove CoinQuestionBlock component
         block->removeComponent<CoinQuestionBlock>();
 
-        auto coin = world.createEntity<Coin1>(pos.x, pos.y - sz.y, 48.0f, 48.0f);
+        auto coin = world.createEntity<Coin1>(pos.x, pos.y - sz.y, 48, 48, ItemFactory(themeComponent.currentTheme));
 
-        if (player->hasComponent<CoinComponent>())
-        {
-            auto &coinComp = player->getComponent<CoinComponent>();
-            ++coinComp.coins; // Increment coins
-        }
+        Entity *gameSession = world.findFirst<CoinComponent>();
+        if (!gameSession)
+            return;
+        auto &coinComp = gameSession->getComponent<CoinComponent>();
+        ++coinComp.coins;
     }
     else if (block->hasComponent<StarQuestionBlock>())
     {
         // Remove StarQuestionBlock component
         block->removeComponent<StarQuestionBlock>();
 
-        auto star = world.createEntity<Star>(pos.x, pos.y, 48.0f, 48.0f);
+        auto star = world.createEntity<Star>(pos.x, pos.y, 48, 48, ItemFactory(themeComponent.currentTheme));
         ItemEmerging emerging;
         emerging.finalY = pos.y - 48;
         star->addComponent<ItemEmerging>(emerging);

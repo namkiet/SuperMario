@@ -10,6 +10,7 @@
 #include <Engine/Audio/Components.hpp>
 #include <Engine/Audio/SoundManager.hpp>
 #include <Gameplay/Player/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
 
 void PiranhaBehaviour::collideWithPlayer(Entity* entity)
 {
@@ -26,6 +27,8 @@ void PiranhaBehaviour::collideWithOther(Entity* entity)
         {
             entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/kickkill.wav"));
             entity->addComponent<DespawnTag>();
+            // Add score tag to notify the score system
+            entity->addComponent<ShouldUpdateScore>(200);
             break;
         }
     }

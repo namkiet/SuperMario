@@ -10,7 +10,6 @@
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
-#include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <iostream>
@@ -30,7 +29,7 @@ void KoopaNormalState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Koopa/koopa_walk.png"), 16, 24, 2, 0.25f));
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("koopa_walk"), 16, 24, 2, 0.25f);
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();

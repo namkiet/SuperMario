@@ -1,16 +1,18 @@
 #pragma once
-#include <World.hpp>
-#include <Gameplay/Block/Components.hpp>
-#include <Prefabs/Star.hpp>
+
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Physics/BlockTag.hpp>
+
+#include <Factories/ItemFactory.hpp>
+
+#include <Gameplay/Block/Components.hpp>
 #include <Gameplay/Patrol/Components.hpp>
 #include <Gameplay/LifeSpan/Components.hpp>
 #include <Gameplay/Player/Components.hpp>
-#include <fstream>
-#include <iostream>
+
+#include <World.hpp>
 
 class FireBulletSystem : public System
 {
@@ -89,7 +91,12 @@ public:
                     fireBullet->getComponent<Transform>().size = sf::Vector2f(48, 48);
 
                     // Add the new animation
-                    fireBullet->addComponent<Animation>(TextureManager::load("assets/Item/FireBullet/FireBullet_4.png"));
+                    Entity *gameSession = world.findFirst<ThemeComponent>();
+                    if (!gameSession)
+                        return;
+                    auto &themeComponent = gameSession->getComponent<ThemeComponent>();
+                    ItemFactory itemFactory(themeComponent.currentTheme);
+                    fireBullet->addComponent<Animation>(itemFactory.getItemTexture("fireworks"));
 
                     // Add the life span component
                     fireBullet->addComponent<LifeSpan>(0.3f);

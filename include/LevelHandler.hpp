@@ -1,14 +1,20 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+
 #include <Core/TextureManager.hpp>
-#include <fstream>
-#include <nlohmann/json.hpp>
-#include <World.hpp>
+
 #include <Engine/Core/Transform.hpp>
-#include <string>
-#include <unordered_map>
+
+#include <nlohmann/json.hpp>
+
+#include <SFML/Graphics.hpp>
 #include <SFML/System/Vector2.hpp>
-#include <iostream>
+
+#include <string>
+
+#include <unordered_map>
+
+#include <World.hpp>
+
 class LevelHandler
 {
 private:
@@ -18,7 +24,7 @@ private:
     // 2 for world 5-4
     // 3 for world 6-1 + 6-2
     int spriteIndex = 0;
-
+    float scale = 3.0f;
     std::unordered_map<std::string, sf::Vector2f> teleMap;
 
     void tileLoad(World &world, std::string tilename, float x, float y, float width, float height);

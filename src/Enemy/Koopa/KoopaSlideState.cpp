@@ -9,9 +9,9 @@
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/Transform.hpp>
-#include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <iostream>
+#include <Gameplay/GameProperties/Components.hpp>
 
 void KoopaSlideState::onEnter(Entity *entity)
 {
@@ -29,7 +29,7 @@ void KoopaSlideState::onEnter(Entity *entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Koopa/koopa_shell.png"), 16, 16, 1, 0));
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("koopa_shell"), 16, 16, 1, 0);
 
     auto &tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();
@@ -44,8 +44,8 @@ void KoopaSlideState::onEnter(Entity *entity)
     std::vector<Direction> directions = {Direction::Left, Direction::Right, Direction::Bottom};
     entity->addComponent<DamageOnContactComponent>(directions);
 
-    // remove the score added tag if it exists
-    entity->removeComponent<ScoreAddedTag>();
+    // Add score tag to notify the score system
+    entity->addComponent<ShouldUpdateScore>(500);
 }
 
 std::shared_ptr<EnemyState> KoopaSlideState::getNewState(Entity *entity, float dt)

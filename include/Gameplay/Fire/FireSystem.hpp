@@ -20,13 +20,6 @@ private:
 public:
     void update(World &world, float dt) override
     {
-        // std::ofstream fout("output.txt", std::ios::app);
-        // if (fout.fail())
-        // {
-        //     std::cerr << "Failed to open output.txt for writing." << std::endl;
-        //     return;
-        // }
-
         for (Entity *player : world.findAll<CanFireTag, Transform, FireCooldown, RigidBody>())
         {
             auto &pos = player->getComponent<Transform>().position;
@@ -39,7 +32,12 @@ public:
 
             if (pool.isKeyPressed(sf::Keyboard::M) && FireBullet::getCount() < 2 && cooldown.timeCount > 0.5f)
             {
-                auto fireBullet = world.createEntity<FireBullet>(pos.x + size.x / 2, pos.y + size.y / 8, 24, 24);
+                Entity *gameSession = world.findFirst<ThemeComponent>();
+                if (!gameSession)
+                    return;
+
+                auto &themeComponent = gameSession->getComponent<ThemeComponent>();
+                auto fireBullet = world.createEntity<FireBullet>(pos.x + size.x / 2, pos.y + size.y / 8, 24, 24, ItemFactory(themeComponent.currentTheme));
                 if (!player->hasComponent<FlipXTag>())
                 {
                     if (fireBullet->hasComponent<PatrolComponent>())
