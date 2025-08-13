@@ -1,4 +1,3 @@
-
 #include <StateManager.hpp>
 
 #include <Gameplay/Enemy/Spiny/SpinyNormalBehaviour.hpp>

@@ -193,18 +193,13 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(StateDuration, duration, timer)
 REGISTER_COMPONENT(BowserBulletPatrol)
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(BowserBulletPatrol, velocity, targetY)
 
-#include <Gameplay/Invincible/Components.hpp>
-
-REGISTER_COMPONENT(InvincibleTag)
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(InvincibleTag, duration, timer)
-
 #include <Gameplay/CaptureFlag/Components.hpp>
 
 REGISTER_COMPONENT(CanCaptureFlagTag)
 DEFINE_TAG(CanCaptureFlagTag)
 
-REGISTER_COMPONENT(SlidingOnFlagPoleTag)
-DEFINE_TAG(SlidingOnFlagPoleTag)
+REGISTER_COMPONENT(ClimbingOnFlagPoleTag)
+DEFINE_TAG(ClimbingOnFlagPoleTag)
 
 REGISTER_COMPONENT(FlagPoleTag)
 DEFINE_TAG(FlagPoleTag)
@@ -241,6 +236,9 @@ DEFINE_TAG(CanFireTag)
 
 REGISTER_COMPONENT(FireCooldown)
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(FireCooldown, timeCount)
+
+REGISTER_COMPONENT(ShootingTag)
+DEFINE_TAG(ShootingTag)
 
 #include <Gameplay/Item/ItemEmerging.hpp>
 
@@ -307,11 +305,9 @@ REGISTER_COMPONENT(TelePort)
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(TelePort, requireCollisionDirection, intime, inVel, destination)
 
 REGISTER_COMPONENT(hasPipeDestination)
-// DEFINE_TAG(hasPipeDestination)
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(hasPipeDestination, pipe, OutDirection)
 
 REGISTER_COMPONENT(TeleChanneling)
-// DEFINE_TAG(TeleChanneling)
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(TeleChanneling, teleInTime, teleEntity)
 
 #include <Gameplay/DamageOnContact/Components.hpp>
@@ -377,7 +373,7 @@ DEFINE_TAG(MushroomBlock)
 #include <Gameplay/Player/Components.hpp>
 
 REGISTER_COMPONENT(PlayerTag)
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(PlayerTag, movementState, powerState)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(PlayerTag, movementState, sizeState, powerState)
 
 REGISTER_COMPONENT(BigMarioTag)
 DEFINE_TAG(BigMarioTag)
@@ -390,6 +386,9 @@ DEFINE_TAG(GrowUpTag)
 
 REGISTER_COMPONENT(InputTag)
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(InputTag, horizontalMovement, jumpPressed)
+
+REGISTER_COMPONENT(InvincibleTag)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(InvincibleTag, duration, timer)
 
 #include <Engine/Core/DespawnTag.hpp>
 
@@ -419,17 +418,17 @@ DEFINE_TAG(FollowByCameraTag)
 #include <Engine/Camera/Camera.hpp>
 
 REGISTER_COMPONENT(Camera)
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Camera, target)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Camera, target, trapHalfWidth, smoothing)
 
 #include <Engine/Animation/BlinkingComponent.hpp>
 
 REGISTER_COMPONENT(BlinkingComponent)
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(BlinkingComponent, interval, timer, visible)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(BlinkingComponent, interval, duration, timer, visible)
 
 #include <Engine/Animation/Animation.hpp>
 
 REGISTER_COMPONENT(Animation)
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Animation, frameWidth, frameHeight, frameCount, frameDuration, currentFrame, timer, loop, row, hasEnded, textures)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Animation, sprite, frameWidth, frameHeight, frameCount, frameDuration, currentFrame, timer, loop, row, hasEnded, textures)
 
 REGISTER_COMPONENT(FlipXTag)
 DEFINE_TAG(FlipXTag)
@@ -437,20 +436,15 @@ DEFINE_TAG(FlipXTag)
 REGISTER_COMPONENT(FlipYTag)
 DEFINE_TAG(FlipYTag)
 
-#include <Engine/Audio/Components.hpp>
+// #include <Engine/Audio/Components.hpp>
 
 // REGISTER_COMPONENT(SoundComponent)
-// NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(SoundComponent, shouldPlay, loop)
+// NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(SoundComponent, sound, shouldPlay, loop)
 
 #include <Engine/Rendering/ZIndex.hpp>
 
 REGISTER_COMPONENT(ZIndex)
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(ZIndex, value)
-
-#include <Engine/Physics/PassThroughTag.hpp>
-
-REGISTER_COMPONENT(PassThroughTag)
-DEFINE_TAG(PassThroughTag)
 
 #include <Engine/Physics/BoxCollider2D.hpp>
 
