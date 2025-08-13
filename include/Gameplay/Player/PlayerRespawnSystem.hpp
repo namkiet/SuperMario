@@ -13,6 +13,8 @@ public:
         if (world.findFirst<PlayerTag>())
             return;
 
-        world.createEntity<Mario>((float)0 * 16, (float)6 * 16, 16, 16, 3);
+        auto mario = world.createEntity<Mario>((float)0 * 16, (float)6 * 16, 16, 16, 3);
+        mario->addComponent<GrowUpTag>();
+        mario->addComponent<FireMarioTag>();
     }
 };

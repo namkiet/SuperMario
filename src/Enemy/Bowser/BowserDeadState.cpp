@@ -4,7 +4,6 @@
 #include <Gameplay/Enemy/Bowser/BowserDeadState.hpp>
 #include <Gameplay/Enemy/Bowser/BowserDeadBehaviour.hpp>
 #include <Engine/Animation/Animation.hpp>
-#include <Engine/Physics/PassThroughTag.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>

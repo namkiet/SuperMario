@@ -28,7 +28,7 @@ public:
         // Set the animation for the fire bullet
         std::vector<const sf::Texture *> textures = itemFactory.getItemTextures("fireBullet");
         addComponent<Animation>(textures, width, height, 0.15f, true);
-        addComponent<ZIndex>(-1); // Set z-index for rendering order
+        addComponent<ZIndex>(1); // Set z-index for rendering order
 
         addComponent<BoxCollider2D>(sf::Vector2f(width, height));
 

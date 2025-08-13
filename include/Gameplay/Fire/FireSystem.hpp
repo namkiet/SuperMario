@@ -30,6 +30,7 @@ public:
             // Update the cooldown time
             cooldown.timeCount += dt;
 
+            player->removeComponent<ShootingTag>();
             if (pool.isKeyPressed(sf::Keyboard::M) && FireBullet::getCount() < 2 && cooldown.timeCount > 0.5f)
             {
                 Entity *gameSession = world.findFirst<ThemeComponent>();
@@ -38,17 +39,20 @@ public:
 
                 auto &themeComponent = gameSession->getComponent<ThemeComponent>();
                 auto fireBullet = world.createEntity<FireBullet>(pos.x + size.x / 2, pos.y + size.y / 8, 24, 24, ItemFactory(themeComponent.currentTheme));
+                player->addComponent<ShootingTag>();
                 if (!player->hasComponent<FlipXTag>())
                 {
                     if (fireBullet->hasComponent<PatrolComponent>())
                         fireBullet->getComponent<PatrolComponent>().isMovingRight = true;
+                    if (fireBullet->hasComponent<Transform>())
+                        fireBullet->getComponent<Transform>().position.x = pos.x + size.x;
                 }
                 else if (player->hasComponent<FlipXTag>())
                 {
                     if (fireBullet->hasComponent<PatrolComponent>())
                         fireBullet->getComponent<PatrolComponent>().isMovingRight = false;
                     if (fireBullet->hasComponent<Transform>())
-                        fireBullet->getComponent<Transform>().position.x = pos.x;
+                        fireBullet->getComponent<Transform>().position.x = pos.x - fireBullet->getComponent<Transform>().size.x;
                 }
 
                 cooldown.timeCount = 0;

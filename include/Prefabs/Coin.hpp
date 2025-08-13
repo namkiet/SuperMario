@@ -4,14 +4,11 @@
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
-#include <Engine/Physics/PassThroughTag.hpp>
-
 #include <Factories/ItemFactory.hpp>
 
 #include <Gameplay/LifeSpan/Components.hpp>
 #include <Gameplay/Collect/Components.hpp>
 #include <Gameplay/Item/Components.hpp>
-
 #include <vector>
 
 class Coin1 : public Entity
@@ -51,7 +48,6 @@ public:
         std::vector<const sf::Texture *> textures = itemFactory.getItemTextures("coin3");
         addComponent<Animation>(textures, width, height, 0.3f, true);
 
-        addComponent<PassThroughTag>();
         addComponent<SmallCoinTag>();
     }
 };
