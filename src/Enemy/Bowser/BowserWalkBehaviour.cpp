@@ -22,7 +22,7 @@ void BowserWalkBehaviour::collideWithPlayer(Entity* entity)
     {
         if (collider->hasComponent<PlayerTag>())
         {
-            if (direction == Direction::Bottom && !entity->hasComponent<ChangeToBowserHurtTag>())
+            if ((direction == Direction::Bottom || collider->hasComponent<CanKillEnemyTag>()) && !entity->hasComponent<ChangeToBowserHurtTag>())
             {
                 entity->getComponent<Health>().hp--;
                 if (entity->getComponent<Health>().hp > 0)
@@ -45,6 +45,8 @@ void BowserWalkBehaviour::collideWithOther(Entity* entity)
 
     for (auto& [collider, direction, overlap] : box.collisions)
     {
+        if (collider->hasComponent<PlayerTag>()) continue;
+
         if (collider->hasComponent<CanKillEnemyTag>() && !entity->hasComponent<ChangeToBowserHurtTag>())
         {
             entity->getComponent<Health>().hp--;

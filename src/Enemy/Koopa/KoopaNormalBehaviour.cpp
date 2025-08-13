@@ -21,7 +21,11 @@ void KoopaNormalBehaviour::collideWithPlayer(Entity* entity)
     {
         if (!collider->hasComponent<PlayerTag>()) continue;
 
-        if (direction == Direction::Bottom)
+        if (collider->hasComponent<CanKillEnemyTag>())
+        {
+            entity->addComponent<ChangeToKoopaFlippedTag>();
+        }
+        else if (direction == Direction::Bottom)
         {
             entity->addComponent<ChangeToKoopaShellTag>();
         }
@@ -39,6 +43,8 @@ void KoopaNormalBehaviour::collideWithOther(Entity* entity)
 
     for (auto& [collider, direction, overlap] : box.collisions)
     {
+        if (collider->hasComponent<PlayerTag>()) continue;
+
         if (collider->hasComponent<CanKillEnemyTag>())
         {
             entity->addComponent<ChangeToKoopaFlippedTag>();
