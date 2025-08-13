@@ -32,14 +32,14 @@ private:
 
                 player->removeComponent<CanCaptureFlagTag>();
                 player->removeComponent<InputTag>();
-                player->addComponent<RigidBody>(sf::Vector2f(0, 200), false);
+                player->addComponent<RigidBody>(sf::Vector2f(0, 150), false);
                 player->addComponent<ClimbingOnFlagPoleTag>();
                 player->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/flagpole.wav"));
 
                 // pull the flag down
                 if (auto flag = world.findFirst<Flag>())
                 {
-                    flag->addComponent<RigidBody>(sf::Vector2f(0, 200), false);
+                    flag->addComponent<RigidBody>(sf::Vector2f(0, 150), false);
                 }
 
                 if (player->hasComponent<TimeComponent>())

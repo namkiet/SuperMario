@@ -1,4 +1,4 @@
-#include <PlayerPowerStates/PlayerDeadState.hpp>
+#include <Gameplay/Player/PlayerSizeStates/PlayerDeadState.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Engine/Core/RigidBody.hpp>
@@ -19,7 +19,7 @@ void PlayerDeadState::onEnter(Entity* entity)
     }
 }
 
-std::shared_ptr<PlayerPowerState> PlayerDeadState::getNewState(Entity* entity)
+std::shared_ptr<PlayerSizeState> PlayerDeadState::getNewState(Entity* entity)
 {
     return nullptr;
 }

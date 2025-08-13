@@ -1,10 +1,12 @@
-#include <PlayerMovementStates/PlayerIdlingState.hpp>
-#include <PlayerMovementStates/PlayerJumpingState.hpp>
-#include <PlayerMovementStates/PlayerRunningState.hpp>
-#include <PlayerMovementStates/PlayerClimbingState.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerIdlingState.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerJumpingState.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerRunningState.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerClimbingState.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerShootingState.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Gameplay/CaptureFlag/Components.hpp>
+#include <Gameplay/Fire/Components.hpp>
 #include <ECS/Entity.hpp>
 
 const std::string PlayerJumpingState::getName() const
@@ -26,6 +28,11 @@ std::shared_ptr<PlayerMovementState> PlayerJumpingState::getNewState(Entity* ent
     if (entity->hasComponent<ClimbingOnFlagPoleTag>())
     {
         return std::make_shared<PlayerClimbingState>();
+    }
+
+    if (entity->hasComponent<ShootingTag>())
+    {
+        return std::make_shared<PlayerShootingState>();
     }
 
     return nullptr;

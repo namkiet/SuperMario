@@ -1,5 +1,5 @@
-#include <PlayerMovementStates/PlayerClimbingState.hpp>
-#include <PlayerMovementStates/PlayerRunningState.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerClimbingState.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerRunningState.hpp>
 #include <Gameplay/CaptureFlag/Components.hpp>
 #include <ECS/Entity.hpp>
 

@@ -1,5 +1,5 @@
-#include <PlayerPowerStates/PlayerGrowingUpState.hpp>
-#include <PlayerPowerStates/PlayerBigState.hpp>
+#include <Gameplay/Player/PlayerSizeStates/PlayerGrowingUpState.hpp>
+#include <Gameplay/Player/PlayerSizeStates/PlayerBigState.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Core/Transform.hpp>
@@ -36,7 +36,7 @@ void PlayerGrowingUpState::onExit(Entity* entity)
     entity->addComponent<RigidBody>();
 }
 
-std::shared_ptr<PlayerPowerState> PlayerGrowingUpState::getNewState(Entity* entity)
+std::shared_ptr<PlayerSizeState> PlayerGrowingUpState::getNewState(Entity* entity)
 {
     if (entity->hasComponent<Animation>())
     {

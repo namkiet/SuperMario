@@ -3,14 +3,16 @@
 #include <memory>
 
 class PlayerMovementState;
+class PlayerSizeState;
 class PlayerPowerState;
 
 struct PlayerTag : public Component 
 {
-    PlayerTag(std::shared_ptr<PlayerMovementState> movementState, std::shared_ptr<PlayerPowerState> powerState) 
-        : movementState(movementState), powerState(powerState) {}
+    PlayerTag(std::shared_ptr<PlayerMovementState> movementState, std::shared_ptr<PlayerSizeState> sizeState, std::shared_ptr<PlayerPowerState> powerState) 
+        : movementState(movementState), sizeState(sizeState), powerState(powerState) {}
 
     std::shared_ptr<PlayerMovementState> movementState;
+    std::shared_ptr<PlayerSizeState> sizeState;
     std::shared_ptr<PlayerPowerState> powerState;
 };
 
@@ -22,4 +24,11 @@ struct InputTag: public Component
 {
     int horizontalMovement = 0;
     bool jumpPressed = false;
+};
+
+struct InvincibleTag : public Component
+{
+    InvincibleTag(float duration) : duration(duration) {}
+    float duration;
+    float timer = 0.0f;
 };

@@ -1,6 +1,6 @@
-#include <PlayerMovementStates/PlayerIdlingState.hpp>
-#include <PlayerMovementStates/PlayerJumpingState.hpp>
-#include <PlayerMovementStates/PlayerRunningState.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerIdlingState.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerJumpingState.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerRunningState.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <ECS/Entity.hpp>
