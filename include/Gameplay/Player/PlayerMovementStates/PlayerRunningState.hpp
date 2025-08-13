@@ -1,7 +1,7 @@
 #pragma once
-#include <PlayerMovementStates/PlayerMovementState.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerMovementState.hpp>
 
-class PlayerIdlingState : public PlayerMovementState
+class PlayerRunningState : public PlayerMovementState
 {
 public:
     const std::string getName() const override;

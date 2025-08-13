@@ -32,7 +32,6 @@
 #include <Gameplay/Block/BounceBlockSystem.hpp>
 #include <Gameplay/Popup/PopupSystem.hpp>
 #include <Gameplay/DamageOnContact/DamageOnContactSystem.hpp>
-#include <Gameplay/Invincible/InvincibleSystem.hpp>
 
 #include <Gameplay/Item/ItemEmergingSystem.hpp>
 #include <Gameplay/Item/CoinJumpingSystem.hpp>
@@ -65,7 +64,6 @@
 #include <Gameplay/GameProperties/PlayTimeSystem.hpp>
 #include <Gameplay/GameProperties/TextPoppingSystem.hpp>
 
-#include <Gameplay/Background/FlagPoleSystem.hpp>
 #include <Gameplay/Background/LevelCompletionSystem.hpp>
 #include <Gameplay/Background/BridgeSystem.hpp>
 #include <Gameplay/Background/ElevatorSystem.hpp>
@@ -129,14 +127,12 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<FireBarSystem>();
     world.addSystem<PodobooSystem>();
 
-    world.addSystem<FlagPoleCollisionSystem>();
+    // world.addSystem<FlagPoleCollisionSystem>();
     world.addSystem<LevelCompletionSystem>();
 
     world.addSystem<TextPoppingSystem>();
 
     world.addSystem<DamageOnContactSystem>();
-
-    world.addSystem<InvincibleSystem>();
 
     world.addSystem<EnemyStateSystem>();
     world.addSystem<EnemyBehaviourSystem>();
@@ -161,7 +157,7 @@ void GameManager::handleEvent(const sf::Event &event)
         {
             // do nothing
 
-            world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(1000.0f);
+            world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(3.0f);
         }
 
         if (event.key.code == sf::Keyboard::X)
@@ -213,7 +209,7 @@ void GameManager::draw(sf::RenderWindow &window, int level) const
     world.getSystem<RenderSystem>()->draw(world, window, level);
 
     // Drawn with custom view
-    world.getSystem<DrawBoxColliderSystem>()->draw(world, window);
+    // world.getSystem<DrawBoxColliderSystem>()->draw(world, window);
 
     // Set the default view
     world.getSystem<DrawGameComponentSystem>()->draw(world, window);

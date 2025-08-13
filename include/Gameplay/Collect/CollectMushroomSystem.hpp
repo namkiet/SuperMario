@@ -17,7 +17,10 @@ class CollectMushroomSystem : public System
                 if (!item->hasComponent<CollectableTag>()) continue;
                 if (!item->hasComponent<MushroomTag>()) continue;
 
-                player->addComponent<GrowUpTag>();
+                if (!player->hasComponent<BigMarioTag>())
+                {
+                    player->addComponent<GrowUpTag>();
+                }
             }
         }
     }

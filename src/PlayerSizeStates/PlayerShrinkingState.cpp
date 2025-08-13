@@ -1,6 +1,6 @@
 
-#include <PlayerPowerStates/PlayerShrinkingState.hpp>
-#include <PlayerPowerStates/PlayerSmallState.hpp>
+#include <Gameplay/Player/PlayerSizeStates/PlayerShrinkingState.hpp>
+#include <Gameplay/Player/PlayerSizeStates/PlayerSmallState.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Animation/BlinkingComponent.hpp>
 #include <Engine/Core/RigidBody.hpp>
@@ -17,7 +17,7 @@ const std::string PlayerShrinkingState::getName() const
 
 void PlayerShrinkingState::onEnter(Entity* entity)
 {   
-    entity->addComponent<BlinkingComponent>(0.1f);
+    entity->addComponent<BlinkingComponent>(0.05f);
     
     entity->removeComponent<RigidBody>();
     entity->removeComponent<DamagedTag>();
@@ -45,7 +45,7 @@ void PlayerShrinkingState::onExit(Entity* entity)
     }
 }
 
-std::shared_ptr<PlayerPowerState> PlayerShrinkingState::getNewState(Entity* entity)
+std::shared_ptr<PlayerSizeState> PlayerShrinkingState::getNewState(Entity* entity)
 {
     if (entity->hasComponent<Animation>())
     {

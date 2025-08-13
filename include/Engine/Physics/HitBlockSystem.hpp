@@ -55,12 +55,12 @@ public:
 
                     case Direction::Left:
                         tf.position.x = blockPos.x - box.size.x - box.offset.x;
-                        rb.velocity.x = std::fmin(blockVel.y, 0.0f);
+                        rb.velocity.x = std::fmin(blockVel.x, 0.0f);
                         break;
 
                     case Direction::Right:
                         tf.position.x = blockPos.x + blockSize.x - box.offset.x;
-                        rb.velocity.x = std::fmax(blockVel.y, 0.0f);
+                        rb.velocity.x = std::fmax(blockVel.x, 0.0f);
                         break;
 
                     default:
@@ -77,6 +77,7 @@ private:
         auto bounds1 = Physics::GetCollisionBounds(curBlock);
         for (auto& [other, dir2, _] : otherCollisions)
         {
+            if (!other->hasComponent<BlockTag>()) continue;
             auto bounds2 = Physics::GetCollisionBounds(other);
             if (dir2 == Direction::Left && bounds1.left == bounds2.left) return true;
             if (dir2 == Direction::Right && bounds1.left + bounds1.width == bounds2.left + bounds2.width) return true;

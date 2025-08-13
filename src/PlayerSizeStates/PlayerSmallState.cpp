@@ -1,13 +1,12 @@
-#include <PlayerPowerStates/PlayerSmallState.hpp>
-#include <PlayerPowerStates/PlayerSmallInvincibleState.hpp>
-#include <PlayerPowerStates/PlayerDeadState.hpp>
-#include <PlayerPowerStates/PlayerGrowingUpState.hpp>
+#include <Gameplay/Player/PlayerSizeStates/PlayerSmallState.hpp>
+#include <Gameplay/Player/PlayerSizeStates/PlayerDeadState.hpp>
+#include <Gameplay/Player/PlayerSizeStates/PlayerGrowingUpState.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/BreakBrick/Components.hpp>
-#include <Gameplay/Invincible/Components.hpp>
+
 #include <ECS/Entity.hpp>
 
 const std::string PlayerSmallState::getName() const
@@ -34,16 +33,11 @@ void PlayerSmallState::onEnter(Entity* entity)
     // }
 }
 
-std::shared_ptr<PlayerPowerState> PlayerSmallState::getNewState(Entity* entity)
+std::shared_ptr<PlayerSizeState> PlayerSmallState::getNewState(Entity* entity)
 {
     if (entity->hasComponent<GrowUpTag>()) 
     {
         return std::make_shared<PlayerGrowingUpState>();
-    }
-
-    if (entity->hasComponent<InvincibleTag>())
-    {
-        return std::make_shared<PlayerSmallInvincibleState>();
     }
 
     if (entity->hasComponent<DamagedTag>())

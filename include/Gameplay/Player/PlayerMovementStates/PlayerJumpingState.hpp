@@ -1,5 +1,5 @@
 #pragma once
-#include <PlayerMovementStates/PlayerMovementState.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerMovementState.hpp>
 
 class PlayerJumpingState : public PlayerMovementState
 {

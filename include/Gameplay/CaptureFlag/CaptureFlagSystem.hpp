@@ -17,7 +17,7 @@ private:
         for (Entity* player : world.findAll<CanCaptureFlagTag, PlayerTag, BoxCollider2D, Transform>())
         {
 
-            for (auto &[pole, direction, overlap] : player->getComponent<BoxCollider2D>().collisions)
+            for (auto &[pole, _, __] : player->getComponent<BoxCollider2D>().collisions)
             {
                 if (!pole->hasComponent<FlagPoleTag>()) continue;
                 if (!pole->hasComponent<Transform>()) continue;
@@ -28,34 +28,19 @@ private:
                 auto& flagPos = pole->getComponent<Transform>().position;
                 auto& flagSize = pole->getComponent<BoxCollider2D>().size;
 
-                // Check if the player has reached the flagpole
-                // playerPos.x = flagPos.x - flagSize.x / 2;
+                playerPos.x = flagPos.x + flagSize.x / 2 - playerBox.size.x;
 
                 player->removeComponent<CanCaptureFlagTag>();
                 player->removeComponent<InputTag>();
-                player->addComponent<RigidBody>(sf::Vector2f(0, 200), false);
+                player->addComponent<RigidBody>(sf::Vector2f(0, 150), false);
+                player->addComponent<ClimbingOnFlagPoleTag>();
+                player->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/flagpole.wav"));
 
                 // pull the flag down
                 if (auto flag = world.findFirst<Flag>())
                 {
-                    flag->addComponent<RigidBody>(sf::Vector2f(0, 300), false);
+                    flag->addComponent<RigidBody>(sf::Vector2f(0, 150), false);
                 }
-
-                player->addComponent<SlidingOnFlagPoleTag>();
-
-                // continue;
-                // auto &pos = player->getComponent<Transform>().position;
-                // auto &size = player->getComponent<BoxCollider2D>().size;
-                // auto &flagSize = collider->getComponent<BoxCollider2D>().size;
-                // auto &flagPos = collider->getComponent<Transform>().position;
-                // auto &velocity = player->getComponent<RigidBody>().velocity;
-
-                // // Check if the player has reached the flagpole
-                playerPos.x = flagPos.x + flagSize.x / 2 - playerBox.size.x;
-
-                // velocity.y = 200;
-                // velocity.x = 0;
-                // // std::cout << "Player reached the flagpole!" << std::endl;
 
                 if (player->hasComponent<TimeComponent>())
                 {
@@ -67,25 +52,6 @@ private:
                     }
                     // Pause the timer when reaching the flagpole
                 }
-
-                // Entity *flag = nullptr;
-                // for (Entity *entity : world.findAll<Flag>())
-                // {
-                //     flag = entity;
-                //     break;
-                // }
-
-                // if (flag)
-                // {
-                //     if (!flag->hasComponent<RigidBody>())
-                //     {
-                //         flag->addComponent<RigidBody>(sf::Vector2f(0, 300));
-                //     }
-                //     else
-                //     {
-                //         flag->getComponent<RigidBody>().velocity = sf::Vector2f(0, 300);
-                //     }
-                // }
 
                 // // For score
                 if (player->hasComponent<ScoreComponent>())
@@ -123,25 +89,39 @@ private:
 
     void checkCollisionWithFlagBlock(World& world, float dt)
     {
-        for (Entity* player : world.findAll<SlidingOnFlagPoleTag, PlayerTag, BoxCollider2D, Transform>())
+        // Player hit flag block
+        for (Entity* player : world.findAll<ClimbingOnFlagPoleTag, PlayerTag, BoxCollider2D, Animation>())
         {
-            for (auto &[block, direction, overlap] : player->getComponent<BoxCollider2D>().collisions)
+            for (auto& [block, _, __] : player->getComponent<BoxCollider2D>().collisions)
             {
                 if (!block->hasComponent<FlagBlock>()) continue;
-                if (!block->hasComponent<BoxCollider2D>()) continue;
 
+                auto& anim = player->getComponent<Animation>();
+                anim.currentFrame = anim.frameCount - 1;
+                anim.loop = false;
+            }
+        }
+
+        // Flag hit flag block
+        auto flag = world.findFirst<Flag, BoxCollider2D>();
+        if (!flag) return;
+        for (auto &[block, _, __] : flag->getComponent<BoxCollider2D>().collisions)
+        {
+            if (!block->hasComponent<FlagBlock>()) continue;
+
+            for (Entity* player : world.findAll<ClimbingOnFlagPoleTag, PlayerTag, BoxCollider2D, Transform>())
+            {
                 auto& pos = player->getComponent<Transform>().position;
                 auto& box = player->getComponent<BoxCollider2D>();
                 pos.x += box.size.x;
 
                 player->addComponent<FlipXTag>();
-                player->addComponent<HoldingTimer>(0.25f);
-                player->removeComponent<SlidingOnFlagPoleTag>();
+                player->addComponent<HoldingTimer>(1.0f);
             }
         }
     }
 
-    void goRight(World& world, float dt)
+    void goToCastle(World& world, float dt)
     {
         for (Entity* player : world.findAll<PlayerTag, HoldingTimer>())
         {
@@ -151,6 +131,7 @@ private:
             {
                 player->addComponent<RigidBody>(sf::Vector2f(200, 0));
                 player->removeComponent<HoldingTimer>();
+                player->removeComponent<ClimbingOnFlagPoleTag>();
             }
         }
     }
@@ -160,6 +141,7 @@ public:
     {
         checkCollisionWithFlagPole(world, dt);
         checkCollisionWithFlagBlock(world, dt);
-        goRight(world, dt);
+        goToCastle(world, dt);
     }
+
 };
