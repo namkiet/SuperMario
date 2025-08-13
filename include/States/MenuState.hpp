@@ -3,17 +3,29 @@
 #include <SFML/Graphics.hpp>
 #include <NewUI/Composite1.hpp>
 #include <memory>
+#include <unordered_map>
+#include <string.h>
+#include <UI/ButtonContainer.hpp>
 class MenuState : public GameState
 {
+public:
+    enum class TexType
+    {
+        background,
+        close,
+        settingpanel,
+        home,
+        soundOn,
+        soundOff,
+        playPanel
+    };
 private:
     sf::Font font;
-    sf::Text playText;
-    std::shared_ptr<sf::Texture> bgTex_;
-    std::shared_ptr<sf::Texture> settingsTex_;
-    
-    std::shared_ptr<Panel> menuPanel_;
-    std::shared_ptr<Button> playBtn_;
-    std::shared_ptr<Button> quitBtn_;
+
+    std::unordered_map<TexType, std::shared_ptr<sf::Texture>> texPool;
+    std::unordered_map<TexType, std::shared_ptr<UIComponent>> UIComponentPool;
+
+    ButtonContainer buttonContainer;
 
     std::shared_ptr<UIComponent> uiRoot;
 public:
@@ -21,4 +33,7 @@ public:
     void handleEvent(const sf::Event &event) override;
     void update(float dt) override;
     void render(sf:: RenderWindow&window) override;
+// public:
+    // std::shared_ptr<sf::Texture> MenuState::loadTexture(const std::string &filePath);
+    // void loadTextures();
 };
