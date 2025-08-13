@@ -17,8 +17,9 @@
 #include <Gameplay/Fire/Components.hpp>
 #include <Gameplay/CaptureFlag/Components.hpp>
 
-#include <PlayerMovementStates/PlayerIdlingState.hpp>
-#include <PlayerPowerStates/PlayerSmallState.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerIdlingState.hpp>
+#include <Gameplay/Player/PlayerSizeStates/PlayerSmallState.hpp>
+#include <Gameplay/Player/PlayerPowerStates/PlayerNormalState.hpp>
 
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
@@ -29,14 +30,14 @@ public:
     Mario(float x, float y, float width, float height, int scale, int currentLevel)
     {
         addComponent<Animation>(TextureManager::load("assets/Player/SmallPlayer/marioSmall_0.png"));
-        addComponent<ZIndex>(-100);
+        addComponent<ZIndex>(-1);
 
         addComponent<FollowByCameraTag>();
 
         // Set the size of the collision box for the player
         addComponent<BoxCollider2D>(sf::Vector2f((width - 4) * scale, height * scale), sf::Vector2f(2 * scale, 0));
 
-        addComponent<PlayerTag>(std::make_shared<PlayerIdlingState>(), std::make_shared<PlayerSmallState>());
+        addComponent<PlayerTag>(std::make_shared<PlayerIdlingState>(), std::make_shared<PlayerSmallState>(), std::make_shared<PlayerNormalState>());
 
         // Set the rigid body for the player
         addComponent<RigidBody>(sf::Vector2f(0, 0));

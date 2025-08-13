@@ -7,6 +7,7 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 #include <Gameplay/Background/Components.hpp>
+#include <iostream>
 
 class ElevatorSystem : public System
 {
@@ -37,12 +38,23 @@ private:
             pos.y = elevatorComp.minY;
         }
 
-        // Out of horitzontal range
-        if (pos.x <= elevatorComp.minX || pos.x >= elevatorComp.maxX)
+        // Out of horizontal range
+        if (pos.x <= elevatorComp.minX) 
         {
+            pos.x = elevatorComp.minX;
             if (elevator->hasComponent<RigidBody>())
             {
-                elevator->getComponent<RigidBody>().velocity *= -1.0f;
+                auto& vel = elevator->getComponent<RigidBody>().velocity;
+                vel.x = std::abs(vel.x);
+            }
+        }
+        else if (pos.x >= elevatorComp.maxX) 
+        {
+            pos.x = elevatorComp.maxX;
+            if (elevator->hasComponent<RigidBody>())
+            {
+                auto& vel = elevator->getComponent<RigidBody>().velocity;
+                vel.x = -std::abs(vel.x);
             }
         }
     }

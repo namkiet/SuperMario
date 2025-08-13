@@ -5,7 +5,7 @@
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/SpatialHashGrid.hpp>
-#include <Gameplay/Player/Components.hpp>
+#include <Engine/Core/RigidBody.hpp>
 
 class CollisionDetectionSystem : public System
 {
@@ -27,13 +27,13 @@ public:
 
         //     // std::cout << "Center: " << center.x << " " << center.y << "\n";
 
-        //     // entities.erase(
-        //     //     std::remove_if(entities.begin(), entities.end(), [&](Entity* entity) {
-        //     //         sf::FloatRect bounds = Physics::GetCollisionBounds(entity);
-        //     //         return !entity->hasComponent<RigidBody>() && !viewArea.intersects(bounds);
-        //     //     }),
-        //     //     entities.end()
-        //     // );
+        //     entities.erase(
+        //         std::remove_if(entities.begin(), entities.end(), [&](Entity* entity) {
+        //             sf::FloatRect bounds = Physics::GetCollisionBounds(entity);
+        //             return !entity->hasComponent<RigidBody>() && !viewArea.intersects(bounds);
+        //         }),
+        //         entities.end()
+        //     );
         // }
 
 

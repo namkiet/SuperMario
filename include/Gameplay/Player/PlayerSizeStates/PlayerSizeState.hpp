@@ -4,13 +4,13 @@
 
 class Entity;
 
-class PlayerMovementState
+class PlayerSizeState
 {
 public:
-    virtual ~PlayerMovementState() = default;
+    virtual ~PlayerSizeState() = default;
     virtual const std::string getName() const = 0;
     virtual void onEnter(Entity* entity) {}
     virtual void onExit(Entity* entity) {}
-    virtual void update(Entity* entity) {}
-    virtual std::shared_ptr<PlayerMovementState> getNewState(Entity* entity) = 0;
+    virtual void update(Entity* entity, float dt) {}
+    virtual std::shared_ptr<PlayerSizeState> getNewState(Entity* entity) = 0;
 };

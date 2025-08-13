@@ -4,7 +4,6 @@
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
-#include <Engine/Physics/PassThroughTag.hpp>
 #include <Engine/Rendering/ZIndex.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Core/TextureManager.hpp>
@@ -25,7 +24,6 @@ public:
         addComponent<ZIndex>(-1);
         addComponent<EnemyTag>(std::make_shared<PiranhaNormalState>(), std::make_shared<PiranhaBehaviour>());
         addComponent<PiranhaPatrol>(y * scale, 24 * 3 + 16, 2.0f, 2.0f);
-        addComponent<PassThroughTag>();
 
         std::vector<Direction> directions = {Direction::Left, Direction::Right, Direction::Top, Direction::Bottom};
         addComponent<DamageOnContactComponent>(directions);

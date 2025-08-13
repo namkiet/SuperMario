@@ -3,7 +3,7 @@
 
 struct CanCaptureFlagTag : public Component {};
 
-struct SlidingOnFlagPoleTag : public Component {};
+struct ClimbingOnFlagPoleTag : public Component {};
 
 struct FlagPoleTag : public Component {};
 

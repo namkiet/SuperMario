@@ -1,7 +1,7 @@
 #pragma once
-#include <PlayerPowerStates/PlayerPowerState.hpp>
+#include <Gameplay/Player/PlayerPowerStates/PlayerPowerState.hpp>
 
-class PlayerSmallInvincibleState : public PlayerPowerState
+class PlayerNormalState : public PlayerPowerState
 {
 public:
     const std::string getName() const override;

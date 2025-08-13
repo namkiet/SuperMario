@@ -4,5 +4,12 @@
 
 struct Camera : public Component
 {
-    sf::Vector2f target = {0.0f, 0.0f};   // Smooth-follow target position
+    Camera(float trapHalfWidth = 80.0f, float smoothing = 8.0f)
+        : trapHalfWidth(trapHalfWidth)
+        , smoothing(smoothing)
+        , target(0, 0) {}
+        
+    sf::Vector2f target;
+    float trapHalfWidth;
+    float smoothing;
 };

@@ -5,7 +5,6 @@
 #include <Gameplay/Enemy/Spiny/SpinyFlippedState.hpp>
 #include <Gameplay/Enemy/Spiny/SpinyNormalBehaviour.hpp>
 #include <Engine/Animation/Animation.hpp>
-#include <Engine/Physics/PassThroughTag.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>

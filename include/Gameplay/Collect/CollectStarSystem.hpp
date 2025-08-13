@@ -4,7 +4,7 @@
 #include <Gameplay/Collect/Components.hpp>
 #include <Gameplay/Item/Components.hpp>
 #include <Gameplay/Player/Components.hpp>
-#include <Gameplay/Invincible/Components.hpp>
+
 
 class CollectStarSystem : public System
 {

@@ -26,11 +26,11 @@ void SpinyNormalBehaviour::collideWithOther(Entity* entity)
         {
             entity->addComponent<ChangeToSpinyFlippedTag>();
         }
-        else if (direction == Direction::Left && patrol.velocity.x > 0)
+        else if (!collider->hasComponent<PlayerTag>() && direction == Direction::Left && patrol.velocity.x > 0)
         {
             patrol.velocity.x *= -1;
         }
-        else if (direction == Direction::Right && patrol.velocity.x < 0)
+        else if (!collider->hasComponent<PlayerTag>() && direction == Direction::Right && patrol.velocity.x < 0)
         {
             patrol.velocity.x *= -1;
         }

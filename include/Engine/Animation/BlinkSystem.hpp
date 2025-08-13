@@ -16,15 +16,24 @@ public:
             auto &anim = entity->getComponent<Animation>();
 
             blink.timer += dt;
+            blink.duration -= dt;
 
             if (blink.timer >= blink.interval) 
             {
+                blink.timer = 0.0f;
                 blink.visible = !blink.visible;
-                blink.timer = 0.f;
 
                 sf::Color currentColor = anim.sprite.getColor();
                 currentColor.a = blink.visible ? 255 : 0;
                 anim.sprite.setColor(currentColor);
+            }
+
+            if (blink.duration < 0.0f)
+            {
+                sf::Color currentColor = anim.sprite.getColor();
+                currentColor.a = 255;
+                anim.sprite.setColor(currentColor);
+                entity->removeComponent<BlinkingComponent>();
             }
         }
     }

@@ -1,9 +1,8 @@
-#include <PlayerPowerStates/PlayerFireState.hpp>
-#include <PlayerPowerStates/PlayerBigInvincibleState.hpp>
-#include <PlayerPowerStates/PlayerShrinkingState.hpp>
+#include <Gameplay/Player/PlayerSizeStates/PlayerFireState.hpp>
+#include <Gameplay/Player/PlayerSizeStates/PlayerShrinkingState.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/Fire/Components.hpp>
-#include <Gameplay/Invincible/Components.hpp>
+
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <ECS/Entity.hpp>
 
@@ -22,13 +21,8 @@ void PlayerFireState::onExit(Entity* entity)
     entity->removeComponent<CanFireTag>();
 }
 
-std::shared_ptr<PlayerPowerState> PlayerFireState::getNewState(Entity* entity)
+std::shared_ptr<PlayerSizeState> PlayerFireState::getNewState(Entity* entity)
 {
-    if (entity->hasComponent<InvincibleTag>())
-    {
-        return std::make_shared<PlayerBigInvincibleState>();
-    }
-
     if (entity->hasComponent<DamagedTag>())
     {
         return std::make_shared<PlayerShrinkingState>();

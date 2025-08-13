@@ -8,7 +8,6 @@
 #include <Gameplay/Item/Components.hpp>
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
-#include <Engine/Physics/PassThroughTag.hpp>
 #include <vector>
 
 class Coin1 : public Entity
@@ -56,7 +55,6 @@ public:
             &TextureManager::load(tileFolder + "SmallCoin" + std::to_string(currentLevel) + "_2.png"),};
         addComponent<Animation>(textures, width, height, 0.3f, true);
 
-        addComponent<PassThroughTag>();
         addComponent<SmallCoinTag>();
     }
 };

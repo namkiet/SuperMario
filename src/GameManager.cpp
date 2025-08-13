@@ -30,7 +30,6 @@
 #include <Gameplay/HitBlock/HitSpecialBlockSystem.hpp>
 #include <Gameplay/Block/BounceBlockSystem.hpp>
 #include <Gameplay/DamageOnContact/DamageOnContactSystem.hpp>
-#include <Gameplay/Invincible/InvincibleSystem.hpp>
 
 #include <Gameplay/Item/ItemEmergingSystem.hpp>
 #include <Gameplay/Item/CoinJumpingSystem.hpp>
@@ -63,7 +62,6 @@
 #include <Gameplay/GameProperties/PlayTimeSystem.hpp>
 #include <Gameplay/GameProperties/TextPoppingSystem.hpp>
 
-#include <Gameplay/Background/FlagPoleSystem.hpp>
 #include <Gameplay/Background/LevelCompletionSystem.hpp>
 #include <Gameplay/Background/BridgeSystem.hpp>
 #include <Gameplay/Background/ElevatorSystem.hpp>
@@ -146,14 +144,12 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<FireBarSystem>();
     world.addSystem<PodobooSystem>();
 
-    world.addSystem<FlagPoleCollisionSystem>();
+    // world.addSystem<FlagPoleCollisionSystem>();
     world.addSystem<LevelCompletionSystem>();
 
     world.addSystem<TextPoppingSystem>();
 
     world.addSystem<DamageOnContactSystem>();
-
-    world.addSystem<InvincibleSystem>();
 
     world.addSystem<EnemyStateSystem>();
     world.addSystem<EnemyBehaviourSystem>();

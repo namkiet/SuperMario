@@ -1,10 +1,10 @@
 
-#include <PlayerPowerStates/PlayerShrinkingState.hpp>
-#include <PlayerPowerStates/PlayerSmallState.hpp>
+#include <Gameplay/Player/PlayerSizeStates/PlayerShrinkingState.hpp>
+#include <Gameplay/Player/PlayerSizeStates/PlayerSmallState.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Animation/BlinkingComponent.hpp>
-#include <Engine/Core/RigidBody.hpp>
 #include <Engine/Core/Transform.hpp>
+#include <Engine/Core/RigidBody.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
@@ -17,8 +17,7 @@ const std::string PlayerShrinkingState::getName() const
 
 void PlayerShrinkingState::onEnter(Entity* entity)
 {   
-    entity->addComponent<BlinkingComponent>(0.05f);
-    
+    entity->addComponent<BlinkingComponent>(0.05f, 2.5f);
     entity->removeComponent<RigidBody>();
     entity->removeComponent<DamagedTag>();
     entity->removeComponent<CanGetDamageTag>();
@@ -26,10 +25,7 @@ void PlayerShrinkingState::onEnter(Entity* entity)
 
 void PlayerShrinkingState::onExit(Entity* entity)
 {  
-    entity->removeComponent<BlinkingComponent>();
-
     entity->addComponent<RigidBody>();
-    entity->addComponent<CanGetDamageTag>();
 
     if (entity->hasComponent<Transform>())
     {
@@ -41,28 +37,18 @@ void PlayerShrinkingState::onExit(Entity* entity)
     if (entity->hasComponent<BoxCollider2D>())
     {
         auto& box = entity->getComponent<BoxCollider2D>();
+        box.offset.x += 6.0f;
+        box.size.x -= 12.0f;
         box.size.y *= 0.5f;
     }
 }
 
-std::shared_ptr<PlayerPowerState> PlayerShrinkingState::getNewState(Entity* entity)
+std::shared_ptr<PlayerSizeState> PlayerShrinkingState::getNewState(Entity* entity)
 {
-    if (entity->hasComponent<Animation>())
+    if (entity->hasComponent<Animation>() && entity->getComponent<Animation>().hasEnded)
     {
-        auto& anim = entity->getComponent<Animation>();
-        if (anim.currentFrame == 2)
-        {
-            entity->addComponent<RigidBody>();
-        }
+        return std::make_shared<PlayerSmallState>();
     }
 
-    if (entity->hasComponent<Animation>())
-    {
-        auto& anim = entity->getComponent<Animation>();
-        if (anim.hasEnded)
-        {
-            return std::make_shared<PlayerSmallState>();
-        }
-    }
     return nullptr;
 }
