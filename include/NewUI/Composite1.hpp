@@ -7,7 +7,8 @@
 #include <cassert>
 #include <iostream>
 #include <Engine/Rendering/Utility.hpp>
-
+#include <UI/roundedRectShape.hpp>
+#include <iostream>
 struct StateColor
 {
     sf::Color normal;
@@ -45,12 +46,21 @@ struct DrawableElement
             return (dx * dx + dy * dy) <= (radius * radius);
         };
     }
+    DrawableElement(std::shared_ptr<RoundedRectangleShape> roundedRect): shape(roundedRect)
+    {
+        containsFn = [roundedRect](sf::Vector2f pos)
+        {
+            return roundedRect->contains(pos);
+        };
+    }
     // ======Other Shape==========
     DrawableElement(std::shared_ptr<sf::Shape> shape) : shape(shape) {
         containsFn = [shape](sf::Vector2f pos) {
             return shape->getGlobalBounds().contains(pos);
         };
     }
+    DrawableElement(){}
+
     // ====== Sprite only ===========
     // DrawableElement(std::shared_ptr<sf::Sprite> spr)
     // : sprite(std::move(spr))
@@ -84,7 +94,9 @@ struct DrawableElement
     }
     void setSprite(std::shared_ptr<sf::Sprite> spr)
     {
+
         sprite = std::move(spr);
+        
         if (!shape || !sprite) return;
 
         sf::FloatRect shapeBounds = shape->getGlobalBounds();
@@ -120,6 +132,14 @@ class Interact
             this->toggle = toggle;
         }
     public:
+        void setCanHover(bool a)
+        {
+            canHover = a;
+        }
+        void setCanActive(bool a)
+        {
+            canActive = a;
+        }
         bool activate() 
         { 
             if (canActive && !isActive) 
@@ -188,7 +208,31 @@ struct InteractUI
     }
     void setText(std::string text)
     {
+        // Cập nhật văn bản
         drawableEle->text.setString(text);
+        if (drawableEle->shape)
+        {
+            // Tính toán kích thước của văn bản và của shape (ví dụ: hình chữ nhật, hình tròn, v.v.)
+            auto tb = drawableEle->text.getLocalBounds();  // Lấy kích thước của văn bản
+
+            // Tính toán vị trí để căn giữa văn bản trong shape
+            sf::Vector2f shapeSize = sf::Vector2f(drawableEle->shape->getGlobalBounds().width, drawableEle->shape->getGlobalBounds().height);
+
+            // Căn giữa văn bản trong shape
+            drawableEle->text.setPosition(
+                drawableEle->shape->getPosition().x + (shapeSize.x - tb.width) * 0.5f - tb.left,  // Căn giữa theo chiều ngang
+                drawableEle->shape->getPosition().y + (shapeSize.y - tb.height) * 0.5f - tb.top   // Căn giữa theo chiều dọc
+            );
+        }
+    }
+    void setTextPos(sf::Vector2f pos)
+    {
+        drawableEle->text.setPosition(pos);
+    }
+    void setSprite(std::shared_ptr<sf::Sprite> spr)
+    {
+        std::cout << "at least it goes to interactui" << std::endl;
+        drawableEle->setSprite(spr);
     }
 
     void updateColor() {
@@ -245,6 +289,15 @@ public:
     void setActive(bool on) 
     {
         if (component) component->interact.setActive(on);
+    }
+    void setText(std::string text)
+    {
+        component->setText(text);
+    }
+    void setSprite(std::shared_ptr<sf::Sprite> spr)
+    {
+        // std::cout << "Ok only" <<std::endl;
+        component->setSprite(spr);
     }
 };
 
@@ -329,11 +382,18 @@ class UIContainer: public UIComponent
         bool handleEvent(const sf::Event& event) override
         {
             sortComponentList();
+            // std::cout << "handle event in uicontainer" << std::endl;
             if (!getIsActive()) return true; // return if not active
             for (auto it = ComponentList.rbegin(); it != ComponentList.rend(); ++it)
             {
+                
+            // std::cout << "mid handle event in uicontainer" << std::endl;
                 if (!(*it)->handleEvent(event)) return false; // handle event for children in reverse order
+            
+            // std::cout << "after mid uicontainer handle event" << std::endl;
             }
+            
+            // std::cout << "end handle event in uicontainer" << std::endl;
             return true;
         }
         
@@ -348,7 +408,7 @@ class Panel: public UIContainer
     {
         sf::RectangleShape overlay;
         overlay.setSize(sf::Vector2f(window.getSize()));
-        overlay.setFillColor(sf::Color(0, 0, 0, 150)); 
+        overlay.setFillColor(sf::Color(0, 0, 0, 220)); 
         window.draw(overlay);
     }
 
@@ -360,7 +420,7 @@ class Panel: public UIContainer
     }
     bool handleEvent(const sf::Event& event) override
     {
-        std::cout << "container handle Event" << std::endl;
+        std::cout << "panel handle Event" << std::endl;
         UIContainer::handleEvent(event); 
         return (!getIsActive());// avoid propagate event to its ancestor if it is active
     }
@@ -397,15 +457,21 @@ class ExpandableButton: public UIContainer
     }
 };
 
-class TextComponent: public UIComponent
+class TextUIComponent: public UIComponent
 {
+    public:
+    TextUIComponent(std::shared_ptr<InteractUI> interactui): UIComponent(interactui) {}
     bool handleEvent(const sf::Event& event) override
     {
         // Nothing here
+        std::cout << "start text handle event" << std::endl;
         return true;
     }
     void draw(sf::RenderWindow& window) override
     {
+        std::cout << "start draw text" << std::endl;
         component->draw(window);
+        
+        std::cout << "end draw text" << std::endl;
     }
 };
