@@ -26,12 +26,16 @@ class ButtonContainer
 
     void handleEvent(const sf::Event& event)
     {
-        activeButton = nullptr;
+        if (activeButton && !activeButton->getIsActive())
+            activeButton = nullptr;
         for (auto& pair: ButtonToAction)
         {
-            pair.first -> handleEvent(event);
+            if (pair.first == activeButton) continue;
+            // pair.first -> handleEvent(event);
             if (pair.first->getIsActive())
             {
+                if (activeButton)
+                    activeButton->setActive(false);
                 activeButton = pair.first;
             }
         }

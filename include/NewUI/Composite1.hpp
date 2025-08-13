@@ -105,8 +105,8 @@ struct DrawableElement
     }
 
     void draw(sf::RenderWindow& window) {
-        if (sprite) window.draw(*sprite);
         if (shape) window.draw(*shape);
+        if (sprite) window.draw(*sprite);
         window.draw(text);
     }
     bool contains(sf::Vector2f pos) 
@@ -187,6 +187,11 @@ class Interact
         {
             if (!canActive) return;
             isActive = active;
+        }
+        void setHover(bool hover)
+        {
+            if (!canHover) return;
+            isHovered = hover;
         }
 
         friend class InteractUI;
@@ -290,6 +295,10 @@ public:
     {
         if (component) component->interact.setActive(on);
     }
+    void setHover(bool on)
+    {
+        if (component) component->interact.setHover(on);
+    }
     void setText(std::string text)
     {
         component->setText(text);
@@ -322,13 +331,14 @@ class Button: public UIComponent
             {
                 if (!component->drawableEle->contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) 
                 {
-                    if (component->interact.deactivate()) {}
+                    // if (component->interact.deactivate()) {}
                 }
                 else {
                     if (component->interact.activate())
                     {
                         if (func) func();
                     }
+                    else component->interact.deactivate();
                 }
             }
             else if (event.type == sf::Event::MouseMoved)

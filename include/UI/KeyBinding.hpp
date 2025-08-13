@@ -46,6 +46,7 @@ public:
     {
         for (auto& pair: mapping)
         {
+            if (pair.first == action) continue;
             if (pair.second == key) {
                 pair.second = sf::Keyboard::Unknown;
             }
