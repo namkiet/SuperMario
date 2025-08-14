@@ -4,6 +4,7 @@
 #include <Engine/Rendering/Utility.hpp>
 #include <iostream>
 #include <cassert>
+#include <UI/HelperBuilder.hpp>
 
 MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
 {
@@ -42,6 +43,30 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     float buttonOffset = 60.f;
     sf::Vector2f controlbtnSize = sf::Vector2f(80.f, 50.f);
     int charSize = 20;
+
+    // create lambda function to make button, text... more easily
+    auto makeButton =[this](
+        sf::Vector2f pos,
+        std::shared_ptr<sf::Shape> shape,
+        const std::string& label,
+        const StateColor& colors,
+        bool toggle,
+        unsigned int textSize,
+        std::function<void()> onClick = nullptr,
+        std::shared_ptr<sf::Sprite> sprite = nullptr,
+        sf::Color textColor = sf::Color::White)
+        {
+            return helperBuilder::makeButton(pos, shape, label, colors, toggle, textSize,
+                        font, onClick, sprite, textColor);
+        };
+    auto makeText = [this](
+        const std::string& content,
+        sf::Vector2f pos,
+        int charSize,
+        const StateColor& colorSetting)
+        {
+            return helperBuilder::makeText(content, pos, charSize, font, colorSetting);
+        };
 
     // === Background Panel (root) ===
     // const auto ws = game->getWindow().getSize();
@@ -389,78 +414,6 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     auto MapMessage = makeText("Choose Your World", sf::Vector2f(200.f, 100.f),
                     40, textColorSetting);
     playPanel->addComponent(MapMessage);
-
-}
-
-// Helper function to create a button
-std::shared_ptr<Button> MenuState::makeButton(
-    sf::Vector2f pos,
-    std::shared_ptr<sf::Shape> shape,
-    const std::string& label,
-    const StateColor& colors,
-    bool toggle,
-    unsigned int textSize,
-    std::function<void()> onClick,
-    std::shared_ptr<sf::Sprite> sprite,
-    sf::Color textColor
-)
-{
-    shape->setPosition(pos);
-    shape->setFillColor(colors.normal);
-
-    auto de = std::make_shared<DrawableElement>(shape);
-    if (sprite) {
-        de->setSprite(sprite);
-    }
-    sf::Text t;
-    t.setFont(font);
-    t.setString(label);
-    t.setCharacterSize(textSize);
-    t.setFillColor(textColor);
-    auto tb = t.getLocalBounds();
-    sf::Vector2f size = sf::Vector2f(shape->getGlobalBounds().width, shape->getGlobalBounds().height);
-    t.setPosition(
-        pos.x + (size.x - tb.width) * 0.5f - tb.left,
-        pos.y + (size.y - tb.height) * 0.5f - tb.top
-    );
-    de->setText(t);
-
-    Interact inter(colors, toggle);
-    auto iu = std::make_shared<InteractUI>(inter, de);
-
-    auto btn = std::make_shared<Button>(iu);
-    btn->setFunc(std::move(onClick));
-    return btn;
-}
-// Helper function to create text
-std::shared_ptr<StaticComponent> MenuState::makeText(
-    const std::string& content,
-    sf::Vector2f pos,
-    int charSize,
-    const StateColor& colorSetting
-)
-{
-    Interact inter(colorSetting);
-    inter.setCanActive(false);
-    inter.setCanHover(false);
-
-    sf::Text txt;
-    txt.setFont(font);
-    txt.setCharacterSize(charSize);
-    txt.setFillColor(sf::Color::White);
-    txt.setString(content);
-
-    DrawableElement drawEle;
-    drawEle.setText(txt);
-
-    InteractUI interactui(inter, std::make_shared<DrawableElement>(drawEle));
-    interactui.setTextPos(pos);
-
-    return std::make_shared<StaticComponent>(std::make_shared<InteractUI>(interactui));
-}
-
-void MenuState::drawPlayComponent()
-{
 
 }
 
