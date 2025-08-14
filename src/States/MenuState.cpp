@@ -3,6 +3,7 @@
 #include <States/PlayingState.hpp>
 #include <Engine/Rendering/Utility.hpp>
 #include <iostream>
+#include <cassert>
 
 MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
 {
@@ -26,7 +27,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     sf::Color(255, 255, 255)
 );
     StateColor textColorSetting(sf::Color(255, 255, 255), sf::Color(255, 255, 255));
-    StateColor soundButtonColor(sf::Color(255,49,49), sf::Color(255, 255, 255));
+    StateColor soundButtonColor(sf::Color(255,49,49, 100), sf::Color(255, 255, 255, 50));
 
     sf::Vector2f playPos((float)ws.x * 0.5f - 220.f * 0.5f, (float)ws.y * 0.5f - 80.f);
     sf::Vector2f btnSize(220.f, 56.f);
@@ -116,7 +117,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     Interact settingsInter(StateColor(mainBtnColor.normal, mainBtnColor.normal), /*toggle=*/true);
     settingsInter.setActive(false); 
     auto settingsIU = std::make_shared<InteractUI>(settingsInter, settingsDE);
-    
+
     auto settingsPanel = std::make_shared<Panel>(settingsIU);
     
     // ======================= Settings button============================
@@ -200,6 +201,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     );
     settingsPanel->addComponent(saveBtn);
     //==========================
+
     // Create Move Up button
     auto moveUpShape = std::make_shared<RoundedRectangleShape>(controlbtnSize, 15.f);
     auto moveUpBtn = makeButton(
@@ -287,17 +289,58 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     );
     auto moveDownMessage = makeText("Move down", moveUpPos + sf::Vector2f(0.f, 4 * buttonOffset) + sf::Vector2f(150.f,15.f),
                             charSize, textColorSetting);
+    // create Option Container to wrap 4 button
+    auto optdrawElement = std::make_shared<DrawableElement>();
+    auto optInteractUI = std::make_shared<InteractUI>(Interact(StateColor()), optdrawElement);
+    std::shared_ptr<OptionContainer> keyOptContainer = std::make_shared<OptionContainer>(optInteractUI);
+    keyOptContainer->setActive(true); // always true to display all button
+
+    keyOptContainer->addComponent(moveUpBtn); 
+    keyOptContainer->addComponent(moveDownBtn);
+    keyOptContainer->addComponent(moveLeftBtn);
+    keyOptContainer->addComponent(moveRightBtn);
+    keyOptContainer->addComponent(shootBtn);
+
+    std::unordered_map<std::shared_ptr<UIComponent>, KeyBinding::Action> ButtonToAction;
+    ButtonToAction[moveUpBtn] = KeyBinding::Action::MoveUp;
+    ButtonToAction[moveDownBtn] = KeyBinding::Action::MoveDown;
+    ButtonToAction[moveLeftBtn] = KeyBinding::Action::MoveLeft;
+    ButtonToAction[moveRightBtn] = KeyBinding::Action::MoveRight;
+    ButtonToAction[shootBtn] = KeyBinding::Action::Shoot;
+
+    keyOptContainer->setFunc([ButtonToAction, keyOptContainer](const sf::Event& event)
+    {
+        auto& keybinding = KeyBinding::Instance();
+        std::shared_ptr<UIComponent> activeButton = keyOptContainer->getActiveComponent();
+        assert(activeButton);
+        if (event.type == sf::Event::KeyPressed)
+        {
+            sf::Keyboard::Key key = event.key.code;
+            
+            auto activeAction = ButtonToAction.at(activeButton);
+            keybinding.setKey(activeAction, key);
+        }
+        for (auto& pair: ButtonToAction)
+        {
+            std::string content = keyToString(keybinding.getKey(ButtonToAction.at(pair.first)));
+            pair.first->setText(content);
+        }
+    });
+
+    
+
 
     // ==================== KeySetting title===========================
     auto KeySettingMessage = makeText("Key Settings", sf::Vector2f(300.f, 100.f),
                     40, textColorSetting);
 
     // Add button and text to panel
-    settingsPanel->addComponent(moveUpBtn);
-    settingsPanel->addComponent(moveRightBtn);
-    settingsPanel->addComponent(moveLeftBtn);
-    settingsPanel->addComponent(shootBtn);
-    settingsPanel->addComponent(moveDownBtn);
+    // settingsPanel->addComponent(moveUpBtn);
+    // settingsPanel->addComponent(moveRightBtn);
+    // settingsPanel->addComponent(moveLeftBtn);
+    // settingsPanel->addComponent(shootBtn);
+    // settingsPanel->addComponent(moveDownBtn);
+    settingsPanel->addComponent(keyOptContainer);
     settingsPanel->addComponent(moveUpMessage);
     settingsPanel->addComponent(moveRightMessage);
     settingsPanel->addComponent(moveLeftMessage);
@@ -455,7 +498,7 @@ void MenuState::drawPlayComponent()
 
 void MenuState::handleEvent(const sf::Event &event) {
     uiRoot->handleEvent(event);
-    buttonContainer.handleEvent(event);
+    // buttonContainer.handleEvent(event);
 }
 
 void MenuState::update(float dt) {
