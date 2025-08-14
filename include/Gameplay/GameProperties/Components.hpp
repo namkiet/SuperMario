@@ -3,11 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 
-struct ScoreComponent : public Component
-{
-    int score = 0; // Initialize score to 0
-};
-
 struct TimeComponent : public Component
 {
     TimeComponent(int timeLeft) : timer(timeLeft) {}
@@ -38,4 +33,23 @@ struct TextComponent : public Component
     float dy = 0.0f;
     float size = 0;
     std::string content;
+};
+
+struct LevelComponent : public Component
+{
+    LevelComponent(int level) : currentLevel(level) {}
+    int currentLevel = 1; // Initialize currentLevel to 1
+};
+
+struct ThemeComponent : public Component
+{
+    ThemeComponent(int theme) : currentTheme(theme) {}
+    int currentTheme = 1; // Initialize currentTheme to 0
+};
+
+// Just for score purpose
+struct ShouldUpdateScore : public Component
+{
+    ShouldUpdateScore(int score) : score(score) {}
+    int score;
 };

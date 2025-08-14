@@ -12,39 +12,33 @@ class CameraSystem : public System
 public:
     void update(World &world, float dt) override
     {
-        auto target = world.findFirst<FollowByCameraTag>();
-        if (!target)
-            return;
-
-        if (!target->hasComponent<Transform>())
-            return;
-        auto &tf = target->getComponent<Transform>();
-
-        if (!world.findFirst<Camera>())
-            return;
+        if (!world.findFirst<Camera>()) return;
         auto &camera = world.findFirst<Camera>()->getComponent<Camera>();
+
+        auto target = world.findFirst<FollowByCameraTag>();
+        if (!target) return;
+        if (!target->hasComponent<Transform>()) return;
+
+        auto &tf = target->getComponent<Transform>();
 
         // target pos
         const float targetCenterX = tf.position.x + 0.5f * tf.size.x;
+
         // cur pos
-        float &camX = camera.target.x;
+        float& camX = camera.target.x;
+        
+        float trapLeft  = camX - camera.trapHalfWidth;
+        float trapRight = camX + camera.trapHalfWidth;
 
-        // Define trap zone (dead zone margins from screen center)
-        const float trapHalfWidth = 80.0f;
-        const float screenCenterX = camX;
+        float desiredCamX = camX; // start with current
 
-        float trapLeft = screenCenterX - trapHalfWidth;
-        float trapRight = screenCenterX + trapHalfWidth;
-
-        // Move camera only if target exits trap zone
         if (targetCenterX < trapLeft)
-        {
-            camX = targetCenterX + trapHalfWidth;
-        }
+            desiredCamX = targetCenterX + camera.trapHalfWidth;
         else if (targetCenterX > trapRight)
-        {
-            camX = targetCenterX - trapHalfWidth;
-        }
+            desiredCamX = targetCenterX - camera.trapHalfWidth;
+
+        // Interpolate toward desired
+        camX += (desiredCamX - camX) * std::min(dt * camera.smoothing, 1.0f);
 
         camX = std::fmax(camX, 0.5f * SIZE::SCREEN.x);
 

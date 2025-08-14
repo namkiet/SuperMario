@@ -1,19 +1,34 @@
 #pragma once
-#include <ECS/Entity.hpp>
-#include <ECS/System.hpp>
-#include <memory>
-#include <stdexcept>
-#include <unordered_map>
-#include <typeindex>
-#include <vector>
+
 #include <algorithm>
 
-#include <Gameplay/Player/Components.hpp>
+#include <ECS/Entity.hpp>
+#include <ECS/System.hpp>
+
 #include <Engine/Core/RigidBody.hpp>
-#include <iostream>
+
+#include <functional>
+
+#include <Gameplay/Player/Components.hpp>
+
+#include <memory>
+
+#include <ScoreManager.hpp>
+
+#include <stdexcept>
+
+#include <typeindex>
+
+#include <unordered_map>
+
+#include <vector>
+
 class World
 {
 public:
+    World(std::function<void(int)> levelReloadCallback)
+        : requestLevelReload(levelReloadCallback) {}
+
     Entity *createEntity()
     {
         entities.push_back(std::make_unique<Entity>());
@@ -25,19 +40,6 @@ public:
     {
         entities.push_back(std::make_unique<T>(std::forward<Args>(args)...));
         return entities.back().get();
-    }
-
-    Entity *createEntityAtFront()
-    {
-        entities.insert(entities.begin(), std::make_unique<Entity>());
-        return entities.front().get();
-    }
-
-    template <typename T, typename... Args>
-    Entity *createEntityAtFront(Args &&...args)
-    {
-        entities.insert(entities.begin(), std::make_unique<T>(std::forward<Args>(args)...));
-        return entities.front().get();
     }
 
     void deleteEntity(Entity *entity)
@@ -145,16 +147,38 @@ public:
         destroyPending.clear();
     }
 
-    void removeAllEntities()
+    ScoreManager &getScoreManager()
     {
-        for (auto &entity : entities)
-            deleteEntity(entity.get());
-        entities.clear();
-        for (Entity *entity : destroyPending)
+        return scoreManager;
+    }
+
+    void reloadLevel(int newLevel)
+    {
+        if (requestLevelReload)
         {
-            deleteEntity(entity);
+            skipUpdate = true;
+            requestLevelReload(newLevel);
         }
-        destroyPending.clear();
+    }
+
+    bool getSkipUpdate() const
+    {
+        return skipUpdate;
+    }
+
+    void setSkipUpdate(bool value)
+    {
+        skipUpdate = value;
+    }
+
+    int getNewLevel()
+    {
+        return newLevel;
+    }
+
+    void setNewLevel(int level)
+    {
+        newLevel = level;
     }
 
 private:
@@ -162,4 +186,8 @@ private:
     std::unordered_map<std::type_index, std::shared_ptr<System>> systems;
     std::vector<std::shared_ptr<System>> orderedSystems;
     std::vector<Entity *> destroyPending;
+    ScoreManager scoreManager;
+    std::function<void(int)> requestLevelReload;
+    bool skipUpdate = false;
+    int newLevel = 1;
 };

@@ -4,11 +4,9 @@
 #include <Gameplay/Enemy/Spiny/SpinyEggState.hpp>
 #include <Gameplay/Enemy/Spiny/SpinyNormalState.hpp>
 #include <Engine/Animation/Animation.hpp>
-#include <Engine/Physics/PassThroughTag.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>
-#include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Stomp/Components.hpp>
 

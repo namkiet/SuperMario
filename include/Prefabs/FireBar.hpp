@@ -1,11 +1,13 @@
 #pragma once
+
 #include <ECS/Entity.hpp>
+
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>
 
-#include <Core/TextureManager.hpp>
+#include <Factories/ItemFactory.hpp>
 
 #include <Gameplay/Obstacles/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
@@ -16,20 +18,20 @@
 class FireBar : public Entity
 {
 public:
-    FireBar(float x, float y, float scale, int index)
+    FireBar(float x, float y, float scale, int index, ItemFactory itemFactory)
     {
         float width = 0;
         float height = 0;
 
         if (index == 1)
         {
-            addComponent<Animation>(TextureManager::load("assets/Item/FireBar/smallFireBar.png"));
+            addComponent<Animation>(itemFactory.getItemTexture("smallFireBar"));
             width = 24;
             height = 144;
         }
         else if (index == 2)
         {
-            addComponent<Animation>(TextureManager::load("assets/Item/FireBar/largeFireBar.png"));
+            addComponent<Animation>(itemFactory.getItemTexture("largeFireBar"));
             width = 24;
             height = 288;
         }

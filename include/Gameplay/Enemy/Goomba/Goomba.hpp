@@ -7,12 +7,12 @@
 #include <Engine/Animation/Animation.hpp>
 #include <Gameplay/Stomp/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
-#include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/Enemy/Goomba/Components.hpp>
 #include <Gameplay/Enemy/Goomba/GoombaNormalState.hpp>
 #include <Gameplay/Enemy/Goomba/GoombaBehaviour.hpp>
+#include <Factories/EnemyFactory.hpp>
 
 class Goomba : public Entity
 {
@@ -23,14 +23,12 @@ public:
         addComponent<Transform>(Transform(sf::Vector2f(x, y) * scale, sf::Vector2f(16, 16) * scale));
         addComponent<BoxCollider2D>(BoxCollider2D(sf::Vector2f(16, 16) * scale));
 
-        addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Goomba/goomba_walk.png"), 16, 16, 2, 0.5f / 2));
+        addComponent<Animation>(EnemyFactory::getEnemyTexture("goomba_walk"), 16, 16, 2, 0.5f / 2);
 
         addComponent<EnemyTag>(std::make_shared<GoombaNormalState>(), std::make_shared<GoombaBehaviour>());
         addComponent<GoombaPatrol>();
         addComponent<NotOnPatrolYet>();
 
-        addComponent<CanHitBlockTag>();
-        addComponent<BlockTag>();
         addComponent<CanHitBlockTag>();
         addComponent<StompableTag>();
 

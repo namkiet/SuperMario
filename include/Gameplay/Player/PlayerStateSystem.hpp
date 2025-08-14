@@ -5,94 +5,100 @@
 #include <Core/AnimationManager.hpp>
 #include <string>
 #include <unordered_map>
+#include <fstream>
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
 
 class PlayerStateSystem : public System
 {
 public:
     void update(World& world, float dt) override
     {
-        for (Entity* entity : world.findAll<PlayerTag, Animation>())
+        for (Entity* player : world.findAll<PlayerTag, Animation>())
         {
-            auto& tag = entity->getComponent<PlayerTag>();
-            auto newMovementState = tag.movementState->getNewState(entity);
-            auto newPowerState = tag.powerState->getNewState(entity);
+            auto& tag = player->getComponent<PlayerTag>();
+            tag.movementState->update(player, dt);
+            tag.sizeState->update(player, dt);
+            tag.powerState->update(player, dt);
 
-            if (!newMovementState && !newPowerState) continue;
+            auto newMovementState = tag.movementState->getNewState(player);
+            auto newSizeState = tag.sizeState->getNewState(player);
+            auto newPowerState = tag.powerState->getNewState(player);
+
+            if (!newMovementState && !newSizeState && !newPowerState) continue;
 
             if (newMovementState)
             {
-                tag.movementState->onExit(entity);
+                tag.movementState->onExit(player);
                 tag.movementState = newMovementState;
-                tag.movementState->onEnter(entity);
+                tag.movementState->onEnter(player);
+            }
+
+            if (newSizeState)
+            {
+                tag.sizeState->onExit(player);
+                tag.sizeState = newSizeState;
+                tag.sizeState->onEnter(player);
             }
 
             if (newPowerState)
             {
-                tag.powerState->onExit(entity);
+                tag.powerState->onExit(player);
                 tag.powerState = newPowerState;
-                tag.powerState->onEnter(entity);
+                tag.powerState->onEnter(player);
             }
 
-            entity->removeComponent<Animation>();
-
-            bool isSpecialState = false;
-            for (const auto& stateName : specialStates)
-            {
-                if (tag.movementState->getName() == stateName || tag.powerState->getName() == stateName)
-                {
-                    entity->addComponent<Animation>(getAnimation(stateName));
-                    isSpecialState = true;
-                    break;
-                }
-            }
-
-            if (!isSpecialState)
-            {
-                entity->addComponent<Animation>(getAnimation(tag.movementState->getName() + tag.powerState->getName()));
-            }
+            auto stateName = "Luigi"+ tag.movementState->getName() + tag.sizeState->getName() + tag.powerState->getName();
+            player->addComponent<Animation>(getAnimation(stateName));
         }
     }
 
 public:
     PlayerStateSystem()
     {
-        animMap["IdlingSmall"] = Animation(TextureManager::load("assets/Mario/Small/idling.png"));
-        animMap["JumpingSmall"] = Animation(TextureManager::load("assets/Mario/Small/jumping.png"));
-        animMap["RunningSmall"] = Animation(TextureManager::load("assets/Mario/Small/running.png"), 16, 16, 3, 0.15f);
-        animMap["IdlingSmallInvincible"] = Animation(TextureManager::load("assets/Mario/Small/idling_invincible.png"), 16, 16, 4, 0.1f);
-        animMap["JumpingSmallInvincible"] = Animation(TextureManager::load("assets/Mario/Small/jumping_invincible.png"), 16, 16, 4, 0.1f);
-        animMap["RunningSmallInvincible"] = Animation(TextureManager::load("assets/Mario/Small/running_invincible.png"), 16, 16, 12, 0.1f);
-
-        animMap["CrouchingBig"] = Animation(TextureManager::load("assets/Mario/Big/crouching.png"));
-        animMap["IdlingBig"] = Animation(TextureManager::load("assets/Mario/Big/idling.png"));
-        animMap["JumpingBig"] = Animation(TextureManager::load("assets/Mario/Big/jumping.png"));
-        animMap["RunningBig"] = Animation(TextureManager::load("assets/Mario/Big/running.png"), 16, 32, 3, 0.15f);
-        animMap["IdlingBigInvincible"] = Animation(TextureManager::load("assets/Mario/Big/idling_invincible.png"), 16, 32, 4, 0.1f);
-        animMap["JumpingBigInvincible"] = Animation(TextureManager::load("assets/Mario/Big/jumping_invincible.png"), 16, 32, 4, 0.1f);
-        animMap["RunningBigInvincible"] = Animation(TextureManager::load("assets/Mario/Big/running_invincible.png"), 16, 32, 12, 0.1f);
-
-        animMap["CrouchingFire"] = Animation(TextureManager::load("assets/Mario/Fire/crouching.png"));
-        animMap["IdlingFire"] = Animation(TextureManager::load("assets/Mario/Fire/idling.png"));
-        animMap["JumpingFire"] = Animation(TextureManager::load("assets/Mario/Fire/jumping.png"));
-        animMap["RunningFire"] = Animation(TextureManager::load("assets/Mario/Fire/running.png"), 16, 32, 3, 0.15f);
-
-        animMap["Shrinking"] = Animation(TextureManager::load("assets/Mario/Big/shrinking.png"), 16, 32, 10, 0.1f, false);
-        animMap["GrowingUp"] = Animation(TextureManager::load("assets/Mario/Small/grow_up.png"), 16, 32, 7, 0.1f, false);
-        animMap["Dead"] = Animation(TextureManager::load("assets/Mario/Small/dead.png"));
-
-        specialStates = {"Dead", "GrowingUp", "Shrinking"};
+        loadAnimationsFromFile("assets/Player/player_animation.json");
     }
 
 private:
-    Animation getAnimation(const std::string& name) const
+    void loadAnimationsFromFile(const std::string& filename)
     {
-        if (animMap.find(name) == animMap.end())
+        std::ifstream fin(filename);
+        if (!fin.is_open()) throw std::runtime_error("Cannot open JSON file: " + filename);
+
+        json j; fin >> j;
+        loadAnimationsFromJSON(j["Mario"], "Mario");
+        loadAnimationsFromJSON(j["Luigi"], "Luigi");
+    }
+
+    void loadAnimationsFromJSON(const json& j, const std::string& character)
+    {
+        for (auto& anim : j["animations"])
         {
-            throw std::runtime_error("Cannot find Animation: " + name);
+            std::string key = character + anim["key"].get<std::string>();
+            std::string path = anim["path"].get<std::string>();
+            int frameWidth = anim.value("frameWidth", 16);
+            int frameHeight = anim.value("frameHeight", 16);
+            int frameCount = anim.value("frameCount", 1);
+            float frameTime = anim.value("frameTime", 0.1f);
+            bool loop = anim.value("loop", true);
+
+            animMap[key] = Animation(TextureManager::load(path), frameWidth, frameHeight, frameCount, frameTime, loop);
         }
 
-        return animMap.at(name);
+        for (auto& [alias, original] : j["aliases"].items())
+        {
+            animMap[character + alias] = animMap.at(character + original.get<std::string>());
+        }
     }
+
+    const Animation& getAnimation(const std::string& name) const
+    {
+        auto it = animMap.find(name);
+        if (it == animMap.end())
+            throw std::runtime_error("Cannot find Animation: " + name);
+        return it->second;
+    }
+
     std::unordered_map<std::string, Animation> animMap;
-    std::vector<std::string> specialStates;
 };

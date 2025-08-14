@@ -1,19 +1,24 @@
 #pragma once
+
 #include <ECS/Entity.hpp>
+
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
-#include <Core/TextureManager.hpp>
+
+#include <Factories/ItemFactory.hpp>
+
 #include <Gameplay/LifeSpan/Components.hpp>
+
 #include <vector>
-#include <iostream>
+
 class Fireworks : public Entity
 {
 private:
     static int fireworksCount;
 
 public:
-    Fireworks(float width, float height)
+    Fireworks(float width, float height, ItemFactory itemFactory)
     {
         // Set random positions
         int i = 0;
@@ -31,7 +36,7 @@ public:
         addComponent<BoxCollider2D>(sf::Vector2f(width, height));
 
         // Set the animation for the fireworks
-        addComponent<Animation>(TextureManager::load("assets/Item/FireBullet/FireBullet_4.png"));
+        addComponent<Animation>(itemFactory.getItemTexture("fireworks"));
 
         addComponent<LifeSpan>(1.0f);
 

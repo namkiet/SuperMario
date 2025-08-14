@@ -4,20 +4,16 @@
 #include <Gameplay/Enemy/Spiny/SpinyFlippedState.hpp>
 #include <Gameplay/Enemy/Spiny/SpinyFlippedBehaviour.hpp>
 #include <Engine/Animation/Animation.hpp>
-#include <Engine/Physics/PassThroughTag.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Audio/Components.hpp>
 #include <Engine/Audio/SoundManager.hpp>
-#include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Stomp/Components.hpp>
-
+#include <Gameplay/GameProperties/Components.hpp>
 void SpinyFlippedState::onEnter(Entity* entity)
 {
-    entity->addComponent<PassThroughTag>();
-
     // if (entity->hasComponent<Animation>()) 
     // {
     //     auto& anim = entity->getComponent<Animation>();
@@ -29,7 +25,7 @@ void SpinyFlippedState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Spiny/spiny_flipped.png"), 16, 14, 1, 0));
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("spiny_flipped"), 16, 14, 1, 0);
     
     entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/kickkill.wav"));
 
@@ -40,9 +36,11 @@ void SpinyFlippedState::onEnter(Entity* entity)
     entity->getComponent<RigidBody>().velocity.y = -600;
     entity->getComponent<SpinyPatrol>().velocity = sf::Vector2f(0, 0);
 
-    entity->removeComponent<BlockTag>();
     entity->removeComponent<CanHitBlockTag>();
     entity->removeComponent<DamageOnContactComponent>();
+
+    // Add score tag to notify the score system
+    entity->addComponent<ShouldUpdateScore>(200);
 }
 
 std::shared_ptr<EnemyState> SpinyFlippedState::getNewState(Entity* entity, float dt)

@@ -10,3 +10,5 @@ struct FireCooldown : public Component
 {
     float timeCount = 0.0f; // Time until the next fire can occur
 };
+
+struct ShootingTag : public Component {};

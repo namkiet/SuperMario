@@ -19,7 +19,11 @@ void KoopaSlideBehaviour::collideWithPlayer(Entity* entity)
     for (auto& [collider, direction, overlap] : box.collisions)
         if (collider->hasComponent<PlayerTag>())
         {
-            if (direction == Direction::Bottom)
+            if (collider->hasComponent<CanKillEnemyTag>())
+            {
+                entity->addComponent<ChangeToKoopaFlippedTag>();
+            }
+            else if (direction == Direction::Bottom)
             {
                 entity->addComponent<ChangeToKoopaShellTag>();
             }

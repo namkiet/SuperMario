@@ -43,8 +43,9 @@ public:
                 }
             }
 
-            if (anim.frameCount == 1)
-                continue;
+            // if (anim.frameCount == 1)
+            //     continue;
+
 
             // if (anim.textures.empty())
             // {
@@ -72,6 +73,7 @@ public:
                 }
 
             }
+
             if (!anim.textures.empty())
             {
                 anim.sprite.setTexture(*anim.textures[anim.currentFrame]);

@@ -8,7 +8,6 @@
 #include <Engine/Physics/GravitySystem.hpp>
 #include <Engine/Physics/MovementSystem.hpp>
 #include <Engine/Physics/RotateBoxCollider2D.hpp>
-#include <Engine/Physics/OBBCollisionSystem.hpp>
 
 #include <Engine/Animation/AnimationSystem.hpp>
 #include <Engine/Animation/BlinkSystem.hpp>
@@ -32,7 +31,6 @@
 #include <Gameplay/Block/BounceBlockSystem.hpp>
 #include <Gameplay/Popup/PopupSystem.hpp>
 #include <Gameplay/DamageOnContact/DamageOnContactSystem.hpp>
-#include <Gameplay/Invincible/InvincibleSystem.hpp>
 
 #include <Gameplay/Item/ItemEmergingSystem.hpp>
 #include <Gameplay/Item/CoinJumpingSystem.hpp>
@@ -65,11 +63,9 @@
 #include <Gameplay/GameProperties/PlayTimeSystem.hpp>
 #include <Gameplay/GameProperties/TextPoppingSystem.hpp>
 
-#include <Gameplay/Background/FlagPoleSystem.hpp>
 #include <Gameplay/Background/LevelCompletionSystem.hpp>
 #include <Gameplay/Background/BridgeSystem.hpp>
 #include <Gameplay/Background/ElevatorSystem.hpp>
-#include <Gameplay/Background/ElevatorCollisionSystem.hpp>
 #include <Gameplay/Obstacles/PodobooSystem.hpp>
 #include <Gameplay/Obstacles/FireBarSystem.hpp>
 
@@ -78,7 +74,8 @@
 #include <cassert>
 #include <iostream>
 
-GameManager::GameManager(int level) : levelHandler(world, level), level(level)
+GameManager::GameManager(int level, std::function<void(int)> reloadCallback)
+    : levelHandler(world, level), level(level), world(reloadCallback)
 {
     levelHandler.start();
 
@@ -96,9 +93,7 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
 
     world.addSystem<RotateBoxCollider2D>();
     world.addSystem<CollisionDetectionSystem>();
-    // world.addSystem<OBBCollisionSystem>();
     world.addSystem<HitBlockSystem>();
-    world.addSystem<ElevatorCollisionSystem>();
 
     world.addSystem<PlayerStateSystem>();
 
@@ -131,19 +126,15 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<FireBarSystem>();
     world.addSystem<PodobooSystem>();
 
-    world.addSystem<FlagPoleCollisionSystem>();
     world.addSystem<LevelCompletionSystem>();
 
     world.addSystem<TextPoppingSystem>();
 
     world.addSystem<DamageOnContactSystem>();
 
-    world.addSystem<InvincibleSystem>();
-
     world.addSystem<EnemyStateSystem>();
     world.addSystem<EnemyBehaviourSystem>();
     world.addSystem<EnemyScoreSystem>();
-    
 
     world.addSystem<AnimationSystem>(); // Animation must be the last one to receive all animation updates
     world.addSystem<BlinkSystem>();
@@ -153,6 +144,9 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
 
     world.addSystem<DespawnSystem>();
     world.addSystem<PlayerRespawnSystem>();
+
+    scoreUI = new ScoreUI();
+    world.getScoreManager().addObserver(scoreUI);
 }
 
 void GameManager::handleEvent(const sf::Event &event)
@@ -164,7 +158,7 @@ void GameManager::handleEvent(const sf::Event &event)
         {
             // do nothing
 
-            world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(3.0f);
+            world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(100.0f);
         }
 
         if (event.key.code == sf::Keyboard::X)
@@ -220,4 +214,11 @@ void GameManager::draw(sf::RenderWindow &window, int level) const
 
     // Set the default view
     world.getSystem<DrawGameComponentSystem>()->draw(world, window);
+
+    scoreUI->draw(window);
+}
+
+World &GameManager::getWorld()
+{
+    return world;
 }

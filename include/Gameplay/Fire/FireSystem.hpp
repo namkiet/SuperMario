@@ -21,13 +21,6 @@ private:
 public:
     void update(World &world, float dt) override
     {
-        // std::ofstream fout("output.txt", std::ios::app);
-        // if (fout.fail())
-        // {
-        //     std::cerr << "Failed to open output.txt for writing." << std::endl;
-        //     return;
-        // }
-
         for (Entity *player : world.findAll<CanFireTag, Transform, FireCooldown, RigidBody>())
         {
             auto &pos = player->getComponent<Transform>().position;
@@ -37,21 +30,32 @@ public:
 
             // Update the cooldown time
             cooldown.timeCount += dt;
+            player->removeComponent<ShootingTag>();
+
             auto& keybinding = KeyBinding::Instance();
+            
             if (pool.isKeyPressed(keybinding.getKey(KeyBinding::Action::Shoot)) && FireBullet::getCount() < 2 && cooldown.timeCount > 0.5f)
             {
-                auto fireBullet = world.createEntity<FireBullet>(pos.x + size.x / 2, pos.y + size.y / 8, 24, 24);
+                Entity *gameSession = world.findFirst<ThemeComponent>();
+                if (!gameSession)
+                    return;
+
+                auto &themeComponent = gameSession->getComponent<ThemeComponent>();
+                auto fireBullet = world.createEntity<FireBullet>(pos.x + size.x / 2, pos.y + size.y / 8, 24, 24, ItemFactory(themeComponent.currentTheme));
+                player->addComponent<ShootingTag>();
                 if (!player->hasComponent<FlipXTag>())
                 {
                     if (fireBullet->hasComponent<PatrolComponent>())
                         fireBullet->getComponent<PatrolComponent>().isMovingRight = true;
+                    if (fireBullet->hasComponent<Transform>())
+                        fireBullet->getComponent<Transform>().position.x = pos.x + size.x;
                 }
                 else if (player->hasComponent<FlipXTag>())
                 {
                     if (fireBullet->hasComponent<PatrolComponent>())
                         fireBullet->getComponent<PatrolComponent>().isMovingRight = false;
                     if (fireBullet->hasComponent<Transform>())
-                        fireBullet->getComponent<Transform>().position.x = pos.x;
+                        fireBullet->getComponent<Transform>().position.x = pos.x - fireBullet->getComponent<Transform>().size.x;
                 }
 
                 cooldown.timeCount = 0;

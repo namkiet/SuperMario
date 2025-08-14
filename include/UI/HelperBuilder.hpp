@@ -11,7 +11,7 @@ std::shared_ptr<Button> makeButton(
         const StateColor& colors,
         bool toggle,
         unsigned int textSize,
-        sf::Font font,
+        sf::Font& font,
         std::function<void()> onClick = nullptr,
         std::shared_ptr<sf::Sprite> sprite = nullptr,
         sf::Color textColor = sf::Color::White)
@@ -47,7 +47,7 @@ std::shared_ptr<StaticComponent> makeText(
     const std::string& content,
     sf::Vector2f pos,
     int charSize,
-    sf::Font font,
+    sf::Font& font,
     const StateColor& colorSetting
 )
 {

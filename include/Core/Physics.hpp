@@ -46,7 +46,7 @@ namespace Physics
         return sf::Vector2f(xo - dx, yo - dy);
     }
 
-    inline CollisionInfo GetCollisionInfo(Entity *a, Entity *b)
+    inline CollisionInfo GetCollisionInfoStatic(Entity *a, Entity *b)
     {
         if (!a->hasComponent<BoxCollider2D>() || 
             !b->hasComponent<BoxCollider2D>() || 
@@ -96,6 +96,28 @@ namespace Physics
             else
             {
                 dir = prevA.y < prevB.y ? Direction::Top : Direction::Bottom;
+            }
+
+            return CollisionInfo(b, dir, overlap);
+        }
+        return CollisionInfo(nullptr , Direction::None, sf::FloatRect());
+    }
+
+    inline CollisionInfo GetCollisionInfoMoving(Entity *a, Entity *b)
+    {
+        auto boundsA = GetCollisionBounds(a);
+        auto boundsB = GetCollisionBounds(b);
+        Direction dir;
+        sf::FloatRect overlap;
+        if (boundsA.intersects(boundsB, overlap))
+        {
+            if (overlap.width < overlap.height)
+            {
+                dir = boundsA.left < boundsB.left ? Direction::Left : Direction::Right;
+            }
+            else
+            {
+                dir = boundsA.top < boundsB.top ? Direction::Top : Direction::Bottom;
             }
 
             return CollisionInfo(b, dir, overlap);

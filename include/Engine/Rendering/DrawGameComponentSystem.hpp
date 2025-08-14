@@ -36,37 +36,26 @@ public:
     void draw(const World &world, sf::RenderWindow &window) const
     {
         window.setView(window.getDefaultView());
-        for (Entity *entity : world.findAll<ScoreComponent>())
+        Entity *gameSession = world.findFirst<TimeComponent, LevelComponent, CoinComponent, ThemeComponent>();
+        if (!gameSession)
         {
-            // Render player name
-            sf::Text player = textRender("MARIO", 100.f, 35.f, font, 25);
-
-            // Render score
-            auto &scoreComponent = entity->getComponent<ScoreComponent>();
-            std::ostringstream oss;
-            oss << std::setw(6) << std::setfill('0') << scoreComponent.score;
-            sf::Text score = textRender(oss.str(), 100.f, 65.f, font, 25);
-
-            // Draw player name and score
-            window.draw(player);
-            window.draw(score);
+            return; // No game session found, nothing to draw
         }
 
-        for (Entity *entity : world.findAll<TimeComponent>())
-        {
-            // Render time
-            sf::Text time = textRender("TIME", 700.f, 35.f, font, 25);
+        // Take the time component from the game session
+        auto &timeComponent = gameSession->getComponent<TimeComponent>();
 
-            // Render time value
-            auto &timeComponent = entity->getComponent<TimeComponent>();
-            std::ostringstream oss;
-            oss << std::setw(3) << std::setfill('0') << timeComponent.timer;
-            sf::Text timeValue = textRender(oss.str(), 720.f, 65.f, font, 25);
+        // Render time
+        sf::Text time = textRender("TIME", 700.f, 35.f, font, 25);
 
-            // Draw time and time value
-            window.draw(time);
-            window.draw(timeValue);
-        }
+        // Render time value
+        std::ostringstream timeOss;
+        timeOss << std::setw(3) << std::setfill('0') << timeComponent.timer;
+        sf::Text timeValue = textRender(timeOss.str(), 720.f, 65.f, font, 25);
+
+        // Draw time and time value
+        window.draw(time);
+        window.draw(timeValue);
 
         for (Entity *entity : world.findAll<SmallCoinTag>())
         {
@@ -83,26 +72,40 @@ public:
             window.draw(sp);
         }
 
-        for (Entity *entity : world.findAll<CoinComponent>())
-        {
-            auto &coinComponent = entity->getComponent<CoinComponent>();
-            std::ostringstream oss;
-            oss << "x" << std::setw(2) << std::setfill('0') << coinComponent.coins;
-            sf::Text coinValue = textRender(oss.str(), 350.f, 65.f, font, 25);
+        // Take the coin component from the game session
+        auto &coinComponent = gameSession->getComponent<CoinComponent>();
 
-            window.draw(coinValue);
-        }
+        // Render coin count
+        std::ostringstream coinOss;
+        coinOss << "x" << std::setw(2) << std::setfill('0') << coinComponent.coins;
+        sf::Text coinValue = textRender(coinOss.str(), 350.f, 65.f, font, 25);
+
+        // Draw coin count
+        window.draw(coinValue);
 
         sf::Text worldName = textRender("WORLD", 500.f, 35.f, font, 25);
         sf::Text mapName;
-        
-        if (Mario::currentLevel == 1)
+
+        // Take the level component from the game session
+        auto &levelComponent = gameSession->getComponent<LevelComponent>();
+
+        // Render map name based on the current level
+        switch (levelComponent.currentLevel)
+        {
+        case 1:
             mapName = textRender("1-1", 520.f, 65.f, font, 25);
-        else if (Mario::currentLevel == 2)
+            break;
+        case 2:
             mapName = textRender("6-1", 520.f, 65.f, font, 25);
-        else if (Mario::currentLevel == 3)
+            break;
+        case 3:
             mapName = textRender("5-4", 520.f, 65.f, font, 25);
-        
+            break;
+        default:
+            mapName = textRender("Unknown Level", 520.f, 65.f, font, 25);
+        }
+
+        // Draw world name and map name
         window.draw(worldName);
         window.draw(mapName);
     }

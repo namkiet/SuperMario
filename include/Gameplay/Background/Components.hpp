@@ -24,6 +24,8 @@ struct CastleFlag : public Component
 
 struct BellTag : public Component
 {
+    bool firstHit = false;
+    bool secondHit = false;
     // This component can be used to tag entities that represent a bell in the background
 };
 
@@ -34,31 +36,34 @@ struct BridgeTileTag : public Component
 
 struct ElevatorComponent : public Component
 {
-    enum class Direction
+    ElevatorComponent() = default;
+
+    ElevatorComponent(float _min, float _max, bool isHorizontal) : isHorizontal(isHorizontal)
     {
-        Up,
-        Down,
-        Left,
-        Right
-    };
-    ElevatorComponent(float currentX, float finalX, int dir)
-    {
-        direction = static_cast<Direction>(dir - 1);
-        if (direction == Direction::Right)
+        if (_min >= _max)
+            std::swap(_min, _max);
+
+        if (isHorizontal)
         {
-            minimumX = currentX;
-            maximumX = finalX;
+            minX = _min;
+            maxX = _max;
+            minY = -INFINITY;
+            maxY = INFINITY;
         }
-        else if (direction == Direction::Left)
+        else
         {
-            minimumX = finalX;
-            maximumX = currentX;
+            minY = _min;
+            maxY = _max;
+            minX = -INFINITY;
+            maxX = INFINITY;
         }
     }
-    Direction direction;
-    Animation animation;
-    float maximumX = 0;
-    float minimumX = 0;
+
+    bool isHorizontal;
+    float minX;
+    float maxX;
+    float minY;
+    float maxY;
 };
 
 struct Princess : public Component

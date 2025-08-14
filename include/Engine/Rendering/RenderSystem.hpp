@@ -6,6 +6,7 @@
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Rendering/Utility.hpp>
+#include <Engine/Rendering/ZIndex.hpp>
 #include <SFML/Graphics.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
 #include <Gameplay/Item/Components.hpp>
@@ -17,6 +18,13 @@ private:
     sf::Font font;
     void backgroundRender(sf::RenderWindow &window, int level) const;
     void textComponentRender(const World &world, sf::RenderWindow &window) const;
+
+    static int getZIndex(Entity* entity)
+    {
+        if (!entity->hasComponent<ZIndex>()) return 0;
+        return entity->getComponent<ZIndex>().value;
+    }
+
 public:
     RenderSystem()
     {
@@ -39,9 +47,9 @@ public:
         backgroundRender(window, level);
         textComponentRender(world, window);
 
-        auto entities = world.findAll<Transform, Animation>();
-        std::sort(entities.begin(), entities.end(), [](Entity *a, Entity *b) { // sort by z-index (to allow which entity lie in front of other)
-            return a->template getComponent<Animation>().zIndex < b->template getComponent<Animation>().zIndex;
+        std::vector<Entity*> entities = world.findAll<Transform, Animation>();
+        std::sort(entities.begin(), entities.end(), [](Entity* a, Entity* b) {
+            return getZIndex(a) < getZIndex(b);
         });
 
         for (Entity *entity : entities)

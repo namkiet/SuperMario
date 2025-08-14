@@ -1,30 +1,26 @@
 #pragma once
 #include <ECS/Entity.hpp>
+
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
+#include <Factories/ItemFactory.hpp>
+
 #include <Gameplay/LifeSpan/Components.hpp>
 #include <Gameplay/Collect/Components.hpp>
 #include <Gameplay/Item/Components.hpp>
-#include <Core/TextureManager.hpp>
-#include <Core/Variables.hpp>
-#include <Engine/Physics/PassThroughTag.hpp>
 #include <vector>
 
 class Coin1 : public Entity
 {
 public:
-    Coin1(float x, float y, float width, float height)
+    Coin1(float x, float y, float width, float height, ItemFactory itemFactory)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x, y), sf::Vector2f(width, height));
 
         // // Set the animation for the coin
-        std::vector<const sf::Texture *> textures = {
-            &TextureManager::load("assets/Item/Coin/Coin1_0.png"),
-            &TextureManager::load("assets/Item/Coin/Coin1_1.png"),
-            &TextureManager::load("assets/Item/Coin/Coin1_2.png"),
-            &TextureManager::load("assets/Item/Coin/Coin1_3.png")};
+        std::vector<const sf::Texture *> textures = itemFactory.getItemTextures("coin1");
         addComponent<Animation>(textures, width, height, 0.15f, true);
 
         // addComponent<Animation>(TextureManager::load("assets/Item/Coin/coin.png"), 16, 16, 16, 0.15);
@@ -43,20 +39,15 @@ public:
 class SmallCoin : public Entity
 {
 public:
-    SmallCoin(float x, float y, float width, float height, int currentLevel)
+    SmallCoin(float x, float y, float width, float height, ItemFactory itemFactory)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x, y), sf::Vector2f(width, height));
 
         // Set the animation for the coin
-        std::string tileFolder = "assets/Item/Coin/";
-        std::vector<const sf::Texture *> textures = {
-            &TextureManager::load(tileFolder + "SmallCoin" + std::to_string(currentLevel) + "_0.png"),
-            &TextureManager::load(tileFolder + "SmallCoin" + std::to_string(currentLevel) + "_1.png"),
-            &TextureManager::load(tileFolder + "SmallCoin" + std::to_string(currentLevel) + "_2.png"),};
+        std::vector<const sf::Texture *> textures = itemFactory.getItemTextures("coin3");
         addComponent<Animation>(textures, width, height, 0.3f, true);
 
-        addComponent<PassThroughTag>();
         addComponent<SmallCoinTag>();
     }
 };
@@ -64,21 +55,15 @@ public:
 class Coin2 : public Entity
 {
 public:
-    Coin2(float x, float y, float width, float height, float scale, int currentLevel)
+    Coin2(float x, float y, float width, float height, float scale, ItemFactory itemFactory)
     {
         // Set the transform for positioning
-        addComponent<Transform>(sf::Vector2f(x * scale, y * scale), sf::Vector2f(width * scale, height * scale));
+        addComponent<Transform>(sf::Vector2f(x, y) * scale, sf::Vector2f(width, height) * scale);
 
-        addComponent<BoxCollider2D>(sf::Vector2f(width * scale, height * scale));
+        addComponent<BoxCollider2D>(sf::Vector2f(width, height) * scale);
 
-        std::string tileFolder = "assets/Item/Coin/";
-
-        //
-        std::vector<const sf::Texture *> textures = {
-            &TextureManager::load(tileFolder + "Coin" + std::to_string(currentLevel) + "_4.png"),
-            &TextureManager::load(tileFolder + "Coin" + std::to_string(currentLevel) + "_5.png"),
-            &TextureManager::load(tileFolder + "Coin" + std::to_string(currentLevel) + "_6.png"),
-            &TextureManager::load(tileFolder + "Coin" + std::to_string(currentLevel) + "_7.png")};
+        // Set the animation for the coin
+        std::vector<const sf::Texture *> textures = itemFactory.getItemTextures("coin2");
         addComponent<Animation>(textures, width, height, 0.3f, true);
 
         // addComponent<Animation>(TextureManager::load("assets/Item/Coin/coin.png"), 16, 16, 16, 0.15);

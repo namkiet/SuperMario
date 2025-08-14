@@ -1,8 +1,4 @@
 #pragma once
-#include <World.hpp>
-
-#include <Gameplay/Player/Components.hpp>
-#include <Gameplay/Patrol/Components.hpp>
 
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/RigidBody.hpp>
@@ -10,10 +6,10 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 
 #include <Gameplay/Obstacles/Components.hpp>
+#include <Gameplay/Player/Components.hpp>
+#include <Gameplay/Patrol/Components.hpp>
 
-#include <Core/TextureManager.hpp>
-
-#include <iostream>
+#include <World.hpp>
 
 class FireBarSystem : public System
 {

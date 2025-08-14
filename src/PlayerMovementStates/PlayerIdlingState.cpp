@@ -1,9 +1,14 @@
-#include <PlayerMovementStates/PlayerIdlingState.hpp>
-#include <PlayerMovementStates/PlayerJumpingState.hpp>
-#include <PlayerMovementStates/PlayerRunningState.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerIdlingState.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerJumpingState.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerRunningState.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerShootingState.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerCrouchingState.hpp>
 #include <Engine/Core/RigidBody.hpp>
+#include <Gameplay/Player/Components.hpp>
+#include <Gameplay/Fire/Components.hpp>
 #include <ECS/Entity.hpp>
 #include <Core/TextureManager.hpp>
+#include <Core/KeyPressPool.hpp>
 
 const std::string PlayerIdlingState::getName() const
 {
@@ -24,6 +29,16 @@ std::shared_ptr<PlayerMovementState> PlayerIdlingState::getNewState(Entity* enti
         {
             return std::make_shared<PlayerRunningState>();
         }
+    }
+    
+    if (entity->hasComponent<ShootingTag>())
+    {
+        return std::make_shared<PlayerShootingState>();
+    }
+
+    if (entity->hasComponent<BigMarioTag>() && KeyPressPool::Instance().isKeyPressed(sf::Keyboard::S)) 
+    {
+        return std::make_shared<PlayerCrouchingState>();
     }
 
     return nullptr;

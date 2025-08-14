@@ -1,17 +1,28 @@
 #pragma once
+
+#include <cmath>
+
 #include <ECS/System.hpp>
-#include <World.hpp>
+
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Animation/Animation.hpp>
+#include <Engine/Core/RigidBody.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/DespawnTag.hpp>
-#include <Core/TextureManager.hpp>
+
+#include <Factories/BlockFactory.hpp>
+#include <Factories/ItemFactory.hpp>
+
 #include <Gameplay/Block/BounceBlock.hpp>
 #include <Gameplay/Block/Components.hpp>
 #include <Gameplay/Player/Components.hpp>
+#include <Gameplay/Enemy/Components.hpp>
+#include <Gameplay/LifeSpan/Components.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
-#include <cmath>
+
+#include <World.hpp>
+
 class HitSpecialBlockSystem : public System
 {
 private:
@@ -22,6 +33,7 @@ private:
     void HitStarBlock(World &world, float dt, Entity *block);
     void CoinBlockUpdate(World &world, float dt, Entity *block);
     void HitMushroomBlock(World &world, float dt, Entity *block);
+    void HitLevelBlock(World &world, float dt, Entity *block);
 
     static sf::FloatRect getColliderBounds(Entity *entity)
     {
@@ -55,7 +67,8 @@ public:
                     continue; // at least half of the size of the player must hit the block (to avoid hitting 2 blocks at the same time)
                 if (!block->hasComponent<NormalBlock>() && !block->hasComponent<QuestionBlockTag>() &&
                     !block->hasComponent<CoinBlock>() && !block->hasComponent<StarBlock>() &&
-                    !block->hasComponent<LevelUpBlock>() && !block->hasComponent<MushroomBlock>())
+                    !block->hasComponent<LevelUpBlock>() && !block->hasComponent<MushroomBlock>() &&
+                    !block->hasComponent<LevelBlock>())
                     continue;
 
                 // Normal Block
@@ -64,8 +77,11 @@ public:
                     // Remove NormalBlock component
                     block->removeComponent<NormalBlock>();
 
-                    // Add DespawnTag component
-                    block->addComponent<DespawnTag>();
+                    // This block can still kill enemy
+                    block->removeComponent<Animation>();
+                    block->removeComponent<BlockTag>();
+                    block->addComponent<LifeSpan>(0.5f);
+                    block->addComponent<CanKillEnemyTag>();
 
                     // Update
                     HitNormalBlock(world, dt, block);
@@ -79,7 +95,14 @@ public:
                             block->removeComponent<Animation>();
                     }
                     if (!block->hasComponent<NormalBlock>() && !block->hasComponent<CoinBlock>())
-                        block->addComponent<Animation>(TextureManager::load("assets/Tile/Tile1/Tile1_27.png"));
+                    {
+                        Entity *gameSession = world.findFirst<ThemeComponent>();
+                        if (!gameSession)
+                            return;
+                        auto &themeComponent = gameSession->getComponent<ThemeComponent>();
+                        BlockFactory blockFactory(themeComponent.currentTheme);
+                        block->addComponent<Animation>(blockFactory.getBlockTexture(27));
+                    }
 
                     if (block->hasComponent<LevelUpBlock>())
                     {
@@ -130,6 +153,14 @@ public:
                         // Update
                         HitMushroomBlock(world, dt, block);
                     }
+                    else if (block->hasComponent<LevelBlock>())
+                    {
+                        // Remove LevelBlock component
+                        block->removeComponent<LevelBlock>();
+
+                        // Update
+                        HitLevelBlock(world, dt, block);
+                    }
                     if (block->hasComponent<Transform>() && !block->hasComponent<BounceBlock>())
                     {
                         auto &tf = block->getComponent<Transform>();
@@ -140,6 +171,7 @@ public:
                         bounce.originalY = pos.y;
                         bounce.updateY = pos.y - (sz.y / 4);
                         block->addComponent<BounceBlock>(bounce);
+                        block->addComponent<RigidBody>(sf::Vector2f(0, 0), false);
                         pos.y = bounce.updateY;
 
                         continue;

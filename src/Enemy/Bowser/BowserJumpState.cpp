@@ -8,7 +8,6 @@
 #include <Gameplay/Enemy/Bowser/BowserDeadState.hpp>
 #include <Gameplay/Enemy/Bowser/BowserIdleState.hpp>
 #include <Engine/Animation/Animation.hpp>
-#include <Engine/Physics/PassThroughTag.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>
@@ -29,7 +28,7 @@ void BowserJumpState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_jump.png"), 32, 35, 1, 0));
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("bowser_jump"), 32, 35, 1, 0);
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();

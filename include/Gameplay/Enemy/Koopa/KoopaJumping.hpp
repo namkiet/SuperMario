@@ -7,12 +7,12 @@
 #include <Engine/Animation/Animation.hpp>
 #include <Gameplay/Stomp/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
-#include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/Enemy/Koopa/Components.hpp>
 #include <Gameplay/Enemy/Koopa/KoopaJumpingState.hpp>
 #include <Gameplay/Enemy/Koopa/KoopaJumpingBehaviour.hpp>
+#include <Factories/EnemyFactory.hpp>
 
 class KoopaJumping : public Entity
 {
@@ -25,7 +25,7 @@ public:
         addComponent<Transform>(Transform(sf::Vector2f(x, y) * scale, sf::Vector2f(16, 24) * scale));
         addComponent<BoxCollider2D>(BoxCollider2D(sf::Vector2f(16, 24) * scale));
 
-        addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Koopa/koopa_jump.png"), 16, 24, 2, 0.5f / 2));
+        addComponent<Animation>(EnemyFactory::getEnemyTexture("koopa_jump"), 16, 24, 2, 0.5f / 2);
 
         addComponent<EnemyTag>(std::make_shared<KoopaJumpingState>(), std::make_shared<KoopaJumpingBehaviour>());
         addComponent<KoopaPatrol>();
@@ -33,7 +33,6 @@ public:
         addComponent<NotOnPatrolYet>();
 
         addComponent<CanHitBlockTag>();
-        addComponent<BlockTag>();
         addComponent<CanHitBlockTag>();
         addComponent<StompableTag>();
 

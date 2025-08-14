@@ -8,12 +8,10 @@
 #include <Gameplay/Enemy/Bowser/BowserDeadState.hpp>
 #include <Gameplay/Enemy/Bowser/BowserIdleState.hpp>
 #include <Engine/Animation/Animation.hpp>
-#include <Engine/Physics/PassThroughTag.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Core/Transform.hpp>
-#include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Stomp/Components.hpp>
 
@@ -37,7 +35,7 @@ void BowserWalkState::onEnter(Entity* entity)
     //         anim.frameHeight
     //     ));
     // }
-    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_walk.png"), 32, 35, 4, 0.25f));
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("bowser_walk"), 32, 35, 4, 0.25f);
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();

@@ -5,9 +5,9 @@
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Rendering/ZIndex.hpp>
 
-#include <Core/TextureManager.hpp>
-#include <Core/Variables.hpp>
+#include <Factories/ItemFactory.hpp>
 
 #include <Gameplay/Item/Components.hpp>
 #include <Gameplay/Enemy/Components.hpp>
@@ -20,20 +20,15 @@ private:
     static int count;
 
 public:
-    FireBullet(float x, float y, float width, float height)
+    FireBullet(float x, float y, float width, float height, ItemFactory itemFactory)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x, y), sf::Vector2f(width, height));
 
         // Set the animation for the fire bullet
-        std::vector<const sf::Texture *> textures =
-            {
-                &TextureManager::load("assets/Item/FireBullet/FireBullet_0.png"),
-                &TextureManager::load("assets/Item/FireBullet/FireBullet_1.png"),
-                &TextureManager::load("assets/Item/FireBullet/FireBullet_2.png"),
-                &TextureManager::load("assets/Item/FireBullet/FireBullet_3.png")};
+        std::vector<const sf::Texture *> textures = itemFactory.getItemTextures("fireBullet");
         addComponent<Animation>(textures, width, height, 0.15f, true);
-        getComponent<Animation>().zIndex = -1; // Set z-index for rendering order
+        addComponent<ZIndex>(1); // Set z-index for rendering order
 
         addComponent<BoxCollider2D>(sf::Vector2f(width, height));
 

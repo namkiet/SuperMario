@@ -4,21 +4,17 @@
 #include <Gameplay/Enemy/Bowser/BowserDeadState.hpp>
 #include <Gameplay/Enemy/Bowser/BowserDeadBehaviour.hpp>
 #include <Engine/Animation/Animation.hpp>
-#include <Engine/Physics/PassThroughTag.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Audio/Components.hpp>
 #include <Engine/Audio/SoundManager.hpp>
-#include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Stomp/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
 
 void BowserDeadState::onEnter(Entity* entity)
 {
-    entity->addComponent<PassThroughTag>();
-    entity->removeComponent<CanHitBlockTag>();
-
     // if (entity->hasComponent<Animation>()) 
     // {
     //     auto& anim = entity->getComponent<Animation>();
@@ -30,8 +26,7 @@ void BowserDeadState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_dead.png"), 32, 39, 1, 0));
-
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("bowser_dead"), 32, 39, 1, 0);
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();
@@ -46,10 +41,12 @@ void BowserDeadState::onEnter(Entity* entity)
 
     entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/bowserfall.wav"));
 
-    entity->removeComponent<BlockTag>();
     entity->removeComponent<CanHitBlockTag>();
     entity->removeComponent<StompableTag>();
     entity->removeComponent<DamageOnContactComponent>();
+
+    // Add score tag to notify the score system
+    entity->addComponent<ShouldUpdateScore>(5000);
 }
 
 std::shared_ptr<EnemyState> BowserDeadState::getNewState(Entity* entity, float dt)

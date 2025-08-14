@@ -1,16 +1,12 @@
 #pragma once
+#include <ECS/System.hpp> 
 #include <World.hpp>
-
-#include <Core/Variables.hpp>
-
-#include <Gameplay/Background/Components.hpp>
-
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>
-
+#include <Gameplay/Background/Components.hpp>
 #include <iostream>
 
 class ElevatorSystem : public System
@@ -20,78 +16,58 @@ public:
     {
         for (Entity *elevator : world.findAll<ElevatorComponent, BoxCollider2D, Transform>())
         {
-            auto &elevatorPos = elevator->getComponent<Transform>().position;
-            auto &elevatorSize = elevator->getComponent<Transform>().size;
-            auto &elevatorComp = elevator->getComponent<ElevatorComponent>();
+            handleOutOfRange(elevator);
+            carryEntites(elevator, dt);   
+        }
+    }
 
-            // Check if the elevator is moving up or down
-            if (elevator->getComponent<ElevatorComponent>().direction == ElevatorComponent::Direction::Up)
-            {
-                if (elevatorPos.y <= 0)
-                {
-                    elevatorPos.y = SIZE::SCREEN.y;
-                    continue;
-                }
+private:
+    void handleOutOfRange(Entity* elevator)
+    {
+        const auto& elevatorComp = elevator->getComponent<ElevatorComponent>();
+        auto& pos = elevator->getComponent<Transform>().position;
+        auto& size = elevator->getComponent<Transform>().size;
 
-                // Set the animation back if it was removed
-                if (!elevator->hasComponent<Animation>() && elevatorPos.y > 32 * 3)
-                {
-                    elevator->addComponent<Animation>(elevatorComp.animation);
-                }
+        // Out of verical range
+        if (pos.y <= elevatorComp.minY)
+        {
+            pos.y = elevatorComp.maxY;
+        }
+        else if (pos.y >= elevatorComp.maxY)
+        {
+            pos.y = elevatorComp.minY;
+        }
 
-                if (elevatorPos.y < 32 * 3)
-                {
-                    // Store the old animation
-                    if (elevator->hasComponent<Animation>())
-                    {
-                        elevatorComp.animation = elevator->getComponent<Animation>();
-                        elevator->removeComponent<Animation>();
-                    }
-                }
-                elevatorPos.y -= 100 * dt; // Move up
-            }
-            else if (elevator->getComponent<ElevatorComponent>().direction == ElevatorComponent::Direction::Down)
+        // Out of horizontal range
+        if (pos.x <= elevatorComp.minX) 
+        {
+            pos.x = elevatorComp.minX;
+            if (elevator->hasComponent<RigidBody>())
             {
-                if (elevatorPos.y >= SIZE::SCREEN.y)
-                {
-                    elevatorPos.y = 0;
-                    // Store the old animation
-                    if (elevator->hasComponent<Animation>())
-                    {
-                        elevatorComp.animation = elevator->getComponent<Animation>();
-                        elevator->removeComponent<Animation>();
-                    }
-                    continue;
-                }
-                // Set the animation back if it was removed
-                if (!elevator->hasComponent<Animation>() && elevatorPos.y > 32 * 3)
-                {
-                    elevator->addComponent<Animation>(elevatorComp.animation);
-                }
-                elevatorPos.y += 100 * dt; // Move down
+                auto& vel = elevator->getComponent<RigidBody>().velocity;
+                vel.x = std::abs(vel.x);
             }
-            else if (elevator->getComponent<ElevatorComponent>().direction == ElevatorComponent::Direction::Left)
+        }
+        else if (pos.x >= elevatorComp.maxX) 
+        {
+            pos.x = elevatorComp.maxX;
+            if (elevator->hasComponent<RigidBody>())
             {
-                // Calculate the min X position based on the original X
-                if (elevatorPos.x <= elevatorComp.minimumX)
-                {
-                    // Change direction to right
-                    elevatorComp.direction = ElevatorComponent::Direction::Right;
-                    continue;
-                }
-                elevatorPos.x -= 100 * dt; // Move left
+                auto& vel = elevator->getComponent<RigidBody>().velocity;
+                vel.x = -std::abs(vel.x);
             }
-            else if (elevator->getComponent<ElevatorComponent>().direction == ElevatorComponent::Direction::Right)
-            {
-                // Calculate the max X position based on the original X
-                if (elevatorPos.x >= elevatorComp.maximumX)
-                {
-                    // Change direction to left
-                    elevatorComp.direction = ElevatorComponent::Direction::Left;
-                    continue;
-                }
-                elevatorPos.x += 100 * dt; // Move right
-            }
+        }
+    }
+
+    void carryEntites(Entity* elevator, float dt)
+    {
+        if (!elevator->getComponent<ElevatorComponent>().isHorizontal) return;
+
+        for (auto& [other, direction, _] : elevator->getComponent<BoxCollider2D>().collisions)
+        {
+            if (direction != Direction::Bottom) continue;
+            if (!other->hasComponent<Transform>()) continue;
+            other->getComponent<Transform>().position.x += elevator->getComponent<RigidBody>().velocity.x * dt;
         }
     }
 };

@@ -29,6 +29,7 @@ void BowserSlideBehaviour::collideWithOther(Entity* entity)
         if (collider->hasComponent<PlayerTag>()) continue;
         if (collider->hasComponent<EnemyTag>()) continue;
         if (collider->hasComponent<CanKillEnemyTag>()) continue;
+        if (!collider->hasComponent<BlockTag>()) continue;
         
         if (direction == Direction::Left && patrol.lastDirection == Direction::Right)
         {

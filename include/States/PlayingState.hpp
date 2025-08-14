@@ -11,6 +11,7 @@ public:
     void update(float dt) override;
     void render(sf::RenderWindow &window) override;
     void setLevel(int level);
+    void requestLevelReload(int newLevel);
     ~PlayingState() override;
 
 private:

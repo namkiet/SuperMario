@@ -10,7 +10,6 @@
 #include <Gameplay/Stomp/Components.hpp>
 #include <Gameplay/LifeSpan/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
-#include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/Enemy/Bowser/BowserBullet/Components.hpp>
@@ -25,7 +24,7 @@ public:
         addComponent<Transform>(Transform(sf::Vector2f(x, y) * scale, sf::Vector2f(24, 15) * scale));
         addComponent<BoxCollider2D>(BoxCollider2D(sf::Vector2f(24, 15) * scale));
 
-        addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_bullet.png"), 24, 15, 3, 0.25f));
+        addComponent<Animation>(EnemyFactory::getEnemyTexture("bowser_bullet"), 24, 15, 3, 0.25f);
 
         addComponent<EnemyTag>(nullptr, std::make_shared<BowserBulletBehaviour>());
         addComponent<BowserBulletPatrol>();

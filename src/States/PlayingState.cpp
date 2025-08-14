@@ -21,12 +21,21 @@ void PlayingState::handleEvent(const sf::Event &event)
         }
     }
 
-    gameManager->handleEvent(event);
+    if (gameManager)
+        gameManager->handleEvent(event);
 }
 
 void PlayingState::update(float dt)
 {
-    gameManager->update(dt);
+    if (gameManager->getWorld().getSkipUpdate())
+    {
+        setLevel(gameManager->getWorld().getNewLevel());
+        return;
+    }
+
+    if (gameManager)
+        gameManager->update(dt);
+
 }
 
 void PlayingState::render(sf::RenderWindow &window)
@@ -34,12 +43,15 @@ void PlayingState::render(sf::RenderWindow &window)
     switch (level)
     {
     case 1:
-        window.clear(sf::Color(146, 144, 255, 255));
+        window.clear(sf::Color(92, 148, 252, 255));
         break;
     case 2:
         window.clear(sf::Color(0, 0, 0, 255));
         break;
     case 3:
+        window.clear(sf::Color(0, 0, 0, 255));
+        break;
+    default:
         window.clear(sf::Color(0, 0, 0, 255));
         break;
     }
@@ -51,7 +63,8 @@ void PlayingState::setLevel(int level)
     this->level = level;
     if (gameManager)
         delete gameManager;
-    gameManager = new GameManager(level);
+    gameManager = new GameManager(level, [this](int newLevel)
+                                  { this->requestLevelReload(newLevel); });
 }
 
 PlayingState::~PlayingState()
@@ -59,4 +72,9 @@ PlayingState::~PlayingState()
     if (gameManager)
         delete gameManager;
     gameManager = nullptr;
+}
+
+void PlayingState::requestLevelReload(int newLevel)
+{
+    setLevel(newLevel);
 }

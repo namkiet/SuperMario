@@ -8,12 +8,12 @@
 #include <Gameplay/Stomp/Components.hpp>
 #include <Gameplay/LifeSpan/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
-#include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/Enemy/Bowser/Components.hpp>
 #include <Gameplay/Enemy/Bowser/BowserIdleState.hpp>
 #include <Gameplay/Enemy/Bowser/BowserIdleBehaviour.hpp>
+#include <Factories/EnemyFactory.hpp>
 
 class Bowser : public Entity
 {
@@ -24,14 +24,13 @@ public:
         addComponent<Transform>(Transform(sf::Vector2f(x, y) * scale, sf::Vector2f(32, 35) * scale));
         addComponent<BoxCollider2D>(BoxCollider2D(sf::Vector2f(32, 35) * scale));
 
-        addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_idle.png"), 32, 35, 1, 0));
+        addComponent<Animation>(Animation(EnemyFactory::getEnemyTexture("bowser_idle"), 32, 35, 1, 0));
 
         addComponent<EnemyTag>(std::make_shared<BowserIdleState>(), std::make_shared<BowserIdleBehaviour>());
         addComponent<BowserPatrol>();
         addComponent<BowserAttack>();
         addComponent<TowardPlayer>();
 
-        addComponent<BlockTag>();
         addComponent<CanHitBlockTag>();
         addComponent<StompableTag>();
         addComponent<Health>(Health(4));
