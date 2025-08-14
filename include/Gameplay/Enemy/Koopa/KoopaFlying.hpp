@@ -24,7 +24,7 @@ public:
         addComponent<Transform>(Transform(sf::Vector2f(x, y) * scale, sf::Vector2f(16, 24) * scale));
         addComponent<BoxCollider2D>(BoxCollider2D(sf::Vector2f(16, 24) * scale));
 
-        addComponent<Animation>(EnemyFactory::getEnemyTexture("koopa_walk"), 16, 24, 2, 0.5f / 2);
+        addComponent<Animation>(EnemyFactory::getEnemyTexture("koopa_fly"), 16, 24, 2, 0.5f / 2);
 
         addComponent<EnemyTag>(std::make_shared<KoopaFlyingState>(), std::make_shared<KoopaFlyingBehaviour>());
         addComponent<KoopaPatrol>();

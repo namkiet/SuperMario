@@ -10,6 +10,7 @@
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Physics/BlockTag.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
@@ -30,6 +31,8 @@ void KoopaShellState::onEnter(Entity *entity)
     //     anim.timer = 0;
     // }
     entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("koopa_shell"), 16, 16, 1, 0);
+
+    entity->addComponent<BlockTag>();
 
     auto &tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();
@@ -69,6 +72,7 @@ std::shared_ptr<EnemyState> KoopaShellState::getNewState(Entity *entity, float d
 
     if (entity->hasComponent<ChangeToKoopaFlippedTag>())
     {
+        entity->removeComponent<BlockTag>();
         entity->removeComponent<KoopaShellTag>();
         entity->removeComponent<ChangeToKoopaFlippedTag>();
         return std::make_shared<KoopaFlippedState>();

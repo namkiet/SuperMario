@@ -8,6 +8,8 @@
 #include <Gameplay/Enemy/Koopa/KoopaSlideBehaviour.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Physics/BlockTag.hpp>
+#include <Engine/Core/RigidBody.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <iostream>
@@ -58,6 +60,12 @@ std::shared_ptr<EnemyState> KoopaSlideState::getNewState(Entity *entity, float d
 
     if (entity->hasComponent<ChangeToKoopaNormalTag>())
     {
+        entity->getComponent<RigidBody>().velocity.y = -300;
+        entity->getComponent<RigidBody>().onGround = false;
+
+        entity->getComponent<Transform>().position.y -= 3 * (24 - 16);
+
+        entity->removeComponent<BlockTag>();
         entity->removeComponent<KoopaSlideTag>();
         entity->removeComponent<CanKillEnemyTag>();
         entity->removeComponent<ChangeToKoopaNormalTag>();
@@ -74,6 +82,7 @@ std::shared_ptr<EnemyState> KoopaSlideState::getNewState(Entity *entity, float d
 
     if (entity->hasComponent<ChangeToKoopaFlippedTag>())
     {
+        entity->removeComponent<BlockTag>();
         entity->removeComponent<KoopaSlideTag>();
         entity->removeComponent<CanKillEnemyTag>();
         entity->removeComponent<ChangeToKoopaFlippedTag>();

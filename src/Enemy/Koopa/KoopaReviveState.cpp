@@ -11,6 +11,7 @@
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Physics/BlockTag.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 
@@ -58,6 +59,7 @@ std::shared_ptr<EnemyState> KoopaReviveState::getNewState(Entity* entity, float 
 
     if (entity->hasComponent<ChangeToKoopaNormalTag>())
     {
+        entity->removeComponent<BlockTag>();
         entity->removeComponent<KoopaReviveTag>();
         entity->removeComponent<ChangeToKoopaNormalTag>();
         return std::make_shared<KoopaNormalState>();
@@ -79,6 +81,7 @@ std::shared_ptr<EnemyState> KoopaReviveState::getNewState(Entity* entity, float 
 
     if (entity->hasComponent<ChangeToKoopaFlippedTag>())
     {
+        entity->removeComponent<BlockTag>();
         entity->removeComponent<KoopaReviveTag>();
         entity->removeComponent<ChangeToKoopaFlippedTag>();
         return std::make_shared<KoopaFlippedState>();
