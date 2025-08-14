@@ -8,6 +8,7 @@
 class ScoreObserver
 {
 public:
+    virtual ~ScoreObserver() = default;
     virtual void onScoreChanged(int newScore) = 0;
 };
 

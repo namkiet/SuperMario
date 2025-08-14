@@ -25,8 +25,8 @@ private:
 
                 auto& playerPos = player->getComponent<Transform>().position;
                 auto& playerBox = player->getComponent<BoxCollider2D>();
-                auto& flagPos = pole->getComponent<Transform>().position;
-                auto& flagSize = pole->getComponent<BoxCollider2D>().size;
+                auto flagPos = pole->getComponent<Transform>().position + pole->getComponent<BoxCollider2D>().offset;
+                auto flagSize = pole->getComponent<BoxCollider2D>().size;
 
                 playerPos.x = flagPos.x + flagSize.x / 2 - playerBox.size.x;
 

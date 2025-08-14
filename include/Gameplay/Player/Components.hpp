@@ -8,12 +8,13 @@ class PlayerPowerState;
 
 struct PlayerTag : public Component 
 {
-    PlayerTag(std::shared_ptr<PlayerMovementState> movementState, std::shared_ptr<PlayerSizeState> sizeState, std::shared_ptr<PlayerPowerState> powerState) 
+    PlayerTag(std::shared_ptr<PlayerMovementState> movementState, std::shared_ptr<PlayerSizeState> sizeState, std::shared_ptr<PlayerPowerState> powerState, bool isMario = true) 
         : movementState(movementState), sizeState(sizeState), powerState(powerState) {}
 
     std::shared_ptr<PlayerMovementState> movementState;
     std::shared_ptr<PlayerSizeState> sizeState;
     std::shared_ptr<PlayerPowerState> powerState;
+    bool isMario = true;
 };
 
 struct BigMarioTag : public Component {};
