@@ -135,13 +135,17 @@ int main() {
         clang_visitChildren(rootCursor, visitor, &cd);
 
         if (!results.empty()) {
-            // print include first
-            outFile << "#include <" << file << ">\n\n";
+            // print include first 
+            std::string includePath = file;
+            const std::string prefix = "include/";
+            if (includePath.rfind(prefix, 0) == 0) {
+                includePath = includePath.substr(prefix.size());
+            }
+            outFile << "\n#include <" << includePath << ">\n";
+
             for (const auto& res : results) {
-                outFile << "REGISTER_COMPONENT(" << res.className << ")\n";
                 if (!res.fields.empty()) {
-                    outFile << "NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE("
-                            << res.className;
+                    outFile << "DEFINE_COMPONENT(" << res.className;
                     for (const auto& field : res.fields) {
                         outFile << ", " << field;
                     }
@@ -151,7 +155,6 @@ int main() {
                 {
                     outFile << "DEFINE_TAG(" << res.className << ")\n";
                 }
-                outFile << "\n";
             }
         }
 

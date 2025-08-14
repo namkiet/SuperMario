@@ -5,7 +5,6 @@
 #include <nlohmann/json.hpp>
 #include <typeinfo>
 #include <ECS/Entity.hpp>
-#include <Core/Utility.hpp>
 #include <iostream>
 
 using json = nlohmann::json;
@@ -14,12 +13,11 @@ using json = nlohmann::json;
 class ComponentRegistry {
 public:
     template<typename T>
-    static void registerComponent() {
-        auto name = get_type_name<T>();
-        saveByType[name] = [](EntityManager& em, json& j) {
+    static void registerComponent(const std::string& name) {
+        saveByType[name] = [name](EntityManager& em, json& j) {
             for (auto entity : em.findAll()) {
                 if (entity->hasComponent<T>()) {
-                    j[std::to_string(entity->getID())][get_type_name<T>()] = entity->getComponent<T>();
+                    j[std::to_string(entity->getID())][name] = entity->getComponent<T>();
                 }
             }
         };

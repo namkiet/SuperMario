@@ -74,7 +74,7 @@
 #include <iostream>
 #include <fstream>
 
-#include <Serialize.hpp>
+#include <Serialization/ComponentMeta.hpp>
 
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;

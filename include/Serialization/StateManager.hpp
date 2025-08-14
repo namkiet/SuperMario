@@ -14,8 +14,7 @@ public:
     using Factory = std::function<std::shared_ptr<BaseState>()>;
 
     template<typename DerivedState>
-    static void registerState() {
-        std::string name = get_type_name<DerivedState>();
+    static void registerState(const std::string& name) {
         registry.push_back({name, typeid(DerivedState), [] {
             return std::make_shared<DerivedState>();
         }});
@@ -60,11 +59,3 @@ inline void from_json(const json& j, std::shared_ptr<StateType>& state) {
         state = nullptr;
     }
 }
-
-#define DEFINE_STATE(Base, Derived) \
-    struct Derived; \
-    static struct Derived##Registrar { \
-        Derived##Registrar() { \
-            StateManager<Base>::template registerState<Derived>(); \
-        } \
-    } Derived##RegistrarInstance;

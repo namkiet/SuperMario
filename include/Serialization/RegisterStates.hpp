@@ -1,5 +1,4 @@
-#include <StateManager.hpp>
-
+#include <Serialization/Macros.hpp>
 #include <Gameplay/Enemy/Spiny/SpinyNormalBehaviour.hpp>
 #include <Gameplay/Enemy/Spiny/SpinyNormalState.hpp>
 #include <Gameplay/Enemy/Spiny/SpinyEggState.hpp>

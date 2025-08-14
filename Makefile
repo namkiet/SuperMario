@@ -14,3 +14,5 @@ compile:
 run:
 	./build/bin/mario
 
+tool:
+	g++ parse.cpp -o parse -std=c++17 -I/usr/local/opt/llvm/include -L/usr/local/opt/llvm/lib -lclang -lLLVM

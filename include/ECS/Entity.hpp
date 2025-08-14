@@ -11,16 +11,6 @@
 class Entity 
 {
 public:
-    // Auto-generated ID
-    Entity() : id(generateID()) {}
-
-    // Explicit ID (guaranteed unused externally)
-    explicit Entity(int givenID) : id(assignSpecificID(givenID)) {}
-
-    virtual ~Entity() { releaseID(id); }
-
-    int getID() const { return id; }
-
     template<typename T, typename... Args>
     void addComponent(Args&&... args) 
     {
@@ -45,6 +35,15 @@ public:
         auto it = components.find(typeid(T));
         return *static_cast<T*>(it->second.get());
     }
+
+public:
+    Entity() : id(generateID()) {}
+
+    explicit Entity(int givenID) : id(assignSpecificID(givenID)) {}
+
+    virtual ~Entity() { releaseID(id); }
+
+    int getID() const { return id; }
 
 private:
     int id;
@@ -80,6 +79,5 @@ private:
 
     static inline int counter{0};
     static inline std::vector<int> freeIDs;
-
     std::unordered_map<std::type_index, std::unique_ptr<Component>> components;
 };

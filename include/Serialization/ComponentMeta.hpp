@@ -1,5 +1,7 @@
-#include <jsonSFML.hpp>
-
+#include <Serialization/sfmlJSON.hpp>
+#include <Serialization/CustomJSON.hpp>
+#include <Serialization/RegisterStates.hpp>
+#include <Serialization/Macros.hpp>
 
 #include <Gameplay/Obstacles/Components.hpp>
 DEFINE_COMPONENT(PodobooTag, upright, lowestY, highestY)
@@ -191,7 +193,7 @@ DEFINE_TAG(FlipXTag)
 DEFINE_TAG(FlipYTag)
 
 #include <Engine/Audio/Components.hpp>
-DEFINE_COMPONENT(SoundComponent, sound, buffer, shouldPlay, loop)
+// DEFINE_COMPONENT(SoundComponent, sound, buffer, shouldPlay, loop)
 
 #include <Engine/Rendering/ZIndex.hpp>
 DEFINE_COMPONENT(ZIndex, value)
