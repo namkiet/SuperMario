@@ -341,6 +341,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     // settingsPanel->addComponent(shootBtn);
     // settingsPanel->addComponent(moveDownBtn);
     settingsPanel->addComponent(keyOptContainer);
+
     settingsPanel->addComponent(moveUpMessage);
     settingsPanel->addComponent(moveRightMessage);
     settingsPanel->addComponent(moveLeftMessage);
@@ -348,15 +349,6 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     settingsPanel->addComponent(moveDownMessage);
     settingsPanel->addComponent(KeySettingMessage);
         
-
-    // Connect button to buttonContainer in order to manage keyBinding
-    buttonContainer.add(moveUpBtn, KeyBinding::Action::MoveUp);
-    buttonContainer.add(moveRightBtn, KeyBinding::Action::MoveRight);
-    buttonContainer.add(moveLeftBtn, KeyBinding::Action::MoveLeft);
-    buttonContainer.add(moveDownBtn, KeyBinding::Action::MoveDown);
-    
-    buttonContainer.add(shootBtn, KeyBinding::Action::Shoot);
-
     // =============== playHomeButton ==============================
 
     auto playhomeBtn = makeButton(
@@ -399,30 +391,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     playPanel->addComponent(MapMessage);
 
 }
-// void MenuState::loadTexture(TexType type, const std::string& filePath)
-// {
-//     texholder.= std::make_shared<sf::Texture>();
-//     if (!texholder.get(type)->loadFromFile(filePath))
-//     {
-//         std::cout << "Cannot load texture from " + filePath << std::endl;
-//         assert(false);
-//     }
-// }
 
-void MenuState::drawBackgroundPanel()
-{
-    // const auto ws = game->getWindow().getSize();
-    // resizeSprite(*spritePool[TexType::background], sf::Vector2f((float)ws.x, (float)ws.y));
-    // spritePool[TexType::background]->setPosition(0.f, 0.f);
-
-    // auto bgDE = std::make_shared<DrawableElement>(spritePool[TexType::background]);
-
-    // Interact panelInter(StateColor(), /*toggle=*/true);
-    // panelInter.setActive(true); // root panel always active
-    // auto panelIU = std::make_shared<InteractUI>(panelInter, bgDE);
-
-    // uiRoot = std::make_shared<Panel>(panelIU);
-}
 // Helper function to create a button
 std::shared_ptr<Button> MenuState::makeButton(
     sf::Vector2f pos,
@@ -498,7 +467,6 @@ void MenuState::drawPlayComponent()
 
 void MenuState::handleEvent(const sf::Event &event) {
     uiRoot->handleEvent(event);
-    // buttonContainer.handleEvent(event);
 }
 
 void MenuState::update(float dt) {
