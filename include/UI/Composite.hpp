@@ -213,20 +213,19 @@ struct InteractUI
     }
     void setText(std::string text)
     {
-        // Cập nhật văn bản
         drawableEle->text.setString(text);
         if (drawableEle->shape)
         {
-            // Tính toán kích thước của văn bản và của shape (ví dụ: hình chữ nhật, hình tròn, v.v.)
-            auto tb = drawableEle->text.getLocalBounds();  // Lấy kích thước của văn bản
+            
+            auto tb = drawableEle->text.getLocalBounds(); 
 
             // Tính toán vị trí để căn giữa văn bản trong shape
             sf::Vector2f shapeSize = sf::Vector2f(drawableEle->shape->getGlobalBounds().width, drawableEle->shape->getGlobalBounds().height);
 
             // Căn giữa văn bản trong shape
             drawableEle->text.setPosition(
-                drawableEle->shape->getPosition().x + (shapeSize.x - tb.width) * 0.5f - tb.left,  // Căn giữa theo chiều ngang
-                drawableEle->shape->getPosition().y + (shapeSize.y - tb.height) * 0.5f - tb.top   // Căn giữa theo chiều dọc
+                drawableEle->shape->getPosition().x + (shapeSize.x - tb.width) * 0.5f - tb.left,
+                drawableEle->shape->getPosition().y + (shapeSize.y - tb.height) * 0.5f - tb.top
             );
         }
     }
@@ -236,7 +235,6 @@ struct InteractUI
     }
     void setSprite(std::shared_ptr<sf::Sprite> spr)
     {
-        std::cout << "at least it goes to interactui" << std::endl;
         drawableEle->setSprite(spr);
     }
 
@@ -245,15 +243,7 @@ struct InteractUI
         auto shape = drawableEle->shape;
         if (shape) 
         {
-            // if (inter.getIsActive() || inter.getIsHovered())
-            // {
-            //     shape->setFillColor(inter.colorSetting.hover);
-            //     // std::cout << "hover" << std::endl;
-            // }
-            // else
-            // {
-            //     shape->setFillColor(inter.colorSetting.normal);
-            // }
+
             shape->setFillColor((inter.getIsActive() || inter.getIsHovered())
                                 ? inter.colorSetting.hover
                                 : inter.colorSetting.normal);
@@ -262,11 +252,8 @@ struct InteractUI
     }
     void draw(sf::RenderWindow& window)
     {
-        // std::cout << "predraw line 181 ok" << std::endl;
         updateColor();
-                // std::cout << "draw line 183 ok" << std::endl;
         drawableEle->draw(window);
-                // std::cout << "draw line 185 ok" << std::endl;
     }
 };
 // hien tai neu nhan hut la tu dong deactivate luon, co van de
@@ -443,8 +430,7 @@ class ExpandableButton: public UIContainer
     bool handleEvent(const sf::Event& event) override
     {
         UIContainer::handleEvent(event); // handle for its children first
-
-
+        
         // handle for it later
         if (event.type == sf::Event::MouseButtonPressed 
         && event.mouseButton.button == sf::Mouse::Left) 
@@ -467,21 +453,17 @@ class ExpandableButton: public UIContainer
     }
 };
 
-class TextUIComponent: public UIComponent
+class StaticComponent: public UIComponent
 {
     public:
-    TextUIComponent(std::shared_ptr<InteractUI> interactui): UIComponent(interactui) {}
+    StaticComponent(std::shared_ptr<InteractUI> interactui): UIComponent(interactui) {}
     bool handleEvent(const sf::Event& event) override
     {
         // Nothing here
-        std::cout << "start text handle event" << std::endl;
         return true;
     }
     void draw(sf::RenderWindow& window) override
     {
-        std::cout << "start draw text" << std::endl;
         component->draw(window);
-        
-        std::cout << "end draw text" << std::endl;
     }
 };
