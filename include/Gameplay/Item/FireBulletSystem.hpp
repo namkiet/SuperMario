@@ -11,6 +11,7 @@
 #include <Gameplay/Patrol/Components.hpp>
 #include <Gameplay/LifeSpan/Components.hpp>
 #include <Gameplay/Player/Components.hpp>
+#include <Gameplay/Enemy/Components.hpp>
 
 #include <World.hpp>
 
@@ -65,7 +66,6 @@ public:
                     rb.velocity.y = -200.0f;
                     // rb.velocity.x = 0.0f;
                     patrolComponent.moveSpeed = 600.0f;
-                    
                 }
                 if (direction == Direction::Bottom)
                 {
@@ -84,11 +84,27 @@ public:
                         // fout << "FireBullet collided with another FireBullet." << std::endl;
                         continue;
                     }
-                    // Remove the old animation
-                    fireBullet->removeComponent<Animation>();
+
+                    if (fireBullet->hasComponent<LifeSpan>())
+                    {
+                        continue;
+                    }
 
                     fireBullet->getComponent<BoxCollider2D>().size = sf::Vector2f(48, 48);
                     fireBullet->getComponent<Transform>().size = sf::Vector2f(48, 48);
+
+                    // Remove the old animation
+                    fireBullet->removeComponent<Animation>();
+
+                    // Set the new position
+                    if (direction == Direction::Left)
+                    {
+                        pos.x = blockPos.x - size.x + size.x / 4;
+                    }
+                    else if (direction == Direction::Right)
+                    {
+                        pos.x = blockPos.x + blockSize.x;
+                    }
 
                     // Add the new animation
                     Entity *gameSession = world.findFirst<ThemeComponent>();
@@ -106,6 +122,7 @@ public:
                     fireBullet->removeComponent<PatrolComponent>();
 
                     fireBullet->removeComponent<RigidBody>();
+
                     // rb.velocity.x = 0.0f;
                     // rb.velocity.y = 0.0f;
 

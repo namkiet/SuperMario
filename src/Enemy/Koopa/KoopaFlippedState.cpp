@@ -32,7 +32,7 @@ void KoopaFlippedState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("koopa_flipped"), 16, 16, 1, 0);
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("koopa_flipped"), 16, 16, 1, 0.0f);
 
     entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/kickkill.wav"));
 

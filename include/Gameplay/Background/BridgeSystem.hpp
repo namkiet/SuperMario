@@ -102,16 +102,18 @@ private:
 public:
     void update(World &world, float dt) override
     {
-        for (Entity *player : world.findAll<PlayerTag, BoxCollider2D, TimeComponent, RigidBody, Transform>())
+        for (Entity *player : world.findAll<PlayerTag, BoxCollider2D, RigidBody, Transform>())
         {
             for (const auto &[collider, direction, overlap] : player->getComponent<BoxCollider2D>().collisions)
             {
-                if (collider->hasComponent<BellTag>())
+                if (collider->hasComponent<BellTag>() && collider->hasComponent<Transform>())
                 {
                     auto &bellTag = collider->getComponent<BellTag>();
                     if (direction == Direction::Top && !bellTag.firstHit)
                         firstHitCheck(world, player, collider);
                     if (direction != Direction::Left && !bellTag.secondHit)
+                        secondHitCheck(world, player, collider);
+                    if (player->getComponent<Transform>().position.y <= collider->getComponent<Transform>().position.y)
                         secondHitCheck(world, player, collider);
                 }
                 normalBlockCheck(world, player);

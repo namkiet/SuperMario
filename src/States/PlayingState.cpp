@@ -1,6 +1,8 @@
 #include <Game.hpp>
 #include <States/PlayingState.hpp>
 #include <Core/Variables.hpp>
+#include <LevelState/InGameState.hpp>
+#include <LevelState/IntroState.hpp>
 
 PlayingState::PlayingState() : gameManager(nullptr)
 {
@@ -25,17 +27,47 @@ void PlayingState::handleEvent(Game &game, const sf::Event &event)
         gameManager->handleEvent(event);
 }
 
-void PlayingState::update(Game &, float dt)
+void PlayingState::update(Game &game, float dt)
 {
     if (gameManager->getWorld().getSkipUpdate())
     {
         setLevel(gameManager->getWorld().getNewLevel());
         return;
     }
+    else if (gameManager->getShouldLoadNextLevel())
+    {
+        if (level + 1 > 3)
+        {
+            game.popState();
+            game.pushState("menu");
+            return;
+        }
+        setLevel(level + 1);
+        return;
+    }
+    else if (gameManager->goBackToMenu())
+    {
+        game.popState();
+        game.pushState("menu");
+        return;
+    }
 
-    if (gameManager)
+    // if (gameManager)
+    //     gameManager->update(dt);
+
+    if (level != 0 && currentLevelState)
+    {
+        auto newState = currentLevelState->getNewState(gameManager);
+        if (newState && newState.get() != currentLevelState.get())
+        {
+            currentLevelState = std::move(newState);
+        }
+        currentLevelState->update(gameManager, dt);
+    }
+    else
+    {
         gameManager->update(dt);
-
+    }
 }
 
 void PlayingState::render(Game &, sf::RenderWindow &window)
@@ -55,7 +87,11 @@ void PlayingState::render(Game &, sf::RenderWindow &window)
         window.clear(sf::Color(0, 0, 0, 255));
         break;
     }
-    gameManager->draw(window, level);
+    // gameManager->draw(window, level);
+    if (level != 0 && currentLevelState)
+        currentLevelState->render(gameManager, window, level);
+    else
+        gameManager->draw(window, level);
 }
 
 void PlayingState::setLevel(int level)
@@ -65,6 +101,7 @@ void PlayingState::setLevel(int level)
         delete gameManager;
     gameManager = new GameManager(level, [this](int newLevel)
                                   { this->requestLevelReload(newLevel); });
+    currentLevelState = std::make_unique<IntroState>();
 }
 
 PlayingState::~PlayingState()

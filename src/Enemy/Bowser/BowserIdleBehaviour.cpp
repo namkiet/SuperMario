@@ -88,7 +88,7 @@ void BowserIdleBehaviour::attack(Entity* entity, float dt, World& world)
         // anim.frameDuration = 0;
         // anim.currentFrame = 0;
         // anim.timer = 0;
-        entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("bowser_idle"), 32, 35, 1, 0);
+        entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("bowser_idle"), 32, 35, 1, 0.0f);
     }
     else if (attack.delay > attack.timer && attack.delay - attack.timer <= 0.75f && attack.isShooting == 0)
     {

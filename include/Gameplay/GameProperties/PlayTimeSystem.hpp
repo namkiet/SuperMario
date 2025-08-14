@@ -3,6 +3,7 @@
 #include <World.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
 #include <Gameplay/LifeSpan/Components.hpp>
+#include <Gameplay/Player/Components.hpp>
 #include <Engine/Core/DespawnTag.hpp>
 
 class PlayTimeSystem : public System
@@ -27,8 +28,10 @@ class PlayTimeSystem : public System
             }
             else if (timeComponent.timer <= 0 && !timeComponent.goesFaster)
             {
-                timeComponent.timer = 0;            // Ensure it doesn't go negative
-                entity->addComponent<DespawnTag>(); // Add a tag to despawn the entity
+                timeComponent.timer = 0; // Ensure it doesn't go negative
+                Entity *player = world.findFirst<PlayerTag>();
+                player->addComponent<DespawnTag>(); // Add a tag to despawn the entity
+                world.setStatus("timeup");
             }
             else if (timeComponent.timer <= 0 && timeComponent.goesFaster)
             {

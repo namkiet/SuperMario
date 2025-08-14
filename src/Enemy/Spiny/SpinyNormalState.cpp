@@ -25,7 +25,7 @@ void SpinyNormalState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Spiny/spiny_walk.png"), 16, 14, 2, 0.25f));
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("spiny_walk"), 16, 14, 2, 0.25f);
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();

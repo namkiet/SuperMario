@@ -24,7 +24,7 @@ public:
         addComponent<Transform>(Transform(sf::Vector2f(x, y) * scale, sf::Vector2f(32, 35) * scale));
         addComponent<BoxCollider2D>(BoxCollider2D(sf::Vector2f(32, 35) * scale));
 
-        addComponent<Animation>(Animation(EnemyFactory::getEnemyTexture("bowser_idle"), 32, 35, 1, 0));
+        addComponent<Animation>(Animation(EnemyFactory::getEnemyTexture("bowser_idle"), 32, 35, 1, 0.0f));
 
         addComponent<EnemyTag>(std::make_shared<BowserIdleState>(), std::make_shared<BowserIdleBehaviour>());
         addComponent<BowserPatrol>();

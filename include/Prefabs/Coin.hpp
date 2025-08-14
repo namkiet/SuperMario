@@ -21,7 +21,7 @@ public:
 
         // // Set the animation for the coin
         std::vector<const sf::Texture *> textures = itemFactory.getItemTextures("coin1");
-        addComponent<Animation>(textures, width, height, 0.15f, true);
+        addComponent<Animation>(textures, (int)width, (int)height, 0.15f, true);
 
         // addComponent<Animation>(TextureManager::load("assets/Item/Coin/coin.png"), 16, 16, 16, 0.15);
 
@@ -46,7 +46,7 @@ public:
 
         // Set the animation for the coin
         std::vector<const sf::Texture *> textures = itemFactory.getItemTextures("coin3");
-        addComponent<Animation>(textures, width, height, 0.3f, true);
+        addComponent<Animation>(textures, (int)width, (int)height, 0.3f, true);
 
         addComponent<SmallCoinTag>();
     }
@@ -64,7 +64,7 @@ public:
 
         // Set the animation for the coin
         std::vector<const sf::Texture *> textures = itemFactory.getItemTextures("coin2");
-        addComponent<Animation>(textures, width, height, 0.3f, true);
+        addComponent<Animation>(textures, (int)width, (int)height, 0.3f, true);
 
         // addComponent<Animation>(TextureManager::load("assets/Item/Coin/coin.png"), 16, 16, 16, 0.15);
 

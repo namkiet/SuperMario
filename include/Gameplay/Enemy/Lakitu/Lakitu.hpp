@@ -23,7 +23,7 @@ public:
         addComponent<Transform>(Transform(sf::Vector2f(x, y) * scale, sf::Vector2f(16, 24) * scale));
         addComponent<BoxCollider2D>(BoxCollider2D(sf::Vector2f(16, 24) * scale));
 
-        addComponent<Animation>(EnemyFactory::getEnemyTexture("lakitu_normal"), 16, 24, 1, 0);
+        addComponent<Animation>(EnemyFactory::getEnemyTexture("lakitu_normal"), 16, 24, 1, 0.0f);
 
         addComponent<EnemyTag>(std::make_shared<LakituNormalState>(), std::make_shared<LakituNormalBehaviour>());
         addComponent<LakituPatrol>();

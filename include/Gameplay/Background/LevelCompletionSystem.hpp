@@ -22,6 +22,7 @@
 class LevelCompletionSystem : public System
 {
 private:
+    float timeElapsed = 0.0f;
     void castleCollisionCheck(World &world, float dt, Entity *player, Entity *collider)
     {
         Entity *gameSession = world.findFirst<TimeComponent>();
@@ -84,11 +85,42 @@ private:
                     --seq.fireworksLeft;
                 }
             }
+
+            if (player->hasComponent<FireworkComponent>())
+            {
+                timeElapsed += dt;
+                auto &seq = player->getComponent<FireworkComponent>();
+                if (seq.fireworksLeft <= 0 && timeElapsed > 3.0f)
+                {
+                    world.setStatus("win");
+                }
+            }
+            else
+            {
+                timeElapsed += dt;
+                if (timeElapsed > 3.0f)
+                {
+                    world.setStatus("win");
+                }
+            }
         }
     }
     void princessCollisionCheck(World &world, float dt, Entity *player)
     {
         player->getComponent<RigidBody>().velocity = sf::Vector2f(0, 0);
+        Entity *gameSession = world.findFirst<TimeComponent>();
+        if (!gameSession)
+            return;
+        auto &timeComponent = gameSession->getComponent<TimeComponent>();
+        if (timeComponent.timer <= 0)
+        {
+            timeElapsed += dt;
+        }
+        
+        if (timeElapsed > 3.0f)
+        {
+            world.setStatus("win");
+        }
     }
 
 public:

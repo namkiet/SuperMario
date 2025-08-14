@@ -222,3 +222,45 @@ World &GameManager::getWorld()
 {
     return world;
 }
+
+std::string GameManager::getStatus()
+{
+    return world.getStatus();
+}
+
+bool GameManager::getShouldLoadNextLevel()
+{
+    return shouldLoadNextLevel;
+}
+
+void GameManager::setShouldLoadNextLevel(bool value)
+{
+    shouldLoadNextLevel = value;
+}
+
+int GameManager::lives = 5;
+
+int GameManager::getLives()
+{
+    return lives;
+}
+
+GameManager::~GameManager()
+{
+    --lives;
+}
+
+void GameManager::setLives(int newLives)
+{
+    lives = newLives;
+}
+
+bool GameManager::goBackToMenu()
+{
+    return backToMenu;
+}
+
+void GameManager::setGoBackToMenu(bool value)
+{
+    backToMenu = value;
+}

@@ -181,6 +181,16 @@ public:
         newLevel = level;
     }
 
+    std::string getStatus()
+    {
+        return status;
+    }
+
+    void setStatus(const std::string &newStatus)
+    {
+        status = newStatus;
+    }
+
 private:
     std::vector<std::unique_ptr<Entity>> entities;
     std::unordered_map<std::type_index, std::shared_ptr<System>> systems;
@@ -190,4 +200,5 @@ private:
     std::function<void(int)> requestLevelReload;
     bool skipUpdate = false;
     int newLevel = 1;
+    std::string status = "playing";
 };

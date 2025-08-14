@@ -29,7 +29,7 @@ void KoopaReviveState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Koopa/koopa_revive.png"), 16, 16, 2, stateDuration / 2 / 9));
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("koopa_revive"), 16, 16, 2, stateDuration / 2 / 9);
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();

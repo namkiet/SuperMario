@@ -26,7 +26,7 @@ void LakituFlippedState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("lakitu_flipped"), 16, 24, 1, 0);
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("lakitu_flipped"), 16, 24, 1, 0.0f);
 
     entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/kickkill.wav"));
 

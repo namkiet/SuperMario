@@ -19,6 +19,16 @@ public:
 
     World &getWorld();
 
+    std::string getStatus();
+
+    bool getShouldLoadNextLevel();
+    void setShouldLoadNextLevel(bool value);
+    static int getLives();
+    static void setLives(int newLives);
+    bool goBackToMenu();
+    void setGoBackToMenu(bool value);
+    ~GameManager();
+
 private:
     World world;
     LevelHandler levelHandler;
@@ -26,4 +36,7 @@ private:
     int level = 1;
     bool oneFrame = false;
     bool shouldPlay = true;
+    bool shouldLoadNextLevel = false;
+    static int lives;
+    bool backToMenu = false;
 };

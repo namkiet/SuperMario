@@ -2,6 +2,7 @@
 #include "GameState.hpp"
 #include "GameManager.hpp"
 #include <SFML/Graphics.hpp>
+#include <LevelState/LevelState.hpp>
 
 class PlayingState : public GameState
 {
@@ -16,5 +17,6 @@ public:
 
 private:
     GameManager *gameManager;
+    std::shared_ptr<LevelState> currentLevelState;
     int level = 1;
 };

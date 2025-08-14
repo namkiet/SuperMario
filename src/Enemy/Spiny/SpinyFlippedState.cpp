@@ -25,7 +25,7 @@ void SpinyFlippedState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("spiny_flipped"), 16, 14, 1, 0);
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("spiny_flipped"), 16, 14, 1, 0.0f);
     
     entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/kickkill.wav"));
 

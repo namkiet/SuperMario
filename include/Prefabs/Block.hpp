@@ -63,7 +63,7 @@ public:
             }
 
             std::vector<const sf::Texture *> textures = blockFactory.getQuestionBlockTextures();
-            addComponent<Animation>(textures, width, height, 0.3f, true);
+            addComponent<Animation>(textures, (int)width, (int)height, 0.3f, true);
         }
         else if (index == 5) // Normal block
         {
@@ -114,28 +114,28 @@ public:
             addComponent<LevelBlock>();
             addComponent<Level1Block>();
             std::vector<const sf::Texture *> textures = blockFactory.getQuestionBlockTextures();
-            addComponent<Animation>(textures, width, height, 0.3f, true);
+            addComponent<Animation>(textures,(int) width, (int)height, 0.3f, true);
         }
         else if (index == 13)
         {
             addComponent<LevelBlock>();
             addComponent<Level2Block>();
             std::vector<const sf::Texture *> textures = blockFactory.getQuestionBlockTextures();
-            addComponent<Animation>(textures, width, height, 0.3f, true);
+            addComponent<Animation>(textures, (int)width, (int)height, 0.3f, true);
         }
         else if (index == 14)
         {
             addComponent<LevelBlock>();
             addComponent<Level3Block>();
             std::vector<const sf::Texture *> textures = blockFactory.getQuestionBlockTextures();
-            addComponent<Animation>(textures, width, height, 0.3f, true);
+            addComponent<Animation>(textures,(int) width, (int)height, 0.3f, true);
         }
         else if (index == 15)
         {
             addComponent<LevelBlock>();
             addComponent<Level4Block>();
             std::vector<const sf::Texture *> textures = blockFactory.getQuestionBlockTextures();
-            addComponent<Animation>(textures, width, height, 0.3f, true);
+            addComponent<Animation>(textures, (int)width, (int)height, 0.3f, true);
         }
     }
 };

@@ -26,7 +26,7 @@ void BowserDeadState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("bowser_dead"), 32, 39, 1, 0);
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("bowser_dead"), 32, 39, 1, 0.0f);
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();
