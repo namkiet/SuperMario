@@ -105,8 +105,9 @@ struct DrawableElement
     }
 
     void draw(sf::RenderWindow& window) {
-        if (shape) window.draw(*shape);
         if (sprite) window.draw(*sprite);
+        
+        if (shape) window.draw(*shape);
         window.draw(text);
     }
     bool contains(sf::Vector2f pos) 
@@ -248,7 +249,6 @@ struct InteractUI
                                 ? inter.colorSetting.hover
                                 : inter.colorSetting.normal);
         }
-        // Optionally update text color too.
     }
     void draw(sf::RenderWindow& window)
     {
@@ -422,6 +422,45 @@ class Panel: public UIContainer
         return (!getIsActive());// avoid propagate event to its ancestor if it is active
     }
 
+};
+class OptionContainer: public UIContainer
+{
+    private:
+    int activeID;
+    std::function<void(const sf::Event&)> func;
+    public:
+        OptionContainer(std::shared_ptr<InteractUI> comp): UIContainer(comp), activeID(-1) {}
+        void setFunc(std::function<void(const sf::Event&)> func)
+        {
+            this->func = func;
+        }
+        std::shared_ptr<UIComponent> getActiveComponent()
+        {
+            if (activeID == -1) return nullptr;
+            return ComponentList[activeID];
+        }
+        bool handleEvent(const sf::Event& event) override
+        {
+            if (activeID == -1 || !ComponentList[activeID]->getIsActive()) activeID = -1;
+            for (int i = 0; i < ComponentList.size(); i++)
+            {
+                if (i == activeID) continue;
+                if (!ComponentList[i]->handleEvent(event)) return false; // if component is button, always true
+                if (ComponentList[i]->getIsActive())
+                {
+                    if (activeID != -1) 
+                        ComponentList[activeID]->setActive(false);
+                    activeID = i;
+                }
+            }
+
+            if (func && activeID != -1)
+            {
+                func(event);
+            }
+
+            return true;
+        }
 };
 
 class ExpandableButton: public UIContainer
