@@ -1,9 +1,8 @@
 #pragma once
 #include <unordered_map>
 #include <memory>
-#include <UI/Button.hpp>
 #include <UI/KeyBinding.hpp>
-#include <NewUI/Composite1.hpp>
+#include <UI/Composite.hpp>
 #include <cassert>
 #include <string.h>
 #include <Engine/Rendering/Utility.hpp>

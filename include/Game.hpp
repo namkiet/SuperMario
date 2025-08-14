@@ -5,6 +5,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include <UI/TextureHolder.hpp>
 
 class Game
 {
@@ -14,7 +15,7 @@ private:
     std::vector<std::shared_ptr<GameState>> stateStack;
     bool isRunning = true;
     StateRegistry registry;
-
+    TextureHolder textureHolder;
 public:
     Game();
     void run();
@@ -24,4 +25,5 @@ public:
     sf::RenderWindow &getWindow();
     void quit();
     StateRegistry &getRegistry();
+    TextureHolder& getTexHolder();
 };

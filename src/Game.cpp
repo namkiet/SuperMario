@@ -10,10 +10,23 @@ Game::Game()
     : contextSettings(0, 0, 16), window(sf::VideoMode(SIZE::SCREEN.x, SIZE::SCREEN.y), "Game", sf::Style::Default, contextSettings)
 {
     window.setFramerateLimit(90);
+
+    // load textureholder
+    textureHolder.load(TexType::background, "assets/Background/MenuBackground.png");
+    textureHolder.load(TexType::close, "assets/UI/close.png");
+    textureHolder.load(TexType::settingpanel, "assets/Background/MenuBackground.png");
+    textureHolder.load(TexType::home, "assets/UI/home.png");
+    textureHolder.load(TexType::soundOn, "assets/UI/soundOn.png");
+    textureHolder.load(TexType::sound, "assets/UI/sound.png");
+    textureHolder.load(TexType::music, "assets/UI/music.png");
+    textureHolder.load(TexType::save, "assets/UI/save.png");
+    textureHolder.load(TexType::turnback, "assets/UI/turn-back.png");
+    textureHolder.load(TexType::soundOff, "assets/UI/soundOff.png");
+    textureHolder.load(TexType::playPanel, "assets/Background/MenuBackground.png");
     
-registry.registerInstance("menu", std::make_shared<MenuState>(std::shared_ptr<Game>(this)));
-registry.registerInstance("play", std::make_shared<PlayingState>(std::shared_ptr<Game>(this)));
-registry.registerInstance("settings", std::make_shared<SettingsState>(std::shared_ptr<Game>(this)));
+    registry.registerInstance("menu", std::make_shared<MenuState>(std::shared_ptr<Game>(this)));
+    registry.registerInstance("play", std::make_shared<PlayingState>(std::shared_ptr<Game>(this)));
+    registry.registerInstance("settings", std::make_shared<SettingsState>(std::shared_ptr<Game>(this)));
 // registry.registerInstance("keysettings", std::make_shared<KeySettingState>(std::shared_ptr<Game>(this)));
 
     pushState("menu");
@@ -93,4 +106,8 @@ void Game::quit()
 StateRegistry &Game::getRegistry()
 {
     return registry;
+}
+TextureHolder& Game::getTexHolder()
+{
+    return textureHolder;
 }
