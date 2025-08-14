@@ -62,12 +62,12 @@ public:
     }
 
     // === SAVE / LOAD ===
-    void loadSceneFromFile(const std::string& filename) {
-        saveManager.loadFromFile(filename);
+    void loadSceneFromFile(const json& j) {
+        saveManager.loadFromFile(j);
     }
 
-    void saveSceneToFile(const std::string& filename) {
-        saveManager.saveToFile(filename);
+    void saveSceneToFile(json& j) const{
+        saveManager.saveToFile(j);
     }
 
 public:

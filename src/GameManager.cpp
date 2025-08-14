@@ -80,7 +80,7 @@
 using json = nlohmann::json;
 
 
-GameManager::GameManager(int level) : levelHandler(world, level), level(level)
+GameManager::GameManager(int level) : levelHandler(world, level), currentLevel(level)
 {
     std::ifstream in("should_read_from_json.json");
 
@@ -88,9 +88,13 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
 
     // std::cout << loadFromJSON << "\n";
 
-    if (loadFromJSON)
+    if (currentLevel == -1)
     {
-        world.loadSceneFromFile("save.json");
+        std::ifstream fin("save.json");
+        json j;
+        fin >> j;
+        currentLevel = j["level"];
+        world.loadSceneFromFile(j["entities"]);
     }
     else
     {
@@ -171,7 +175,11 @@ void GameManager::handleEvent(const sf::Event &event)
     {
         if (event.key.code == sf::Keyboard::S)
         {
-            world.saveSceneToFile("save.json");  
+            json j;
+            j["level"] = currentLevel;
+            world.saveSceneToFile(j["entities"]);  
+            std::ofstream fout("save.json");
+            fout << j.dump(4);
         }
 
         if (event.key.code == sf::Keyboard::N)
@@ -181,13 +189,13 @@ void GameManager::handleEvent(const sf::Event &event)
 
         if (event.key.code == sf::Keyboard::X)
         {
-            std::cout << "HELLO\n";
+            // std::cout << "HELLO\n";
             auto lakitu = world.createEntity<Lakitu>(20 * 16, 3 * 16, 3);
         }
 
         if (event.key.code == sf::Keyboard::B)
         {
-            std::cout << "HELLO\n";
+            // std::cout << "HELLO\n";
             auto bowser = world.createEntity<Bowser>(10 * 16, 3 * 16, 3);
         }
 
@@ -214,7 +222,7 @@ void GameManager::update(float dt)
 
     if (oneFrame && !shouldPlay) return;
 
-    std::cout << 1.0f / dt << "\n";
+    // std::cout << 1.0f / dt << "\n";
     world.update(dt);
 
     if (oneFrame)
@@ -222,13 +230,15 @@ void GameManager::update(float dt)
         shouldPlay = false;
     }
 
+    // std::cout << level << "\n";
+
     // world.showSceneEditor();
 }
 
 void GameManager::draw(sf::RenderWindow &window, int level) const
 {
     // Set the custom view
-    world.getSystem<RenderSystem>()->draw(world, window, level);
+    world.getSystem<RenderSystem>()->draw(world, window, currentLevel);
 
     // Drawn with custom view
     world.getSystem<DrawBoxColliderSystem>()->draw(world, window);

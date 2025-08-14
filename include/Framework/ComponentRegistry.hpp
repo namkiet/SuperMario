@@ -6,6 +6,7 @@
 #include <typeinfo>
 #include <ECS/Entity.hpp>
 #include <Core/Utility.hpp>
+#include <iostream>
 
 using json = nlohmann::json;
 
@@ -27,15 +28,23 @@ public:
         };
     }
 
-    void saveComponents(EntityManager& em, json& j) {
+    void saveComponents(EntityManager& em, json& j) const {
         for (auto& [_, saveFunc] : saveByType) saveFunc(em, j);
     }
 
     void loadComponents(const json& j, EntityManager& em) {
         for (auto& [id, data] : j.items()) {
             for (auto& [name, compJSON] : data.items()) {
-                if (loadByType.find(name) != loadByType.end()) {
-                    loadByType[name](compJSON, em.getEntityByID(std::stoi(id)));
+                if (loadByType.find(name) != loadByType.end()) 
+                {
+                    try
+                    {
+                        loadByType[name](compJSON, em.getEntityByID(std::stoi(id)));
+                    }
+                    catch(const std::exception& e)
+                    {
+                        std::cerr << id << " " << name << " " << e.what() << '\n';
+                    }
                 }
             }
         }

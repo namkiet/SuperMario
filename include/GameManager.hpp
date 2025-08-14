@@ -17,7 +17,7 @@ public:
 private:    
     World world;
     LevelHandler levelHandler;
-    int level = 1;
+    int currentLevel = 1;
     bool oneFrame = false;
     bool shouldPlay = true;
 };
