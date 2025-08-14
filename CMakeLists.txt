@@ -4,9 +4,12 @@ project(mario LANGUAGES CXX)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 # Only add -Wno-inconsistent-missing-override for non-MSVC compilers
 if(NOT MSVC)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-inconsistent-missing-override")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-inconsistent-missing-override")
 endif()
 
+if (MSVC)
+  add_compile_options(/bigobj)
+endif()
 
 include(FetchContent)
 

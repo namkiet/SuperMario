@@ -1,4 +1,5 @@
 #pragma once
+#include <Framework/EntityManager.hpp>
 #include <unordered_map>
 #include <functional>
 #include <string>
@@ -22,7 +23,7 @@ public:
             }
         };
         loadByType[name] = [](const json& j, Entity* e) {
-            e->addComponent<T>(j);
+            e->addComponent<T>(T(j));
         };
     }
 

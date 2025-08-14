@@ -1,7 +1,9 @@
 #pragma once
 #include <nlohmann/json.hpp>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <Core/TextureManager.hpp>
+#include <Engine/Audio/SoundManager.hpp>
 #include <Framework/EntityManager.hpp>
 #include <Framework/ComponentRegistry.hpp>
 #include <vector>
@@ -60,6 +62,30 @@ namespace nlohmann {
 
         static void from_json(const json& j, sf::Sprite& sprite) {
             sprite.setTexture(TextureManager::load(j.get<std::string>()));
+        }
+    };
+
+    template <>
+    struct adl_serializer<const sf::SoundBuffer*> {
+        static void to_json(json& j, const sf::SoundBuffer* buffer) {
+            j = buffer ? SoundManager::getPath(buffer) : "";
+        }
+        static void from_json(const json& j, const sf::SoundBuffer*& buffer) {
+            if (j.is_string() && !j.get<std::string>().empty())
+                buffer = &SoundManager::load(j.get<std::string>()); 
+            else
+                buffer = nullptr;
+        }
+    };
+
+    template <>
+    struct adl_serializer<sf::Sound> {
+        static void to_json(json& j, const sf::Sound& sound) {
+            j = SoundManager::getPath(sound.getBuffer());
+        }
+
+        static void from_json(const json& j, sf::Sound& sound) {
+            sound.setBuffer(SoundManager::load(j.get<std::string>()));
         }
     };
 }

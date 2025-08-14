@@ -26,7 +26,6 @@ public:
         return textureMap.emplace(fileName, std::move(texture)).first->second;
     }
 
-    // Tìm path của texture* (chậm hơn vì duyệt map)
     static std::string getPath(const sf::Texture* texture)
     {
         for (const auto& pair : textureMap)

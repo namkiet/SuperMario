@@ -74,7 +74,7 @@
 #include <iostream>
 #include <fstream>
 
-#include <Serialization/ComponentMeta.hpp>
+// #include <Serialization/ComponentMeta.hpp>
 
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
@@ -201,7 +201,7 @@ void GameManager::handleEvent(const sf::Event &event)
 
         if (event.key.code == sf::Keyboard::T)
         {
-            auto goomba = world.createEntity<Goomba>(7 * 16, 2 * 16, 3);
+            auto koopa = world.createEntity<Koopa>(7 * 16, 2 * 16, 3);
         }
 
         if (event.key.code == sf::Keyboard::P)
