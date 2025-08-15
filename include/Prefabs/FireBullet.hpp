@@ -11,6 +11,7 @@
 
 #include <Gameplay/Item/Components.hpp>
 #include <Gameplay/Enemy/Components.hpp>
+#include <Gameplay/LifeSpan/Components.hpp>
 
 #include <vector>
 
@@ -42,6 +43,8 @@ public:
 
         // Add the can kill enemy tag
         addComponent<CanKillEnemyTag>();
+
+        addComponent<LifeSpan>(5.0f);
         ++count;
     }
     ~FireBullet()

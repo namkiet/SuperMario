@@ -123,6 +123,8 @@ public:
 
                     fireBullet->removeComponent<RigidBody>();
 
+                    break;
+
                     // rb.velocity.x = 0.0f;
                     // rb.velocity.y = 0.0f;
 
