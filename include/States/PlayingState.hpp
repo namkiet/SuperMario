@@ -14,11 +14,16 @@ public:
     void render(sf::RenderWindow &window) override;
     void setLevel(int level);
     void requestLevelReload(int newLevel);
+    void setupButton();
     ~PlayingState() override;
     void reset();
 
 private:
     GameManager *gameManager;
+    std::shared_ptr<UIComponent> uiRoot;
+    sf::Font UIFont;
+
+    std::shared_ptr<UIComponent> DeadPanel; // temp
     std::shared_ptr<LevelState> currentLevelState;
     int level = 1;
 };

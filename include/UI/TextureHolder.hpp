@@ -14,7 +14,12 @@ enum class TexType {
     sound,
     music,
     save,
-    turnback
+    turnback,
+    marioidling,
+    mariochoose,
+    marionotchoose,
+    luigichoose,
+    luiginotchoose
 };
 
 using TextureHolder = ResourceHolder<sf::Texture, TexType>;
