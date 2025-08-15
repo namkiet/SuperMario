@@ -44,7 +44,6 @@ public:
         // Add the can kill enemy tag
         addComponent<CanKillEnemyTag>();
 
-        addComponent<LifeSpan>(5.0f);
         ++count;
     }
     ~FireBullet()
