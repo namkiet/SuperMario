@@ -12,7 +12,7 @@ public:
 
     void handleEvent(const sf::Event &event);
     void update(float dt);
-    void draw(sf::RenderWindow &window, int level) const;
+    void draw(sf::RenderWindow &window, int level);
 
 private:    
     World world;

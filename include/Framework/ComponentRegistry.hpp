@@ -23,7 +23,8 @@ public:
             }
         };
         loadByType[name] = [](const json& j, Entity* e) {
-            e->addComponent<T>(T(j));
+            T comp = j;
+            e->addComponent<T>(comp);
         };
     }
 

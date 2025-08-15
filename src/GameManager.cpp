@@ -218,7 +218,7 @@ void GameManager::handleEvent(const sf::Event &event)
 
 void GameManager::update(float dt)
 {
-    if (dt > 0.2f) return;
+    if (dt > 0.1f) return;
 
     if (oneFrame && !shouldPlay) return;
 
@@ -235,7 +235,7 @@ void GameManager::update(float dt)
     // world.showSceneEditor();
 }
 
-void GameManager::draw(sf::RenderWindow &window, int level) const
+void GameManager::draw(sf::RenderWindow &window, int level)
 {
     // Set the custom view
     world.getSystem<RenderSystem>()->draw(world, window, currentLevel);
