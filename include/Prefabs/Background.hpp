@@ -40,7 +40,7 @@ public:
             // Add the flagpole tag
             addComponent<FlagPoleTag>();
 
-            // addComponent<BoxCollider2D>(sf::Vector2f(width * scale, height * scale));
+            addComponent<BoxCollider2D>(sf::Vector2f(width * scale / 8, height * scale), sf::Vector2f(width * scale * 7 / 16, 0));
 
             // Set the texture for the background
             // addComponent<Animation>(TextureManager::load("assets/Background/FlagPole.png"));
