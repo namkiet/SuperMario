@@ -3,9 +3,11 @@
 #include <Core/Variables.hpp>
 #include <LevelState/InGameState.hpp>
 #include <LevelState/IntroState.hpp>
+#include <LevelState/LevelChosenState.hpp>
 
 PlayingState::PlayingState() : gameManager(nullptr)
 {
+    currentLevelState = std::make_unique<LevelChosenState>();
 }
 
 void PlayingState::handleEvent(Game &game, const sf::Event &event)

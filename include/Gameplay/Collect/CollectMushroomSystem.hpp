@@ -48,7 +48,7 @@ class CollectMushroomSystem : public System
         if (shouldReloadLevel)
         {
             world.setSkipUpdate(true);
-            world.setNewLevel(newLevel);
+            world.setStatus("intro");
         }
     }
 };
