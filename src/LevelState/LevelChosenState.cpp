@@ -11,6 +11,7 @@ std::shared_ptr<LevelState> LevelChosenState::getNewState(GameManager *gameManag
     if (gameManager->getStatus() == "intro")
     {
         gameManager->getWorld().setSkipUpdate(true);
+        gameManager->setLives(5);
     }
     return nullptr;
 }
@@ -18,4 +19,9 @@ std::shared_ptr<LevelState> LevelChosenState::getNewState(GameManager *gameManag
 void LevelChosenState::render(GameManager *gameManager, sf::RenderWindow &window, int level)
 {
     gameManager->draw(window, level);
+}
+
+bool LevelChosenState::shouldReturnToMenu() const
+{
+    return false;
 }

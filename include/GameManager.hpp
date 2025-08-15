@@ -25,8 +25,6 @@ public:
     void setShouldLoadNextLevel(bool value);
     static int getLives();
     static void setLives(int newLives);
-    bool goBackToMenu();
-    void setGoBackToMenu(bool value);
     ~GameManager();
 
 private:
@@ -38,5 +36,4 @@ private:
     bool shouldPlay = true;
     bool shouldLoadNextLevel = false;
     static int lives;
-    bool backToMenu = false;
 };

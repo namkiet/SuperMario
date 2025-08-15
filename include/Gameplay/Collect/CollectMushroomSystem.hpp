@@ -11,13 +11,15 @@ class CollectMushroomSystem : public System
     {
         bool shouldReloadLevel = false; // Reset at start of update
         int newLevel = 1;
-        for (Entity* player : world.findAll<CanCollectTag, PlayerTag, BoxCollider2D>())
+        for (Entity *player : world.findAll<CanCollectTag, PlayerTag, BoxCollider2D>())
         {
             for (const auto &[item, direction, overlap] : player->getComponent<BoxCollider2D>().collisions)
             {
                 // Check if the entity can collect the item
-                if (!item->hasComponent<CollectableTag>()) continue;
-                if (!item->hasComponent<MushroomTag>()) continue;
+                if (!item->hasComponent<CollectableTag>())
+                    continue;
+                if (!item->hasComponent<MushroomTag>())
+                    continue;
 
                 if (!player->hasComponent<BigMarioTag>())
                 {
@@ -47,7 +49,7 @@ class CollectMushroomSystem : public System
         }
         if (shouldReloadLevel)
         {
-            world.setSkipUpdate(true);
+            world.setNewLevel(newLevel);
             world.setStatus("intro");
         }
     }

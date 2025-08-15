@@ -254,13 +254,3 @@ void GameManager::setLives(int newLives)
 {
     lives = newLives;
 }
-
-bool GameManager::goBackToMenu()
-{
-    return backToMenu;
-}
-
-void GameManager::setGoBackToMenu(bool value)
-{
-    backToMenu = value;
-}

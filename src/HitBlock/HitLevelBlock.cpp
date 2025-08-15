@@ -28,7 +28,7 @@ void HitSpecialBlockSystem::HitLevelBlock(World &world, float dt, Entity *block)
     {
         newLevel = 4;
     }
-    auto mushroom = world.createEntity<LevelMushroom>(pos.x, pos.y - 20, 48, 48, newLevel, ItemFactory(1));
+    auto mushroom = world.createEntity<LevelMushroom>(pos.x, pos.y - 20, 48.0f, 48.0f, newLevel, ItemFactory(1));
     ItemEmerging emerging;
     emerging.finalY = pos.y - 48;
     mushroom->addComponent<ItemEmerging>(emerging);

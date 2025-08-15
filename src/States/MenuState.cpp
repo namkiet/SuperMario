@@ -17,7 +17,7 @@ void MenuState::handleEvent(Game &game, const sf::Event &event)
         auto playState = game.getRegistry().getState("play");
         if (playState)
         {
-            std::static_pointer_cast<PlayingState>(playState)->setLevel(0);
+            std::static_pointer_cast<PlayingState>(playState)->reset();
             game.pushState("play");
         }
     }

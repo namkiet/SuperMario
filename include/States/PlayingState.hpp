@@ -14,6 +14,7 @@ public:
     void setLevel(int level);
     void requestLevelReload(int newLevel);
     ~PlayingState() override;
+    void reset();
 
 private:
     GameManager *gameManager;

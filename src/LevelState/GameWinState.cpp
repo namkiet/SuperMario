@@ -13,3 +13,8 @@ std::shared_ptr<LevelState> GameWinState::getNewState(GameManager *gameManager)
 {
     return nullptr;
 }
+
+bool GameWinState::shouldReturnToMenu() const
+{
+    return false;
+}

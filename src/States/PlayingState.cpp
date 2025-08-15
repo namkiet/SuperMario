@@ -7,7 +7,6 @@
 
 PlayingState::PlayingState() : gameManager(nullptr)
 {
-    currentLevelState = std::make_unique<LevelChosenState>();
 }
 
 void PlayingState::handleEvent(Game &game, const sf::Event &event)
@@ -47,7 +46,7 @@ void PlayingState::update(Game &game, float dt)
         setLevel(level + 1);
         return;
     }
-    else if (gameManager->goBackToMenu())
+    else if (currentLevelState && currentLevelState->shouldReturnToMenu())
     {
         game.popState();
         game.pushState("menu");
@@ -57,7 +56,7 @@ void PlayingState::update(Game &game, float dt)
     // if (gameManager)
     //     gameManager->update(dt);
 
-    if (level != 0 && currentLevelState)
+    if (currentLevelState)
     {
         auto newState = currentLevelState->getNewState(gameManager);
         if (newState && newState.get() != currentLevelState.get())
@@ -65,10 +64,6 @@ void PlayingState::update(Game &game, float dt)
             currentLevelState = std::move(newState);
         }
         currentLevelState->update(gameManager, dt);
-    }
-    else
-    {
-        gameManager->update(dt);
     }
 }
 
@@ -90,10 +85,8 @@ void PlayingState::render(Game &, sf::RenderWindow &window)
         break;
     }
     // gameManager->draw(window, level);
-    if (level != 0 && currentLevelState)
+    if (currentLevelState)
         currentLevelState->render(gameManager, window, level);
-    else
-        gameManager->draw(window, level);
 }
 
 void PlayingState::setLevel(int level)
@@ -116,4 +109,10 @@ PlayingState::~PlayingState()
 void PlayingState::requestLevelReload(int newLevel)
 {
     setLevel(newLevel);
+}
+
+void PlayingState::reset()
+{
+    setLevel(0);
+    currentLevelState = std::make_unique<LevelChosenState>();
 }

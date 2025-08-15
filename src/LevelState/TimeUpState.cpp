@@ -3,8 +3,6 @@
 void TimeUpState::update(GameManager *gameManager, float dt)
 {
     timeElapsed += dt;
-    if (timeElapsed > 1.5f)
-        gameManager->setGoBackToMenu(true);
 }
 
 std::shared_ptr<LevelState> TimeUpState::getNewState(GameManager *gameManager)
@@ -23,4 +21,16 @@ void TimeUpState::render(GameManager *gameManager, sf::RenderWindow &window, int
     text.setPosition(250, 200);
 
     window.draw(text);
+}
+
+TimeUpState::TimeUpState()
+{
+    font.loadFromFile("BalooBhai2-ExtraBold.ttf");
+}
+
+bool TimeUpState::shouldReturnToMenu() const
+{
+    if (timeElapsed > 1.5f)
+        return true;
+    return false;
 }

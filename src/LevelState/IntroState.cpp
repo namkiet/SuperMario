@@ -64,3 +64,8 @@ void IntroState::render(GameManager *gameManager, sf::RenderWindow &window, int 
     window.draw(smallMap);
     window.draw(introText);
 }
+
+bool IntroState::shouldReturnToMenu() const
+{
+    return false;
+}

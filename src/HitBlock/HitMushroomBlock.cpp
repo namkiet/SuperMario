@@ -15,7 +15,7 @@ void HitSpecialBlockSystem::HitMushroomBlock(World &world, float dt, Entity *blo
     if (!gameSession)
         return;
     auto &themeComponent = gameSession->getComponent<ThemeComponent>();
-    auto mushroom = world.createEntity<Mushroom1>(pos.x, pos.y - 20, 48, 48, ItemFactory(themeComponent.currentTheme));
+    auto mushroom = world.createEntity<Mushroom1>(pos.x, pos.y - 20, 48.0f, 48.0f, ItemFactory(themeComponent.currentTheme));
     ItemEmerging emerging;
     emerging.finalY = pos.y - 48;
     mushroom->addComponent<ItemEmerging>(emerging);

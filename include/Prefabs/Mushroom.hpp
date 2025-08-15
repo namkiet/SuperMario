@@ -57,7 +57,7 @@ public:
 class LevelMushroom : public Entity
 {
 public:
-    LevelMushroom(float x, float y, int width, int height, int newLevel, ItemFactory itemFactory)
+    LevelMushroom(float x, float y, float width, float height, int newLevel, ItemFactory itemFactory)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x, y), sf::Vector2f(width, height));

@@ -36,3 +36,8 @@ void InGameState::render(GameManager *gameManager, sf::RenderWindow &window, int
 {
     gameManager->draw(window, level);
 }
+
+bool InGameState::shouldReturnToMenu() const
+{
+    return false;
+}
