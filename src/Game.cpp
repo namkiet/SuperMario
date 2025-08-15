@@ -23,7 +23,13 @@ Game::Game()
     textureHolder.load(TexType::turnback, "assets/UI/turn-back.png");
     textureHolder.load(TexType::soundOff, "assets/UI/soundOff.png");
     textureHolder.load(TexType::playPanel, "assets/Background/MenuBackground.png");
-    
+    textureHolder.load(TexType::marioidling, "assets/Mario/Small/idling.png");
+    textureHolder.load(TexType::mariochoose, "assets/Characters/RedMarioActive.png");
+    textureHolder.load(TexType::marionotchoose, "assets/Characters/RedMarioNotActive.png");
+    textureHolder.load(TexType::luigichoose, "assets/Characters/GreenMarioActive.png");
+    textureHolder.load(TexType::luiginotchoose, "assets/Characters/GreenMarioNotActive.png");
+
+
     registry.registerInstance("menu", std::make_shared<MenuState>(std::shared_ptr<Game>(this)));
     registry.registerInstance("play", std::make_shared<PlayingState>(std::shared_ptr<Game>(this)));
     registry.registerInstance("settings", std::make_shared<SettingsState>(std::shared_ptr<Game>(this)));

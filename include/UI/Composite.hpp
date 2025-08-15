@@ -13,14 +13,22 @@ struct StateColor
 {
     sf::Color normal;
     sf::Color hover;
+    // for shape
 
-    StateColor(sf::Color hoverColor, sf::Color normalColor = sf::Color(255, 255, 255, 0))
+    sf::Color normalText;
+    sf::Color hoverText;
+
+    StateColor(sf::Color hoverColor, sf::Color normalColor = sf::Color(255, 255, 255, 0), sf::Color normalText = sf::Color::White, sf::Color hoverText = sf::Color::White)
         : normal(normalColor),
-          hover(hoverColor)
+          hover(hoverColor),
+          normalText(normalText),
+          hoverText(hoverText)
     {}
     StateColor()
         : normal(sf::Color(255, 255, 255, 0)), 
-          hover(sf::Color(255, 255, 255, 50)) 
+          hover(sf::Color(255, 255, 255, 50)),
+            normalText(sf::Color::White),
+          hoverText(sf::Color::White)
     {}
 };
 
@@ -46,6 +54,13 @@ struct DrawableElement
             return (dx * dx + dy * dy) <= (radius * radius);
         };
     }
+        DrawableElement(std::shared_ptr<sf::RectangleShape> shape): shape(shape)
+    {
+        containsFn = [shape](sf::Vector2f pos)
+        {
+             return shape->getGlobalBounds().contains(pos);
+        };
+    }
     DrawableElement(std::shared_ptr<RoundedRectangleShape> roundedRect): shape(roundedRect)
     {
         containsFn = [roundedRect](sf::Vector2f pos)
@@ -61,23 +76,6 @@ struct DrawableElement
     }
     DrawableElement(){}
 
-    // ====== Sprite only ===========
-    // DrawableElement(std::shared_ptr<sf::Sprite> spr)
-    // : sprite(std::move(spr))
-    // {
-    //     if (sprite) {
-    //         auto bounds = sprite->getGlobalBounds();
-    //         auto rectShape = std::make_shared<sf::RectangleShape>(
-    //             sf::Vector2f(bounds.width, bounds.height)
-    //         );
-    //         rectShape->setPosition(bounds.left, bounds.top);
-    //         shape = rectShape; // shape = globalbound of sprite
-
-    //         containsFn = [rectShape](sf::Vector2f pos) {
-    //             return rectShape->getGlobalBounds().contains(pos);
-    //         };
-    //     }
-    // }
     DrawableElement(std::shared_ptr<sf::Sprite> spr)
     : sprite(std::move(spr))
 {
@@ -94,16 +92,13 @@ struct DrawableElement
     }
     void setSprite(std::shared_ptr<sf::Sprite> spr)
     {
-
-        sprite = std::move(spr);
         
+        sprite = std::move(spr);
         if (!shape || !sprite) return;
-
         sf::FloatRect shapeBounds = shape->getGlobalBounds();
         resizeSprite(*sprite, {shapeBounds.width, shapeBounds.height});
         sprite->setPosition(shapeBounds.left, shapeBounds.top);
     }
-
     void draw(sf::RenderWindow& window) {
         if (sprite) window.draw(*sprite);
         
@@ -187,6 +182,7 @@ class Interact
         void setActive(bool active)
         {
             if (!canActive) return;
+            if (active == false) std::cout << "set deActive is call" << std::endl;
             isActive = active;
         }
         void setHover(bool hover)
@@ -234,6 +230,10 @@ struct InteractUI
     {
         drawableEle->text.setPosition(pos);
     }
+    void setSpritePos(sf::Vector2f pos)
+    {
+        drawableEle->sprite->setPosition(pos);
+    }
     void setSprite(std::shared_ptr<sf::Sprite> spr)
     {
         drawableEle->setSprite(spr);
@@ -249,6 +249,9 @@ struct InteractUI
                                 ? inter.colorSetting.hover
                                 : inter.colorSetting.normal);
         }
+        drawableEle->text.setFillColor((inter.getIsActive() || inter.getIsHovered())
+                                ? inter.colorSetting.hoverText
+                                : inter.colorSetting.normalText);
     }
     void draw(sf::RenderWindow& window)
     {
@@ -312,7 +315,6 @@ class Button: public UIComponent
         }
         bool handleEvent(const sf::Event& event) override
         {
-            std::cout << "Button handle event" << std::endl;
             if (event.type == sf::Event::MouseButtonPressed 
             && event.mouseButton.button == sf::Mouse::Left) 
             {
@@ -349,14 +351,14 @@ class UIContainer: public UIComponent
         explicit UIContainer(std::shared_ptr<InteractUI> comp)
         : UIComponent(std::move(comp)) {}
 
-        void addComponent(std::shared_ptr<UIComponent> ele)
+        virtual void addComponent(std::shared_ptr<UIComponent> ele)
         {
             ComponentList.push_back(ele);
         }
-        void setComponent(std::vector<std::shared_ptr<UIComponent>> list)
-        {
-            ComponentList = list;
-        }
+        // void setComponent(std::vector<std::shared_ptr<UIComponent>> list)
+        // {
+        //     ComponentList = list;
+        // }
         void sortComponentList()
         {
             std::stable_sort(ComponentList.begin(), ComponentList.end(),
@@ -379,7 +381,6 @@ class UIContainer: public UIComponent
         bool handleEvent(const sf::Event& event) override
         {
             sortComponentList();
-            // std::cout << "handle event in uicontainer" << std::endl;
             if (!getIsActive()) return true; // return if not active
             for (auto it = ComponentList.rbegin(); it != ComponentList.rend(); ++it)
             {
@@ -398,8 +399,14 @@ class UIContainer: public UIComponent
 
 class Panel: public UIContainer
 {
+    private:
+    sf::Keyboard::Key activeKey;
     // helper func
-    using UIContainer::UIContainer;
+    public:
+     Panel(std::shared_ptr<InteractUI> comp, sf::Keyboard::Key k = sf::Keyboard::Unknown)
+        : UIContainer(std::move(comp)), activeKey(k) {}
+        
+    void setActiveKey(sf::Keyboard::Key k) {this->activeKey = k;}
 
     static void drawOverlay(sf::RenderWindow& window)
     {
@@ -417,58 +424,100 @@ class Panel: public UIContainer
     }
     bool handleEvent(const sf::Event& event) override
     {
-        std::cout << "panel handle Event" << std::endl;
         UIContainer::handleEvent(event); 
+        // std::cout << "can go here" << std::endl;
+        if (activeKey != sf::Keyboard::Unknown 
+            && event.type == sf::Event::KeyPressed
+             && event.key.code == activeKey)
+             {
+                this->setActive(true);
+             }
         return (!getIsActive());// avoid propagate event to its ancestor if it is active
     }
 
 };
 class OptionContainer: public UIContainer
 {
-    private:
-    int activeID;
+private:
+    std::shared_ptr<UIComponent> activeComponent;
     std::function<void(const sf::Event&)> func;
-    public:
-        OptionContainer(std::shared_ptr<InteractUI> comp): UIContainer(comp), activeID(-1) {}
-        void setFunc(std::function<void(const sf::Event&)> func)
-        {
-            this->func = func;
-        }
-        std::shared_ptr<UIComponent> getActiveComponent()
-        {
-            if (activeID == -1) return nullptr;
-            return ComponentList[activeID];
-        }
-        bool handleEvent(const sf::Event& event) override
-        {
-            if (activeID == -1 || !ComponentList[activeID]->getIsActive()) activeID = -1;
-            for (int i = 0; i < ComponentList.size(); i++)
-            {
-                if (i == activeID) continue;
-                if (!ComponentList[i]->handleEvent(event)) return false; // if component is button, always true
-                if (ComponentList[i]->getIsActive())
-                {
-                    if (activeID != -1) 
-                        ComponentList[activeID]->setActive(false);
-                    activeID = i;
-                }
-            }
+    bool mustHaveOption;
 
-            if (func && activeID != -1)
-            {
-                func(event);
-            }
+public:
+    OptionContainer(std::shared_ptr<InteractUI> comp, bool mustHaveOp = false)
+        : UIContainer(comp), activeComponent(nullptr), mustHaveOption(mustHaveOp) 
+    {}
 
-            return true;
+    void setFunc(std::function<void(const sf::Event&)> func)
+    {
+        this->func = func;
+    }
+
+    void addComponent(std::shared_ptr<UIComponent> ele) override
+    {
+        ComponentList.push_back(ele);
+        if (ComponentList.size() == 1) 
+            activeComponent = ele; 
+    }
+
+    std::shared_ptr<UIComponent> getActiveComponent()
+    {
+        return activeComponent;
+    }
+
+    bool handleEvent(const sf::Event& event) override
+    {
+        sortComponentList();
+
+        if (mustHaveOption) 
+            assert(activeComponent != nullptr); 
+
+        std::shared_ptr<UIComponent> tempActiveComponent = activeComponent;
+
+        for (int i = ComponentList.size() - 1; i >= 0; i--)
+        {
+            if (!ComponentList[i]->handleEvent(event)) 
+                return false;
+
+            if (ComponentList[i]->getIsActive())
+            {
+                tempActiveComponent = ComponentList[i];
+            }
         }
+
+        if (tempActiveComponent != activeComponent)
+        {
+            if (activeComponent) 
+                activeComponent->setActive(false);
+            activeComponent = tempActiveComponent;
+        }
+        else
+        {
+            if (activeComponent && !activeComponent->getIsActive())
+            {
+                if (!mustHaveOption) 
+                    activeComponent = nullptr; 
+                else 
+                    activeComponent->setActive(true);
+            }
+        }
+
+        if (func && activeComponent)
+        {
+            func(event);
+        }
+
+        return true;
+    }
 };
+
 
 class ExpandableButton: public UIContainer
 {
     public:
     bool handleEvent(const sf::Event& event) override
     {
-        UIContainer::handleEvent(event); // handle for its children first
+        UIContainer::handleEvent(event);
         
         // handle for it later
         if (event.type == sf::Event::MouseButtonPressed 
@@ -501,8 +550,8 @@ class StaticComponent: public UIComponent
         // Nothing here
         return true;
     }
-    void draw(sf::RenderWindow& window) override
-    {
-        component->draw(window);
-    }
+    // void draw(sf::RenderWindow& window) override
+    // {
+    //     component->draw(window);
+    // }
 };

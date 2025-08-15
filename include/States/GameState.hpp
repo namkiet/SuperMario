@@ -1,4 +1,5 @@
 #pragma once
+#include <UI/Composite.hpp>
 #include <memory>
 namespace sf
 {
