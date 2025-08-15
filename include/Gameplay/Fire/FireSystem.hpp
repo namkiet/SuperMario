@@ -38,7 +38,7 @@ public:
                     return;
 
                 auto &themeComponent = gameSession->getComponent<ThemeComponent>();
-                auto fireBullet = world.createEntity<FireBullet>(pos.x + size.x / 2, pos.y + size.y / 8, 24, 24, ItemFactory(themeComponent.currentTheme));
+                auto fireBullet = world.createEntity<FireBullet>(pos.x + size.x / 2, pos.y + size.y / 8, 24.0f, 24.0f, ItemFactory(themeComponent.currentTheme));
                 player->addComponent<ShootingTag>();
                 if (!player->hasComponent<FlipXTag>())
                 {

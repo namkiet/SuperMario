@@ -12,6 +12,8 @@
 #include <Gameplay/Enemy/Bowser/Components.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
 
+#include <TimeManager.hpp>
+
 #include <iostream>
 
 class BridgeSystem : public System
@@ -72,10 +74,10 @@ private:
         if (!gameSession)
             return;
         auto &themeComponent = gameSession->getComponent<ThemeComponent>();
-        world.createEntity<SmallDebris1>(pos.x, pos.y, 24, 24, ItemFactory(themeComponent.currentTheme));
-        world.createEntity<SmallDebris2>(pos.x, pos.y, 24, 24, ItemFactory(themeComponent.currentTheme));
-        world.createEntity<SmallDebris3>(pos.x, pos.y, 24, 24, ItemFactory(themeComponent.currentTheme));
-        world.createEntity<SmallDebris4>(pos.x, pos.y, 24, 24, ItemFactory(themeComponent.currentTheme));
+        world.createEntity<SmallDebris1>(pos.x, pos.y, 24.0f, 24.0f, ItemFactory(themeComponent.currentTheme));
+        world.createEntity<SmallDebris2>(pos.x, pos.y, 24.0f, 24.0f, ItemFactory(themeComponent.currentTheme));
+        world.createEntity<SmallDebris3>(pos.x, pos.y, 24.0f, 24.0f, ItemFactory(themeComponent.currentTheme));
+        world.createEntity<SmallDebris4>(pos.x, pos.y, 24.0f, 24.0f, ItemFactory(themeComponent.currentTheme));
     }
 
     void secondHitCheck(World &world, Entity *player, Entity *collider)
@@ -89,14 +91,7 @@ private:
             player->removeComponent<InputTag>();
 
         collider->getComponent<BellTag>().secondHit = true;
-        Entity *gameSession = world.findFirst<TimeComponent>();
-        if (!gameSession)
-            return;
-        auto &timeComponent = gameSession->getComponent<TimeComponent>();
-        if (!timeComponent.isPaused)
-        {
-            timeComponent.isPaused = true;
-        }
+        TimeManager::instance().setTimePaused(true);
     }
 
 public:
@@ -104,6 +99,9 @@ public:
     {
         for (Entity *player : world.findAll<PlayerTag, BoxCollider2D, RigidBody, Transform>())
         {
+            auto &pos = player->getComponent<Transform>().position;
+            auto &size = player->getComponent<BoxCollider2D>().size;
+
             for (const auto &[collider, direction, overlap] : player->getComponent<BoxCollider2D>().collisions)
             {
                 if (collider->hasComponent<BellTag>() && collider->hasComponent<Transform>())
@@ -113,7 +111,9 @@ public:
                         firstHitCheck(world, player, collider);
                     if (direction != Direction::Left && !bellTag.secondHit)
                         secondHitCheck(world, player, collider);
-                    if (player->getComponent<Transform>().position.y <= collider->getComponent<Transform>().position.y)
+                    auto &blockPos = collider->getComponent<Transform>().position;
+                    auto &blockSize = collider->getComponent<BoxCollider2D>().size;
+                    if (pos.y + size.y <= blockPos.y + blockSize.y)
                         secondHitCheck(world, player, collider);
                 }
                 normalBlockCheck(world, player);

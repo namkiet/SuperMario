@@ -24,7 +24,7 @@ public:
 
         // Set the animation for the bell
         std::vector<const sf::Texture *> textures = itemFactory.getItemTextures("bell");
-        addComponent<Animation>(textures, width, height, 0.3f, true);
+        addComponent<Animation>(textures, (int)width,(int) height, 0.3f, true);
 
         addComponent<BellTag>();
     }

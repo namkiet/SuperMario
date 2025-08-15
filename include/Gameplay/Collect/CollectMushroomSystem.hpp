@@ -1,9 +1,14 @@
 #pragma once
-#include <World.hpp>
+
 #include <Engine/Physics/BoxCollider2D.hpp>
+
 #include <Gameplay/Collect/Components.hpp>
 #include <Gameplay/Item/Components.hpp>
 #include <Gameplay/Player/Components.hpp>
+
+#include <LevelManager.hpp>
+
+#include <World.hpp>
 
 class CollectMushroomSystem : public System
 {
@@ -31,26 +36,26 @@ class CollectMushroomSystem : public System
                 {
                     newLevel = 1;
                     shouldReloadLevel = true;
-                    std::cout << "Collect Mushroom: GET_TO_LEVEL_1\n";
+                    // std::cout << "Collect Mushroom: GET_TO_LEVEL_1\n";
                 }
                 else if (mushroomTag.buff == MushroomTag::Buff::GET_TO_LEVEL_2)
                 {
                     newLevel = 2;
                     shouldReloadLevel = true;
-                    std::cout << "Collect Mushroom: GET_TO_LEVEL_2\n";
+                    // std::cout << "Collect Mushroom: GET_TO_LEVEL_2\n";
                 }
                 else if (mushroomTag.buff == MushroomTag::Buff::GET_TO_LEVEL_3)
                 {
                     newLevel = 3;
                     shouldReloadLevel = true;
-                    std::cout << "Collect Mushroom: GET_TO_LEVEL_3\n";
+                    // std::cout << "Collect Mushroom: GET_TO_LEVEL_3\n";
                 }
             }
         }
         if (shouldReloadLevel)
         {
-            world.setNewLevel(newLevel);
-            world.setStatus("intro");
+            LevelManager::instance().setLevel(newLevel);
+            LevelManager::instance().setStatus("intro");
         }
     }
 };

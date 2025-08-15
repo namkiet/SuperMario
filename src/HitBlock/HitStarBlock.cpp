@@ -17,7 +17,7 @@ void HitSpecialBlockSystem::HitStarBlock(World &world, float dt, Entity *block)
     auto &themeComponent = gameSession->getComponent<ThemeComponent>();
 
     // Create a Star entity
-    auto star = world.createEntity<Star>(pos.x, pos.y, 48, 48, ItemFactory(themeComponent.currentTheme));
+    auto star = world.createEntity<Star>(pos.x, pos.y, 48.0f, 48.0f, ItemFactory(themeComponent.currentTheme));
     ItemEmerging emerging;
     emerging.finalY = pos.y - 48;
     star->addComponent<ItemEmerging>(emerging);

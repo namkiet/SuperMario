@@ -39,8 +39,6 @@ void LevelHandler::start()
         load("assets/Levels/map11.json", world);
 
         spriteIndex = 1;
-        world.createEntity<SmallCoin>(325.0f, 65.0f, 15, 24, ItemFactory(spriteIndex));
-
         break;
     case 2:
         // Load character setup from a JSON file
@@ -49,7 +47,6 @@ void LevelHandler::start()
         load("assets/Levels/map61.json", world);
 
         spriteIndex = 1;
-        world.createEntity<SmallCoin>(325.0f, 65.0f, 15, 24, ItemFactory(spriteIndex));
 
         break;
     case 3:
@@ -59,7 +56,6 @@ void LevelHandler::start()
         load("assets/Levels/map54.json", world);
 
         spriteIndex = 3;
-        world.createEntity<SmallCoin>(325.0f, 65.0f, 15, 24, ItemFactory(spriteIndex));
 
         break;
     default:
@@ -70,6 +66,7 @@ void LevelHandler::start()
         spriteIndex = 1;
     }
     world.createEntity<GameSession>(currentLevel, spriteIndex);
+    world.createEntity<SmallCoin>(325.0f, 65.0f, 15.0f, 24.0f, ItemFactory(spriteIndex));
 }
 
 void LevelHandler::load(const std::string &filename, World &world)
@@ -318,7 +315,7 @@ void LevelHandler::backgroundLoad(World &world, std::string tilename, float x, f
         world.createEntity<Background>(x, y, width, height, scale, 9);
         float flagPosX = x - width / 2;
         float flagPosY = y + 17;
-        world.createEntity<Background>(flagPosX, flagPosY, 16, 16, scale, 10);
+        world.createEntity<Background>(flagPosX, flagPosY, 16.0f, 16.0f, scale, 10);
     }
     else if (tilename == "Castle")
     {

@@ -3,6 +3,7 @@
 #include <Prefabs/Coin.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
+#include <ScoreManager.hpp>
 
 class EnemyScoreSystem : public System
 {
@@ -15,12 +16,12 @@ public:
             auto &scoreComponent = enemy->getComponent<ShouldUpdateScore>();
 
             // Update the score
-            world.getScoreManager().addScore(scoreComponent.score);
+            ScoreManager::instance().addScore(scoreComponent.score);
 
             // Create a text popping at the enemy's position
             Entity *scoreTextEntity = world.createEntity();
             std::string scoreText = std::to_string(scoreComponent.score);
-            scoreTextEntity->addComponent<TextComponent>(scoreText, pos.x, pos.y, pos.y - 48, 15, 1);
+            scoreTextEntity->addComponent<TextComponent>(scoreText, pos.x, pos.y, pos.y - 48, 15.0f, 1);
 
             // Remove the score tag
             enemy->removeComponent<ShouldUpdateScore>();

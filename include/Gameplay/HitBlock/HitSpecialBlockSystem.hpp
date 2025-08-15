@@ -2,6 +2,8 @@
 
 #include <cmath>
 
+#include <CoinManager.hpp>
+
 #include <ECS/System.hpp>
 
 #include <Engine/Physics/BoxCollider2D.hpp>
@@ -131,11 +133,7 @@ public:
                         // Update
                         HitCoinBlock(world, dt, block);
 
-                        if (player->hasComponent<CoinComponent>())
-                        {
-                            auto &coinComp = player->getComponent<CoinComponent>();
-                            ++coinComp.coins; // Increment coins
-                        }
+                        CoinManager::instance().addCoin();
                     }
                     else if (block->hasComponent<StarBlock>())
                     {

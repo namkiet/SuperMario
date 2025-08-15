@@ -49,7 +49,7 @@ void HitSpecialBlockSystem::HitCoinBlock(World &world, float dt, Entity *block)
         if (!gameSession)
             return;
         auto &themeComponent = gameSession->getComponent<ThemeComponent>();
-        auto coin = world.createEntity<Coin1>(pos.x, pos.y - sz.y - sz.y / 4, 48, 48, ItemFactory(themeComponent.currentTheme));
+        auto coin = world.createEntity<Coin1>(pos.x, pos.y - sz.y - sz.y / 4, 48.0f, 48.0f, ItemFactory(themeComponent.currentTheme));
 
         coinBlockComponent.timer = 0.0f;
         --coinBlockComponent.hitCount;

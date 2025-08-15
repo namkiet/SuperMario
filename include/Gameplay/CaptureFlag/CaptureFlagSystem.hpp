@@ -8,23 +8,28 @@
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Gameplay/CaptureFlag/Components.hpp>
+#include <ScoreManager.hpp>
+#include <TimeManager.hpp>
 
 class CaptureFlagSystem : public System
 {
 private:
-    void checkCollisionWithFlagPole(World& world, float dt)
+    void checkCollisionWithFlagPole(World &world, float dt)
     {
-        for (Entity* player : world.findAll<CanCaptureFlagTag, PlayerTag, BoxCollider2D, Transform>())
+        for (Entity *player : world.findAll<CanCaptureFlagTag, PlayerTag, BoxCollider2D, Transform>())
         {
 
             for (auto &[pole, _, __] : player->getComponent<BoxCollider2D>().collisions)
             {
-                if (!pole->hasComponent<FlagPoleTag>()) continue;
-                if (!pole->hasComponent<Transform>()) continue;
-                if (!pole->hasComponent<BoxCollider2D>()) continue;
+                if (!pole->hasComponent<FlagPoleTag>())
+                    continue;
+                if (!pole->hasComponent<Transform>())
+                    continue;
+                if (!pole->hasComponent<BoxCollider2D>())
+                    continue;
 
-                auto& playerPos = player->getComponent<Transform>().position;
-                auto& playerBox = player->getComponent<BoxCollider2D>();
+                auto &playerPos = player->getComponent<Transform>().position;
+                auto &playerBox = player->getComponent<BoxCollider2D>();
                 auto flagPos = pole->getComponent<Transform>().position + pole->getComponent<BoxCollider2D>().offset;
                 auto flagSize = pole->getComponent<BoxCollider2D>().size;
 
@@ -42,19 +47,12 @@ private:
                     flag->addComponent<RigidBody>(sf::Vector2f(0, 48 * 8), false);
                 }
 
-                Entity *gameSession = world.findFirst<TimeComponent>();
-                if (!gameSession)
-                    return;
-                auto &timeComponent = gameSession->getComponent<TimeComponent>();
+                if (TimeManager::instance().getIsPaused())
+                    continue;
 
-                if (!timeComponent.isPaused)
-                if (player->hasComponent<TimeComponent>())
-                {
-                    timeComponent.timeUnitLeft = timeComponent.timer % 10; // Store the remaining time unit
-                    timeComponent.isPaused = true;
-                }
-
-                if (timeComponent.firstTimePause)
+                TimeManager::instance().setTimePaused(true);
+                
+                if (TimeManager::instance().getFirstTimePause())
                     continue;
 
                 Entity *scoreTextEntity = world.createEntity();
@@ -63,34 +61,35 @@ private:
 
                 if (playerPos.y <= flagPos.y)
                 {
-                    world.getScoreManager().addScore(5000); // Increment score by 5000
-                    scoreTextEntity->addComponent<TextComponent>("5000", x, y, flagPos.y + 48, 25, 2);
+                    ScoreManager::instance().addScore(5000);
+                    scoreTextEntity->addComponent<TextComponent>("5000", x, y, flagPos.y + 48, 25.0f, 2);
                 }
                 else if (playerPos.y > flagPos.y && playerPos.y <= flagPos.y + flagSize.y)
                 {
-                    world.getScoreManager().addScore(800); // Increment score by 800
-                    scoreTextEntity->addComponent<TextComponent>("800", x, y, flagPos.y + 48, 25, 2);
+                    ScoreManager::instance().addScore(800);
+                    scoreTextEntity->addComponent<TextComponent>("800", x, y, flagPos.y + 48, 25.0f, 2);
                 }
                 else
                 {
-                    world.getScoreManager().addScore(100); // Increment score by 100
-                    scoreTextEntity->addComponent<TextComponent>("100", x, y, flagPos.y + 48, 25, 2);
+                    ScoreManager::instance().addScore(100);
+                    scoreTextEntity->addComponent<TextComponent>("100", x, y, flagPos.y + 48, 25.0f, 2);
                 }
-                timeComponent.firstTimePause = true;
+                TimeManager::instance().setFirstTimePause(true);
             }
         }
     }
 
-    void checkCollisionWithFlagBlock(World& world, float dt)
+    void checkCollisionWithFlagBlock(World &world, float dt)
     {
         // Player hit flag block
-        for (Entity* player : world.findAll<ClimbingOnFlagPoleTag, PlayerTag, BoxCollider2D, Animation>())
+        for (Entity *player : world.findAll<ClimbingOnFlagPoleTag, PlayerTag, BoxCollider2D, Animation>())
         {
-            for (auto& [block, _, __] : player->getComponent<BoxCollider2D>().collisions)
+            for (auto &[block, _, __] : player->getComponent<BoxCollider2D>().collisions)
             {
-                if (!block->hasComponent<FlagBlock>()) continue;
+                if (!block->hasComponent<FlagBlock>())
+                    continue;
 
-                auto& anim = player->getComponent<Animation>();
+                auto &anim = player->getComponent<Animation>();
                 anim.currentFrame = anim.frameCount - 1;
                 anim.loop = false;
             }
@@ -98,15 +97,17 @@ private:
 
         // Flag hit flag block
         auto flag = world.findFirst<Flag, BoxCollider2D>();
-        if (!flag) return;
+        if (!flag)
+            return;
         for (auto &[block, _, __] : flag->getComponent<BoxCollider2D>().collisions)
         {
-            if (!block->hasComponent<FlagBlock>()) continue;
+            if (!block->hasComponent<FlagBlock>())
+                continue;
 
-            for (Entity* player : world.findAll<ClimbingOnFlagPoleTag, PlayerTag, BoxCollider2D, Transform>())
+            for (Entity *player : world.findAll<ClimbingOnFlagPoleTag, PlayerTag, BoxCollider2D, Transform>())
             {
-                auto& pos = player->getComponent<Transform>().position;
-                auto& box = player->getComponent<BoxCollider2D>();
+                auto &pos = player->getComponent<Transform>().position;
+                auto &box = player->getComponent<BoxCollider2D>();
                 pos.x += box.size.x;
 
                 player->addComponent<FlipXTag>();
@@ -115,11 +116,11 @@ private:
         }
     }
 
-    void goToCastle(World& world, float dt)
+    void goToCastle(World &world, float dt)
     {
-        for (Entity* player : world.findAll<PlayerTag, HoldingTimer>())
+        for (Entity *player : world.findAll<PlayerTag, HoldingTimer>())
         {
-            auto& duration = player->getComponent<HoldingTimer>().duration;
+            auto &duration = player->getComponent<HoldingTimer>().duration;
             duration -= dt;
             if (duration < 0.0f)
             {
@@ -137,5 +138,4 @@ public:
         checkCollisionWithFlagBlock(world, dt);
         goToCastle(world, dt);
     }
-
 };

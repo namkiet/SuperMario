@@ -1,11 +1,4 @@
 #pragma once
-#include <World.hpp>
-
-#include <Gameplay/Collect/Components.hpp>
-#include <Gameplay/GameProperties/Components.hpp>
-#include <Gameplay/Background/Components.hpp>
-#include <Gameplay/Player/Components.hpp>
-#include <Gameplay/Item/Components.hpp>
 
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/RigidBody.hpp>
@@ -13,11 +6,24 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 
+#include <Factories/ItemFactory.hpp>
+
+#include <Gameplay/Collect/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
+#include <Gameplay/Background/Components.hpp>
+#include <Gameplay/Player/Components.hpp>
+#include <Gameplay/Item/Components.hpp>
+
+#include <LevelManager.hpp>
+
 #include <Prefabs/Fireworks.hpp>
 #include <Prefabs/Background.hpp>
 
-#include <Factories/ItemFactory.hpp>
-#include <iostream>
+#include <ScoreManager.hpp>
+
+#include <TimeManager.hpp>
+
+#include <World.hpp>
 
 class LevelCompletionSystem : public System
 {
@@ -25,32 +31,27 @@ private:
     float timeElapsed = 0.0f;
     void castleCollisionCheck(World &world, float dt, Entity *player, Entity *collider)
     {
-        Entity *gameSession = world.findFirst<TimeComponent>();
-        if (!gameSession)
-            return;
-
         auto &castlePos = collider->getComponent<Transform>().position;
         auto &castleSize = collider->getComponent<Transform>().size;
 
-        auto &timeComponent = gameSession->getComponent<TimeComponent>();
-
-        // Check if the player has reached the flagpole
-
         if (player->hasComponent<Animation>())
             player->removeComponent<Animation>();
+
         player->getComponent<RigidBody>().velocity = sf::Vector2f(0, 0);
 
         // Create castle flag if timer runs out
-        if (timeComponent.timer <= 0 && !timeComponent.firstTimeReach0)
+        if (TimeManager::instance().getTime() <= 0 && !TimeManager::instance().getFirstTimeReach0())
         {
             float x = (castlePos.x + 48 * 2) / 3;
             float y = (castlePos.y) / 3;
-            auto castleFlag = world.createEntity<Background>(x, y, 14, 14, 3, 11);
+            auto castleFlag = world.createEntity<Background>(x, y, 14.0f, 14.0f, 3.0f, 11);
+
             ItemEmerging emerging;
             emerging.finalY = castlePos.y - 14 * 3;
+
             castleFlag->addComponent<ItemEmerging>(emerging);
-            timeComponent.firstTimeReach0 = true;
-            // std::cout << "Castle flag is trigger to create" << std::endl;
+
+            TimeManager::instance().setFirstTimeReach0(true);
         }
 
         Entity *flag = world.findFirst<CastleFlag>();
@@ -60,7 +61,7 @@ private:
         {
             if (!player->hasComponent<FireworkComponent>())
             {
-                int n = timeComponent.timeUnitLeft;
+                int n = TimeManager::instance().getTimeUnitLeft();
                 if (n == 1 || n == 3 || n == 6)
                 {
                     player->addComponent<FireworkComponent>(n);
@@ -76,10 +77,10 @@ private:
                     if (!gameSession)
                         return;
                     auto &themeComponent = gameSession->getComponent<ThemeComponent>();
-                    world.createEntity<Fireworks>(48, 48, ItemFactory(themeComponent.currentTheme));
+                    world.createEntity<Fireworks>(48.0f, 48.0f, ItemFactory(themeComponent.currentTheme));
 
                     // Update score
-                    world.getScoreManager().addScore(100);
+                    ScoreManager::instance().addScore(100);
 
                     // Decrease the fireworks left count
                     --seq.fireworksLeft;
@@ -92,7 +93,7 @@ private:
                 auto &seq = player->getComponent<FireworkComponent>();
                 if (seq.fireworksLeft <= 0 && timeElapsed > 3.0f)
                 {
-                    world.setStatus("win");
+                    LevelManager::instance().setStatus("win");
                 }
             }
             else
@@ -100,7 +101,7 @@ private:
                 timeElapsed += dt;
                 if (timeElapsed > 3.0f)
                 {
-                    world.setStatus("win");
+                    LevelManager::instance().setStatus("win");
                 }
             }
         }
@@ -108,18 +109,15 @@ private:
     void princessCollisionCheck(World &world, float dt, Entity *player)
     {
         player->getComponent<RigidBody>().velocity = sf::Vector2f(0, 0);
-        Entity *gameSession = world.findFirst<TimeComponent>();
-        if (!gameSession)
-            return;
-        auto &timeComponent = gameSession->getComponent<TimeComponent>();
-        if (timeComponent.timer <= 0)
+        
+        if (TimeManager::instance().getTime() <= 0)
         {
             timeElapsed += dt;
         }
-        
+
         if (timeElapsed > 3.0f)
         {
-            world.setStatus("win");
+            LevelManager::instance().setStatus("win");
         }
     }
 
@@ -141,17 +139,12 @@ public:
 
                 if (collider->hasComponent<Castle>() || collider->hasComponent<Princess>())
                 {
-                    Entity *gameSession = world.findFirst<TimeComponent>();
-                    if (!gameSession)
-                        return;
-
-                    auto &timeComponent = gameSession->getComponent<TimeComponent>();
-                    timeComponent.goesFaster = true;
+                    TimeManager::instance().setTimeGoesFaster(true);
 
                     // Update score
-                    if (timeComponent.timer > 0)
+                    if (TimeManager::instance().getTime() > 0)
                     {
-                        world.getScoreManager().addScore(50);
+                        ScoreManager::instance().addScore(50);
                     }
                 }
             }

@@ -4,6 +4,7 @@
 #include <Engine/Rendering/Utility.hpp>
 #include <sstream>
 #include <iomanip>
+#include <iostream>
 
 class ScoreObserver
 {
@@ -18,10 +19,22 @@ private:
     int score = 0;
     std::vector<ScoreObserver *> observers;
 
+    // Singleton: private constructor and deleted copy/move
+    ScoreManager() = default;
+    ScoreManager(const ScoreManager &) = delete;
+    ScoreManager &operator=(const ScoreManager &) = delete;
+
 public:
+    static ScoreManager &instance()
+    {
+        static ScoreManager instance;
+        return instance;
+    }
+
     void addObserver(ScoreObserver *observer)
     {
         observers.push_back(observer);
+        observer->onScoreChanged(score); // Notify new observer of current score
     }
     void addScore(int newScore)
     {
@@ -31,10 +44,6 @@ public:
             observer->onScoreChanged(score);
         }
     }
-    int getScore() const
-    {
-        return score;
-    }
     ~ScoreManager()
     {
         for (auto &observer : observers)
@@ -42,6 +51,14 @@ public:
             delete observer;
         }
         observers.clear();
+    }
+    void reset()
+    {
+        score = 0;
+        for (auto &observer : observers)
+        {
+            observer->onScoreChanged(score);
+        }
     }
 };
 

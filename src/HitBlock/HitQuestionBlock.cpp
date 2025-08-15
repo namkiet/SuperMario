@@ -58,11 +58,7 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
 
         auto coin = world.createEntity<Coin1>(pos.x, pos.y - sz.y, 48.0f, 48.0f, ItemFactory(themeComponent.currentTheme));
 
-        Entity *gameSession = world.findFirst<CoinComponent>();
-        if (!gameSession)
-            return;
-        auto &coinComp = gameSession->getComponent<CoinComponent>();
-        ++coinComp.coins;
+        CoinManager::instance().addCoin();
     }
     else if (block->hasComponent<StarQuestionBlock>())
     {

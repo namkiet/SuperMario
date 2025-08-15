@@ -85,11 +85,6 @@ public:
                         continue;
                     }
 
-                    if (fireBullet->hasComponent<LifeSpan>())
-                    {
-                        continue;
-                    }
-
                     fireBullet->getComponent<BoxCollider2D>().size = sf::Vector2f(48, 48);
                     fireBullet->getComponent<Transform>().size = sf::Vector2f(48, 48);
 

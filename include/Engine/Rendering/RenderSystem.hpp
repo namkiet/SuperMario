@@ -17,7 +17,6 @@ class RenderSystem : public System
 private:
     sf::Font font;
     void backgroundRender(sf::RenderWindow &window, int level) const;
-    void textComponentRender(const World &world, sf::RenderWindow &window) const;
 
     static int getZIndex(Entity* entity)
     {
@@ -45,7 +44,6 @@ public:
             window.setView(view);
         }
         backgroundRender(window, level);
-        textComponentRender(world, window);
 
         std::vector<Entity*> entities = world.findAll<Transform, Animation>();
         std::sort(entities.begin(), entities.end(), [](Entity* a, Entity* b) {

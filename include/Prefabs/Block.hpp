@@ -39,7 +39,7 @@ public:
         }
         else if (index == 0)
         {
-            addComponent<GroundBlock>();
+            addComponent<StairsBlock>();
             return;
         }
 

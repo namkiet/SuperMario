@@ -4,6 +4,7 @@
 #include <LevelState/InGameState.hpp>
 #include <LevelState/IntroState.hpp>
 #include <LevelState/LevelChosenState.hpp>
+#include <LevelManager.hpp>
 
 PlayingState::PlayingState() : gameManager(nullptr)
 {
@@ -30,12 +31,13 @@ void PlayingState::handleEvent(Game &game, const sf::Event &event)
 
 void PlayingState::update(Game &game, float dt)
 {
-    if (gameManager->getWorld().getSkipUpdate())
+    if (LevelManager::instance().getSkipUpdate())
     {
-        setLevel(gameManager->getWorld().getNewLevel());
+        // std::cout << "newLevel = " << newLevel << std::endl;
+        setLevel(LevelManager::instance().getLevel());
         return;
     }
-    else if (gameManager->getShouldLoadNextLevel())
+    else if (LevelManager::instance().getShouldLoadNextLevel())
     {
         if (level + 1 > 3)
         {
@@ -43,6 +45,8 @@ void PlayingState::update(Game &game, float dt)
             game.pushState("menu");
             return;
         }
+        LevelManager::instance().setLevel(level + 1);
+        // std::cout << "newLevel = " << newLevel << std::endl;
         setLevel(level + 1);
         return;
     }
@@ -94,8 +98,12 @@ void PlayingState::setLevel(int level)
     this->level = level;
     if (gameManager)
         delete gameManager;
-    gameManager = new GameManager(level, [this](int newLevel)
-                                  { this->requestLevelReload(newLevel); });
+    gameManager = new GameManager(level);
+
+    LevelManager::instance().setSkipUpdate(false);
+    LevelManager::instance().setStatus("playing");
+    LevelManager::instance().setShouldLoadNextLevel(false);
+    
     currentLevelState = std::make_unique<IntroState>();
 }
 

@@ -64,7 +64,7 @@ public:
 
         addComponent<Animation>(itemFactory.getItemTexture("mushroom1"));
         addComponent<ZIndex>(-1);
-
+        addComponent<LevelMushroomTag>();
         if (newLevel == 1)
             addComponent<MushroomTag>(MushroomTag::Buff::GET_TO_LEVEL_1);
         else if (newLevel == 2)
