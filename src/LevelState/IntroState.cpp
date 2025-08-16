@@ -26,7 +26,7 @@ std::shared_ptr<LevelState> IntroState::getNewState(GameManager *gameManager)
 
 void IntroState::render(GameManager *gameManager, sf::RenderWindow &window, int level)
 {
-    std::cout << "Rendering IntroState" << std::endl;
+    // std::cout << "Rendering IntroState" << std::endl;
     window.setView(window.getDefaultView());
     window.clear(sf::Color(34, 34, 34, 255));
 

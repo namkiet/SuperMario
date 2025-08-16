@@ -18,20 +18,20 @@
 class FireBar : public Entity
 {
 public:
-    FireBar(float x, float y, float scale, int index, ItemFactory itemFactory)
+    FireBar(float x, float y, float scale, int index)
     {
         float width = 0;
         float height = 0;
 
         if (index == 1)
         {
-            addComponent<Animation>(itemFactory.getItemTexture("smallFireBar"));
+            addComponent<Animation>(ItemFactory::getItemTexture("smallFireBar"));
             width = 24;
             height = 144;
         }
         else if (index == 2)
         {
-            addComponent<Animation>(itemFactory.getItemTexture("largeFireBar"));
+            addComponent<Animation>(ItemFactory::getItemTexture("largeFireBar"));
             width = 24;
             height = 288;
         }

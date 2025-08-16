@@ -32,7 +32,11 @@ class CollectMushroomSystem : public System
                 }
 
                 auto &mushroomTag = item->getComponent<MushroomTag>();
-                if (mushroomTag.buff == MushroomTag::Buff::GET_TO_LEVEL_1)
+                if (mushroomTag.buff == MushroomTag::Buff::GIVE_ONE_MORE_LIFE)
+                {
+                    world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/1up.wav"));
+                }
+                else if (mushroomTag.buff == MushroomTag::Buff::GET_TO_LEVEL_1)
                 {
                     newLevel = 1;
                     shouldReloadLevel = true;

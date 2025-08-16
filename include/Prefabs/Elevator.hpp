@@ -15,7 +15,7 @@ class Elevator : public Entity
 {
 public:
     // Direction: 1: up, 2: down, 3: left, 4:right
-    Elevator(float x, float y, float scale, int index, int direction, ItemFactory itemFactory)
+    Elevator(float x, float y, float scale, int index, int direction)
     {
         float width = 0;
         float height = 0;
@@ -33,19 +33,19 @@ public:
 
         if (index == 1)
         {
-            addComponent<Animation>(itemFactory.getItemTexture("elevator1"));
+            addComponent<Animation>(ItemFactory::getItemTexture("elevator1"));
             width = 24.0f;
             height = 7.0f;
         }
         else if (index == 2)
         {
-            addComponent<Animation>(itemFactory.getItemTexture("elevator2"));
+            addComponent<Animation>(ItemFactory::getItemTexture("elevator2"));
             width = 32.0f;
             height = 7.0f;
         }
         else if (index == 3)
         {
-            addComponent<Animation>(itemFactory.getItemTexture("elevator3"));
+            addComponent<Animation>(ItemFactory::getItemTexture("elevator3"));
             width = 48.0f;
             height = 7.0f;
         }

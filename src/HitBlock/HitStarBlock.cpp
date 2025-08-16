@@ -11,13 +11,9 @@ void HitSpecialBlockSystem::HitStarBlock(World &world, float dt, Entity *block)
     auto &pos = tf.position;
     auto &sz = tf.size;
 
-    Entity *gameSession = world.findFirst<ThemeComponent>();
-    if (!gameSession)
-        return;
-    auto &themeComponent = gameSession->getComponent<ThemeComponent>();
-
     // Create a Star entity
-    auto star = world.createEntity<Star>(pos.x, pos.y, 48.0f, 48.0f, ItemFactory(themeComponent.currentTheme));
+    world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/item.wav"));
+    auto star = world.createEntity<Star>(pos.x, pos.y, 48.0f, 48.0f);
     ItemEmerging emerging;
     emerging.finalY = pos.y - 48;
     star->addComponent<ItemEmerging>(emerging);

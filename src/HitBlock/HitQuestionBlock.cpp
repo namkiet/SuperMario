@@ -15,11 +15,6 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
     auto &pos = tf.position;
     auto &sz = tf.size;
 
-    Entity *gameSession = world.findFirst<ThemeComponent>();
-    if (!gameSession)
-        return;
-    auto &themeComponent = gameSession->getComponent<ThemeComponent>();
-
     // Spawn a coin entity on top of it
     if (block->hasComponent<FlowerQuestionBlock>())
     {
@@ -28,14 +23,16 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
 
         if (player->hasComponent<BigMarioTag>())
         {
-            auto flower = world.createEntity<Flower>(pos.x, pos.y - 20, 48.0f, 48.0f, ItemFactory(themeComponent.currentTheme));
+            world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/item.wav"));
+            auto flower = world.createEntity<Flower>(pos.x, pos.y - 20, 48.0f, 48.0f);
             ItemEmerging emerging;
             emerging.finalY = pos.y - 48;
             flower->addComponent<ItemEmerging>(emerging);
         }
         else
         {
-            auto mushroom = world.createEntity<Mushroom1>(pos.x, pos.y - 20, 48.0f, 48.0f, ItemFactory(themeComponent.currentTheme));
+            world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/item.wav"));
+            auto mushroom = world.createEntity<Mushroom1>(pos.x, pos.y - 20, 48.0f, 48.0f);
             ItemEmerging emerging;
             emerging.finalY = pos.y - 48;
             mushroom->addComponent<ItemEmerging>(emerging);
@@ -46,7 +43,8 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
         // Remove MushroomQuestionBlock component
         block->removeComponent<MushroomQuestionBlock>();
 
-        auto mushroom = world.createEntity<Mushroom1>(pos.x, pos.y - 20, 48.0f, 48.0f, ItemFactory(themeComponent.currentTheme));
+        world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/item.wav"));
+        auto mushroom = world.createEntity<Mushroom1>(pos.x, pos.y - 20, 48.0f, 48.0f);
         ItemEmerging emerging;
         emerging.finalY = pos.y - 48;
         mushroom->addComponent<ItemEmerging>(emerging);
@@ -56,7 +54,8 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
         // Remove CoinQuestionBlock component
         block->removeComponent<CoinQuestionBlock>();
 
-        auto coin = world.createEntity<Coin1>(pos.x, pos.y - sz.y, 48.0f, 48.0f, ItemFactory(themeComponent.currentTheme));
+        world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/coin.wav"));
+        auto coin = world.createEntity<Coin1>(pos.x, pos.y - sz.y, 48.0f, 48.0f);
 
         CoinManager::instance().addCoin();
     }
@@ -65,7 +64,8 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
         // Remove StarQuestionBlock component
         block->removeComponent<StarQuestionBlock>();
 
-        auto star = world.createEntity<Star>(pos.x, pos.y, 48.0f, 48.0f, ItemFactory(themeComponent.currentTheme));
+        world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/item.wav"));
+        auto star = world.createEntity<Star>(pos.x, pos.y, 48.0f, 48.0f);
         ItemEmerging emerging;
         emerging.finalY = pos.y - 48;
         star->addComponent<ItemEmerging>(emerging);

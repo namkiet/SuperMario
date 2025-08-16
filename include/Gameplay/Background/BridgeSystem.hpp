@@ -70,14 +70,10 @@ private:
 
         // Turn the normal block into debris
         auto &pos = normalBlock->getComponent<Transform>().position;
-        Entity *gameSession = world.findFirst<ThemeComponent>();
-        if (!gameSession)
-            return;
-        auto &themeComponent = gameSession->getComponent<ThemeComponent>();
-        world.createEntity<SmallDebris1>(pos.x, pos.y, 24.0f, 24.0f, ItemFactory(themeComponent.currentTheme));
-        world.createEntity<SmallDebris2>(pos.x, pos.y, 24.0f, 24.0f, ItemFactory(themeComponent.currentTheme));
-        world.createEntity<SmallDebris3>(pos.x, pos.y, 24.0f, 24.0f, ItemFactory(themeComponent.currentTheme));
-        world.createEntity<SmallDebris4>(pos.x, pos.y, 24.0f, 24.0f, ItemFactory(themeComponent.currentTheme));
+        world.createEntity<SmallDebris1>(pos.x, pos.y, 24.0f, 24.0f);
+        world.createEntity<SmallDebris2>(pos.x, pos.y, 24.0f, 24.0f);
+        world.createEntity<SmallDebris3>(pos.x, pos.y, 24.0f, 24.0f);
+        world.createEntity<SmallDebris4>(pos.x, pos.y, 24.0f, 24.0f);
     }
 
     void secondHitCheck(World &world, Entity *player, Entity *collider)
@@ -104,7 +100,7 @@ public:
 
             for (const auto &[collider, direction, overlap] : player->getComponent<BoxCollider2D>().collisions)
             {
-                if (collider->hasComponent<BellTag>() && collider->hasComponent<Transform>())
+                if (collider->hasComponent<BellTag>() && collider->hasComponent<Transform>() && collider->hasComponent<BoxCollider2D>())
                 {
                     auto &bellTag = collider->getComponent<BellTag>();
                     if (direction == Direction::Top && !bellTag.firstHit)

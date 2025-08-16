@@ -28,7 +28,10 @@ void InGameState::update(GameManager *gameManager, float dt)
 std::shared_ptr<LevelState> InGameState::getNewState(GameManager *gameManager)
 {
     if (LevelManager::instance().getStatus() == std::string("win"))
+    {
+        gameManager->setLives(gameManager->getLives() + 1);
         return std::make_shared<GameWinState>();
+    }
 
     if (LevelManager::instance().getStatus() == std::string("timeup"))
         return std::make_shared<TimeUpState>();
@@ -37,12 +40,12 @@ std::shared_ptr<LevelState> InGameState::getNewState(GameManager *gameManager)
     {
         if (GameManager::getLives() <= 1)
         {
-            std::cout << "Game Over! Returning to main menu." << std::endl;
+            // std::cout << "Game Over! Returning to main menu." << std::endl;
             gameManager->setLives(4);
             return std::make_shared<GameOverState>();
         }
         LevelManager::instance().setSkipUpdate(true);
-        std::cout << "Returning to intro state." << std::endl;
+        // std::cout << "Returning to intro state." << std::endl;
         return std::make_shared<IntroState>();
     }
 
@@ -51,7 +54,7 @@ std::shared_ptr<LevelState> InGameState::getNewState(GameManager *gameManager)
 
 void InGameState::render(GameManager *gameManager, sf::RenderWindow &window, int level)
 {
-    //std::cout << "Rendering InGameState" << std::endl;
+    // std::cout << "Rendering InGameState" << std::endl;
     gameManager->draw(window, level);
     scoreUI->draw(window);
     levelUI->draw(window);

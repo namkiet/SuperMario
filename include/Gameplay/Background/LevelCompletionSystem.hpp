@@ -5,6 +5,8 @@
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>
+#include <Engine/Audio/Components.hpp>
+#include <Engine/Audio/SoundManager.hpp>
 
 #include <Factories/ItemFactory.hpp>
 
@@ -73,11 +75,8 @@ private:
                 auto &seq = player->getComponent<FireworkComponent>();
                 if (seq.fireworksLeft > 0 && Fireworks::getFireworksCount() < 1)
                 {
-                    Entity *gameSession = world.findFirst<ThemeComponent>();
-                    if (!gameSession)
-                        return;
-                    auto &themeComponent = gameSession->getComponent<ThemeComponent>();
-                    world.createEntity<Fireworks>(48.0f, 48.0f, ItemFactory(themeComponent.currentTheme));
+                    world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/fire.wav"));
+                    world.createEntity<Fireworks>(48.0f, 48.0f);
 
                     // Update score
                     ScoreManager::instance().addScore(100);
@@ -109,7 +108,7 @@ private:
     void princessCollisionCheck(World &world, float dt, Entity *player)
     {
         player->getComponent<RigidBody>().velocity = sf::Vector2f(0, 0);
-        
+
         if (TimeManager::instance().getTime() <= 0)
         {
             timeElapsed += dt;
@@ -145,6 +144,7 @@ public:
                     if (TimeManager::instance().getTime() > 0)
                     {
                         ScoreManager::instance().addScore(50);
+                        world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/coin.wav"));
                     }
                 }
             }

@@ -40,7 +40,7 @@ public:
     void addCoin()
     {
         ++coins;
-        std::cout << "Coin added. Total coins: " << coins << std::endl;
+        // std::cout << "Coin added. Total coins: " << coins << std::endl;
         for (auto &observer : observers)
         {
             observer->onCoinChanged(coins);

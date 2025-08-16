@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Audio.hpp>
+#include <unordered_map>
 #include <string>
 
 class SoundManager

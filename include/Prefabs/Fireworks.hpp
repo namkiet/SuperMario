@@ -18,7 +18,7 @@ private:
     static int fireworksCount;
 
 public:
-    Fireworks(float width, float height, ItemFactory itemFactory)
+    Fireworks(float width, float height)
     {
         // Set random positions
         int i = 0;
@@ -36,7 +36,7 @@ public:
         addComponent<BoxCollider2D>(sf::Vector2f(width, height));
 
         // Set the animation for the fireworks
-        addComponent<Animation>(itemFactory.getItemTexture("fireworks"));
+        addComponent<Animation>(ItemFactory::getItemTexture("fireworks"));
 
         addComponent<LifeSpan>(1.0f);
 

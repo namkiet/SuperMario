@@ -12,14 +12,14 @@
 
 #include <Gameplay/Block/Components.hpp>
 
-#include <vector>
+#include <ThemeManager.hpp>
 
-#include <iostream>
+#include <vector>
 
 class Block : public Entity
 {
 public:
-    Block(float x, float y, float width, float height, float scale, int index, BlockFactory blockFactory)
+    Block(float x, float y, float width, float height, float scale, int index)
     {
         // Add the block tag
         addComponent<BlockTag>();
@@ -62,25 +62,25 @@ public:
                 break;
             }
 
-            std::vector<const sf::Texture *> textures = blockFactory.getQuestionBlockTextures();
+            std::vector<const sf::Texture *> textures = BlockFactory::getQuestionBlockTextures();
             addComponent<Animation>(textures, (int)width, (int)height, 0.3f, true);
         }
         else if (index == 5) // Normal block
         {
             addComponent<NormalBlock>();
-            addComponent<Animation>(blockFactory.getBlockTexture(2));
+            addComponent<Animation>(BlockFactory::getBlockTexture(2));
         }
         else if (index == 6) // Coin block
         {
             addComponent<CoinBlock>();
-            addComponent<Animation>(blockFactory.getBlockTexture(2));
+            addComponent<Animation>(BlockFactory::getBlockTexture(2));
             addComponent<CoinBlockComponent>();
         }
 
         else if (index == 7) // Stairs block
         {
             addComponent<StairsBlock>();
-            addComponent<Animation>(blockFactory.getBlockTexture(28));
+            addComponent<Animation>(BlockFactory::getBlockTexture(28));
         }
         else if (index == 8)
         {
@@ -95,46 +95,46 @@ public:
             addComponent<StarBlock>();
 
             // Get the texture for the block
-            addComponent<Animation>(blockFactory.getBlockTexture(2));
+            addComponent<Animation>(BlockFactory::getBlockTexture(2));
 
             // std::cout << "star block added" << std::endl;
         }
         else if (index == 10) // Flag block
         {
             addComponent<FlagBlock>();
-            addComponent<Animation>(blockFactory.getBlockTexture(28));
+            addComponent<Animation>(BlockFactory::getBlockTexture(28));
         }
         else if (index == 11)
         {
             addComponent<MushroomBlock>();
-            addComponent<Animation>(blockFactory.getBlockTexture(2));
+            addComponent<Animation>(BlockFactory::getBlockTexture(2));
         }
         else if (index == 12)
         {
             addComponent<LevelBlock>();
             addComponent<Level1Block>();
-            std::vector<const sf::Texture *> textures = blockFactory.getQuestionBlockTextures();
+            std::vector<const sf::Texture *> textures = BlockFactory::getQuestionBlockTextures();
             addComponent<Animation>(textures,(int) width, (int)height, 0.3f, true);
         }
         else if (index == 13)
         {
             addComponent<LevelBlock>();
             addComponent<Level2Block>();
-            std::vector<const sf::Texture *> textures = blockFactory.getQuestionBlockTextures();
+            std::vector<const sf::Texture *> textures = BlockFactory::getQuestionBlockTextures();
             addComponent<Animation>(textures, (int)width, (int)height, 0.3f, true);
         }
         else if (index == 14)
         {
             addComponent<LevelBlock>();
             addComponent<Level3Block>();
-            std::vector<const sf::Texture *> textures = blockFactory.getQuestionBlockTextures();
+            std::vector<const sf::Texture *> textures = BlockFactory::getQuestionBlockTextures();
             addComponent<Animation>(textures,(int) width, (int)height, 0.3f, true);
         }
         else if (index == 15)
         {
             addComponent<LevelBlock>();
             addComponent<Level4Block>();
-            std::vector<const sf::Texture *> textures = blockFactory.getQuestionBlockTextures();
+            std::vector<const sf::Texture *> textures = BlockFactory::getQuestionBlockTextures();
             addComponent<Animation>(textures, (int)width, (int)height, 0.3f, true);
         }
     }

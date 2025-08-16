@@ -26,6 +26,8 @@
 #include <Prefabs/Elevator.hpp>
 #include <Prefabs/Bell.hpp>
 
+#include <ThemeManager.hpp>
+
 LevelHandler::LevelHandler(World &world, int currentLevel) : world(world), currentLevel(currentLevel) {}
 
 void LevelHandler::start()
@@ -66,7 +68,7 @@ void LevelHandler::start()
         spriteIndex = 1;
     }
     world.createEntity<GameSession>(currentLevel, spriteIndex);
-    world.createEntity<SmallCoin>(325.0f, 65.0f, 15.0f, 24.0f, ItemFactory(spriteIndex));
+    world.createEntity<SmallCoin>(325.0f, 65.0f, 15.0f, 24.0f);
 }
 
 void LevelHandler::load(const std::string &filename, World &world)
@@ -145,63 +147,63 @@ void LevelHandler::tileLoad(World &world, std::string tilename, float x, float y
     char lastChar = tilename.back();
     int tileIndex = lastChar - '0';
 
-    BlockFactory blockFactory(tileIndex);
+    ThemeManager::setTheme(tileIndex);
 
     if (tilename.find("1UpBlock") != std::string::npos) // 1Up blocks
     {
-        world.createEntity<Block>(x, y, width, height, scale, 8, blockFactory);
+        world.createEntity<Block>(x, y, width, height, scale, 8);
     }
     else if (tilename.find("NormalBlock") != std::string::npos) // Normal blocks
     {
-        world.createEntity<Block>(x, y, width, height, scale, 5, blockFactory);
+        world.createEntity<Block>(x, y, width, height, scale, 5);
     }
     else if (tilename.find("CoinBlock") != std::string::npos) // Coin blocks
     {
-        world.createEntity<Block>(x, y, width, height, scale, 6, blockFactory);
+        world.createEntity<Block>(x, y, width, height, scale, 6);
     }
     else if (tilename.find("FlagBlock") != std::string::npos) // Flag blocks
     {
-        world.createEntity<Block>(x, y, width, height, scale, 10, blockFactory);
+        world.createEntity<Block>(x, y, width, height, scale, 10);
     }
     else if (tilename.find("StarBlock") != std::string::npos) // Star blocks
     {
-        world.createEntity<Block>(x, y, width, height, scale, 9, blockFactory);
+        world.createEntity<Block>(x, y, width, height, scale, 9);
     }
     else if (tilename.find("CoinQuestionBlock") != std::string::npos) // Coin question blocks
     {
-        world.createEntity<Block>(x, y, width, height, scale, 1, blockFactory);
+        world.createEntity<Block>(x, y, width, height, scale, 1);
     }
     else if (tilename.find("MushroomQuestionBlock") != std::string::npos) // Mushroom question blocks
     {
-        world.createEntity<Block>(x, y, width, height, scale, 2, blockFactory);
+        world.createEntity<Block>(x, y, width, height, scale, 2);
     }
     else if (tilename.find("FlowerQuestionBlock") != std::string::npos) // Flower question blocks
     {
-        world.createEntity<Block>(x, y, width, height, scale, 3, blockFactory);
+        world.createEntity<Block>(x, y, width, height, scale, 3);
     }
     else if (tilename.find("StairsBlock") != std::string::npos) // Stairs blocks
     {
-        world.createEntity<Block>(x, y, width, height, scale, 7, blockFactory);
+        world.createEntity<Block>(x, y, width, height, scale, 7);
     }
     else if (tilename.find("MushroomBlock") != std::string::npos)
     {
-        world.createEntity<Block>(x, y, width, height, scale, 11, blockFactory);
+        world.createEntity<Block>(x, y, width, height, scale, 11);
     }
     else if (tilename.find("Level1QuestionBlock") != std::string::npos)
     {
-        world.createEntity<Block>(x, y, width, height, scale, 12, blockFactory);
+        world.createEntity<Block>(x, y, width, height, scale, 12);
     }
     else if (tilename.find("Level2QuestionBlock") != std::string::npos)
     {
-        world.createEntity<Block>(x, y, width, height, scale, 13, blockFactory);
+        world.createEntity<Block>(x, y, width, height, scale, 13);
     }
     else if (tilename.find("Level3QuestionBlock") != std::string::npos)
     {
-        world.createEntity<Block>(x, y, width, height, scale, 14, blockFactory);
+        world.createEntity<Block>(x, y, width, height, scale, 14);
     }
     else if (tilename.find("Level4QuestionBlock") != std::string::npos)
     {
-        world.createEntity<Block>(x, y, width, height, scale, 15, blockFactory);
+        world.createEntity<Block>(x, y, width, height, scale, 15);
     }
 }
 
@@ -210,11 +212,11 @@ void LevelHandler::pipeLoad(World &world, std::string tilename, float x, float y
     char lastChar = tilename.back();
     int pipeIndex = lastChar - '0';
 
-    PipeFactory pipeFactory(pipeIndex);
+    ThemeManager::setTheme(pipeIndex);
 
     if (tilename.find("HorizontalEnterablePipe") != std::string::npos)
     {
-        auto pipe = world.createEntity<Pipe>(x, y, width * 4, height * 2, scale, 2, true, pipeFactory);
+        auto pipe = world.createEntity<Pipe>(x, y, width * 4, height * 2, scale, 2, true);
         pipe->addComponent<TelePort>();
         auto &teleport = pipe->getComponent<TelePort>();
         teleport.setCollideDir(Direction::Left);
@@ -225,7 +227,7 @@ void LevelHandler::pipeLoad(World &world, std::string tilename, float x, float y
     }
     else if (tilename.find("VerticalEnterablePipe") != std::string::npos) // Vertical go-in pipes
     {
-        auto pipe = world.createEntity<Pipe>(x, y, width * 2, height, scale, 0, true, pipeFactory);
+        auto pipe = world.createEntity<Pipe>(x, y, width * 2, height, scale, 0, true);
         pipe->addComponent<TelePort>();
         auto &teleport = pipe->getComponent<TelePort>();
         teleport.setCollideDir(Direction::Top);
@@ -234,11 +236,11 @@ void LevelHandler::pipeLoad(World &world, std::string tilename, float x, float y
     }
     else if (tilename.find("UnenterablePipe") != std::string::npos) // Nap cong
     {
-        world.createEntity<Pipe>(x, y, width * 2, height, scale, 0, false, pipeFactory);
+        world.createEntity<Pipe>(x, y, width * 2, height, scale, 0, false);
     }
     else if (tilename.find("Pipe") != std::string::npos) // Normal pipes
     {
-        world.createEntity<Pipe>(x, y, width * 2, height, scale, 1, false, pipeFactory);
+        world.createEntity<Pipe>(x, y, width * 2, height, scale, 1, false);
     }
 }
 
@@ -246,11 +248,11 @@ void LevelHandler::groundLoad(World &world, std::string tilename, float x, float
 {
     if (tilename == "GroundBlock") // Ground block
     {
-        world.createEntity<Block>(x, y, width, height, scale, -1, 0);
+        world.createEntity<Block>(x, y, width, height, scale, -1);
     }
     else if (tilename == "StairsBlock")
     {
-        world.createEntity<Block>(x, y, width, height, scale, 0, 0);
+        world.createEntity<Block>(x, y, width, height, scale, 0);
     }
 }
 
@@ -260,7 +262,8 @@ void LevelHandler::itemLoad(World &world, std::string tilename, float x, float y
     {
         char lastChar = tilename.back();
         int coinIndex = lastChar - '0';
-        world.createEntity<Coin2>(x, y, width, height, scale, coinIndex);
+        ThemeManager::setCoin2Theme(coinIndex);
+        world.createEntity<Coin2>(x, y, width, height, scale);
     }
     else if (tilename == "FireBullet_4")
     {
@@ -276,35 +279,35 @@ void LevelHandler::itemLoad(World &world, std::string tilename, float x, float y
     }
     else if (tilename == "FireBar1")
     {
-        world.createEntity<FireBar>(x + 4, y + 4, scale, 1, ItemFactory(spriteIndex));
+        world.createEntity<FireBar>(x + 4, y + 4, scale, 1);
     }
     else if (tilename == "FireBar2")
     {
-        world.createEntity<FireBar>(x + 4, y + 4, scale, 2, ItemFactory(spriteIndex));
+        world.createEntity<FireBar>(x + 4, y + 4, scale, 2);
     }
     else if (tilename == "Bridge1")
     {
-        world.createEntity<Bridge>(x, y, scale, 1, ItemFactory(spriteIndex));
+        world.createEntity<Bridge>(x, y, scale, 1);
     }
     else if (tilename == "Bridge2")
     {
-        world.createEntity<Bridge>(x, y, scale, 2, ItemFactory(spriteIndex));
+        world.createEntity<Bridge>(x, y, scale, 2);
     }
     else if (tilename == "SmallUpElevator")
     {
-        world.createEntity<Elevator>(x, y, scale, 1, 1, ItemFactory(spriteIndex));
+        world.createEntity<Elevator>(x, y, scale, 1, 1);
     }
     else if (tilename == "SmallDownElevator")
     {
-        world.createEntity<Elevator>(x, y, scale, 1, 2, ItemFactory(spriteIndex));
+        world.createEntity<Elevator>(x, y, scale, 1, 2);
     }
     else if (tilename == "MediumRightElevator")
     {
-        world.createEntity<Elevator>(x, y, scale, 2, 4, ItemFactory(spriteIndex));
+        world.createEntity<Elevator>(x, y, scale, 2, 4);
     }
     else if (tilename == "Bell")
     {
-        world.createEntity<Bell>(x, y, width, height, scale, ItemFactory(spriteIndex));
+        world.createEntity<Bell>(x, y, width, height, scale);
     }
 }
 

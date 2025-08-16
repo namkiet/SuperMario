@@ -5,6 +5,8 @@
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Animation/Animation.hpp>
+#include <Engine/Audio/Components.hpp>
+#include <Engine/Audio/SoundManager.hpp>
 
 #include <Gameplay/Fire/Components.hpp>
 #include <Gameplay/Item/Components.hpp>
@@ -33,12 +35,8 @@ public:
             player->removeComponent<ShootingTag>();
             if (pool.isKeyPressed(sf::Keyboard::M) && FireBullet::getCount() < 2 && cooldown.timeCount > 0.5f)
             {
-                Entity *gameSession = world.findFirst<ThemeComponent>();
-                if (!gameSession)
-                    return;
-
-                auto &themeComponent = gameSession->getComponent<ThemeComponent>();
-                auto fireBullet = world.createEntity<FireBullet>(pos.x + size.x / 2, pos.y + size.y / 8, 24.0f, 24.0f, ItemFactory(themeComponent.currentTheme));
+                world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/fireball.wav"));
+                auto fireBullet = world.createEntity<FireBullet>(pos.x + size.x / 2, pos.y + size.y / 8, 24.0f, 24.0f);
                 player->addComponent<ShootingTag>();
                 if (!player->hasComponent<FlipXTag>())
                 {

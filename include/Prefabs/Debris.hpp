@@ -14,13 +14,13 @@
 class SmallDebris1 : public Entity
 {
 public:
-    SmallDebris1(float x, float y, float width, float height, ItemFactory itemFactory)
+    SmallDebris1(float x, float y, float width, float height)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x - width, y + height), sf::Vector2f(width, height));
 
         // Set the animation for the debris
-        addComponent<Animation>(itemFactory.getItemTexture("debris1"));
+        addComponent<Animation>(ItemFactory::getItemTexture("debris1"));
 
         // Set the rigid body for physics
         addComponent<RigidBody>(sf::Vector2f(0, -600));
@@ -38,13 +38,13 @@ public:
 class SmallDebris2 : public Entity
 {
 public:
-    SmallDebris2(float x, float y, float width, float height, ItemFactory itemFactory)
+    SmallDebris2(float x, float y, float width, float height)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x - width, y - height), sf::Vector2f(width, height));
 
         // Set the animation for the debris
-        addComponent<Animation>(itemFactory.getItemTexture("debris2"));
+        addComponent<Animation>(ItemFactory::getItemTexture("debris2"));
 
         // Set the rigid body for physics
         addComponent<RigidBody>(sf::Vector2f(0, -600));
@@ -63,13 +63,13 @@ public:
 class SmallDebris3 : public Entity
 {
 public:
-    SmallDebris3(float x, float y, float width, float height, ItemFactory itemFactory)
+    SmallDebris3(float x, float y, float width, float height)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x + width, y + height), sf::Vector2f(width, height));
 
         // Set the animation for the debris
-        addComponent<Animation>(itemFactory.getItemTexture("debris3"));
+        addComponent<Animation>(ItemFactory::getItemTexture("debris3"));
 
         // Set the rigid body for physics
         addComponent<RigidBody>(sf::Vector2f(0, -600));
@@ -87,13 +87,13 @@ public:
 class SmallDebris4 : public Entity
 {
 public:
-    SmallDebris4(float x, float y, float width, float height, ItemFactory itemFactory)
+    SmallDebris4(float x, float y, float width, float height)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x + width, y - height), sf::Vector2f(width, height));
 
         // Set the animation for the debris
-        addComponent<Animation>(itemFactory.getItemTexture("debris4"));
+        addComponent<Animation>(ItemFactory::getItemTexture("debris4"));
         
         // Set the rigid body for physics
         addComponent<RigidBody>(sf::Vector2f(0, -600));

@@ -16,7 +16,7 @@ public:
 class LevelManager
 {
 private:
-    int level = 0;
+    int level = 1;
     std::string status = "playing";
     bool skipUpdate = false;
     bool shouldLoadNextLevel = false;
@@ -71,7 +71,7 @@ public:
     }
     void reset()
     {
-        level = 0;
+        level = 1;
         for (auto &observer : observers)
         {
             observer->onLevelChanged(level);

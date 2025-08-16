@@ -1,15 +1,77 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <Core/TextureManager.hpp>
+#include <ThemeManager.hpp>
 
 class ItemFactory
 {
 private:
-    std::unordered_map<std::string, std::string> itemTypeToFolder;
+    static std::unordered_map<std::string, std::string> itemTypeToFolder;
 
 public:
     ItemFactory(int theme)
     {
+        setTheme();
+    }
+
+    static const sf::Texture &getItemTexture(const std::string &itemType)
+    {
+        setTheme();
+        auto it = itemTypeToFolder.find(itemType);
+        if (it != itemTypeToFolder.end())
+        {
+            std::string path = it->second;
+            if (itemType == "mushroom1" || itemType == "bridge1")
+            {
+                path += "_0.png";
+            }
+            else if (itemType == "mushroom2" || itemType == "bridge2")
+            {
+                path += "_1.png";
+            }
+            return TextureManager::load(path);
+        }
+        return TextureManager::load("assets/Item/Default.png"); // Fallback texture
+    }
+
+    static std::vector<const sf::Texture *> getItemTextures(const std::string &itemType)
+    {
+        setTheme();
+        auto it = itemTypeToFolder.find(itemType);
+        if (it != itemTypeToFolder.end())
+        {
+            if (itemType != "coin3" && itemType != "bell")
+                return {
+                    &TextureManager::load(it->second + "_0.png"),
+                    &TextureManager::load(it->second + "_1.png"),
+                    &TextureManager::load(it->second + "_2.png"),
+                    &TextureManager::load(it->second + "_3.png")};
+            else
+            {
+                return {
+                    &TextureManager::load(it->second + "_0.png"),
+                    &TextureManager::load(it->second + "_1.png"),
+                    &TextureManager::load(it->second + "_2.png")};
+            }
+        }
+        return {&TextureManager::load("assets/Item/Default.png")}; // Fallback texture
+    }
+
+    static std::vector<const sf::Texture*> getCoin2Textures()
+    {
+        return 
+        {
+            &TextureManager::load("assets/Item/Coin/Coin2/Coin" + std::to_string(ThemeManager::getCoin2Theme()) + "_0.png"),
+            &TextureManager::load("assets/Item/Coin/Coin2/Coin" + std::to_string(ThemeManager::getCoin2Theme()) + "_1.png"),
+            &TextureManager::load("assets/Item/Coin/Coin2/Coin" + std::to_string(ThemeManager::getCoin2Theme()) + "_2.png"),
+            &TextureManager::load("assets/Item/Coin/Coin2/Coin" + std::to_string(ThemeManager::getCoin2Theme()) + "_3.png")
+        };
+    }
+
+    static void setTheme()
+    {
+        int theme = ThemeManager::getTheme();
+
         itemTypeToFolder["flower"] = "assets/Item/Flower/Flower" + std::to_string(theme);
         itemTypeToFolder["coin1"] = "assets/Item/Coin/Coin1/Coin" + std::to_string(theme);
         itemTypeToFolder["coin2"] = "assets/Item/Coin/Coin2/Coin" + std::to_string(theme);
@@ -31,45 +93,5 @@ public:
         itemTypeToFolder["largeFireBar"] = "assets/Item/FireBar/largeFireBar.png";
         itemTypeToFolder["fireBullet"] = "assets/Item/FireBullet/FireBullet";
         itemTypeToFolder["fireworks"] = "assets/Item/FireBullet/FireBullet_4.png";
-    }
-
-    const sf::Texture &getItemTexture(const std::string &itemType) const
-    {
-        auto it = itemTypeToFolder.find(itemType);
-        if (it != itemTypeToFolder.end())
-        {
-            std::string path = it->second;
-            if (itemType == "mushroom1" || itemType == "bridge1")
-            {
-                path += "_0.png";
-            }
-            else if (itemType == "mushroom2" || itemType == "bridge2")
-            {
-                path += "_1.png";
-            }
-            return TextureManager::load(path);
-        }
-        return TextureManager::load("assets/Item/Default.png"); // Fallback texture
-    }
-    std::vector<const sf::Texture *> getItemTextures(const std::string &itemType) const
-    {
-        auto it = itemTypeToFolder.find(itemType);
-        if (it != itemTypeToFolder.end())
-        {
-            if (itemType != "coin3" && itemType != "bell")
-                return {
-                    &TextureManager::load(it->second + "_0.png"),
-                    &TextureManager::load(it->second + "_1.png"),
-                    &TextureManager::load(it->second + "_2.png"),
-                    &TextureManager::load(it->second + "_3.png")};
-            else
-            {
-                return {
-                    &TextureManager::load(it->second + "_0.png"),
-                    &TextureManager::load(it->second + "_1.png"),
-                    &TextureManager::load(it->second + "_2.png")};
-            }
-        }
-        return {&TextureManager::load("assets/Item/Default.png")}; // Fallback texture
     }
 };
