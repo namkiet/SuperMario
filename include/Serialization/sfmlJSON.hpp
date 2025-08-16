@@ -57,11 +57,13 @@ namespace nlohmann {
     template <>
     struct adl_serializer<sf::Sprite> {
         static void to_json(json& j, const sf::Sprite& sprite) {
-            j = TextureManager::getPath(sprite.getTexture());
+            const auto* tex = sprite.getTexture();
+            j = tex ? TextureManager::getPath(tex) : "";
         }
 
         static void from_json(const json& j, sf::Sprite& sprite) {
-            sprite.setTexture(TextureManager::load(j.get<std::string>()));
+            if (j.is_string() && !j.get<std::string>().empty())
+                sprite.setTexture(TextureManager::load(j.get<std::string>())); 
         }
     };
 

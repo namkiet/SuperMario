@@ -33,20 +33,31 @@ public:
     T& getComponent() 
     {
         auto it = components.find(typeid(T));
+        if (it == components.end())
+        {
+            std::string error = "Cannot find Component " + std::string(typeid(T).name()) + " of Entity " + name + " " + std::to_string(id);
+            throw std::runtime_error(error);
+        }
         return *static_cast<T*>(it->second.get());
     }
 
 public:
-    Entity() : id(generateID()) {}
+    Entity() 
+        : id(generateID()), name("Unknown") {}
 
-    explicit Entity(int givenID) : id(assignSpecificID(givenID)) {}
+    explicit Entity(int givenID, const std::string& name) 
+        : id(assignSpecificID(givenID)), name(name) {}
 
     virtual ~Entity() { releaseID(id); }
 
     int getID() const { return id; }
 
+    std::string getName() const { return name; }
+    void setName(const std::string& newName) { name = newName; }
+
 private:
     int id;
+    std::string name;
 
     static int generateID() 
     {

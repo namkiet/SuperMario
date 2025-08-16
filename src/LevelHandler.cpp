@@ -98,10 +98,10 @@ void LevelHandler::load(const std::string &filename, World &world)
                     continue;
                 }
                 tileLoad(world, tileName, x, y, tileWidth, tileHeight);
-                pipeLoad(world, tileName, x, y, tileWidth, tileHeight);
-                itemLoad(world, tileName, x, y, tileWidth, tileHeight);
+                // pipeLoad(world, tileName, x, y, tileWidth, tileHeight);
+                // itemLoad(world, tileName, x, y, tileWidth, tileHeight);
                 playerLoad(world, tileName, x, y, tileWidth, tileHeight);
-                enemyLoad(world, tileName, x, y, tileWidth, tileHeight);
+                // enemyLoad(world, tileName, x, y, tileWidth, tileHeight);
             }
         }
 

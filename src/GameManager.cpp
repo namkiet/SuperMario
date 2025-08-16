@@ -80,14 +80,8 @@
 using json = nlohmann::json;
 
 
-GameManager::GameManager(int level) : levelHandler(world, level), currentLevel(level)
+GameManager::GameManager(int level) : levelHandler(world, level), currentLevel(level), editor(world)
 {
-    std::ifstream in("should_read_from_json.json");
-
-    bool loadFromJSON = json::parse(in)["shouldReadFromJson"];
-
-    // std::cout << loadFromJSON << "\n";
-
     if (currentLevel == -1)
     {
         std::ifstream fin("save.json");
@@ -169,7 +163,7 @@ GameManager::GameManager(int level) : levelHandler(world, level), currentLevel(l
     world.addSystem<PlayerRespawnSystem>();
 }
 
-void GameManager::handleEvent(const sf::Event &event)
+void GameManager::handleEvent(const sf::Event& event, const sf::RenderWindow& window)
 {
     if (event.type == sf::Event::KeyPressed)
     {
@@ -214,13 +208,22 @@ void GameManager::handleEvent(const sf::Event &event)
             shouldPlay = true;
         }
     }
+
+    if (oneFrame)
+    {
+        editor.handleEvent(event, window);
+    }
 }
 
 void GameManager::update(float dt)
 {
     if (dt > 0.1f) return;
 
-    if (oneFrame && !shouldPlay) return;
+    if (oneFrame && !shouldPlay)
+    {
+        world.getSystem<AnimationSystem>()->update(world, dt);
+        return;
+    }
 
     // std::cout << 1.0f / dt << "\n";
     world.update(dt);
@@ -232,7 +235,6 @@ void GameManager::update(float dt)
 
     // std::cout << level << "\n";
 
-    // world.showSceneEditor();
 }
 
 void GameManager::draw(sf::RenderWindow &window, int level)
@@ -245,4 +247,10 @@ void GameManager::draw(sf::RenderWindow &window, int level)
 
     // Set the default view
     world.getSystem<DrawGameComponentSystem>()->draw(world, window);
+
+    if (oneFrame)
+    {
+        editor.drawUI();
+        editor.display(window);
+    }
 }

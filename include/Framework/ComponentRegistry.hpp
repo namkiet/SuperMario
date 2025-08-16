@@ -7,6 +7,7 @@
 #include <typeinfo>
 #include <ECS/Entity.hpp>
 #include <iostream>
+#include <sstream>
 
 using json = nlohmann::json;
 
@@ -14,43 +15,24 @@ using json = nlohmann::json;
 class ComponentRegistry {
 public:
     template<typename T>
-    static void registerComponent(const std::string& name) {
-        saveByType[name] = [name](EntityManager& em, json& j) {
-            for (auto entity : em.findAll()) {
-                if (entity->hasComponent<T>()) {
-                    j[std::to_string(entity->getID())][name] = entity->getComponent<T>();
-                }
+    static void registerComponent(const std::string& compName) {
+        saveByType[compName] = [compName](Entity* entity, json& j) {
+            if (entity->hasComponent<T>()) {
+                j[std::to_string(entity->getID())][compName] = entity->getComponent<T>();
             }
         };
-        loadByType[name] = [](const json& j, Entity* e) {
+        loadByType[compName] = [](const json& j, Entity* e) {
             T comp = j;
             e->addComponent<T>(comp);
         };
     }
 
-    void saveComponents(EntityManager& em, json& j) const {
-        for (auto& [_, saveFunc] : saveByType) saveFunc(em, j);
-    }
-
-    void loadComponents(const json& j, EntityManager& em) {
-        for (auto& [id, data] : j.items()) {
-            for (auto& [name, compJSON] : data.items()) {
-                if (loadByType.find(name) != loadByType.end()) 
-                {
-                    try
-                    {
-                        loadByType[name](compJSON, em.getEntityByID(std::stoi(id)));
-                    }
-                    catch(const std::exception& e)
-                    {
-                        std::cerr << id << " " << name << " " << e.what() << '\n';
-                    }
-                }
-            }
-        }
-    }
+    void saveComponents(EntityManager& em, json& j) const;
+    void saveComponents(Entity* entity, json& j) const;
+    void loadComponents(const json& j, EntityManager& em);
+    void loadComponents(const json& j, Entity* entity);
 
 private:
-    static inline std::unordered_map<std::string, std::function<void(EntityManager&, json&)>> saveByType;
+    static inline std::unordered_map<std::string, std::function<void(Entity*, json&)>> saveByType;
     static inline std::unordered_map<std::string, std::function<void(const json&, Entity*)>> loadByType;
 };

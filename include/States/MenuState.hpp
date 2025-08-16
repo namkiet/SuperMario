@@ -10,7 +10,7 @@ private:
 
 public:
     MenuState();
-    void handleEvent(Game &game, const sf::Event &event) override;
+    void handleEvent(Game &game, const sf::Event& event, const sf::RenderWindow& window) override;
     void update(Game &game, float dt) override;
     void render(Game &game, sf::RenderWindow &window) override;
 };

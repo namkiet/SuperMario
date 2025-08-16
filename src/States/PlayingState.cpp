@@ -6,7 +6,7 @@ PlayingState::PlayingState() : gameManager(nullptr)
 {
 }
 
-void PlayingState::handleEvent(Game &game, const sf::Event &event)
+void PlayingState::handleEvent(Game &game, const sf::Event& event, const sf::RenderWindow& window)
 {
     if (event.type == sf::Event::KeyPressed)
     {
@@ -21,7 +21,7 @@ void PlayingState::handleEvent(Game &game, const sf::Event &event)
         }
     }
 
-    gameManager->handleEvent(event);
+    gameManager->handleEvent(event, window);
 }
 
 void PlayingState::update(Game &, float dt)

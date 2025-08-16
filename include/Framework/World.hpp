@@ -1,18 +1,15 @@
 #pragma once
-#include "EntityManager.hpp"
-#include "SystemManager.hpp"
-#include "ComponentRegistry.hpp"
-#include "SaveManager.hpp"
+#include <Framework/EntityManager.hpp>
+#include <Framework/SystemManager.hpp>
+#include <Framework/ComponentRegistry.hpp>
+#include <Framework/SaveManager.hpp>
+#include <SFML/Graphics.hpp>
 
 class World {
 public:
     // === ENTITY MANAGEMENT ===
     Entity* createEntity() {
         return entityManager.createEntity();
-    }
-
-    Entity* createEntity(int id) {
-        return entityManager.createEntity(id);
     }
 
     template<typename T, typename... Args>
@@ -78,4 +75,6 @@ private:
     SystemManager systemManager;
     ComponentRegistry componentRegistry;
     SaveManager saveManager;
+
+    friend class LevelEditor;
 };

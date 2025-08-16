@@ -8,19 +8,27 @@ class EntityManager {
 public:
     ~EntityManager() { entities.clear(); }
 
+    Entity* addEntity(std::unique_ptr<Entity> entity)
+    {
+        entities.push_back(std::move(entity));
+        return entities.back().get();
+    }
+
     Entity* createEntity() {
         entities.push_back(std::make_unique<Entity>());
         return entities.back().get();
     }
 
-    Entity* createEntity(int id) {
-        entities.push_back(std::make_unique<Entity>(id));
+    Entity* createEntity(int id, const std::string& name) {
+        entities.push_back(std::make_unique<Entity>(id, name));
         return entities.back().get();
     }
 
     template<typename T, typename... Args>
     Entity* createEntity(Args&&... args) {
-        entities.push_back(std::make_unique<T>(std::forward<Args>(args)...));
+        auto newEntity = std::make_unique<T>(std::forward<Args>(args)...);
+        newEntity->setName(typeid(T).name());
+        entities.push_back(std::move(newEntity));
         return entities.back().get();
     }
 
