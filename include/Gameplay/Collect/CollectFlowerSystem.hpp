@@ -1,9 +1,14 @@
 #pragma once
-#include <World.hpp>
+
 #include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Audio/Components.hpp>
+#include <Engine/Audio/SoundManager.hpp>
+
 #include <Gameplay/Collect/Components.hpp>
 #include <Gameplay/Item/Components.hpp>
 #include <Gameplay/Player/Components.hpp>
+
+#include <World.hpp>
 
 class CollectFlowerSystem : public System
 {
@@ -17,6 +22,7 @@ class CollectFlowerSystem : public System
                 if (!item->hasComponent<CollectableTag>()) continue;
                 if (!item->hasComponent<FlowerTag>()) continue;
 
+                world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/powerup_collect.wav"));
                 if (player->hasComponent<BigMarioTag>())
                 {
                     player->addComponent<FireMarioTag>();

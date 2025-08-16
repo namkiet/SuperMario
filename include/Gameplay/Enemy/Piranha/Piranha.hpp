@@ -23,7 +23,7 @@ public:
         addComponent<Animation>(EnemyFactory::getEnemyTexture("piranha_normal"), 16, 24, 2, 0.25f);
         addComponent<ZIndex>(-1);
         addComponent<EnemyTag>(std::make_shared<PiranhaNormalState>(), std::make_shared<PiranhaBehaviour>());
-        addComponent<PiranhaPatrol>(y * scale, 24 * 3 + 16, 2.0f, 2.0f);
+        addComponent<PiranhaPatrol>(y * scale, (float)(24 * 3 + 16), 2.0f, 2.0f);
 
         std::vector<Direction> directions = {Direction::Left, Direction::Right, Direction::Top, Direction::Bottom};
         addComponent<DamageOnContactComponent>(directions);

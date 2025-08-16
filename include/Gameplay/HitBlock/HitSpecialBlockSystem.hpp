@@ -2,6 +2,8 @@
 
 #include <cmath>
 
+#include <CoinManager.hpp>
+
 #include <ECS/System.hpp>
 
 #include <Engine/Physics/BoxCollider2D.hpp>
@@ -9,8 +11,8 @@
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Core/Transform.hpp>
-#include <Engine/Core/DespawnTag.hpp>
-
+#include <Engine/Audio/Components.hpp>
+#include <Engine/Audio/SoundManager.hpp>
 #include <Factories/BlockFactory.hpp>
 #include <Factories/ItemFactory.hpp>
 
@@ -96,12 +98,7 @@ public:
                     }
                     if (!block->hasComponent<NormalBlock>() && !block->hasComponent<CoinBlock>())
                     {
-                        Entity *gameSession = world.findFirst<ThemeComponent>();
-                        if (!gameSession)
-                            return;
-                        auto &themeComponent = gameSession->getComponent<ThemeComponent>();
-                        BlockFactory blockFactory(themeComponent.currentTheme);
-                        block->addComponent<Animation>(blockFactory.getBlockTexture(27));
+                        block->addComponent<Animation>(BlockFactory::getBlockTexture(27));
                     }
 
                     if (block->hasComponent<LevelUpBlock>())
@@ -131,11 +128,7 @@ public:
                         // Update
                         HitCoinBlock(world, dt, block);
 
-                        if (player->hasComponent<CoinComponent>())
-                        {
-                            auto &coinComp = player->getComponent<CoinComponent>();
-                            ++coinComp.coins; // Increment coins
-                        }
+                        CoinManager::instance().addCoin();
                     }
                     else if (block->hasComponent<StarBlock>())
                     {

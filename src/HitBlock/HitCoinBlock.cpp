@@ -19,12 +19,8 @@ void HitSpecialBlockSystem::CoinBlockUpdate(World &world, float dt, Entity *bloc
         block->removeComponent<CoinBlock>();
         block->removeComponent<CoinBlockComponent>();
         block->removeComponent<Animation>();
-        Entity* gameSession = world.findFirst<ThemeComponent>();
-        if (!gameSession)
-            return;
-        auto &themeComponent = gameSession->getComponent<ThemeComponent>();
-        BlockFactory blockFactory(themeComponent.currentTheme);
-        block->addComponent<Animation>(blockFactory.getBlockTexture(27));
+       
+        block->addComponent<Animation>(BlockFactory::getBlockTexture(27));
     }
 }
 
@@ -45,11 +41,9 @@ void HitSpecialBlockSystem::HitCoinBlock(World &world, float dt, Entity *block)
 
     if (coinBlockComponent.hitCount > 0)
     {
-        Entity *gameSession = world.findFirst<ThemeComponent>();
-        if (!gameSession)
-            return;
-        auto &themeComponent = gameSession->getComponent<ThemeComponent>();
-        auto coin = world.createEntity<Coin1>(pos.x, pos.y - sz.y - sz.y / 4, 48, 48, ItemFactory(themeComponent.currentTheme));
+        world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/coin.wav"));
+
+        auto coin = world.createEntity<Coin1>(pos.x, pos.y - sz.y - sz.y / 4, 48.0f, 48.0f);
 
         coinBlockComponent.timer = 0.0f;
         --coinBlockComponent.hitCount;

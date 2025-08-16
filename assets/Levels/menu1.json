@@ -2,12 +2,23 @@
  "height":12,
  "layers":[
         {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":12,
+         "name":"Tile Layer 1",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":21,
+         "x":0,
+         "y":0
+        }, 
+        {
          "draworder":"topdown",
          "height":10,
          "name":"Object Layer 1",
          "objects":[
                 {
-                 "height":64,
+                 "height":176,
                  "id":1,
                  "name":"GroundBlock",
                  "properties":
@@ -19,52 +30,7 @@
                  "visible":true,
                  "width":16,
                  "x":0,
-                 "y":112
-                }, 
-                {
-                 "height":48,
-                 "id":2,
-                 "name":"GroundBlock",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":16,
-                 "y":128
-                }, 
-                {
-                 "height":32,
-                 "id":3,
-                 "name":"GroundBlock",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":32,
-                 "y":144
-                }, 
-                {
-                 "height":16,
-                 "id":4,
-                 "name":"GroundBlock",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":48,
-                 "y":160
+                 "y":0
                 }, 
                 {
                  "height":16,
@@ -93,7 +59,7 @@
                  "type":"",
                  "visible":true,
                  "width":48,
-                 "x":64,
+                 "x":16,
                  "y":80
                 }, 
                 {
@@ -107,8 +73,8 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":16,
-                 "x":320,
+                 "width":32,
+                 "x":304,
                  "y":0
                 }, 
                 {
@@ -123,7 +89,22 @@
                  "type":"",
                  "visible":true,
                  "width":48,
-                 "x":128,
+                 "x":160,
+                 "y":64
+                }, 
+                {
+                 "height":16,
+                 "id":15,
+                 "name":"GroundBlock",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":96,
                  "y":112
                 }],
          "opacity":1,
@@ -132,19 +113,8 @@
          "width":32,
          "x":0,
          "y":0
-        }, 
-        {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         "height":12,
-         "name":"Tile Layer 1",
-         "opacity":1,
-         "type":"tilelayer",
-         "visible":true,
-         "width":21,
-         "x":0,
-         "y":0
         }],
- "nextobjectid":15,
+ "nextobjectid":17,
  "orientation":"orthogonal",
  "properties":
     {
@@ -189,36 +159,6 @@
          "imageheight":16,
          "imagewidth":16,
          "margin":0,
-         "name":"Level3QuestionBlock",
-         "properties":
-            {
-
-            },
-         "spacing":0,
-         "tileheight":16,
-         "tilewidth":16
-        }, 
-        {
-         "firstgid":4,
-         "image":"..\/Tile\/Tile1\/Tile1_24.png",
-         "imageheight":16,
-         "imagewidth":16,
-         "margin":0,
-         "name":"Level4QuestionBlock",
-         "properties":
-            {
-
-            },
-         "spacing":0,
-         "tileheight":16,
-         "tilewidth":16
-        }, 
-        {
-         "firstgid":5,
-         "image":"..\/Tile\/Tile1\/Tile1_24.png",
-         "imageheight":16,
-         "imagewidth":16,
-         "margin":0,
          "name":"Level3QuestionBlock1",
          "properties":
             {
@@ -229,7 +169,7 @@
          "tilewidth":16
         }, 
         {
-         "firstgid":6,
+         "firstgid":4,
          "image":"..\/Tile\/Tile1\/Tile1_24.png",
          "imageheight":16,
          "imagewidth":16,

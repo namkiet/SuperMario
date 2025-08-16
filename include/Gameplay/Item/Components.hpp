@@ -46,7 +46,6 @@ struct MushroomTag : public Component
         GET_TO_LEVEL_4
     };
     Buff buff;
-
     MushroomTag(Buff buff) : buff(buff) {}
 };
 
@@ -73,4 +72,9 @@ struct FireworkComponent : public Component
 {
     FireworkComponent(int n) : fireworksLeft(n) {}
     int fireworksLeft = 0; // Number of fireworks left to display
+};
+
+struct LevelMushroomTag : public Component
+{
+    // This tag is used to identify the mushroom level item
 };

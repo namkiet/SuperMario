@@ -4,7 +4,7 @@
 #include <Engine/Core/Transform.hpp>
 #include <Gameplay/LifeSpan/Components.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
-#include <iostream>
+#include <ScoreManager.hpp>
 
 class CoinJumpingSystem : public System
 {
@@ -24,8 +24,8 @@ public:
             if (lifeSpan.value <= 0.0f)
             {
                 Entity *scoreTextEntity = world.createEntity();
-                scoreTextEntity->addComponent<TextComponent>("200", pos.x, pos.y + size.y, pos.y + size.y - 48, 15, 1);
-                world.getScoreManager().addScore(200);
+                scoreTextEntity->addComponent<TextComponent>("200", pos.x, pos.y + size.y, pos.y + size.y - 48, 15.0f, 1);
+                ScoreManager::instance().addScore(200);
             }
         }
     }

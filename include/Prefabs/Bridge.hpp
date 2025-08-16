@@ -16,7 +16,7 @@
 class Bridge : public Entity
 {
 public:
-    Bridge(float x, float y, float scale, int index, ItemFactory itemFactory)
+    Bridge(float x, float y, float scale, int index)
     {
         float width = 0;
         float height = 0;
@@ -26,7 +26,7 @@ public:
             height = 12.0f;
 
             // Set the texture for the bridge
-            addComponent<Animation>(itemFactory.getItemTexture("bridge1"));
+            addComponent<Animation>(ItemFactory::getItemTexture("bridge1"));
 
             // Add block tag to the bridge
             addComponent<BlockTag>();
@@ -37,7 +37,7 @@ public:
             height = 14.0f;
 
             // Set the texture for the bridge
-            addComponent<Animation>(itemFactory.getItemTexture("bridge2"));
+            addComponent<Animation>(ItemFactory::getItemTexture("bridge2"));
         }
         // Set the size of the collision box for the bridge
         addComponent<BoxCollider2D>(sf::Vector2f(width, height) * scale);

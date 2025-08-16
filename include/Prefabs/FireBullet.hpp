@@ -21,13 +21,13 @@ private:
     static int count;
 
 public:
-    FireBullet(float x, float y, float width, float height, ItemFactory itemFactory)
+    FireBullet(float x, float y, float width, float height)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x, y), sf::Vector2f(width, height));
 
         // Set the animation for the fire bullet
-        std::vector<const sf::Texture *> textures = itemFactory.getItemTextures("fireBullet");
+        std::vector<const sf::Texture *> textures = ItemFactory::getItemTextures("fireBullet");
         addComponent<Animation>(textures,(int) width, (int)height, 0.15f, true);
         addComponent<ZIndex>(1); // Set z-index for rendering order
 

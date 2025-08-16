@@ -4,6 +4,8 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Physics/BlockTag.hpp>
+#include <Engine/Audio/Components.hpp>
+#include <Engine/Audio/SoundManager.hpp>
 
 #include <Factories/ItemFactory.hpp>
 
@@ -37,18 +39,22 @@ public:
             for (const auto &[block, direction, overlap] : collider.collisions)
             {
                 if (block->hasComponent<PlayerTag>())
-                {
-                    // fout << "FireBullet collided with player." << std::endl;
                     continue;
-                }
+
                 if (block->hasComponent<FireBulletTag>())
-                {
-                    // fout << "FireBullet collided with another FireBullet." << std::endl;
+
                     continue;
-                }
+
+                if (!block->hasComponent<BoxCollider2D>())
+                    continue;
+
+                if (!block->hasComponent<Transform>())
+                    continue;
+
                 // fout << "Fire Bullet collided with blocks" << std::endl;
                 auto &blockPos = block->getComponent<Transform>().position;
                 auto &blockSize = block->getComponent<BoxCollider2D>().size;
+                
                 if (direction == Direction::Top && !block->hasComponent<StairsBlock>())
                 {
                     if (block->hasComponent<PlayerTag>())
@@ -85,11 +91,6 @@ public:
                         continue;
                     }
 
-                    if (fireBullet->hasComponent<LifeSpan>())
-                    {
-                        continue;
-                    }
-
                     fireBullet->getComponent<BoxCollider2D>().size = sf::Vector2f(48, 48);
                     fireBullet->getComponent<Transform>().size = sf::Vector2f(48, 48);
 
@@ -106,13 +107,13 @@ public:
                         pos.x = blockPos.x + blockSize.x;
                     }
 
+                    if (block->hasComponent<BlockTag>())
+                    {
+                        world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/fire.wav"));
+                    }
+
                     // Add the new animation
-                    Entity *gameSession = world.findFirst<ThemeComponent>();
-                    if (!gameSession)
-                        return;
-                    auto &themeComponent = gameSession->getComponent<ThemeComponent>();
-                    ItemFactory itemFactory(themeComponent.currentTheme);
-                    fireBullet->addComponent<Animation>(itemFactory.getItemTexture("fireworks"));
+                    fireBullet->addComponent<Animation>(ItemFactory::getItemTexture("fireworks"));
 
                     // Add the life span component
                     fireBullet->addComponent<LifeSpan>(0.3f);

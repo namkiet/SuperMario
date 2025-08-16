@@ -16,7 +16,7 @@
 class Flower : public Entity
 {
 public:
-    Flower(float x, float y, float width, float height, ItemFactory itemFactory)
+    Flower(float x, float y, float width, float height)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x, y), sf::Vector2f(width, height));
@@ -25,7 +25,7 @@ public:
         addComponent<BoxCollider2D>(sf::Vector2f(width, height));
 
         // Set the animation for the flower
-        std::vector<const sf::Texture *> textures = itemFactory.getItemTextures("flower");
+        std::vector<const sf::Texture *> textures = ItemFactory::getItemTextures("flower");
         addComponent<Animation>(textures,(int) width,(int) height, 0.15f, true);
         addComponent<ZIndex>(-1);
 

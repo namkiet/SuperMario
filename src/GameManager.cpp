@@ -14,6 +14,7 @@
 #include <Engine/Rendering/RenderSystem.hpp>
 #include <Engine/Rendering/DrawBoxColliderSystem.hpp>
 #include <Engine/Rendering/DrawGameComponentSystem.hpp>
+#include <Engine/Rendering/DrawTextSystem.hpp>
 
 #include <Engine/Audio/SoundSystem.hpp>
 
@@ -60,6 +61,9 @@
 #include <Gameplay/Enemy/Bowser/Bowser.hpp>
 #include <Gameplay/Enemy/EnemyScoreSystem.hpp>
 
+#include <ScoreManager.hpp>
+#include <TimeManager.hpp>
+
 #include <Gameplay/GameProperties/PlayTimeSystem.hpp>
 #include <Gameplay/GameProperties/TextPoppingSystem.hpp>
 
@@ -74,8 +78,7 @@
 #include <cassert>
 #include <iostream>
 
-GameManager::GameManager(int level, std::function<void(int)> reloadCallback)
-    : levelHandler(world, level), level(level), world(reloadCallback)
+GameManager::GameManager(int level) : levelHandler(world, level), level(level)
 {
     levelHandler.start();
 
@@ -140,13 +143,11 @@ GameManager::GameManager(int level, std::function<void(int)> reloadCallback)
     world.addSystem<BlinkSystem>();
     world.addSystem<RenderSystem>();
     world.addSystem<DrawBoxColliderSystem>();
+    world.addSystem<DrawTextSystem>();
     world.addSystem<DrawGameComponentSystem>();
 
     world.addSystem<DespawnSystem>();
     world.addSystem<PlayerRespawnSystem>();
-
-    scoreUI = new ScoreUI();
-    world.getScoreManager().addObserver(scoreUI);
 }
 
 void GameManager::handleEvent(const sf::Event &event)
@@ -174,18 +175,18 @@ void GameManager::handleEvent(const sf::Event &event)
         if (event.key.code == sf::Keyboard::X)
         {
             std::cout << "HELLO\n";
-            auto lakitu = world.createEntity<Lakitu>(20 * 16, 3 * 16, 3);
+            auto lakitu = world.createEntity<Lakitu>((float)(20 * 16), (float)(3 * 16), 3.0f);
         }
 
         if (event.key.code == sf::Keyboard::B)
         {
             std::cout << "HELLO\n";
-            auto bowser = world.createEntity<Bowser>(10 * 16, 3 * 16, 3);
+            auto bowser = world.createEntity<Bowser>((float)(10 * 16), (float)(3 * 16), 3.0f);
         }
 
         if (event.key.code == sf::Keyboard::T)
         {
-            auto goomba = world.createEntity<Goomba>(7 * 16, 2 * 16, 3);
+            auto goomba = world.createEntity<Goomba>((float)(7 * 16), (float)(2 * 16), 3.0f);
         }
 
         if (event.key.code == sf::Keyboard::P)
@@ -222,30 +223,14 @@ void GameManager::draw(sf::RenderWindow &window, int level) const
     // Drawn with custom view
     world.getSystem<DrawBoxColliderSystem>()->draw(world, window);
 
+    if (level == 0)
+        return;
+
+    // Drawn with custiom view
+    world.getSystem<DrawTextSystem>()->draw(world, window);
+
     // Set the default view
     world.getSystem<DrawGameComponentSystem>()->draw(world, window);
-
-    scoreUI->draw(window);
-}
-
-World &GameManager::getWorld()
-{
-    return world;
-}
-
-std::string GameManager::getStatus()
-{
-    return world.getStatus();
-}
-
-bool GameManager::getShouldLoadNextLevel()
-{
-    return shouldLoadNextLevel;
-}
-
-void GameManager::setShouldLoadNextLevel(bool value)
-{
-    shouldLoadNextLevel = value;
 }
 
 int GameManager::lives = 5;

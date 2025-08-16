@@ -15,7 +15,7 @@
 class Mushroom1 : public Entity
 {
 public:
-    Mushroom1(float x, float y, float width, float height, ItemFactory itemFactory)
+    Mushroom1(float x, float y, float width, float height)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x, y), sf::Vector2f(width, height));
@@ -26,7 +26,7 @@ public:
         // Set the animation for the flower
         // addComponent<Animation>(TextureManager::load("assets/Item/Mushroom/Mushroom1_0.png"));
 
-        addComponent<Animation>(itemFactory.getItemTexture("mushroom1"));
+        addComponent<Animation>(ItemFactory::getItemTexture("mushroom1"));
         addComponent<ZIndex>(-1);
 
         addComponent<MushroomTag>(MushroomTag::Buff::GROW_UP);
@@ -36,7 +36,7 @@ public:
 class Mushroom2 : public Entity
 {
 public:
-    Mushroom2(float x, float y, float width, float height, ItemFactory itemFactory)
+    Mushroom2(float x, float y, float width, float height)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x, y), sf::Vector2f(width, height));
@@ -47,7 +47,7 @@ public:
         // Set the animation for the flower
         // addComponent<Animation>(TextureManager::load("assets/Item/Mushroom/Mushroom1_1.png"));
 
-        addComponent<Animation>(itemFactory.getItemTexture("mushroom2"));
+        addComponent<Animation>(ItemFactory::getItemTexture("mushroom2"));
         addComponent<ZIndex>(-1);
 
         addComponent<MushroomTag>(MushroomTag::Buff::GIVE_ONE_MORE_LIFE);
@@ -57,14 +57,14 @@ public:
 class LevelMushroom : public Entity
 {
 public:
-    LevelMushroom(float x, float y, float width, float height, int newLevel, ItemFactory itemFactory)
+    LevelMushroom(float x, float y, float width, float height, int newLevel)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x, y), sf::Vector2f(width, height));
 
-        addComponent<Animation>(itemFactory.getItemTexture("mushroom1"));
+        addComponent<Animation>(ItemFactory::getItemTexture("mushroom1"));
         addComponent<ZIndex>(-1);
-
+        addComponent<LevelMushroomTag>();
         if (newLevel == 1)
             addComponent<MushroomTag>(MushroomTag::Buff::GET_TO_LEVEL_1);
         else if (newLevel == 2)

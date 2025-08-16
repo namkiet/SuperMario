@@ -1,5 +1,9 @@
 #include <LevelState/GameOverState.hpp>
 #include <LevelState/IntroState.hpp>
+#include <iostream>
+#include <LevelManager.hpp>
+#include <CoinManager.hpp>
+#include <ScoreManager.hpp>
 
 GameOverState::GameOverState()
 {
@@ -13,7 +17,8 @@ void GameOverState::update(GameManager *gameManager, float dt)
 
 void GameOverState::render(GameManager *gameManager, sf::RenderWindow &window, int level)
 {
-    // Render game over screen
+    // std::cout << "Rendering GameOverState" << std::endl;
+    //  Render game over screen
     window.clear(sf::Color::Black);
 
     sf::Text text;

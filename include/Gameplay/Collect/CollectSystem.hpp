@@ -1,11 +1,20 @@
 #pragma once
-#include <World.hpp>
-#include <Gameplay/Collect/Components.hpp>
-#include <Gameplay/GameProperties/Components.hpp>
-#include <Gameplay/Item/Components.hpp>
+
+#include <CoinManager.hpp>
+
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/DespawnTag.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Audio/Components.hpp>
+#include <Engine/Audio/SoundManager.hpp>
+
+#include <Gameplay/Collect/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
+#include <Gameplay/Item/Components.hpp>
+
+#include <ScoreManager.hpp>
+
+#include <World.hpp>
 
 class CollectSystem : public System
 {
@@ -19,26 +28,28 @@ class CollectSystem : public System
                 if (!collider->hasComponent<CanCollectTag>())
                     continue;
 
-                Entity *gameSession = world.findFirst<CoinComponent>();
-                if (!gameSession)
-                    continue;
-                auto &coinComponent = gameSession->getComponent<CoinComponent>();
+                if (item->hasComponent<LevelMushroomTag>())
+                    continue; // Don't score level mushrooms
 
                 if (!item->hasComponent<Coin2Tag>())
-                    world.getScoreManager().addScore(1000);
+                    ScoreManager::instance().addScore(1000);
 
                 else
-                    world.getScoreManager().addScore(200);
+                {
+                    ScoreManager::instance().addScore(200);
+                    world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/coin.wav"));
+                }
 
                 if (!item->hasComponent<Coin2Tag>())
                 {
                     Entity *scoreTextEntity = world.createEntity();
                     float x = item->getComponent<Transform>().position.x;
                     float y = item->getComponent<Transform>().position.y - item->getComponent<Transform>().size.y / 2;
-                    scoreTextEntity->addComponent<TextComponent>("1000", x, y, y - 48, 15, 1);
+                    scoreTextEntity->addComponent<TextComponent>("1000", x, y, y - 48, 15.0f, 1);
                 }
-                ++coinComponent.coins;
-                
+
+                CoinManager::instance().addCoin();
+
                 item->addComponent<DespawnTag>();
             }
         }

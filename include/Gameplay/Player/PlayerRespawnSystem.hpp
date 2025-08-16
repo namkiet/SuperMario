@@ -1,10 +1,15 @@
 #pragma once
+
 #include <ECS/System.hpp>
-#include <World.hpp>
+
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
+
+#include <LevelManager.hpp>
+
 #include <Prefabs/Mario.hpp>
-#include <fstream>
+
+#include <World.hpp>
 
 class PlayerRespawnSystem : public System
 {
@@ -14,16 +19,11 @@ public:
         if (world.findFirst<PlayerTag>())
             return;
 
-        auto mario = world.createEntity<Mario>((float)0 * 16, (float)6 * 16, 16, 16, 3);
+        auto mario = world.createEntity<Mario>((float)0 * 16, (float)6 * 16, 16.0f, 16.0f, 3.0f);
         mario->addComponent<GrowUpTag>();
         mario->addComponent<FireMarioTag>();
-
-        Entity *gameSession = world.findFirst<LevelComponent>();
-        if (!gameSession)
-            return;
-        auto &levelComponent = gameSession->getComponent<LevelComponent>();
         
-        world.setNewLevel(levelComponent.currentLevel);
-        world.setStatus("intro");       
+        LevelManager::instance().setLevel(0);
+        LevelManager::instance().setStatus("intro");
     }
 };

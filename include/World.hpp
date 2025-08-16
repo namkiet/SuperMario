@@ -26,9 +26,6 @@
 class World
 {
 public:
-    World(std::function<void(int)> levelReloadCallback)
-        : requestLevelReload(levelReloadCallback) {}
-
     Entity *createEntity()
     {
         entities.push_back(std::make_unique<Entity>());
@@ -146,59 +143,10 @@ public:
 
         destroyPending.clear();
     }
-
-    ScoreManager &getScoreManager()
-    {
-        return scoreManager;
-    }
-
-    void reloadLevel(int newLevel)
-    {
-        if (requestLevelReload)
-        {
-            skipUpdate = true;
-            requestLevelReload(newLevel);
-        }
-    }
-
-    bool getSkipUpdate() const
-    {
-        return skipUpdate;
-    }
-
-    void setSkipUpdate(bool value)
-    {
-        skipUpdate = value;
-    }
-
-    int getNewLevel()
-    {
-        return newLevel;
-    }
-
-    void setNewLevel(int level)
-    {
-        newLevel = level;
-    }
-
-    std::string getStatus()
-    {
-        return status;
-    }
-
-    void setStatus(const std::string &newStatus)
-    {
-        status = newStatus;
-    }
-
 private:
     std::vector<std::unique_ptr<Entity>> entities;
     std::unordered_map<std::type_index, std::shared_ptr<System>> systems;
     std::vector<std::shared_ptr<System>> orderedSystems;
-    std::vector<Entity *> destroyPending;
-    ScoreManager scoreManager;
-    std::function<void(int)> requestLevelReload;
-    bool skipUpdate = false;
+    std::vector<Entity *> destroyPending;   
     int newLevel = 1;
-    std::string status = "playing";
 };

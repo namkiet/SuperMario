@@ -14,13 +14,13 @@
 class Coin1 : public Entity
 {
 public:
-    Coin1(float x, float y, float width, float height, ItemFactory itemFactory)
+    Coin1(float x, float y, float width, float height)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x, y), sf::Vector2f(width, height));
 
         // // Set the animation for the coin
-        std::vector<const sf::Texture *> textures = itemFactory.getItemTextures("coin1");
+        std::vector<const sf::Texture *> textures = ItemFactory::getItemTextures("coin1");
         addComponent<Animation>(textures, (int)width, (int)height, 0.15f, true);
 
         // addComponent<Animation>(TextureManager::load("assets/Item/Coin/coin.png"), 16, 16, 16, 0.15);
@@ -39,13 +39,13 @@ public:
 class SmallCoin : public Entity
 {
 public:
-    SmallCoin(float x, float y, float width, float height, ItemFactory itemFactory)
+    SmallCoin(float x, float y, float width, float height)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x, y), sf::Vector2f(width, height));
 
         // Set the animation for the coin
-        std::vector<const sf::Texture *> textures = itemFactory.getItemTextures("coin3");
+        std::vector<const sf::Texture *> textures = ItemFactory::getItemTextures("coin3");
         addComponent<Animation>(textures, (int)width, (int)height, 0.3f, true);
 
         addComponent<SmallCoinTag>();
@@ -55,7 +55,7 @@ public:
 class Coin2 : public Entity
 {
 public:
-    Coin2(float x, float y, float width, float height, float scale, ItemFactory itemFactory)
+    Coin2(float x, float y, float width, float height, float scale)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x, y) * scale, sf::Vector2f(width, height) * scale);
@@ -63,7 +63,7 @@ public:
         addComponent<BoxCollider2D>(sf::Vector2f(width, height) * scale);
 
         // Set the animation for the coin
-        std::vector<const sf::Texture *> textures = itemFactory.getItemTextures("coin2");
+        std::vector<const sf::Texture *> textures = ItemFactory::getCoin2Textures();
         addComponent<Animation>(textures, (int)width, (int)height, 0.3f, true);
 
         // addComponent<Animation>(TextureManager::load("assets/Item/Coin/coin.png"), 16, 16, 16, 0.15);

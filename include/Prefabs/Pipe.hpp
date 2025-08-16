@@ -17,7 +17,7 @@
 class Pipe : public Entity
 {
 public:
-    Pipe(float x, float y, float width, float height, float scale, int index, bool allowTeleport, PipeFactory pipeFactory)
+    Pipe(float x, float y, float width, float height, float scale, int index, bool allowTeleport)
     {
         // Set the size of the collision box for the pipe
         addComponent<BoxCollider2D>(sf::Vector2f(width, height) * scale);
@@ -35,13 +35,13 @@ public:
         switch (index)
         {
         case 0:
-            addComponent<Animation>(pipeFactory.getPipeTexture("pipe1"));
+            addComponent<Animation>(PipeFactory::getPipeTexture("pipe1"));
             break;
         case 1:
-            addComponent<Animation>(pipeFactory.getPipeTexture("pipe2"));
+            addComponent<Animation>(PipeFactory::getPipeTexture("pipe2"));
             break;
         case 2:
-            addComponent<Animation>(pipeFactory.getPipeTexture("pipe3"));
+            addComponent<Animation>(PipeFactory::getPipeTexture("pipe3"));
             break;
         }
 

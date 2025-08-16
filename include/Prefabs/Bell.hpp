@@ -14,7 +14,7 @@
 class Bell : public Entity
 {
 public:
-    Bell(float x, float y, float width, float height, float scale, ItemFactory itemFactory)
+    Bell(float x, float y, float width, float height, float scale)
     {
         // Set the transform for positioning
         addComponent<Transform>(sf::Vector2f(x, y) * scale, sf::Vector2f(width, height) * scale);
@@ -23,8 +23,8 @@ public:
         addComponent<BoxCollider2D>(sf::Vector2f(width, height) * scale);
 
         // Set the animation for the bell
-        std::vector<const sf::Texture *> textures = itemFactory.getItemTextures("bell");
-        addComponent<Animation>(textures, width, height, 0.3f, true);
+        std::vector<const sf::Texture *> textures = ItemFactory::getItemTextures("bell");
+        addComponent<Animation>(textures, (int)width,(int) height, 0.3f, true);
 
         addComponent<BellTag>();
     }

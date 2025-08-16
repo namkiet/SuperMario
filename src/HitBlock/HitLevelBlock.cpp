@@ -28,7 +28,8 @@ void HitSpecialBlockSystem::HitLevelBlock(World &world, float dt, Entity *block)
     {
         newLevel = 4;
     }
-    auto mushroom = world.createEntity<LevelMushroom>(pos.x, pos.y - 20, 48.0f, 48.0f, newLevel, ItemFactory(1));
+    world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/item.wav"));
+    auto mushroom = world.createEntity<LevelMushroom>(pos.x, pos.y - 20, 48.0f, 48.0f, newLevel);
     ItemEmerging emerging;
     emerging.finalY = pos.y - 48;
     mushroom->addComponent<ItemEmerging>(emerging);

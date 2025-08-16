@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <Core/TextureManager.hpp>
 
+
 IntroState::IntroState()
 {
     font.loadFromFile("BalooBhai2-ExtraBold.ttf");
@@ -17,6 +18,7 @@ std::shared_ptr<LevelState> IntroState::getNewState(GameManager *gameManager)
 {
     if (timeElapsed >= 1.5f) // Assuming 3 seconds for the intro
     {
+        TimeManager::instance().reset();
         return std::make_shared<InGameState>();
     }
     return nullptr;
@@ -24,6 +26,8 @@ std::shared_ptr<LevelState> IntroState::getNewState(GameManager *gameManager)
 
 void IntroState::render(GameManager *gameManager, sf::RenderWindow &window, int level)
 {
+    // std::cout << "Rendering IntroState" << std::endl;
+    window.setView(window.getDefaultView());
     window.clear(sf::Color(34, 34, 34, 255));
 
     sf::Sprite smallMap;

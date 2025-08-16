@@ -3,6 +3,7 @@
 #include "GameManager.hpp"
 #include <SFML/Graphics.hpp>
 #include <LevelState/LevelState.hpp>
+#include <LevelManager.hpp>
 
 class PlayingState : public GameState
 {
