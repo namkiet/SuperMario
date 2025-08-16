@@ -10,7 +10,6 @@
 #include <Gameplay/Tele/Components.hpp>
 #include <Gameplay/Enemy/Lakitu/Lakitu.hpp>
 #include <Gameplay/Enemy/Bowser/Bowser.hpp>
-#include <Gameplay/GameProperties/GameSession.hpp>
 
 #include <LevelHandler.hpp>
 
@@ -40,7 +39,6 @@ void LevelHandler::start()
         // Load the level setup from a JSON file
         load("assets/Levels/map11.json", world);
 
-        spriteIndex = 1;
         break;
     case 2:
         // Load character setup from a JSON file
@@ -48,26 +46,19 @@ void LevelHandler::start()
         // Load the level setup from a JSON file
         load("assets/Levels/map61.json", world);
 
-        spriteIndex = 1;
-
         break;
     case 3:
         // Load character setup from a JSON file
         load("assets/Levels/map54b.json", world);
         // Load the level setup from a JSON file
         load("assets/Levels/map54.json", world);
-
-        spriteIndex = 3;
-
         break;
     default:
         // Load character setup from a JSON file
         load("assets/Levels/menu1b.json", world);
         // Load the level setup from a JSON file
         load("assets/Levels/menu1.json", world);
-        spriteIndex = 1;
     }
-    world.createEntity<GameSession>(currentLevel, spriteIndex);
     world.createEntity<SmallCoin>(325.0f, 65.0f, 15.0f, 24.0f);
 }
 
