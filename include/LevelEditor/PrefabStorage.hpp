@@ -105,7 +105,7 @@ private:
         // Coin Question block
         prefabList.emplace_back("Coin",
             [this](float x, float y) -> std::unique_ptr<Entity> {
-                return std::make_unique<Block>(x / 3, y / 3, 16, 16, 3, 1, 1); // wrap raw pointer
+                return std::make_unique<Block>(x / 3, y / 3, 16, 16, 3, 1); // wrap raw pointer
             });
 
         

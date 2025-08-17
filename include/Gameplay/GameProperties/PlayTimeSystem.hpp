@@ -13,8 +13,6 @@
 
 #include <TimeManager.hpp>
 
-#include <World.hpp>
-
 class PlayTimeSystem : public System
 {
 private:

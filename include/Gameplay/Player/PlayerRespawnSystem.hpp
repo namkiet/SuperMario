@@ -4,12 +4,8 @@
 #include <Framework/World.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
-
 #include <LevelManager.hpp>
-
 #include <Prefabs/Mario.hpp>
-
-#include <World.hpp>
 
 class PlayerRespawnSystem : public System
 {

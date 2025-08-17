@@ -23,6 +23,6 @@ struct TextComponent : public Component
 // Just for score purpose
 struct ShouldUpdateScore : public Component
 {
-    ShouldUpdateScore(int score) : score(score) {}
+    ShouldUpdateScore(int score = 0) : score(score) {}
     int score;
 };

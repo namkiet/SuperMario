@@ -10,8 +10,6 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <World.hpp>
-
 class GameManager
 {
 public:
@@ -20,9 +18,6 @@ public:
     void handleEvent(const sf::Event& event, sf::RenderWindow& window);
     void update(float dt);
     void draw(sf::RenderWindow &window, int level);
-
-private:    
-    
     static int getLives();
     static void setLives(int newLives);
     ~GameManager();

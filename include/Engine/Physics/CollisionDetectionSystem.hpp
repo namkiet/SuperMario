@@ -6,7 +6,7 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/SpatialHashGrid.hpp>
 #include <Gameplay/Player/Components.hpp>
-#include <World.hpp>
+#include <Framework/World.hpp>
 #include <Engine/Core/RigidBody.hpp>
 
 class CollisionDetectionSystem : public System

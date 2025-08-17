@@ -15,7 +15,6 @@
 #include <Gameplay/Patrol/Components.hpp>
 #include <Gameplay/Obstacles/Components.hpp>
 
-#include <World.hpp>
 class PodobooSystem : public System
 {
 public:

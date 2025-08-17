@@ -26,7 +26,7 @@ void PlayingState::handleEvent(Game &game, const sf::Event& event, sf::RenderWin
     }
 
     if (gameManager)
-        gameManager->handleEvent(event);
+        gameManager->handleEvent(event, window);
 }
 
 void PlayingState::update(Game &game, float dt)

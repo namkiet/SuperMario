@@ -47,7 +47,7 @@ public:
         if (newLevel == 0)
         {
             // Keep the level unchanged
-            level = level;
+            // level = level;
         }
         else
             level = newLevel;

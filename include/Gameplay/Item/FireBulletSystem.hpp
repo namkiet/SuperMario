@@ -17,8 +17,6 @@
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/Enemy/Components.hpp>
 
-#include <World.hpp>
-
 class FireBulletSystem : public System
 {
 public:

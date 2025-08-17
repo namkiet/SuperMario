@@ -13,8 +13,6 @@
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/Patrol/Components.hpp>
 
-#include <World.hpp>
-
 class FireBarSystem : public System
 {
 public:

@@ -24,8 +24,6 @@
 #include <Gameplay/LifeSpan/Components.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
 
-#include <World.hpp>
-
 class HitSpecialBlockSystem : public System
 {
 private:

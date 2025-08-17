@@ -8,6 +8,8 @@ class PlayerPowerState;
 
 struct PlayerTag : public Component 
 {
+    PlayerTag() = default;
+
     PlayerTag(std::shared_ptr<PlayerMovementState> movementState, std::shared_ptr<PlayerSizeState> sizeState, std::shared_ptr<PlayerPowerState> powerState, bool isMario = true) 
         : movementState(movementState), sizeState(sizeState), powerState(powerState) {}
 

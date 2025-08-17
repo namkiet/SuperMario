@@ -8,8 +8,6 @@
 
 #include <LevelManager.hpp>
 
-#include <World.hpp>
-
 class CollectMushroomSystem : public System
 {
     void update(World &world, float dt) override

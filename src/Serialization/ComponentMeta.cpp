@@ -1,6 +1,5 @@
 #include <Serialization/sfmlJSON.hpp>
 #include <Serialization/CustomJSON.hpp>
-// #include <Serialization/RegisterStates.hpp>
 #include <Serialization/Macros.hpp>
 
 #include <Gameplay/Obstacles/Components.hpp>
@@ -12,7 +11,7 @@ DEFINE_TAG(Castle)
 DEFINE_TAG(FlagPole)
 DEFINE_TAG(Flag)
 DEFINE_TAG(CastleFlag)
-DEFINE_TAG(BellTag)
+DEFINE_COMPONENT(BellTag, firstHit, secondHit)
 DEFINE_TAG(BridgeTileTag)
 DEFINE_COMPONENT(ElevatorComponent, isHorizontal, minX, maxX, minY, maxY)
 DEFINE_TAG(Princess)
@@ -40,7 +39,6 @@ DEFINE_COMPONENT(EnemyTag, state, behaviour)
 DEFINE_COMPONENT(TowardPlayer, direction)
 DEFINE_TAG(CanKillEnemyTag)
 DEFINE_TAG(NotOnPatrolYet)
-DEFINE_TAG(ScoreAddedTag)
 
 #include <Gameplay/Enemy/Koopa/Components.hpp>
 DEFINE_TAG(KoopaTag)
@@ -90,10 +88,8 @@ DEFINE_TAG(FlagPoleTag)
 DEFINE_COMPONENT(HoldingTimer, duration)
 
 #include <Gameplay/GameProperties/Components.hpp>
-DEFINE_COMPONENT(ScoreComponent, score)
-DEFINE_COMPONENT(TimeComponent, timer, subtimer, isPaused, goesFaster, firstTimeReach0, firstTimePause, timeUnitLeft)
-DEFINE_COMPONENT(CoinComponent, coins)
 DEFINE_COMPONENT(TextComponent, startX, startY, finalY, dy, size, content)
+DEFINE_COMPONENT(ShouldUpdateScore, score)
 
 #include <Gameplay/LifeSpan/Components.hpp>
 DEFINE_COMPONENT(LifeSpan, value)
@@ -121,6 +117,7 @@ DEFINE_TAG(FireBulletTag)
 DEFINE_TAG(SmallCoinTag)
 DEFINE_TAG(Coin2Tag)
 DEFINE_COMPONENT(FireworkComponent, fireworksLeft)
+DEFINE_TAG(LevelMushroomTag)
 
 #include <Gameplay/Stomp/Components.hpp>
 DEFINE_TAG(StomperTag)
@@ -157,9 +154,14 @@ DEFINE_TAG(FlagBlock)
 DEFINE_TAG(QuestionBlockTag)
 DEFINE_COMPONENT(CoinBlockComponent, waitingTime, timer, hitCount, isCollected, firstTime)
 DEFINE_TAG(MushroomBlock)
+DEFINE_TAG(Level1Block)
+DEFINE_TAG(Level2Block)
+DEFINE_TAG(Level3Block)
+DEFINE_TAG(Level4Block)
+DEFINE_TAG(LevelBlock)
 
 #include <Gameplay/Player/Components.hpp>
-DEFINE_COMPONENT(PlayerTag, movementState, sizeState, powerState)
+DEFINE_COMPONENT(PlayerTag, movementState, sizeState, powerState, isMario)
 DEFINE_TAG(BigMarioTag)
 DEFINE_TAG(FireMarioTag)
 DEFINE_TAG(GrowUpTag)
@@ -192,8 +194,8 @@ DEFINE_COMPONENT(Animation, sprite, frameWidth, frameHeight, frameCount, frameDu
 DEFINE_TAG(FlipXTag)
 DEFINE_TAG(FlipYTag)
 
-// #include <Engine/Audio/Components.hpp>
-// DEFINE_COMPONENT(SoundComponent, sound, buffer, shouldPlay, loop)
+#include <Engine/Audio/Components.hpp>
+DEFINE_COMPONENT(SoundComponent, sound, buffer, shouldPlay, loop)
 
 #include <Engine/Rendering/ZIndex.hpp>
 DEFINE_COMPONENT(ZIndex, value)

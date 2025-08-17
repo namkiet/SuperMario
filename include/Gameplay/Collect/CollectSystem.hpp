@@ -18,8 +18,6 @@
 
 #include <ScoreManager.hpp>
 
-#include <World.hpp>
-
 class CollectSystem : public System
 {
     void update(World &world, float dt) override

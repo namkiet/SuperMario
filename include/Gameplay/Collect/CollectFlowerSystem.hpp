@@ -7,7 +7,7 @@
 #include <Gameplay/Item/Components.hpp>
 #include <Gameplay/Player/Components.hpp>
 
-#include <World.hpp>
+#include <Framework/World.hpp>
 
 class CollectFlowerSystem : public System
 {
