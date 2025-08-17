@@ -9,12 +9,13 @@
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 
+#include <Factories/EnemyFactory.hpp>
+
+#include <Gameplay/Player/Components.hpp>
+#include <Gameplay/Patrol/Components.hpp>
 #include <Gameplay/Obstacles/Components.hpp>
 
-#include <Core/TextureManager.hpp>
-
-#include <iostream>
-
+#include <World.hpp>
 class PodobooSystem : public System
 {
 public:
@@ -33,7 +34,7 @@ public:
                 podobooTag.upright = false;
                 rigidBody.velocity.y = -rigidBody.velocity.y; // Falling speed
                 podoboo->removeComponent<Animation>();
-                podoboo->addComponent<Animation>(TextureManager::load("assets/Enemy/Podoboo/Podoboo2.png"));
+                podoboo->addComponent<Animation>(EnemyFactory::getEnemyTexture("podoboo_fall"));
             }
             else if (!podobooTag.upright && transform.position.y >= podobooTag.lowestY)
             {
@@ -41,7 +42,7 @@ public:
                 podobooTag.upright = true;
                 rigidBody.velocity.y = -rigidBody.velocity.y; // Rising speed
                 podoboo->removeComponent<Animation>();
-                podoboo->addComponent<Animation>(TextureManager::load("assets/Enemy/Podoboo/Podoboo1.png"));
+                podoboo->addComponent<Animation>(EnemyFactory::getEnemyTexture("podoboo_rise"));
             }
         }
     }

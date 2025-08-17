@@ -4,6 +4,10 @@
 #include <Gameplay/Player/Components.hpp>
 #include <string>
 #include <unordered_map>
+#include <fstream>
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
 
 class PlayerStateSystem : public System
 {
@@ -44,7 +48,7 @@ public:
                 tag.powerState->onEnter(player);
             }
 
-            auto stateName = tag.movementState->getName() + tag.sizeState->getName() + tag.powerState->getName();
+            auto stateName = "Luigi"+ tag.movementState->getName() + tag.sizeState->getName() + tag.powerState->getName();
             player->addComponent<Animation>(getAnimation(stateName));
         }
     }
@@ -52,67 +56,48 @@ public:
 public:
     PlayerStateSystem()
     {
-        animMap["IdlingSmallNormal"] = Animation(TextureManager::load("assets/Mario/Small/idling.png"));
-        animMap["IdlingSmallInvincible"] = Animation(TextureManager::load("assets/Mario/Small/idling_invincible.png"), 16, 16, 4, 0.1f);
-        animMap["IdlingBigNormal"] = Animation(TextureManager::load("assets/Mario/Big/idling.png"));
-        animMap["IdlingBigInvincible"] = Animation(TextureManager::load("assets/Mario/Big/idling_invincible.png"), 16, 32, 4, 0.1f);
-        animMap["IdlingFireNormal"] = Animation(TextureManager::load("assets/Mario/Fire/idling.png"));
-        animMap["IdlingFireInvincible"] = animMap["IdlingBigInvincible"];
-        animMap["IdlingDeadNormal"] = Animation(TextureManager::load("assets/Mario/Small/dead.png"));
-        animMap["IdlingShrinkingNormal"] = Animation(TextureManager::load("assets/Mario/Big/shrinking.png"), 16, 32, 10, 0.1f, false);
-        animMap["IdlingGrowingUpNormal"] = Animation(TextureManager::load("assets/Mario/Small/grow_up.png"), 16, 32, 7, 0.1f, false);
-        animMap["IdlingGrowingUpInvincible"] = Animation(TextureManager::load("assets/Mario/Small/grow_up_invincible.png"), 16, 32, 7, 0.1f, false);
-
-        animMap["JumpingSmallNormal"] = Animation(TextureManager::load("assets/Mario/Small/jumping.png"));
-        animMap["JumpingSmallInvincible"] = Animation(TextureManager::load("assets/Mario/Small/jumping_invincible.png"), 16, 16, 4, 0.1f);
-        animMap["JumpingBigNormal"] = Animation(TextureManager::load("assets/Mario/Big/jumping.png"));  
-        animMap["JumpingBigInvincible"] = Animation(TextureManager::load("assets/Mario/Big/jumping_invincible.png"), 16, 32, 4, 0.1f);
-        animMap["JumpingFireNormal"] = Animation(TextureManager::load("assets/Mario/Fire/jumping.png"));
-        animMap["JumpingFireInvincible"] = getAnimation("JumpingBigInvincible");
-        animMap["JumpingDeadNormal"] = getAnimation("IdlingDeadNormal");
-        animMap["JumpingShrinkingNormal"] = getAnimation("IdlingShrinkingNormal");
-        animMap["JumpingGrowingUpNormal"] = getAnimation("IdlingGrowingUpNormal");
-        animMap["JumpingGrowingUpInvincible"] = getAnimation("IdlingGrowingUpInvincible");
-
-        animMap["RunningSmallNormal"] = Animation(TextureManager::load("assets/Mario/Small/running.png"), 16, 16, 3, 0.15f);
-        animMap["RunningSmallInvincible"] = Animation(TextureManager::load("assets/Mario/Small/running_invincible.png"), 16, 16, 12, 0.1f);
-        animMap["RunningBigInvincible"] = Animation(TextureManager::load("assets/Mario/Big/running_invincible.png"), 16, 32, 12, 0.1f);
-        animMap["RunningBigNormal"] = Animation(TextureManager::load("assets/Mario/Big/running.png"), 16, 32, 3, 0.15f);
-        animMap["RunningFireNormal"] = Animation(TextureManager::load("assets/Mario/Fire/running.png"), 16, 32, 3, 0.15f);
-        animMap["RunningFireInvincible"] = getAnimation("RunningBigInvincible");
-        animMap["RunningDeadNormal"] = getAnimation("IdlingDeadNormal");
-        animMap["RunningShrinkingNormal"] = getAnimation("IdlingShrinkingNormal");
-        animMap["RunningGrowingUpNormal"] = getAnimation("IdlingGrowingUpNormal");
-        animMap["RunningGrowingUpInvincible"] = getAnimation("IdlingGrowingUpInvincible");
-
-        animMap["ClimbingSmallNormal"] = Animation(TextureManager::load("assets/Mario/Small/climbing.png"), 16, 16, 2, 0.2f);
-        animMap["ClimbingSmallInvincible"] = Animation(TextureManager::load("assets/Mario/Small/climbing_invincible.png"), 16, 16, 4, 0.2f);
-        animMap["ClimbingBigNormal"] = Animation(TextureManager::load("assets/Mario/Big/climbing.png"), 16, 32, 2, 0.2f);
-        animMap["ClimbingBigInvincible"] = Animation(TextureManager::load("assets/Mario/Big/climbing_invincible.png"), 16, 32, 4, 0.2f);
-        animMap["ClimbingFireNormal"] = Animation(TextureManager::load("assets/Mario/Fire/climbing.png"), 16, 32, 2, 0.2f);
-        animMap["ClimbingFireInvincible"] = getAnimation("ClimbingBigInvincible");
-
-        animMap["CrouchingBigNormal"] = Animation(TextureManager::load("assets/Mario/Big/crouching.png"));
-        animMap["CrouchingBigInvincible"] = Animation(TextureManager::load("assets/Mario/Big/crouching_invincible.png"), 16, 32, 4, 0.2f);
-        animMap["CrouchingFireNormal"] = Animation(TextureManager::load("assets/Mario/Fire/crouching.png"));
-        animMap["CrouchingFireInvincible"] = getAnimation("CrouchingBigInvincible");
-        animMap["CrouchingDeadNormal"] = getAnimation("IdlingDeadNormal");
-        animMap["CrouchingShrinkingNormal"] = getAnimation("IdlingShrinkingNormal");
-
-        animMap["ShootingFireNormal"] = Animation(TextureManager::load("assets/Mario/Fire/shooting.png"));
-        animMap["ShootingFireInvincible"] = animMap["ShootingFireNormal"];
+        loadAnimationsFromFile("assets/Player/player_animation.json");
     }
 
 private:
-    const Animation& getAnimation(const std::string& name) const
+    void loadAnimationsFromFile(const std::string& filename)
     {
-        if (animMap.find(name) == animMap.end())
+        std::ifstream fin(filename);
+        if (!fin.is_open()) throw std::runtime_error("Cannot open JSON file: " + filename);
+
+        json j; fin >> j;
+        loadAnimationsFromJSON(j["Mario"], "Mario");
+        loadAnimationsFromJSON(j["Luigi"], "Luigi");
+    }
+
+    void loadAnimationsFromJSON(const json& j, const std::string& character)
+    {
+        for (auto& anim : j["animations"])
         {
-            throw std::runtime_error("Cannot find Animation: " + name);
+            std::string key = character + anim["key"].get<std::string>();
+            std::string path = anim["path"].get<std::string>();
+            int frameWidth = anim.value("frameWidth", 16);
+            int frameHeight = anim.value("frameHeight", 16);
+            int frameCount = anim.value("frameCount", 1);
+            float frameTime = anim.value("frameTime", 0.1f);
+            bool loop = anim.value("loop", true);
+
+            animMap[key] = Animation(TextureManager::load(path), frameWidth, frameHeight, frameCount, frameTime, loop);
         }
 
-        return animMap.at(name);
+        for (auto& [alias, original] : j["aliases"].items())
+        {
+            animMap[character + alias] = animMap.at(character + original.get<std::string>());
+        }
     }
+
+    const Animation& getAnimation(const std::string& name) const
+    {
+        auto it = animMap.find(name);
+        if (it == animMap.end())
+            throw std::runtime_error("Cannot find Animation: " + name);
+        return it->second;
+    }
+
     std::unordered_map<std::string, Animation> animMap;
-    std::vector<std::string> specialStates;
 };

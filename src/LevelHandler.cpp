@@ -1,4 +1,6 @@
-#include <LevelHandler.hpp>
+#include <fstream>
+
+#include <Factories/ItemFactory.hpp>
 
 #include <Gameplay/Enemy/Goomba/Goomba.hpp>
 #include <Gameplay/Enemy/Koopa/Koopa.hpp>
@@ -8,6 +10,8 @@
 #include <Gameplay/Tele/Components.hpp>
 #include <Gameplay/Enemy/Lakitu/Lakitu.hpp>
 #include <Gameplay/Enemy/Bowser/Bowser.hpp>
+
+#include <LevelHandler.hpp>
 
 #include <Prefabs/Block.hpp>
 #include <Prefabs/Pipe.hpp>
@@ -21,6 +25,8 @@
 #include <Prefabs/Elevator.hpp>
 #include <Prefabs/Bell.hpp>
 
+#include <ThemeManager.hpp>
+
 LevelHandler::LevelHandler(World &world, int currentLevel) : world(world), currentLevel(currentLevel) {}
 
 void LevelHandler::start()
@@ -32,7 +38,6 @@ void LevelHandler::start()
         load("assets/Levels/map11b.json", world);
         // Load the level setup from a JSON file
         load("assets/Levels/map11.json", world);
-        world.createEntity<SmallCoin>(325.0f, 65.0f, 15.0f, 24.0f, 1);
 
         break;
     case 2:
@@ -40,16 +45,21 @@ void LevelHandler::start()
         load("assets/Levels/map61b.json", world);
         // Load the level setup from a JSON file
         load("assets/Levels/map61.json", world);
-        world.createEntity<SmallCoin>(325.0f, 65.0f, 15.0f, 24.0f, 1);
+
         break;
     case 3:
         // Load character setup from a JSON file
         load("assets/Levels/map54b.json", world);
         // Load the level setup from a JSON file
         load("assets/Levels/map54.json", world);
-        world.createEntity<SmallCoin>(325.0f, 65.0f, 15.0f, 24.0f, 3);
         break;
+    default:
+        // Load character setup from a JSON file
+        load("assets/Levels/menu1b.json", world);
+        // Load the level setup from a JSON file
+        load("assets/Levels/menu1.json", world);
     }
+    world.createEntity<SmallCoin>(325.0f, 65.0f, 15.0f, 24.0f);
 }
 
 void LevelHandler::load(const std::string &filename, World &world)
@@ -128,45 +138,63 @@ void LevelHandler::tileLoad(World &world, std::string tilename, float x, float y
     char lastChar = tilename.back();
     int tileIndex = lastChar - '0';
 
+    ThemeManager::setTheme(tileIndex);
+
     if (tilename.find("1UpBlock") != std::string::npos) // 1Up blocks
     {
-        world.createEntity<Block>(x, y, width, height, 3, 8, tileIndex);
+        world.createEntity<Block>(x, y, width, height, scale, 8);
     }
     else if (tilename.find("NormalBlock") != std::string::npos) // Normal blocks
     {
-        world.createEntity<Block>(x, y, width, height, 3, 5, tileIndex);
+        world.createEntity<Block>(x, y, width, height, scale, 5);
     }
     else if (tilename.find("CoinBlock") != std::string::npos) // Coin blocks
     {
-        world.createEntity<Block>(x, y, width, height, 3, 6, tileIndex);
+        world.createEntity<Block>(x, y, width, height, scale, 6);
     }
     else if (tilename.find("FlagBlock") != std::string::npos) // Flag blocks
     {
-        world.createEntity<Block>(x, y, width, height, 3, 10, tileIndex);
+        world.createEntity<Block>(x, y, width, height, scale, 10);
     }
     else if (tilename.find("StarBlock") != std::string::npos) // Star blocks
     {
-        world.createEntity<Block>(x, y, width, height, 3, 9, tileIndex);
+        world.createEntity<Block>(x, y, width, height, scale, 9);
     }
     else if (tilename.find("CoinQuestionBlock") != std::string::npos) // Coin question blocks
     {
-        world.createEntity<Block>(x, y, width, height, 3, 1, tileIndex);
+        world.createEntity<Block>(x, y, width, height, scale, 1);
     }
     else if (tilename.find("MushroomQuestionBlock") != std::string::npos) // Mushroom question blocks
     {
-        world.createEntity<Block>(x, y, width, height, 3, 2, tileIndex);
+        world.createEntity<Block>(x, y, width, height, scale, 2);
     }
     else if (tilename.find("FlowerQuestionBlock") != std::string::npos) // Flower question blocks
     {
-        world.createEntity<Block>(x, y, width, height, 3, 3, tileIndex);
+        world.createEntity<Block>(x, y, width, height, scale, 3);
     }
     else if (tilename.find("StairsBlock") != std::string::npos) // Stairs blocks
     {
-        world.createEntity<Block>(x, y, width, height, 3, 7, tileIndex);
+        world.createEntity<Block>(x, y, width, height, scale, 7);
     }
     else if (tilename.find("MushroomBlock") != std::string::npos)
     {
-        world.createEntity<Block>(x, y, width, height, 3, 11, tileIndex);
+        world.createEntity<Block>(x, y, width, height, scale, 11);
+    }
+    else if (tilename.find("Level1QuestionBlock") != std::string::npos)
+    {
+        world.createEntity<Block>(x, y, width, height, scale, 12);
+    }
+    else if (tilename.find("Level2QuestionBlock") != std::string::npos)
+    {
+        world.createEntity<Block>(x, y, width, height, scale, 13);
+    }
+    else if (tilename.find("Level3QuestionBlock") != std::string::npos)
+    {
+        world.createEntity<Block>(x, y, width, height, scale, 14);
+    }
+    else if (tilename.find("Level4QuestionBlock") != std::string::npos)
+    {
+        world.createEntity<Block>(x, y, width, height, scale, 15);
     }
 }
 
@@ -175,9 +203,11 @@ void LevelHandler::pipeLoad(World &world, std::string tilename, float x, float y
     char lastChar = tilename.back();
     int pipeIndex = lastChar - '0';
 
+    ThemeManager::setTheme(pipeIndex);
+
     if (tilename.find("HorizontalEnterablePipe") != std::string::npos)
     {
-        auto pipe = world.createEntity<Pipe>(x, y, width * 3, height * 2, 3, 2, true, pipeIndex);
+        auto pipe = world.createEntity<Pipe>(x, y, width * 4, height * 2, scale, 2, true);
         pipe->addComponent<TelePort>();
         auto &teleport = pipe->getComponent<TelePort>();
         teleport.setCollideDir(Direction::Left);
@@ -188,7 +218,7 @@ void LevelHandler::pipeLoad(World &world, std::string tilename, float x, float y
     }
     else if (tilename.find("VerticalEnterablePipe") != std::string::npos) // Vertical go-in pipes
     {
-        auto pipe = world.createEntity<Pipe>(x, y, width * 2, height, 3, 0, true, pipeIndex);
+        auto pipe = world.createEntity<Pipe>(x, y, width * 2, height, scale, 0, true);
         pipe->addComponent<TelePort>();
         auto &teleport = pipe->getComponent<TelePort>();
         teleport.setCollideDir(Direction::Top);
@@ -197,11 +227,11 @@ void LevelHandler::pipeLoad(World &world, std::string tilename, float x, float y
     }
     else if (tilename.find("UnenterablePipe") != std::string::npos) // Nap cong
     {
-        world.createEntity<Pipe>(x, y, width * 2, height, 3, 0, false, pipeIndex);
+        world.createEntity<Pipe>(x, y, width * 2, height, scale, 0, false);
     }
     else if (tilename.find("Pipe") != std::string::npos) // Normal pipes
     {
-        world.createEntity<Pipe>(x, y, width * 2, height, 3, 1, false, pipeIndex);
+        world.createEntity<Pipe>(x, y, width * 2, height, scale, 1, false);
     }
 }
 
@@ -209,7 +239,11 @@ void LevelHandler::groundLoad(World &world, std::string tilename, float x, float
 {
     if (tilename == "GroundBlock") // Ground block
     {
-        world.createEntity<Block>(x, y, width, height, 3, -1, 0);
+        world.createEntity<Block>(x, y, width, height, scale, -1);
+    }
+    else if (tilename == "StairsBlock")
+    {
+        world.createEntity<Block>(x, y, width, height, scale, 0);
     }
 }
 
@@ -219,7 +253,8 @@ void LevelHandler::itemLoad(World &world, std::string tilename, float x, float y
     {
         char lastChar = tilename.back();
         int coinIndex = lastChar - '0';
-        world.createEntity<Coin2>(x, y, width, height, 3, coinIndex);
+        ThemeManager::setCoin2Theme(coinIndex);
+        world.createEntity<Coin2>(x, y, width, height, scale);
     }
     else if (tilename == "FireBullet_4")
     {
@@ -227,43 +262,43 @@ void LevelHandler::itemLoad(World &world, std::string tilename, float x, float y
     }
     else if (tilename == "Podoboo1")
     {
-        world.createEntity<Podoboo>(x + width / 2, y, width, height, 3, true);
+        world.createEntity<Podoboo>(x + width / 2, y, width, height, scale, true);
     }
     else if (tilename == "Podoboo2")
     {
-        world.createEntity<Podoboo>(x + width / 2, y, width, height, 3, false);
+        world.createEntity<Podoboo>(x + width / 2, y, width, height, scale, false);
     }
     else if (tilename == "FireBar1")
     {
-        world.createEntity<FireBar>(x + 4, y + 4, 3, 1);
+        world.createEntity<FireBar>(x + 4, y + 4, scale, 1);
     }
     else if (tilename == "FireBar2")
     {
-        world.createEntity<FireBar>(x + 4, y + 4, 3, 2);
+        world.createEntity<FireBar>(x + 4, y + 4, scale, 2);
     }
     else if (tilename == "Bridge1")
     {
-        world.createEntity<Bridge>(x, y, 3, 1);
+        world.createEntity<Bridge>(x, y, scale, 1);
     }
     else if (tilename == "Bridge2")
     {
-        world.createEntity<Bridge>(x, y, 3, 2);
+        world.createEntity<Bridge>(x, y, scale, 2);
     }
     else if (tilename == "SmallUpElevator")
     {
-        world.createEntity<Elevator>(x, y, 3, 1, 1);
+        world.createEntity<Elevator>(x, y, scale, 1, 1);
     }
     else if (tilename == "SmallDownElevator")
     {
-        world.createEntity<Elevator>(x, y, 3, 1, 2);
+        world.createEntity<Elevator>(x, y, scale, 1, 2);
     }
     else if (tilename == "MediumRightElevator")
     {
-        world.createEntity<Elevator>(x, y, 3, 2, 4);
+        world.createEntity<Elevator>(x, y, scale, 2, 4);
     }
     else if (tilename == "Bell")
     {
-        world.createEntity<Bell>(x, y, width, height, 3);
+        world.createEntity<Bell>(x, y, width, height, scale);
     }
 }
 
@@ -271,18 +306,18 @@ void LevelHandler::backgroundLoad(World &world, std::string tilename, float x, f
 {
     if (tilename == "FlagPole") // Background
     {
-        world.createEntity<Background>(x, y, width, height, 3, 9);
+        world.createEntity<Background>(x, y, width, height, scale, 9);
         float flagPosX = x - width / 2;
         float flagPosY = y + 17;
-        world.createEntity<Background>(flagPosX, flagPosY, 16, 16, 3, 10);
+        world.createEntity<Background>(flagPosX, flagPosY, 16.0f, 16.0f, scale, 10);
     }
     else if (tilename == "Castle")
     {
-        world.createEntity<Background>(x, y, width, height, 3, 0);
+        world.createEntity<Background>(x, y, width, height, scale, 0);
     }
     else if (tilename == "Princess")
     {
-        world.createEntity<Background>(x, y, width, height, 3, 12);
+        world.createEntity<Background>(x, y, width, height, scale, 12);
     }
 }
 
@@ -290,21 +325,21 @@ void LevelHandler::playerLoad(World &world, std::string tilename, float x, float
 {
     if (tilename == "StartingPoint") // Player
     {
-        world.createEntity<Mario>(x, y, width, height, 3, currentLevel);
+        world.createEntity<Mario>(x, y, width, height, scale);
     }
     else if (tilename == "CheckPoint1")
     {
         // world.createEntity<Mario>(x, y, width, height, 3);
-        teleMap[tilename] = sf::Vector2f(x * 3, y * 3);
+        teleMap[tilename] = sf::Vector2f(x * scale, y * scale);
     }
 
     else if (tilename == "CheckPoint2")
     {
-        teleMap[tilename] = sf::Vector2f(x * 3, y * 3);
+        teleMap[tilename] = sf::Vector2f(x * scale, y * scale);
     }
     else if (tilename == "CheckPoint3")
     {
-        teleMap[tilename] = sf::Vector2f(x * 3, y * 3);
+        teleMap[tilename] = sf::Vector2f(x * scale, y * scale);
     }
 }
 
@@ -313,30 +348,30 @@ void LevelHandler::enemyLoad(World &world, std::string tilename, float x, float 
     if (tilename == "Goomba") // Goomba
     {
         // cout<< "Enemy starting position found at: (" << j << ", " << i << ")" << endl;
-        auto goomba = world.createEntity<Goomba>(x, y, 3);
+        auto goomba = world.createEntity<Goomba>(x, y, scale);
     }
     else if (tilename == "Koopa") // Koopa
     {
-        auto koopa = world.createEntity<Koopa>(x, y, 3);
+        auto koopa = world.createEntity<Koopa>(x, y, scale);
     }
     else if (tilename == "Piranha")
     {
-        auto piranha = world.createEntity<Piranha>(x + width / 2, y + 16/3.0f, 3);
+        auto piranha = world.createEntity<Piranha>(x + width / 2, y + 16/3.0f, scale);
     }
     else if (tilename == "JumpingKoopa")
     {
-        auto koopaJumping = world.createEntity<KoopaJumping>(x, y, 3);
+        auto koopaJumping = world.createEntity<KoopaJumping>(x, y, scale);
     }
     else if (tilename == "FlyingKoopa")
     {
-        auto koopaFlying = world.createEntity<KoopaFlying>(x, y, 3);
+        auto koopaFlying = world.createEntity<KoopaFlying>(x, y, scale);
     }
     else if (tilename == "Lakitu")
     {
-        auto lakitu = world.createEntity<Lakitu>(x, y, 3);
+        auto lakitu = world.createEntity<Lakitu>(x, y, scale);
     }
     else if (tilename == "Bowser")
     {
-        auto bowser = world.createEntity<Bowser>(x, y, 3);
+        auto bowser = world.createEntity<Bowser>(x, y, scale);
     }
 }

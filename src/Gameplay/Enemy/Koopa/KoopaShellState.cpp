@@ -10,9 +10,10 @@
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
-#include <Core/TextureManager.hpp>
+#include <Engine/Physics/BlockTag.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
 
 void KoopaShellState::onEnter(Entity *entity)
 {
@@ -29,7 +30,9 @@ void KoopaShellState::onEnter(Entity *entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Koopa/koopa_shell.png"), 16, 16, 1, 0));
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("koopa_shell"), 16, 16, 1, 0.0f);
+
+    entity->addComponent<BlockTag>();
 
     auto &tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();
@@ -40,6 +43,9 @@ void KoopaShellState::onEnter(Entity *entity)
     entity->getComponent<KoopaPatrol>().velocity = sf::Vector2f(0, 0);
 
     entity->removeComponent<DamageOnContactComponent>();
+
+    // Add score tag to notify the score system
+    entity->addComponent<ShouldUpdateScore>(100);
 }
 
 std::shared_ptr<EnemyState> KoopaShellState::getNewState(Entity *entity, float dt)
@@ -66,6 +72,7 @@ std::shared_ptr<EnemyState> KoopaShellState::getNewState(Entity *entity, float d
 
     if (entity->hasComponent<ChangeToKoopaFlippedTag>())
     {
+        entity->removeComponent<BlockTag>();
         entity->removeComponent<KoopaShellTag>();
         entity->removeComponent<ChangeToKoopaFlippedTag>();
         return std::make_shared<KoopaFlippedState>();

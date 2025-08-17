@@ -7,7 +7,6 @@
 #include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>
-#include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Stomp/Components.hpp>
 

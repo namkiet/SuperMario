@@ -141,7 +141,7 @@ void BowserJumpBehaviour::attack(Entity* entity, float dt, World& world)
         // anim.frameDuration = 0;
         // anim.currentFrame = 0;
         // anim.timer = 0;
-        entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_jump.png"), 32, 35, 1, 0));
+        entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("bowser_jump"), 32, 35, 1, 0.0f);
     }
     else if (attack.delay > attack.timer && attack.delay - attack.timer <= 0.75f && attack.isShooting == 0)
     {
@@ -163,14 +163,14 @@ void BowserJumpBehaviour::attack(Entity* entity, float dt, World& world)
         //     anim.frameWidth,
         //     anim.frameHeight
         // ));
-        entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_shoot.png"), 32, 36, 2, attack.delay - attack.timer));
+        entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("bowser_shoot"), 32, 36, 2, attack.delay - attack.timer);
     }
     else if (attack.timer >= attack.delay)
     {
         attack.timer = 0;
         attack.isShooting = 0;
 
-        auto bullet = world.createEntity<BowserBullet>(0, 0, 3);
+        auto bullet = world.createEntity<BowserBullet>(0.0f, 0.0f, 3.0f);
         auto& bulletTF = bullet->getComponent<Transform>();
         auto& bulletPT = bullet->getComponent<BowserBulletPatrol>();
         auto direction = entity->getComponent<TowardPlayer>().direction;

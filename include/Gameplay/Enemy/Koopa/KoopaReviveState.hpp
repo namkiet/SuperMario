@@ -9,8 +9,8 @@ public:
     std::shared_ptr<EnemyState> getNewState(Entity* entity, float dt) override;
 
 private:
-    float timer = 0;
-    float stateDuration = 3;
+    float timer = 0.0f;
+    float stateDuration = 3.0f;
 };
 
 

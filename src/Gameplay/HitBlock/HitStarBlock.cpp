@@ -12,7 +12,8 @@ void HitSpecialBlockSystem::HitStarBlock(World &world, float dt, Entity *block)
     auto &sz = tf.size;
 
     // Create a Star entity
-    auto star = world.createEntity<Star>(pos.x, pos.y, 48.0f, 48.0f);
+    world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/item.wav"));
+    auto star = world.createEntity<Star>(pos.x, pos.y - 20, 48.0f, 48.0f);
     ItemEmerging emerging;
     emerging.finalY = pos.y - 48;
     star->addComponent<ItemEmerging>(emerging);

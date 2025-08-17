@@ -7,12 +7,12 @@
 #include <Engine/Animation/Animation.hpp>
 #include <Gameplay/Stomp/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
-#include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/Enemy/Lakitu/Components.hpp>
 #include <Gameplay/Enemy/Lakitu/LakituNormalState.hpp>
 #include <Gameplay/Enemy/Lakitu/LakituNormalBehaviour.hpp>
+#include <Factories/EnemyFactory.hpp>
 
 class Lakitu : public Entity
 {
@@ -23,7 +23,7 @@ public:
         addComponent<Transform>(Transform(sf::Vector2f(x, y) * scale, sf::Vector2f(16, 24) * scale));
         addComponent<BoxCollider2D>(BoxCollider2D(sf::Vector2f(16, 24) * scale));
 
-        addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Lakitu/Lakitu_normal.png"), 16, 24, 1, 0));
+        addComponent<Animation>(EnemyFactory::getEnemyTexture("lakitu_normal"), 16, 24, 1, 0.0f);
 
         addComponent<EnemyTag>(std::make_shared<LakituNormalState>(), std::make_shared<LakituNormalBehaviour>());
         addComponent<LakituPatrol>();

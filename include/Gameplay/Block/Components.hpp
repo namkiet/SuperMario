@@ -37,5 +37,24 @@ struct CoinBlockComponent : public Component
 
 struct MushroomBlock : public Component
 {
-    // This component can be used to identify mushroom blocks specifically
+};
+
+struct Level1Block : public Component
+{
+};
+
+struct Level2Block : public Component
+{
+};
+
+struct Level3Block : public Component
+{
+};
+
+struct Level4Block : public Component
+{
+};
+
+struct LevelBlock : public Component
+{
 };

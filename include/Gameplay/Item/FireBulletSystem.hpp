@@ -6,11 +6,18 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Physics/BlockTag.hpp>
+#include <Engine/Audio/Components.hpp>
+#include <Engine/Audio/SoundManager.hpp>
+
+#include <Factories/ItemFactory.hpp>
+
+#include <Gameplay/Block/Components.hpp>
 #include <Gameplay/Patrol/Components.hpp>
 #include <Gameplay/LifeSpan/Components.hpp>
 #include <Gameplay/Player/Components.hpp>
-#include <fstream>
-#include <iostream>
+#include <Gameplay/Enemy/Components.hpp>
+
+#include <World.hpp>
 
 class FireBulletSystem : public System
 {
@@ -34,18 +41,22 @@ public:
             for (const auto &[block, direction, overlap] : collider.collisions)
             {
                 if (block->hasComponent<PlayerTag>())
-                {
-                    // fout << "FireBullet collided with player." << std::endl;
                     continue;
-                }
+
                 if (block->hasComponent<FireBulletTag>())
-                {
-                    // fout << "FireBullet collided with another FireBullet." << std::endl;
+
                     continue;
-                }
+
+                if (!block->hasComponent<BoxCollider2D>())
+                    continue;
+
+                if (!block->hasComponent<Transform>())
+                    continue;
+
                 // fout << "Fire Bullet collided with blocks" << std::endl;
                 auto &blockPos = block->getComponent<Transform>().position;
                 auto &blockSize = block->getComponent<BoxCollider2D>().size;
+                
                 if (direction == Direction::Top && !block->hasComponent<StairsBlock>())
                 {
                     if (block->hasComponent<PlayerTag>())
@@ -63,7 +74,6 @@ public:
                     rb.velocity.y = -200.0f;
                     // rb.velocity.x = 0.0f;
                     patrolComponent.moveSpeed = 600.0f;
-                    
                 }
                 if (direction == Direction::Bottom)
                 {
@@ -82,14 +92,30 @@ public:
                         // fout << "FireBullet collided with another FireBullet." << std::endl;
                         continue;
                     }
-                    // Remove the old animation
-                    fireBullet->removeComponent<Animation>();
 
                     fireBullet->getComponent<BoxCollider2D>().size = sf::Vector2f(48, 48);
                     fireBullet->getComponent<Transform>().size = sf::Vector2f(48, 48);
 
+                    // Remove the old animation
+                    fireBullet->removeComponent<Animation>();
+
+                    // Set the new position
+                    if (direction == Direction::Left)
+                    {
+                        pos.x = blockPos.x - size.x + size.x / 4;
+                    }
+                    else if (direction == Direction::Right)
+                    {
+                        pos.x = blockPos.x + blockSize.x;
+                    }
+
+                    if (block->hasComponent<BlockTag>())
+                    {
+                        world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/fire.wav"));
+                    }
+
                     // Add the new animation
-                    fireBullet->addComponent<Animation>(TextureManager::load("assets/Item/FireBullet/FireBullet_4.png"));
+                    fireBullet->addComponent<Animation>(ItemFactory::getItemTexture("fireworks"));
 
                     // Add the life span component
                     fireBullet->addComponent<LifeSpan>(0.3f);
@@ -99,6 +125,9 @@ public:
                     fireBullet->removeComponent<PatrolComponent>();
 
                     fireBullet->removeComponent<RigidBody>();
+
+                    break;
+
                     // rb.velocity.x = 0.0f;
                     // rb.velocity.y = 0.0f;
 

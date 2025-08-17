@@ -7,11 +7,11 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Rendering/ZIndex.hpp>
 
-#include <Core/TextureManager.hpp>
-#include <Core/Variables.hpp>
+#include <Factories/ItemFactory.hpp>
 
 #include <Gameplay/Item/Components.hpp>
 #include <Gameplay/Enemy/Components.hpp>
+#include <Gameplay/LifeSpan/Components.hpp>
 
 #include <vector>
 
@@ -27,14 +27,9 @@ public:
         addComponent<Transform>(sf::Vector2f(x, y), sf::Vector2f(width, height));
 
         // Set the animation for the fire bullet
-        std::vector<const sf::Texture *> textures =
-            {
-                &TextureManager::load("assets/Item/FireBullet/FireBullet_0.png"),
-                &TextureManager::load("assets/Item/FireBullet/FireBullet_1.png"),
-                &TextureManager::load("assets/Item/FireBullet/FireBullet_2.png"),
-                &TextureManager::load("assets/Item/FireBullet/FireBullet_3.png")};
-        addComponent<Animation>(textures, width, height, 0.15f, true);
-        addComponent<ZIndex>(-1); // Set z-index for rendering order
+        std::vector<const sf::Texture *> textures = ItemFactory::getItemTextures("fireBullet");
+        addComponent<Animation>(textures,(int) width, (int)height, 0.15f, true);
+        addComponent<ZIndex>(1); // Set z-index for rendering order
 
         addComponent<BoxCollider2D>(sf::Vector2f(width, height));
 
@@ -48,6 +43,7 @@ public:
 
         // Add the can kill enemy tag
         addComponent<CanKillEnemyTag>();
+
         ++count;
     }
     ~FireBullet()

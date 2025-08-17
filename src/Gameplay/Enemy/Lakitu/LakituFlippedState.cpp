@@ -9,9 +9,9 @@
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Audio/Components.hpp>
 #include <Engine/Audio/SoundManager.hpp>
-#include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Stomp/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
 
 void LakituFlippedState::onEnter(Entity* entity)
 {
@@ -26,7 +26,7 @@ void LakituFlippedState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Lakitu/lakitu_flipped.png"), 16, 24, 1, 0));
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("lakitu_flipped"), 16, 24, 1, 0.0f);
 
     entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/kickkill.wav"));
 
@@ -41,6 +41,9 @@ void LakituFlippedState::onEnter(Entity* entity)
 
     entity->removeComponent<StompableTag>();
     entity->removeComponent<DamageOnContactComponent>();
+
+    // Add score tag to notify the score system
+    entity->addComponent<ShouldUpdateScore>(800);
 }
 
 std::shared_ptr<EnemyState> LakituFlippedState::getNewState(Entity* entity, float dt)

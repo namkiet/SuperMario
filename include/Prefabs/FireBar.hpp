@@ -1,11 +1,13 @@
 #pragma once
+
 #include <ECS/Entity.hpp>
+
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>
 
-#include <Core/TextureManager.hpp>
+#include <Factories/ItemFactory.hpp>
 
 #include <Gameplay/Obstacles/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
@@ -23,13 +25,13 @@ public:
 
         if (index == 1)
         {
-            addComponent<Animation>(TextureManager::load("assets/Item/FireBar/smallFireBar.png"));
+            addComponent<Animation>(ItemFactory::getItemTexture("smallFireBar"));
             width = 24;
             height = 144;
         }
         else if (index == 2)
         {
-            addComponent<Animation>(TextureManager::load("assets/Item/FireBar/largeFireBar.png"));
+            addComponent<Animation>(ItemFactory::getItemTexture("largeFireBar"));
             width = 24;
             height = 288;
         }

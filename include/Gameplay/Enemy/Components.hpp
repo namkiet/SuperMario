@@ -23,6 +23,3 @@ struct TowardPlayer : public Component
 
 struct CanKillEnemyTag : public Component {};
 struct NotOnPatrolYet : public Component {};
-
-// Just for score purpose
-struct ScoreAddedTag : public Component {};

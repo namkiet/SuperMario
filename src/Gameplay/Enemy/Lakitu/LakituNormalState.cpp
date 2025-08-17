@@ -4,7 +4,6 @@
 #include <Gameplay/Enemy/Lakitu/LakituNormalState.hpp>
 #include <Gameplay/Enemy/Lakitu/LakituFlippedState.hpp>
 #include <Engine/Animation/Animation.hpp>
-#include <Core/TextureManager.hpp>
 
 void LakituNormalState::onEnter(Entity* entity)
 {

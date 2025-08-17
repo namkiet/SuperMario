@@ -11,7 +11,7 @@
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
-#include <Core/TextureManager.hpp>
+#include <Engine/Physics/BlockTag.hpp>
 #include <Core/Variables.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 
@@ -30,7 +30,7 @@ void KoopaReviveState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Koopa/koopa_revive.png"), 16, 16, 2, stateDuration / 2 / 9));
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("koopa_revive"), 16, 16, 2, stateDuration / 2 / 9);
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();
@@ -59,6 +59,7 @@ std::shared_ptr<EnemyState> KoopaReviveState::getNewState(Entity* entity, float 
 
     if (entity->hasComponent<ChangeToKoopaNormalTag>())
     {
+        entity->removeComponent<BlockTag>();
         entity->removeComponent<KoopaReviveTag>();
         entity->removeComponent<ChangeToKoopaNormalTag>();
         return std::make_shared<KoopaNormalState>();
@@ -80,6 +81,7 @@ std::shared_ptr<EnemyState> KoopaReviveState::getNewState(Entity* entity, float 
 
     if (entity->hasComponent<ChangeToKoopaFlippedTag>())
     {
+        entity->removeComponent<BlockTag>();
         entity->removeComponent<KoopaReviveTag>();
         entity->removeComponent<ChangeToKoopaFlippedTag>();
         return std::make_shared<KoopaFlippedState>();

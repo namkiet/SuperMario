@@ -1,0 +1,114 @@
+{
+    "Mario" : {
+        "animations": [
+            {"key": "IdlingSmallNormal", "path": "assets/Mario/Small/idling.png", "frameWidth": 16, "frameHeight": 16, "frameCount": 1, "frameTime": 0.1, "loop": true},
+            {"key": "IdlingSmallInvincible", "path": "assets/Mario/Small/idling_invincible.png", "frameWidth": 16, "frameHeight": 16, "frameCount": 4, "frameTime": 0.1, "loop": true},
+            {"key": "IdlingBigNormal", "path": "assets/Mario/Big/idling.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 1, "frameTime": 0.1, "loop": true},
+            {"key": "IdlingBigInvincible", "path": "assets/Mario/Big/idling_invincible.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 4, "frameTime": 0.1, "loop": true},
+            {"key": "IdlingFireNormal", "path": "assets/Mario/Fire/idling.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 1, "frameTime": 0.1, "loop": true},
+            {"key": "IdlingDeadNormal", "path": "assets/Mario/Small/dead.png", "frameWidth": 16, "frameHeight": 16, "frameCount": 1, "frameTime": 0.1, "loop": true},
+            {"key": "IdlingShrinkingNormal", "path": "assets/Mario/Big/shrinking.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 10, "frameTime": 0.1, "loop": false},
+            {"key": "IdlingGrowingUpNormal", "path": "assets/Mario/Small/grow_up.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 7, "frameTime": 0.1, "loop": false},
+            {"key": "IdlingGrowingUpInvincible", "path": "assets/Mario/Small/grow_up_invincible.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 7, "frameTime": 0.1, "loop": false},
+
+            {"key": "JumpingSmallNormal", "path": "assets/Mario/Small/jumping.png", "frameWidth": 16, "frameHeight": 16, "frameCount": 1, "frameTime": 0.1, "loop": true},
+            {"key": "JumpingSmallInvincible", "path": "assets/Mario/Small/jumping_invincible.png", "frameWidth": 16, "frameHeight": 16, "frameCount": 4, "frameTime": 0.1, "loop": true},
+            {"key": "JumpingBigNormal", "path": "assets/Mario/Big/jumping.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 1, "frameTime": 0.1, "loop": true},
+            {"key": "JumpingBigInvincible", "path": "assets/Mario/Big/jumping_invincible.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 4, "frameTime": 0.1, "loop": true},
+            {"key": "JumpingFireNormal", "path": "assets/Mario/Fire/jumping.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 1, "frameTime": 0.1, "loop": true},
+
+            {"key": "RunningSmallNormal", "path": "assets/Mario/Small/running.png", "frameWidth": 16, "frameHeight": 16, "frameCount": 3, "frameTime": 0.15, "loop": true},
+            {"key": "RunningSmallInvincible", "path": "assets/Mario/Small/running_invincible.png", "frameWidth": 16, "frameHeight": 16, "frameCount": 12, "frameTime": 0.1, "loop": true},
+            {"key": "RunningBigNormal", "path": "assets/Mario/Big/running.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 3, "frameTime": 0.15, "loop": true},
+            {"key": "RunningBigInvincible", "path": "assets/Mario/Big/running_invincible.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 12, "frameTime": 0.1, "loop": true},
+            {"key": "RunningFireNormal", "path": "assets/Mario/Fire/running.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 3, "frameTime": 0.15, "loop": true},
+
+            {"key": "ClimbingSmallNormal", "path": "assets/Mario/Small/climbing.png", "frameWidth": 16, "frameHeight": 16, "frameCount": 2, "frameTime": 0.2, "loop": true},
+            {"key": "ClimbingSmallInvincible", "path": "assets/Mario/Small/climbing_invincible.png", "frameWidth": 16, "frameHeight": 16, "frameCount": 4, "frameTime": 0.2, "loop": true},
+            {"key": "ClimbingBigNormal", "path": "assets/Mario/Big/climbing.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 2, "frameTime": 0.2, "loop": true},
+            {"key": "ClimbingBigInvincible", "path": "assets/Mario/Big/climbing_invincible.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 4, "frameTime": 0.2, "loop": true},
+            {"key": "ClimbingFireNormal", "path": "assets/Mario/Fire/climbing.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 2, "frameTime": 0.2, "loop": true},
+
+            {"key": "CrouchingBigNormal", "path": "assets/Mario/Big/crouching.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 1, "frameTime": 0.1, "loop": true},
+            {"key": "CrouchingBigInvincible", "path": "assets/Mario/Big/crouching_invincible.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 4, "frameTime": 0.2, "loop": true},
+            {"key": "CrouchingFireNormal", "path": "assets/Mario/Fire/crouching.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 1, "frameTime": 0.1, "loop": true},
+
+            {"key": "ShootingFireNormal", "path": "assets/Mario/Fire/shooting.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 1, "frameTime": 0.1, "loop": true}
+        ],
+
+        "aliases": {
+            "IdlingFireInvincible": "IdlingBigInvincible",
+            "JumpingFireInvincible": "JumpingBigInvincible",
+            "JumpingDeadNormal": "IdlingDeadNormal",
+            "JumpingShrinkingNormal": "IdlingShrinkingNormal",
+            "JumpingGrowingUpNormal": "IdlingGrowingUpNormal",
+            "JumpingGrowingUpInvincible": "IdlingGrowingUpInvincible",
+            "RunningFireInvincible": "RunningBigInvincible",
+            "RunningDeadNormal": "IdlingDeadNormal",
+            "RunningShrinkingNormal": "IdlingShrinkingNormal",
+            "RunningGrowingUpNormal": "IdlingGrowingUpNormal",
+            "RunningGrowingUpInvincible": "IdlingGrowingUpInvincible",
+            "ClimbingFireInvincible": "ClimbingBigInvincible",
+            "CrouchingFireInvincible": "CrouchingBigInvincible",
+            "CrouchingDeadNormal": "IdlingDeadNormal",
+            "CrouchingShrinkingNormal": "IdlingShrinkingNormal",
+            "ShootingFireInvincible": "ShootingFireNormal"
+        }
+    },
+    "Luigi": {
+        "animations": [
+            {"key": "IdlingSmallNormal", "path": "assets/Luigi/Small/idling.png", "frameWidth": 16, "frameHeight": 16, "frameCount": 1, "frameTime": 0.1, "loop": true},
+            {"key": "IdlingSmallInvincible", "path": "assets/Luigi/Small/idling_invincible.png", "frameWidth": 16, "frameHeight": 16, "frameCount": 4, "frameTime": 0.1, "loop": true},
+            {"key": "IdlingBigNormal", "path": "assets/Luigi/Big/idling.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 1, "frameTime": 0.1, "loop": true},
+            {"key": "IdlingBigInvincible", "path": "assets/Luigi/Big/idling_invincible.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 4, "frameTime": 0.1, "loop": true},
+            {"key": "IdlingFireNormal", "path": "assets/Luigi/Fire/idling.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 1, "frameTime": 0.1, "loop": true},
+            {"key": "IdlingDeadNormal", "path": "assets/Luigi/Small/dead.png", "frameWidth": 16, "frameHeight": 16, "frameCount": 1, "frameTime": 0.1, "loop": true},
+            {"key": "IdlingShrinkingNormal", "path": "assets/Luigi/Big/shrinking.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 10, "frameTime": 0.1, "loop": false},
+            {"key": "IdlingGrowingUpNormal", "path": "assets/Luigi/Small/grow_up.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 7, "frameTime": 0.1, "loop": false},
+            {"key": "IdlingGrowingUpInvincible", "path": "assets/Luigi/Small/grow_up_invincible.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 7, "frameTime": 0.1, "loop": false},
+
+            {"key": "JumpingSmallNormal", "path": "assets/Luigi/Small/jumping.png", "frameWidth": 16, "frameHeight": 16, "frameCount": 1, "frameTime": 0.1, "loop": true},
+            {"key": "JumpingSmallInvincible", "path": "assets/Luigi/Small/jumping_invincible.png", "frameWidth": 16, "frameHeight": 16, "frameCount": 4, "frameTime": 0.1, "loop": true},
+            {"key": "JumpingBigNormal", "path": "assets/Luigi/Big/jumping.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 1, "frameTime": 0.1, "loop": true},
+            {"key": "JumpingBigInvincible", "path": "assets/Luigi/Big/jumping_invincible.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 4, "frameTime": 0.1, "loop": true},
+            {"key": "JumpingFireNormal", "path": "assets/Luigi/Fire/jumping.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 1, "frameTime": 0.1, "loop": true},
+
+            {"key": "RunningSmallNormal", "path": "assets/Luigi/Small/running.png", "frameWidth": 16, "frameHeight": 16, "frameCount": 3, "frameTime": 0.15, "loop": true},
+            {"key": "RunningSmallInvincible", "path": "assets/Luigi/Small/running_invincible.png", "frameWidth": 16, "frameHeight": 16, "frameCount": 12, "frameTime": 0.1, "loop": true},
+            {"key": "RunningBigNormal", "path": "assets/Luigi/Big/running.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 3, "frameTime": 0.15, "loop": true},
+            {"key": "RunningBigInvincible", "path": "assets/Luigi/Big/running_invincible.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 12, "frameTime": 0.1, "loop": true},
+            {"key": "RunningFireNormal", "path": "assets/Luigi/Fire/running.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 3, "frameTime": 0.15, "loop": true},
+
+            {"key": "ClimbingSmallNormal", "path": "assets/Luigi/Small/climbing.png", "frameWidth": 16, "frameHeight": 16, "frameCount": 2, "frameTime": 0.2, "loop": true},
+            {"key": "ClimbingSmallInvincible", "path": "assets/Luigi/Small/climbing_invincible.png", "frameWidth": 16, "frameHeight": 16, "frameCount": 4, "frameTime": 0.2, "loop": true},
+            {"key": "ClimbingBigNormal", "path": "assets/Luigi/Big/climbing.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 2, "frameTime": 0.2, "loop": true},
+            {"key": "ClimbingBigInvincible", "path": "assets/Luigi/Big/climbing_invincible.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 4, "frameTime": 0.2, "loop": true},
+            {"key": "ClimbingFireNormal", "path": "assets/Luigi/Fire/climbing.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 2, "frameTime": 0.2, "loop": true},
+
+            {"key": "CrouchingBigNormal", "path": "assets/Luigi/Big/crouching.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 1, "frameTime": 0.1, "loop": true},
+            {"key": "CrouchingBigInvincible", "path": "assets/Luigi/Big/crouching_invincible.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 4, "frameTime": 0.2, "loop": true},
+            {"key": "CrouchingFireNormal", "path": "assets/Luigi/Fire/crouching.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 1, "frameTime": 0.1, "loop": true},
+
+            {"key": "ShootingFireNormal", "path": "assets/Luigi/Fire/shooting.png", "frameWidth": 16, "frameHeight": 32, "frameCount": 1, "frameTime": 0.1, "loop": true}
+        ],
+
+        "aliases": {
+            "IdlingFireInvincible": "IdlingBigInvincible",
+            "JumpingFireInvincible": "JumpingBigInvincible",
+            "JumpingDeadNormal": "IdlingDeadNormal",
+            "JumpingShrinkingNormal": "IdlingShrinkingNormal",
+            "JumpingGrowingUpNormal": "IdlingGrowingUpNormal",
+            "JumpingGrowingUpInvincible": "IdlingGrowingUpInvincible",
+            "RunningFireInvincible": "RunningBigInvincible",
+            "RunningDeadNormal": "IdlingDeadNormal",
+            "RunningShrinkingNormal": "IdlingShrinkingNormal",
+            "RunningGrowingUpNormal": "IdlingGrowingUpNormal",
+            "RunningGrowingUpInvincible": "IdlingGrowingUpInvincible",
+            "ClimbingFireInvincible": "ClimbingBigInvincible",
+            "CrouchingFireInvincible": "CrouchingBigInvincible",
+            "CrouchingDeadNormal": "IdlingDeadNormal",
+            "CrouchingShrinkingNormal": "IdlingShrinkingNormal",
+            "ShootingFireInvincible": "ShootingFireNormal"
+        }
+    }
+}

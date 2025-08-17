@@ -1,5 +1,6 @@
 #include <Gameplay/HitBlock/HitSpecialBlockSystem.hpp>
 #include <Prefabs/Coin.hpp>
+#include <Factories/BlockFactory.hpp>
 
 void HitSpecialBlockSystem::CoinBlockUpdate(World &world, float dt, Entity *block)
 {
@@ -18,7 +19,8 @@ void HitSpecialBlockSystem::CoinBlockUpdate(World &world, float dt, Entity *bloc
         block->removeComponent<CoinBlock>();
         block->removeComponent<CoinBlockComponent>();
         block->removeComponent<Animation>();
-        block->addComponent<Animation>(TextureManager::load("assets/Tile/Tile1/Tile1_27.png"));
+       
+        block->addComponent<Animation>(BlockFactory::getBlockTexture(27));
     }
 }
 
@@ -39,6 +41,8 @@ void HitSpecialBlockSystem::HitCoinBlock(World &world, float dt, Entity *block)
 
     if (coinBlockComponent.hitCount > 0)
     {
+        world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/coin.wav"));
+
         auto coin = world.createEntity<Coin1>(pos.x, pos.y - sz.y - sz.y / 4, 48.0f, 48.0f);
 
         coinBlockComponent.timer = 0.0f;

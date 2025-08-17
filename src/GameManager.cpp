@@ -8,13 +8,13 @@
 #include <Engine/Physics/GravitySystem.hpp>
 #include <Engine/Physics/MovementSystem.hpp>
 #include <Engine/Physics/RotateBoxCollider2D.hpp>
-#include <Engine/Physics/OBBCollisionSystem.hpp>
 
 #include <Engine/Animation/AnimationSystem.hpp>
 #include <Engine/Animation/BlinkSystem.hpp>
 #include <Engine/Rendering/RenderSystem.hpp>
 #include <Engine/Rendering/DrawBoxColliderSystem.hpp>
 #include <Engine/Rendering/DrawGameComponentSystem.hpp>
+#include <Engine/Rendering/DrawTextSystem.hpp>
 
 #include <Engine/Audio/SoundSystem.hpp>
 
@@ -58,6 +58,9 @@
 #include <Gameplay/Enemy/Lakitu/Lakitu.hpp>
 #include <Gameplay/Enemy/Bowser/Bowser.hpp>
 #include <Gameplay/Enemy/EnemyScoreSystem.hpp>
+
+#include <ScoreManager.hpp>
+#include <TimeManager.hpp>
 
 #include <Gameplay/GameProperties/PlayTimeSystem.hpp>
 #include <Gameplay/GameProperties/TextPoppingSystem.hpp>
@@ -109,7 +112,6 @@ GameManager::GameManager(int level) : levelHandler(world, level), currentLevel(l
 
     world.addSystem<RotateBoxCollider2D>();
     world.addSystem<CollisionDetectionSystem>();
-    // world.addSystem<OBBCollisionSystem>();
     world.addSystem<HitBlockSystem>();
 
     world.addSystem<PlayerStateSystem>();
@@ -142,7 +144,6 @@ GameManager::GameManager(int level) : levelHandler(world, level), currentLevel(l
     world.addSystem<FireBarSystem>();
     world.addSystem<PodobooSystem>();
 
-    // world.addSystem<FlagPoleCollisionSystem>();
     world.addSystem<LevelCompletionSystem>();
 
     world.addSystem<TextPoppingSystem>();
@@ -157,6 +158,7 @@ GameManager::GameManager(int level) : levelHandler(world, level), currentLevel(l
     world.addSystem<BlinkSystem>();
     world.addSystem<RenderSystem>();
     world.addSystem<DrawBoxColliderSystem>();
+    world.addSystem<DrawTextSystem>();
     world.addSystem<DrawGameComponentSystem>();
 
     world.addSystem<DespawnSystem>();
@@ -181,23 +183,16 @@ void GameManager::handleEvent(const sf::Event& event, sf::RenderWindow& window)
             world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(3.0f);
         }
 
-        if (event.key.code == sf::Keyboard::X)
+        if (event.key.code == sf::Keyboard::F)
         {
-            // std::cout << "HELLO\n";
-            auto lakitu = world.createEntity<Lakitu>(20 * 16, 3 * 16, 3);
-        }
+            // do nothing
 
-        if (event.key.code == sf::Keyboard::B)
-        {
-            // std::cout << "HELLO\n";
-            auto bowser = world.createEntity<Bowser>(10 * 16, 3 * 16, 3);
-        }
 
-        if (event.key.code == sf::Keyboard::T)
-        {
-            auto koopa = world.createEntity<Koopa>(7 * 16, 2 * 16, 3);
+            auto mario = world.findFirst<PlayerTag>();
+            mario->addComponent<GrowUpTag>();
+            mario->addComponent<FireMarioTag>();
         }
-
+        
         if (event.key.code == sf::Keyboard::P)
         {
             oneFrame = !oneFrame;
@@ -255,6 +250,12 @@ void GameManager::draw(sf::RenderWindow &window, int level)
     // Drawn with custom view
     world.getSystem<DrawBoxColliderSystem>()->draw(world, window);
 
+    if (level == 0)
+        return;
+
+    // Drawn with custiom view
+    world.getSystem<DrawTextSystem>()->draw(world, window);
+
     // Set the default view
     world.getSystem<DrawGameComponentSystem>()->draw(world, window);
 
@@ -263,4 +264,21 @@ void GameManager::draw(sf::RenderWindow &window, int level)
         editor->drawUI();
         editor->display(window);
     }
+}
+
+int GameManager::lives = 5;
+
+int GameManager::getLives()
+{
+    return lives;
+}
+
+GameManager::~GameManager()
+{
+    --lives;
+}
+
+void GameManager::setLives(int newLives)
+{
+    lives = newLives;
 }

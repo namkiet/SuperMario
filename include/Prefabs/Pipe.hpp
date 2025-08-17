@@ -1,7 +1,7 @@
 #pragma once
+
 #include <ECS/Entity.hpp>
 
-#include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 
 #include <Engine/Core/Transform.hpp>
@@ -9,40 +9,40 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 
+#include <Factories/PipeFactory.hpp>
+
 #include <Gameplay/Pipe/Components.hpp>
 #include <Gameplay/Tele/Components.hpp>
 
 class Pipe : public Entity
 {
 public:
-    Pipe(float x, float y, float width, float height, int scale, int index, bool allowTeleport, int spriteIndex)
+    Pipe(float x, float y, float width, float height, float scale, int index, bool allowTeleport)
     {
         // Set the size of the collision box for the pipe
-        addComponent<BoxCollider2D>(sf::Vector2f(width * scale, height * scale));
+        addComponent<BoxCollider2D>(sf::Vector2f(width, height) * scale);
         getComponent<BoxCollider2D>().offset = sf::Vector2f(2 * scale, 0);
         getComponent<BoxCollider2D>().size = sf::Vector2f((width - 4) * scale, height * scale);
         // Set the transform for the pipe
-        addComponent<Transform>(sf::Vector2f(x * scale, y * scale), sf::Vector2f(width * scale, height * scale));
+        addComponent<Transform>(sf::Vector2f(x, y) * scale, sf::Vector2f(width, height) * scale);
 
         // Add the pipe tag
         addComponent<BlockTag>();
 
         addComponent<PipeTag>();
-        // Set the texture for the player
-        std::string tileFolder = "assets/Pipe/";
-        if (index == 0)
-        {
-            addComponent<Animation>(TextureManager::load(tileFolder + "Pipe" + std::to_string(spriteIndex) + "_0.png"));
-        }
 
-        else if (index == 1)
+        // Set the texture for the pipe
+        switch (index)
         {
-            addComponent<Animation>(TextureManager::load(tileFolder + "Pipe" + std::to_string(spriteIndex) + "_1.png"));
-        }
-
-        else if (index == 2)
-        {
-            addComponent<Animation>(TextureManager::load(tileFolder + "Pipe" + std::to_string(spriteIndex) + "_2.png"));
+        case 0:
+            addComponent<Animation>(PipeFactory::getPipeTexture("pipe1"));
+            break;
+        case 1:
+            addComponent<Animation>(PipeFactory::getPipeTexture("pipe2"));
+            break;
+        case 2:
+            addComponent<Animation>(PipeFactory::getPipeTexture("pipe3"));
+            break;
         }
 
         if (allowTeleport)

@@ -27,7 +27,10 @@ public:
             auto &patrolComponent = star->getComponent<PatrolComponent>();
             for (const auto &[block, direction, overlap] : collider.collisions)
             {
-                auto &blockPos = block->getComponent<Transform>().position;
+                if (!block->hasComponent<Transform>())
+                    continue;
+                
+                    auto &blockPos = block->getComponent<Transform>().position;
                 if (direction == Direction::Top)
                 {
                     pos.y = blockPos.y - size.y * 2;

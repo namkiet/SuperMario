@@ -5,13 +5,19 @@
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/SpatialHashGrid.hpp>
+#include <Gameplay/Player/Components.hpp>
+#include <World.hpp>
 #include <Engine/Core/RigidBody.hpp>
 
 class CollisionDetectionSystem : public System
 {
 private:
-    SpatialHashGrid& grid = SpatialHashGrid::getInstance();
+    SpatialHashGrid &grid = SpatialHashGrid::getInstance();
     const float MAX_DISTANCE = 2000.0f;
+    bool obbIntersect(const sf::Vector2f *a, const sf::Vector2f *b);
+
+    sf::FloatRect getOBBBounds(const sf::Vector2f *corners);
+    sf::FloatRect getAABBBounds(const sf::Vector2f &position, const sf::Vector2f &size, const sf::Vector2f &offset);
 
 public:
     void update(World &world, float dt) override
@@ -36,25 +42,29 @@ public:
         //     );
         // }
 
-
         // Insert entities into spatial grid
         for (Entity *e : entities)
         {
             auto &col = e->getComponent<BoxCollider2D>();
-            if (col.rotation != 0.0f)
-                continue;
-
             auto &tf = e->getComponent<Transform>();
-            sf::FloatRect bounds(tf.position + col.offset, col.size);
+            sf::FloatRect bounds;
+            if (col.rotation == 0.0f)
+                bounds = getAABBBounds(tf.position, col.size, col.offset);
+            else
+                bounds = getOBBBounds(col.corners);
             grid.insert(e, bounds);
             col.collisions.clear();
         }
 
         for (Entity *e : entities)
         {
-            auto &tf = e->getComponent<Transform>();
-            auto &col = e->getComponent<BoxCollider2D>();
-            sf::FloatRect bounds(tf.position + col.offset, col.size);
+            auto &tfA = e->getComponent<Transform>();
+            auto &colA = e->getComponent<BoxCollider2D>();
+            sf::FloatRect bounds;
+            if (colA.rotation == 0.0f)
+                bounds = getAABBBounds(tfA.position, colA.size, colA.offset);
+            else
+                bounds = getOBBBounds(colA.corners);
 
             auto nearby = grid.query(bounds);
             for (Entity *other : nearby)
@@ -62,21 +72,54 @@ public:
                 if (e == other)
                     continue;
 
-                if (!e->hasComponent<RigidBody>() && !other->hasComponent<RigidBody>()) continue;
+                if (!e->hasComponent<RigidBody>() && !other->hasComponent<RigidBody>())
+                    continue;
 
-                CollisionInfo info;
-                if (e->hasComponent<RigidBody>() && other->hasComponent<RigidBody>())
-                {
-                    info = Physics::GetCollisionInfoMoving(e, other);
-                }
-                else
-                {
-                    info = Physics::GetCollisionInfoStatic(e, other);
-                }
+                auto &colB = other->getComponent<BoxCollider2D>();
+                auto &tfB = other->getComponent<Transform>();
 
-                if (info.collider)
+                if (colA.rotation == 0.0f && colB.rotation == 0.0f) // AABB(A) vs AABB(B)
                 {
-                    col.collisions.emplace_back(info);
+                    CollisionInfo info;
+                    if (e->hasComponent<RigidBody>() && other->hasComponent<RigidBody>())
+                    {
+                        info = Physics::GetCollisionInfoMoving(e, other);
+                    }
+                    else
+                    {
+                        info = Physics::GetCollisionInfoStatic(e, other);
+                    }
+
+                    if (info.collider)
+                    {
+                        colA.collisions.emplace_back(info);
+                    }
+                }
+                else if (colA.rotation != 0.0f && colB.rotation == 0.0f) // OBB (A) vs AABB (B)
+                {
+                    sf::Vector2f aabbCorners[4];
+                    aabbCorners[0] = tfB.position + colB.offset;
+                    aabbCorners[1] = tfB.position + colB.offset + sf::Vector2f(colB.size.x, 0);
+                    aabbCorners[2] = tfB.position + colB.offset + colB.size;
+                    aabbCorners[3] = tfB.position + colB.offset + sf::Vector2f(0, colB.size.y);
+
+                    if (obbIntersect(colA.corners, aabbCorners))
+                    {
+                        colA.collisions.emplace_back(CollisionInfo(other, Direction::Left));
+                    }
+                }
+                else if (colA.rotation == 0.0f && colB.rotation != 0.0f) // AABB (A) vs OBB (B)
+                {
+                    sf::Vector2f aabbCorners[4];
+                    aabbCorners[0] = tfA.position + colA.offset;
+                    aabbCorners[1] = tfA.position + colA.offset + sf::Vector2f(colA.size.x, 0);
+                    aabbCorners[2] = tfA.position + colA.offset + colA.size;
+                    aabbCorners[3] = tfA.position + colA.offset + sf::Vector2f(0, colA.size.y);
+
+                    if (obbIntersect(aabbCorners, colB.corners))
+                    {
+                        colA.collisions.emplace_back(CollisionInfo(other, Direction::Left));
+                    }
                 }
             }
         }

@@ -1,16 +1,17 @@
 #pragma once
+
 #include <ECS/Entity.hpp>
+
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>
 
-#include <Core/TextureManager.hpp>
+#include <Factories/EnemyFactory.hpp>
 
 #include <Gameplay/Obstacles/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 
-#include <iostream>
 class Podoboo : public Entity
 {
 public:
@@ -31,12 +32,12 @@ public:
         // Set the animation for the Podoboo
         if (upright)
         {
-            addComponent<Animation>(TextureManager::load("assets/Enemy/Podoboo/Podoboo1.png"));
+            addComponent<Animation>(EnemyFactory::getEnemyTexture("podoboo_rise"));
             addComponent<RigidBody>(sf::Vector2f(0.f, -400.f), false);
         }
         else
         {
-            addComponent<Animation>(TextureManager::load("assets/Enemy/Podoboo/Podoboo2.png"));
+            addComponent<Animation>(EnemyFactory::getEnemyTexture("podoboo_fall"));
             addComponent<RigidBody>(sf::Vector2f(0.f, 400.f), false);
         }
     }

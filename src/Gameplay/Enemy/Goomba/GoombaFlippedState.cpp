@@ -8,13 +8,13 @@
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Audio/Components.hpp>
 #include <Engine/Audio/SoundManager.hpp>
-#include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Stomp/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
 
-void GoombaFlippedState::onEnter(Entity* entity)
+void GoombaFlippedState::onEnter(Entity *entity)
 {
-    // if (entity->hasComponent<Animation>()) 
+    // if (entity->hasComponent<Animation>())
     // {
     //     auto& anim = entity->getComponent<Animation>();
     //     anim.sprite = sf::Sprite(TextureManager::load("assets/Enemy/Goomba/goomba_flipped.png"));
@@ -25,19 +25,22 @@ void GoombaFlippedState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Goomba/goomba_flipped.png"), 16, 16, 2, 0.25f));
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("goomba_flipped"), 16, 16, 2, 0.25f);
 
     entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/kickkill.wav"));
-    
+
     entity->getComponent<RigidBody>().velocity.y = -600;
     entity->getComponent<GoombaPatrol>().velocity = sf::Vector2f(0, 0);
 
     entity->removeComponent<CanHitBlockTag>();
     entity->removeComponent<StompableTag>();
     entity->removeComponent<DamageOnContactComponent>();
+
+    // Add score tag to notify the score system
+    entity->addComponent<ShouldUpdateScore>(100);
 }
 
-std::shared_ptr<EnemyState> GoombaFlippedState::getNewState(Entity* entity, float dt)
+std::shared_ptr<EnemyState> GoombaFlippedState::getNewState(Entity *entity, float dt)
 {
     return nullptr;
 }

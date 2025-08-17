@@ -28,7 +28,7 @@ void BowserJumpState::onEnter(Entity* entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Bowser/bowser_jump.png"), 32, 35, 1, 0));
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("bowser_jump"), 32, 35, 1, 0.0f);
 
     auto& tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();

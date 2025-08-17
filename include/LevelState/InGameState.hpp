@@ -1,0 +1,19 @@
+#include <LevelState/LevelState.hpp>
+#include <ScoreManager.hpp>
+#include <LevelManager.hpp>
+#include <CoinManager.hpp>
+#include <TimeManager.hpp>
+class InGameState : public LevelState
+{
+private:
+    ScoreUI *scoreUI = nullptr;
+    LevelUI *levelUI = nullptr;
+    CoinUI *coinUI = nullptr;
+    TimeUI *timeUI = nullptr;
+public:
+    InGameState();
+    void update(GameManager *gameManager, float dt) override;
+    std::shared_ptr<LevelState> getNewState(GameManager *gameManager) override;
+    void render(GameManager *gameManager, sf::RenderWindow &window, int level) override;
+    bool shouldReturnToMenu() const override;
+};

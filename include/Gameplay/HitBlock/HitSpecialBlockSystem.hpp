@@ -1,20 +1,30 @@
 #pragma once
+
+#include <cmath>
+
+#include <CoinManager.hpp>
+
 #include <ECS/System.hpp>
 #include <Framework/World.hpp>
+
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Core/Transform.hpp>
-#include <Engine/Core/DespawnTag.hpp>
-#include <Core/TextureManager.hpp>
+#include <Engine/Audio/Components.hpp>
+#include <Engine/Audio/SoundManager.hpp>
+#include <Factories/BlockFactory.hpp>
+#include <Factories/ItemFactory.hpp>
+
 #include <Gameplay/Block/BounceBlock.hpp>
 #include <Gameplay/Block/Components.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/LifeSpan/Components.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
-#include <cmath>
+
+#include <World.hpp>
 
 class HitSpecialBlockSystem : public System
 {
@@ -26,6 +36,7 @@ private:
     void HitStarBlock(World &world, float dt, Entity *block);
     void CoinBlockUpdate(World &world, float dt, Entity *block);
     void HitMushroomBlock(World &world, float dt, Entity *block);
+    void HitLevelBlock(World &world, float dt, Entity *block);
 
     static sf::FloatRect getColliderBounds(Entity *entity)
     {
@@ -59,7 +70,8 @@ public:
                     continue; // at least half of the size of the player must hit the block (to avoid hitting 2 blocks at the same time)
                 if (!block->hasComponent<NormalBlock>() && !block->hasComponent<QuestionBlockTag>() &&
                     !block->hasComponent<CoinBlock>() && !block->hasComponent<StarBlock>() &&
-                    !block->hasComponent<LevelUpBlock>() && !block->hasComponent<MushroomBlock>())
+                    !block->hasComponent<LevelUpBlock>() && !block->hasComponent<MushroomBlock>() &&
+                    !block->hasComponent<LevelBlock>())
                     continue;
 
                 // Normal Block
@@ -86,7 +98,9 @@ public:
                             block->removeComponent<Animation>();
                     }
                     if (!block->hasComponent<NormalBlock>() && !block->hasComponent<CoinBlock>())
-                        block->addComponent<Animation>(TextureManager::load("assets/Tile/Tile1/Tile1_27.png"));
+                    {
+                        block->addComponent<Animation>(BlockFactory::getBlockTexture(27));
+                    }
 
                     if (block->hasComponent<LevelUpBlock>())
                     {
@@ -115,11 +129,7 @@ public:
                         // Update
                         HitCoinBlock(world, dt, block);
 
-                        if (player->hasComponent<CoinComponent>())
-                        {
-                            auto &coinComp = player->getComponent<CoinComponent>();
-                            ++coinComp.coins; // Increment coins
-                        }
+                        CoinManager::instance().addCoin();
                     }
                     else if (block->hasComponent<StarBlock>())
                     {
@@ -136,6 +146,14 @@ public:
 
                         // Update
                         HitMushroomBlock(world, dt, block);
+                    }
+                    else if (block->hasComponent<LevelBlock>())
+                    {
+                        // Remove LevelBlock component
+                        block->removeComponent<LevelBlock>();
+
+                        // Update
+                        HitLevelBlock(world, dt, block);
                     }
                     if (block->hasComponent<Transform>() && !block->hasComponent<BounceBlock>())
                     {

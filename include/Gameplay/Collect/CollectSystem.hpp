@@ -3,9 +3,22 @@
 #include <Gameplay/Collect/Components.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
 #include <Gameplay/Item/Components.hpp>
+
+#include <CoinManager.hpp>
+
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/DespawnTag.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Audio/Components.hpp>
+#include <Engine/Audio/SoundManager.hpp>
+
+#include <Gameplay/Collect/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
+#include <Gameplay/Item/Components.hpp>
+
+#include <ScoreManager.hpp>
+
+#include <World.hpp>
 
 class CollectSystem : public System
 {
@@ -19,13 +32,16 @@ class CollectSystem : public System
                 if (!collider->hasComponent<CanCollectTag>())
                     continue;
 
-                if (collider->hasComponent<ScoreComponent>())
+                if (item->hasComponent<LevelMushroomTag>())
+                    continue; // Don't score level mushrooms
+
+                if (!item->hasComponent<Coin2Tag>())
+                    ScoreManager::instance().addScore(1000);
+
+                else
                 {
-                    auto &scoreComponent = collider->getComponent<ScoreComponent>();
-                    if (!item->hasComponent<Coin2Tag>())
-                        scoreComponent.score += 1000; // Increment score by 100 for each collectable item}
-                    else
-                        scoreComponent.score += 200; // Increment score by 2000 for Coin2
+                    ScoreManager::instance().addScore(200);
+                    world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/coin.wav"));
                 }
 
                 if (!item->hasComponent<Coin2Tag>())
@@ -33,13 +49,11 @@ class CollectSystem : public System
                     Entity *scoreTextEntity = world.createEntity();
                     float x = item->getComponent<Transform>().position.x;
                     float y = item->getComponent<Transform>().position.y - item->getComponent<Transform>().size.y / 2;
-                    scoreTextEntity->addComponent<TextComponent>("1000", x, y, y - 48, 15, 1);
+                    scoreTextEntity->addComponent<TextComponent>("1000", x, y, y - 48, 15.0f, 1);
                 }
-                if (collider->hasComponent<CoinComponent>())
-                {
-                    auto &coinComp = collider->getComponent<CoinComponent>();
-                    ++coinComp.coins; // Increment coins
-                }
+
+                CoinManager::instance().addCoin();
+
                 item->addComponent<DespawnTag>();
             }
         }

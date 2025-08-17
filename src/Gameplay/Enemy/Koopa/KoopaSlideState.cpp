@@ -8,10 +8,12 @@
 #include <Gameplay/Enemy/Koopa/KoopaSlideBehaviour.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Physics/BlockTag.hpp>
+#include <Engine/Core/RigidBody.hpp>
 #include <Engine/Core/Transform.hpp>
-#include <Core/TextureManager.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <iostream>
+#include <Gameplay/GameProperties/Components.hpp>
 
 void KoopaSlideState::onEnter(Entity *entity)
 {
@@ -29,7 +31,7 @@ void KoopaSlideState::onEnter(Entity *entity)
     //     anim.currentFrame = 0;
     //     anim.timer = 0;
     // }
-    entity->addComponent<Animation>(Animation(TextureManager::load("assets/Enemy/Koopa/koopa_shell.png"), 16, 16, 1, 0));
+    entity->addComponent<Animation>(EnemyFactory::getEnemyTexture("koopa_shell"), 16, 16, 1, 0.0f);
 
     auto &tag = entity->getComponent<EnemyTag>();
     tag.behaviour.reset();
@@ -44,8 +46,8 @@ void KoopaSlideState::onEnter(Entity *entity)
     std::vector<Direction> directions = {Direction::Left, Direction::Right, Direction::Bottom};
     entity->addComponent<DamageOnContactComponent>(directions);
 
-    // remove the score added tag if it exists
-    entity->removeComponent<ScoreAddedTag>();
+    // Add score tag to notify the score system
+    entity->addComponent<ShouldUpdateScore>(500);
 }
 
 std::shared_ptr<EnemyState> KoopaSlideState::getNewState(Entity *entity, float dt)
@@ -58,6 +60,12 @@ std::shared_ptr<EnemyState> KoopaSlideState::getNewState(Entity *entity, float d
 
     if (entity->hasComponent<ChangeToKoopaNormalTag>())
     {
+        entity->getComponent<RigidBody>().velocity.y = -300;
+        entity->getComponent<RigidBody>().onGround = false;
+
+        entity->getComponent<Transform>().position.y -= 3 * (24 - 16);
+
+        entity->removeComponent<BlockTag>();
         entity->removeComponent<KoopaSlideTag>();
         entity->removeComponent<CanKillEnemyTag>();
         entity->removeComponent<ChangeToKoopaNormalTag>();
@@ -74,6 +82,7 @@ std::shared_ptr<EnemyState> KoopaSlideState::getNewState(Entity *entity, float d
 
     if (entity->hasComponent<ChangeToKoopaFlippedTag>())
     {
+        entity->removeComponent<BlockTag>();
         entity->removeComponent<KoopaSlideTag>();
         entity->removeComponent<CanKillEnemyTag>();
         entity->removeComponent<ChangeToKoopaFlippedTag>();

@@ -11,6 +11,8 @@ void HitSpecialBlockSystem::HitMushroomBlock(World &world, float dt, Entity *blo
     auto &pos = tf.position;
     auto &sz = tf.size;
 
+    world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/item.wav"));
+
     auto mushroom = world.createEntity<Mushroom1>(pos.x, pos.y - 20, 48.0f, 48.0f);
     ItemEmerging emerging;
     emerging.finalY = pos.y - 48;

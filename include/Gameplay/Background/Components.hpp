@@ -1,7 +1,6 @@
 #pragma once
 #include <ECS/Component.hpp>
 #include <Engine/Animation/Animation.hpp>
-#include <algorithm>
 
 struct Castle : public Component
 {
@@ -25,6 +24,8 @@ struct CastleFlag : public Component
 
 struct BellTag : public Component
 {
+    bool firstHit = false;
+    bool secondHit = false;
     // This component can be used to tag entities that represent a bell in the background
 };
 
@@ -39,7 +40,8 @@ struct ElevatorComponent : public Component
 
     ElevatorComponent(float _min, float _max, bool isHorizontal) : isHorizontal(isHorizontal)
     {
-        if (_min >= _max) std::swap(_min, _max);
+        if (_min >= _max)
+            std::swap(_min, _max);
 
         if (isHorizontal)
         {

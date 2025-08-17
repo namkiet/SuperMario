@@ -5,7 +5,6 @@
 #include <Gameplay/Enemy/Goomba/GoombaFlippedState.hpp>
 #include <Gameplay/Enemy/Goomba/GoombaStompedState.hpp>
 #include <Engine/Animation/Animation.hpp>
-#include <Core/TextureManager.hpp>
 
 void GoombaNormalState::onEnter(Entity* entity)
 {

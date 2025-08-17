@@ -15,32 +15,32 @@
 class Background : public Entity
 {
 public:
-    Background(float x, float y, float width, float height, int scale, int index)
+    Background(float x, float y, float width, float height, float scale, int index)
     {
-            // Set the size of the collision box for the background
-        addComponent<BoxCollider2D>(sf::Vector2f(width * scale, height * scale));
+        // Set the size of the collision box for the background
+        addComponent<BoxCollider2D>(sf::Vector2f(width, height) * scale);
 
         // Set the transform for the background
-        addComponent<Transform>(sf::Vector2f(x * scale, y * scale), sf::Vector2f(width * scale, height * scale));
+        addComponent<Transform>(sf::Vector2f(x, y) * scale, sf::Vector2f(width, height) * scale);
 
         if (index == 0)
         {
             // Add the castle tag
             addComponent<Castle>();
 
-            getComponent<BoxCollider2D>().offset = sf::Vector2f(144, 48 * 3);
-            getComponent<BoxCollider2D>().size = sf::Vector2f(48, 96);
+            getComponent<BoxCollider2D>().offset = sf::Vector2f(144.0f, (float)(48 * 3));
+            getComponent<BoxCollider2D>().size = sf::Vector2f(48.0f, 96.0f);
             // Set the texture for the background
             addComponent<Animation>(TextureManager::load("assets/Background/Castle.png"));
             addComponent<ZIndex>(-2);
         }
-       
+
         else if (index == 9)
         {
             // Add the flagpole tag
             addComponent<FlagPoleTag>();
 
-            // addComponent<BoxCollider2D>(sf::Vector2f(width * scale, height * scale));
+            addComponent<BoxCollider2D>(sf::Vector2f(width * scale / 8, height * scale), sf::Vector2f(width * scale * 7 / 16, 0));
 
             // Set the texture for the background
             // addComponent<Animation>(TextureManager::load("assets/Background/FlagPole.png"));

@@ -1,29 +1,29 @@
 #pragma once
+
 #include <ECS/System.hpp>
 #include <Framework/World.hpp>
 #include <Gameplay/Player/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
+
+#include <LevelManager.hpp>
+
 #include <Prefabs/Mario.hpp>
-#include <fstream>
+
+#include <World.hpp>
 
 class PlayerRespawnSystem : public System
 {
 public:
     void update(World &world, float dt) override
     {
-        // std::ofstream fout("output.txt", std::ios::app);
-        // if (fout.fail())
-        // {
-        //     std::cerr << "Failed to open output.txt for writing." << std::endl;
-        //     return;
-        // }
         if (world.findFirst<PlayerTag>())
             return;
-        // world.createEntity<Mario>(200, SIZE::SCREEN.y - 2 * SIZE::GRID.y - 50);
-        auto mario = world.createEntity<Mario>((float)195 * 16, (float)6 * 16, 16.0f, 16.0f, 3, Mario::currentLevel);
+
+        auto mario = world.createEntity<Mario>((float)0 * 16, (float)6 * 16, 16.0f, 16.0f, 3.0f);
         mario->addComponent<GrowUpTag>();
         mario->addComponent<FireMarioTag>();
-        // fout << "Player respawned at position: (3*16, 12*16)" << std::endl;
-        // fout.close();
-        // std::cout << "Player respawned!" << std::endl;
+        
+        LevelManager::instance().setLevel(0);
+        LevelManager::instance().setStatus("intro");
     }
 };

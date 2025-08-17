@@ -17,7 +17,6 @@ class RenderSystem : public System
 private:
     sf::Font font;
     void backgroundRender(sf::RenderWindow &window, int level) const;
-    void textComponentRender(const World &world, sf::RenderWindow &window) const;
 
     static int getZIndex(Entity* entity)
     {
@@ -41,11 +40,10 @@ public:
         {
             auto &cam = world.findFirst<Camera>()->getComponent<Camera>();
             auto size = window.getSize();
-            sf::View view(cam.target, sf::Vector2f(size.x, size.y));
+            sf::View view(sf::Vector2f(std::round(cam.target.x), std::round(cam.target.y)), sf::Vector2f(size.x, size.y));
             window.setView(view);
         }
         backgroundRender(window, level);
-        textComponentRender(world, window);
 
         std::vector<Entity*> entities = world.findAll<Transform, Animation>();
         std::sort(entities.begin(), entities.end(), [](Entity* a, Entity* b) {
@@ -64,9 +62,9 @@ public:
             auto &sp = anim.sprite;
 
             // Resize sprite uniformly to fit target size
-            resizeSprite(sp, tf.size);
+            resizeSprite(sp, sf::Vector2f(std::round(tf.size.x), std::round(tf.size.y)));
 
-            sp.setPosition(tf.position);
+            sp.setPosition(sf::Vector2f(std::round(tf.position.x), std::round(tf.position.y)));
 
             // Flip horizontally if needed
             sf::Vector2f scale = sp.getScale();

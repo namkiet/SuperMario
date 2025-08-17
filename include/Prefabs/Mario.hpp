@@ -27,7 +27,7 @@
 class Mario : public Entity
 {
 public:
-    Mario(float x, float y, float width, float height, int scale, int currentLevel)
+    Mario(float x, float y, float width, float height, float scale)
     {
         addComponent<Animation>(TextureManager::load("assets/Player/SmallPlayer/marioSmall_0.png"));
         addComponent<ZIndex>(-1);
@@ -37,13 +37,13 @@ public:
         // Set the size of the collision box for the player
         addComponent<BoxCollider2D>(sf::Vector2f((width - 4) * scale, height * scale), sf::Vector2f(2 * scale, 0));
 
-        addComponent<PlayerTag>(std::make_shared<PlayerIdlingState>(), std::make_shared<PlayerSmallState>(), std::make_shared<PlayerNormalState>());
+        addComponent<PlayerTag>(std::make_shared<PlayerIdlingState>(), std::make_shared<PlayerSmallState>(), std::make_shared<PlayerNormalState>(), false);
 
         // Set the rigid body for the player
         addComponent<RigidBody>(sf::Vector2f(0, 0));
 
         // Set the transform for the player
-        addComponent<Transform>(sf::Vector2f(x * scale, y * scale), sf::Vector2f(width * scale, height * scale));
+        addComponent<Transform>(sf::Vector2f(x, y) * scale, sf::Vector2f(width, height) * scale);
 
         addComponent<StomperTag>();
 
@@ -57,19 +57,8 @@ public:
 
         addComponent<CanHitBlockTag>();
 
-        addComponent<ScoreComponent>();
-
-        addComponent<TimeComponent>(400);
-
-        addComponent<CoinComponent>();
-
         addComponent<FireCooldown>();
 
         addComponent<CanCaptureFlagTag>();
-
-        this->currentLevel = currentLevel;
     }
-    static int currentLevel;
 };
-
-inline int Mario::currentLevel = 1; // Initialize currentLevel to 1

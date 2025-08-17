@@ -1,10 +1,14 @@
 #pragma once
 #include <Framework/World.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Audio/Components.hpp>
+#include <Engine/Audio/SoundManager.hpp>
+
 #include <Gameplay/Collect/Components.hpp>
 #include <Gameplay/Item/Components.hpp>
 #include <Gameplay/Player/Components.hpp>
 
+#include <World.hpp>
 
 class CollectStarSystem : public System
 {
@@ -17,6 +21,7 @@ class CollectStarSystem : public System
                 // Check if the entity can collect the item
                 if (!item->hasComponent<CollectableTag>()) continue;
                 if (!item->hasComponent<StarTag>()) continue;
+                world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/powerup_collect.wav"));
 
                 player->addComponent<InvincibleTag>(10.0f);
             }

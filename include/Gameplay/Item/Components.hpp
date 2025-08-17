@@ -39,7 +39,11 @@ struct MushroomTag : public Component
     enum Buff
     {
         GIVE_ONE_MORE_LIFE,
-        GROW_UP
+        GROW_UP,
+        GET_TO_LEVEL_1,
+        GET_TO_LEVEL_2,
+        GET_TO_LEVEL_3,
+        GET_TO_LEVEL_4
     };
     
     Buff buff;
@@ -69,4 +73,9 @@ struct FireworkComponent : public Component
 {
     FireworkComponent(int n = 0) : fireworksLeft(n) {}
     int fireworksLeft; // Number of fireworks left to display
+};
+
+struct LevelMushroomTag : public Component
+{
+    // This tag is used to identify the mushroom level item
 };

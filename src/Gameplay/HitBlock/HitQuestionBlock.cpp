@@ -23,13 +23,15 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
 
         if (player->hasComponent<BigMarioTag>())
         {
-            auto flower = world.createEntity<Flower>(pos.x, pos.y - sz.y, 48.0f, 48.0f);
+            world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/item.wav"));
+            auto flower = world.createEntity<Flower>(pos.x, pos.y - 20, 48.0f, 48.0f);
             ItemEmerging emerging;
             emerging.finalY = pos.y - 48;
             flower->addComponent<ItemEmerging>(emerging);
         }
         else
         {
+            world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/item.wav"));
             auto mushroom = world.createEntity<Mushroom1>(pos.x, pos.y - 20, 48.0f, 48.0f);
             ItemEmerging emerging;
             emerging.finalY = pos.y - 48;
@@ -41,6 +43,7 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
         // Remove MushroomQuestionBlock component
         block->removeComponent<MushroomQuestionBlock>();
 
+        world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/item.wav"));
         auto mushroom = world.createEntity<Mushroom1>(pos.x, pos.y - 20, 48.0f, 48.0f);
         ItemEmerging emerging;
         emerging.finalY = pos.y - 48;
@@ -51,19 +54,17 @@ void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *blo
         // Remove CoinQuestionBlock component
         block->removeComponent<CoinQuestionBlock>();
 
+        world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/coin.wav"));
         auto coin = world.createEntity<Coin1>(pos.x, pos.y - sz.y, 48.0f, 48.0f);
 
-        if (player->hasComponent<CoinComponent>())
-        {
-            auto &coinComp = player->getComponent<CoinComponent>();
-            ++coinComp.coins; // Increment coins
-        }
+        CoinManager::instance().addCoin();
     }
     else if (block->hasComponent<StarQuestionBlock>())
     {
         // Remove StarQuestionBlock component
         block->removeComponent<StarQuestionBlock>();
 
+        world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/item.wav"));
         auto star = world.createEntity<Star>(pos.x, pos.y, 48.0f, 48.0f);
         ItemEmerging emerging;
         emerging.finalY = pos.y - 48;
