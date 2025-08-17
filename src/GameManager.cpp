@@ -80,7 +80,7 @@
 using json = nlohmann::json;
 
 
-GameManager::GameManager(int level) : levelHandler(world, level), currentLevel(level), editor(world)
+GameManager::GameManager(int level) : levelHandler(world, level), currentLevel(level)
 {
     if (currentLevel == -1)
     {
@@ -163,7 +163,7 @@ GameManager::GameManager(int level) : levelHandler(world, level), currentLevel(l
     world.addSystem<PlayerRespawnSystem>();
 }
 
-void GameManager::handleEvent(const sf::Event& event, const sf::RenderWindow& window)
+void GameManager::handleEvent(const sf::Event& event, sf::RenderWindow& window)
 {
     if (event.type == sf::Event::KeyPressed)
     {
@@ -201,6 +201,16 @@ void GameManager::handleEvent(const sf::Event& event, const sf::RenderWindow& wi
         if (event.key.code == sf::Keyboard::P)
         {
             oneFrame = !oneFrame;
+
+            if (editor)
+            {
+                delete editor;
+                editor = nullptr;
+            }
+            else
+            {
+                editor = new LevelEditor(world);
+            }
         }
 
         if (event.key.code == sf::Keyboard::O)
@@ -209,10 +219,7 @@ void GameManager::handleEvent(const sf::Event& event, const sf::RenderWindow& wi
         }
     }
 
-    if (oneFrame)
-    {
-        editor.handleEvent(event, window);
-    }
+    if (editor) editor->handleEvent(event, window);
 }
 
 void GameManager::update(float dt)
@@ -221,7 +228,10 @@ void GameManager::update(float dt)
 
     if (oneFrame && !shouldPlay)
     {
+        world.getSystem<CollisionDetectionSystem>()->update(world, dt);
         world.getSystem<AnimationSystem>()->update(world, dt);
+        // world.getSystem<HitBlockSystem>()->update(world, dt);
+        // world.getSystem<MovementSystem>()->update(world, dt);
         return;
     }
 
@@ -248,9 +258,9 @@ void GameManager::draw(sf::RenderWindow &window, int level)
     // Set the default view
     world.getSystem<DrawGameComponentSystem>()->draw(world, window);
 
-    if (oneFrame)
+    if (editor)
     {
-        editor.drawUI();
-        editor.display(window);
+        editor->drawUI();
+        editor->display(window);
     }
 }

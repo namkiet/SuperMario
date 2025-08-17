@@ -11,53 +11,63 @@ LevelEditor::LevelEditor(World& world)
     : model(world.entityManager, world.componentRegistry)
     , prefabs(world.entityManager, world.componentRegistry) {}
 
-void LevelEditor::handleEvent(const sf::Event& event, const sf::RenderWindow& window)
+void LevelEditor::handleEvent(const sf::Event& event, sf::RenderWindow& window)
 {
     sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window)) + model.getCameraCenter() - 0.5f * sf::Vector2f(window.getSize().x, window.getSize().y);
 
     if (ImGui::GetIO().WantCaptureMouse) return;
 
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    if (!currentCommand)
     {
-        // selectedEntity = nullptr;
-        if (selectedPrefab) 
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
-            setCommand<SpawnCommand>(model, selectedPrefab, mousePos);
-            selectedPrefab = nullptr;
+            // selectedEntity = nullptr;
+            if (selectedPrefab) 
+            {
+                setCommand<SpawnCommand>(model, selectedPrefab, mousePos, window);
+                // selectedPrefab = nullptr;
+            }
+            else if (auto draggedEntity = model.getEntityAt(mousePos.x, mousePos.y))
+            {
+                setCommand<DragCommand>(draggedEntity, window);
+                selectedEntity = draggedEntity;
+            }
+            else
+            {
+                setCommand<PanCommand>(window, model.getCameraCenter());
+            }
         }
-        else if (auto draggedEntity = model.getEntityAt(mousePos.x, mousePos.y))
+        else if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
         {
-            setCommand<DragCommand>(draggedEntity, window);
-            selectedEntity = draggedEntity;
+            if (selectedPrefab)
+            {
+                selectedPrefab = nullptr;
+            }
+            else
+            {
+                setCommand<DeleteCommand>(model, mousePos);
+            }
         }
-        else
-        {
-            setCommand<PanCommand>(window, model.getCameraCenter());
-        }
-    }
-    else if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
-    {
-        setCommand<DeleteCommand>(model, mousePos);
     }
 
     // Execute and finalize
     if (currentCommand && currentCommand->execute())
     {
-        // pushUndo(std::move(currentCommand));
         currentCommand = nullptr;
     }
 }
 
 void LevelEditor::display(sf::RenderWindow& window)
 {
-    sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
     if (selectedPrefab)
     {
+        sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+
         sf::Sprite sprite = selectedPrefab->animation.sprite;
         resizeSprite(sprite, selectedPrefab->size);
         sprite.setPosition(mousePos - 0.5f * selectedPrefab->size);
         sf::Color color = sprite.getColor();
-        color.a = 150;
+        color.a = 200;
         sprite.setColor(color);
         window.draw(sprite);
     }

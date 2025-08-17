@@ -9,6 +9,11 @@
 
 #include <Gameplay/Enemy/Goomba/Goomba.hpp>
 #include <Gameplay/Enemy/Koopa/Koopa.hpp>
+#include <Gameplay/Enemy/Koopa/KoopaFlying.hpp>
+#include <Gameplay/Enemy/Koopa/KoopaJumping.hpp>
+#include <Gameplay/Enemy/Spiny/Spiny.hpp>
+#include <Gameplay/Enemy/Bowser/Bowser.hpp>
+#include <Prefabs/Block.hpp>
 
 struct Prefab
 {
@@ -18,11 +23,21 @@ struct Prefab
     Animation animation;                     
     sf::Vector2f size;                        
     CreatorFunc creator; // Creates an entity at x,y
+    bool canBePlaced = true;
 
-    Prefab(const std::string& name_, const Animation& anim, CreatorFunc creatorFunc)
-        : name(name_), animation(anim), creator(std::move(creatorFunc))
+    Prefab(const std::string& name_, CreatorFunc creatorFunc)
+        : name(name_), creator(std::move(creatorFunc))
     {
-        size = creator(0, 0)->getComponent<Transform>().size;
+        auto sample = creator(0, 0);
+        if (sample->hasComponent<Transform>())
+        {
+            size = creator(0, 0)->getComponent<Transform>().size;
+        }
+
+        if (sample->hasComponent<Animation>())
+        {
+            animation = creator(0, 0)->getComponent<Animation>();
+        }
     }
 };
 
@@ -41,20 +56,63 @@ private:
 
     void registerPrefabs()
     {
+        registerEnemies();
+        registerBlocks();
+        registerItems();
+    }
+
+    void registerEnemies()
+    {
         // Goomba
-        Animation goombaAnim(TextureManager::load("assets/Enemy/Goomba/goomba_walk.png"), 16, 16, 2, 0.25f);
-        sf::Vector2f goombaSize{16.f, 16.f};
-        prefabList.emplace_back("Goomba", goombaAnim,
+        prefabList.emplace_back("Goomba",
             [this](float x, float y) -> std::unique_ptr<Entity> {
                 return std::make_unique<Goomba>(x / 3, y / 3, 3); // wrap raw pointer
             });
 
         // Koopa
-        Animation koopaAnim(TextureManager::load("assets/Enemy/Koopa/koopa_walk.png"), 16, 24, 2, 0.25f);
-        sf::Vector2f koopaSize{16.f, 24.f};
-        prefabList.emplace_back("Koopa", koopaAnim,
+        prefabList.emplace_back("Koopa",
             [this](float x, float y) -> std::unique_ptr<Entity> {
                 return std::make_unique<Koopa>(x / 3, y / 3, 3); // wrap raw pointer
             });
+        
+        // KoopaJumping
+        prefabList.emplace_back("KoopaJumping",
+            [this](float x, float y) -> std::unique_ptr<Entity> {
+                return std::make_unique<KoopaJumping>(x / 3, y / 3, 3); // wrap raw pointer
+            });
+
+        // KoopaFlying
+        prefabList.emplace_back("KoopaFlying",
+            [this](float x, float y) -> std::unique_ptr<Entity> {
+                return std::make_unique<KoopaFlying>(x / 3, y / 3, 3); // wrap raw pointer
+            });
+
+        // Spiny
+        prefabList.emplace_back("Spiny",
+            [this](float x, float y) -> std::unique_ptr<Entity> {
+                return std::make_unique<Spiny>(x / 3, y / 3, 3); // wrap raw pointer
+            });
+
+        // Bowser
+        prefabList.emplace_back("Bowser",
+            [this](float x, float y) -> std::unique_ptr<Entity> {
+                return std::make_unique<Bowser>(x / 3, y / 3, 3); // wrap raw pointer
+            });
+    }
+    
+    void registerBlocks()
+    {
+        // Coin Question block
+        prefabList.emplace_back("Coin",
+            [this](float x, float y) -> std::unique_ptr<Entity> {
+                return std::make_unique<Block>(x / 3, y / 3, 16, 16, 3, 1, 1); // wrap raw pointer
+            });
+
+        
+    }
+
+    void registerItems()
+    {
+        
     }
 };

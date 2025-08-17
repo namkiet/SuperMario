@@ -9,17 +9,17 @@ class LevelEditor
 {
 public:
     LevelEditor(World& world);
-    void handleEvent(const sf::Event& event, const sf::RenderWindow& window);
+    void handleEvent(const sf::Event& event, sf::RenderWindow& window);
     void display(sf::RenderWindow& window);
     void drawUI();
-
+    // void clear();
     
 private:
     Model model;
     Entity* selectedEntity = nullptr;
     Prefab* selectedPrefab = nullptr;
     PrefabStorage prefabs;
-    std::unique_ptr<ICommand> currentCommand;
+    std::unique_ptr<ICommand> currentCommand = nullptr;
 
 public:
     template<typename CommandType, typename... Args>

@@ -12,14 +12,14 @@ public:
     // Constructor with level
     GameManager(int level);
 
-    void handleEvent(const sf::Event& event, const sf::RenderWindow& window);
+    void handleEvent(const sf::Event& event, sf::RenderWindow& window);
     void update(float dt);
     void draw(sf::RenderWindow &window, int level);
 
 private:    
     World world;
     LevelHandler levelHandler;
-    LevelEditor editor;
+    LevelEditor* editor;
     int currentLevel = 1;
     bool oneFrame = false;
     bool shouldPlay = true;

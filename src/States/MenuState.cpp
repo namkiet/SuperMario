@@ -10,7 +10,7 @@ MenuState::MenuState()
     playText.setPosition(250, 250);
 }
 
-void MenuState::handleEvent(Game &game, const sf::Event& event, const sf::RenderWindow& window)
+void MenuState::handleEvent(Game &game, const sf::Event& event, sf::RenderWindow& window)
 {
     if (event.type == sf::Event::KeyPressed)
     {

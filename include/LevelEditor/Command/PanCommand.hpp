@@ -5,7 +5,7 @@
 class PanCommand : public ICommand
 {
 public:
-    PanCommand(const sf::RenderWindow& window, sf::Vector2f& camCenter) : window(window), camCenter(camCenter) {}
+    PanCommand(sf::RenderWindow& window, sf::Vector2f& camCenter) : window(window), camCenter(camCenter) {}
 
     bool execute() override
     {
@@ -26,7 +26,7 @@ public:
             sf::Vector2f currWorld = window.mapPixelToCoords(mousePixelPos);
             sf::Vector2f delta = prevWorld - currWorld;
 
-            camCenter += delta;
+            camCenter.x += delta.x;
 
             lastMousePos = mousePixelPos;
         }
@@ -37,6 +37,6 @@ public:
 private:
     bool isPanning = false;
     sf::Vector2i lastMousePos;
-    const sf::RenderWindow& window;
+    sf::RenderWindow& window;
     sf::Vector2f& camCenter;
 };
