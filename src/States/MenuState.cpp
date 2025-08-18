@@ -46,7 +46,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     // === Background Panel (root) ===
     // const auto ws = game->getWindow().getSize();
     std::shared_ptr<sf::Sprite> bgSprite = std::make_shared<sf::Sprite>(texholder.get(::TexType::background));
-    resizeSprite(*bgSprite, sf::Vector2f((float)ws.x, (float)ws.y));
+    resizeSprite(*bgSprite, sf::Vector2f((float)UIConstant::ws.x, (float)UIConstant::ws.y));
     bgSprite->setPosition(0.f, 0.f);
 
     auto bgDE = std::make_shared<DrawableElement>(bgSprite);
@@ -60,12 +60,12 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
 
 
     // ================= Super Mario Title===================
-    auto GameStartMessage = makeTextUtil("Super Mario Bros", sf::Vector2f(ws.x / 2, ws.y / 3.5),
+    auto GameStartMessage = makeTextUtil("Super Mario Bros", sf::Vector2f(UIConstant::ws.x / 2,UIConstant::ws.y / 3.5),
                     40, textColorSetting, /*setCenter=*/true);
     root->addComponent(GameStartMessage);
     // ================ quit button============================
     auto quitBtn = makeButtonUtil(
-        sf::Vector2f((float)ws.x * 0.5f - 220.f * 0.5f, (float)ws.y * 0.5f + 10.f),
+        sf::Vector2f((float)UIConstant::ws.x * 0.5f - 220.f * 0.5f, (float)UIConstant::ws.y * 0.5f + 10.f),
         std::make_shared<RoundedRectangleShape>(btnSize, 15.f),
         "Quit", 
         mainBtnColor,
@@ -89,7 +89,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     // auto playPanel = std::make_shared<Panel>(playPanelIU);
     // =================== Play button =======================
     auto roundedRectShape = std::make_shared<RoundedRectangleShape>(btnSize, 15.f);
-    sf::Vector2f playPos((float)ws.x * 0.5f - 220.f * 0.5f, (float)ws.y * 0.5f - 80.f);
+    sf::Vector2f playPos((float)UIConstant::ws.x * 0.5f - 220.f * 0.5f, (float)UIConstant::ws.y * 0.5f - 80.f);
 
     auto playBtn = makeButtonUtil(
         playPos,
@@ -127,7 +127,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     // settingComponent = settingsPanel;
     
     // ======================= Settings button============================
-    auto settingsPos = sf::Vector2f((float)ws.x * 0.5f - 220.f * 0.5f, (float)ws.y * 0.5f + 100.f);
+    auto settingsPos = sf::Vector2f((float)UIConstant::ws.x * 0.5f - 220.f * 0.5f, (float)UIConstant::ws.y * 0.5f + 100.f);
 
     auto settingroundedRectShape = std::make_shared<RoundedRectangleShape>(sf::Vector2f(220.f, 56.f), 20.f); 
 
@@ -338,7 +338,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
 
 
     // ==================== KeySetting title===========================
-    auto KeySettingMessage = makeTextUtil("Key Settings", sf::Vector2f(ws.x / 2, ws.y / 6),
+    auto KeySettingMessage = makeTextUtil("Key Settings", sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y / 6),
                     40, textColorSetting, /*setCenter=*/true);
 
     // Add button and text to panel

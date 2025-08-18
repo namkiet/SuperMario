@@ -30,7 +30,7 @@ void PlayingState::handleEvent(const sf::Event &event)
     }
 
     if (gameManager)
-        gameManager->handleEvent(event);
+        gameManager->handleEvent(event, game->getWindow());
 
     if (uiRoot) uiRoot->handleEvent(event);
 }
@@ -47,8 +47,8 @@ void PlayingState::update(float dt)
     {
         if (level + 1 > 3)
         {
-            game.popState();
-            game.pushState("menu");
+            game->popState();
+            game->pushState("menu");
             return;
         }
         LevelManager::instance().setLevel(level + 1);
@@ -58,8 +58,8 @@ void PlayingState::update(float dt)
     }
     else if (currentLevelState && currentLevelState->shouldReturnToMenu())
     {
-        game.popState();
-        game.pushState("menu");
+        game->popState();
+        game->pushState("menu");
         return;
     }
 
@@ -139,17 +139,17 @@ void PlayingState::setupButton()
         std::cout << "104 ok \n";
     if (level == 4)
     {
-        float sameHeightStat = ws.y * 0.9;
+        float sameHeightStat = UIConstant::ws.y * 0.9;
         StateColor marionameColorSetting(sf::Color::White, sf::Color::White, sf::Color(153, 153, 153), sf::Color(255, 49, 49)); 
         StateColor luiginameColorSetting(sf::Color::White, sf::Color::White, sf::Color(153, 153, 153), sf::Color(102, 210, 50));
-        auto MarioNameMessage = helperBuilder::makeCanActiveText("Mario", sf::Vector2f(ws.x * 0.35, sameHeightStat),
+        auto MarioNameMessage = helperBuilder::makeCanActiveText("Mario", sf::Vector2f(UIConstant::ws.x * 0.35, sameHeightStat),
                             30, UIFont, marionameColorSetting, true);
 
-        auto LuigiNameMessage = helperBuilder::makeCanActiveText("Luigi", sf::Vector2f(ws.x * 0.85, sameHeightStat),
+        auto LuigiNameMessage = helperBuilder::makeCanActiveText("Luigi", sf::Vector2f(UIConstant::ws.x * 0.85, sameHeightStat),
                             30, UIFont, luiginameColorSetting, true);
 
         auto RedMarioBtn = makeButtonUtil(
-            sf::Vector2f(ws.x * 0.2, sameHeightStat), 
+            sf::Vector2f(UIConstant::ws.x * 0.2, sameHeightStat), 
             std::make_shared<sf::CircleShape>(60.f),
             "",
             StateColor(sf::Color(0,0,0,0), sf::Color(153,153,153, 200)),
@@ -163,7 +163,7 @@ void PlayingState::setupButton()
             );
 
         auto GreenMarioBtn = makeButtonUtil(
-            sf::Vector2f(ws.x * 0.7, sameHeightStat), 
+            sf::Vector2f(UIConstant::ws.x * 0.7, sameHeightStat), 
             std::make_shared<sf::CircleShape>(60.f),
             "",
             StateColor(sf::Color(0,0,0,0), sf::Color(153,153,153, 200)),
@@ -233,7 +233,7 @@ void PlayingState::setupButton()
         dummyContainer->addComponent(pausePanel);
 
         //==========Create Pause Text======================
-        auto PauseMessage = makeTextUtil("Pausing", sf::Vector2f(ws.x / 2, ws.y / 6),
+        auto PauseMessage = makeTextUtil("Pausing", sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y / 6),
                     40, textColorSetting, /*setCenter=*/true);
         pausePanel->addComponent(PauseMessage);
 
@@ -248,7 +248,7 @@ void PlayingState::setupButton()
             sf::Vector2f(0.f, -90.f),
             sf::Vector2f(50.f, -80.f)
         };
-        sf::Vector2f centerPos = sf::Vector2f(ws.x / 2, ws.y / 2);
+        sf::Vector2f centerPos = sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y / 2);
         
     // ========================== Setting Panel =====================================
     // Create Settings Panel
@@ -449,7 +449,7 @@ std::cout << "288 ok \n";
 
 
     // ==================== KeySetting title===========================
-    auto KeySettingMessage = makeTextUtil("Key Settings", sf::Vector2f(ws.x / 2, ws.y / 6),
+    auto KeySettingMessage = makeTextUtil("Key Settings", sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y / 6),
                     40, textColorSetting, /*setCenter=*/true);
     settingsPanel->addComponent(keyOptContainer);
 
@@ -556,7 +556,7 @@ std::cout << "288 ok \n";
         
 
         // =============== DeathPanel=======================
-        auto Deathrect = std::make_shared<sf::RectangleShape>(sf::Vector2f(ws.x, ws.y));
+        auto Deathrect = std::make_shared<sf::RectangleShape>(sf::Vector2f(UIConstant::ws.x, UIConstant::ws.y));
         Deathrect->setFillColor(sf::Color(34, 34, 34));
         auto DeathPanelDE = std::make_shared<DrawableElement>(Deathrect);
         Interact Deathpanelinteract(StateColor(sf::Color(34,34,34), sf::Color(34,34,34)));
@@ -567,7 +567,7 @@ std::cout << "288 ok \n";
         dummyContainer->addComponent(DeathPanel);
         
         // ================Time up Panel====================
-        auto TimeUprect = std::make_shared<sf::RectangleShape>(sf::Vector2f(ws.x, ws.y));
+        auto TimeUprect = std::make_shared<sf::RectangleShape>(sf::Vector2f(UIConstant::ws.x, UIConstant::ws.y));
         TimeUprect->setFillColor(sf::Color(34, 34, 34));
         auto TimeUpPanelDE = std::make_shared<DrawableElement>(TimeUprect);
         Interact panelinteract(StateColor(sf::Color(34,34,34), sf::Color(34,34,34)));
@@ -579,18 +579,18 @@ std::cout << "288 ok \n";
         
         // =========== Game Over =======================
         auto gameOverText = helperBuilder::makeText("Game Over", 
-                                               sf::Vector2f(ws.x / 2, ws.y / 3),
+                                               sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y / 3),
                                                40, UIFont, StateColor(sf::Color::White, sf::Color::White,
                                             sf::Color(255,49, 49), sf::Color::White), true);
         // ============== TimeUp =========================
         auto timeUpText = helperBuilder::makeText("Time Up", 
-                                               sf::Vector2f(ws.x / 2, ws.y / 3),
+                                               sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y / 3),
                                                40, UIFont, StateColor(sf::Color::White, sf::Color::White,
                                             sf::Color(255,49, 49), sf::Color::White), true);
 
         // ===============Restart Button===================
         auto restartBtnDeath = makeButtonUtil(
-        sf::Vector2f(ws.x / 2, ws.y * 0.5),  // Vị trí Restart
+        sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y * 0.5),  // Vị trí Restart
             std::make_shared<RoundedRectangleShape>(sf::Vector2f(300.f, 50.f), 20.f), 
             "Restart", 
             StateColor(sf::Color(255, 255, 255, 200), sf::Color(255, 255, 255, 0)),
@@ -606,7 +606,7 @@ std::cout << "288 ok \n";
         );
         
         auto restartBtnTimeUp = makeButtonUtil(
-        sf::Vector2f(ws.x / 2, ws.y * 0.5),  // Vị trí Restart
+        sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y * 0.5),  // Vị trí Restart
             std::make_shared<RoundedRectangleShape>(sf::Vector2f(300.f, 50.f), 20.f), 
             "Restart", 
             StateColor(sf::Color(255, 255, 255, 200), sf::Color(255, 255, 255, 0)),
@@ -620,7 +620,7 @@ std::cout << "288 ok \n";
         );
         // ==============Exit button ========================
             auto exitBtnDeath = makeButtonUtil(
-                sf::Vector2f(ws.x / 2, ws.y * 0.6),
+                sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y * 0.6),
                 std::make_shared<RoundedRectangleShape>(sf::Vector2f(300.f, 50.f), 20.f),
                 "Exit", 
                 StateColor(sf::Color(255, 255, 255, 200), sf::Color(255, 255, 255, 0)),
@@ -633,7 +633,7 @@ std::cout << "288 ok \n";
                 nullptr, sf::Color::White, true
             );
                 auto exitBtnTimeUp = makeButtonUtil(
-                sf::Vector2f(ws.x / 2, ws.y * 0.6),
+                sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y * 0.6),
                 std::make_shared<RoundedRectangleShape>(sf::Vector2f(300.f, 50.f), 20.f),
                 "Exit", 
                 StateColor(sf::Color(255, 255, 255, 200), sf::Color(255, 255, 255, 0)),
