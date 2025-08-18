@@ -52,7 +52,7 @@ json Model::getEntityInfo(Entity* entity) const
 
     int id = entity->getID();
     componentRegistry.saveComponents(entity, j);
-    return j[std::to_string(id)];
+    return j;
 }
 
 void Model::updateEntityInfo(Entity* entity, const json& newData)

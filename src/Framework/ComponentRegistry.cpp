@@ -4,13 +4,14 @@
 void ComponentRegistry::saveComponents(EntityManager& em, json& j) const {
     for (auto entity : em.findAll())
     {
-        saveComponents(entity, j);
+        saveComponents(entity, j[std::to_string(entity->getID())]);
     }
 }
 
 void ComponentRegistry::saveComponents(Entity* entity, json& j) const
 {
-    j[std::to_string(entity->getID())]["name"] = entity->getName();
+    j.clear();
+    j["name"] = entity->getName();
     for (auto& [_, saveFunc] : saveByType)
     {
         saveFunc(entity, j);

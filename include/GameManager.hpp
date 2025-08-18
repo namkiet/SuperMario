@@ -13,7 +13,7 @@
 class GameManager
 {
 public:
-    GameManager(int level);
+    GameManager(int level, bool hasWonLastLevel);
 
     void handleEvent(const sf::Event& event, sf::RenderWindow& window);
     void update(float dt);
@@ -25,10 +25,11 @@ public:
 private:
     World world;
     LevelHandler levelHandler;
-    Editor* editor;
+    Editor* editor = nullptr;
     int currentLevel = 1;
     bool oneFrame = false;
     bool shouldPlay = true;
     
     static int lives;
+    static inline json prevMarioData;
 };

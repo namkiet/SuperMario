@@ -77,4 +77,5 @@ private:
     SaveManager saveManager;
 
     friend class Editor;
+    friend class GameManager;
 };

@@ -47,7 +47,7 @@ void PlayingState::update(Game &game, float dt)
         }
         LevelManager::instance().setLevel(level + 1);
         // std::cout << "newLevel = " << newLevel << std::endl;
-        setLevel(level + 1);
+        setLevel(level + 1, true);
         return;
     }
     else if (currentLevelState && currentLevelState->shouldReturnToMenu())
@@ -93,12 +93,12 @@ void PlayingState::render(Game &, sf::RenderWindow &window)
         currentLevelState->render(gameManager, window, level);
 }
 
-void PlayingState::setLevel(int level)
+void PlayingState::setLevel(int level, bool hasWonLastLevel)
 {
     this->level = level;
     if (gameManager)
         delete gameManager;
-    gameManager = new GameManager(level);
+    gameManager = new GameManager(level, hasWonLastLevel);
 
     LevelManager::instance().setSkipUpdate(false);
     LevelManager::instance().setStatus("playing");
