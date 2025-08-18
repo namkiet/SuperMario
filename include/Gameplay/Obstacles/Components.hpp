@@ -8,7 +8,7 @@ struct PodobooTag : public Component
     {
     }
     bool upright = true;
-    float lowestY = 672.0f;
+    float lowestY = 820.0f;
     float highestY = 240.0f;
 };
 

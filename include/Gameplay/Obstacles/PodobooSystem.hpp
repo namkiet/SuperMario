@@ -37,7 +37,7 @@ public:
                 // If not upright and at the lowest point, switch to rising
                 transform.position.y = podobooTag.lowestY;
                 podobooTag.upright = true;
-                rigidBody.velocity.y = -1200; // Rising speed
+                rigidBody.velocity.y = -1400; // Rising speed
                 podoboo->removeComponent<Animation>();
                 podoboo->addComponent<Animation>(EnemyFactory::getEnemyTexture("podoboo_rise"));
             }
