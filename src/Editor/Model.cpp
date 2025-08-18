@@ -1,6 +1,7 @@
-#include <LevelEditor/Model.hpp>
+#include <Editor/Model.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Camera/Camera.hpp>
+#include <string>
 
 Model::Model(EntityManager& entityManager, ComponentRegistry& componentRegistry)
     : entityManager(entityManager), componentRegistry(componentRegistry) 
@@ -42,5 +43,19 @@ Entity* Model::getEntityAt(float x, float y)
 sf::Vector2f& Model::getCameraCenter() const
 {
     return entityManager.findFirst<Camera>()->getComponent<Camera>().target;
+}
 
+json Model::getEntityInfo(Entity* entity) const
+{
+    json j;
+    if (!entity) return j;
+
+    int id = entity->getID();
+    componentRegistry.saveComponents(entity, j);
+    return j[std::to_string(id)];
+}
+
+void Model::updateEntityInfo(Entity* entity, const json& newData)
+{
+    componentRegistry.loadComponents(newData, entity);
 }

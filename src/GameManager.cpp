@@ -204,7 +204,7 @@ void GameManager::handleEvent(const sf::Event& event, sf::RenderWindow& window)
             }
             else
             {
-                editor = new LevelEditor(world);
+                editor = new Editor(world);
             }
         }
 

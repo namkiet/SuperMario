@@ -2,7 +2,7 @@
 #include <Framework/World.hpp>
 #include <SFML/Graphics.hpp>
 #include <LevelHandler.hpp>
-#include <LevelEditor/LevelEditor.hpp>
+#include <Editor/Editor.hpp>
 
 #include <LevelHandler.hpp>
 
@@ -25,7 +25,7 @@ public:
 private:
     World world;
     LevelHandler levelHandler;
-    LevelEditor* editor;
+    Editor* editor;
     int currentLevel = 1;
     bool oneFrame = false;
     bool shouldPlay = true;

@@ -76,5 +76,5 @@ private:
     ComponentRegistry componentRegistry;
     SaveManager saveManager;
 
-    friend class LevelEditor;
+    friend class Editor;
 };

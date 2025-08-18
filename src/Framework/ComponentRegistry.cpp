@@ -26,7 +26,7 @@ void ComponentRegistry::loadComponents(const json& j, EntityManager& em) {
 
     for (auto entity : em.findAll())
     {
-        loadComponents(j, entity);
+        loadComponents(j[std::to_string(entity->getID())], entity);
     }
 }
 
@@ -35,7 +35,7 @@ void ComponentRegistry::loadComponents(const json& j, Entity* entity) {
     if (!entity) return;
 
     int id = entity->getID();
-    for (auto& [compName, compJSON] : j[std::to_string(id)].items()) 
+    for (auto& [compName, compJSON] : j.items()) 
     {
         if (compName == "name") continue;
 

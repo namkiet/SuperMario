@@ -172,7 +172,7 @@ DEFINE_COMPONENT(InvincibleTag, duration, timer)
 DEFINE_TAG(DespawnTag)
 
 #include <Engine/Core/Transform.hpp>
-DEFINE_COMPONENT(Transform, prevPos, position, size, isFacingRight)
+DEFINE_COMPONENT(Transform, prevPos, position, size)
 
 #include <Engine/Core/RigidBody.hpp>
 DEFINE_COMPONENT(RigidBody, velocity, acceleration, applyGravity, onGround)
