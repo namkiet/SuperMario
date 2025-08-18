@@ -12,7 +12,7 @@ public:
     void handleEvent(Game &game, const sf::Event& event, sf::RenderWindow& window) override;
     void update(Game &game, float dt) override;
     void render(Game &game, sf::RenderWindow &window) override;
-    void setLevel(int level);
+    void setLevel(int level, bool hasWonLastLevel = false);
     void requestLevelReload(int newLevel);
     ~PlayingState() override;
     void reset();

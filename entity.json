@@ -1,0 +1,74 @@
+{
+    "Animation": {
+        "currentFrame": 2,
+        "frameCount": 4,
+        "frameDuration": 0.30000001192092896,
+        "frameHeight": 16,
+        "frameWidth": 16,
+        "hasEnded": false,
+        "loop": true,
+        "row": 0,
+        "sprite": "assets/Item/Coin/Coin2/Coin1_2.png",
+        "textures": [
+            "assets/Item/Coin/Coin2/Coin1_0.png",
+            "assets/Item/Coin/Coin2/Coin1_1.png",
+            "assets/Item/Coin/Coin2/Coin1_2.png",
+            "assets/Item/Coin/Coin2/Coin1_3.png"
+        ],
+        "timer": 0.2518497407436371
+    },
+    "BoxCollider2D": {
+        "bounce": false,
+        "collisions": [],
+        "corners": [
+            {
+                "x": 0.0,
+                "y": 0.0
+            },
+            {
+                "x": 0.0,
+                "y": 0.0
+            },
+            {
+                "x": 0.0,
+                "y": 0.0
+            },
+            {
+                "x": 0.0,
+                "y": 0.0
+            }
+        ],
+        "isDisabled": false,
+        "offset": {
+            "x": 0.0,
+            "y": 0.0
+        },
+        "origin": {
+            "x": 0.0,
+            "y": 0.0
+        },
+        "rotation": 0.0,
+        "size": {
+            "x": 48.0,
+            "y": 48.0
+        }
+    },
+    "Coin2Tag": {},
+    "CollectableTag": {},
+    "Transform": {
+        "isFacingRight": true,
+        "position": {
+            "x": 3024.0,
+            "y": 432.0
+        },
+        "prevPos": {
+            "x": 3024.0,
+            "y": 432.0
+        },
+        "size": {
+            "x": 48.0,
+            "y": 48.0
+        }
+    },
+    "name": "5Coin2"
+}

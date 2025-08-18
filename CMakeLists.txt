@@ -56,10 +56,10 @@ add_executable(${PROJECT_NAME} ${SRC_FILES} ${HEADER_FILES})
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-window sfml-system sfml-audio ImGui-SFML::ImGui-SFML)
 
-# if (CMAKE_CXX_COMPILER_ID MATCHES "AppleClang" OR CMAKE_SYSTEM_NAME MATCHES "Linux")
-#     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fsanitize=undefined -fsanitize=address")
-#     target_link_options(mario BEFORE PUBLIC -fsanitize=undefined PUBLIC -fsanitize=address)
-# endif()
+if (CMAKE_CXX_COMPILER_ID MATCHES "AppleClang" OR CMAKE_SYSTEM_NAME MATCHES "Linux")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fsanitize=undefined -fsanitize=address")
+    target_link_options(mario BEFORE PUBLIC -fsanitize=undefined PUBLIC -fsanitize=address)
+endif()
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 

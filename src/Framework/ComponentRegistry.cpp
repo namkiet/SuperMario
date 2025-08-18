@@ -4,13 +4,14 @@
 void ComponentRegistry::saveComponents(EntityManager& em, json& j) const {
     for (auto entity : em.findAll())
     {
-        saveComponents(entity, j);
+        saveComponents(entity, j[std::to_string(entity->getID())]);
     }
 }
 
 void ComponentRegistry::saveComponents(Entity* entity, json& j) const
 {
-    j[std::to_string(entity->getID())]["name"] = entity->getName();
+    j.clear();
+    j["name"] = entity->getName();
     for (auto& [_, saveFunc] : saveByType)
     {
         saveFunc(entity, j);
@@ -26,7 +27,7 @@ void ComponentRegistry::loadComponents(const json& j, EntityManager& em) {
 
     for (auto entity : em.findAll())
     {
-        loadComponents(j, entity);
+        loadComponents(j[std::to_string(entity->getID())], entity);
     }
 }
 
@@ -35,7 +36,7 @@ void ComponentRegistry::loadComponents(const json& j, Entity* entity) {
     if (!entity) return;
 
     int id = entity->getID();
-    for (auto& [compName, compJSON] : j[std::to_string(id)].items()) 
+    for (auto& [compName, compJSON] : j.items()) 
     {
         if (compName == "name") continue;
 

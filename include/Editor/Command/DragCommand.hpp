@@ -1,5 +1,5 @@
 #pragma once
-#include <LevelEditor/Command/ICommand.hpp>
+#include <Editor/Command/ICommand.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>

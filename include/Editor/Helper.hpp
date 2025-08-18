@@ -1,6 +1,7 @@
 #pragma once
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Rendering/Utility.hpp>
+#include <imgui.h>
 
 struct AnimationButtonInfo {
     ImTextureID textureID;

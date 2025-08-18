@@ -83,7 +83,7 @@
 using json = nlohmann::json;
 
 
-GameManager::GameManager(int level) : levelHandler(world, level), currentLevel(level)
+GameManager::GameManager(int level, bool hasWonLastLevel) : levelHandler(world, level), currentLevel(level)
 {
     if (currentLevel == -1)
     {
@@ -163,6 +163,15 @@ GameManager::GameManager(int level) : levelHandler(world, level), currentLevel(l
 
     world.addSystem<DespawnSystem>();
     world.addSystem<PlayerRespawnSystem>();
+
+    if (hasWonLastLevel)
+    {
+        auto player = world.findFirst<PlayerTag>();
+        auto tf = player->getComponent<Transform>();
+        world.componentRegistry.loadComponents(prevMarioData, player);
+        player->getComponent<Transform>().position = tf.position;
+        player->getComponent<Transform>().position.y -= (player->getComponent<Transform>().size.y - tf.size.y);
+    }
 }
 
 void GameManager::handleEvent(const sf::Event& event, sf::RenderWindow& window)
@@ -181,6 +190,11 @@ void GameManager::handleEvent(const sf::Event& event, sf::RenderWindow& window)
         if (event.key.code == sf::Keyboard::N)
         {
             world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(3.0f);
+        }
+
+        if (event.key.code == sf::Keyboard::T)
+        {
+            world.findFirst<PlayerTag>()->getComponent<Transform>().position.x = 195 * 48;
         }
 
         if (event.key.code == sf::Keyboard::F)
@@ -204,7 +218,7 @@ void GameManager::handleEvent(const sf::Event& event, sf::RenderWindow& window)
             }
             else
             {
-                editor = new LevelEditor(world);
+                editor = new Editor(world);
             }
         }
 
@@ -275,6 +289,7 @@ int GameManager::getLives()
 
 GameManager::~GameManager()
 {
+    world.componentRegistry.saveComponents(world.findFirst<PlayerTag>(), prevMarioData);
     --lives;
 }
 
