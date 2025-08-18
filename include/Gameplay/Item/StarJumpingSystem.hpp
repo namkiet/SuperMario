@@ -30,11 +30,11 @@ public:
                 if (!block->hasComponent<Transform>())
                     continue;
                 
-                    auto &blockPos = block->getComponent<Transform>().position;
+                auto &blockPos = block->getComponent<Transform>().position;
                 if (direction == Direction::Top)
                 {
-                    pos.y = blockPos.y - size.y * 2;
-                    rb.velocity.y = 0.0f;
+                    pos.y = blockPos.y - size.y;
+                    rb.velocity.y = -650;
                     rb.velocity.x = 0.0f;
                     patrolComponent.moveSpeed = 400.0f;
                     // fout << "Star collided with block from bottom." << std::endl;

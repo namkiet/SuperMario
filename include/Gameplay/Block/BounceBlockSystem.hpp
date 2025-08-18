@@ -23,14 +23,14 @@ public:
         {
             auto &bounce = block->getComponent<BounceBlock>();
             auto &pos = block->getComponent<Transform>().position;
+            auto &rb = block->getComponent<RigidBody>();
 
             block->addComponent<CanKillEnemyTag>();
 
-            bounce.timer += dt;
-            // fout << "Timer for bounce block" << std::endl;
-            if (bounce.timer >= bounce.bounceTime)
+            float futureY = pos.y + (rb.velocity.y + PHYSICS::GRAVITY * dt) * dt;
+
+            if (abs(bounce.originalY - pos.y) < abs(bounce.originalY - futureY) && rb.velocity.y > 0)
             {
-                bounce.timer = 0.0f;
                 pos.y = bounce.originalY;
                 block->removeComponent<CanKillEnemyTag>();
                 block->removeComponent<BounceBlock>();

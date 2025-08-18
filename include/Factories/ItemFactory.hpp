@@ -89,8 +89,8 @@ public:
         itemTypeToFolder["elevator1"] = "assets/Item/Elevator/Elevator1.png";
         itemTypeToFolder["elevator2"] = "assets/Item/Elevator/Elevator2.png";
         itemTypeToFolder["elevator3"] = "assets/Item/Elevator/Elevator3.png";
-        itemTypeToFolder["smallFireBar"] = "assets/Item/FireBar/smallFireBar.png";
-        itemTypeToFolder["largeFireBar"] = "assets/Item/FireBar/largeFireBar.png";
+        itemTypeToFolder["smallFireBar"] = "assets/Item/FireBar/smallFireBar";
+        itemTypeToFolder["largeFireBar"] = "assets/Item/FireBar/largeFireBar";
         itemTypeToFolder["fireBullet"] = "assets/Item/FireBullet/FireBullet";
         itemTypeToFolder["fireworks"] = "assets/Item/FireBullet/FireBullet_4.png";
     }

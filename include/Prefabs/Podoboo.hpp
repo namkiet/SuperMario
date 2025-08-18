@@ -33,12 +33,14 @@ public:
         if (upright)
         {
             addComponent<Animation>(EnemyFactory::getEnemyTexture("podoboo_rise"));
-            addComponent<RigidBody>(sf::Vector2f(0.f, -400.f), false);
+            addComponent<RigidBody>(sf::Vector2f(0.f, -1200.f));
+            getComponent<RigidBody>().antiGravity = -800;
         }
         else
         {
             addComponent<Animation>(EnemyFactory::getEnemyTexture("podoboo_fall"));
-            addComponent<RigidBody>(sf::Vector2f(0.f, 400.f), false);
+            addComponent<RigidBody>(sf::Vector2f(0.f, 0.f));
+            getComponent<RigidBody>().antiGravity = -800;
         }
     }
 };

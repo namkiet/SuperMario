@@ -16,6 +16,7 @@ public:
             if (rb.applyGravity) // now, applyGravity is always true
             {
                 rb.velocity.y += PHYSICS::GRAVITY * dt;
+                rb.velocity.y += rb.antiGravity * dt;
             }
         }
     }

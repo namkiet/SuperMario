@@ -162,10 +162,8 @@ public:
 
                         BounceBlock bounce;
                         bounce.originalY = pos.y;
-                        bounce.updateY = pos.y - (sz.y / 4);
                         block->addComponent<BounceBlock>(bounce);
-                        block->addComponent<RigidBody>(sf::Vector2f(0, 0), false);
-                        pos.y = bounce.updateY;
+                        block->addComponent<RigidBody>(sf::Vector2f(0, bounce.bounceVel), true);
 
                         continue;
                     }

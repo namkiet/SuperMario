@@ -25,15 +25,17 @@ public:
 
         if (index == 1)
         {
-            addComponent<Animation>(ItemFactory::getItemTexture("smallFireBar"));
+            std::vector <const sf::Texture*> textures = ItemFactory::getItemTextures("smallFireBar");
             width = 24;
             height = 144;
+            addComponent<Animation>(textures, (int)width, (int)height, 0.09f, true);
         }
         else if (index == 2)
         {
-            addComponent<Animation>(ItemFactory::getItemTexture("largeFireBar"));
+            std::vector <const sf::Texture*> textures = ItemFactory::getItemTextures("largeFireBar");
             width = 24;
             height = 288;
+            addComponent<Animation>(textures, (int)width, (int)height, 0.09f, true);
         }
 
         // Set the transform for positioning

@@ -69,9 +69,9 @@ public:
                     }
 
                     pos.y = blockPos.y - size.y * 2.5;
-                    rb.velocity.y = -200.0f;
+                    rb.velocity.y = -300.0f;
                     // rb.velocity.x = 0.0f;
-                    patrolComponent.moveSpeed = 600.0f;
+                    // patrolComponent.moveSpeed = 600.0f;
                 }
                 if (direction == Direction::Bottom)
                 {
@@ -109,7 +109,7 @@ public:
 
                     if (block->hasComponent<BlockTag>())
                     {
-                        world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/fire.wav"));
+                        // world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/fire.wav"));
                     }
 
                     // Add the new animation

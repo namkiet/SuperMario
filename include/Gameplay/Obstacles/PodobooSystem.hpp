@@ -24,19 +24,20 @@ public:
             auto &transform = podoboo->getComponent<Transform>();
             auto &rigidBody = podoboo->getComponent<RigidBody>();
 
-            if (podobooTag.upright && transform.position.y <= podobooTag.highestY)
+            if (podobooTag.upright && rigidBody.velocity.y > 0)
             {
                 // If upright and at the highest point, switch to falling
                 podobooTag.upright = false;
-                rigidBody.velocity.y = -rigidBody.velocity.y; // Falling speed
+                // rigidBody.velocity.y = -rigidBody.velocity.y; // Falling speed
                 podoboo->removeComponent<Animation>();
                 podoboo->addComponent<Animation>(EnemyFactory::getEnemyTexture("podoboo_fall"));
             }
             else if (!podobooTag.upright && transform.position.y >= podobooTag.lowestY)
             {
                 // If not upright and at the lowest point, switch to rising
+                transform.position.y = podobooTag.lowestY;
                 podobooTag.upright = true;
-                rigidBody.velocity.y = -rigidBody.velocity.y; // Rising speed
+                rigidBody.velocity.y = -1200; // Rising speed
                 podoboo->removeComponent<Animation>();
                 podoboo->addComponent<Animation>(EnemyFactory::getEnemyTexture("podoboo_rise"));
             }
