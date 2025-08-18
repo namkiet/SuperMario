@@ -1,17 +1,19 @@
-#include <LevelEditor/LevelEditor.hpp>
-#include <LevelEditor/Helper.hpp>
-#include <LevelEditor/Command/PanCommand.hpp>
-#include <LevelEditor/Command/SpawnCommand.hpp>
-#include <LevelEditor/Command/DragCommand.hpp>
-#include <LevelEditor/Command/DeleteCommand.hpp>
+#include <Editor/Editor.hpp>
+#include <Editor/Helper.hpp>
+#include <Editor/Command/PanCommand.hpp>
+#include <Editor/Command/SpawnCommand.hpp>
+#include <Editor/Command/DragCommand.hpp>
+#include <Editor/Command/DeleteCommand.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <imgui.h>
+#include <fstream>
 
-LevelEditor::LevelEditor(World& world)
+Editor::Editor(World& world)
     : model(world.entityManager, world.componentRegistry)
-    , prefabs(world.entityManager, world.componentRegistry) {}
+    , prefabs(world.entityManager, world.componentRegistry)
+    , panel(prefabs) {}
 
-void LevelEditor::handleEvent(const sf::Event& event, sf::RenderWindow& window)
+void Editor::handleEvent(const sf::Event& event, sf::RenderWindow& window)
 {
     sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window)) + model.getCameraCenter() - 0.5f * sf::Vector2f(window.getSize().x, window.getSize().y);
 
@@ -21,7 +23,7 @@ void LevelEditor::handleEvent(const sf::Event& event, sf::RenderWindow& window)
     {
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
-            // selectedEntity = nullptr;
+            selectedEntity = nullptr;
             if (selectedPrefab) 
             {
                 setCommand<SpawnCommand>(model, selectedPrefab, mousePos, window);
@@ -57,7 +59,7 @@ void LevelEditor::handleEvent(const sf::Event& event, sf::RenderWindow& window)
     }
 }
 
-void LevelEditor::display(sf::RenderWindow& window)
+void Editor::display(sf::RenderWindow& window)
 {
     if (selectedPrefab)
     {
@@ -73,25 +75,26 @@ void LevelEditor::display(sf::RenderWindow& window)
     }
 }
 
-void LevelEditor::drawUI()
+void Editor::drawUI()
 {
     ImGui::Begin("Prefab Options");
-    ImGui::Text("Prefabs");
-    ImGui::Separator();
 
-    int columns = 4;
-    ImGui::Columns(columns, nullptr, false);
+    panel.draw();
 
-    for (auto& prefab : prefabs.getAll()) {
-        updateAnimation(prefab.animation, 1.0f / 90); // update at constant 90 FPS
+    // Prefab browser
+    if (auto chosen = panel.getSelectedPrefab()) {
+        selectedPrefab = chosen;
+    }
 
-        auto btn = getAnimationButtonInfo(prefab.animation, 24.f);
-        if (ImGui::ImageButton(btn.textureID, btn.size, btn.uv0, btn.uv1)) {
-            selectedPrefab = &prefab;
+    // Entity inspector
+    if (selectedEntity) {
+        json j = model.getEntityInfo(selectedEntity);
+        inspector.draw(j);
+
+        if (inspector.hasUpdated())
+        {
+            model.updateEntityInfo(selectedEntity, j);
         }
-
-        ImGui::TextWrapped("%s", prefab.name.c_str());
-        ImGui::NextColumn();
     }
 
     ImGui::End();

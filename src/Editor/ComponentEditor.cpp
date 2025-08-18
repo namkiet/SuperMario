@@ -1,4 +1,4 @@
-#include <LevelEditor/ComponentEditor.hpp>
+#include <Editor/ComponentEditor.hpp>
 #include <Framework/EntityManager.hpp>
 #include <cstring>
 #include <string>

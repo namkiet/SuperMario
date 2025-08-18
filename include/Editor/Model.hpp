@@ -16,6 +16,8 @@ public:
     void removeEntity(float x, float y);
     Entity* getEntityAt(float x, float y);
     sf::Vector2f& getCameraCenter() const;
+    json getEntityInfo(Entity* entity) const;
+    void updateEntityInfo(Entity* entity, const json& newData);
 
 private:
     EntityManager& entityManager;

@@ -18,7 +18,7 @@ public:
     static void registerComponent(const std::string& compName) {
         saveByType[compName] = [compName](Entity* entity, json& j) {
             if (entity->hasComponent<T>()) {
-                j[std::to_string(entity->getID())][compName] = entity->getComponent<T>();
+                j[compName] = entity->getComponent<T>();
             }
         };
         loadByType[compName] = [](const json& j, Entity* e) {

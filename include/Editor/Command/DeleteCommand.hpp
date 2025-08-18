@@ -1,6 +1,6 @@
 #pragma once
-#include <LevelEditor/Command/ICommand.hpp>
-#include <LevelEditor/Model.hpp>
+#include <Editor/Command/ICommand.hpp>
+#include <Editor/Model.hpp>
 
 class DeleteCommand : public ICommand
 {
