@@ -4,6 +4,7 @@
 #include <Framework/World.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
+#include <Gameplay/Fire/Components.hpp>
 #include <LevelManager.hpp>
 #include <Prefabs/Mario.hpp>
 
@@ -17,7 +18,7 @@ public:
 
         auto mario = world.createEntity<Mario>((float)0 * 16, (float)6 * 16, 16.0f, 16.0f, 3.0f);
         mario->addComponent<GrowUpTag>();
-        mario->addComponent<FireMarioTag>();
+        mario->addComponent<CanFireTag>();
         
         LevelManager::instance().setLevel(0);
         LevelManager::instance().setStatus("intro");

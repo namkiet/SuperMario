@@ -8,6 +8,7 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
+#include <Gameplay/Fire/Components.hpp>
 #include <ECS/Entity.hpp>
 
 const std::string PlayerShrinkingState::getName() const
@@ -21,6 +22,7 @@ void PlayerShrinkingState::onEnter(Entity* entity)
     entity->removeComponent<RigidBody>();
     entity->removeComponent<DamagedTag>();
     entity->removeComponent<CanGetDamageTag>();
+    entity->removeComponent<CanFireTag>();
 }
 
 void PlayerShrinkingState::onExit(Entity* entity)

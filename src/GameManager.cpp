@@ -190,7 +190,7 @@ void GameManager::handleEvent(const sf::Event& event, sf::RenderWindow& window)
 
             auto mario = world.findFirst<PlayerTag>();
             mario->addComponent<GrowUpTag>();
-            mario->addComponent<FireMarioTag>();
+            mario->addComponent<CanFireTag>();
         }
         
         if (event.key.code == sf::Keyboard::P)

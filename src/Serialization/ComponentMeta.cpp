@@ -137,7 +137,7 @@ DEFINE_COMPONENT(DamageOnContactComponent, validDirections)
 DEFINE_TAG(DamagedTag)
 
 #include <Gameplay/Block/BounceBlock.hpp>
-DEFINE_COMPONENT(BounceBlock, bounceTime, timer, updateY, originalY)
+DEFINE_COMPONENT(BounceBlock, originalY, bounceVel)
 
 #include <Gameplay/Block/Components.hpp>
 DEFINE_TAG(CoinBlock)
@@ -163,7 +163,6 @@ DEFINE_TAG(LevelBlock)
 #include <Gameplay/Player/Components.hpp>
 DEFINE_COMPONENT(PlayerTag, movementState, sizeState, powerState, isMario)
 DEFINE_TAG(BigMarioTag)
-DEFINE_TAG(FireMarioTag)
 DEFINE_TAG(GrowUpTag)
 DEFINE_COMPONENT(InputTag, horizontalMovement, jumpPressed)
 DEFINE_COMPONENT(InvincibleTag, duration, timer)
@@ -175,7 +174,7 @@ DEFINE_TAG(DespawnTag)
 DEFINE_COMPONENT(Transform, prevPos, position, size, isFacingRight)
 
 #include <Engine/Core/RigidBody.hpp>
-DEFINE_COMPONENT(RigidBody, velocity, acceleration, applyGravity, onGround)
+DEFINE_COMPONENT(RigidBody, velocity, acceleration, applyGravity, onGround, antiGravity)
 
 #include <Engine/Input/Input.hpp>
 DEFINE_COMPONENT(Input, moveLeft, moveRight, jumpPressed, shootPressed)
@@ -194,8 +193,8 @@ DEFINE_COMPONENT(Animation, sprite, frameWidth, frameHeight, frameCount, frameDu
 DEFINE_TAG(FlipXTag)
 DEFINE_TAG(FlipYTag)
 
-#include <Engine/Audio/Components.hpp>
-DEFINE_COMPONENT(SoundComponent, sound, buffer, shouldPlay, loop)
+// #include <Engine/Audio/Components.hpp>
+// DEFINE_COMPONENT(SoundComponent, sound, buffer, shouldPlay, loop)
 
 #include <Engine/Rendering/ZIndex.hpp>
 DEFINE_COMPONENT(ZIndex, value)

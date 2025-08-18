@@ -6,6 +6,7 @@
 #include <Gameplay/Collect/Components.hpp>
 #include <Gameplay/Item/Components.hpp>
 #include <Gameplay/Player/Components.hpp>
+#include <Gameplay/Fire/Components.hpp>
 
 #include <Framework/World.hpp>
 
@@ -24,7 +25,7 @@ class CollectFlowerSystem : public System
                 world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/powerup_collect.wav"));
                 if (player->hasComponent<BigMarioTag>())
                 {
-                    player->addComponent<FireMarioTag>();
+                    player->addComponent<CanFireTag>();
                 }
                 else
                 {

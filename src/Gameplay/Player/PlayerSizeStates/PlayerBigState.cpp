@@ -5,6 +5,7 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
+#include <Gameplay/Fire/Components.hpp>
 #include <ECS/Entity.hpp>
 
 const std::string PlayerBigState::getName() const
@@ -19,7 +20,7 @@ void PlayerBigState::onEnter(Entity* entity)
 
 std::shared_ptr<PlayerSizeState> PlayerBigState::getNewState(Entity* entity)
 {
-    if (entity->hasComponent<FireMarioTag>()) 
+    if (entity->hasComponent<CanFireTag>()) 
     {
         return std::make_shared<PlayerFireState>();
     }
