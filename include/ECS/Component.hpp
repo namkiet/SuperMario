@@ -2,6 +2,6 @@
 
 struct Component
 {
+public:
     virtual ~Component() = default;
-    // virtual Component* clone() const = 0;
 };

@@ -1,4 +1,8 @@
 #pragma once
+#include <Framework/World.hpp>
+#include <Gameplay/Collect/Components.hpp>
+#include <Gameplay/GameProperties/Components.hpp>
+#include <Gameplay/Item/Components.hpp>
 
 #include <CoinManager.hpp>
 
@@ -13,8 +17,6 @@
 #include <Gameplay/Item/Components.hpp>
 
 #include <ScoreManager.hpp>
-
-#include <World.hpp>
 
 class CollectSystem : public System
 {

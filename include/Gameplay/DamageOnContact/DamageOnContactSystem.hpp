@@ -1,6 +1,6 @@
 #pragma once
 #include <ECS/System.hpp>
-#include <World.hpp>
+#include <Framework/World.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/DespawnTag.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
@@ -30,11 +30,8 @@ public:
 
                 if (validHit)
                 {
-                    // if (!entity->hasComponent<DamagedTag>())
-                    // {
-                        entity->addComponent<DamagedTag>();
-                        std::cout << "Ouch.\n";
-                    // }
+                    entity->addComponent<DamagedTag>();
+                    std::cout << "Ouch.\n";
                 }
             }
         }

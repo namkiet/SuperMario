@@ -1,6 +1,6 @@
 #pragma once
 #include <ECS/System.hpp>
-#include <World.hpp>
+#include <Framework/World.hpp>
 #include <Engine/Animation/BlinkingComponent.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <SFML/Graphics.hpp>

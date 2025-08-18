@@ -9,6 +9,7 @@
 
 struct EnemyTag : public Component 
 {
+    EnemyTag() : state(nullptr), behaviour(nullptr) {}
     EnemyTag(std::shared_ptr<EnemyState> state, std::shared_ptr<EnemyBehaviour> behaviour) : state(state), behaviour(behaviour) {}
     std::shared_ptr<EnemyState> state;
     std::shared_ptr<EnemyBehaviour> behaviour;

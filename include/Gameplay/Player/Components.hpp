@@ -8,6 +8,8 @@ class PlayerPowerState;
 
 struct PlayerTag : public Component 
 {
+    PlayerTag() = default;
+
     PlayerTag(std::shared_ptr<PlayerMovementState> movementState, std::shared_ptr<PlayerSizeState> sizeState, std::shared_ptr<PlayerPowerState> powerState, bool isMario = true) 
         : movementState(movementState), sizeState(sizeState), powerState(powerState) {}
 
@@ -29,7 +31,7 @@ struct InputTag: public Component
 
 struct InvincibleTag : public Component
 {
-    InvincibleTag(float duration) : duration(duration) {}
+    InvincibleTag(float duration = 0.0f) : duration(duration) {}
     float duration;
     float timer = 0.0f;
 };

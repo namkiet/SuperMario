@@ -15,6 +15,8 @@ Game::Game()
     registry.registerInstance("settings", std::make_shared<SettingsState>());
 
     pushState("menu");
+
+    ImGui::SFML::Init(window);
 }
 
 void Game::run()
@@ -32,10 +34,11 @@ void Game::run()
         sf::Event event;
         while (window.pollEvent(event))
         {
+            ImGui::SFML::ProcessEvent(event);
             if (event.type == sf::Event::Closed)
                 window.close();
             if (currentState())
-                currentState()->handleEvent(*this, event);
+                currentState()->handleEvent(*this, event, window);
         }
 
         // // --- Update logic vật lý nhiều lần nếu cần ---
@@ -44,6 +47,7 @@ void Game::run()
         //     lag -= fixedDt;
         // }
 
+        ImGui::SFML::Update(window, clock.restart());
         if (currentState())
             currentState()->update(*this, dt);
 
@@ -51,8 +55,11 @@ void Game::run()
         window.clear(sf::Color(146, 144, 255, 255));
         if (currentState())
             currentState()->render(*this, window);
+        ImGui::SFML::Render(window);
         window.display();
     }
+
+    ImGui::SFML::Shutdown();
 }
 
 void Game::pushState(const std::string &name)

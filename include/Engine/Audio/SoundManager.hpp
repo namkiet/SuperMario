@@ -24,6 +24,19 @@ public:
         return soundMap[fileName];
     }
 
+    static std::string getPath(const sf::SoundBuffer* buffer)
+    {
+        for (const auto& pair : soundMap)
+        {
+            if (&pair.second == buffer)
+            {
+                return pair.first;
+            }
+        }
+
+        throw std::runtime_error("Sound pointer not found in SoundManager");
+    }
+
 private:
     static inline std::unordered_map<std::string, sf::SoundBuffer> soundMap;
 };

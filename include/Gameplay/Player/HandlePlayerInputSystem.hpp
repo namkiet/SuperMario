@@ -1,6 +1,6 @@
 #pragma once
 #include <ECS/System.hpp>
-#include <World.hpp>
+#include <Framework/World.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Audio/Components.hpp>
 #include <Engine/Audio/SoundManager.hpp>
@@ -15,7 +15,7 @@ class HandlePlayerInputSystem : public System
 public:
     void update(World& world, float dt) override
     {
-        for (Entity* player : world.findAll<PlayerTag, RigidBody, InputTag>())
+        for (Entity* player : world.findAll<RigidBody, InputTag>())
         {
             auto& rb = player->getComponent<RigidBody>();
             auto& pool = KeyPressPool::Instance();

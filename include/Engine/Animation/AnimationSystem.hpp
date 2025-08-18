@@ -1,5 +1,5 @@
 #pragma once
-#include <World.hpp>
+#include <Framework/World.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
@@ -34,61 +34,14 @@ public:
                 if (rb.velocity.x > 0.0f)
                 {
                     entity->removeComponent<FlipXTag>();
-                    // anim.flipX = false;
                 }
                 else if (rb.velocity.x < 0.0f)
                 {
                     entity->addComponent<FlipXTag>();
-                    // anim.flipX = true;
                 }
             }
 
-            // if (anim.frameCount == 1)
-            //     continue;
-
-
-            // if (anim.textures.empty())
-            // {
-            //     std::cerr << "Animation textures are empty for entity: " << entity << std::endl;
-            //     continue;
-            // }
-
-            anim.timer += dt;
-            if (anim.timer >= anim.frameDuration)
-            {
-                anim.timer -= anim.frameDuration;
-                anim.currentFrame++;
-
-                if (anim.currentFrame >= anim.frameCount)
-                {
-                    if (anim.loop)
-                    {
-                        anim.currentFrame = 0;
-                    }
-                    else
-                    {
-                        anim.currentFrame = anim.frameCount - 1;
-                        anim.hasEnded = true;
-                    }
-                }
-
-            }
-
-            if (!anim.textures.empty())
-            {
-                anim.sprite.setTexture(*anim.textures[anim.currentFrame]);
-            }
-            else
-            {
-
-                // Set texture rect
-                anim.sprite.setTextureRect(sf::IntRect(
-                    anim.currentFrame * anim.frameWidth,
-                    anim.row * anim.frameHeight,
-                    anim.frameWidth,
-                    anim.frameHeight
-                ));
-            }
+            updateAnimation(entity->getComponent<Animation>(), dt);
         }
     }
 };

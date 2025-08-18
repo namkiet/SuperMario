@@ -10,7 +10,7 @@ MenuState::MenuState()
     playText.setPosition(250, 250);
 }
 
-void MenuState::handleEvent(Game &game, const sf::Event &event)
+void MenuState::handleEvent(Game &game, const sf::Event& event, sf::RenderWindow& window)
 {
     if (event.type == sf::Event::KeyPressed)
     {
@@ -19,6 +19,15 @@ void MenuState::handleEvent(Game &game, const sf::Event &event)
         {
             std::static_pointer_cast<PlayingState>(playState)->reset();
             game.pushState("play");
+        }
+        else if (event.key.code == sf::Keyboard::Num4 || event.key.code == sf::Keyboard::Numpad4)
+        {
+            auto playState = game.getRegistry().getState("play");
+            if (playState)
+            {
+                std::static_pointer_cast<PlayingState>(playState)->setLevel(-1);
+                game.pushState("play");
+            }
         }
     }
 }

@@ -26,11 +26,9 @@
 #include <Gameplay/Player/PlayerRespawnSystem.hpp>
 #include <Gameplay/Player/PlayerStateSystem.hpp>
 
-#include <Gameplay/Reset/ResetSystem.hpp>
 #include <Gameplay/Stomp/StompSystem.hpp>
 #include <Gameplay/HitBlock/HitSpecialBlockSystem.hpp>
 #include <Gameplay/Block/BounceBlockSystem.hpp>
-#include <Gameplay/Popup/PopupSystem.hpp>
 #include <Gameplay/DamageOnContact/DamageOnContactSystem.hpp>
 
 #include <Gameplay/Item/ItemEmergingSystem.hpp>
@@ -77,12 +75,30 @@
 
 #include <cassert>
 #include <iostream>
+#include <fstream>
 
-GameManager::GameManager(int level) : levelHandler(world, level), level(level)
+// #include <Serialization/ComponentMeta.hpp>
+
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+
+
+GameManager::GameManager(int level) : levelHandler(world, level), currentLevel(level)
 {
-    levelHandler.start();
+    if (currentLevel == -1)
+    {
+        std::ifstream fin("save.json");
+        json j;
+        fin >> j;
+        currentLevel = j["level"];
+        world.loadSceneFromFile(j["entities"]);
+    }
+    else
+    {
+        levelHandler.start();
+        world.createEntity()->addComponent<Camera>();
+    }
 
-    world.createEntity()->addComponent<Camera>();
 
     world.addSystem<PlayTimeSystem>();
 
@@ -105,7 +121,6 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
 
     world.addSystem<LifeSystem>();
 
-    world.addSystem<PopupSystem>();
     world.addSystem<PatrolSystem>();
     world.addSystem<StompSystem>();
     world.addSystem<HitSpecialBlockSystem>();
@@ -150,16 +165,22 @@ GameManager::GameManager(int level) : levelHandler(world, level), level(level)
     world.addSystem<PlayerRespawnSystem>();
 }
 
-void GameManager::handleEvent(const sf::Event &event)
+void GameManager::handleEvent(const sf::Event& event, sf::RenderWindow& window)
 {
     if (event.type == sf::Event::KeyPressed)
     {
+        if (event.key.code == sf::Keyboard::S)
+        {
+            json j;
+            j["level"] = currentLevel;
+            world.saveSceneToFile(j["entities"]);  
+            std::ofstream fout("save.json");
+            fout << j.dump(4);
+        }
 
         if (event.key.code == sf::Keyboard::N)
         {
-            // do nothing
-
-            world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(100.0f);
+            world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(3.0f);
         }
 
         if (event.key.code == sf::Keyboard::F)
@@ -171,27 +192,20 @@ void GameManager::handleEvent(const sf::Event &event)
             mario->addComponent<GrowUpTag>();
             mario->addComponent<FireMarioTag>();
         }
-
-        if (event.key.code == sf::Keyboard::X)
-        {
-            std::cout << "HELLO\n";
-            auto lakitu = world.createEntity<Lakitu>((float)(20 * 16), (float)(3 * 16), 3.0f);
-        }
-
-        if (event.key.code == sf::Keyboard::B)
-        {
-            std::cout << "HELLO\n";
-            auto bowser = world.createEntity<Bowser>((float)(10 * 16), (float)(3 * 16), 3.0f);
-        }
-
-        if (event.key.code == sf::Keyboard::T)
-        {
-            auto goomba = world.createEntity<Goomba>((float)(7 * 16), (float)(2 * 16), 3.0f);
-        }
-
+        
         if (event.key.code == sf::Keyboard::P)
         {
             oneFrame = !oneFrame;
+
+            if (editor)
+            {
+                delete editor;
+                editor = nullptr;
+            }
+            else
+            {
+                editor = new LevelEditor(world);
+            }
         }
 
         if (event.key.code == sf::Keyboard::O)
@@ -199,12 +213,22 @@ void GameManager::handleEvent(const sf::Event &event)
             shouldPlay = true;
         }
     }
+
+    if (editor) editor->handleEvent(event, window);
 }
 
 void GameManager::update(float dt)
 {
+    if (dt > 0.1f) return;
+
     if (oneFrame && !shouldPlay)
+    {
+        world.getSystem<CollisionDetectionSystem>()->update(world, dt);
+        world.getSystem<AnimationSystem>()->update(world, dt);
+        // world.getSystem<HitBlockSystem>()->update(world, dt);
+        // world.getSystem<MovementSystem>()->update(world, dt);
         return;
+    }
 
     // std::cout << 1.0f / dt << "\n";
     world.update(dt);
@@ -213,12 +237,15 @@ void GameManager::update(float dt)
     {
         shouldPlay = false;
     }
+
+    // std::cout << level << "\n";
+
 }
 
-void GameManager::draw(sf::RenderWindow &window, int level) const
+void GameManager::draw(sf::RenderWindow &window, int level)
 {
     // Set the custom view
-    world.getSystem<RenderSystem>()->draw(world, window, level);
+    world.getSystem<RenderSystem>()->draw(world, window, currentLevel);
 
     // Drawn with custom view
     world.getSystem<DrawBoxColliderSystem>()->draw(world, window);
@@ -231,6 +258,12 @@ void GameManager::draw(sf::RenderWindow &window, int level) const
 
     // Set the default view
     world.getSystem<DrawGameComponentSystem>()->draw(world, window);
+
+    if (editor)
+    {
+        editor->drawUI();
+        editor->display(window);
+    }
 }
 
 int GameManager::lives = 5;

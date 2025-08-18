@@ -5,6 +5,7 @@
 #include <CoinManager.hpp>
 
 #include <ECS/System.hpp>
+#include <Framework/World.hpp>
 
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>
@@ -22,8 +23,6 @@
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/LifeSpan/Components.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
-
-#include <World.hpp>
 
 class HitSpecialBlockSystem : public System
 {

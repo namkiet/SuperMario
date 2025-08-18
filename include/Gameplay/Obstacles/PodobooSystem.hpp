@@ -1,4 +1,8 @@
 #pragma once
+#include <Framework/World.hpp>
+
+#include <Gameplay/Player/Components.hpp>
+#include <Gameplay/Patrol/Components.hpp>
 
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/RigidBody.hpp>
@@ -11,7 +15,6 @@
 #include <Gameplay/Patrol/Components.hpp>
 #include <Gameplay/Obstacles/Components.hpp>
 
-#include <World.hpp>
 class PodobooSystem : public System
 {
 public:

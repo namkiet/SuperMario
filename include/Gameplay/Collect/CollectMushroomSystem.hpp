@@ -1,5 +1,5 @@
 #pragma once
-
+#include <Framework/World.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 
 #include <Gameplay/Collect/Components.hpp>
@@ -7,8 +7,6 @@
 #include <Gameplay/Player/Components.hpp>
 
 #include <LevelManager.hpp>
-
-#include <World.hpp>
 
 class CollectMushroomSystem : public System
 {

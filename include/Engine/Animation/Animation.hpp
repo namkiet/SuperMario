@@ -8,20 +8,24 @@ struct Animation : public Component
     Animation() = default;
 
     Animation(const sf::Texture& texture)
-        : sprite(texture)
-        , frameWidth(texture.getSize().x)
+        : frameWidth(texture.getSize().x)
         , frameHeight(texture.getSize().y)
         , frameCount(1)
         , frameDuration(0)
-        , loop(true) {}
+        , loop(true) 
+    {
+        textures.push_back(&texture);
+    }
 
     Animation(const sf::Texture &texture, int frameWidth, int frameHeight, int frameCount, float frameDuration, bool loop = true)
-        : sprite(texture)
-        , frameWidth(frameWidth)
+        : frameWidth(frameWidth)
         , frameHeight(frameHeight)
         , frameCount(frameCount)
         , frameDuration(frameDuration)
-        , loop(loop) {}
+        , loop(loop) 
+        {
+            textures.push_back(&texture);
+        }
 
     Animation(std::vector<const sf::Texture*> textures, int frameWidth, int frameHeight, float frameDuration, bool loop) 
         : frameWidth(frameWidth)
@@ -29,10 +33,7 @@ struct Animation : public Component
         , frameCount(textures.size())
         , frameDuration(frameDuration)
         , loop(loop)
-        , textures(textures)
-    {
-        sprite.setTexture(*textures[0]);
-    }
+        , textures(textures) {}
 
     sf::Sprite sprite;
     int frameWidth;
@@ -49,3 +50,42 @@ struct Animation : public Component
 
 struct FlipXTag : public Component {};
 struct FlipYTag : public Component {};
+
+inline void updateAnimation(Animation& anim, float dt)
+{
+    anim.timer += dt;
+    if (anim.timer >= anim.frameDuration)
+    {
+        anim.timer -= anim.frameDuration;
+        anim.currentFrame++;
+
+        if (anim.currentFrame >= anim.frameCount)
+        {
+            if (anim.loop)
+            {
+                anim.currentFrame = 0;
+            }
+            else
+            {
+                anim.currentFrame = anim.frameCount - 1;
+                anim.hasEnded = true;
+            }
+        }
+
+    }
+
+    if (anim.textures.size() == 1)
+    {
+        anim.sprite.setTexture(*anim.textures[0]);
+        anim.sprite.setTextureRect(sf::IntRect(
+            anim.currentFrame * anim.frameWidth,
+            anim.row * anim.frameHeight,
+            anim.frameWidth,
+            anim.frameHeight
+        ));
+    }
+    else
+    {
+        anim.sprite.setTexture(*anim.textures[anim.currentFrame]);
+    }
+}

@@ -1,8 +1,7 @@
 #pragma once
 #include <ECS/System.hpp>
-#include <World.hpp>
+#include <Framework/World.hpp>
 #include <Gameplay/Player/Components.hpp>
-#include <Core/AnimationManager.hpp>
 #include <string>
 #include <unordered_map>
 #include <fstream>

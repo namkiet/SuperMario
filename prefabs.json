@@ -1,0 +1,206 @@
+{
+    "Goomba": {
+        "Animation": {
+            "currentFrame": 0,
+            "frameCount": 2,
+            "frameDuration": 0.25,
+            "frameHeight": 16,
+            "frameWidth": 16,
+            "hasEnded": false,
+            "loop": true,
+            "row": 0,
+            "sprite": "",
+            "textures": [
+                "assets/Enemy/Goomba/goomba_walk.png"
+            ],
+            "timer": 0.0
+        },
+        "BoxCollider2D": {
+            "bounce": false,
+            "collisions": [],
+            "corners": [
+                {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                {
+                    "x": 0.0,
+                    "y": 0.0
+                }
+            ],
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "origin": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "rotation": 0.0,
+            "size": {
+                "x": 320.0,
+                "y": 320.0
+            }
+        },
+        "CanHitBlockTag": {},
+        "DamageOnContactComponent": {
+            "validDirections": [
+                3,
+                4,
+                2
+            ]
+        },
+        "EnemyTag": {
+            "behaviour": "GoombaBehaviour",
+            "state": "GoombaNormalState"
+        },
+        "GoombaPatrol": {
+            "velocity": {
+                "x": 0.0,
+                "y": 0.0
+            }
+        },
+        "NotOnPatrolYet": {},
+        "RigidBody": {
+            "acceleration": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "applyGravity": true,
+            "onGround": false,
+            "velocity": {
+                "x": 0.0,
+                "y": 0.0
+            }
+        },
+        "StompableTag": {},
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 2000.0,
+                "y": 2000.0
+            },
+            "prevPos": {
+                "x": 2000.0,
+                "y": 2000.0
+            },
+            "size": {
+                "x": 320.0,
+                "y": 320.0
+            }
+        },
+        "name": "6Goomba"
+    },
+    "Koopa": {
+        "Animation": {
+            "currentFrame": 0,
+            "frameCount": 2,
+            "frameDuration": 0.25,
+            "frameHeight": 24,
+            "frameWidth": 16,
+            "hasEnded": false,
+            "loop": true,
+            "row": 0,
+            "sprite": "",
+            "textures": [
+                "assets/Enemy/Koopa/koopa_walk.png"
+            ],
+            "timer": 0.0
+        },
+        "BoxCollider2D": {
+            "bounce": false,
+            "collisions": [],
+            "corners": [
+                {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                {
+                    "x": 0.0,
+                    "y": 0.0
+                }
+            ],
+            "isDisabled": false,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "origin": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "rotation": 0.0,
+            "size": {
+                "x": 480.0,
+                "y": 720.0
+            }
+        },
+        "CanHitBlockTag": {},
+        "DamageOnContactComponent": {
+            "validDirections": [
+                3,
+                4,
+                2
+            ]
+        },
+        "EnemyTag": {
+            "behaviour": "KoopaNormalBehaviour",
+            "state": "KoopaNormalState"
+        },
+        "KoopaNormalTag": {},
+        "KoopaPatrol": {
+            "lastDirection": 0,
+            "velocity": {
+                "x": 0.0,
+                "y": 0.0
+            }
+        },
+        "NotOnPatrolYet": {},
+        "RigidBody": {
+            "acceleration": {
+                "x": 0.0,
+                "y": 0.0
+            },
+            "applyGravity": true,
+            "onGround": false,
+            "velocity": {
+                "x": 0.0,
+                "y": 0.0
+            }
+        },
+        "StompableTag": {},
+        "Transform": {
+            "isFacingRight": true,
+            "position": {
+                "x": 6000.0,
+                "y": 3000.0
+            },
+            "prevPos": {
+                "x": 6000.0,
+                "y": 3000.0
+            },
+            "size": {
+                "x": 480.0,
+                "y": 720.0
+            }
+        },
+        "name": "5Koopa"
+    }
+}

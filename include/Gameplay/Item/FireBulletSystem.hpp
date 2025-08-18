@@ -1,5 +1,7 @@
 #pragma once
-
+#include <Framework/World.hpp>
+#include <Gameplay/Block/Components.hpp>
+#include <Prefabs/Star.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>
@@ -14,8 +16,6 @@
 #include <Gameplay/LifeSpan/Components.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/Enemy/Components.hpp>
-
-#include <World.hpp>
 
 class FireBulletSystem : public System
 {

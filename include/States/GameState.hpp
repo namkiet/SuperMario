@@ -12,7 +12,7 @@ class GameState
 {
 public:
     virtual ~GameState() = default;
-    virtual void handleEvent(Game& game, const sf::Event& event) = 0;
+    virtual void handleEvent(Game& game, const sf::Event& event, sf::RenderWindow& window) = 0;
     virtual void update(Game& game, float dt) = 0;
     virtual void render(Game& game, sf::RenderWindow& window) = 0;
 };

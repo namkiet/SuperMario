@@ -9,6 +9,6 @@ struct LifeSpan : public Component
 
 struct Health : public Component
 {
-    Health(int hp) : hp(hp) {}
+    Health(int hp = 0) : hp(hp) {}
     int hp;
 };

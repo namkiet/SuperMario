@@ -5,6 +5,8 @@
 
 struct TextComponent : public Component
 {
+    TextComponent() = default;
+
     TextComponent(std::string text, float startX, float startY, float finalY, float size, int seconds)
         : content(text), startX(startX), startY(startY), finalY(finalY), size(size)
     {
@@ -21,6 +23,6 @@ struct TextComponent : public Component
 // Just for score purpose
 struct ShouldUpdateScore : public Component
 {
-    ShouldUpdateScore(int score) : score(score) {}
+    ShouldUpdateScore(int score = 0) : score(score) {}
     int score;
 };

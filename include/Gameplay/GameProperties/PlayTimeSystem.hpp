@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ECS/System.hpp>
+#include <Framework/World.hpp>
 
 #include <Engine/Core/DespawnTag.hpp>
 
@@ -11,8 +12,6 @@
 #include <LevelManager.hpp>
 
 #include <TimeManager.hpp>
-
-#include <World.hpp>
 
 class PlayTimeSystem : public System
 {

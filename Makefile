@@ -1,4 +1,4 @@
-.PHONY: all build compile run clear
+.PHONY: all build compile run clear tool
 
 all:: clear compile run
 
@@ -12,5 +12,7 @@ compile:
 	cmake --build build -- -j8
 
 run:
-	./build/bin/main
+	./build/bin/mario
 
+tool:
+	g++ tool/parse.cpp -o tool/parse -std=c++17 -I/usr/local/opt/llvm/include -L/usr/local/opt/llvm/lib -lclang -lLLVM

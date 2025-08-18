@@ -10,6 +10,8 @@ void RenderSystem::backgroundRender(sf::RenderWindow &window, int level) const
     sf::Sprite sky;
     sf::Sprite backgroundSprite;
 
+    // std::cout << level << "\n";
+
     switch (level)
     {
     case 1:
