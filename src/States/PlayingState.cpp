@@ -9,9 +9,9 @@ PlayingState::PlayingState(std::shared_ptr<Game> game) : GameState(game), gameMa
 {
    uiRoot = nullptr;
    
-    std::cout << " to playstate constructor ok" << std::endl;
+    // std::cout << " to playstate constructor ok" << std::endl;
     setupButton();
-    std::cout << "playstate constructor ok" << std::endl;
+    // std::cout << "playstate constructor ok" << std::endl;
 }
 
 void PlayingState::handleEvent(const sf::Event &event)
@@ -67,13 +67,8 @@ void PlayingState::render(sf::RenderWindow &window)
 
 void PlayingState::setupButton()
 {
-    std::cout << "74 ok \n";
-
-        std::cout << "76 ok \n";
     if (!UIFont.loadFromFile("MarioFont.ttf")) assert(false);
-        std::cout << "78 ok \n";
     auto& texholder = game->getTexHolder();
-        std::cout << "80 ok \n";
 
     using namespace UIConstant;
 
@@ -101,8 +96,6 @@ void PlayingState::setupButton()
         {
             return helperBuilder::makeText(content, pos, charSize, UIFont, colorSetting, setCenter);
         };
-
-        std::cout << "104 ok \n";
     if (level == 4)
     {
         float sameHeightStat = ws.y * 0.9;
@@ -141,8 +134,6 @@ void PlayingState::setupButton()
             std::make_shared<sf::Sprite>(texholder.get(TexType::luigichoose)),
             sf::Color::White, /*setCenter = */true
             );
-            std::cout << "145, level = 4 still ok " << std::endl;
-
         auto optdrawElement = std::make_shared<DrawableElement>();
         auto optInteractUI = std::make_shared<InteractUI>(Interact(StateColor()), optdrawElement);
         std::shared_ptr<OptionContainer> CharOptContainer = std::make_shared<OptionContainer>(optInteractUI, /*mustHaveOp=*/true);
@@ -194,7 +185,7 @@ void PlayingState::setupButton()
         auto pausePanel = std::make_shared<Panel>(pauseIU);
 
         pausePanel->setActiveKey(sf::Keyboard::Z); // press Z to open pause
-        std::cout << "129 ok \n";
+
 
         dummyContainer->addComponent(pausePanel);
 
@@ -284,7 +275,6 @@ void PlayingState::setupButton()
     settingsPanel->addComponent(musicBtn);
     //==========================
 
-    std::cout << "235 ok \n";
     // Create Move Up button
     auto moveUpShape = std::make_shared<RoundedRectangleShape>(controlbtnSize, 15.f);
     auto moveUpBtn = makeButtonUtil(
@@ -336,8 +326,6 @@ void PlayingState::setupButton()
     );
     auto moveLeftMessage = makeTextUtil("Move left", moveUpPos + sf::Vector2f(0.f, 2 * buttonOffset) + sf::Vector2f(150.f,15.f),
                             charSize, textColorSetting);
-
-std::cout << "288 ok \n";
 
     // ===================shoot button================================
     auto shootShape = std::make_shared<RoundedRectangleShape>(controlbtnSize, 15.f);
@@ -409,9 +397,6 @@ std::cout << "288 ok \n";
             pair.first->setText(content);
         }
     });
-
-    std::cout << "360 ok \n";
-    
 
 
     // ==================== KeySetting title===========================
@@ -486,8 +471,6 @@ std::cout << "288 ok \n";
             nullptr, sf::Color::White, /*setCenter=*/true
         );
         pausePanel->addComponent(saveBtn);
-
-        std::cout << "433 ok \n";
 
         roundedRectShape = std::make_shared<RoundedRectangleShape>(pauseButtonShape, 15.f);
         

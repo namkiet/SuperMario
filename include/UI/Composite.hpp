@@ -182,7 +182,6 @@ class Interact
         void setActive(bool active)
         {
             if (!canActive) return;
-            if (active == false) std::cout << "set deActive is call" << std::endl;
             isActive = active;
         }
         void setHover(bool hover)
@@ -295,7 +294,6 @@ public:
     }
     void setSprite(std::shared_ptr<sf::Sprite> spr)
     {
-        // std::cout << "Ok only" <<std::endl;
         component->setSprite(spr);
     }
 };
@@ -355,10 +353,6 @@ class UIContainer: public UIComponent
         {
             ComponentList.push_back(ele);
         }
-        // void setComponent(std::vector<std::shared_ptr<UIComponent>> list)
-        // {
-        //     ComponentList = list;
-        // }
         void sortComponentList()
         {
             std::stable_sort(ComponentList.begin(), ComponentList.end(),
@@ -384,14 +378,8 @@ class UIContainer: public UIComponent
             if (!getIsActive()) return true; // return if not active
             for (auto it = ComponentList.rbegin(); it != ComponentList.rend(); ++it)
             {
-                
-            // std::cout << "mid handle event in uicontainer" << std::endl;
                 if (!(*it)->handleEvent(event)) return false; // handle event for children in reverse order
-            
-            // std::cout << "after mid uicontainer handle event" << std::endl;
             }
-            
-            // std::cout << "end handle event in uicontainer" << std::endl;
             return true;
         }
         
@@ -424,8 +412,7 @@ class Panel: public UIContainer
     }
     bool handleEvent(const sf::Event& event) override
     {
-        UIContainer::handleEvent(event); 
-        // std::cout << "can go here" << std::endl;
+        UIContainer::handleEvent(event);
         if (activeKey != sf::Keyboard::Unknown 
             && event.type == sf::Event::KeyPressed
              && event.key.code == activeKey)
