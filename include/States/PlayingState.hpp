@@ -12,7 +12,7 @@ public:
     void handleEvent(const sf::Event &event, sf::RenderWindow& window) override;
     void update(float dt) override;
     void render(sf::RenderWindow &window) override;
-    void setLevel(int level);
+    void setLevel(int level, bool hasWonLastLevel = false);
     void requestLevelReload(int newLevel);
     void setupButton();
     ~PlayingState() override;

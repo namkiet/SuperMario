@@ -9,6 +9,8 @@
 #include <UI/HelperBuilder.hpp>
 #include <UI/KeyBinding.hpp>
 
+using namespace UIConstant;
+
 PlayingState::PlayingState(std::shared_ptr<Game> game) : GameState(game), gameManager(nullptr)
 {
    uiRoot = nullptr;
@@ -18,7 +20,7 @@ PlayingState::PlayingState(std::shared_ptr<Game> game) : GameState(game), gameMa
     // std::cout << "playstate constructor ok" << std::endl;
 }
 
-void PlayingState::handleEvent(const sf::Event &event)
+void PlayingState::handleEvent(const sf::Event &event, sf::RenderWindow& window)
 {
     if (event.type == sf::Event::KeyPressed)
     {
@@ -35,7 +37,7 @@ void PlayingState::handleEvent(const sf::Event &event)
     if (uiRoot) uiRoot->handleEvent(event);
 }
 
-void PlayingState::update(Game &game, float dt)
+void PlayingState::update(float dt)
 {
     if (LevelManager::instance().getSkipUpdate())
     {
@@ -47,8 +49,8 @@ void PlayingState::update(Game &game, float dt)
     {
         if (level + 1 > 3)
         {
-            game.popState();
-            game.pushState("menu");
+            game->popState();
+            game->pushState("menu");
             return;
         }
         LevelManager::instance().setLevel(level + 1);
@@ -58,8 +60,8 @@ void PlayingState::update(Game &game, float dt)
     }
     else if (currentLevelState && currentLevelState->shouldReturnToMenu())
     {
-        game.popState();
-        game.pushState("menu");
+        game->popState();
+        game->pushState("menu");
         return;
     }
 

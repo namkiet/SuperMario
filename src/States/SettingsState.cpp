@@ -9,7 +9,7 @@ SettingsState::SettingsState(std::shared_ptr<Game> game): GameState(game)
     info.setPosition(200, 250);
 }
 
-void SettingsState::handleEvent(const sf::Event& event)
+void SettingsState::handleEvent(const sf::Event& event, sf::RenderWindow& window)
 {
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
         game->popState();  // return to PlayGameState

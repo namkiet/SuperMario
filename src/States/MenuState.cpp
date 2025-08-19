@@ -396,7 +396,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
 }
 
 
-void MenuState::handleEvent(const sf::Event &event) {
+void MenuState::handleEvent(const sf::Event &event, sf::RenderWindow& window) {
     if (uiRoot) uiRoot->handleEvent(event);
 }
 

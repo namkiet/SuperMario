@@ -1,6 +1,6 @@
 #pragma once
 #include <ECS/Component.hpp>
-using namespace std;
+// using namespace std;
 
 struct CoinBlock : public Component {};
 
