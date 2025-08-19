@@ -17,7 +17,7 @@ namespace helperBuilder
         const StateColor& colors,
         bool toggle,
         unsigned int textSize,
-        sf::Font font,
+        sf::Font& font,
         std::function<void()> onClick = nullptr,
         std::shared_ptr<sf::Sprite> sprite = nullptr,
         sf::Color textColor = sf::Color::White,
