@@ -61,8 +61,8 @@ public:
 public:
     PlayerStateSystem()
     {
-        MessageBus::subscribe("SelectedMario", [this](const std::string&) { isMario = true; playerHasChanged = true; });
-        MessageBus::subscribe("SelectedLuigi", [this](const std::string&) { isMario = false; playerHasChanged = true; });
+        MessageBus::subscribe("SelectedMario", this, [this](const std::string&) { isMario = true; playerHasChanged = true; });
+        MessageBus::subscribe("SelectedLuigi", this, [this](const std::string&) { isMario = false; playerHasChanged = true; });
         loadAnimationsFromFile("assets/Player/player_animation.json");
     }
 

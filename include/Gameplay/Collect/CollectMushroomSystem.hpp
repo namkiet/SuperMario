@@ -24,33 +24,49 @@ class CollectMushroomSystem : public System
                 if (!item->hasComponent<MushroomTag>())
                     continue;
 
-                if (!player->hasComponent<BigMarioTag>())
-                {
-                    player->addComponent<GrowUpTag>();
-                }
+                
 
-                auto &mushroomTag = item->getComponent<MushroomTag>();
-                if (mushroomTag.buff == MushroomTag::Buff::GIVE_ONE_MORE_LIFE)
+               auto& mushroomTag = item->getComponent<MushroomTag>();
+                switch (mushroomTag.buff) 
                 {
-                    world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/1up.wav"));
-                }
-                else if (mushroomTag.buff == MushroomTag::Buff::GET_TO_LEVEL_1)
-                {
-                    newLevel = 1;
-                    shouldReloadLevel = true;
-                    // std::cout << "Collect Mushroom: GET_TO_LEVEL_1\n";
-                }
-                else if (mushroomTag.buff == MushroomTag::Buff::GET_TO_LEVEL_2)
-                {
-                    newLevel = 2;
-                    shouldReloadLevel = true;
-                    // std::cout << "Collect Mushroom: GET_TO_LEVEL_2\n";
-                }
-                else if (mushroomTag.buff == MushroomTag::Buff::GET_TO_LEVEL_3)
-                {
-                    newLevel = 3;
-                    shouldReloadLevel = true;
-                    // std::cout << "Collect Mushroom: GET_TO_LEVEL_3\n";
+                    case MushroomTag::Buff::GROW_UP: 
+                    {
+                        if (!player->hasComponent<BigMarioTag>())
+                        {
+                            player->addComponent<GrowUpTag>();
+                        }
+                        break;
+                    }
+
+                    case MushroomTag::Buff::GIVE_ONE_MORE_LIFE: {
+                        world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/1up.wav"));
+                        GameManager::setLives(GameManager::getLives() + 1);
+                        break;
+                    }
+
+                    case MushroomTag::Buff::GET_TO_LEVEL_1: {
+                        newLevel = 1;
+                        shouldReloadLevel = true;
+                        // std::cout << "Collect Mushroom: GET_TO_LEVEL_1\n";
+                        break;
+                    }
+
+                    case MushroomTag::Buff::GET_TO_LEVEL_2: {
+                        newLevel = 2;
+                        shouldReloadLevel = true;
+                        // std::cout << "Collect Mushroom: GET_TO_LEVEL_2\n";
+                        break;
+                    }
+
+                    case MushroomTag::Buff::GET_TO_LEVEL_3: {
+                        newLevel = 3;
+                        shouldReloadLevel = true;
+                        // std::cout << "Collect Mushroom: GET_TO_LEVEL_3\n";
+                        break;
+                    }
+
+                    default:
+                        break; // in case new enum values are added later
                 }
             }
         }

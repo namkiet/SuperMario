@@ -24,7 +24,10 @@ private:
     // 3 for world 6-1 + 6-2
     int spriteIndex = 0;
     float scale = 3.0f;
+
     std::unordered_map<std::string, sf::Vector2f> teleMap;
+
+    static std::vector<sf::Vector2f> checkPointPos;
     static inline bool shouldCreateMario = true;
 
     void tileLoad(World &world, std::string tilename, float x, float y, float width, float height);
@@ -39,5 +42,6 @@ private:
 
 public:
     LevelHandler(World &world, int currentLevel = 0);
+    static std::vector<sf::Vector2f> &getCheckPointPos();
     void start();
 };

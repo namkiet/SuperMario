@@ -63,7 +63,7 @@ void BowserJumpBehaviour::patrol(Entity* entity, float dt, World& world)
     auto& attack = entity->getComponent<BowserAttack>();
     auto& tf = entity->getComponent<Transform>();
     auto& rb = entity->getComponent<RigidBody>();
-    auto& playerTF = world.findFirst<PlayerTag>()->getComponent<Transform>();
+    auto& playerTF = world.findFirst<PlayerTag, Transform>()->getComponent<Transform>();
     auto& towardPlayer = entity->getComponent<TowardPlayer>();
     auto playerCen = playerTF.position + playerTF.size / 2.0f;
 
@@ -104,7 +104,7 @@ void BowserJumpBehaviour::attack(Entity* entity, float dt, World& world)
 {
     auto& bowserTF =entity->getComponent<Transform>();
     auto& attack = entity->getComponent<BowserAttack>();
-    auto playerTF = world.findFirst<PlayerTag>()->getComponent<Transform>();
+    auto playerTF = world.findFirst<PlayerTag, Transform>()->getComponent<Transform>();
 
     if (abs(bowserTF.position.x - playerTF.position.x) > attack.distance
     ||  entity->hasComponent<ChangeToBowserHurtTag>()

@@ -1,4 +1,3 @@
-#pragma once
 #include <Framework/SaveManager.hpp>
 
 SaveManager::SaveManager(EntityManager& entityManager, ComponentRegistry& componentRegistry)

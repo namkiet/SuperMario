@@ -470,7 +470,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "image":"..\/Item\/FireBar\/smallFireBar.png",
+         "image":"..\/Item\/FireBar\/smallFireBar_0.png",
          "imageheight":144,
          "imagewidth":24,
          "margin":0,
@@ -485,7 +485,7 @@
         }, 
         {
          "firstgid":10,
-         "image":"..\/Item\/FireBar\/largeFireBar.png",
+         "image":"..\/Item\/FireBar\/largeFireBar_0.png",
          "imageheight":288,
          "imagewidth":24,
          "margin":0,

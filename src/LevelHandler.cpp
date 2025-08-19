@@ -29,10 +29,10 @@
 
 #include <ThemeManager.hpp>
 
-LevelHandler::LevelHandler(World &world, int currentLevel) : world(world), currentLevel(currentLevel) 
+LevelHandler::LevelHandler(World &world, int currentLevel) : world(world), currentLevel(currentLevel)
 {
-    MessageBus::subscribe("SelectedMario", [this](const std::string&) { shouldCreateMario = true; });
-    MessageBus::subscribe("SelectedLuigi", [this](const std::string&) { shouldCreateMario = false; });
+    MessageBus::subscribe("SelectedMario", this, [this](const std::string&) { shouldCreateMario = true; });
+    MessageBus::subscribe("SelectedLuigi", this, [this](const std::string&) { shouldCreateMario = false; });
 }
 
 void LevelHandler::start()
@@ -332,7 +332,14 @@ void LevelHandler::playerLoad(World &world, std::string tilename, float x, float
     if (tilename == "StartingPoint") // Player
     {
         world.createEntity<Mario>(x, y, width, height, scale, shouldCreateMario);
+        std::cout << "Player created at position: (" << x * scale << ", " << y * scale << ")\n";
+        checkPointPos.push_back(sf::Vector2f(x * scale, y * scale));
     }
+    else if (tilename == "CheckPoint")
+    {
+        checkPointPos.push_back(sf::Vector2f(x * scale, y * scale));
+    }
+
     else if (tilename == "CheckPoint1")
     {
         // world.createEntity<Mario>(x, y, width, height, 3);
@@ -362,7 +369,7 @@ void LevelHandler::enemyLoad(World &world, std::string tilename, float x, float 
     }
     else if (tilename == "Piranha")
     {
-        auto piranha = world.createEntity<Piranha>(x + width / 2, y + 16/3.0f, scale);
+        auto piranha = world.createEntity<Piranha>(x + width / 2, y + 16 / 3.0f, scale);
     }
     else if (tilename == "JumpingKoopa")
     {
@@ -380,4 +387,11 @@ void LevelHandler::enemyLoad(World &world, std::string tilename, float x, float 
     {
         auto bowser = world.createEntity<Bowser>(x, y, scale);
     }
+}
+
+std::vector<sf::Vector2f> LevelHandler::checkPointPos;
+
+std::vector<sf::Vector2f> &LevelHandler::getCheckPointPos()
+{
+    return checkPointPos;
 }

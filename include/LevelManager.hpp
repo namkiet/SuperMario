@@ -28,6 +28,9 @@ private:
     LevelManager(const LevelManager &) = delete;
     LevelManager &operator=(const LevelManager &) = delete;
 
+    //
+    sf::Vector2f prevMarioPosition = sf::Vector2f(0.f, 0.f);
+
 public:
     static LevelManager &instance()
     {
@@ -72,6 +75,7 @@ public:
     void reset()
     {
         level = 1;
+        prevMarioPosition = sf::Vector2f(0.f, 0.f);
         for (auto &observer : observers)
         {
             observer->onLevelChanged(level);
@@ -105,6 +109,16 @@ public:
     void setShouldLoadNextLevel(bool value)
     {
         shouldLoadNextLevel = value;
+    }
+
+    void setPrevMarioPosition(const sf::Vector2f &position)
+    {
+        prevMarioPosition = position;
+    }
+
+    sf::Vector2f &getPrevMarioPosition()
+    {
+        return prevMarioPosition;
     }
 };
 

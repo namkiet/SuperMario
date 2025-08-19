@@ -9,7 +9,7 @@
 
 MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
 {
-    font.loadFromFile("MarioFont.ttf");
+    font.loadFromFile("BalooBhai2-ExtraBold.ttf");
 
     auto& texholder = game->getTexHolder();
     using namespace UIConstant;
@@ -418,6 +418,22 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
 
 void MenuState::handleEvent(const sf::Event &event) {
     if (uiRoot) uiRoot->handleEvent(event);
+
+    if (event.type == sf::Event::KeyPressed)
+    {
+        if (event.key.code == sf::Keyboard::S)
+        {
+            auto playState = game->getRegistry().getState("play");
+            if (playState)
+            {
+                json j;
+                std::ifstream fin("save.json");
+                fin >> j;
+                std::static_pointer_cast<PlayingState>(playState)->setLevel(j["level"], false, true);
+                game->pushState("play");
+            }
+        }
+    }
 }
 
 void MenuState::update(float dt) {
