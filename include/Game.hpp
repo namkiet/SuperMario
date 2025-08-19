@@ -6,6 +6,7 @@
 #include <memory>
 #include <string>
 #include <UI/TextureHolder.hpp>
+#include <UI/Composite.hpp>
 
 class Game
 {

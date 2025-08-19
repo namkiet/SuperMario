@@ -143,7 +143,7 @@ class TeleSystem : public System
         assert(false);
         return false;
     }
-    static sf::Vector2f calVel(Direction dir, float speed = 200.f)
+    static sf::Vector2f calVel(Direction dir, float speed = 150.f)
     {
         if (dir == Direction::Top)
             return sf::Vector2f(0.f, -speed);

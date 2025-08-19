@@ -8,6 +8,7 @@
 #include <UI/UIConstant.hpp>
 #include <UI/HelperBuilder.hpp>
 #include <UI/KeyBinding.hpp>
+#include <UI/CommonUIPool.hpp>
 
 // InGameState::InGameState()
 // {
@@ -74,7 +75,7 @@ void InGameState::setupButton()
         {
             return helperBuilder::makeText(content, pos, charSize, UIFont, colorSetting, setCenter);
         };
-    assert(LevelManager::instance().getLevel() != 0);
+    // assert(LevelManager::instance().getLevel() != 0);
 
     // create Dummy uiROot
         auto dummydrawElement = std::make_shared<DrawableElement>();
@@ -118,212 +119,220 @@ void InGameState::setupButton()
         };
         sf::Vector2f centerPos = sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y / 2);
         
-    // ========================== Setting Panel =====================================
-    // Create Settings Panel
-    auto& keybinding = KeyBinding::Instance();
-    auto settingsPanelShape = std::make_shared<RoundedRectangleShape>(panelSize, 20.f);
-    settingsPanelShape->setPosition(panelPos);
-    settingsPanelShape->setFillColor(mainBtnColor.normal);
+    // // ========================== Setting Panel =====================================
+    // // Create Settings Panel
+    // auto& keybinding = KeyBinding::Instance();
+    // auto settingsPanelShape = std::make_shared<RoundedRectangleShape>(panelSize, 20.f);
+    // settingsPanelShape->setPosition(panelPos);
+    // settingsPanelShape->setFillColor(mainBtnColor.normal);
 
-    auto settingsDE = std::make_shared<DrawableElement>(settingsPanelShape);
+    // auto settingsDE = std::make_shared<DrawableElement>(settingsPanelShape);
 
 
-    Interact settingsInter(StateColor(mainBtnColor.normal, mainBtnColor.normal), /*toggle=*/true);
-    settingsInter.setActive(false); 
-    auto settingsIU = std::make_shared<InteractUI>(settingsInter, settingsDE);
+    // Interact settingsInter(StateColor(mainBtnColor.normal, mainBtnColor.normal), /*toggle=*/true);
+    // settingsInter.setActive(false); 
+    // auto settingsIU = std::make_shared<InteractUI>(settingsInter, settingsDE);
 
-    auto settingsPanel = std::make_shared<Panel>(settingsIU);
+    // auto settingsPanel = std::make_shared<Panel>(settingsIU);
 
-    // settingComponent = settingsPanel;
+    // // settingComponent = settingsPanel;
 
     // ========== Close button in settingsPanel =================================
 
-    std::shared_ptr<sf::Sprite> turnbackSprite = std::make_shared<sf::Sprite>(texholder.get(TexType::turnback));
-    auto homeBtn = makeButtonUtil(
-        sf::Vector2f(40.f, 40.f), 
-        std::make_shared<sf::CircleShape>(30.f),
-        "",
-        backButtonColor,
-        false,
-        0,
-        [settingsPanel]() { 
-            settingsPanel->setActive(false);
-        },
-        turnbackSprite
-    );
-    settingsPanel->addComponent(homeBtn);
-    pausePanel->addComponent(settingsPanel);
+    // std::shared_ptr<sf::Sprite> turnbackSprite = std::make_shared<sf::Sprite>(texholder.get(TexType::turnback));
+    // auto homeBtn = makeButtonUtil(
+    //     sf::Vector2f(40.f, 40.f), 
+    //     std::make_shared<sf::CircleShape>(30.f),
+    //     "",
+    //     backButtonColor,
+    //     false,
+    //     0,
+    //     [settingsPanel]() { 
+    //         settingsPanel->setActive(false);
+    //     },
+    //     turnbackSprite
+    // );
+    // settingsPanel->addComponent(homeBtn);
+    pausePanel->addComponent(CommonUIPool::getInstance().get("settingPanel"));
 
-    // =============Sound button =======================================
-        auto soundBtn = makeButtonUtil(
-        panelPos + sf::Vector2f(panelSize.x - 120.f, 30.f), 
-        std::make_shared<RoundedRectangleShape>(sf::Vector2f(70.f, 70.f), 10.f),
-        "",
-        soundButtonColor,
-        true,
-        0,
-        [settingsPanel]() { },
-        std::make_shared<sf::Sprite>(texholder.get(TexType::sound))
-    );
-    // soundBtn->setFunc([soundBtn, this]() {
-    //     static bool soundOn = false;
-    //     if (soundOn) soundBtn->setSprite(spritePool[TexType::soundOn]);
-    //     else soundBtn->setSprite(spritePool[TexType::soundOff]);
-    //     soundOn = !soundOn;
-    // });
-    settingsPanel->addComponent(soundBtn);
-    //============Music Button========================
-        auto musicBtn = makeButtonUtil(
-        panelPos + sf::Vector2f(panelSize.x - 120.f, 140.f), 
-        std::make_shared<RoundedRectangleShape>(sf::Vector2f(70.f, 70.f), 10.f),
-        "",
-        soundButtonColor,
-        true,
-        0,
-        [settingsPanel]() { },
-        std::make_shared<sf::Sprite>(texholder.get(TexType::music))
-    );
-    settingsPanel->addComponent(musicBtn);
-    //==========================
+    // // =============Sound button =======================================
+    //     auto soundBtn = makeButtonUtil(
+    //     panelPos + sf::Vector2f(panelSize.x - 120.f, 30.f), 
+    //     std::make_shared<RoundedRectangleShape>(sf::Vector2f(70.f, 70.f), 10.f),
+    //     "",
+    //     soundButtonColor,
+    //     true,
+    //     0,
+    //     []() {
+    //         SOUND::shouldPlayMusic = !SOUND::shouldPlayMusic;
+    //      },
+    //     std::make_shared<sf::Sprite>(texholder.get(TexType::sound))
+    // );
+    // soundBtn->setActive(SOUND::shouldPlayMusic);
+    // // soundBtn->setFunc([soundBtn, this]() {
+    // //     static bool soundOn = false;
+    // //     if (soundOn) soundBtn->setSprite(spritePool[TexType::soundOn]);
+    // //     else soundBtn->setSprite(spritePool[TexType::soundOff]);
+    // //     soundOn = !soundOn;
+    // // });
+    // settingsPanel->addComponent(soundBtn);
+    // //============Music Button========================
+    //     auto musicBtn = makeButtonUtil(
+    //     panelPos + sf::Vector2f(panelSize.x - 120.f, 140.f), 
+    //     std::make_shared<RoundedRectangleShape>(sf::Vector2f(70.f, 70.f), 10.f),
+    //     "",
+    //     soundButtonColor,
+    //     true,
+    //     0,
+    //     [settingsPanel]() { },
+    //     std::make_shared<sf::Sprite>(texholder.get(TexType::music))
+    // );
+    // settingsPanel->addComponent(musicBtn);
+    // //==========================
+    // //  setFunc for setting panel so that  sound and music is set to correct state
+    // // settingsPanel->setFunc([musicBtn, soundBtn](){
+    // //     musicBtn->setActive(SOUND::shouldPlayMusic);
+    // //     soundBtn->setActive(SOUND::shouldPlayMusic);
+    // // });
 
-    // Create Move Up button
-    auto moveUpShape = std::make_shared<RoundedRectangleShape>(controlbtnSize, 15.f);
-    auto moveUpBtn = makeButtonUtil(
-        moveUpPos,
-        std::static_pointer_cast<sf::Shape>(moveUpShape),
-        keyToString(keybinding.getKey(KeyBinding::Action::MoveUp)),
-        keybuttonColor,
-        true,
-        charSize,
-        [this]() { 
-            std::cout << "Move Up button clicked!" << std::endl;
-        },
-        nullptr, sf::Color::Black
-    );
-    auto moveUpMessage = makeTextUtil("Jump", moveUpPos + sf::Vector2f(150.f,15.f),
-                            charSize, textColorSetting);
+    // // Create Move Up button
+    // auto moveUpShape = std::make_shared<RoundedRectangleShape>(controlbtnSize, 15.f);
+    // auto moveUpBtn = makeButtonUtil(
+    //     moveUpPos,
+    //     std::static_pointer_cast<sf::Shape>(moveUpShape),
+    //     keyToString(keybinding.getKey(KeyBinding::Action::MoveUp)),
+    //     keybuttonColor,
+    //     true,
+    //     charSize,
+    //     [this]() { 
+    //         std::cout << "Move Up button clicked!" << std::endl;
+    //     },
+    //     nullptr, sf::Color::Black
+    // );
+    // auto moveUpMessage = makeTextUtil("Jump", moveUpPos + sf::Vector2f(150.f,15.f),
+    //                         charSize, textColorSetting);
 
-    // Create Move right button
-    auto moveRightShape = std::make_shared<RoundedRectangleShape>(controlbtnSize, 15.f);
-    auto moveRightBtn = makeButtonUtil(
-        moveUpPos + sf::Vector2f(0.f, 1 * buttonOffset), 
-        std::static_pointer_cast<sf::Shape>(moveRightShape),
-        keyToString(keybinding.getKey(KeyBinding::Action::MoveRight)),
-        keybuttonColor,
-        true,
-        charSize,
-        [this]() { 
-            std::cout << "Move Down button clicked!" << std::endl;
-        },
-        nullptr, sf::Color::Black
-    );
-    auto moveRightMessage = makeTextUtil("Move right", moveUpPos + sf::Vector2f(0.f, 1 * buttonOffset) + sf::Vector2f(150.f,15.f),
-                            charSize, textColorSetting);
-
-
-    // Create Move Left button
-    auto moveLeftShape = std::make_shared<RoundedRectangleShape>(controlbtnSize, 15.f);
-    auto moveLeftBtn = makeButtonUtil(
-        moveUpPos + sf::Vector2f(0.f, 2 * buttonOffset),
-        std::static_pointer_cast<sf::Shape>(moveLeftShape),
-        keyToString(keybinding.getKey(KeyBinding::Action::MoveLeft)),
-        keybuttonColor,
-        true,
-        charSize,
-        [this]() { 
-            std::cout << "Move Left button clicked!" << std::endl;
-        },
-        nullptr, sf::Color::Black
-    );
-    auto moveLeftMessage = makeTextUtil("Move left", moveUpPos + sf::Vector2f(0.f, 2 * buttonOffset) + sf::Vector2f(150.f,15.f),
-                            charSize, textColorSetting);
+    // // Create Move right button
+    // auto moveRightShape = std::make_shared<RoundedRectangleShape>(controlbtnSize, 15.f);
+    // auto moveRightBtn = makeButtonUtil(
+    //     moveUpPos + sf::Vector2f(0.f, 1 * buttonOffset), 
+    //     std::static_pointer_cast<sf::Shape>(moveRightShape),
+    //     keyToString(keybinding.getKey(KeyBinding::Action::MoveRight)),
+    //     keybuttonColor,
+    //     true,
+    //     charSize,
+    //     [this]() { 
+    //         std::cout << "Move Down button clicked!" << std::endl;
+    //     },
+    //     nullptr, sf::Color::Black
+    // );
+    // auto moveRightMessage = makeTextUtil("Move right", moveUpPos + sf::Vector2f(0.f, 1 * buttonOffset) + sf::Vector2f(150.f,15.f),
+    //                         charSize, textColorSetting);
 
 
-    // ===================shoot button================================
-    auto shootShape = std::make_shared<RoundedRectangleShape>(controlbtnSize, 15.f);
-    auto shootBtn = makeButtonUtil(
-        moveUpPos + sf::Vector2f(0.f, 3 * buttonOffset),
-        std::static_pointer_cast<sf::Shape>(shootShape),
-        keyToString(keybinding.getKey(KeyBinding::Action::Shoot)),
-        keybuttonColor,
-        true,
-        charSize,
-        [this]() { 
-            std::cout << "Shoot button clicked!" << std::endl;
-        },
-        nullptr, sf::Color::Black
-    );
-    auto ShootMessage = makeTextUtil("Shoot", moveUpPos + sf::Vector2f(0.f, 3 * buttonOffset) + sf::Vector2f(150.f,15.f),
-                            charSize, textColorSetting);
+    // // Create Move Left button
+    // auto moveLeftShape = std::make_shared<RoundedRectangleShape>(controlbtnSize, 15.f);
+    // auto moveLeftBtn = makeButtonUtil(
+    //     moveUpPos + sf::Vector2f(0.f, 2 * buttonOffset),
+    //     std::static_pointer_cast<sf::Shape>(moveLeftShape),
+    //     keyToString(keybinding.getKey(KeyBinding::Action::MoveLeft)),
+    //     keybuttonColor,
+    //     true,
+    //     charSize,
+    //     [this]() { 
+    //         std::cout << "Move Left button clicked!" << std::endl;
+    //     },
+    //     nullptr, sf::Color::Black
+    // );
+    // auto moveLeftMessage = makeTextUtil("Move left", moveUpPos + sf::Vector2f(0.f, 2 * buttonOffset) + sf::Vector2f(150.f,15.f),
+    //                         charSize, textColorSetting);
+
+
+    // // ===================shoot button================================
+    // auto shootShape = std::make_shared<RoundedRectangleShape>(controlbtnSize, 15.f);
+    // auto shootBtn = makeButtonUtil(
+    //     moveUpPos + sf::Vector2f(0.f, 3 * buttonOffset),
+    //     std::static_pointer_cast<sf::Shape>(shootShape),
+    //     keyToString(keybinding.getKey(KeyBinding::Action::Shoot)),
+    //     keybuttonColor,
+    //     true,
+    //     charSize,
+    //     [this]() { 
+    //         std::cout << "Shoot button clicked!" << std::endl;
+    //     },
+    //     nullptr, sf::Color::Black
+    // );
+    // auto ShootMessage = makeTextUtil("Shoot", moveUpPos + sf::Vector2f(0.f, 3 * buttonOffset) + sf::Vector2f(150.f,15.f),
+    //                         charSize, textColorSetting);
     
-    // Create Move down button
-    auto MoveDownShape = std::make_shared<RoundedRectangleShape>(controlbtnSize, 15.f);
-    auto moveDownBtn = makeButtonUtil(
-        moveUpPos + sf::Vector2f(0.f, 4 * buttonOffset), 
-        std::static_pointer_cast<sf::Shape>(MoveDownShape),
-        keyToString(keybinding.getKey(KeyBinding::Action::MoveDown)),
-        keybuttonColor,
-        true,
-        charSize,
-        [this]() { 
-            std::cout << "Move Down button clicked!" << std::endl;
-        },
-        nullptr, sf::Color::Black
-    );
-    auto moveDownMessage = makeTextUtil("Move down", moveUpPos + sf::Vector2f(0.f, 4 * buttonOffset) + sf::Vector2f(150.f,15.f),
-                            charSize, textColorSetting);
-    // create Option Container to wrap 4 button
-    auto optdrawElement = std::make_shared<DrawableElement>();
-    auto optInteractUI = std::make_shared<InteractUI>(Interact(StateColor()), optdrawElement);
-    std::shared_ptr<OptionContainer> keyOptContainer = std::make_shared<OptionContainer>(optInteractUI);
-    keyOptContainer->setActive(true); // always true to display all button
+    // // Create Move down button
+    // auto MoveDownShape = std::make_shared<RoundedRectangleShape>(controlbtnSize, 15.f);
+    // auto moveDownBtn = makeButtonUtil(
+    //     moveUpPos + sf::Vector2f(0.f, 4 * buttonOffset), 
+    //     std::static_pointer_cast<sf::Shape>(MoveDownShape),
+    //     keyToString(keybinding.getKey(KeyBinding::Action::MoveDown)),
+    //     keybuttonColor,
+    //     true,
+    //     charSize,
+    //     [this]() { 
+    //         std::cout << "Move Down button clicked!" << std::endl;
+    //     },
+    //     nullptr, sf::Color::Black
+    // );
+    // auto moveDownMessage = makeTextUtil("Move down", moveUpPos + sf::Vector2f(0.f, 4 * buttonOffset) + sf::Vector2f(150.f,15.f),
+    //                         charSize, textColorSetting);
+    // // create Option Container to wrap 4 button
+    // auto optdrawElement = std::make_shared<DrawableElement>();
+    // auto optInteractUI = std::make_shared<InteractUI>(Interact(StateColor()), optdrawElement);
+    // std::shared_ptr<OptionContainer> keyOptContainer = std::make_shared<OptionContainer>(optInteractUI);
+    // keyOptContainer->setActive(true); // always true to display all button
 
-    keyOptContainer->addComponent(moveUpBtn); 
-    keyOptContainer->addComponent(moveDownBtn);
-    keyOptContainer->addComponent(moveLeftBtn);
-    keyOptContainer->addComponent(moveRightBtn);
-    keyOptContainer->addComponent(shootBtn);
+    // keyOptContainer->addComponent(moveUpBtn); 
+    // keyOptContainer->addComponent(moveDownBtn);
+    // keyOptContainer->addComponent(moveLeftBtn);
+    // keyOptContainer->addComponent(moveRightBtn);
+    // keyOptContainer->addComponent(shootBtn);
 
-    std::unordered_map<std::shared_ptr<UIComponent>, KeyBinding::Action> ButtonToAction;
-    ButtonToAction[moveUpBtn] = KeyBinding::Action::MoveUp;
-    ButtonToAction[moveDownBtn] = KeyBinding::Action::MoveDown;
-    ButtonToAction[moveLeftBtn] = KeyBinding::Action::MoveLeft;
-    ButtonToAction[moveRightBtn] = KeyBinding::Action::MoveRight;
-    ButtonToAction[shootBtn] = KeyBinding::Action::Shoot;
+    // std::unordered_map<std::shared_ptr<UIComponent>, KeyBinding::Action> ButtonToAction;
+    // ButtonToAction[moveUpBtn] = KeyBinding::Action::MoveUp;
+    // ButtonToAction[moveDownBtn] = KeyBinding::Action::MoveDown;
+    // ButtonToAction[moveLeftBtn] = KeyBinding::Action::MoveLeft;
+    // ButtonToAction[moveRightBtn] = KeyBinding::Action::MoveRight;
+    // ButtonToAction[shootBtn] = KeyBinding::Action::Shoot;
 
-    keyOptContainer->setFunc([ButtonToAction, keyOptContainer](const sf::Event& event)
-    {
-        auto& keybinding = KeyBinding::Instance();
-        std::shared_ptr<UIComponent> activeButton = keyOptContainer->getActiveComponent();
-        assert(activeButton);
-        if (event.type == sf::Event::KeyPressed)
-        {
-            sf::Keyboard::Key key = event.key.code;
+    // keyOptContainer->setFunc([ButtonToAction, keyOptContainer](const sf::Event& event)
+    // {
+    //     auto& keybinding = KeyBinding::Instance();
+    //     std::shared_ptr<UIComponent> activeButton = keyOptContainer->getActiveComponent();
+    //     assert(activeButton);
+    //     if (event.type == sf::Event::KeyPressed)
+    //     {
+    //         sf::Keyboard::Key key = event.key.code;
             
-            auto activeAction = ButtonToAction.at(activeButton);
-            keybinding.setKey(activeAction, key);
-        }
-        for (auto& pair: ButtonToAction)
-        {
-            std::string content = keyToString(keybinding.getKey(ButtonToAction.at(pair.first)));
-            pair.first->setText(content);
-        }
-    });
+    //         auto activeAction = ButtonToAction.at(activeButton);
+    //         keybinding.setKey(activeAction, key);
+    //     }
+    //     for (auto& pair: ButtonToAction)
+    //     {
+    //         std::string content = keyToString(keybinding.getKey(ButtonToAction.at(pair.first)));
+    //         pair.first->setText(content);
+    //     }
+    // });
 
     
 
 
-    // ==================== KeySetting title===========================
-    auto KeySettingMessage = makeTextUtil("Key Settings", sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y / 6),
-                    40, textColorSetting, /*setCenter=*/true);
-    settingsPanel->addComponent(keyOptContainer);
+    // // ==================== KeySetting title===========================
+    // auto KeySettingMessage = makeTextUtil("Key Settings", sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y / 6),
+    //                 40, textColorSetting, /*setCenter=*/true);
+    // settingsPanel->addComponent(keyOptContainer);
 
-    settingsPanel->addComponent(moveUpMessage);
-    settingsPanel->addComponent(moveRightMessage);
-    settingsPanel->addComponent(moveLeftMessage);
-    settingsPanel->addComponent(ShootMessage);
-    settingsPanel->addComponent(moveDownMessage);
-    settingsPanel->addComponent(KeySettingMessage);
+    // settingsPanel->addComponent(moveUpMessage);
+    // settingsPanel->addComponent(moveRightMessage);
+    // settingsPanel->addComponent(moveLeftMessage);
+    // settingsPanel->addComponent(ShootMessage);
+    // settingsPanel->addComponent(moveDownMessage);
+    // settingsPanel->addComponent(KeySettingMessage);
         // ==========Create Resume Button==================
         auto roundedRectShape = std::make_shared<RoundedRectangleShape>(pauseButtonShape, 15.f);
         
@@ -350,8 +359,8 @@ void InGameState::setupButton()
             mainBtnColor,
             false, 
             25,
-            [settingsPanel]() {
-                settingsPanel->setActive(true);
+            []() {
+                CommonUIPool::getInstance().get("settingPanel")->setActive(true);
             },
             nullptr, sf::Color::White, /*setCenter=*/true
         );

@@ -6,6 +6,7 @@
 #include <cassert>
 #include <UI/UIConstant.hpp>
 #include <UI/HelperBuilder.hpp>
+#include <UI/CommonUIPool.hpp>
 
 MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
 {
@@ -192,15 +193,16 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         soundButtonColor,
         true,
         0,
-        [settingsPanel]() { },
+        []() {
+            SOUND::shouldPlayMusic = true;
+         },
         std::make_shared<sf::Sprite>(texholder.get(TexType::sound))
     );
-    // soundBtn->setFunc([soundBtn, this]() {
-    //     static bool soundOn = false;
-    //     if (soundOn) soundBtn->setSprite(spritePool[TexType::soundOn]);
-    //     else soundBtn->setSprite(spritePool[TexType::soundOff]);
-    //     soundOn = !soundOn;
-    // });
+    soundBtn->setDeactiveFunc([](){
+        SOUND::shouldPlayMusic = false;
+    });
+    soundBtn->setActive(SOUND::shouldPlayMusic);
+
     settingsPanel->addComponent(soundBtn);
     //============Music Button========================
         auto musicBtn = makeButtonUtil(
@@ -210,10 +212,14 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         soundButtonColor,
         true,
         0,
-        [settingsPanel]() { },
+        []() { },
         std::make_shared<sf::Sprite>(texholder.get(TexType::music))
     );
     settingsPanel->addComponent(musicBtn);
+    
+    // add setting panel to pool for later reference
+    CommonUIPool::getInstance().add("settingPanel", settingsPanel);
+    
     // //============Save Button========================
     //     auto saveBtn = makeButtonUtil(
     //     panelPos + sf::Vector2f(panelSize.x - 120.f, 250.f), 

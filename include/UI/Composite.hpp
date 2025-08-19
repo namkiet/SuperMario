@@ -323,13 +323,20 @@ class Button : public UIComponent
 {
 private:
     std::function<void()> func;
+    std::function<void()> deactiveFunc;
 
 public:
-    explicit Button(std::shared_ptr<InteractUI> comp) : UIComponent(std::move(comp)) {}
+    explicit Button(std::shared_ptr<InteractUI> comp) : UIComponent(std::move(comp)) {
+        func = nullptr; deactiveFunc = nullptr;
+    }
 
     void setFunc(std::function<void()> func)
     {
         this->func = func;
+    }
+    void setDeactiveFunc(std::function<void()> func2)
+    {
+        this->deactiveFunc = func2;
     }
     bool handleEvent(const sf::Event &event) override
     {
@@ -347,7 +354,12 @@ public:
                         func();
                 }
                 else
-                    component->interact.deactivate();
+                    {
+                        if(component->interact.deactivate() && deactiveFunc)
+                        {
+                            deactiveFunc();
+                        };
+                    }
             }
         }
         else if (event.type == sf::Event::MouseMoved)
@@ -369,10 +381,11 @@ class UIContainer : public UIComponent
 {
 protected:
     std::vector<std::shared_ptr<UIComponent>> ComponentList;
+    // std::function<void()> func; // initially use to update true state for component before draw them
 
 public:
     explicit UIContainer(std::shared_ptr<InteractUI> comp)
-        : UIComponent(std::move(comp)) {}
+        : UIComponent(std::move(comp)){}
 
     virtual void addComponent(std::shared_ptr<UIComponent> ele)
     {
@@ -390,6 +403,8 @@ public:
                              return !a->getIsActive() && b->getIsActive();
                          });
     }
+    
+    // void setFunc(std::function<void()> func) { this->func = func;}
 
 public:
     void draw(sf::RenderWindow &window) override
@@ -405,6 +420,7 @@ public:
     }
     bool handleEvent(const sf::Event &event) override
     {
+        // if (func) func();
         sortComponentList();
         if (!getIsActive())
             return true; // return if not active
@@ -427,7 +443,6 @@ class Panel : public UIContainer
 {
 private:
     sf::Keyboard::Key activeKey;
-    // helper func
 public:
     Panel(std::shared_ptr<InteractUI> comp, sf::Keyboard::Key k = sf::Keyboard::Unknown)
         : UIContainer(std::move(comp)), activeKey(k) {}

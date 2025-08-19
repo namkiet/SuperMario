@@ -18,3 +18,7 @@ namespace PLAYER
 {
     inline float HORIZONTAL_SPEED = 400.0f;
 }
+namespace SOUND
+{
+    inline bool shouldPlayMusic = true;
+}
