@@ -66,37 +66,37 @@ private:
         // Goomba
         prefabList.emplace_back("Goomba",
             [this](float x, float y) -> std::unique_ptr<Entity> {
-                return std::make_unique<Goomba>(x / 3, y / 3, 3); // wrap raw pointer
+                return std::make_unique<Goomba>(x / 3, y / 3, 3.0f); // wrap raw pointer
             });
 
         // Koopa
         prefabList.emplace_back("Koopa",
             [this](float x, float y) -> std::unique_ptr<Entity> {
-                return std::make_unique<Koopa>(x / 3, y / 3, 3); // wrap raw pointer
+                return std::make_unique<Koopa>(x / 3, y / 3, 3.0f); // wrap raw pointer
             });
         
         // KoopaJumping
         prefabList.emplace_back("KoopaJumping",
             [this](float x, float y) -> std::unique_ptr<Entity> {
-                return std::make_unique<KoopaJumping>(x / 3, y / 3, 3); // wrap raw pointer
+                return std::make_unique<KoopaJumping>(x / 3, y / 3, 3.0f); // wrap raw pointer
             });
 
         // KoopaFlying
         prefabList.emplace_back("KoopaFlying",
             [this](float x, float y) -> std::unique_ptr<Entity> {
-                return std::make_unique<KoopaFlying>(x / 3, y / 3, 3); // wrap raw pointer
+                return std::make_unique<KoopaFlying>(x / 3, y / 3, 3.0f); // wrap raw pointer
             });
 
         // Spiny
         prefabList.emplace_back("Spiny",
             [this](float x, float y) -> std::unique_ptr<Entity> {
-                return std::make_unique<Spiny>(x / 3, y / 3, 3); // wrap raw pointer
+                return std::make_unique<Spiny>(x / 3, y / 3, 3.0f); // wrap raw pointer
             });
 
         // Bowser
         prefabList.emplace_back("Bowser",
             [this](float x, float y) -> std::unique_ptr<Entity> {
-                return std::make_unique<Bowser>(x / 3, y / 3, 3); // wrap raw pointer
+                return std::make_unique<Bowser>(x / 3, y / 3, 3.0f); // wrap raw pointer
             });
     }
     
@@ -105,7 +105,7 @@ private:
         // Coin Question block
         prefabList.emplace_back("Coin",
             [this](float x, float y) -> std::unique_ptr<Entity> {
-                return std::make_unique<Block>(x / 3, y / 3, 16, 16, 3, 1); // wrap raw pointer
+                return std::make_unique<Block>(x / 3, y / 3, 16.0f, 16.0f, 3.0f, 1); // wrap raw pointer
             });
 
         

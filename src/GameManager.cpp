@@ -61,6 +61,7 @@
 
 #include <ScoreManager.hpp>
 #include <TimeManager.hpp>
+#include <LevelManager.hpp>
 
 #include <Gameplay/GameProperties/PlayTimeSystem.hpp>
 #include <Gameplay/GameProperties/TextPoppingSystem.hpp>
@@ -82,7 +83,6 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-
 GameManager::GameManager(int level, bool hasWonLastLevel) : levelHandler(world, level), currentLevel(level)
 {
     if (currentLevel == -1)
@@ -98,7 +98,6 @@ GameManager::GameManager(int level, bool hasWonLastLevel) : levelHandler(world, 
         levelHandler.start();
         world.createEntity()->addComponent<Camera>();
     }
-
 
     world.addSystem<PlayTimeSystem>();
 
@@ -172,9 +171,37 @@ GameManager::GameManager(int level, bool hasWonLastLevel) : levelHandler(world, 
         player->getComponent<Transform>().position = tf.position;
         player->getComponent<Transform>().position.y -= (player->getComponent<Transform>().size.y - tf.size.y);
     }
+    else
+    {
+        auto player = world.findFirst<PlayerTag, Transform>();
+        if (player)
+        {
+            // Store the original initial position of the player
+            auto oriPos = player->getComponent<Transform>().position;
+            auto tf = player->getComponent<Transform>();
+
+            // Get the previous Mario position from LevelManager
+            auto &pos = LevelManager::instance().getPrevMarioPosition();
+
+            // Load checkpoints from LevelHandler
+            std::vector<sf::Vector2f> checkpoints = LevelHandler::getCheckPointPos();
+
+            sf::Vector2f nearestCheckPoint = oriPos;
+
+            for (const auto &checkPointPos : checkpoints)
+            {
+                if (checkPointPos.x > nearestCheckPoint.x && checkPointPos.x <= pos.x && pos.x > 0)
+                {
+                    nearestCheckPoint = checkPointPos;
+                }
+            }
+
+            player->getComponent<Transform>().position = nearestCheckPoint;
+        }
+    }
 }
 
-void GameManager::handleEvent(const sf::Event& event, sf::RenderWindow& window)
+void GameManager::handleEvent(const sf::Event &event, sf::RenderWindow &window)
 {
     if (event.type == sf::Event::KeyPressed)
     {
@@ -182,14 +209,14 @@ void GameManager::handleEvent(const sf::Event& event, sf::RenderWindow& window)
         {
             json j;
             j["level"] = currentLevel;
-            world.saveSceneToFile(j["entities"]);  
+            world.saveSceneToFile(j["entities"]);
             std::ofstream fout("save.json");
             fout << j.dump(4);
         }
 
         if (event.key.code == sf::Keyboard::N)
         {
-            world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(3.0f);
+            world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(500.0f);
         }
 
         if (event.key.code == sf::Keyboard::T)
@@ -201,12 +228,11 @@ void GameManager::handleEvent(const sf::Event& event, sf::RenderWindow& window)
         {
             // do nothing
 
-
             auto mario = world.findFirst<PlayerTag>();
             mario->addComponent<GrowUpTag>();
             mario->addComponent<CanFireTag>();
         }
-        
+
         if (event.key.code == sf::Keyboard::P)
         {
             oneFrame = !oneFrame;
@@ -228,12 +254,14 @@ void GameManager::handleEvent(const sf::Event& event, sf::RenderWindow& window)
         }
     }
 
-    if (editor) editor->handleEvent(event, window);
+    if (editor)
+        editor->handleEvent(event, window);
 }
 
 void GameManager::update(float dt)
 {
-    if (dt > 0.1f) return;
+    if (dt > 0.1f)
+        return;
 
     if (oneFrame && !shouldPlay)
     {
@@ -253,7 +281,6 @@ void GameManager::update(float dt)
     }
 
     // std::cout << level << "\n";
-
 }
 
 void GameManager::draw(sf::RenderWindow &window, int level)
@@ -289,15 +316,20 @@ int GameManager::getLives()
 
 GameManager::~GameManager()
 {
-    if (auto player = world.findFirst<PlayerTag>()) 
+    std::cout << "GameManager destructor called\n";
+    if (auto player = world.findFirst<PlayerTag>())
     {
         world.componentRegistry.saveComponents(player, prevMarioData);
     }
-    
     --lives;
 }
 
 void GameManager::setLives(int newLives)
 {
     lives = newLives;
+}
+
+json &GameManager::getPrevMarioData()
+{
+    return prevMarioData;
 }

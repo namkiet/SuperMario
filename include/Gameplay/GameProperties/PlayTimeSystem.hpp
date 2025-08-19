@@ -13,6 +13,8 @@
 
 #include <TimeManager.hpp>
 
+#include <LevelManager.hpp>
+
 class PlayTimeSystem : public System
 {
 private:
@@ -30,8 +32,10 @@ public:
         else if (!TimeManager::instance().getTimeGoesFaster() && TimeManager::instance().getTime() <= 0)
         {
             Entity *player = world.findFirst<PlayerTag>();
-            player->addComponent<DespawnTag>(); // Add a tag to despawn the entity
+            player->addComponent<DespawnTag>();                          // Add a tag to despawn the entity
+
             LevelManager::instance().setStatus("timeup");
+            LevelManager::instance().setPrevMarioPosition(player->getComponent<Transform>().position);
         }
     }
 };

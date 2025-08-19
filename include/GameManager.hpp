@@ -10,27 +10,27 @@
 
 #include <SFML/Graphics.hpp>
 
-
 class GameManager
 {
 public:
     GameManager(int level, bool hasWonLastLevel);
 
-    void handleEvent(const sf::Event& event, sf::RenderWindow& window);
+    void handleEvent(const sf::Event &event, sf::RenderWindow &window);
     void update(float dt);
     void draw(sf::RenderWindow &window, int level);
     static int getLives();
     static void setLives(int newLives);
+    static json &getPrevMarioData();
     ~GameManager();
 
 private:
     World world;
     LevelHandler levelHandler;
-    Editor* editor = nullptr;
+    Editor *editor = nullptr;
     int currentLevel = 1;
     bool oneFrame = false;
     bool shouldPlay = true;
-    
+
     static int lives;
     static inline json prevMarioData;
 };

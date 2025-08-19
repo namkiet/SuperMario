@@ -9,7 +9,7 @@
 
 MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
 {
-    font.loadFromFile("MarioFont.ttf");
+    font.loadFromFile("BalooBhai2-ExtraBold.ttf");
 
     auto& texholder = game->getTexHolder();
     using namespace UIConstant;

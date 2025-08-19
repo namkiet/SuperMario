@@ -33,6 +33,7 @@ class CollectMushroomSystem : public System
                 if (mushroomTag.buff == MushroomTag::Buff::GIVE_ONE_MORE_LIFE)
                 {
                     world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/1up.wav"));
+                    GameManager::setLives(GameManager::getLives() + 1);
                 }
                 else if (mushroomTag.buff == MushroomTag::Buff::GET_TO_LEVEL_1)
                 {

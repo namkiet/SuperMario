@@ -4,22 +4,23 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/DespawnTag.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
-#include <iostream>
+#include <LevelManager.hpp>
 
 class DamageOnContactSystem : public System
 {
 public:
-    void update(World& world, float dt) override
+    void update(World &world, float dt) override
     {
-        for (Entity* entity : world.findAll<CanGetDamageTag, BoxCollider2D>())
+        for (Entity *entity : world.findAll<CanGetDamageTag, BoxCollider2D>())
         {
-            for (const auto& [collider, direction, overlap] : entity->getComponent<BoxCollider2D>().collisions)
-            {   
-                if (!collider->hasComponent<DamageOnContactComponent>()) continue;
-                auto& dmg = collider->getComponent<DamageOnContactComponent>();
-                
+            for (const auto &[collider, direction, overlap] : entity->getComponent<BoxCollider2D>().collisions)
+            {
+                if (!collider->hasComponent<DamageOnContactComponent>())
+                    continue;
+                auto &dmg = collider->getComponent<DamageOnContactComponent>();
+
                 bool validHit = false;
-                for (const auto& validDir : dmg.validDirections)
+                for (const auto &validDir : dmg.validDirections)
                 {
                     if (direction == validDir)
                     {
@@ -31,6 +32,11 @@ public:
                 if (validHit)
                 {
                     entity->addComponent<DamagedTag>();
+                    if (entity->hasComponent<PlayerTag>())
+                    {
+                        LevelManager::instance().setPrevMarioPosition(entity->getComponent<Transform>().position);
+                    }
+
                     std::cout << "Ouch.\n";
                 }
             }
