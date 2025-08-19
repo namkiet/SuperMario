@@ -289,7 +289,11 @@ int GameManager::getLives()
 
 GameManager::~GameManager()
 {
-    world.componentRegistry.saveComponents(world.findFirst<PlayerTag>(), prevMarioData);
+    if (auto player = world.findFirst<PlayerTag>()) 
+    {
+        world.componentRegistry.saveComponents(player, prevMarioData);
+    }
+    
     --lives;
 }
 

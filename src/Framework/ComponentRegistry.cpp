@@ -11,6 +11,8 @@ void ComponentRegistry::saveComponents(EntityManager& em, json& j) const {
 void ComponentRegistry::saveComponents(Entity* entity, json& j) const
 {
     j.clear();
+
+    if (!entity) return;
     j["name"] = entity->getName();
     for (auto& [_, saveFunc] : saveByType)
     {

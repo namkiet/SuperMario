@@ -2,6 +2,7 @@
 #include <ECS/System.hpp>
 #include <Framework/World.hpp>
 #include <Gameplay/Player/Components.hpp>
+#include <Core/MessageBus.hpp>
 #include <string>
 #include <unordered_map>
 #include <fstream>
@@ -25,7 +26,11 @@ public:
             auto newSizeState = tag.sizeState->getNewState(player);
             auto newPowerState = tag.powerState->getNewState(player);
 
-            if (!newMovementState && !newSizeState && !newPowerState) continue;
+            if (!playerHasChanged && !newMovementState && !newSizeState && !newPowerState) continue;
+
+            playerHasChanged = false;
+            tag.speed = isMario ? 400.0f : 300.0f;
+            tag.jumpForce = isMario ? 1100.0f : 1400.0f;
 
             if (newMovementState)
             {
@@ -48,7 +53,7 @@ public:
                 tag.powerState->onEnter(player);
             }
 
-            auto stateName = "Luigi"+ tag.movementState->getName() + tag.sizeState->getName() + tag.powerState->getName();
+            auto stateName = (isMario ? "Mario" : "Luigi") + tag.movementState->getName() + tag.sizeState->getName() + tag.powerState->getName();
             player->addComponent<Animation>(getAnimation(stateName));
         }
     }
@@ -56,6 +61,8 @@ public:
 public:
     PlayerStateSystem()
     {
+        MessageBus::subscribe("SelectedMario", [this](const std::string&) { isMario = true; playerHasChanged = true; });
+        MessageBus::subscribe("SelectedLuigi", [this](const std::string&) { isMario = false; playerHasChanged = true; });
         loadAnimationsFromFile("assets/Player/player_animation.json");
     }
 
@@ -100,4 +107,6 @@ private:
     }
 
     std::unordered_map<std::string, Animation> animMap;
+    static inline bool playerHasChanged = false;
+    static inline bool isMario = true;
 };

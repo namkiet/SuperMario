@@ -14,7 +14,7 @@
                 "textures": [
                     "assets/Enemy/Lakitu/lakitu_normal.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -90,6 +90,7 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": false,
                 "onGround": false,
                 "velocity": {
@@ -103,11 +104,11 @@
             },
             "Transform": {
                 "position": {
-                    "x": 1630.637939453125,
+                    "x": 1225.6004638671875,
                     "y": 96.0
                 },
                 "prevPos": {
-                    "x": 1632.0,
+                    "x": 1235.240966796875,
                     "y": 96.0
                 },
                 "size": {
@@ -119,7 +120,7 @@
         },
         "10": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 16,
@@ -131,11 +132,22 @@
                 "textures": [
                     "assets/Enemy/Goomba/goomba_walk.png"
                 ],
-                "timer": 0.17962874472141266
+                "timer": 0.07484198361635208
             },
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 84,
+                        "direction": 1,
+                        "overlap": {
+                            "height": 0.95166015625,
+                            "left": 1536.0,
+                            "top": 528.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -193,22 +205,23 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": true,
-                "onGround": false,
+                "onGround": true,
                 "velocity": {
                     "x": 0.0,
-                    "y": 33.871360778808594
+                    "y": 0.0
                 }
             },
             "StompableTag": {},
             "Transform": {
                 "position": {
                     "x": 1536.0,
-                    "y": 384.3748779296875
+                    "y": 480.0
                 },
                 "prevPos": {
                     "x": 1536.0,
-                    "y": 384.2826232910156
+                    "y": 480.0
                 },
                 "size": {
                     "x": 48.0,
@@ -716,7 +729,18 @@
             "BlockTag": {},
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 3,
+                        "direction": 2,
+                        "overlap": {
+                            "height": 0.951690673828125,
+                            "left": 3504.0,
+                            "top": 432.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -769,7 +793,7 @@
         },
         "11": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 16,
@@ -781,11 +805,22 @@
                 "textures": [
                     "assets/Enemy/Goomba/goomba_walk.png"
                 ],
-                "timer": 0.17962874472141266
+                "timer": 0.07484198361635208
             },
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 111,
+                        "direction": 1,
+                        "overlap": {
+                            "height": 0.95166015625,
+                            "left": 3408.0,
+                            "top": 528.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -843,22 +878,23 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": true,
-                "onGround": false,
+                "onGround": true,
                 "velocity": {
                     "x": 0.0,
-                    "y": 33.871360778808594
+                    "y": 0.0
                 }
             },
             "StompableTag": {},
             "Transform": {
                 "position": {
                     "x": 3408.0,
-                    "y": 384.3748779296875
+                    "y": 480.0
                 },
                 "prevPos": {
                     "x": 3408.0,
-                    "y": 384.2826232910156
+                    "y": 480.0
                 },
                 "size": {
                     "x": 48.0,
@@ -926,7 +962,18 @@
             "BlockTag": {},
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 11,
+                        "direction": 2,
+                        "overlap": {
+                            "height": 0.95166015625,
+                            "left": 3408.0,
+                            "top": 528.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -981,7 +1028,18 @@
             "BlockTag": {},
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 7,
+                        "direction": 2,
+                        "overlap": {
+                            "height": 0.951690673828125,
+                            "left": 3456.0,
+                            "top": 480.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -1034,7 +1092,7 @@
         },
         "113": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 2,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 24,
@@ -1042,13 +1100,13 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Item/Coin/Coin3/SmallCoin1_0.png",
+                "sprite": "assets/Item/Coin/Coin3/SmallCoin1_2.png",
                 "textures": [
                     "assets/Item/Coin/Coin3/SmallCoin1_0.png",
                     "assets/Item/Coin/Coin3/SmallCoin1_1.png",
                     "assets/Item/Coin/Coin3/SmallCoin1_2.png"
                 ],
-                "timer": 0.0796266570687294
+                "timer": 0.22484198212623596
             },
             "SmallCoinTag": {},
             "Transform": {
@@ -1071,262 +1129,16 @@
             "Camera": {
                 "smoothing": 8.0,
                 "target": {
-                    "x": 495.0001220703125,
+                    "x": 480.0,
                     "y": 360.0
                 },
                 "trapHalfWidth": 80.0
             },
             "name": "Unknown"
         },
-        "115": {
-            "Animation": {
-                "currentFrame": 0,
-                "frameCount": 1,
-                "frameDuration": 0.0,
-                "frameHeight": 35,
-                "frameWidth": 32,
-                "hasEnded": false,
-                "loop": true,
-                "row": 0,
-                "sprite": "assets/Enemy/Bowser/bowser_idle.png",
-                "textures": [
-                    "assets/Enemy/Bowser/bowser_idle.png"
-                ],
-                "timer": 47.45018768310547
-            },
-            "BowserAttack": {
-                "castTime": 0.0,
-                "delay": 4.0,
-                "distance": 1000.0,
-                "isShooting": false,
-                "timer": 0.0
-            },
-            "BowserPatrol": {
-                "accelerate": {
-                    "x": 0.0,
-                    "y": 0.0
-                },
-                "duration": 5.0,
-                "jumpCooldown": 5.0,
-                "lastDirection": 3,
-                "safeDist": 150.0,
-                "timerDura": 0.0,
-                "timerJump": 0.0,
-                "velocity": {
-                    "x": 0.0,
-                    "y": 0.0
-                }
-            },
-            "BoxCollider2D": {
-                "bounce": false,
-                "collisions": [],
-                "corners": [
-                    {
-                        "x": 0.0,
-                        "y": 0.0
-                    },
-                    {
-                        "x": 0.0,
-                        "y": 0.0
-                    },
-                    {
-                        "x": 0.0,
-                        "y": 0.0
-                    },
-                    {
-                        "x": 0.0,
-                        "y": 0.0
-                    }
-                ],
-                "isDisabled": false,
-                "offset": {
-                    "x": 0.0,
-                    "y": 0.0
-                },
-                "origin": {
-                    "x": 0.0,
-                    "y": 0.0
-                },
-                "rotation": 0.0,
-                "size": {
-                    "x": 96.0,
-                    "y": 105.0
-                }
-            },
-            "CanHitBlockTag": {},
-            "DamageOnContactComponent": {
-                "validDirections": [
-                    3,
-                    4,
-                    2
-                ]
-            },
-            "EnemyTag": {
-                "behaviour": "BowserIdleBehaviour",
-                "state": "BowserIdleState"
-            },
-            "FlipXTag": {},
-            "Health": {
-                "hp": 4
-            },
-            "RigidBody": {
-                "acceleration": {
-                    "x": 0.0,
-                    "y": 0.0
-                },
-                "applyGravity": true,
-                "onGround": false,
-                "velocity": {
-                    "x": 0.0,
-                    "y": 0.0
-                }
-            },
-            "StompableTag": {},
-            "TowardPlayer": {
-                "direction": 3
-            },
-            "Transform": {
-                "position": {
-                    "x": 754.0000610351563,
-                    "y": 510.5
-                },
-                "prevPos": {
-                    "x": 635.0,
-                    "y": 478.5
-                },
-                "size": {
-                    "x": 96.0,
-                    "y": 105.0
-                }
-            },
-            "name": "Unknown"
-        },
-        "116": {
-            "Animation": {
-                "currentFrame": 0,
-                "frameCount": 1,
-                "frameDuration": 0.0,
-                "frameHeight": 35,
-                "frameWidth": 32,
-                "hasEnded": false,
-                "loop": true,
-                "row": 0,
-                "sprite": "assets/Enemy/Bowser/bowser_idle.png",
-                "textures": [
-                    "assets/Enemy/Bowser/bowser_idle.png"
-                ],
-                "timer": 37.82722473144531
-            },
-            "BowserAttack": {
-                "castTime": 0.0,
-                "delay": 4.0,
-                "distance": 1000.0,
-                "isShooting": false,
-                "timer": 0.0
-            },
-            "BowserPatrol": {
-                "accelerate": {
-                    "x": 0.0,
-                    "y": 0.0
-                },
-                "duration": 5.0,
-                "jumpCooldown": 5.0,
-                "lastDirection": 3,
-                "safeDist": 150.0,
-                "timerDura": 0.0,
-                "timerJump": 0.0,
-                "velocity": {
-                    "x": 0.0,
-                    "y": 0.0
-                }
-            },
-            "BoxCollider2D": {
-                "bounce": false,
-                "collisions": [],
-                "corners": [
-                    {
-                        "x": 0.0,
-                        "y": 0.0
-                    },
-                    {
-                        "x": 0.0,
-                        "y": 0.0
-                    },
-                    {
-                        "x": 0.0,
-                        "y": 0.0
-                    },
-                    {
-                        "x": 0.0,
-                        "y": 0.0
-                    }
-                ],
-                "isDisabled": false,
-                "offset": {
-                    "x": 0.0,
-                    "y": 0.0
-                },
-                "origin": {
-                    "x": 0.0,
-                    "y": 0.0
-                },
-                "rotation": 0.0,
-                "size": {
-                    "x": 96.0,
-                    "y": 105.0
-                }
-            },
-            "CanHitBlockTag": {},
-            "DamageOnContactComponent": {
-                "validDirections": [
-                    3,
-                    4,
-                    2
-                ]
-            },
-            "EnemyTag": {
-                "behaviour": "BowserIdleBehaviour",
-                "state": "BowserIdleState"
-            },
-            "FlipXTag": {},
-            "Health": {
-                "hp": 4
-            },
-            "RigidBody": {
-                "acceleration": {
-                    "x": 0.0,
-                    "y": 0.0
-                },
-                "applyGravity": true,
-                "onGround": false,
-                "velocity": {
-                    "x": 0.0,
-                    "y": 0.0
-                }
-            },
-            "StompableTag": {},
-            "TowardPlayer": {
-                "direction": 3
-            },
-            "Transform": {
-                "position": {
-                    "x": 480.0000305175781,
-                    "y": 483.5
-                },
-                "prevPos": {
-                    "x": 304.00006103515625,
-                    "y": 471.5
-                },
-                "size": {
-                    "x": 96.0,
-                    "y": 105.0
-                }
-            },
-            "name": "Unknown"
-        },
         "12": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -1338,11 +1150,22 @@
                 "textures": [
                     "assets/Enemy/Koopa/koopa_walk.png"
                 ],
-                "timer": 0.17962874472141266
+                "timer": 0.07484198361635208
             },
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 52,
+                        "direction": 1,
+                        "overlap": {
+                            "height": 0.951690673828125,
+                            "left": 4512.0,
+                            "top": 480.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -1402,22 +1225,23 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": true,
-                "onGround": false,
+                "onGround": true,
                 "velocity": {
                     "x": 0.0,
-                    "y": 33.871360778808594
+                    "y": 0.0
                 }
             },
             "StompableTag": {},
             "Transform": {
                 "position": {
                     "x": 4512.0,
-                    "y": 384.3748779296875
+                    "y": 408.0
                 },
                 "prevPos": {
                     "x": 4512.0,
-                    "y": 384.2826232910156
+                    "y": 408.0
                 },
                 "size": {
                     "x": 48.0,
@@ -1428,7 +1252,7 @@
         },
         "13": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -1440,7 +1264,7 @@
                 "textures": [
                     "assets/Enemy/Piranha/piranha_normal.png"
                 ],
-                "timer": 0.17962874472141266
+                "timer": 0.07484198361635208
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -1516,7 +1340,7 @@
                 "maxHeight": 448.0,
                 "minHeight": 360.0,
                 "phaseDuration": 2.0,
-                "timer": 0.013230999931693077,
+                "timer": 0.8248419761657715,
                 "velocity": {
                     "x": 0.0,
                     "y": -44.0
@@ -1527,6 +1351,7 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": false,
                 "onGround": false,
                 "velocity": {
@@ -1555,7 +1380,7 @@
         },
         "14": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -1567,7 +1392,7 @@
                 "textures": [
                     "assets/Enemy/Koopa/koopa_jump.png"
                 ],
-                "timer": 0.17962874472141266
+                "timer": 0.07484198361635208
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -1631,22 +1456,23 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": true,
                 "onGround": false,
                 "velocity": {
                     "x": 0.0,
-                    "y": 20.640357971191406
+                    "y": 118.5304946899414
                 }
             },
             "StompableTag": {},
             "Transform": {
                 "position": {
                     "x": 5232.0,
-                    "y": 480.3462829589844
+                    "y": 415.8805236816406
                 },
                 "prevPos": {
                     "x": 5232.0,
-                    "y": 480.2826232910156
+                    "y": 413.223388671875
                 },
                 "size": {
                     "x": 48.0,
@@ -1657,7 +1483,7 @@
         },
         "15": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -1669,7 +1495,7 @@
                 "textures": [
                     "assets/Enemy/Koopa/koopa_jump.png"
                 ],
-                "timer": 0.17962874472141266
+                "timer": 0.07484198361635208
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -1733,22 +1559,23 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": true,
                 "onGround": false,
                 "velocity": {
                     "x": 0.0,
-                    "y": 20.640357971191406
+                    "y": 118.5304946899414
                 }
             },
             "StompableTag": {},
             "Transform": {
                 "position": {
                     "x": 5712.0,
-                    "y": 480.3462829589844
+                    "y": 415.8805236816406
                 },
                 "prevPos": {
                     "x": 5712.0,
-                    "y": 480.2826232910156
+                    "y": 413.223388671875
                 },
                 "size": {
                     "x": 48.0,
@@ -1759,7 +1586,7 @@
         },
         "16": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -1771,11 +1598,22 @@
                 "textures": [
                     "assets/Enemy/Koopa/koopa_walk.png"
                 ],
-                "timer": 0.17962874472141266
+                "timer": 0.07484198361635208
             },
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 64,
+                        "direction": 1,
+                        "overlap": {
+                            "height": 0.95166015625,
+                            "left": 6384.0,
+                            "top": 576.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -1835,22 +1673,23 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": true,
-                "onGround": false,
+                "onGround": true,
                 "velocity": {
                     "x": 0.0,
-                    "y": 33.871360778808594
+                    "y": 0.0
                 }
             },
             "StompableTag": {},
             "Transform": {
                 "position": {
                     "x": 6384.0,
-                    "y": 480.3748779296875
+                    "y": 504.0
                 },
                 "prevPos": {
                     "x": 6384.0,
-                    "y": 480.2826232910156
+                    "y": 504.0
                 },
                 "size": {
                     "x": 48.0,
@@ -1861,7 +1700,7 @@
         },
         "17": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -1873,11 +1712,22 @@
                 "textures": [
                     "assets/Enemy/Koopa/koopa_walk.png"
                 ],
-                "timer": 0.17962874472141266
+                "timer": 0.07484198361635208
             },
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 71,
+                        "direction": 1,
+                        "overlap": {
+                            "height": 0.95172119140625,
+                            "left": 2160.0,
+                            "top": 624.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -1937,22 +1787,23 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": true,
-                "onGround": false,
+                "onGround": true,
                 "velocity": {
                     "x": 0.0,
-                    "y": 33.871360778808594
+                    "y": 0.0
                 }
             },
             "StompableTag": {},
             "Transform": {
                 "position": {
                     "x": 2160.0,
-                    "y": 528.3748779296875
+                    "y": 552.0
                 },
                 "prevPos": {
                     "x": 2160.0,
-                    "y": 528.2825927734375
+                    "y": 552.0
                 },
                 "size": {
                     "x": 48.0,
@@ -1963,7 +1814,7 @@
         },
         "18": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -1975,11 +1826,22 @@
                 "textures": [
                     "assets/Enemy/Koopa/koopa_walk.png"
                 ],
-                "timer": 0.17962874472141266
+                "timer": 0.07484198361635208
             },
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 71,
+                        "direction": 1,
+                        "overlap": {
+                            "height": 0.95172119140625,
+                            "left": 2640.0,
+                            "top": 624.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -2039,22 +1901,23 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": true,
-                "onGround": false,
+                "onGround": true,
                 "velocity": {
                     "x": 0.0,
-                    "y": 33.871360778808594
+                    "y": 0.0
                 }
             },
             "StompableTag": {},
             "Transform": {
                 "position": {
                     "x": 2640.0,
-                    "y": 528.3748779296875
+                    "y": 552.0
                 },
                 "prevPos": {
                     "x": 2640.0,
-                    "y": 528.2825927734375
+                    "y": 552.0
                 },
                 "size": {
                     "x": 48.0,
@@ -2065,7 +1928,7 @@
         },
         "19": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -2077,11 +1940,22 @@
                 "textures": [
                     "assets/Enemy/Koopa/koopa_walk.png"
                 ],
-                "timer": 0.17962874472141266
+                "timer": 0.07484198361635208
             },
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 77,
+                        "direction": 1,
+                        "overlap": {
+                            "height": 0.95172119140625,
+                            "left": 7824.0,
+                            "top": 624.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -2141,22 +2015,23 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": true,
-                "onGround": false,
+                "onGround": true,
                 "velocity": {
                     "x": 0.0,
-                    "y": 33.871360778808594
+                    "y": 0.0
                 }
             },
             "StompableTag": {},
             "Transform": {
                 "position": {
                     "x": 7824.0,
-                    "y": 528.3748779296875
+                    "y": 552.0
                 },
                 "prevPos": {
                     "x": 7824.0,
-                    "y": 528.2825927734375
+                    "y": 552.0
                 },
                 "size": {
                     "x": 48.0,
@@ -2167,7 +2042,7 @@
         },
         "2": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 16,
@@ -2179,11 +2054,22 @@
                 "textures": [
                     "assets/Enemy/Goomba/goomba_walk.png"
                 ],
-                "timer": 0.17962874472141266
+                "timer": 0.07484198361635208
             },
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 86,
+                        "direction": 1,
+                        "overlap": {
+                            "height": 0.951690673828125,
+                            "left": 1824.0,
+                            "top": 432.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -2241,22 +2127,23 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": true,
-                "onGround": false,
+                "onGround": true,
                 "velocity": {
                     "x": 0.0,
-                    "y": 33.871360778808594
+                    "y": 0.0
                 }
             },
             "StompableTag": {},
             "Transform": {
                 "position": {
                     "x": 1824.0,
-                    "y": 288.3748779296875
+                    "y": 384.0
                 },
                 "prevPos": {
                     "x": 1824.0,
-                    "y": 288.2826232910156
+                    "y": 384.0
                 },
                 "size": {
                     "x": 48.0,
@@ -2275,15 +2162,26 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Player/SmallPlayer/marioSmall_0.png",
+                "sprite": "assets/Player/SmallPlayer/luigiSmall_0.png",
                 "textures": [
-                    "assets/Player/SmallPlayer/marioSmall_0.png"
+                    "assets/Player/SmallPlayer/luigiSmall_0.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 68,
+                        "direction": 1,
+                        "overlap": {
+                            "height": 0.95172119140625,
+                            "left": 198.0,
+                            "top": 624.0,
+                            "width": 36.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -2340,6 +2238,7 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": true,
                 "onGround": true,
                 "velocity": {
@@ -2350,8 +2249,8 @@
             "StomperTag": {},
             "Transform": {
                 "position": {
-                    "x": 218.0,
-                    "y": 537.0
+                    "x": 192.0,
+                    "y": 576.0
                 },
                 "prevPos": {
                     "x": 192.0,
@@ -2381,7 +2280,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -2451,7 +2350,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -2521,7 +2420,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -2598,7 +2497,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -2668,7 +2567,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -2726,7 +2625,7 @@
         },
         "26": {
             "Animation": {
-                "currentFrame": 3,
+                "currentFrame": 2,
                 "frameCount": 4,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -2734,14 +2633,14 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Item/Coin/Coin2/Coin1_3.png",
+                "sprite": "assets/Item/Coin/Coin2/Coin1_2.png",
                 "textures": [
                     "assets/Item/Coin/Coin2/Coin1_0.png",
                     "assets/Item/Coin/Coin2/Coin1_1.png",
                     "assets/Item/Coin/Coin2/Coin1_2.png",
                     "assets/Item/Coin/Coin2/Coin1_3.png"
                 ],
-                "timer": 0.0796266570687294
+                "timer": 0.22484198212623596
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -2799,7 +2698,7 @@
         },
         "27": {
             "Animation": {
-                "currentFrame": 3,
+                "currentFrame": 2,
                 "frameCount": 4,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -2807,14 +2706,14 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Item/Coin/Coin2/Coin1_3.png",
+                "sprite": "assets/Item/Coin/Coin2/Coin1_2.png",
                 "textures": [
                     "assets/Item/Coin/Coin2/Coin1_0.png",
                     "assets/Item/Coin/Coin2/Coin1_1.png",
                     "assets/Item/Coin/Coin2/Coin1_2.png",
                     "assets/Item/Coin/Coin2/Coin1_3.png"
                 ],
-                "timer": 0.0796266570687294
+                "timer": 0.22484198212623596
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -2884,7 +2783,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -2954,12 +2853,23 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 5,
+                        "direction": 2,
+                        "overlap": {
+                            "height": 0.951690673828125,
+                            "left": 7248.0,
+                            "top": 336.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -3012,7 +2922,7 @@
         },
         "3": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 16,
@@ -3024,11 +2934,22 @@
                 "textures": [
                     "assets/Enemy/Goomba/goomba_walk.png"
                 ],
-                "timer": 0.17962874472141266
+                "timer": 0.07484198361635208
             },
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 109,
+                        "direction": 1,
+                        "overlap": {
+                            "height": 0.951690673828125,
+                            "left": 3504.0,
+                            "top": 432.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -3086,22 +3007,23 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": true,
-                "onGround": false,
+                "onGround": true,
                 "velocity": {
                     "x": 0.0,
-                    "y": 33.871360778808594
+                    "y": 0.0
                 }
             },
             "StompableTag": {},
             "Transform": {
                 "position": {
                     "x": 3504.0,
-                    "y": 288.3748779296875
+                    "y": 384.0
                 },
                 "prevPos": {
                     "x": 3504.0,
-                    "y": 288.2826232910156
+                    "y": 384.0
                 },
                 "size": {
                     "x": 48.0,
@@ -3166,7 +3088,7 @@
         },
         "31": {
             "Animation": {
-                "currentFrame": 3,
+                "currentFrame": 2,
                 "frameCount": 4,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -3174,14 +3096,14 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Item/Coin/Coin2/Coin1_3.png",
+                "sprite": "assets/Item/Coin/Coin2/Coin1_2.png",
                 "textures": [
                     "assets/Item/Coin/Coin2/Coin1_0.png",
                     "assets/Item/Coin/Coin2/Coin1_1.png",
                     "assets/Item/Coin/Coin2/Coin1_2.png",
                     "assets/Item/Coin/Coin2/Coin1_3.png"
                 ],
-                "timer": 0.0796266570687294
+                "timer": 0.22484198212623596
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -3239,7 +3161,7 @@
         },
         "32": {
             "Animation": {
-                "currentFrame": 3,
+                "currentFrame": 2,
                 "frameCount": 4,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -3247,14 +3169,14 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Item/Coin/Coin2/Coin1_3.png",
+                "sprite": "assets/Item/Coin/Coin2/Coin1_2.png",
                 "textures": [
                     "assets/Item/Coin/Coin2/Coin1_0.png",
                     "assets/Item/Coin/Coin2/Coin1_1.png",
                     "assets/Item/Coin/Coin2/Coin1_2.png",
                     "assets/Item/Coin/Coin2/Coin1_3.png"
                 ],
-                "timer": 0.0796266570687294
+                "timer": 0.22484198212623596
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -3312,7 +3234,7 @@
         },
         "33": {
             "Animation": {
-                "currentFrame": 3,
+                "currentFrame": 2,
                 "frameCount": 4,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -3320,14 +3242,14 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Item/Coin/Coin2/Coin1_3.png",
+                "sprite": "assets/Item/Coin/Coin2/Coin1_2.png",
                 "textures": [
                     "assets/Item/Coin/Coin2/Coin1_0.png",
                     "assets/Item/Coin/Coin2/Coin1_1.png",
                     "assets/Item/Coin/Coin2/Coin1_2.png",
                     "assets/Item/Coin/Coin2/Coin1_3.png"
                 ],
-                "timer": 0.0796266570687294
+                "timer": 0.22484198212623596
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -3397,7 +3319,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -3467,7 +3389,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -3525,7 +3447,7 @@
         },
         "36": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 2,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -3533,13 +3455,13 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Tile/Tile1/Tile1_24.png",
+                "sprite": "assets/Tile/Tile1/Tile1_26.png",
                 "textures": [
                     "assets/Tile/Tile1/Tile1_24.png",
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.0796266570687294
+                "timer": 0.22484198212623596
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -3598,7 +3520,7 @@
         },
         "37": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 2,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -3606,13 +3528,13 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Tile/Tile1/Tile1_24.png",
+                "sprite": "assets/Tile/Tile1/Tile1_26.png",
                 "textures": [
                     "assets/Tile/Tile1/Tile1_24.png",
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.0796266570687294
+                "timer": 0.22484198212623596
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -3671,7 +3593,7 @@
         },
         "38": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 2,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -3679,13 +3601,13 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Tile/Tile1/Tile1_24.png",
+                "sprite": "assets/Tile/Tile1/Tile1_26.png",
                 "textures": [
                     "assets/Tile/Tile1/Tile1_24.png",
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.0796266570687294
+                "timer": 0.22484198212623596
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -3728,8 +3650,8 @@
             "QuestionBlockTag": {},
             "Transform": {
                 "position": {
-                    "x": 753.0,
-                    "y": 369.9999694824219
+                    "x": 816.0,
+                    "y": 432.0
                 },
                 "prevPos": {
                     "x": 816.0,
@@ -3744,7 +3666,7 @@
         },
         "39": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 2,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -3752,13 +3674,13 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Tile/Tile1/Tile1_24.png",
+                "sprite": "assets/Tile/Tile1/Tile1_26.png",
                 "textures": [
                     "assets/Tile/Tile1/Tile1_24.png",
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.0796266570687294
+                "timer": 0.22484198212623596
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -3801,8 +3723,8 @@
             "QuestionBlockTag": {},
             "Transform": {
                 "position": {
-                    "x": 834.0,
-                    "y": 370.0000305175781
+                    "x": 864.0,
+                    "y": 432.0
                 },
                 "prevPos": {
                     "x": 864.0,
@@ -3817,7 +3739,7 @@
         },
         "4": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 16,
@@ -3829,11 +3751,22 @@
                 "textures": [
                     "assets/Enemy/Goomba/goomba_walk.png"
                 ],
-                "timer": 0.17962874472141266
+                "timer": 0.07484198361635208
             },
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 97,
+                        "direction": 1,
+                        "overlap": {
+                            "height": 0.951690673828125,
+                            "left": 7152.0,
+                            "top": 336.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -3891,6 +3824,7 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": true,
                 "onGround": true,
                 "velocity": {
@@ -3929,7 +3863,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -3999,7 +3933,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -4069,7 +4003,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -4139,7 +4073,7 @@
                 "textures": [
                     "assets/Pipe/Pipe1_0.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -4209,7 +4143,7 @@
         },
         "44": {
             "Animation": {
-                "currentFrame": 3,
+                "currentFrame": 2,
                 "frameCount": 4,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -4217,14 +4151,14 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Item/Coin/Coin2/Coin1_3.png",
+                "sprite": "assets/Item/Coin/Coin2/Coin1_2.png",
                 "textures": [
                     "assets/Item/Coin/Coin2/Coin1_0.png",
                     "assets/Item/Coin/Coin2/Coin1_1.png",
                     "assets/Item/Coin/Coin2/Coin1_2.png",
                     "assets/Item/Coin/Coin2/Coin1_3.png"
                 ],
-                "timer": 0.0796266570687294
+                "timer": 0.22484198212623596
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -4282,7 +4216,7 @@
         },
         "45": {
             "Animation": {
-                "currentFrame": 3,
+                "currentFrame": 2,
                 "frameCount": 4,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -4290,14 +4224,14 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Item/Coin/Coin2/Coin1_3.png",
+                "sprite": "assets/Item/Coin/Coin2/Coin1_2.png",
                 "textures": [
                     "assets/Item/Coin/Coin2/Coin1_0.png",
                     "assets/Item/Coin/Coin2/Coin1_1.png",
                     "assets/Item/Coin/Coin2/Coin1_2.png",
                     "assets/Item/Coin/Coin2/Coin1_3.png"
                 ],
-                "timer": 0.0796266570687294
+                "timer": 0.22484198212623596
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -4355,7 +4289,7 @@
         },
         "46": {
             "Animation": {
-                "currentFrame": 3,
+                "currentFrame": 2,
                 "frameCount": 4,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -4363,14 +4297,14 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Item/Coin/Coin2/Coin1_3.png",
+                "sprite": "assets/Item/Coin/Coin2/Coin1_2.png",
                 "textures": [
                     "assets/Item/Coin/Coin2/Coin1_0.png",
                     "assets/Item/Coin/Coin2/Coin1_1.png",
                     "assets/Item/Coin/Coin2/Coin1_2.png",
                     "assets/Item/Coin/Coin2/Coin1_3.png"
                 ],
-                "timer": 0.0796266570687294
+                "timer": 0.22484198212623596
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -4494,7 +4428,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -4564,7 +4498,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -4629,7 +4563,7 @@
         },
         "5": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 16,
@@ -4641,11 +4575,22 @@
                 "textures": [
                     "assets/Enemy/Goomba/goomba_walk.png"
                 ],
-                "timer": 0.17962874472141266
+                "timer": 0.07484198361635208
             },
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 29,
+                        "direction": 1,
+                        "overlap": {
+                            "height": 0.951690673828125,
+                            "left": 7248.0,
+                            "top": 336.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -4703,6 +4648,7 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": true,
                 "onGround": true,
                 "velocity": {
@@ -4741,7 +4687,7 @@
                 "textures": [
                     "assets/Pipe/Pipe1_1.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -4823,7 +4769,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -4893,12 +4839,23 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 12,
+                        "direction": 2,
+                        "overlap": {
+                            "height": 0.951690673828125,
+                            "left": 4512.0,
+                            "top": 480.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -4963,7 +4920,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5033,7 +4990,7 @@
                 "textures": [
                     "assets/Pipe/Pipe1_0.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5104,7 +5061,7 @@
                 "textures": [
                     "assets/Pipe/Pipe1_1.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5175,7 +5132,7 @@
                 "textures": [
                     "assets/Pipe/Pipe1_1.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5246,7 +5203,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5316,7 +5273,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5386,7 +5343,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5444,7 +5401,7 @@
         },
         "6": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 16,
@@ -5456,11 +5413,22 @@
                 "textures": [
                     "assets/Enemy/Goomba/goomba_walk.png"
                 ],
-                "timer": 0.17962874472141266
+                "timer": 0.07484198361635208
             },
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 85,
+                        "direction": 1,
+                        "overlap": {
+                            "height": 0.951690673828125,
+                            "left": 1680.0,
+                            "top": 480.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -5518,22 +5486,23 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": true,
-                "onGround": false,
+                "onGround": true,
                 "velocity": {
                     "x": 0.0,
-                    "y": 33.871360778808594
+                    "y": 0.0
                 }
             },
             "StompableTag": {},
             "Transform": {
                 "position": {
                     "x": 1680.0,
-                    "y": 336.3748779296875
+                    "y": 432.0
                 },
                 "prevPos": {
                     "x": 1680.0,
-                    "y": 336.2826232910156
+                    "y": 432.0
                 },
                 "size": {
                     "x": 48.0,
@@ -5556,7 +5525,7 @@
                 "textures": [
                     "assets/Pipe/Pipe1_1.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5627,7 +5596,7 @@
                 "textures": [
                     "assets/Pipe/Pipe1_1.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5698,7 +5667,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5768,7 +5737,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5838,12 +5807,23 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 16,
+                        "direction": 2,
+                        "overlap": {
+                            "height": 0.95166015625,
+                            "left": 6384.0,
+                            "top": 576.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -5908,7 +5888,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5978,7 +5958,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -6048,7 +6028,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -6108,7 +6088,18 @@
             "BlockTag": {},
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 20,
+                        "direction": 2,
+                        "overlap": {
+                            "height": 0.95172119140625,
+                            "left": 198.0,
+                            "top": 624.0,
+                            "width": 36.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -6216,7 +6207,7 @@
         },
         "7": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 16,
@@ -6228,11 +6219,22 @@
                 "textures": [
                     "assets/Enemy/Goomba/goomba_walk.png"
                 ],
-                "timer": 0.17962874472141266
+                "timer": 0.07484198361635208
             },
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 112,
+                        "direction": 1,
+                        "overlap": {
+                            "height": 0.951690673828125,
+                            "left": 3456.0,
+                            "top": 480.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -6290,22 +6292,23 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": true,
-                "onGround": false,
+                "onGround": true,
                 "velocity": {
                     "x": 0.0,
-                    "y": 33.871360778808594
+                    "y": 0.0
                 }
             },
             "StompableTag": {},
             "Transform": {
                 "position": {
                     "x": 3456.0,
-                    "y": 336.3748779296875
+                    "y": 432.0
                 },
                 "prevPos": {
                     "x": 3456.0,
-                    "y": 336.2826232910156
+                    "y": 432.0
                 },
                 "size": {
                     "x": 48.0,
@@ -6373,7 +6376,28 @@
             "BlockTag": {},
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 18,
+                        "direction": 2,
+                        "overlap": {
+                            "height": 0.95172119140625,
+                            "left": 2640.0,
+                            "top": 624.0,
+                            "width": 48.0
+                        }
+                    },
+                    {
+                        "collider": 17,
+                        "direction": 2,
+                        "overlap": {
+                            "height": 0.95172119140625,
+                            "left": 2160.0,
+                            "top": 624.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -6703,7 +6727,18 @@
             "BlockTag": {},
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 19,
+                        "direction": 2,
+                        "overlap": {
+                            "height": 0.95172119140625,
+                            "left": 7824.0,
+                            "top": 624.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -6866,7 +6901,7 @@
         },
         "8": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -6878,7 +6913,7 @@
                 "textures": [
                     "assets/Enemy/Koopa/koopa_fly.png"
                 ],
-                "timer": 0.17962874472141266
+                "timer": 0.07484198361635208
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -6950,6 +6985,7 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": false,
                 "onGround": false,
                 "velocity": {
@@ -6961,11 +6997,11 @@
             "Transform": {
                 "position": {
                     "x": 3648.0,
-                    "y": 336.2826232910156
+                    "y": 336.37127685546875
                 },
                 "prevPos": {
                     "x": 3648.0,
-                    "y": 336.2826232910156
+                    "y": 336.37127685546875
                 },
                 "size": {
                     "x": 48.0,
@@ -7042,7 +7078,7 @@
                 "textures": [
                     "assets/Background/Flag.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -7115,7 +7151,7 @@
                 "textures": [
                     "assets/Background/Castle.png"
                 ],
-                "timer": 62.179595947265625
+                "timer": 0.8248419761657715
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -7232,7 +7268,18 @@
             "BlockTag": {},
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 10,
+                        "direction": 2,
+                        "overlap": {
+                            "height": 0.95166015625,
+                            "left": 1536.0,
+                            "top": 528.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -7287,7 +7334,18 @@
             "BlockTag": {},
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 6,
+                        "direction": 2,
+                        "overlap": {
+                            "height": 0.951690673828125,
+                            "left": 1680.0,
+                            "top": 480.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -7342,7 +7400,18 @@
             "BlockTag": {},
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 2,
+                        "direction": 2,
+                        "overlap": {
+                            "height": 0.951690673828125,
+                            "left": 1824.0,
+                            "top": 432.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,
@@ -7560,7 +7629,7 @@
         },
         "9": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -7572,7 +7641,7 @@
                 "textures": [
                     "assets/Enemy/Koopa/koopa_fly.png"
                 ],
-                "timer": 0.17962874472141266
+                "timer": 0.07484198361635208
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -7644,6 +7713,7 @@
                     "x": 0.0,
                     "y": 0.0
                 },
+                "antiGravity": 0.0,
                 "applyGravity": false,
                 "onGround": false,
                 "velocity": {
@@ -7655,11 +7725,11 @@
             "Transform": {
                 "position": {
                     "x": 8448.0,
-                    "y": 336.2826232910156
+                    "y": 336.37127685546875
                 },
                 "prevPos": {
                     "x": 8448.0,
-                    "y": 336.2826232910156
+                    "y": 336.37127685546875
                 },
                 "size": {
                     "x": 48.0,
@@ -8057,7 +8127,18 @@
             "BlockTag": {},
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [],
+                "collisions": [
+                    {
+                        "collider": 4,
+                        "direction": 2,
+                        "overlap": {
+                            "height": 0.951690673828125,
+                            "left": 7152.0,
+                            "top": 336.0,
+                            "width": 48.0
+                        }
+                    }
+                ],
                 "corners": [
                     {
                         "x": 0.0,

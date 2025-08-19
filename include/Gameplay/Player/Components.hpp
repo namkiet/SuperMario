@@ -17,6 +17,8 @@ struct PlayerTag : public Component
     std::shared_ptr<PlayerSizeState> sizeState;
     std::shared_ptr<PlayerPowerState> powerState;
     bool isMario = true;
+    float speed = 400.0f;
+    float jumpForce = 1100.0f;
 };
 
 struct BigMarioTag : public Component {};

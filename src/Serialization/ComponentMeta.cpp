@@ -176,9 +176,6 @@ DEFINE_COMPONENT(Transform, prevPos, position, size)
 #include <Engine/Core/RigidBody.hpp>
 DEFINE_COMPONENT(RigidBody, velocity, acceleration, applyGravity, onGround, antiGravity)
 
-#include <Engine/Input/Input.hpp>
-DEFINE_COMPONENT(Input, moveLeft, moveRight, jumpPressed, shootPressed)
-
 #include <Engine/Camera/FollowByCameraTag.hpp>
 DEFINE_TAG(FollowByCameraTag)
 
