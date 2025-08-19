@@ -10,8 +10,12 @@ private:
     LevelUI *levelUI = nullptr;
     CoinUI *coinUI = nullptr;
     TimeUI *timeUI = nullptr;
+
 public:
-    InGameState();
+    void setupButton();
+public:
+    // InGameState();
+    InGameState(std::shared_ptr<Game> game);
     void update(GameManager *gameManager, float dt) override;
     std::shared_ptr<LevelState> getNewState(GameManager *gameManager) override;
     void render(GameManager *gameManager, sf::RenderWindow &window, int level) override;
