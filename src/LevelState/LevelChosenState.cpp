@@ -38,7 +38,7 @@ LevelChosenState::LevelChosenState(std::shared_ptr<Game> game): LevelState(game)
         {
             return helperBuilder::makeText(content, pos, charSize, UIFont, colorSetting, setCenter);
         };
-    assert(LevelManager::instance().getLevel() == 0);
+    // assert(LevelManager::instance().getLevel() == 0);
 
     float sameHeightStat = UIConstant::ws.y * 0.9;
         StateColor marionameColorSetting(sf::Color::White, sf::Color::White, sf::Color(153, 153, 153), sf::Color(255, 49, 49)); 

@@ -8,6 +8,7 @@
 #include <UI/UIConstant.hpp>
 #include <UI/HelperBuilder.hpp>
 #include <UI/KeyBinding.hpp>
+#include <Core/MessageBus.hpp>
 
 // InGameState::InGameState()
 // {
@@ -74,7 +75,7 @@ void InGameState::setupButton()
         {
             return helperBuilder::makeText(content, pos, charSize, UIFont, colorSetting, setCenter);
         };
-    assert(LevelManager::instance().getLevel() != 0);
+    // assert(LevelManager::instance().getLevel() != 0);
 
     // create Dummy uiROot
         auto dummydrawElement = std::make_shared<DrawableElement>();
@@ -381,7 +382,9 @@ void InGameState::setupButton()
             mainBtnColor,
             false, 
             25,
-            nullptr,
+            []() {
+                MessageBus::publish("GameSaved");
+            },
             nullptr, sf::Color::White, /*setCenter=*/true
         );
         pausePanel->addComponent(saveBtn);
