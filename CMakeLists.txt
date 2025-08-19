@@ -60,10 +60,10 @@ target_compile_options(${PROJECT_NAME} PRIVATE
   $<$<CXX_COMPILER_ID:MSVC>:/GR>
 )
 
-# if (CMAKE_CXX_COMPILER_ID MATCHES "AppleClang" OR CMAKE_SYSTEM_NAME MATCHES "Linux")
-#     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fsanitize=undefined -fsanitize=address")
-#     target_link_options(mario BEFORE PUBLIC -fsanitize=undefined PUBLIC -fsanitize=address)
-# endif()
+if (CMAKE_CXX_COMPILER_ID MATCHES "AppleClang" OR CMAKE_SYSTEM_NAME MATCHES "Linux")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fsanitize=undefined -fsanitize=address")
+    target_link_options(mario BEFORE PUBLIC -fsanitize=undefined PUBLIC -fsanitize=address)
+endif()
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 

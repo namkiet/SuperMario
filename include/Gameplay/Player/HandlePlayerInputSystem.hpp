@@ -15,36 +15,21 @@ class HandlePlayerInputSystem : public System
 public:
     void update(World& world, float dt) override
     {
-        for (Entity* player : world.findAll<RigidBody, InputTag>())
+        for (Entity* player : world.findAll<PlayerTag, RigidBody, InputTag>())
         {
+            auto& tag = player->getComponent<PlayerTag>();
             auto& rb = player->getComponent<RigidBody>();
             auto& pool = KeyPressPool::Instance();
-            // if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) // Move left
-            // {
-            //     rb.velocity.x = -200.f;
-            // }
-            // else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) // Move right
-            // {
-            //     rb.velocity.x = 200.f;
-            // }
-            // else // Stading
-            // {
-            //     rb.velocity.x = 0.f;
-            // }
-
-            // if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && rb.onGround) // Jump
-            // {
-            //     rb.velocity.y = -PHYSICS::JUMP_FORCE;
-            // }
+            
             auto& keybinding = KeyBinding::Instance();
 
             if (pool.isKeyPressed(keybinding.getKey(KeyBinding::Action::MoveLeft))) // Move left
             {
-                rb.velocity.x = -PLAYER::HORIZONTAL_SPEED;
+                rb.velocity.x = -tag.speed;
             }
             else if (pool.isKeyPressed(keybinding.getKey(KeyBinding::Action::MoveRight))) // Move right
             {
-                rb.velocity.x = PLAYER::HORIZONTAL_SPEED;
+                rb.velocity.x = tag.speed;
             }
             else // Standing
             {
@@ -54,7 +39,7 @@ public:
             if (pool.isKeyPressed(keybinding.getKey(KeyBinding::Action::MoveUp)) && rb.onGround) // Jump
             {
                 player->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/jumpsmall.wav"));
-                rb.velocity.y = -PHYSICS::JUMP_FORCE;
+                rb.velocity.y = -tag.jumpForce;
             }
             // gravity se detect theo thu tu nao
             

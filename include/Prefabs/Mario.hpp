@@ -27,9 +27,19 @@
 class Mario : public Entity
 {
 public:
-    Mario(float x, float y, float width, float height, float scale)
+    Mario(float x, float y, float width, float height, float scale, bool shouldCreateMario)
     {
-        addComponent<Animation>(TextureManager::load("assets/Player/SmallPlayer/marioSmall_0.png"));
+        if (shouldCreateMario)
+        {
+            addComponent<Animation>(TextureManager::load("assets/Player/SmallPlayer/marioSmall_0.png"));
+            addComponent<PlayerTag>(std::make_shared<PlayerIdlingState>(), std::make_shared<PlayerSmallState>(), std::make_shared<PlayerNormalState>(), true);
+        }
+        else
+        {
+            addComponent<Animation>(TextureManager::load("assets/Player/SmallPlayer/luigiSmall_0.png"));
+            addComponent<PlayerTag>(std::make_shared<PlayerIdlingState>(), std::make_shared<PlayerSmallState>(), std::make_shared<PlayerNormalState>(), false);
+        }
+
         addComponent<ZIndex>(-1);
 
         addComponent<FollowByCameraTag>();
@@ -37,7 +47,6 @@ public:
         // Set the size of the collision box for the player
         addComponent<BoxCollider2D>(sf::Vector2f((width - 4) * scale, height * scale), sf::Vector2f(2 * scale, 0));
 
-        addComponent<PlayerTag>(std::make_shared<PlayerIdlingState>(), std::make_shared<PlayerSmallState>(), std::make_shared<PlayerNormalState>(), false);
 
         // Set the rigid body for the player
         addComponent<RigidBody>(sf::Vector2f(0, 0));

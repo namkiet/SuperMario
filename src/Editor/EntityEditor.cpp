@@ -1,4 +1,4 @@
-#include <LevelEditor/EntityEditor.hpp>
+#include <Editor/EntityEditor.hpp>
 #include <Core/TextureManager.hpp>
 #include <Gameplay/Enemy/Goomba/Goomba.hpp>
 #include <Gameplay/Enemy/Koopa/Koopa.hpp>

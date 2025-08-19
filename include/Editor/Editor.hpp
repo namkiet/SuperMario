@@ -1,24 +1,29 @@
 #pragma once
-#include <LevelEditor/Model.hpp>
-#include <LevelEditor/PrefabStorage.hpp>
-#include <LevelEditor/Command/ICommand.hpp>
+#include <Editor/Model.hpp>
+#include <Editor/PrefabStorage.hpp>
+#include <Editor/EntityInspector.hpp>
+#include <Editor/PrefabPanel.hpp>
+#include <Editor/Command/ICommand.hpp>
 #include <Framework/World.hpp>
 #include <SFML/Graphics.hpp>
 
-class LevelEditor 
+class Editor 
 {
 public:
-    LevelEditor(World& world);
+    Editor(World& world);
     void handleEvent(const sf::Event& event, sf::RenderWindow& window);
     void display(sf::RenderWindow& window);
     void drawUI();
-    // void clear();
     
 private:
     Model model;
+    PrefabStorage prefabs;
+    EntityInspector inspector;
+    PrefabPanel panel;
+
+private:
     Entity* selectedEntity = nullptr;
     Prefab* selectedPrefab = nullptr;
-    PrefabStorage prefabs;
     std::unique_ptr<ICommand> currentCommand = nullptr;
 
 public:

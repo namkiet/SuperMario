@@ -61,21 +61,15 @@ void Game::run()
             if (currentState())
                 currentState()->handleEvent(event);
         }
-
-        // // --- Update logic vật lý nhiều lần nếu cần ---
-        // while (lag >= fixedDt) {
-        //     if (currentState()) currentState()->update(*this, fixedDt);
-        //     lag -= fixedDt;
-        // }
-
+        
         ImGui::SFML::Update(window, clock.restart());
         if (currentState())
             currentState()->update(dt);
 
-        // --- Vẽ chỉ 1 lần ---
         window.clear(sf::Color(146, 144, 255, 255));
         if (currentState())
             currentState()->render(window);
+        ImGui::SFML::Render(window);
         window.display();
     }
 

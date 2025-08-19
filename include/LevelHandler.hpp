@@ -25,6 +25,7 @@ private:
     int spriteIndex = 0;
     float scale = 3.0f;
     std::unordered_map<std::string, sf::Vector2f> teleMap;
+    static inline bool shouldCreateMario = true;
 
     void tileLoad(World &world, std::string tilename, float x, float y, float width, float height);
     void pipeLoad(World &world, std::string tilename, float x, float y, float width, float height);

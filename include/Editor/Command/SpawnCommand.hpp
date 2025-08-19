@@ -1,7 +1,7 @@
 #pragma once
-#include <LevelEditor/Command/ICommand.hpp>
-#include <LevelEditor/Model.hpp>
-#include <LevelEditor/PrefabStorage.hpp>
+#include <Editor/Command/ICommand.hpp>
+#include <Editor/Model.hpp>
+#include <Editor/PrefabStorage.hpp>
 #include <Engine/Physics/SpatialHashGrid.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 #include <Core/Physics.hpp>

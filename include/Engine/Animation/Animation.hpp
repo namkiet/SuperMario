@@ -8,23 +8,27 @@ struct Animation : public Component
     Animation() = default;
 
     Animation(const sf::Texture& texture)
-        : frameWidth(texture.getSize().x)
+        : sprite(texture)
+        , frameWidth(texture.getSize().x)
         , frameHeight(texture.getSize().y)
         , frameCount(1)
         , frameDuration(0)
         , loop(true) 
     {
         textures.push_back(&texture);
+        update(0);
     }
 
     Animation(const sf::Texture &texture, int frameWidth, int frameHeight, int frameCount, float frameDuration, bool loop = true)
-        : frameWidth(frameWidth)
+        : sprite(texture)
+        , frameWidth(frameWidth)
         , frameHeight(frameHeight)
         , frameCount(frameCount)
         , frameDuration(frameDuration)
         , loop(loop) 
         {
             textures.push_back(&texture);
+            update(0);
         }
 
     Animation(std::vector<const sf::Texture*> textures, int frameWidth, int frameHeight, float frameDuration, bool loop) 
@@ -33,7 +37,10 @@ struct Animation : public Component
         , frameCount(textures.size())
         , frameDuration(frameDuration)
         , loop(loop)
-        , textures(textures) {}
+        , textures(textures) 
+        {
+            update(0);
+        }
 
     sf::Sprite sprite;
     int frameWidth;
@@ -46,6 +53,45 @@ struct Animation : public Component
     int row = 0;
     bool hasEnded = false;
     std::vector<const sf::Texture *> textures;
+
+    void update(float dt)
+    {
+        timer += dt;
+        if (timer >= frameDuration)
+        {
+            timer -= frameDuration;
+            currentFrame++;
+
+            if (currentFrame >= frameCount)
+            {
+                if (loop)
+                {
+                    currentFrame = 0;
+                }
+                else
+                {
+                    currentFrame = frameCount - 1;
+                    hasEnded = true;
+                }
+            }
+
+        }
+
+        if (textures.size() == 1)
+        {
+            sprite.setTexture(*textures[0]);
+            sprite.setTextureRect(sf::IntRect(
+                currentFrame * frameWidth,
+                row * frameHeight,
+                frameWidth,
+                frameHeight
+            ));
+        }
+        else
+        {
+            sprite.setTexture(*textures[currentFrame]);
+        }
+    }
 };
 
 struct FlipXTag : public Component {};
