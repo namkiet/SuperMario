@@ -83,14 +83,28 @@
 using json = nlohmann::json;
 
 
-GameManager::GameManager(int level, bool hasWonLastLevel) : levelHandler(world, level), currentLevel(level)
+GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue) : levelHandler(world, level), currentLevel(level)
 {
-    if (currentLevel == -1)
+    MessageBus::subscribe("GameSaved", this, [this](const std::string&) {
+        json j;
+        j["level"] = currentLevel;
+        j["lives"] = lives;
+        world.saveSceneToFile(j["entities"]);  
+        std::ofstream fout("save.json");
+        fout << j.dump(4);
+    });
+
+
+    if (shouldContinue)
     {
         std::ifstream fin("save.json");
         json j;
         fin >> j;
-        currentLevel = j["level"];
+        // currentLevel = j["level"];
+
+        lives = j["lives"];
+
+        world.entityManager.removeAllEntities();
         world.loadSceneFromFile(j["entities"]);
     }
     else
@@ -178,14 +192,16 @@ void GameManager::handleEvent(const sf::Event& event, sf::RenderWindow& window)
 {
     if (event.type == sf::Event::KeyPressed)
     {
-        if (event.key.code == sf::Keyboard::S)
-        {
-            json j;
-            j["level"] = currentLevel;
-            world.saveSceneToFile(j["entities"]);  
-            std::ofstream fout("save.json");
-            fout << j.dump(4);
-        }
+        // if (event.key.code == sf::Keyboard::S)
+        // {
+        //     std::ifstream fin("save.json");
+        //     json j;
+        //     fin >> j;
+        //     currentLevel = j["level"];
+
+        //     world.entityManager.removeAllEntities();
+        //     world.loadSceneFromFile(j["entities"]);
+        // }
 
         if (event.key.code == sf::Keyboard::N)
         {
@@ -289,6 +305,7 @@ int GameManager::getLives()
 
 GameManager::~GameManager()
 {
+    MessageBus::unsubscribe("GameSaved", this);
     if (auto player = world.findFirst<PlayerTag>()) 
     {
         world.componentRegistry.saveComponents(player, prevMarioData);
