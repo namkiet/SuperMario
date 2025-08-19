@@ -65,7 +65,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     root->addComponent(GameStartMessage);
     // ================ quit button============================
     auto quitBtn = makeButtonUtil(
-        sf::Vector2f((float)UIConstant::ws.x * 0.5f - 220.f * 0.5f, (float)UIConstant::ws.y * 0.5f + 10.f),
+        sf::Vector2f((float)UIConstant::ws.x * 0.5f, (float)UIConstant::ws.y * 0.5f + 10.f),
         std::make_shared<RoundedRectangleShape>(btnSize, 15.f),
         "Quit", 
         mainBtnColor,
@@ -74,6 +74,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         [this]() {
             this->game->getWindow().close(); 
         }
+        , nullptr, sf::Color::White, /*setCenter=*/true
     );
      root->addComponent(quitBtn);
 
@@ -89,7 +90,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     // auto playPanel = std::make_shared<Panel>(playPanelIU);
     // =================== Play button =======================
     auto roundedRectShape = std::make_shared<RoundedRectangleShape>(btnSize, 15.f);
-    sf::Vector2f playPos((float)UIConstant::ws.x * 0.5f - 220.f * 0.5f, (float)UIConstant::ws.y * 0.5f - 80.f);
+    sf::Vector2f playPos((float)UIConstant::ws.x * 0.5f, (float)UIConstant::ws.y * 0.5f - 80.f);
 
     auto playBtn = makeButtonUtil(
         playPos,
@@ -98,12 +99,15 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         mainBtnColor,
         false, 
         25,
-        [this]() {
-                if (auto playState = this->game->getRegistry().getState("play")) {
-                    std::static_pointer_cast<PlayingState>(playState)->setLevel(4);
-                    this->game->pushState("play");
+        [this, game]() {
+                auto playState = game->getRegistry().getState("play");
+                if (playState)
+                {
+                    std::static_pointer_cast<PlayingState>(playState)->reset();
+                    game->pushState("play");
                 }
             }
+        , nullptr, sf::Color::White, /*setCenter=*/true
     );
     root->addComponent(playBtn);
     // root->addComponent(playPanel);
@@ -127,7 +131,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     // settingComponent = settingsPanel;
     
     // ======================= Settings button============================
-    auto settingsPos = sf::Vector2f((float)UIConstant::ws.x * 0.5f - 220.f * 0.5f, (float)UIConstant::ws.y * 0.5f + 100.f);
+    auto settingsPos = sf::Vector2f((float)UIConstant::ws.x * 0.5f, (float)UIConstant::ws.y * 0.5f + 100.f);
 
     auto settingroundedRectShape = std::make_shared<RoundedRectangleShape>(sf::Vector2f(220.f, 56.f), 20.f); 
 
@@ -139,6 +143,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         true,
         25,
         [settingsPanel]() { settingsPanel->setActive(true); }
+        , nullptr, sf::Color::White, /*setCenter=*/true
     );
 
     root->addComponent(settingsBtn);

@@ -15,10 +15,10 @@ public:
 
     template<typename DerivedState>
     static void registerState(const std::string& name) {
-        registry.push_back({name, typeid(DerivedState), [] {
+        registry.push_back({name, std::type_index(typeid(DerivedState)), [] {
             return std::make_shared<DerivedState>();
         }});
-        nameMap[name] = registry.back().factory;
+        getNameMap()[name] = registry.back().factory;
     }
 
     static std::string getName(const std::shared_ptr<BaseState>& state) {
@@ -31,8 +31,9 @@ public:
     }
 
     static std::shared_ptr<BaseState> create(const std::string& name) {
-        auto it = nameMap.find(name);
-        return (it != nameMap.end()) ? it->second() : nullptr;
+        auto& map = getNameMap();
+        auto it = map.find(name);
+        return (it != map.end()) ? it->second() : nullptr;
     }
 
 private:
@@ -43,7 +44,12 @@ private:
     };
 
     static inline std::vector<Entry> registry;
-    static inline std::unordered_map<std::string, Factory> nameMap;
+
+    // function-local static để tránh static init order fiasco
+    static std::unordered_map<std::string, Factory>& getNameMap() {
+        static std::unordered_map<std::string, Factory> instance;
+        return instance;
+    }
 };
 
 template<typename StateType>

@@ -102,13 +102,10 @@ void PlayingState::render(sf::RenderWindow &window)
 
 void PlayingState::setupButton()
 {
-    std::cout << "74 ok \n";
-
-        std::cout << "76 ok \n";
     if (!UIFont.loadFromFile("MarioFont.ttf")) assert(false);
-        std::cout << "78 ok \n";
+
     auto& texholder = game->getTexHolder();
-        std::cout << "80 ok \n";
+
 
     using namespace UIConstant;
 
@@ -137,8 +134,7 @@ void PlayingState::setupButton()
             return helperBuilder::makeText(content, pos, charSize, UIFont, colorSetting, setCenter);
         };
 
-        std::cout << "104 ok \n";
-    if (level == 4)
+    if (level == 0)
     {
         float sameHeightStat = UIConstant::ws.y * 0.9;
         StateColor marionameColorSetting(sf::Color::White, sf::Color::White, sf::Color(153, 153, 153), sf::Color(255, 49, 49)); 
@@ -178,7 +174,6 @@ void PlayingState::setupButton()
             std::make_shared<sf::Sprite>(texholder.get(TexType::luigichoose)),
             sf::Color::White, /*setCenter = */true
             );
-            std::cout << "145, level = 4 still ok " << std::endl;
 
         auto optdrawElement = std::make_shared<DrawableElement>();
         auto optInteractUI = std::make_shared<InteractUI>(Interact(StateColor()), optdrawElement);
@@ -231,7 +226,7 @@ void PlayingState::setupButton()
         auto pausePanel = std::make_shared<Panel>(pauseIU);
 
         pausePanel->setActiveKey(sf::Keyboard::Z); // press Z to open pause
-        std::cout << "129 ok \n";
+
 
         dummyContainer->addComponent(pausePanel);
 
@@ -321,7 +316,6 @@ void PlayingState::setupButton()
     settingsPanel->addComponent(musicBtn);
     //==========================
 
-    std::cout << "235 ok \n";
     // Create Move Up button
     auto moveUpShape = std::make_shared<RoundedRectangleShape>(controlbtnSize, 15.f);
     auto moveUpBtn = makeButtonUtil(
@@ -374,7 +368,6 @@ void PlayingState::setupButton()
     auto moveLeftMessage = makeTextUtil("Move left", moveUpPos + sf::Vector2f(0.f, 2 * buttonOffset) + sf::Vector2f(150.f,15.f),
                             charSize, textColorSetting);
 
-std::cout << "288 ok \n";
 
     // ===================shoot button================================
     auto shootShape = std::make_shared<RoundedRectangleShape>(controlbtnSize, 15.f);
@@ -447,7 +440,6 @@ std::cout << "288 ok \n";
         }
     });
 
-    std::cout << "360 ok \n";
     
 
 
