@@ -1,5 +1,6 @@
 #pragma once
-
+#include <UI/Composite.hpp>
+#include <memory>
 namespace sf
 {
     class Event;
@@ -10,9 +11,12 @@ class Game;
 
 class GameState
 {
+protected:
+    std::shared_ptr<Game> game;
 public:
+    GameState(std::shared_ptr<Game> game);
     virtual ~GameState() = default;
-    virtual void handleEvent(Game& game, const sf::Event& event, sf::RenderWindow& window) = 0;
-    virtual void update(Game& game, float dt) = 0;
-    virtual void render(Game& game, sf::RenderWindow& window) = 0;
+    virtual void handleEvent(const sf::Event& event, sf::RenderWindow& window) = 0;
+    virtual void update(float dt) = 0;
+    virtual void render(sf::RenderWindow& window) = 0;
 };

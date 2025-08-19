@@ -1,16 +1,26 @@
 #pragma once
 #include "GameState.hpp"
 #include <SFML/Graphics.hpp>
-
+#include <UI/Composite.hpp>
+#include <memory>
+#include <unordered_map>
+#include <string.h>
+#include <UI/ButtonContainer.hpp>
+#include <UI/TextureHolder.hpp>
 class MenuState : public GameState
 {
 private:
     sf::Font font;
-    sf::Text playText;
 
+    std::unordered_map<TexType, std::shared_ptr<sf::Texture>> texPool;
+
+    // giu tat ca component
+    std::shared_ptr<UIComponent> uiRoot;
+    // std::shared_ptr<UIComponent> settingComponent;
 public:
-    MenuState();
-    void handleEvent(Game &game, const sf::Event& event, sf::RenderWindow& window) override;
-    void update(Game &game, float dt) override;
-    void render(Game &game, sf::RenderWindow &window) override;
+    MenuState(std::shared_ptr<Game> game);
+    void handleEvent(const sf::Event &event, sf::RenderWindow& window) override;
+    void update(float dt) override;
+    void render(sf:: RenderWindow&window) override;
+
 };
