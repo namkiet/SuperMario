@@ -52,7 +52,7 @@ void LakituNormalBehaviour::patrol(Entity* entity, float dt, World& world)
     auto& tf = entity->getComponent<Transform>();
     auto& towardPlayer = entity->getComponent<TowardPlayer>();
 
-    auto playerTf = world.findFirst<PlayerTag>()->getComponent<Transform>();
+    auto playerTf = world.findFirst<PlayerTag, Transform>()->getComponent<Transform>();
     auto targetCenter = playerTf.position + (playerTf.size / 2.0f);
     auto lakituCenter = tf.position + (tf.size / 2.0f);
     if (targetCenter.x > patrol.limitX)
@@ -134,7 +134,7 @@ void LakituNormalBehaviour::attack(Entity* entity, float dt, World& world)
     auto tf = entity->getComponent<Transform>();
     auto rb = entity->getComponent<RigidBody>();
 
-    auto playerPos = world.findFirst<PlayerTag>()->getComponent<Transform>().position;
+    auto playerPos = world.findFirst<PlayerTag, Transform>()->getComponent<Transform>().position;
 
     if (abs(playerPos.x - tf.position.x) > attack.distance) 
         return;

@@ -210,7 +210,7 @@ void GameManager::handleEvent(const sf::Event& event, sf::RenderWindow& window)
 
         if (event.key.code == sf::Keyboard::T)
         {
-            world.findFirst<PlayerTag>()->getComponent<Transform>().position.x = 195 * 48;
+            world.findFirst<PlayerTag, Transform>()->getComponent<Transform>().position.x = 195 * 48;
         }
 
         if (event.key.code == sf::Keyboard::F)
@@ -277,23 +277,24 @@ void GameManager::draw(sf::RenderWindow &window, int level)
     // Set the custom view
     world.getSystem<RenderSystem>()->draw(world, window, currentLevel);
 
-    // Drawn with custom view
-    world.getSystem<DrawBoxColliderSystem>()->draw(world, window);
-
     if (level == 0)
         return;
+
+
+    if (editor)
+    {
+        editor->drawUI();
+        editor->display(window);
+
+        // Drawn with custom view
+        world.getSystem<DrawBoxColliderSystem>()->draw(world, window);
+    }
 
     // Drawn with custiom view
     world.getSystem<DrawTextSystem>()->draw(world, window);
 
     // Set the default view
     world.getSystem<DrawGameComponentSystem>()->draw(world, window);
-
-    if (editor)
-    {
-        editor->drawUI();
-        editor->display(window);
-    }
 }
 
 int GameManager::lives = 5;

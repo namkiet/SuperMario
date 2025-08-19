@@ -38,7 +38,7 @@ void BowserIdleBehaviour::patrol(Entity* entity, float dt, World& world)
 {
     auto& bowserTF =entity->getComponent<Transform>();
     auto& attack = entity->getComponent<BowserAttack>();
-    auto playerTF = world.findFirst<PlayerTag>()->getComponent<Transform>();
+    auto playerTF = world.findFirst<PlayerTag, Transform>()->getComponent<Transform>();
 
     if (abs(bowserTF.position.x - playerTF.position.x) <= attack.distance)
     {
@@ -57,7 +57,7 @@ void BowserIdleBehaviour::attack(Entity* entity, float dt, World& world)
 
     auto& bowserTF =entity->getComponent<Transform>();
     auto& attack = entity->getComponent<BowserAttack>();
-    auto playerTF = world.findFirst<PlayerTag>()->getComponent<Transform>();
+    auto playerTF = world.findFirst<PlayerTag, Transform>()->getComponent<Transform>();
 
     if (abs(bowserTF.position.x - playerTF.position.x) > attack.distance)
     {

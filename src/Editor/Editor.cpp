@@ -41,6 +41,7 @@ void Editor::handleEvent(const sf::Event& event, sf::RenderWindow& window)
         }
         else if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
         {
+            selectedEntity = nullptr;
             if (selectedPrefab)
             {
                 selectedPrefab = nullptr;
