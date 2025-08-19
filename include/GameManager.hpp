@@ -30,6 +30,7 @@ private:
     int currentLevel = 1;
     bool oneFrame = false;
     bool shouldPlay = true;
+    bool isPaused = false;
 
     static int lives;
     static inline json prevMarioData;

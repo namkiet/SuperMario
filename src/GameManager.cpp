@@ -95,6 +95,9 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue) :
         fout << j.dump(4);
     });
 
+    MessageBus::subscribe("GamePaused", this, [this](const std::string&) { std::cout << "Paused\n"; isPaused = true; });
+    MessageBus::subscribe("GameResumed", this, [this](const std::string&) { isPaused = false; });
+
 
     if (shouldContinue)
     {
@@ -280,6 +283,8 @@ void GameManager::update(float dt)
     if (dt > 0.1f)
         return;
 
+    if (isPaused) return;
+
     if (oneFrame && !shouldPlay)
     {
         world.getSystem<CollisionDetectionSystem>()->update(world, dt);
@@ -335,6 +340,8 @@ int GameManager::getLives()
 GameManager::~GameManager()
 {
     MessageBus::unsubscribe("GameSaved", this);
+    MessageBus::unsubscribe("GamePaused", this);
+    MessageBus::unsubscribe("GameResumed", this);
     if (auto player = world.findFirst<PlayerTag>()) 
     {
         world.componentRegistry.saveComponents(player, prevMarioData);

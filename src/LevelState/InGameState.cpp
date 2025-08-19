@@ -9,6 +9,7 @@
 #include <UI/HelperBuilder.hpp>
 #include <UI/KeyBinding.hpp>
 #include <UI/CommonUIPool.hpp>
+#include <Core/MessageBus.hpp>
 
 // InGameState::InGameState()
 // {
@@ -344,6 +345,7 @@ void InGameState::setupButton()
             false, 
             25,
             [pausePanel]() {
+                MessageBus::publish("GameResumed");
                 pausePanel->setActive(false);
             },
             nullptr, sf::Color::White, /*setCenter=*/true
@@ -390,7 +392,9 @@ void InGameState::setupButton()
             mainBtnColor,
             false, 
             25,
-            nullptr,
+            []() {
+                MessageBus::publish("GameSaved");
+            },
             nullptr, sf::Color::White, /*setCenter=*/true
         );
         pausePanel->addComponent(saveBtn);
@@ -537,6 +541,7 @@ void InGameState::setupButton()
                 false,
                 0, 
                 [this, pausePanel]() { 
+                    MessageBus::publish("GamePaused");
                     pausePanel->setActive(true);
                 },
                 std::make_shared<sf::Sprite>(texholder.get(TexType::pause)), sf::Color::White, true
