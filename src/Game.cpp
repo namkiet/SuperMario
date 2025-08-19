@@ -28,7 +28,8 @@ Game::Game()
     textureHolder.load(TexType::marionotchoose, "assets/Characters/RedMarioNotActive.png");
     textureHolder.load(TexType::luigichoose, "assets/Characters/GreenMarioActive.png");
     textureHolder.load(TexType::luiginotchoose, "assets/Characters/GreenMarioNotActive.png");
-
+    textureHolder.load(TexType::keybutton, "assets/UI/keyButton.png");
+    textureHolder.load(TexType::pause, "assets/UI/pause.png");
 
     registry.registerInstance("menu", std::make_shared<MenuState>(std::shared_ptr<Game>(this)));
     registry.registerInstance("play", std::make_shared<PlayingState>(std::shared_ptr<Game>(this)));

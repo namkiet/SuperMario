@@ -19,7 +19,9 @@ enum class TexType {
     mariochoose,
     marionotchoose,
     luigichoose,
-    luiginotchoose
+    luiginotchoose,
+    keybutton,
+    pause
 };
 
 using TextureHolder = ResourceHolder<sf::Texture, TexType>;

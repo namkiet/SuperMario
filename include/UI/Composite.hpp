@@ -390,8 +390,6 @@ class UIContainer: public UIComponent
             
             // std::cout << "after mid uicontainer handle event" << std::endl;
             }
-            
-            // std::cout << "end handle event in uicontainer" << std::endl;
             return true;
         }
         

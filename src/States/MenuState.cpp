@@ -65,7 +65,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     root->addComponent(GameStartMessage);
     // ================ quit button============================
     auto quitBtn = makeButtonUtil(
-        sf::Vector2f((float)UIConstant::ws.x * 0.5f, (float)UIConstant::ws.y * 0.5f + 10.f),
+        sf::Vector2f((float)UIConstant::ws.x * 0.5f, (float)UIConstant::ws.y * 0.5f + 190.f),
         std::make_shared<RoundedRectangleShape>(btnSize, 15.f),
         "Quit", 
         mainBtnColor,
@@ -149,6 +149,21 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     root->addComponent(settingsBtn);
     root->addComponent(settingsPanel);
 
+    // ====================== Load game button=============================
+        auto LoadBtn = makeButtonUtil(
+        sf::Vector2f((float)UIConstant::ws.x * 0.5f, (float)UIConstant::ws.y * 0.5f + 10.f),
+        std::make_shared<RoundedRectangleShape>(btnSize, 15.f),
+        "Load", 
+        mainBtnColor,
+        false,
+        25, 
+        [this]() {
+            std::cout << "Load game" << std::endl;
+        }
+        , nullptr, sf::Color::White, /*setCenter=*/true
+    );
+     root->addComponent(LoadBtn);
+
 
     // ========== Close button in settingsPanel =================================
 
@@ -225,7 +240,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         [this]() { 
             std::cout << "Move Up button clicked!" << std::endl;
         },
-        nullptr, sf::Color::Black
+        std::make_shared<sf::Sprite>(texholder.get(::TexType::keybutton)), sf::Color::Black
     );
     auto moveUpMessage = makeTextUtil("Jump", moveUpPos + sf::Vector2f(150.f,15.f),
                             charSize, textColorSetting);
@@ -242,7 +257,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         [this]() { 
             std::cout << "Move Down button clicked!" << std::endl;
         },
-        nullptr, sf::Color::Black
+        std::make_shared<sf::Sprite>(texholder.get(::TexType::keybutton)), sf::Color::Black
     );
     auto moveRightMessage = makeTextUtil("Move right", moveUpPos + sf::Vector2f(0.f, 1 * buttonOffset) + sf::Vector2f(150.f,15.f),
                             charSize, textColorSetting);
@@ -260,7 +275,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         [this]() { 
             std::cout << "Move Left button clicked!" << std::endl;
         },
-        nullptr, sf::Color::Black
+        std::make_shared<sf::Sprite>(texholder.get(::TexType::keybutton)), sf::Color::Black
     );
     auto moveLeftMessage = makeTextUtil("Move left", moveUpPos + sf::Vector2f(0.f, 2 * buttonOffset) + sf::Vector2f(150.f,15.f),
                             charSize, textColorSetting);
@@ -279,7 +294,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         [this]() { 
             std::cout << "Shoot button clicked!" << std::endl;
         },
-        nullptr, sf::Color::Black
+        std::make_shared<sf::Sprite>(texholder.get(::TexType::keybutton)), sf::Color::Black
     );
     auto ShootMessage = makeTextUtil("Shoot", moveUpPos + sf::Vector2f(0.f, 3 * buttonOffset) + sf::Vector2f(150.f,15.f),
                             charSize, textColorSetting);
@@ -296,7 +311,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         [this]() { 
             std::cout << "Move Down button clicked!" << std::endl;
         },
-        nullptr, sf::Color::Black
+        std::make_shared<sf::Sprite>(texholder.get(::TexType::keybutton)), sf::Color::Black
     );
     auto moveDownMessage = makeTextUtil("Move down", moveUpPos + sf::Vector2f(0.f, 4 * buttonOffset) + sf::Vector2f(150.f,15.f),
                             charSize, textColorSetting);

@@ -32,7 +32,7 @@ void PlayingState::handleEvent(const sf::Event &event)
 
     if (gameManager)
         gameManager->handleEvent(event, game->getWindow());
-
+    // std::cout << "handle event here" << std::endl; 
     if (uiRoot) uiRoot->handleEvent(event);
 }
 
@@ -649,7 +649,23 @@ void PlayingState::setupButton()
         TimeUpPanel->addComponent(restartBtnTimeUp);
         TimeUpPanel->addComponent(exitBtnTimeUp);
         
+        // ================= Pause button =====================
+         auto pauseBtnInGame = makeButtonUtil(
+                sf::Vector2f(UIConstant::ws.x - 100.f, 100.f),
+                std::make_shared<sf::CircleShape>(35.f),
+                "", 
+                StateColor(sf::Color(255, 255, 255, 200), sf::Color(255, 255, 255, 0)),
+                false,
+                0, 
+                [this, pausePanel]() { 
+                    pausePanel->setActive(true);
+                },
+                std::make_shared<sf::Sprite>(texholder.get(TexType::pause)), sf::Color::White, true
+            );
+        dummyContainer->addComponent(pauseBtnInGame);
+        
         uiRoot = dummyContainer;
+        dummyContainer->setActive(true);
     }
 }
 

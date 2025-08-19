@@ -22,7 +22,8 @@ namespace UIConstant
 
     inline const StateColor keybuttonColor(
         sf::Color(255, 165, 0),
-        sf::Color(255, 255, 255, 50)
+        sf::Color(255, 255, 255, 50),
+        sf::Color::Black, sf::Color::Black
     ); // key button color in setting state
 
     inline const StateColor textColorSetting(sf::Color(255, 255, 255), sf::Color(255, 255, 255));
