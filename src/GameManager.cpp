@@ -83,14 +83,29 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-GameManager::GameManager(int level, bool hasWonLastLevel) : levelHandler(world, level), currentLevel(level)
+
+GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue) : levelHandler(world, level), currentLevel(level)
 {
-    if (currentLevel == -1)
+    MessageBus::subscribe("GameSaved", this, [this](const std::string&) {
+        json j;
+        j["level"] = currentLevel;
+        j["lives"] = lives;
+        world.saveSceneToFile(j["entities"]);  
+        std::ofstream fout("save.json");
+        fout << j.dump(4);
+    });
+
+
+    if (shouldContinue)
     {
         std::ifstream fin("save.json");
         json j;
         fin >> j;
-        currentLevel = j["level"];
+        // currentLevel = j["level"];
+
+        lives = j["lives"];
+
+        world.entityManager.removeAllEntities();
         world.loadSceneFromFile(j["entities"]);
     }
     else
@@ -205,14 +220,16 @@ void GameManager::handleEvent(const sf::Event &event, sf::RenderWindow &window)
 {
     if (event.type == sf::Event::KeyPressed)
     {
-        if (event.key.code == sf::Keyboard::S)
-        {
-            json j;
-            j["level"] = currentLevel;
-            world.saveSceneToFile(j["entities"]);
-            std::ofstream fout("save.json");
-            fout << j.dump(4);
-        }
+        // if (event.key.code == sf::Keyboard::S)
+        // {
+        //     std::ifstream fin("save.json");
+        //     json j;
+        //     fin >> j;
+        //     currentLevel = j["level"];
+
+        //     world.entityManager.removeAllEntities();
+        //     world.loadSceneFromFile(j["entities"]);
+        // }
 
         if (event.key.code == sf::Keyboard::N)
         {
@@ -221,7 +238,7 @@ void GameManager::handleEvent(const sf::Event &event, sf::RenderWindow &window)
 
         if (event.key.code == sf::Keyboard::T)
         {
-            world.findFirst<PlayerTag>()->getComponent<Transform>().position.x = 195 * 48;
+            world.findFirst<PlayerTag, Transform>()->getComponent<Transform>().position.x = 195 * 48;
         }
 
         if (event.key.code == sf::Keyboard::F)
@@ -288,23 +305,24 @@ void GameManager::draw(sf::RenderWindow &window, int level)
     // Set the custom view
     world.getSystem<RenderSystem>()->draw(world, window, currentLevel);
 
-    // Drawn with custom view
-    world.getSystem<DrawBoxColliderSystem>()->draw(world, window);
-
     if (level == 0)
         return;
+
+
+    if (editor)
+    {
+        editor->drawUI();
+        editor->display(window);
+
+        // Drawn with custom view
+        world.getSystem<DrawBoxColliderSystem>()->draw(world, window);
+    }
 
     // Drawn with custiom view
     world.getSystem<DrawTextSystem>()->draw(world, window);
 
     // Set the default view
     world.getSystem<DrawGameComponentSystem>()->draw(world, window);
-
-    if (editor)
-    {
-        editor->drawUI();
-        editor->display(window);
-    }
 }
 
 int GameManager::lives = 5;
@@ -316,8 +334,8 @@ int GameManager::getLives()
 
 GameManager::~GameManager()
 {
-    std::cout << "GameManager destructor called\n";
-    if (auto player = world.findFirst<PlayerTag>())
+    MessageBus::unsubscribe("GameSaved", this);
+    if (auto player = world.findFirst<PlayerTag>()) 
     {
         world.componentRegistry.saveComponents(player, prevMarioData);
     }

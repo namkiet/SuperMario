@@ -497,8 +497,11 @@ void PlayingState::setupButton()
             mainBtnColor,
             false,
             25,
-            nullptr,
-            nullptr, sf::Color::White, /*setCenter=*/true);
+            [](){
+                MessageBus::publish("GameSaved");
+            },
+            nullptr, sf::Color::White, /*setCenter=*/true
+        );
         pausePanel->addComponent(saveBtn);
 
         std::cout << "433 ok \n";
@@ -636,17 +639,18 @@ void PlayingState::setupButton()
     }
 }
 
-void PlayingState::setLevel(int level, bool hasWonLastLevel)
+void PlayingState::setLevel(int level, bool hasWonLastLevel, bool shouldContinue)
 {
     this->level = level;
     if (gameManager)
         delete gameManager;
-    gameManager = new GameManager(level, hasWonLastLevel);
+        gameManager = new GameManager(level, hasWonLastLevel, shouldContinue);
     setupButton();
 
     LevelManager::instance().setSkipUpdate(false);
     LevelManager::instance().setStatus("playing");
     LevelManager::instance().setShouldLoadNextLevel(false);
+    LevelManager::instance().setLevel(level);
 
     currentLevelState = std::make_unique<IntroState>();
 }

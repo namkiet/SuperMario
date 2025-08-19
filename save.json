@@ -14,7 +14,7 @@
                 "textures": [
                     "assets/Enemy/Lakitu/lakitu_normal.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -104,11 +104,11 @@
             },
             "Transform": {
                 "position": {
-                    "x": 1225.6004638671875,
+                    "x": 1032.1943359375,
                     "y": 96.0
                 },
                 "prevPos": {
-                    "x": 1235.240966796875,
+                    "x": 1039.3173828125,
                     "y": 96.0
                 },
                 "size": {
@@ -120,7 +120,7 @@
         },
         "10": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 16,
@@ -132,7 +132,7 @@
                 "textures": [
                     "assets/Enemy/Goomba/goomba_walk.png"
                 ],
-                "timer": 0.07484198361635208
+                "timer": 0.21140404045581818
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -141,7 +141,7 @@
                         "collider": 84,
                         "direction": 1,
                         "overlap": {
-                            "height": 0.95166015625,
+                            "height": 0.51953125,
                             "left": 1536.0,
                             "top": 528.0,
                             "width": 48.0
@@ -734,7 +734,7 @@
                         "collider": 3,
                         "direction": 2,
                         "overlap": {
-                            "height": 0.951690673828125,
+                            "height": 0.519561767578125,
                             "left": 3504.0,
                             "top": 432.0,
                             "width": 48.0
@@ -793,7 +793,7 @@
         },
         "11": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 16,
@@ -805,7 +805,7 @@
                 "textures": [
                     "assets/Enemy/Goomba/goomba_walk.png"
                 ],
-                "timer": 0.07484198361635208
+                "timer": 0.21140404045581818
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -814,7 +814,7 @@
                         "collider": 111,
                         "direction": 1,
                         "overlap": {
-                            "height": 0.95166015625,
+                            "height": 0.51953125,
                             "left": 3408.0,
                             "top": 528.0,
                             "width": 48.0
@@ -967,7 +967,7 @@
                         "collider": 11,
                         "direction": 2,
                         "overlap": {
-                            "height": 0.95166015625,
+                            "height": 0.51953125,
                             "left": 3408.0,
                             "top": 528.0,
                             "width": 48.0
@@ -1033,7 +1033,7 @@
                         "collider": 7,
                         "direction": 2,
                         "overlap": {
-                            "height": 0.951690673828125,
+                            "height": 0.519561767578125,
                             "left": 3456.0,
                             "top": 480.0,
                             "width": 48.0
@@ -1092,7 +1092,7 @@
         },
         "113": {
             "Animation": {
-                "currentFrame": 2,
+                "currentFrame": 1,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 24,
@@ -1100,13 +1100,13 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Item/Coin/Coin3/SmallCoin1_2.png",
+                "sprite": "assets/Item/Coin/Coin3/SmallCoin1_1.png",
                 "textures": [
                     "assets/Item/Coin/Coin3/SmallCoin1_0.png",
                     "assets/Item/Coin/Coin3/SmallCoin1_1.png",
                     "assets/Item/Coin/Coin3/SmallCoin1_2.png"
                 ],
-                "timer": 0.22484198212623596
+                "timer": 0.011403948068618774
             },
             "SmallCoinTag": {},
             "Transform": {
@@ -1138,7 +1138,7 @@
         },
         "12": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -1150,7 +1150,7 @@
                 "textures": [
                     "assets/Enemy/Koopa/koopa_walk.png"
                 ],
-                "timer": 0.07484198361635208
+                "timer": 0.21140404045581818
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -1159,7 +1159,7 @@
                         "collider": 52,
                         "direction": 1,
                         "overlap": {
-                            "height": 0.951690673828125,
+                            "height": 0.519561767578125,
                             "left": 4512.0,
                             "top": 480.0,
                             "width": 48.0
@@ -1252,7 +1252,7 @@
         },
         "13": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -1264,7 +1264,7 @@
                 "textures": [
                     "assets/Enemy/Piranha/piranha_normal.png"
                 ],
-                "timer": 0.07484198361635208
+                "timer": 0.21140404045581818
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -1340,7 +1340,7 @@
                 "maxHeight": 448.0,
                 "minHeight": 360.0,
                 "phaseDuration": 2.0,
-                "timer": 0.8248419761657715,
+                "timer": 1.2114042043685913,
                 "velocity": {
                     "x": 0.0,
                     "y": -44.0
@@ -1380,7 +1380,7 @@
         },
         "14": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -1392,7 +1392,7 @@
                 "textures": [
                     "assets/Enemy/Koopa/koopa_jump.png"
                 ],
-                "timer": 0.07484198361635208
+                "timer": 0.21140404045581818
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -1461,18 +1461,18 @@
                 "onGround": false,
                 "velocity": {
                     "x": 0.0,
-                    "y": 118.5304946899414
+                    "y": -611.4840087890625
                 }
             },
             "StompableTag": {},
             "Transform": {
                 "position": {
                     "x": 5232.0,
-                    "y": 415.8805236816406
+                    "y": 516.2254028320313
                 },
                 "prevPos": {
                     "x": 5232.0,
-                    "y": 413.223388671875
+                    "y": 524.733642578125
                 },
                 "size": {
                     "x": 48.0,
@@ -1483,7 +1483,7 @@
         },
         "15": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -1495,7 +1495,7 @@
                 "textures": [
                     "assets/Enemy/Koopa/koopa_jump.png"
                 ],
-                "timer": 0.07484198361635208
+                "timer": 0.21140404045581818
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -1564,18 +1564,18 @@
                 "onGround": false,
                 "velocity": {
                     "x": 0.0,
-                    "y": 118.5304946899414
+                    "y": -611.4840087890625
                 }
             },
             "StompableTag": {},
             "Transform": {
                 "position": {
                     "x": 5712.0,
-                    "y": 415.8805236816406
+                    "y": 516.2254028320313
                 },
                 "prevPos": {
                     "x": 5712.0,
-                    "y": 413.223388671875
+                    "y": 524.733642578125
                 },
                 "size": {
                     "x": 48.0,
@@ -1586,7 +1586,7 @@
         },
         "16": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -1598,7 +1598,7 @@
                 "textures": [
                     "assets/Enemy/Koopa/koopa_walk.png"
                 ],
-                "timer": 0.07484198361635208
+                "timer": 0.21140404045581818
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -1607,7 +1607,7 @@
                         "collider": 64,
                         "direction": 1,
                         "overlap": {
-                            "height": 0.95166015625,
+                            "height": 0.51953125,
                             "left": 6384.0,
                             "top": 576.0,
                             "width": 48.0
@@ -1700,7 +1700,7 @@
         },
         "17": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -1712,7 +1712,7 @@
                 "textures": [
                     "assets/Enemy/Koopa/koopa_walk.png"
                 ],
-                "timer": 0.07484198361635208
+                "timer": 0.21140404045581818
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -1721,7 +1721,7 @@
                         "collider": 71,
                         "direction": 1,
                         "overlap": {
-                            "height": 0.95172119140625,
+                            "height": 0.51953125,
                             "left": 2160.0,
                             "top": 624.0,
                             "width": 48.0
@@ -1814,7 +1814,7 @@
         },
         "18": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -1826,7 +1826,7 @@
                 "textures": [
                     "assets/Enemy/Koopa/koopa_walk.png"
                 ],
-                "timer": 0.07484198361635208
+                "timer": 0.21140404045581818
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -1835,7 +1835,7 @@
                         "collider": 71,
                         "direction": 1,
                         "overlap": {
-                            "height": 0.95172119140625,
+                            "height": 0.51953125,
                             "left": 2640.0,
                             "top": 624.0,
                             "width": 48.0
@@ -1928,7 +1928,7 @@
         },
         "19": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -1940,7 +1940,7 @@
                 "textures": [
                     "assets/Enemy/Koopa/koopa_walk.png"
                 ],
-                "timer": 0.07484198361635208
+                "timer": 0.21140404045581818
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -1949,7 +1949,7 @@
                         "collider": 77,
                         "direction": 1,
                         "overlap": {
-                            "height": 0.95172119140625,
+                            "height": 0.51953125,
                             "left": 7824.0,
                             "top": 624.0,
                             "width": 48.0
@@ -2042,7 +2042,7 @@
         },
         "2": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 16,
@@ -2054,7 +2054,7 @@
                 "textures": [
                     "assets/Enemy/Goomba/goomba_walk.png"
                 ],
-                "timer": 0.07484198361635208
+                "timer": 0.21140404045581818
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -2063,7 +2063,7 @@
                         "collider": 86,
                         "direction": 1,
                         "overlap": {
-                            "height": 0.951690673828125,
+                            "height": 0.519561767578125,
                             "left": 1824.0,
                             "top": 432.0,
                             "width": 48.0
@@ -2156,17 +2156,17 @@
             "Animation": {
                 "currentFrame": 0,
                 "frameCount": 1,
-                "frameDuration": 0.0,
+                "frameDuration": 0.10000000149011612,
                 "frameHeight": 16,
                 "frameWidth": 16,
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Player/SmallPlayer/luigiSmall_0.png",
+                "sprite": "assets/Mario/Small/idling.png",
                 "textures": [
-                    "assets/Player/SmallPlayer/luigiSmall_0.png"
+                    "assets/Mario/Small/idling.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 0.07280799746513367
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -2175,8 +2175,8 @@
                         "collider": 68,
                         "direction": 1,
                         "overlap": {
-                            "height": 0.95172119140625,
-                            "left": 198.0,
+                            "height": 0.51953125,
+                            "left": 279.85357666015625,
                             "top": 624.0,
                             "width": 36.0
                         }
@@ -2229,9 +2229,11 @@
             },
             "PlayerTag": {
                 "isMario": true,
+                "jumpForce": 1100.0,
                 "movementState": "PlayerIdlingState",
                 "powerState": "PlayerNormalState",
-                "sizeState": "PlayerSmallState"
+                "sizeState": "PlayerSmallState",
+                "speed": 400.0
             },
             "RigidBody": {
                 "acceleration": {
@@ -2249,11 +2251,11 @@
             "StomperTag": {},
             "Transform": {
                 "position": {
-                    "x": 192.0,
+                    "x": 273.85357666015625,
                     "y": 576.0
                 },
                 "prevPos": {
-                    "x": 192.0,
+                    "x": 273.85357666015625,
                     "y": 576.0
                 },
                 "size": {
@@ -2280,7 +2282,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -2350,7 +2352,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -2420,7 +2422,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -2497,7 +2499,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -2567,7 +2569,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -2625,7 +2627,7 @@
         },
         "26": {
             "Animation": {
-                "currentFrame": 2,
+                "currentFrame": 0,
                 "frameCount": 4,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -2633,14 +2635,14 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Item/Coin/Coin2/Coin1_2.png",
+                "sprite": "assets/Item/Coin/Coin2/Coin1_0.png",
                 "textures": [
                     "assets/Item/Coin/Coin2/Coin1_0.png",
                     "assets/Item/Coin/Coin2/Coin1_1.png",
                     "assets/Item/Coin/Coin2/Coin1_2.png",
                     "assets/Item/Coin/Coin2/Coin1_3.png"
                 ],
-                "timer": 0.22484198212623596
+                "timer": 0.011403948068618774
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -2698,7 +2700,7 @@
         },
         "27": {
             "Animation": {
-                "currentFrame": 2,
+                "currentFrame": 0,
                 "frameCount": 4,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -2706,14 +2708,14 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Item/Coin/Coin2/Coin1_2.png",
+                "sprite": "assets/Item/Coin/Coin2/Coin1_0.png",
                 "textures": [
                     "assets/Item/Coin/Coin2/Coin1_0.png",
                     "assets/Item/Coin/Coin2/Coin1_1.png",
                     "assets/Item/Coin/Coin2/Coin1_2.png",
                     "assets/Item/Coin/Coin2/Coin1_3.png"
                 ],
-                "timer": 0.22484198212623596
+                "timer": 0.011403948068618774
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -2783,7 +2785,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -2853,7 +2855,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -2863,7 +2865,7 @@
                         "collider": 5,
                         "direction": 2,
                         "overlap": {
-                            "height": 0.951690673828125,
+                            "height": 0.519561767578125,
                             "left": 7248.0,
                             "top": 336.0,
                             "width": 48.0
@@ -2922,7 +2924,7 @@
         },
         "3": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 16,
@@ -2934,7 +2936,7 @@
                 "textures": [
                     "assets/Enemy/Goomba/goomba_walk.png"
                 ],
-                "timer": 0.07484198361635208
+                "timer": 0.21140404045581818
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -2943,7 +2945,7 @@
                         "collider": 109,
                         "direction": 1,
                         "overlap": {
-                            "height": 0.951690673828125,
+                            "height": 0.519561767578125,
                             "left": 3504.0,
                             "top": 432.0,
                             "width": 48.0
@@ -3088,7 +3090,7 @@
         },
         "31": {
             "Animation": {
-                "currentFrame": 2,
+                "currentFrame": 0,
                 "frameCount": 4,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -3096,14 +3098,14 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Item/Coin/Coin2/Coin1_2.png",
+                "sprite": "assets/Item/Coin/Coin2/Coin1_0.png",
                 "textures": [
                     "assets/Item/Coin/Coin2/Coin1_0.png",
                     "assets/Item/Coin/Coin2/Coin1_1.png",
                     "assets/Item/Coin/Coin2/Coin1_2.png",
                     "assets/Item/Coin/Coin2/Coin1_3.png"
                 ],
-                "timer": 0.22484198212623596
+                "timer": 0.011403948068618774
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -3161,7 +3163,7 @@
         },
         "32": {
             "Animation": {
-                "currentFrame": 2,
+                "currentFrame": 0,
                 "frameCount": 4,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -3169,14 +3171,14 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Item/Coin/Coin2/Coin1_2.png",
+                "sprite": "assets/Item/Coin/Coin2/Coin1_0.png",
                 "textures": [
                     "assets/Item/Coin/Coin2/Coin1_0.png",
                     "assets/Item/Coin/Coin2/Coin1_1.png",
                     "assets/Item/Coin/Coin2/Coin1_2.png",
                     "assets/Item/Coin/Coin2/Coin1_3.png"
                 ],
-                "timer": 0.22484198212623596
+                "timer": 0.011403948068618774
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -3234,7 +3236,7 @@
         },
         "33": {
             "Animation": {
-                "currentFrame": 2,
+                "currentFrame": 0,
                 "frameCount": 4,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -3242,14 +3244,14 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Item/Coin/Coin2/Coin1_2.png",
+                "sprite": "assets/Item/Coin/Coin2/Coin1_0.png",
                 "textures": [
                     "assets/Item/Coin/Coin2/Coin1_0.png",
                     "assets/Item/Coin/Coin2/Coin1_1.png",
                     "assets/Item/Coin/Coin2/Coin1_2.png",
                     "assets/Item/Coin/Coin2/Coin1_3.png"
                 ],
-                "timer": 0.22484198212623596
+                "timer": 0.011403948068618774
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -3319,7 +3321,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -3389,7 +3391,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -3447,7 +3449,7 @@
         },
         "36": {
             "Animation": {
-                "currentFrame": 2,
+                "currentFrame": 1,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -3455,13 +3457,13 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Tile/Tile1/Tile1_26.png",
+                "sprite": "assets/Tile/Tile1/Tile1_25.png",
                 "textures": [
                     "assets/Tile/Tile1/Tile1_24.png",
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.22484198212623596
+                "timer": 0.011403948068618774
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -3520,7 +3522,7 @@
         },
         "37": {
             "Animation": {
-                "currentFrame": 2,
+                "currentFrame": 1,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -3528,13 +3530,13 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Tile/Tile1/Tile1_26.png",
+                "sprite": "assets/Tile/Tile1/Tile1_25.png",
                 "textures": [
                     "assets/Tile/Tile1/Tile1_24.png",
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.22484198212623596
+                "timer": 0.011403948068618774
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -3593,7 +3595,7 @@
         },
         "38": {
             "Animation": {
-                "currentFrame": 2,
+                "currentFrame": 1,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -3601,13 +3603,13 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Tile/Tile1/Tile1_26.png",
+                "sprite": "assets/Tile/Tile1/Tile1_25.png",
                 "textures": [
                     "assets/Tile/Tile1/Tile1_24.png",
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.22484198212623596
+                "timer": 0.011403948068618774
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -3666,7 +3668,7 @@
         },
         "39": {
             "Animation": {
-                "currentFrame": 2,
+                "currentFrame": 1,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -3674,13 +3676,13 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Tile/Tile1/Tile1_26.png",
+                "sprite": "assets/Tile/Tile1/Tile1_25.png",
                 "textures": [
                     "assets/Tile/Tile1/Tile1_24.png",
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.22484198212623596
+                "timer": 0.011403948068618774
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -3739,7 +3741,7 @@
         },
         "4": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 16,
@@ -3751,7 +3753,7 @@
                 "textures": [
                     "assets/Enemy/Goomba/goomba_walk.png"
                 ],
-                "timer": 0.07484198361635208
+                "timer": 0.21140404045581818
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -3760,7 +3762,7 @@
                         "collider": 97,
                         "direction": 1,
                         "overlap": {
-                            "height": 0.951690673828125,
+                            "height": 0.519561767578125,
                             "left": 7152.0,
                             "top": 336.0,
                             "width": 48.0
@@ -3863,7 +3865,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -3933,7 +3935,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -4003,7 +4005,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -4073,7 +4075,7 @@
                 "textures": [
                     "assets/Pipe/Pipe1_0.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -4143,7 +4145,7 @@
         },
         "44": {
             "Animation": {
-                "currentFrame": 2,
+                "currentFrame": 0,
                 "frameCount": 4,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -4151,14 +4153,14 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Item/Coin/Coin2/Coin1_2.png",
+                "sprite": "assets/Item/Coin/Coin2/Coin1_0.png",
                 "textures": [
                     "assets/Item/Coin/Coin2/Coin1_0.png",
                     "assets/Item/Coin/Coin2/Coin1_1.png",
                     "assets/Item/Coin/Coin2/Coin1_2.png",
                     "assets/Item/Coin/Coin2/Coin1_3.png"
                 ],
-                "timer": 0.22484198212623596
+                "timer": 0.011403948068618774
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -4216,7 +4218,7 @@
         },
         "45": {
             "Animation": {
-                "currentFrame": 2,
+                "currentFrame": 0,
                 "frameCount": 4,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -4224,14 +4226,14 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Item/Coin/Coin2/Coin1_2.png",
+                "sprite": "assets/Item/Coin/Coin2/Coin1_0.png",
                 "textures": [
                     "assets/Item/Coin/Coin2/Coin1_0.png",
                     "assets/Item/Coin/Coin2/Coin1_1.png",
                     "assets/Item/Coin/Coin2/Coin1_2.png",
                     "assets/Item/Coin/Coin2/Coin1_3.png"
                 ],
-                "timer": 0.22484198212623596
+                "timer": 0.011403948068618774
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -4289,7 +4291,7 @@
         },
         "46": {
             "Animation": {
-                "currentFrame": 2,
+                "currentFrame": 0,
                 "frameCount": 4,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -4297,14 +4299,14 @@
                 "hasEnded": false,
                 "loop": true,
                 "row": 0,
-                "sprite": "assets/Item/Coin/Coin2/Coin1_2.png",
+                "sprite": "assets/Item/Coin/Coin2/Coin1_0.png",
                 "textures": [
                     "assets/Item/Coin/Coin2/Coin1_0.png",
                     "assets/Item/Coin/Coin2/Coin1_1.png",
                     "assets/Item/Coin/Coin2/Coin1_2.png",
                     "assets/Item/Coin/Coin2/Coin1_3.png"
                 ],
-                "timer": 0.22484198212623596
+                "timer": 0.011403948068618774
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -4428,7 +4430,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -4498,7 +4500,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -4563,7 +4565,7 @@
         },
         "5": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 16,
@@ -4575,7 +4577,7 @@
                 "textures": [
                     "assets/Enemy/Goomba/goomba_walk.png"
                 ],
-                "timer": 0.07484198361635208
+                "timer": 0.21140404045581818
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -4584,7 +4586,7 @@
                         "collider": 29,
                         "direction": 1,
                         "overlap": {
-                            "height": 0.951690673828125,
+                            "height": 0.519561767578125,
                             "left": 7248.0,
                             "top": 336.0,
                             "width": 48.0
@@ -4687,7 +4689,7 @@
                 "textures": [
                     "assets/Pipe/Pipe1_1.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -4769,7 +4771,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -4839,7 +4841,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -4849,7 +4851,7 @@
                         "collider": 12,
                         "direction": 2,
                         "overlap": {
-                            "height": 0.951690673828125,
+                            "height": 0.519561767578125,
                             "left": 4512.0,
                             "top": 480.0,
                             "width": 48.0
@@ -4920,7 +4922,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -4990,7 +4992,7 @@
                 "textures": [
                     "assets/Pipe/Pipe1_0.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5061,7 +5063,7 @@
                 "textures": [
                     "assets/Pipe/Pipe1_1.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5132,7 +5134,7 @@
                 "textures": [
                     "assets/Pipe/Pipe1_1.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5203,7 +5205,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5273,7 +5275,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5343,7 +5345,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5401,7 +5403,7 @@
         },
         "6": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 16,
@@ -5413,7 +5415,7 @@
                 "textures": [
                     "assets/Enemy/Goomba/goomba_walk.png"
                 ],
-                "timer": 0.07484198361635208
+                "timer": 0.21140404045581818
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -5422,7 +5424,7 @@
                         "collider": 85,
                         "direction": 1,
                         "overlap": {
-                            "height": 0.951690673828125,
+                            "height": 0.519561767578125,
                             "left": 1680.0,
                             "top": 480.0,
                             "width": 48.0
@@ -5525,7 +5527,7 @@
                 "textures": [
                     "assets/Pipe/Pipe1_1.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5596,7 +5598,7 @@
                 "textures": [
                     "assets/Pipe/Pipe1_1.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5667,7 +5669,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5737,7 +5739,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5807,7 +5809,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5817,7 +5819,7 @@
                         "collider": 16,
                         "direction": 2,
                         "overlap": {
-                            "height": 0.95166015625,
+                            "height": 0.51953125,
                             "left": 6384.0,
                             "top": 576.0,
                             "width": 48.0
@@ -5888,7 +5890,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -5958,7 +5960,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_2.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -6028,7 +6030,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -6093,8 +6095,8 @@
                         "collider": 20,
                         "direction": 2,
                         "overlap": {
-                            "height": 0.95172119140625,
-                            "left": 198.0,
+                            "height": 0.51953125,
+                            "left": 279.85357666015625,
                             "top": 624.0,
                             "width": 36.0
                         }
@@ -6207,7 +6209,7 @@
         },
         "7": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 16,
@@ -6219,7 +6221,7 @@
                 "textures": [
                     "assets/Enemy/Goomba/goomba_walk.png"
                 ],
-                "timer": 0.07484198361635208
+                "timer": 0.21140404045581818
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -6228,7 +6230,7 @@
                         "collider": 112,
                         "direction": 1,
                         "overlap": {
-                            "height": 0.951690673828125,
+                            "height": 0.519561767578125,
                             "left": 3456.0,
                             "top": 480.0,
                             "width": 48.0
@@ -6381,7 +6383,7 @@
                         "collider": 18,
                         "direction": 2,
                         "overlap": {
-                            "height": 0.95172119140625,
+                            "height": 0.51953125,
                             "left": 2640.0,
                             "top": 624.0,
                             "width": 48.0
@@ -6391,7 +6393,7 @@
                         "collider": 17,
                         "direction": 2,
                         "overlap": {
-                            "height": 0.95172119140625,
+                            "height": 0.51953125,
                             "left": 2160.0,
                             "top": 624.0,
                             "width": 48.0
@@ -6732,7 +6734,7 @@
                         "collider": 19,
                         "direction": 2,
                         "overlap": {
-                            "height": 0.95172119140625,
+                            "height": 0.51953125,
                             "left": 7824.0,
                             "top": 624.0,
                             "width": 48.0
@@ -6901,7 +6903,7 @@
         },
         "8": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -6913,7 +6915,7 @@
                 "textures": [
                     "assets/Enemy/Koopa/koopa_fly.png"
                 ],
-                "timer": 0.07484198361635208
+                "timer": 0.21140404045581818
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -6997,11 +6999,11 @@
             "Transform": {
                 "position": {
                     "x": 3648.0,
-                    "y": 336.37127685546875
+                    "y": 336.35601806640625
                 },
                 "prevPos": {
                     "x": 3648.0,
-                    "y": 336.37127685546875
+                    "y": 336.35601806640625
                 },
                 "size": {
                     "x": 48.0,
@@ -7078,7 +7080,7 @@
                 "textures": [
                     "assets/Background/Flag.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -7151,7 +7153,7 @@
                 "textures": [
                     "assets/Background/Castle.png"
                 ],
-                "timer": 0.8248419761657715
+                "timer": 1.2114042043685913
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -7273,7 +7275,7 @@
                         "collider": 10,
                         "direction": 2,
                         "overlap": {
-                            "height": 0.95166015625,
+                            "height": 0.51953125,
                             "left": 1536.0,
                             "top": 528.0,
                             "width": 48.0
@@ -7339,7 +7341,7 @@
                         "collider": 6,
                         "direction": 2,
                         "overlap": {
-                            "height": 0.951690673828125,
+                            "height": 0.519561767578125,
                             "left": 1680.0,
                             "top": 480.0,
                             "width": 48.0
@@ -7405,7 +7407,7 @@
                         "collider": 2,
                         "direction": 2,
                         "overlap": {
-                            "height": 0.951690673828125,
+                            "height": 0.519561767578125,
                             "left": 1824.0,
                             "top": 432.0,
                             "width": 48.0
@@ -7629,7 +7631,7 @@
         },
         "9": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 2,
                 "frameDuration": 0.25,
                 "frameHeight": 24,
@@ -7641,7 +7643,7 @@
                 "textures": [
                     "assets/Enemy/Koopa/koopa_fly.png"
                 ],
-                "timer": 0.07484198361635208
+                "timer": 0.21140404045581818
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -7725,11 +7727,11 @@
             "Transform": {
                 "position": {
                     "x": 8448.0,
-                    "y": 336.37127685546875
+                    "y": 336.35601806640625
                 },
                 "prevPos": {
                     "x": 8448.0,
-                    "y": 336.37127685546875
+                    "y": 336.35601806640625
                 },
                 "size": {
                     "x": 48.0,
@@ -8132,7 +8134,7 @@
                         "collider": 4,
                         "direction": 2,
                         "overlap": {
-                            "height": 0.951690673828125,
+                            "height": 0.519561767578125,
                             "left": 7152.0,
                             "top": 336.0,
                             "width": 48.0
@@ -8300,5 +8302,6 @@
             "name": "5Block"
         }
     },
-    "level": 2
+    "level": 2,
+    "lives": 4
 }

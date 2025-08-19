@@ -1,4 +1,3 @@
-#pragma once
 #include <Framework/ComponentRegistry.hpp>
 
 void ComponentRegistry::saveComponents(EntityManager& em, json& j) const {

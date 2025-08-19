@@ -13,7 +13,7 @@
 class GameManager
 {
 public:
-    GameManager(int level, bool hasWonLastLevel);
+    GameManager(int level, bool hasWonLastLevel, bool shouldContinue);
 
     void handleEvent(const sf::Event &event, sf::RenderWindow &window);
     void update(float dt);

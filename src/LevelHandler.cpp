@@ -31,13 +31,8 @@
 
 LevelHandler::LevelHandler(World &world, int currentLevel) : world(world), currentLevel(currentLevel)
 {
-    MessageBus::subscribe("SelectedMario", [this](const std::string &)
-                          { shouldCreateMario = true; });
-    MessageBus::subscribe("SelectedLuigi", [this](const std::string &)
-                          { shouldCreateMario = false; });
-
-    // Clear the previouse checkpoint positions
-    checkPointPos.clear();
+    MessageBus::subscribe("SelectedMario", this, [this](const std::string&) { shouldCreateMario = true; });
+    MessageBus::subscribe("SelectedLuigi", this, [this](const std::string&) { shouldCreateMario = false; });
 }
 
 void LevelHandler::start()
