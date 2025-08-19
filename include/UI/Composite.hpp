@@ -416,11 +416,6 @@ public:
                 return false; // handle event for children in reverse order
 
             // std::cout << "after mid uicontainer handle event" << std::endl;
-<<<<<<< HEAD
-            }
-            return true;
-=======
->>>>>>> a7e177b44045b597b3216b2c18b3ebb4b0c7f7f7
         }
 
         // std::cout << "end handle event in uicontainer" << std::endl;

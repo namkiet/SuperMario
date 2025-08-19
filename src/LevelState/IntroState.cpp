@@ -4,10 +4,10 @@
 #include <Core/TextureManager.hpp>
 
 
-IntroState::IntroState()
-{
-    font.loadFromFile("BalooBhai2-ExtraBold.ttf");
-}
+// IntroState::IntroState()
+// {
+//     font.loadFromFile("BalooBhai2-ExtraBold.ttf");
+// }
 
 void IntroState::update(GameManager *gameManager, float dt)
 {
@@ -19,7 +19,7 @@ std::shared_ptr<LevelState> IntroState::getNewState(GameManager *gameManager)
     if (timeElapsed >= 1.5f) // Assuming 3 seconds for the intro
     {
         TimeManager::instance().reset();
-        return std::make_shared<InGameState>();
+        return std::make_shared<InGameState>(game);
     }
     return nullptr;
 }
@@ -34,7 +34,7 @@ void IntroState::render(GameManager *gameManager, sf::RenderWindow &window, int 
 
     std::string lives = std::to_string(GameManager::getLives());
     sf::Text livesText;
-    livesText.setFont(font);
+    livesText.setFont(UIFont);
     livesText.setString("x " + lives);
     livesText.setCharacterSize(100);
     livesText.setFillColor(sf::Color({255, 239, 235, 255}));
@@ -42,7 +42,7 @@ void IntroState::render(GameManager *gameManager, sf::RenderWindow &window, int 
     window.draw(livesText);
 
     sf::Text introText;
-    introText.setFont(font);
+    introText.setFont(UIFont);
     introText.setCharacterSize(100);
     introText.setFillColor(sf::Color({255, 239, 235, 255}));
     introText.setPosition(307, 50);
