@@ -157,8 +157,16 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         mainBtnColor,
         false,
         25, 
-        [this]() {
-            std::cout << "Load game" << std::endl;
+        [this, game]() {
+            auto playState = game->getRegistry().getState("play");
+            if (playState)
+            {
+                json j;
+                std::ifstream fin("save.json");
+                fin >> j;
+                std::static_pointer_cast<PlayingState>(playState)->setLevel(j["level"], false, true);
+                game->pushState("play");
+            }
         }
         , nullptr, sf::Color::White, /*setCenter=*/true
     );
@@ -418,22 +426,6 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
 
 void MenuState::handleEvent(const sf::Event &event) {
     if (uiRoot) uiRoot->handleEvent(event);
-
-    if (event.type == sf::Event::KeyPressed)
-    {
-        if (event.key.code == sf::Keyboard::S)
-        {
-            auto playState = game->getRegistry().getState("play");
-            if (playState)
-            {
-                json j;
-                std::ifstream fin("save.json");
-                fin >> j;
-                std::static_pointer_cast<PlayingState>(playState)->setLevel(j["level"], false, true);
-                game->pushState("play");
-            }
-        }
-    }
 }
 
 void MenuState::update(float dt) {

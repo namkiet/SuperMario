@@ -336,6 +336,7 @@ void InGameState::setupButton()
             false, 
             25,
             [pausePanel]() {
+                MessageBus::publish("GameResumed");
                 pausePanel->setActive(false);
             },
             nullptr, sf::Color::White, /*setCenter=*/true
@@ -531,6 +532,7 @@ void InGameState::setupButton()
                 false,
                 0, 
                 [this, pausePanel]() { 
+                    MessageBus::publish("GamePaused");
                     pausePanel->setActive(true);
                 },
                 std::make_shared<sf::Sprite>(texholder.get(TexType::pause)), sf::Color::White, true

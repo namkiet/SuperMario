@@ -690,6 +690,7 @@ void PlayingState::setLevel(int level, bool hasWonLastLevel, bool shouldContinue
     LevelManager::instance().setSkipUpdate(false);
     LevelManager::instance().setStatus("playing");
     LevelManager::instance().setShouldLoadNextLevel(false);
+    if (shouldContinue) LevelManager::instance().setLevel(level);
     
     currentLevelState = std::make_unique<IntroState>(game);
 }
