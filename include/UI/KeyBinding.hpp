@@ -13,6 +13,7 @@ public:
         MoveDown,
         Sit,
         Shoot,
+        Tele,
     };
 
 private:
@@ -28,6 +29,7 @@ private:
         mapping[Action::MoveDown] = sf::Keyboard::S;
         mapping[Action::Sit] = sf::Keyboard::Space;
         mapping[Action::Shoot] = sf::Keyboard::M;
+        mapping[Action::Tele] = sf::Keyboard::Y;
     }
 
     KeyBinding(const KeyBinding&) = delete;

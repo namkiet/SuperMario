@@ -103,11 +103,13 @@ struct TeleChanneling: public Component // for player
 {
     float teleInTime;
     Entity* teleEntity; // pipe
+    bool beforeActualTele;
 
     TeleChanneling() = default;
 
     TeleChanneling(Entity* pipe): teleEntity(pipe)
     {
+        beforeActualTele = true;
         assert (teleEntity->hasComponent<TelePort>());
         teleInTime = teleEntity->getComponent<TelePort>().intime;
     }
