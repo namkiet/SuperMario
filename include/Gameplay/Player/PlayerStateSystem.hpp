@@ -18,6 +18,9 @@ public:
         for (Entity* player : world.findAll<PlayerTag, Animation>())
         {
             auto& tag = player->getComponent<PlayerTag>();
+
+            if (!tag.movementState || !tag.sizeState || !tag.powerState) continue;
+
             tag.movementState->update(player, dt);
             tag.sizeState->update(player, dt);
             tag.powerState->update(player, dt);

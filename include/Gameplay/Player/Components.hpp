@@ -13,9 +13,9 @@ struct PlayerTag : public Component
     PlayerTag(std::shared_ptr<PlayerMovementState> movementState, std::shared_ptr<PlayerSizeState> sizeState, std::shared_ptr<PlayerPowerState> powerState, bool isMario = true) 
         : movementState(movementState), sizeState(sizeState), powerState(powerState) {}
 
-    std::shared_ptr<PlayerMovementState> movementState;
-    std::shared_ptr<PlayerSizeState> sizeState;
-    std::shared_ptr<PlayerPowerState> powerState;
+    std::shared_ptr<PlayerMovementState> movementState = nullptr;
+    std::shared_ptr<PlayerSizeState> sizeState = nullptr;
+    std::shared_ptr<PlayerPowerState> powerState = nullptr;
     bool isMario = true;
     float speed = 400.0f;
     float jumpForce = 1100.0f;
