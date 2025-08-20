@@ -47,7 +47,7 @@ void BowserSlideState::onEnter(Entity* entity)
     patrol.velocity.x = 1000 * (patrol.lastDirection == Direction::Right ? 1 : -1);
     patrol.velocity.y = 0;
 
-    entity->addComponent<StateDuration>(5);
+    entity->addComponent<StateDuration>(5.0f);
     entity->addComponent<CanKillEnemyTag>();
     entity->addComponent<SoundComponent>(SoundComponent(&SoundManager::load("assets/Sounds/spin.wav"), true));
 

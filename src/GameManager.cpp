@@ -83,21 +83,21 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-
 GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue) : levelHandler(world, level), currentLevel(level)
 {
-    MessageBus::subscribe("GameSaved", this, [this](const std::string&) {
+    MessageBus::subscribe("GameSaved", this, [this](const std::string &)
+                          {
         json j;
         j["level"] = currentLevel;
         j["lives"] = lives;
         world.saveSceneToFile(j["entities"]);  
         std::ofstream fout("save.json");
-        fout << j.dump(4);
-    });
+        fout << j.dump(4); });
 
-    MessageBus::subscribe("GamePaused", this, [this](const std::string&) { std::cout << "Paused\n"; isPaused = true; });
-    MessageBus::subscribe("GameResumed", this, [this](const std::string&) { isPaused = false; });
-
+    MessageBus::subscribe("GamePaused", this, [this](const std::string &)
+                          { std::cout << "Paused\n"; isPaused = true; });
+    MessageBus::subscribe("GameResumed", this, [this](const std::string &)
+                          { isPaused = false; });
 
     if (shouldContinue)
     {
@@ -189,7 +189,7 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue) :
         player->getComponent<Transform>().position = tf.position;
         player->getComponent<Transform>().position.y -= (player->getComponent<Transform>().size.y - tf.size.y);
     }
-    else
+    else if (LevelManager::instance().getLevel() != 0)
     {
         auto player = world.findFirst<PlayerTag, Transform>();
         if (player)
@@ -215,6 +215,14 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue) :
             }
 
             player->getComponent<Transform>().position = nearestCheckPoint;
+        }
+    }
+    else if (LevelManager::instance().getLevel() == 0)
+    {
+        auto player = world.findFirst<PlayerTag, FollowByCameraTag>();
+        if (player)
+        {
+            player->removeComponent<FollowByCameraTag>();
         }
     }
 }
@@ -283,7 +291,8 @@ void GameManager::update(float dt)
     if (dt > 0.1f)
         return;
 
-    if (isPaused) return;
+    if (isPaused)
+        return;
 
     if (oneFrame && !shouldPlay)
     {
@@ -313,7 +322,6 @@ void GameManager::draw(sf::RenderWindow &window, int level)
     if (level == 0)
         return;
 
-
     if (editor)
     {
         editor->drawUI();
@@ -342,7 +350,7 @@ GameManager::~GameManager()
     MessageBus::unsubscribe("GameSaved", this);
     MessageBus::unsubscribe("GamePaused", this);
     MessageBus::unsubscribe("GameResumed", this);
-    if (auto player = world.findFirst<PlayerTag>()) 
+    if (auto player = world.findFirst<PlayerTag>())
     {
         world.componentRegistry.saveComponents(player, prevMarioData);
     }

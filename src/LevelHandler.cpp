@@ -31,8 +31,10 @@
 
 LevelHandler::LevelHandler(World &world, int currentLevel) : world(world), currentLevel(currentLevel)
 {
-    MessageBus::subscribe("SelectedMario", this, [this](const std::string&) { shouldCreateMario = true; });
-    MessageBus::subscribe("SelectedLuigi", this, [this](const std::string&) { shouldCreateMario = false; });
+    MessageBus::subscribe("SelectedMario", this, [this](const std::string &)
+                          { shouldCreateMario = true; });
+    MessageBus::subscribe("SelectedLuigi", this, [this](const std::string &)
+                          { shouldCreateMario = false; });
 }
 
 void LevelHandler::start()
@@ -332,7 +334,6 @@ void LevelHandler::playerLoad(World &world, std::string tilename, float x, float
     if (tilename == "StartingPoint") // Player
     {
         world.createEntity<Mario>(x, y, width, height, scale, shouldCreateMario);
-        std::cout << "Player created at position: (" << x * scale << ", " << y * scale << ")\n";
         checkPointPos.push_back(sf::Vector2f(x * scale, y * scale));
     }
     else if (tilename == "CheckPoint")

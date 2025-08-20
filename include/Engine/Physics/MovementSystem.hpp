@@ -30,7 +30,6 @@ public:
                 if (entity->hasComponent<PlayerTag>())
                 {
                     LevelManager::instance().setPrevMarioPosition(tf.position);
-                    std::cout << "Player despawned at position: (" << tf.position.x << ", " << tf.position.y << ")\n";
                 }
             }
         }
