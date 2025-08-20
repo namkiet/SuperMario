@@ -1,21 +1,23 @@
 #pragma once
 #include <ECS/Component.hpp>
+#include <Gameplay/Player/PlayerMovementStates/PlayerIdlingState.hpp>
+#include <Gameplay/Player/PlayerSizeStates/PlayerSmallState.hpp>
+#include <Gameplay/Player/PlayerPowerStates/PlayerNormalState.hpp>
 #include <memory>
-
-class PlayerMovementState;
-class PlayerSizeState;
-class PlayerPowerState;
 
 struct PlayerTag : public Component 
 {
-    PlayerTag() = default;
+    PlayerTag()
+        : movementState(std::make_shared<PlayerIdlingState>())
+        , sizeState(std::make_shared<PlayerSmallState>())
+        , powerState(std::make_shared<PlayerNormalState>()) {}
 
     PlayerTag(std::shared_ptr<PlayerMovementState> movementState, std::shared_ptr<PlayerSizeState> sizeState, std::shared_ptr<PlayerPowerState> powerState, bool isMario = true) 
         : movementState(movementState), sizeState(sizeState), powerState(powerState) {}
 
-    std::shared_ptr<PlayerMovementState> movementState = nullptr;
-    std::shared_ptr<PlayerSizeState> sizeState = nullptr;
-    std::shared_ptr<PlayerPowerState> powerState = nullptr;
+    std::shared_ptr<PlayerMovementState> movementState;
+    std::shared_ptr<PlayerSizeState> sizeState;
+    std::shared_ptr<PlayerPowerState> powerState;
     bool isMario = true;
     float speed = 400.0f;
     float jumpForce = 1100.0f;

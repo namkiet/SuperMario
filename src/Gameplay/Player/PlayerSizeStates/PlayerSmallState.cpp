@@ -29,6 +29,8 @@ void PlayerSmallState::update(Entity* entity, float dt)
 
 std::shared_ptr<PlayerSizeState> PlayerSmallState::getNewState(Entity* entity)
 {
+    if (entity->hasComponent<BlinkingComponent>()) return nullptr;
+
     if (entity->hasComponent<GrowUpTag>()) 
     {
         return std::make_shared<PlayerGrowingUpState>();
