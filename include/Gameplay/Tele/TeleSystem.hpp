@@ -14,6 +14,7 @@
 
 class TeleSystem : public System
 {
+    int TeleFade = -1;
     static bool totallyCollide(Entity *a, Entity *b, Direction dir)
     {
         // std::cout << "Check heree" << std::endl;
@@ -88,11 +89,38 @@ class TeleSystem : public System
 
         return sf::Vector2f(0, 0);
     }
+    static void getSpawnPosAtPipeExit(Entity* pipe, Entity* player, Direction outDir)
+    {
+        auto& pos = player->getComponent<Transform>().position;
+        const auto pipeBox   = Physics::GetCollisionBounds(pipe);
+        const auto playerBox = Physics::GetCollisionBounds(player);
+
+        switch (outDir)
+        {
+            case Direction::Top:
+            case Direction::Bottom:
+            {
+                float centerX = pipeBox.left + pipeBox.width * 0.5f - playerBox.width * 0.5f;
+                pos.x = centerX - player->getComponent<BoxCollider2D>().offset.x;
+                break;
+            }
+            case Direction::Left:
+            case Direction::Right:
+            {
+                float centerY = pipeBox.top + pipeBox.height * 0.5f - playerBox.height * 0.5f;
+                pos.y = centerY - player->getComponent<BoxCollider2D>().offset.y;
+                break;
+            }
+            default:
+                break;
+        }
+    }
     Entity *findPipeDestination(World &world, Entity *player)
     {
         auto entities = world.findAll<PipeTag>();
         for (auto &e : entities)
         {
+            if (!e) continue;
             if (Physics::GetCollisionDirection(player, e) != Direction::None)
                 return e;
         }
@@ -152,9 +180,22 @@ class TeleSystem : public System
                 auto teleInfo = tele.teleEntity->getComponent<TelePort>();
                 auto &pos = player->getComponent<Transform>().position;
                 pos += teleInfo.inVel * dt;
-                
-                if (totallyBypass(player, tele.teleEntity, tele.teleEntity->getComponent<TelePort>().requireCollisionDirection)) // doing tele
+                if (totallyBypass(player, tele.teleEntity, tele.teleEntity->getComponent<TelePort>().requireCollisionDirection) && TeleFade == -1)
                 {
+                    auto& anim = player->getComponent<Animation>();
+                    sf::Color temp = anim.sprite.getColor();
+                    TeleFade = temp.a;
+                    temp.a = 0;
+                    anim.sprite.setColor(temp);
+
+                }
+                if (tele.teleInTime < 0) // doing tele
+                {
+                    auto& anim = player->getComponent<Animation>();
+                    sf::Color temp = anim.sprite.getColor();
+                    temp.a = TeleFade; TeleFade = -1;
+                    anim.sprite.setColor(temp);
+
                     tele.beforeActualTele = false;
                     auto &pos = player->getComponent<Transform>().position;
                     pos = tele.teleEntity->getComponent<TelePort>().destination;
@@ -163,6 +204,8 @@ class TeleSystem : public System
                         auto &PipeDestination = tele.teleEntity->getComponent<hasPipeDestination>();
                         PipeDestination.pipe = findPipeDestination(world, player);
                         assert(PipeDestination.pipe != nullptr);
+                        // set pos of player middle of pipe
+                        getSpawnPosAtPipeExit(PipeDestination.pipe, player, PipeDestination.OutDirection);
                     }
                     
                     // anim.sprite.setColor(sf::Color(255,255,255,255)); // default;
@@ -211,3 +254,8 @@ class TeleSystem : public System
         }
     }
 };
+
+
+// tao 1 cai struct chua thong tin
+// neu -1 thi set 9 va truyen thong tin vao struct
+// neu 
