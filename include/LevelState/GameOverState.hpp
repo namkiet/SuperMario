@@ -4,6 +4,7 @@ class GameOverState : public LevelState
 {
 private:
     float timeElapsed = 0.0f;
+    bool shouldRestart = false;
     // sf::Font font;
 
 public:

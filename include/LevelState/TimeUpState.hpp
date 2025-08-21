@@ -7,6 +7,7 @@ class TimeUpState : public LevelState
 private:
     // sf::Font font;
     float timeElapsed = 0.0f;
+    bool shouldRestart = false;
 
 public:
     // TimeUpState();
