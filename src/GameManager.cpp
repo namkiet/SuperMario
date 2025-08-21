@@ -189,7 +189,7 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue) :
         player->getComponent<Transform>().position = tf.position;
         player->getComponent<Transform>().position.y -= (player->getComponent<Transform>().size.y - tf.size.y);
     }
-    else if (LevelManager::instance().getLevel() != 0)
+    else if (level != 0)
     {
         auto player = world.findFirst<PlayerTag, Transform>();
         if (player)
@@ -217,7 +217,7 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue) :
             player->getComponent<Transform>().position = nearestCheckPoint;
         }
     }
-    else if (LevelManager::instance().getLevel() == 0)
+    else if (level == 0)
     {
         auto player = world.findFirst<PlayerTag, FollowByCameraTag>();
         if (player)

@@ -10,9 +10,11 @@ private:
     LevelUI *levelUI = nullptr;
     CoinUI *coinUI = nullptr;
     TimeUI *timeUI = nullptr;
+    bool shouldRestart = false;
 
 public:
     void setupButton();
+
 public:
     // InGameState();
     InGameState(std::shared_ptr<Game> game);
