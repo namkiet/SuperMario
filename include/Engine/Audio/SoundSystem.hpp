@@ -16,7 +16,7 @@ public:
             if (soundComponent.shouldPlay)
             {
                 soundComponent.sound.setBuffer(*soundComponent.buffer);
-                soundComponent.sound.setVolume(SOUND::shouldPlayMusic? 100: 0);
+                soundComponent.sound.setVolume(SOUND::shouldPlaySound? 100: 0);
                 soundComponent.sound.play();
                 soundComponent.sound.setLoop(soundComponent.loop);
                 soundComponent.shouldPlay = false;

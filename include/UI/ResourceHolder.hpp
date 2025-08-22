@@ -30,7 +30,7 @@ public:
         insertResource(id, std::move(resource));
     }
 
-    Resource&       get(Identifier id)       { return *mResourceMap.at(id); }
+    Resource&       iveget(Identifier id)       { return *mResourceMap.at(id); }
     const Resource& get(Identifier id) const { return *mResourceMap.at(id); }
 
 private:

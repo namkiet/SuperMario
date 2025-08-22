@@ -11,6 +11,7 @@ private:
     CoinUI *coinUI = nullptr;
     TimeUI *timeUI = nullptr;
     bool shouldRestart = false;
+    std::shared_ptr<UIComponent> LiveNum;
 
 public:
     void setupButton();

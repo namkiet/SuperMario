@@ -7,6 +7,7 @@
 #include <string>
 #include <UI/TextureHolder.hpp>
 #include <UI/Composite.hpp>
+#include <SFML/Audio.hpp>
 
 class Game
 {
@@ -17,6 +18,7 @@ private:
     bool isRunning = true;
     StateRegistry registry;
     TextureHolder textureHolder;
+    sf::Music backgroundMusic;
 public:
     Game();
     void run();

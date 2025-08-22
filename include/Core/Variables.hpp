@@ -20,5 +20,6 @@ namespace PLAYER
 }
 namespace SOUND
 {
+    inline bool shouldPlaySound = true;
     inline bool shouldPlayMusic = true;
 }

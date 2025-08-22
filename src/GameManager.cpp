@@ -180,7 +180,7 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue) :
 
     world.addSystem<DespawnSystem>();
     world.addSystem<PlayerRespawnSystem>();
-
+    
     if (hasWonLastLevel)
     {
         auto player = world.findFirst<PlayerTag>();
