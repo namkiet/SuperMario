@@ -10,6 +10,7 @@
 #include <UI/KeyBinding.hpp>
 #include <UI/CommonUIPool.hpp>
 #include <Core/MessageBus.hpp>
+#include <string>
 
 // InGameState::InGameState()
 // {
@@ -114,7 +115,7 @@ void InGameState::setupButton()
         sf::Vector2f(0.f, 100.f),
         sf::Vector2f(-50.f, -80.f),
         sf::Vector2f(0.f, -90.f),
-        sf::Vector2f(50.f, -80.f)};
+        sf::Vector2f(50.f, -87.f)};
     sf::Vector2f centerPos = sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y / 2);
 
     // // ========================== Setting Panel =====================================
@@ -424,6 +425,11 @@ void InGameState::setupButton()
     auto LiveNumMessage = makeTextUtil("3", centerPos + offsetList[7],
                                        30, textColorSetting, /*setCenter=*/true);
     pausePanel->addComponent(LiveNumMessage);
+    // LiveNum = LiveNumMessage;
+    // std::cout << "make button again " << std::endl;
+    MessageBus::subscribe("LiveNum", LiveNumMessage.get(), [LiveNumMessage](const std::string& a){
+        LiveNumMessage->setText(a);
+    });
 
     // =============== DeathPanel=======================
     auto Deathrect = std::make_shared<sf::RectangleShape>(sf::Vector2f(UIConstant::ws.x, UIConstant::ws.y));
@@ -543,6 +549,7 @@ void InGameState::setupButton()
 void InGameState::update(GameManager *gameManager, float dt)
 {
     gameManager->update(dt);
+    MessageBus::publish("LiveNum", std::to_string(gameManager->getLives()));
 }
 
 std::shared_ptr<LevelState> InGameState::getNewState(GameManager *gameManager)
@@ -589,6 +596,8 @@ void InGameState::render(GameManager *gameManager, sf::RenderWindow &window, int
     timeUI->draw(window);
     if (uiRoot)
         uiRoot->draw(window);
+    
+    // LiveNum->draw(window);
 }
 
 bool InGameState::shouldReturnToMenu() const

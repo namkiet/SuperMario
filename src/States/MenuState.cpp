@@ -202,14 +202,14 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         true,
         0,
         []() {
-            SOUND::shouldPlayMusic = true;
+            SOUND::shouldPlaySound = true;
          },
         std::make_shared<sf::Sprite>(texholder.get(TexType::sound))
     );
     soundBtn->setDeactiveFunc([](){
-        SOUND::shouldPlayMusic = false;
+        SOUND::shouldPlaySound = false;
     });
-    soundBtn->setActive(SOUND::shouldPlayMusic);
+    soundBtn->setActive(SOUND::shouldPlaySound);
 
     settingsPanel->addComponent(soundBtn);
     //============Music Button========================
@@ -220,9 +220,15 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         soundButtonColor,
         true,
         0,
-        []() { },
+        []() {
+            SOUND::shouldPlayMusic = true;
+         },
         std::make_shared<sf::Sprite>(texholder.get(TexType::music))
     );
+    musicBtn->setDeactiveFunc([](){
+        SOUND::shouldPlayMusic = false;
+        });
+    musicBtn->setActive(SOUND::shouldPlayMusic);
     settingsPanel->addComponent(musicBtn);
     
     // add setting panel to pool for later reference
