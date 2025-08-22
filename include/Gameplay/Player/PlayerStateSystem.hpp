@@ -101,11 +101,11 @@ private:
         }
     }
 
-    const Animation& getAnimation(const std::string& name) const
+    Animation getAnimation(const std::string& name) const
     {
         auto it = animMap.find(name);
         if (it == animMap.end())
-            throw std::runtime_error("Cannot find Animation: " + name);
+            return Animation();
         return it->second;
     }
 
