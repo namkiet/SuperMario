@@ -10,6 +10,9 @@
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Fire/Components.hpp>
 #include <Entity/Entity.hpp>
+#include <Engine/Core/DespawnTag.hpp>
+#include <Gameplay/Player/PlayerSizeStates/PlayerDeadState.hpp>
+#include <Engine/Audio/SoundManager.hpp>
 
 const std::string PlayerShrinkingState::getName() const
 {
@@ -23,6 +26,7 @@ void PlayerShrinkingState::onEnter(Entity* entity)
     entity->removeComponent<DamagedTag>();
     entity->removeComponent<CanGetDamageTag>();
     entity->removeComponent<CanFireTag>();
+    entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/pipepowerdown.wav"));
 }
 
 void PlayerShrinkingState::onExit(Entity* entity)
@@ -47,6 +51,10 @@ void PlayerShrinkingState::onExit(Entity* entity)
 
 std::shared_ptr<PlayerSizeState> PlayerShrinkingState::getNewState(Entity* entity)
 {
+    if (entity->hasComponent<DespawnTag>()) 
+    {
+        return std::make_shared<PlayerDeadState>();
+    }
     if (entity->hasComponent<Animation>() && entity->getComponent<Animation>().hasEnded)
     {
         return std::make_shared<PlayerSmallState>();

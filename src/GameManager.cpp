@@ -173,7 +173,13 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue) :
     world.addSystem<PlayerRespawnSystem>();
     
     // create music Player
+    std::cout << "rebuild" << std::endl;
     Entity* musicPlayer = world.createEntity(); musicPlayer->addComponent<MusicPlayer>();
+    
+    // if (LevelManager::instance().getStatus() == std::string("gameover"))
+    // {
+    //     world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/gameover.wav"), false, true, sf::Time(sf::seconds(1000)));
+    // }
 
     if (hasWonLastLevel)
     {

@@ -220,11 +220,13 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         true,
         0,
         []() {
+            std::cout << "set shouldPlayMusic to True\n";
             SOUND::shouldPlayMusic = true;
          },
         std::make_shared<sf::Sprite>(texholder.get(TexType::music))
     );
     musicBtn->setDeactiveFunc([](){
+        std::cout << "set shouldPlayMusic to False\n";
         SOUND::shouldPlayMusic = false;
         });
     musicBtn->setActive(SOUND::shouldPlayMusic);

@@ -7,7 +7,7 @@
 #include <Gameplay/DamageOnContact/Components.hpp>
 #include <Gameplay/Fire/Components.hpp>
 #include <Entity/Entity.hpp>
-
+#include <Engine/Audio/SoundManager.hpp>
 const std::string PlayerBigState::getName() const
 {
     return "Big";

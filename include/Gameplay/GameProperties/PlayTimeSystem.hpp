@@ -12,7 +12,7 @@
 #include <LevelManager.hpp>
 
 #include <TimeManager.hpp>
-
+#include <Engine/Audio/SoundManager.hpp>
 #include <LevelManager.hpp>
 
 class PlayTimeSystem : public System
@@ -34,8 +34,16 @@ public:
             Entity *player = world.findFirst<PlayerTag>();
             player->addComponent<DespawnTag>();                          // Add a tag to despawn the entity
 
-            LevelManager::instance().setStatus("timeup");
-            LevelManager::instance().setPrevMarioPosition(player->getComponent<Transform>().position);
+            static float timeUpTimer = 0.0f;
+            timeUpTimer += dt;
+            if (timeUpTimer >= 2.0f)
+            {
+                LevelManager::instance().setStatus("timeup");
+                LevelManager::instance().setPrevMarioPosition(player->getComponent<Transform>().position);
+                // world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/gameover.wav"), false);
+                // std::cout << "It looks good '================" << std::endl;
+                timeUpTimer = 0.0f; // Reset timer for next time
+            }
         }
     }
 };

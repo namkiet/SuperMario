@@ -6,6 +6,7 @@
 #include <Core/Variables.hpp>
 #include <LevelManager.hpp>
 #include <iostream>
+#include <Engine/Audio/SoundManager.hpp>
 
 class MovementSystem : public System
 {
@@ -24,11 +25,12 @@ public:
                 tf.position.y += std::min(rb.velocity.y * dt, 100.0f);
             }
 
-            if (tf.position.y > SIZE::SCREEN.y + 200.0f)
+            if (tf.position.y > SIZE::SCREEN.y + 200.0f && !entity->hasComponent<DespawnTag>())
             {
                 entity->addComponent<DespawnTag>();
                 if (entity->hasComponent<PlayerTag>())
                 {
+                    // world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/death.wav"), false, true, sf::Time(sf::seconds(0.5)));
                     LevelManager::instance().setPrevMarioPosition(tf.position);
                 }
             }

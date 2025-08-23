@@ -6,6 +6,9 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Entity/Entity.hpp>
+#include <Engine/Audio/SoundManager.hpp>
+#include <Engine/Core/DespawnTag.hpp>
+#include <Gameplay/Player/PlayerSizeStates/PlayerDeadState.hpp>
 
 const std::string PlayerGrowingUpState::getName() const
 {
@@ -31,6 +34,7 @@ void PlayerGrowingUpState::onEnter(Entity* entity)
         box.size.x += 12.0f;
         box.size.y *= 2.0f;
     }
+    entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/powerup.wav"));
 }
 
 void PlayerGrowingUpState::onExit(Entity* entity)
@@ -40,6 +44,10 @@ void PlayerGrowingUpState::onExit(Entity* entity)
 
 std::shared_ptr<PlayerSizeState> PlayerGrowingUpState::getNewState(Entity* entity)
 {
+    if (entity->hasComponent<DespawnTag>()) 
+    {
+        return std::make_shared<PlayerDeadState>();
+    }
     if (entity->hasComponent<Animation>() && entity->getComponent<Animation>().hasEnded)
     {
         return std::make_shared<PlayerBigState>();

@@ -16,11 +16,14 @@ namespace PHYSICS
 
 namespace PLAYER
 {
-    inline float HORIZONTAL_SPEED = 400.0f;
+    // inline float HORIZONTAL_SPEED = 400.0f;
+    
+    inline float HORIZONTAL_SPEED = 800.0f;
+
 }
 namespace SOUND
 {
     inline bool shouldPlaySound = true;
     inline bool shouldPlayMusic = true;
-    inline bool SoundBlockMusic = false;
+    // inline bool SoundBlockMusic = false;
 }

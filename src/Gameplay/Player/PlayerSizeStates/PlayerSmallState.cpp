@@ -6,7 +6,8 @@
 #include <Engine/Animation/BlinkingComponent.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
-
+#include <Engine/Core/DespawnTag.hpp>
+#include <Engine/Audio/SoundManager.hpp>
 #include <Entity/Entity.hpp>
 
 const std::string PlayerSmallState::getName() const
@@ -36,7 +37,7 @@ std::shared_ptr<PlayerSizeState> PlayerSmallState::getNewState(Entity* entity)
         return std::make_shared<PlayerGrowingUpState>();
     }
 
-    if (entity->hasComponent<DamagedTag>()) 
+    if (entity->hasComponent<DamagedTag>() || entity->hasComponent<DespawnTag>()) 
     {
         return std::make_shared<PlayerDeadState>();
     }

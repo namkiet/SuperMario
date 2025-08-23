@@ -11,6 +11,8 @@
 #include <UI/CommonUIPool.hpp>
 #include <Core/MessageBus.hpp>
 #include <string>
+#include <Engine/Audio/Components.hpp>
+#include <Engine/Audio/SoundManager.hpp>
 
 // InGameState::InGameState()
 // {
@@ -569,6 +571,7 @@ std::shared_ptr<LevelState> InGameState::getNewState(GameManager *gameManager)
         {
             // std::cout << "Game Over! Returning to main menu." << std::endl;
             gameManager->setLives(4);
+            LevelManager::instance().setStatus(std::string("gameover"));
             return std::make_shared<GameOverState>(game);
         }
         LevelManager::instance().setSkipUpdate(true);

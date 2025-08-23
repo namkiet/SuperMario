@@ -40,6 +40,7 @@ private:
                 player->addComponent<RigidBody>(sf::Vector2f(0, 48 * 8), false);
                 player->addComponent<ClimbingOnFlagPoleTag>();
                 player->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/flagpole.wav"));
+                world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/win.wav"), false, true, sf::seconds(5.f));
 
                 // pull the flag down
                 if (auto flag = world.findFirst<Flag>())

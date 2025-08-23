@@ -4,6 +4,8 @@
 #include <Engine/Core/RigidBody.hpp>
 #include <Entity/Entity.hpp>
 
+#include <Engine/Audio/SoundManager.hpp>
+
 const std::string PlayerDeadState::getName() const
 {
     return "Dead";
@@ -17,6 +19,7 @@ void PlayerDeadState::onEnter(Entity* entity)
     {
         entity->getComponent<RigidBody>().velocity = sf::Vector2f(0, -600);
     }
+    entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/death.wav"), false);
 }
 
 std::shared_ptr<PlayerSizeState> PlayerDeadState::getNewState(Entity* entity)
