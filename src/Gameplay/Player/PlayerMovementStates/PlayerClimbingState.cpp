@@ -1,7 +1,7 @@
 #include <Gameplay/Player/PlayerMovementStates/PlayerClimbingState.hpp>
 #include <Gameplay/Player/PlayerMovementStates/PlayerRunningState.hpp>
 #include <Gameplay/CaptureFlag/Components.hpp>
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 
 const std::string PlayerClimbingState::getName() const
 {

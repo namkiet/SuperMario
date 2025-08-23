@@ -41,7 +41,7 @@ public:
                 }
             }
 
-            updateAnimation(entity->getComponent<Animation>(), dt);
+            entity->getComponent<Animation>().update(dt);
         }
     }
 };

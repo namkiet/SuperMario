@@ -2,7 +2,7 @@
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Engine/Core/RigidBody.hpp>
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 
 const std::string PlayerDeadState::getName() const
 {

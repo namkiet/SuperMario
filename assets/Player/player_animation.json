@@ -38,20 +38,31 @@
 
         "aliases": {
             "IdlingFireInvincible": "IdlingBigInvincible",
+            "IdlingDeadInvincible": "IdlingDeadNormal",
+            "IdlingShrinkingInvincible": "IdlingShrinkingNormal",
+
             "JumpingFireInvincible": "JumpingBigInvincible",
             "JumpingDeadNormal": "IdlingDeadNormal",
+            "JumpingDeadInvincible": "IdlingDeadNormal",
             "JumpingShrinkingNormal": "IdlingShrinkingNormal",
+            "JumpingShrinkingInvincible": "IdlingShrinkingNormal",
             "JumpingGrowingUpNormal": "IdlingGrowingUpNormal",
             "JumpingGrowingUpInvincible": "IdlingGrowingUpInvincible",
+
             "RunningFireInvincible": "RunningBigInvincible",
             "RunningDeadNormal": "IdlingDeadNormal",
+            "RunningDeadInvincible": "IdlingDeadNormal",
             "RunningShrinkingNormal": "IdlingShrinkingNormal",
+            "RunningShrinkingInvincible": "IdlingShrinkingNormal",
             "RunningGrowingUpNormal": "IdlingGrowingUpNormal",
             "RunningGrowingUpInvincible": "IdlingGrowingUpInvincible",
+
             "ClimbingFireInvincible": "ClimbingBigInvincible",
+            
             "CrouchingFireInvincible": "CrouchingBigInvincible",
             "CrouchingDeadNormal": "IdlingDeadNormal",
             "CrouchingShrinkingNormal": "IdlingShrinkingNormal",
+
             "ShootingFireInvincible": "ShootingFireNormal"
         }
     },

@@ -4,7 +4,7 @@
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 #include <Core/KeyPressPool.hpp>
 
 const std::string PlayerCrouchingState::getName() const

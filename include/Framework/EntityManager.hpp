@@ -1,5 +1,5 @@
 #pragma once
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 #include <memory>
 #include <vector>
 #include <algorithm>

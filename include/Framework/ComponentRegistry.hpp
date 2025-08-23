@@ -5,7 +5,7 @@
 #include <string>
 #include <nlohmann/json.hpp>
 #include <typeinfo>
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 #include <iostream>
 #include <sstream>
 

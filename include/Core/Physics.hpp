@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Core/Transform.hpp>

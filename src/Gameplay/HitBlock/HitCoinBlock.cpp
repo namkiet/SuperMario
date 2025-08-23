@@ -1,5 +1,5 @@
 #include <Gameplay/HitBlock/HitSpecialBlockSystem.hpp>
-#include <Prefabs/Coin.hpp>
+#include <Entity/Item/Coin.hpp>
 #include <Factories/BlockFactory.hpp>
 
 void HitSpecialBlockSystem::CoinBlockUpdate(World &world, float dt, Entity *block)

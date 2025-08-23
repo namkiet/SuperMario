@@ -1,7 +1,7 @@
 #pragma once
 #include <Framework/World.hpp>
 #include <Gameplay/Block/Components.hpp>
-#include <Prefabs/Star.hpp>
+#include <Entity/Item/Star.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Core/RigidBody.hpp>

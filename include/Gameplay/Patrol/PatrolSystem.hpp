@@ -24,14 +24,22 @@ public:
                 if (collider->hasComponent<FireBulletTag>())
                     continue;
                 // If it collides with something on the left or on the right, it will reverse direction
-                if (direction == Direction::Left || direction == Direction::Right)
+                if ((direction == Direction::Left && patrol.isMovingRight) || 
+                    (direction == Direction::Right && !patrol.isMovingRight))
                 {
                     patrol.isMovingRight = !patrol.isMovingRight;
                     break;
                 }
             }
 
-            rb.velocity.x = patrol.moveSpeed * (patrol.isMovingRight ? 1 : -1);
+            if (patrol.isMovingRight)
+            {
+                rb.velocity.x = abs(patrol.moveSpeed);
+            }
+            else
+            {
+                rb.velocity.x = -abs(patrol.moveSpeed);
+            }
         }
     }
 };

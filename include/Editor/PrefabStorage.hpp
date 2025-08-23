@@ -7,13 +7,13 @@
 #include <Framework/EntityManager.hpp>
 #include <Framework/ComponentRegistry.hpp>
 
-#include <Gameplay/Enemy/Goomba/Goomba.hpp>
-#include <Gameplay/Enemy/Koopa/Koopa.hpp>
-#include <Gameplay/Enemy/Koopa/KoopaFlying.hpp>
-#include <Gameplay/Enemy/Koopa/KoopaJumping.hpp>
-#include <Gameplay/Enemy/Spiny/Spiny.hpp>
-#include <Gameplay/Enemy/Bowser/Bowser.hpp>
-#include <Prefabs/Block.hpp>
+#include <Entity/Enemy/Goomba.hpp>
+#include <Entity/Enemy/Koopa.hpp>
+#include <Entity/Enemy/KoopaFlying.hpp>
+#include <Entity/Enemy/KoopaJumping.hpp>
+#include <Entity/Enemy/Spiny.hpp>
+#include <Entity/Enemy/Bowser.hpp>
+#include <Entity/Block/Block.hpp>
 
 struct Prefab
 {

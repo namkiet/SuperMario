@@ -46,18 +46,9 @@
 #include <Gameplay/Tele/TeleSystem.hpp>
 
 #include <Gameplay/CaptureFlag/CaptureFlagSystem.hpp>
-
+#include <Gameplay/Enemy/EnemyScoreSystem.hpp>
 #include <Gameplay/Enemy/EnemyStateSystem.hpp>
 #include <Gameplay/Enemy/EnemyBehaviourSystem.hpp>
-#include <Gameplay/Enemy/Koopa/Koopa.hpp>
-#include <Gameplay/Enemy/Goomba/Goomba.hpp>
-#include <Gameplay/Enemy/Koopa/KoopaJumping.hpp>
-#include <Gameplay/Enemy/Koopa/KoopaFlying.hpp>
-#include <Gameplay/Enemy/Piranha/Piranha.hpp>
-#include <Gameplay/Enemy/Spiny/Spiny.hpp>
-#include <Gameplay/Enemy/Lakitu/Lakitu.hpp>
-#include <Gameplay/Enemy/Bowser/Bowser.hpp>
-#include <Gameplay/Enemy/EnemyScoreSystem.hpp>
 
 #include <ScoreManager.hpp>
 #include <TimeManager.hpp>
@@ -288,7 +279,7 @@ void GameManager::handleEvent(const sf::Event &event, sf::RenderWindow &window)
 
 void GameManager::update(float dt)
 {
-    if (dt > 0.1f)
+    if (dt > 0.5f)
         return;
 
     if (isPaused)

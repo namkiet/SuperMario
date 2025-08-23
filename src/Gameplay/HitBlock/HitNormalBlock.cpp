@@ -1,5 +1,5 @@
 #include <Gameplay/HitBlock/HitSpecialBlockSystem.hpp>
-#include <Prefabs/Debris.hpp>
+#include <Entity/Miscellaneous/Debris.hpp>
 
 void HitSpecialBlockSystem::HitNormalBlock(World &world, float dt, Entity *block)
 {

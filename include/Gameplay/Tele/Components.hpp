@@ -6,7 +6,7 @@
 // #include <ECS/System.hpp>
 // #include <Framework/World.hpp>
 // #include <Gameplay/Player/Components.hpp>
-// #include <Prefabs/Mario.hpp>
+// #include <Entity/Player/Mario.hpp>
 // #include <unordered_map>
 // #include <cassert>
 
@@ -53,7 +53,7 @@
 #include <ECS/System.hpp>
 #include <Framework/World.hpp>
 #include <Gameplay/Player/Components.hpp>
-#include <Prefabs/Mario.hpp>
+#include <Entity/Player/Mario.hpp>
 #include <unordered_map>
 #include <cassert>
 #include <Core/Physics.hpp>

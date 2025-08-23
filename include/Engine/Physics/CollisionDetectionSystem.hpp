@@ -25,23 +25,6 @@ public:
         grid.clear();
         auto entities = world.findAll<BoxCollider2D, Transform>();
 
-        // // Not check the entities which are too far away from the screen center
-        // if (auto camera = world.findFirst<Camera>())
-        // {
-        //     const auto &center = camera->getComponent<Camera>().target;
-        //     sf::FloatRect viewArea(center - MAX_DISTANCE * sf::Vector2f(1, 1), MAX_DISTANCE * sf::Vector2f(2, 2));
-
-        //     // std::cout << "Center: " << center.x << " " << center.y << "\n";
-
-        //     entities.erase(
-        //         std::remove_if(entities.begin(), entities.end(), [&](Entity* entity) {
-        //             sf::FloatRect bounds = Physics::GetCollisionBounds(entity);
-        //             return !entity->hasComponent<RigidBody>() && !viewArea.intersects(bounds);
-        //         }),
-        //         entities.end()
-        //     );
-        // }
-
         // Insert entities into spatial grid
         for (Entity *e : entities)
         {

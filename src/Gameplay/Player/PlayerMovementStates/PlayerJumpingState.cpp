@@ -7,7 +7,7 @@
 #include <Engine/Core/RigidBody.hpp>
 #include <Gameplay/CaptureFlag/Components.hpp>
 #include <Gameplay/Fire/Components.hpp>
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 
 const std::string PlayerJumpingState::getName() const
 {

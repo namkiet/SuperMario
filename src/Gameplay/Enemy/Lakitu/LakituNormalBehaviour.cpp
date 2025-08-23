@@ -1,9 +1,9 @@
 #include <Framework/World.hpp>
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/Enemy/Lakitu/Components.hpp>
 #include <Gameplay/Enemy/Lakitu/LakituNormalBehaviour.hpp>
-#include <Gameplay/Enemy/Spiny/Spiny.hpp>
+#include <Entity/Enemy/Spiny.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Core/RigidBody.hpp>

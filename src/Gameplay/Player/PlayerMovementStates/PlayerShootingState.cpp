@@ -2,7 +2,7 @@
 #include <Gameplay/Player/PlayerMovementStates/PlayerIdlingState.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Core/RigidBody.hpp>
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 #include <Core/TextureManager.hpp>
 
 PlayerShootingState::PlayerShootingState() : animationDuration(0.125f) {}

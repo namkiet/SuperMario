@@ -1,6 +1,6 @@
 #include <Gameplay/HitBlock/HitSpecialBlockSystem.hpp>
 #include <Gameplay/Item/ItemEmerging.hpp>
-#include <Prefabs/Star.hpp>
+#include <Entity/Item/Star.hpp>
 
 void HitSpecialBlockSystem::HitStarBlock(World &world, float dt, Entity *block)
 {

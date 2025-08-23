@@ -3,7 +3,7 @@
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/DamageOnContact/Components.hpp>
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 
 const std::string PlayerInvincibleState::getName() const
 {

@@ -3,7 +3,7 @@
 #include <Gameplay/Player/PlayerMovementStates/PlayerRunningState.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Core/RigidBody.hpp>
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 #include <Core/TextureManager.hpp>
 
 const std::string PlayerRunningState::getName() const

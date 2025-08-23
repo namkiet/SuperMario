@@ -1,6 +1,5 @@
 #pragma once
 #include <Framework/World.hpp>
-#include <Prefabs/Coin.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
 #include <ScoreManager.hpp>

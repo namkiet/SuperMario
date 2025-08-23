@@ -1,6 +1,6 @@
 #include <Gameplay/HitBlock/HitSpecialBlockSystem.hpp>
 #include <Gameplay/Item/ItemEmerging.hpp>
-#include <Prefabs/Mushroom.hpp>
+#include <Entity/Item/Mushroom.hpp>
 
 void HitSpecialBlockSystem::Hit1UpBlock(World &world, float dt, Entity *block)
 {

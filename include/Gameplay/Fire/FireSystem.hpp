@@ -11,7 +11,7 @@
 #include <Gameplay/Fire/Components.hpp>
 #include <Gameplay/Item/Components.hpp>
 
-#include <Prefabs/FireBullet.hpp>
+#include <Entity/Miscellaneous/FireBullet.hpp>
 
 #include <Core/KeyPressPool.hpp>
 #include <fstream>

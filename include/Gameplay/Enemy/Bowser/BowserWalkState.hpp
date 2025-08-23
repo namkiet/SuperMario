@@ -1,5 +1,5 @@
 #pragma once
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 #include <Gameplay/Enemy/EnemyState.hpp>
 
 class BowserWalkState : public EnemyState
