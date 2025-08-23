@@ -12,3 +12,19 @@ struct SoundComponent : public Component
     bool shouldPlay;
     bool loop;
 };
+
+struct MusicComponent: public Component
+{
+    sf::Music music;
+    bool loop;
+    bool shouldReplay;
+    std::string path;
+
+    MusicComponent(const std::string& path = "", bool loop = true)
+        : loop(loop), shouldReplay(true), path(path)
+    {
+        if (!path.empty()) {
+            music.openFromFile(path);
+        }
+    }
+};

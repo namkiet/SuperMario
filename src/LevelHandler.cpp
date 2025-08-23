@@ -37,6 +37,11 @@ LevelHandler::LevelHandler(World &world, int currentLevel) : world(world), curre
                           { shouldCreateMario = false; });
 }
 
+std::string LevelHandler::getMusicPath()
+{
+    return "";
+}
+
 void LevelHandler::start()
 {
     switch (currentLevel)

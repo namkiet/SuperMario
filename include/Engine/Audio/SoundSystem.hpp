@@ -28,5 +28,26 @@ public:
             }
 
         }
+
+        for (Entity *entity : world.findAll<MusicComponent>())
+        {
+            auto& musicComponent = entity->getComponent<MusicComponent>();
+            
+            if (musicComponent.shouldReplay)
+            {
+                musicComponent.music.setVolume(SOUND::shouldPlayMusic? 100: 0);
+                musicComponent.music.play();
+                musicComponent.music.setLoop(musicComponent.loop);
+                musicComponent.shouldReplay = false;
+            }
+
+            if (musicComponent.music.getStatus() == sf::Music::Stopped && !musicComponent.loop) 
+            {
+                entity->removeComponent<MusicComponent>();
+            }
+
+        }
     }
 };
+
+//

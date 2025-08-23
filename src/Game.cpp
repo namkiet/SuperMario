@@ -10,15 +10,6 @@ Game::Game()
     : contextSettings(0, 0, 16), window(sf::VideoMode(SIZE::SCREEN.x, SIZE::SCREEN.y), "Game", sf::Style::Default, contextSettings)
 {
     window.setFramerateLimit(90);
-    if (!backgroundMusic.openFromFile("assets/Sounds/Background.mp3")) {
-    std::cerr << "Could not load music\n";
-    }
-    else {
-    backgroundMusic.setLoop(true); 
-    backgroundMusic.setVolume(50.f);
-    backgroundMusic.play();       
-    }
-
     // load textureholder
     textureHolder.load(TexType::background, "assets/Background/MenuBackground.png");
     textureHolder.load(TexType::close, "assets/UI/close.png");
@@ -74,9 +65,7 @@ void Game::run()
         ImGui::SFML::Update(window, clock.restart());
         if (currentState())
             currentState()->update(dt);
-
-        backgroundMusic.setVolume(SOUND::shouldPlayMusic? 50.f : 0.f);
-
+            
         window.clear(sf::Color(146, 144, 255, 255));
         if (currentState())
             currentState()->render(window);

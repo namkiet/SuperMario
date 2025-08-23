@@ -9,6 +9,7 @@
 #include <ScoreManager.hpp>
 
 #include <SFML/Graphics.hpp>
+#include <unordered_map>
 
 class GameManager
 {
@@ -31,6 +32,7 @@ private:
     bool oneFrame = false;
     bool shouldPlay = true;
     bool isPaused = false;
+    std::unordered_map<std::string, std::string> musicPathMap;
 
     static int lives;
     static inline json prevMarioData;

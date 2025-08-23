@@ -41,6 +41,7 @@ private:
     void load(const std::string &filename, World &world);
 
 public:
+    virtual std::string getMusicPath();
     LevelHandler(World &world, int currentLevel = 0);
     static std::vector<sf::Vector2f> &getCheckPointPos();
     void start();

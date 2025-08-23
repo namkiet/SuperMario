@@ -175,12 +175,20 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue) :
     world.addSystem<BlinkSystem>();
     world.addSystem<RenderSystem>();
     world.addSystem<DrawBoxColliderSystem>();
-    world.addSystem<DrawTextSystem>();
+        world.addSystem<DrawTextSystem>();
     world.addSystem<DrawGameComponentSystem>();
 
     world.addSystem<DespawnSystem>();
     world.addSystem<PlayerRespawnSystem>();
     
+    Entity* music = world.createEntity();
+    std::string musicPath;
+    switch(level)
+    {
+        
+    }
+    music->addComponent<MusicComponent>("assets/Sounds/Background.mp3");
+
     if (hasWonLastLevel)
     {
         auto player = world.findFirst<PlayerTag>();

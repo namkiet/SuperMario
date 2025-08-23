@@ -18,7 +18,7 @@ private:
     bool isRunning = true;
     StateRegistry registry;
     TextureHolder textureHolder;
-    sf::Music backgroundMusic;
+    // sf::Music backgroundMusic;
 public:
     Game();
     void run();
