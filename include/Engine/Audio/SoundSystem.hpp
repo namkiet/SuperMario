@@ -3,7 +3,7 @@
 #include <Framework/World.hpp>
 #include <Engine/Audio/Components.hpp>
 #include <SFML/Audio.hpp>
-
+#include <cassert>
 class SoundSystem : public System
 {
 public:
@@ -28,24 +28,25 @@ public:
             }
 
         }
-
-        for (Entity *entity : world.findAll<MusicComponent>())
+        
+        if (!SOUND::shouldPlayMusic) return;
+        auto camera = world.findFirst<Camera>();
+        auto musicPlayer = world.findFirst<MusicPlayer>(); auto& music = musicPlayer->getComponent<MusicPlayer>();
+        assert (musicPlayer && camera);
+        for (Entity *entity : world.findAll<MusicSource>())
         {
-            auto& musicComponent = entity->getComponent<MusicComponent>();
+            auto& mu = entity->getComponent<MusicSource>();
+            auto pos = mu.soundSource;
+            if (!camera->getComponent<Camera>().isInScreen(pos)) {
+                continue; }// out of screen, skip
             
-            if (musicComponent.shouldReplay)
-            {
-                musicComponent.music.setVolume(SOUND::shouldPlayMusic? 100: 0);
-                musicComponent.music.play();
-                musicComponent.music.setLoop(musicComponent.loop);
-                musicComponent.shouldReplay = false;
-            }
-
-            if (musicComponent.music.getStatus() == sf::Music::Stopped && !musicComponent.loop) 
-            {
-                entity->removeComponent<MusicComponent>();
-            }
-
+            if (mu.path == musicPlayer->getComponent<MusicPlayer>().curPath) {
+                // std::cout << mu.path << std::endl;
+                break;} // already play music
+            music.setMusic(mu.path);
+            music.music.setVolume(SOUND::SoundBlockMusic? 0: 50);
+            music.music.play(); music.music.setLoop(true);
+            std::cout << "set to new music source" << std::endl;
         }
     }
 };

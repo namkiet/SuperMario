@@ -22,4 +22,5 @@ namespace SOUND
 {
     inline bool shouldPlaySound = true;
     inline bool shouldPlayMusic = true;
+    inline bool SoundBlockMusic = false;
 }

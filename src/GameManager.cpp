@@ -181,13 +181,8 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue) :
     world.addSystem<DespawnSystem>();
     world.addSystem<PlayerRespawnSystem>();
     
-    Entity* music = world.createEntity();
-    std::string musicPath;
-    switch(level)
-    {
-        
-    }
-    music->addComponent<MusicComponent>("assets/Sounds/Background.mp3");
+    // create music Player
+    Entity* musicPlayer = world.createEntity(); musicPlayer->addComponent<MusicPlayer>();
 
     if (hasWonLastLevel)
     {

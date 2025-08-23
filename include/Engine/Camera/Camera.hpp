@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <ECS/Component.hpp>
 #include <Core/Variables.hpp>
+#include <cmath>
 
 struct Camera : public Component
 {
@@ -11,4 +12,8 @@ struct Camera : public Component
     sf::Vector2f target;
     float trapHalfWidth;
     float smoothing;
+    bool isInScreen(sf::Vector2f pos)
+    {
+        return std::abs(pos.x - target.x) < SIZE::SCREEN.x / 2 && std::abs(pos.y - target.y) < SIZE::SCREEN.y / 2;
+    }
 };

@@ -26,6 +26,7 @@ private:
     float scale = 3.0f;
 
     std::unordered_map<std::string, sf::Vector2f> teleMap;
+    std::string musicPath;
 
     static std::vector<sf::Vector2f> checkPointPos;
     static inline bool shouldCreateMario = true;
@@ -41,7 +42,6 @@ private:
     void load(const std::string &filename, World &world);
 
 public:
-    virtual std::string getMusicPath();
     LevelHandler(World &world, int currentLevel = 0);
     static std::vector<sf::Vector2f> &getCheckPointPos();
     void start();

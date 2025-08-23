@@ -12,6 +12,7 @@
 #include <Gameplay/Enemy/Bowser/Bowser.hpp>
 
 #include <LevelHandler.hpp>
+#include <Engine/Audio/Components.hpp>
 
 #include <Prefabs/Block.hpp>
 #include <Prefabs/Pipe.hpp>
@@ -37,40 +38,47 @@ LevelHandler::LevelHandler(World &world, int currentLevel) : world(world), curre
                           { shouldCreateMario = false; });
 }
 
-std::string LevelHandler::getMusicPath()
-{
-    return "";
-}
-
 void LevelHandler::start()
 {
     switch (currentLevel)
     {
     case 1:
+        musicPath = "assets/Sounds/Background.mp3";
         // Load character setup from a JSON file
         load("assets/Levels/map11b.json", world);
         // Load the level setup from a JSON file
         load("assets/Levels/map11.json", world);
+        std::cout << "music path in level " << currentLevel << "\n";
 
         break;
     case 2:
+        musicPath = "assets/Sounds/Background.mp3";
         // Load character setup from a JSON file
         load("assets/Levels/map61b.json", world);
         // Load the level setup from a JSON file
         load("assets/Levels/map61.json", world);
+        
+        std::cout << "music path in level " << currentLevel << "\n";
 
         break;
     case 3:
+        musicPath = "assets/Sounds/Background.mp3";
         // Load character setup from a JSON file
         load("assets/Levels/map54b.json", world);
         // Load the level setup from a JSON file
         load("assets/Levels/map54.json", world);
+        
+        std::cout << "music path in level " << currentLevel << "\n";
         break;
     default:
+    
+        musicPath = "assets/Sounds/billfirework.wav";
         // Load character setup from a JSON file
         load("assets/Levels/menu1b.json", world);
         // Load the level setup from a JSON file
         load("assets/Levels/menu1.json", world);
+        
+        std::cout << "music path in level " << currentLevel << "\n";
     }
     world.createEntity<SmallCoin>(325.0f, 65.0f, 15.0f, 24.0f);
 }
@@ -340,6 +348,8 @@ void LevelHandler::playerLoad(World &world, std::string tilename, float x, float
     {
         world.createEntity<Mario>(x, y, width, height, scale, shouldCreateMario);
         checkPointPos.push_back(sf::Vector2f(x * scale, y * scale));
+        auto source = world.createEntity(); source->addComponent<MusicSource>(musicPath, sf::Vector2f(x * scale, y * scale));
+
     }
     else if (tilename == "CheckPoint")
     {
@@ -350,11 +360,13 @@ void LevelHandler::playerLoad(World &world, std::string tilename, float x, float
     {
         // world.createEntity<Mario>(x, y, width, height, 3);
         teleMap[tilename] = sf::Vector2f(x * scale, y * scale);
+        world.createEntity()->addComponent<MusicSource>("assets/Sounds/billfirework.wav", sf::Vector2f(x * scale, y * scale));
     }
 
     else if (tilename == "CheckPoint2")
     {
         teleMap[tilename] = sf::Vector2f(x * scale, y * scale);
+        world.createEntity()->addComponent<MusicSource>(musicPath, sf::Vector2f(x * scale, y * scale));
     }
     else if (tilename == "CheckPoint3")
     {

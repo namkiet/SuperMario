@@ -1,6 +1,8 @@
 #pragma once
 #include <ECS/Component.hpp>
 #include <SFML/Audio.hpp>
+#include <cassert>
+#include <iostream>
 
 struct SoundComponent : public Component
 {
@@ -13,18 +15,35 @@ struct SoundComponent : public Component
     bool loop;
 };
 
-struct MusicComponent: public Component
+struct MusicSource: public Component
 {
-    sf::Music music;
-    bool loop;
-    bool shouldReplay;
+
     std::string path;
 
-    MusicComponent(const std::string& path = "", bool loop = true)
-        : loop(loop), shouldReplay(true), path(path)
+    sf::Vector2f soundSource;
+
+    MusicSource(const std::string& path = "", sf::Vector2f pos = sf::Vector2f(-2000, -2000))
+        : path(path), soundSource(pos)
+    {
+        std::cout << "path = " << path << std::endl;
+        std::cout << "pos =" << pos.y << " " << pos.y << std::endl;
+    }
+};
+
+        // if (!path.empty()) {
+        //     music.openFromFile(path);
+        // }
+
+struct MusicPlayer: public Component
+{
+    sf::Music music;
+    std::string curPath;
+    MusicPlayer(): curPath("") {}
+    void setMusic(const std::string& path = "")
     {
         if (!path.empty()) {
-            music.openFromFile(path);
+            if (!music.openFromFile(path)) assert(false);
+            curPath = path;
         }
     }
 };

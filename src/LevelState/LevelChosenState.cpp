@@ -38,7 +38,7 @@ LevelChosenState::LevelChosenState(std::shared_ptr<Game> game): LevelState(game)
         {
             return helperBuilder::makeText(content, pos, charSize, UIFont, colorSetting, setCenter);
         };
-        std::cout << "level = " << LevelManager::instance().getLevel() << " \n";
+        // std::cout << "level = " << LevelManager::instance().getLevel() << " \n";
     // assert(LevelManager::instance().getLevel() == 0);
 
     float sameHeightStat = UIConstant::ws.y * 0.9;
