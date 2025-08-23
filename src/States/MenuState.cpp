@@ -17,7 +17,6 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     auto& keybinding = KeyBinding::Instance();
     //============== set up constant=========================
 
-
     // create lambda function to make button, text... more easily
     auto makeButtonUtil = [this](
         sf::Vector2f pos,
@@ -171,7 +170,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         }
         , nullptr, sf::Color::White, /*setCenter=*/true
     );
-     root->addComponent(LoadBtn);
+    root->addComponent(LoadBtn);
 
 
     // ========== Close button in settingsPanel =================================
