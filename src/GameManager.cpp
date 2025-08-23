@@ -106,6 +106,11 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue, b
         world.createEntity()->addComponent<Camera>();
     }
 
+    if (canEdit)
+    {
+        ThemeManager::setTheme(1);
+    }
+
     world.addSystem<PlayTimeSystem>();
 
     world.addSystem<InputSystem>();

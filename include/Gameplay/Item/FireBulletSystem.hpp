@@ -84,6 +84,7 @@ public:
                         // fout << "FireBullet collided with another FireBullet." << std::endl;
                         continue;
                     }
+                }
 
                 if (direction == Direction::Top && !block->hasComponent<EnemyTag>())
                 {

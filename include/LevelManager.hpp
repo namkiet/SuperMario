@@ -168,7 +168,7 @@ public:
             mapName = textRender("5-4", 500.f, 65.f, font, 25);
             break;
         default:
-            mapName = textRender("Unknown Level", 500.f, 65.f, font, 25);
+            mapName = textRender("Unknown", 500.f, 65.f, font, 25);
         }
 
         // Draw world name and map name
