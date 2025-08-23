@@ -249,6 +249,7 @@ class TeleSystem : public System
                 isDisabled = true;
                 // remove vel
                 player->removeComponent<RigidBody>();
+                block->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/flagpole.wav"), false, true, sf::seconds(1.f));
                 break;
             }
         }

@@ -6,13 +6,16 @@
 
 struct SoundComponent : public Component
 {
-    SoundComponent(const sf::SoundBuffer* buffer = nullptr, bool loop = false) 
-        : buffer(buffer), shouldPlay(true), loop(loop) {}
+    SoundComponent(const sf::SoundBuffer* buffer = nullptr, bool loop = false, bool blockMusic = false, sf::Time blockMusicTimeAfterSound = sf::Time::Zero) 
+        : buffer(buffer), shouldPlay(true), loop(loop), blockMusicTimeAfterSound(blockMusicTimeAfterSound), blockMusic(blockMusic) {}
 
     sf::Sound sound;
     const sf::SoundBuffer* buffer;
     bool shouldPlay;
     bool loop;
+
+    bool blockMusic;
+    sf::Time blockMusicTimeAfterSound;
 };
 
 struct MusicSource: public Component
