@@ -23,6 +23,7 @@ struct Prefab
     Animation animation;                     
     sf::Vector2f size;                        
     CreatorFunc creator; // Creates an entity at x,y
+    sf::Vector2f curPos;
     bool canBePlaced = true;
 
     Prefab(const std::string& name_, CreatorFunc creatorFunc)

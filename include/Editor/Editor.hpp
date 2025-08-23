@@ -14,6 +14,7 @@ public:
     void handleEvent(const sf::Event& event, sf::RenderWindow& window);
     void display(sf::RenderWindow& window);
     void drawUI();
+    void drawGrid(sf::RenderWindow& window, const sf::FloatRect& viewBounds, float cellSize = 48.f);
     
 private:
     Model model;
