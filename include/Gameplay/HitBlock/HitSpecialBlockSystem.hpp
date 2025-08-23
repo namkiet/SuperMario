@@ -47,7 +47,7 @@ private:
 public:
     void update(World &world, float dt) override
     {
-        for (Entity *block : world.findAll<CoinBlock, CoinBlockComponent>())
+        for (Entity *block : world.findAll<CoinBlockTag, CoinBlockComponent>())
         {
             CoinBlockUpdate(world, dt, block);
         }
@@ -66,17 +66,17 @@ public:
 
                 if (right - left < 0.5f * bounds1.width)
                     continue; // at least half of the size of the player must hit the block (to avoid hitting 2 blocks at the same time)
-                if (!block->hasComponent<NormalBlock>() && !block->hasComponent<QuestionBlockTag>() &&
-                    !block->hasComponent<CoinBlock>() && !block->hasComponent<StarBlock>() &&
-                    !block->hasComponent<LevelUpBlock>() && !block->hasComponent<MushroomBlock>() &&
-                    !block->hasComponent<LevelBlock>())
+                if (!block->hasComponent<NormalBlockTag>() && !block->hasComponent<QuestionBlockTag>() &&
+                    !block->hasComponent<CoinBlockTag>() && !block->hasComponent<StarBlockTag>() &&
+                    !block->hasComponent<LevelUpBlockTag>() && !block->hasComponent<MushroomBlockTag>() &&
+                    !block->hasComponent<LevelBlockTag>())
                     continue;
 
                 // Normal Block
-                if (block->hasComponent<NormalBlock>() && player->hasComponent<BigMarioTag>())
+                if (block->hasComponent<NormalBlockTag>() && player->hasComponent<BigMarioTag>())
                 {
                     // Remove NormalBlock component
-                    block->removeComponent<NormalBlock>();
+                    block->removeComponent<NormalBlockTag>();
 
                     // This block can still kill enemy
                     block->removeComponent<Animation>();
@@ -92,19 +92,19 @@ public:
                     // Change texture of the block after hit
                     if (block->hasComponent<Animation>())
                     {
-                        if (!block->hasComponent<NormalBlock>() && !block->hasComponent<CoinBlock>())
+                        if (!block->hasComponent<NormalBlockTag>() && !block->hasComponent<CoinBlockTag>())
                             block->removeComponent<Animation>();
                     }
-                    if (!block->hasComponent<NormalBlock>() && !block->hasComponent<CoinBlock>())
+                    if (!block->hasComponent<NormalBlockTag>() && !block->hasComponent<CoinBlockTag>())
                     {
                         block->addComponent<Animation>(BlockFactory::getBlockTexture(27));
                     }
 
-                    if (block->hasComponent<LevelUpBlock>())
+                    if (block->hasComponent<LevelUpBlockTag>())
                     {
                         // Remove LevelUpBlock component
                         block->addComponent<BlockTag>();
-                        block->removeComponent<LevelUpBlock>();
+                        block->removeComponent<LevelUpBlockTag>();
 
                         // player->
 
@@ -119,49 +119,49 @@ public:
                         // Update
                         HitQuestionBlock(world, dt, block, player);
                     }
-                    else if (block->hasComponent<CoinBlock>())
+                    else if (block->hasComponent<CoinBlockTag>())
                     {
                         // Remove CoinBlock component
-                        // block->removeComponent<CoinBlock>();
+                        // block->removeComponent<CoinBlockTag>();
 
                         // Update
                         HitCoinBlock(world, dt, block);
 
                         CoinManager::instance().addCoin();
                     }
-                    else if (block->hasComponent<StarBlock>())
+                    else if (block->hasComponent<StarBlockTag>())
                     {
                         // Remove StarBlock component
-                        block->removeComponent<StarBlock>();
+                        block->removeComponent<StarBlockTag>();
 
                         // Update
                         HitStarBlock(world, dt, block);
                     }
-                    else if (block->hasComponent<MushroomBlock>())
+                    else if (block->hasComponent<MushroomBlockTag>())
                     {
                         // Remove MushroomBlock component
-                        block->removeComponent<MushroomBlock>();
+                        block->removeComponent<MushroomBlockTag>();
 
                         // Update
                         HitMushroomBlock(world, dt, block);
                     }
-                    else if (block->hasComponent<LevelBlock>())
+                    else if (block->hasComponent<LevelBlockTag>())
                     {
                         // Remove LevelBlock component
-                        block->removeComponent<LevelBlock>();
+                        block->removeComponent<LevelBlockTag>();
 
                         // Update
                         HitLevelBlock(world, dt, block);
                     }
-                    if (block->hasComponent<Transform>() && !block->hasComponent<BounceBlock>())
+                    if (block->hasComponent<Transform>() && !block->hasComponent<BounceBlockTag>())
                     {
                         auto &tf = block->getComponent<Transform>();
                         auto &pos = tf.position;
                         auto &sz = tf.size;
 
-                        BounceBlock bounce;
+                        BounceBlockTag bounce;
                         bounce.originalY = pos.y;
-                        block->addComponent<BounceBlock>(bounce);
+                        block->addComponent<BounceBlockTag>(bounce);
                         block->addComponent<RigidBody>(sf::Vector2f(0, bounce.bounceVel), true);
 
                         continue;

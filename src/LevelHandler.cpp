@@ -167,59 +167,59 @@ void LevelHandler::tileLoad(World &world, std::string tilename, float x, float y
 
     if (tilename.find("1UpBlock") != std::string::npos) // 1Up blocks
     {
-        world.createEntity<Block>(x, y, width, height, scale, 8);
+        world.createEntity<LevelBlock>(x, y, width, height, scale);
     }
     else if (tilename.find("NormalBlock") != std::string::npos) // Normal blocks
     {
-        world.createEntity<Block>(x, y, width, height, scale, 5);
+        world.createEntity<NormalBlock>(x, y, width, height, scale);
     }
     else if (tilename.find("CoinBlock") != std::string::npos) // Coin blocks
     {
-        world.createEntity<Block>(x, y, width, height, scale, 6);
+        world.createEntity<CoinBlock>(x, y, width, height, scale);
     }
     else if (tilename.find("FlagBlock") != std::string::npos) // Flag blocks
     {
-        world.createEntity<Block>(x, y, width, height, scale, 10);
+        world.createEntity<FlagBlock>(x, y, width, height, scale);
     }
     else if (tilename.find("StarBlock") != std::string::npos) // Star blocks
     {
-        world.createEntity<Block>(x, y, width, height, scale, 9);
+        world.createEntity<StarBlock>(x, y, width, height, scale);
     }
     else if (tilename.find("CoinQuestionBlock") != std::string::npos) // Coin question blocks
     {
-        world.createEntity<Block>(x, y, width, height, scale, 1);
+        world.createEntity<QuestionBlock>(x, y, width, height, scale, 1);
     }
     else if (tilename.find("MushroomQuestionBlock") != std::string::npos) // Mushroom question blocks
     {
-        world.createEntity<Block>(x, y, width, height, scale, 2);
+        world.createEntity<QuestionBlock>(x, y, width, height, scale, 2);
     }
     else if (tilename.find("FlowerQuestionBlock") != std::string::npos) // Flower question blocks
     {
-        world.createEntity<Block>(x, y, width, height, scale, 3);
+        world.createEntity<QuestionBlock>(x, y, width, height, scale, 3);
     }
     else if (tilename.find("StairsBlock") != std::string::npos) // Stairs blocks
     {
-        world.createEntity<Block>(x, y, width, height, scale, 7);
+        world.createEntity<StairsBlock>(x, y, width, height, scale);
     }
     else if (tilename.find("MushroomBlock") != std::string::npos)
     {
-        world.createEntity<Block>(x, y, width, height, scale, 11);
+        world.createEntity<MushroomBlock>(x, y, width, height, scale);
     }
     else if (tilename.find("Level1QuestionBlock") != std::string::npos)
     {
-        world.createEntity<Block>(x, y, width, height, scale, 12);
+        world.createEntity<Level1Block>(x, y, width, height, scale);
     }
     else if (tilename.find("Level2QuestionBlock") != std::string::npos)
     {
-        world.createEntity<Block>(x, y, width, height, scale, 13);
+        world.createEntity<Level2Block>(x, y, width, height, scale);
     }
     else if (tilename.find("Level3QuestionBlock") != std::string::npos)
     {
-        world.createEntity<Block>(x, y, width, height, scale, 14);
+        world.createEntity<Level3Block>(x, y, width, height, scale);
     }
     else if (tilename.find("Level4QuestionBlock") != std::string::npos)
     {
-        world.createEntity<Block>(x, y, width, height, scale, 15);
+        world.createEntity<Level4Block>(x, y, width, height, scale);
     }
 }
 
@@ -264,11 +264,11 @@ void LevelHandler::groundLoad(World &world, std::string tilename, float x, float
 {
     if (tilename == "GroundBlock") // Ground block
     {
-        world.createEntity<Block>(x, y, width, height, scale, -1);
+        world.createEntity<GroundBlock>(x, y, width, height, scale);
     }
     else if (tilename == "StairsBlock")
     {
-        world.createEntity<Block>(x, y, width, height, scale, 0);
+        world.createEntity<StairsBlock>(x, y, width, height, scale);
     }
 }
 

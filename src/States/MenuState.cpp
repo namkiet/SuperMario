@@ -163,9 +163,9 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
             if (playState)
             {
                 json j;
-                std::ifstream fin("save.json");
+                std::ifstream fin("sample.json");
                 fin >> j;
-                std::static_pointer_cast<PlayingState>(playState)->setLevel(j["level"], false, true);
+                std::static_pointer_cast<PlayingState>(playState)->setLevel(j["level"], false, true, true);
                 game->pushState("play");
             }
         },

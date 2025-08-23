@@ -33,6 +33,8 @@ void RenderSystem::backgroundRender(sf::RenderWindow &window, int level) const
         backgroundSprite.setScale(3, 3);
         window.draw(backgroundSprite);
         break;
+    case -1:
+        break;
     default:
         backgroundSprite = sf::Sprite(TextureManager::load("assets/Background/menu.png"));
         backgroundSprite.setScale(3, 3);

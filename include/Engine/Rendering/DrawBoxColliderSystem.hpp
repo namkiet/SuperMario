@@ -15,25 +15,27 @@ public:
     void draw(const World &world, sf::RenderWindow &window) const
     {
         // return;
-        for (Entity* entity : world.findAll<Transform, BoxCollider2D>())
+        for (Entity* entity : world.findAll<Transform, Animation>())
         {
             auto &tf = entity->getComponent<Transform>();
-            auto &box = entity->getComponent<BoxCollider2D>();
-            sf::RectangleShape rect(box.size);
-            rect.setPosition(tf.position + box.offset);
+            
+            sf::RectangleShape rect;
+            if (entity->hasComponent<BoxCollider2D>())
+            {
+                auto &box = entity->getComponent<BoxCollider2D>();
+                rect.setSize(box.size);
+                rect.setPosition(tf.position + box.offset);
+            }
+            else
+            {
+                rect.setSize(tf.size);
+                rect.setPosition(tf.position);
+            }
+
             rect.setOutlineColor(sf::Color::Red);
             rect.setOutlineThickness(2.f);
             rect.setFillColor(sf::Color::Transparent);
             window.draw(rect);
-
-            // Draw lines between the corners
-            for (int i = 0; i < 4; ++i)
-            {
-                sf::Vertex line[] = {
-                    sf::Vertex(box.corners[i], sf::Color::Red),
-                    sf::Vertex(box.corners[(i + 1) % 4], sf::Color::Red)};
-                window.draw(line, 2, sf::Lines);
-            }
         }
     }
 };

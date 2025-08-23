@@ -3,6 +3,7 @@
 #include <Entity/Entity.hpp>
 
 #include <Engine/Core/Transform.hpp>
+#include <Engine/Rendering/ZIndex.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 

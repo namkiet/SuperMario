@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 
-void resizeSprite(sf::Sprite &sprite, const sf::Vector2f &targetSize);
+void resizeSprite(sf::Sprite &sprite, const sf::Vector2f &targetSize, bool shouldRepeat = false);
 
 sf::Text textRender(std::string text, float x, float y, const sf::Font &font, float size);
 

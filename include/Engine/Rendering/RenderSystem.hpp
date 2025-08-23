@@ -62,7 +62,7 @@ public:
             auto &sp = anim.sprite;
 
             // Resize sprite uniformly to fit target size
-            resizeSprite(sp, sf::Vector2f(std::round(tf.size.x), std::round(tf.size.y)));
+            resizeSprite(sp, sf::Vector2f(std::round(tf.size.x), std::round(tf.size.y)), anim.shouldRepeat);
 
             sp.setPosition(sf::Vector2f(std::round(tf.position.x), std::round(tf.position.y)));
 
@@ -79,16 +79,6 @@ public:
                 scale.x = std::abs(scale.x); // ensure it's normal if not flipped
             }
             sp.setScale(scale);
-
-            // Set origin to center (important for correct flipping)
-            // sp.setOrigin(sp.getLocalBounds().width / 2.f, sp.getLocalBounds().height / 2.f);
-
-            // // Position sprite centered within the tf area
-            // sf::Vector2f center;
-            // center.x = tf.position.x + 0.5f * tf.size.x;
-            // center.y = tf.position.y + tf.size.y - 0.5f * sp.getGlobalBounds().height;
-
-            // sp.setPosition(center);
 
             if (entity->hasComponent<FireBarComponent>())
             {
