@@ -42,7 +42,7 @@ public:
         auto camera = world.findFirst<Camera>();
         auto musicPlayer = world.findFirst<MusicPlayer>(); auto& music = musicPlayer->getComponent<MusicPlayer>();
         if (SoundBlockMusic) {
-            std::cout << "can not play music due to sound block\n";
+            // std::cout << "can not play music due to sound block\n";
             MusicBlockBySoundTime -= sf::seconds(dt);
             if (MusicBlockBySoundTime < sf::Time::Zero)
                 MusicBlockBySoundTime = sf::Time::Zero;

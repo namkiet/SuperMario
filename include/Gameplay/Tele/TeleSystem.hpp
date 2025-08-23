@@ -234,7 +234,7 @@ class TeleSystem : public System
                 if (direction == Direction::Top && !sf::Keyboard::isKeyPressed(keybinding.getKey(KeyBinding::Action::Tele)))
                 {
                     // std::cout << "not allow to continue" << std::endl;
-                    continue;
+                    continue; 
                 }
 
                 // std::cout << "LETS GOOOOOOO" <<std::endl;
