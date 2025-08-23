@@ -85,7 +85,7 @@ public:
 
         std::ostringstream coinOss;
         coinOss << "x" << std::setw(2) << std::setfill('0') << coins;
-        sf::Text coinValue = textRender(coinOss.str(), 350.f, 65.f, font, 25);
+        sf::Text coinValue = textRender(coinOss.str(), 330.f, 65.f, font, 25);
 
         // Draw coin count
         window.draw(coinValue);

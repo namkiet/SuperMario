@@ -102,8 +102,11 @@ void InGameState::setupButton()
     dummyContainer->addComponent(pausePanel);
 
     //==========Create Pause Text======================
-    auto PauseMessage = makeTextUtil("Pausing", sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y / 6),
-                                     40, textColorSetting, /*setCenter=*/true);
+    auto PauseMessage = makeTextUtil("Pause",
+                                     sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y / 8),
+                                     100,
+                                     textColorSetting,
+                                     /*setCenter=*/true);
     pausePanel->addComponent(PauseMessage);
 
     // ==== set up constant in pause
@@ -326,16 +329,20 @@ void InGameState::setupButton()
     // settingsPanel->addComponent(ShootMessage);
     // settingsPanel->addComponent(moveDownMessage);
     // settingsPanel->addComponent(KeySettingMessage);
+
+    sf::Vector2f leftButtonPos = sf::Vector2f(panelPos.x + panelSize.x * 0.25f, panelPos.y + panelSize.y * 0.5f);
+    sf::Vector2f rightButtonPos = sf::Vector2f(panelPos.x + panelSize.x * 0.75f, panelPos.y + panelSize.y * 0.5f);
+
     // ==========Create Resume Button==================
     auto roundedRectShape = std::make_shared<RoundedRectangleShape>(pauseButtonShape, 15.f);
 
     auto resumeBtn = makeButtonUtil(
-        centerPos + offsetList[0],
+        leftButtonPos,
         std::static_pointer_cast<sf::Shape>(roundedRectShape),
         "Resume",
         mainBtnColor,
         false,
-        25,
+        50,
         [pausePanel]()
         {
             MessageBus::publish("GameResumed");
@@ -347,12 +354,12 @@ void InGameState::setupButton()
     roundedRectShape = std::make_shared<RoundedRectangleShape>(pauseButtonShape, 15.f);
 
     auto settingBtn = makeButtonUtil(
-        centerPos + offsetList[1],
+        rightButtonPos,
         std::static_pointer_cast<sf::Shape>(roundedRectShape),
         "Setting",
         mainBtnColor,
         false,
-        25,
+        50,
         []()
         {
             CommonUIPool::getInstance().get("settingPanel")->setActive(true);
@@ -364,12 +371,12 @@ void InGameState::setupButton()
     roundedRectShape = std::make_shared<RoundedRectangleShape>(pauseButtonShape, 15.f);
 
     auto restartBtn = makeButtonUtil(
-        centerPos + offsetList[2],
+        leftButtonPos + sf::Vector2f(0.f, 80.f),
         std::static_pointer_cast<sf::Shape>(roundedRectShape),
         "Restart",
         mainBtnColor,
         false,
-        25,
+        50,
         [this]()
         {
             shouldRestart = true;
@@ -380,12 +387,12 @@ void InGameState::setupButton()
     roundedRectShape = std::make_shared<RoundedRectangleShape>(pauseButtonShape, 15.f);
 
     auto saveBtn = makeButtonUtil(
-        centerPos + offsetList[3],
+        rightButtonPos + sf::Vector2f(0.f, 80.f),
         std::static_pointer_cast<sf::Shape>(roundedRectShape),
         "Save",
         mainBtnColor,
         false,
-        25,
+        50,
         []()
         {
             MessageBus::publish("GameSaved");
@@ -398,12 +405,12 @@ void InGameState::setupButton()
     roundedRectShape = std::make_shared<RoundedRectangleShape>(pauseButtonShape, 15.f);
 
     auto exitBtn = makeButtonUtil(
-        centerPos + offsetList[4],
+        leftButtonPos + sf::Vector2f(panelSize.x * 0.25f, 160.f),
         std::static_pointer_cast<sf::Shape>(roundedRectShape),
         "Exit",
         mainBtnColor,
         false,
-        25,
+        50,
         [this]()
         {
             game->popState();
@@ -411,25 +418,36 @@ void InGameState::setupButton()
         },
         nullptr, sf::Color::White, /*setCenter=*/true);
     pausePanel->addComponent(exitBtn);
-    // ============ mario image =========================
 
+    // ============ mario image =========================
     std::shared_ptr<sf::Sprite> marioSprite = std::make_shared<sf::Sprite>(texholder.get(TexType::marioidling));
-    resizeSprite(*marioSprite, sf::Vector2f(50.f, 50.f));
-    auto marioImage = helperBuilder::makeSprite(centerPos + offsetList[5], marioSprite, mainBtnColor, /*setCenter=*/true);
+    resizeSprite(*marioSprite, sf::Vector2f(80.f, 80.f));
+    auto marioImage = helperBuilder::makeSprite(sf::Vector2f(panelPos.x + panelSize.x * 0.4f, panelPos.y + panelSize.y * 0.25f),
+                                                 marioSprite, 
+                                                 mainBtnColor, 
+                                                 /*setCenter=*/true);
     pausePanel->addComponent(marioImage);
+
     // ============ multiply message =====================
-    auto MultiplyMessage = makeTextUtil("x", centerPos + offsetList[6],
-                                        30, textColorSetting, /*setCenter=*/true);
+    auto MultiplyMessage = makeTextUtil("x",
+                                        sf::Vector2f(panelPos.x + panelSize.x * 0.525f, panelPos.y + panelSize.y * 0.2f),
+                                        65,
+                                        textColorSetting,
+                                        /*setCenter=*/true);
     pausePanel->addComponent(MultiplyMessage);
+
     // ============ live num =========================
-    auto LiveNumMessage = makeTextUtil("3", centerPos + offsetList[7],
-                                       30, textColorSetting, /*setCenter=*/true);
+    auto LiveNumMessage = makeTextUtil("4",
+                                       sf::Vector2f(panelPos.x + panelSize.x * 0.65f, panelPos.y + panelSize.y * 0.2f),
+                                       70, 
+                                       textColorSetting, 
+                                       /*setCenter=*/true);
     pausePanel->addComponent(LiveNumMessage);
+
     // LiveNum = LiveNumMessage;
     // std::cout << "make button again " << std::endl;
-    MessageBus::subscribe("LiveNum", LiveNumMessage.get(), [LiveNumMessage](const std::string& a){
-        LiveNumMessage->setText(a);
-    });
+    MessageBus::subscribe("LiveNum", LiveNumMessage.get(), [LiveNumMessage](const std::string &a)
+                          { LiveNumMessage->setText(a); });
 
     // =============== DeathPanel=======================
     auto Deathrect = std::make_shared<sf::RectangleShape>(sf::Vector2f(UIConstant::ws.x, UIConstant::ws.y));
@@ -528,8 +546,8 @@ void InGameState::setupButton()
 
     // ================= Pause button =====================
     auto pauseBtnInGame = makeButtonUtil(
-        sf::Vector2f(UIConstant::ws.x - 100.f, 100.f),
-        std::make_shared<sf::CircleShape>(35.f),
+        sf::Vector2f(UIConstant::ws.x - 110.f, 60.f),
+        std::make_shared<sf::CircleShape>(27.5f),
         "",
         StateColor(sf::Color(255, 255, 255, 200), sf::Color(255, 255, 255, 0)),
         false,
@@ -596,7 +614,7 @@ void InGameState::render(GameManager *gameManager, sf::RenderWindow &window, int
     timeUI->draw(window);
     if (uiRoot)
         uiRoot->draw(window);
-    
+
     // LiveNum->draw(window);
 }
 

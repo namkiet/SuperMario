@@ -159,12 +159,12 @@ public:
         window.setView(window.getDefaultView());
 
         // Render time
-        sf::Text timeText = textRender("TIME", 700.f, 35.f, font, 25);
+        sf::Text timeText = textRender("TIME", 660.f, 35.f, font, 25);
 
         // Render time value
         std::ostringstream timeOss;
         timeOss << std::setw(3) << std::setfill('0') << time;
-        sf::Text timeValue = textRender(timeOss.str(), 720.f, 65.f, font, 25);
+        sf::Text timeValue = textRender(timeOss.str(), 680.f, 65.f, font, 25);
 
         // Draw time and time value
         window.draw(timeText);

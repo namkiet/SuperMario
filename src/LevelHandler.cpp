@@ -84,7 +84,7 @@ void LevelHandler::start()
         
         std::cout << "music path in level " << currentLevel << "\n";
     }
-    world.createEntity<SmallCoin>(325.0f, 65.0f, 15.0f, 24.0f);
+    world.createEntity<SmallCoin>(305.0f, 65.0f, 15.0f, 24.0f);
 }
 
 void LevelHandler::load(const std::string &filename, World &world)
@@ -293,35 +293,35 @@ void LevelHandler::itemLoad(World &world, std::string tilename, float x, float y
     {
         world.createEntity<Podoboo>(x + width / 2, y, width, height, scale, false);
     }
-    else if (tilename == "FireBar1")
+    else if (tilename.find("SmallFireBar") != std::string::npos)
     {
         world.createEntity<FireBar>(x + 4, y + 4, scale, 1);
     }
-    else if (tilename == "FireBar2")
+    else if (tilename.find("LargeFireBar") != std::string::npos)
     {
         world.createEntity<FireBar>(x + 4, y + 4, scale, 2);
     }
-    else if (tilename == "Bridge1")
+    else if (tilename.find("KeyBridge") != std::string::npos)
     {
         world.createEntity<Bridge>(x, y, scale, 1);
     }
-    else if (tilename == "Bridge2")
+    else if (tilename.find("Bridge") != std::string::npos)
     {
         world.createEntity<Bridge>(x, y, scale, 2);
     }
-    else if (tilename == "SmallUpElevator")
+    else if (tilename.find("SmallUpElevator") != std::string::npos)
     {
         world.createEntity<Elevator>(x, y, scale, 1, 1);
     }
-    else if (tilename == "SmallDownElevator")
+    else if (tilename.find("SmallDownElevator") != std::string::npos)
     {
         world.createEntity<Elevator>(x, y, scale, 1, 2);
     }
-    else if (tilename == "MediumRightElevator")
+    else if (tilename.find("MediumRightElevator") != std::string::npos)
     {
         world.createEntity<Elevator>(x, y, scale, 2, 4);
     }
-    else if (tilename == "Bell")
+    else if (tilename.find("Bell") != std::string::npos)
     {
         world.createEntity<Bell>(x, y, width, height, scale);
     }
@@ -416,4 +416,11 @@ std::vector<sf::Vector2f> LevelHandler::checkPointPos;
 std::vector<sf::Vector2f> &LevelHandler::getCheckPointPos()
 {
     return checkPointPos;
+}
+
+LevelHandler::~LevelHandler()
+{
+    checkPointPos.clear();
+    teleMap.clear();
+    shouldCreateMario = true;
 }

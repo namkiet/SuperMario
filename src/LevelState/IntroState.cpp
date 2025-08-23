@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include <Core/TextureManager.hpp>
 
-
 // IntroState::IntroState()
 // {
 //     font.loadFromFile("BalooBhai2-ExtraBold.ttf");
@@ -26,10 +25,23 @@ std::shared_ptr<LevelState> IntroState::getNewState(GameManager *gameManager)
 
 void IntroState::render(GameManager *gameManager, sf::RenderWindow &window, int level)
 {
-    // std::cout << "Rendering IntroState" << std::endl;
     window.setView(window.getDefaultView());
     window.clear(sf::Color(34, 34, 34, 255));
 
+    sf::Sprite player;
+
+    if (LevelManager::instance().isMarioChosen())
+    {
+        player = sf::Sprite(TextureManager::load("assets/Mario/Small/idling.png"));
+    }
+    else
+    {
+        player = sf::Sprite(TextureManager::load("assets/Luigi/Small/idling.png"));
+    }
+    player.setScale(6.0f, 6.0f);
+    player.setPosition(375, 200);
+    window.draw(player);
+    
     sf::Sprite smallMap;
 
     std::string lives = std::to_string(GameManager::getLives());

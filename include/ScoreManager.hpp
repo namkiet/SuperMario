@@ -82,10 +82,10 @@ public:
         window.setView(window.getDefaultView());
 
         // Render player name
-        sf::Text player = textRender("MARIO", 100.f, 35.f, font, 25);
+        sf::Text player = textRender("MARIO", 80.f, 35.f, font, 25);
         std::ostringstream scoreOss;
         scoreOss << std::setw(6) << std::setfill('0') << score;
-        sf::Text score = textRender(scoreOss.str(), 100.f, 65.f, font, 25);
+        sf::Text score = textRender(scoreOss.str(), 80.f, 65.f, font, 25);
 
         // Draw player name and score
         window.draw(player);
