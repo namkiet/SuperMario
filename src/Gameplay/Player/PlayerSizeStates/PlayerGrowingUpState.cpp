@@ -5,7 +5,7 @@
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Gameplay/Player/Components.hpp>
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 
 const std::string PlayerGrowingUpState::getName() const
 {

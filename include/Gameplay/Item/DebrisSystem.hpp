@@ -1,6 +1,6 @@
 #pragma once
 #include <Framework/World.hpp>
-#include <Prefabs/Debris.hpp>
+#include <Gameplay/Item/Components.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <fstream>
 class DebrisSystem : public System

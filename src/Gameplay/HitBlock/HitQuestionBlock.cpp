@@ -1,10 +1,10 @@
 #include <Gameplay/HitBlock/HitSpecialBlockSystem.hpp>
 #include <Gameplay/Item/ItemEmerging.hpp>
 
-#include <Prefabs/Mushroom.hpp>
-#include <Prefabs/Star.hpp>
-#include <Prefabs/Coin.hpp>
-#include <Prefabs/Flower.hpp>
+#include <Entity/Item/Mushroom.hpp>
+#include <Entity/Item/Star.hpp>
+#include <Entity/Item/Coin.hpp>
+#include <Entity/Item/Flower.hpp>
 
 void HitSpecialBlockSystem::HitQuestionBlock(World &world, float dt, Entity *block, Entity *player)
 {

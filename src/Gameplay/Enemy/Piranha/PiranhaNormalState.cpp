@@ -1,4 +1,4 @@
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 #include <Gameplay/Enemy/Piranha/PiranhaNormalState.hpp>
 
 void PiranhaNormalState::onEnter(Entity* entity)

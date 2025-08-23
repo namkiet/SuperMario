@@ -1,4 +1,4 @@
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/Enemy/Goomba/Components.hpp>
 #include <Gameplay/Enemy/Goomba/GoombaFlippedState.hpp>

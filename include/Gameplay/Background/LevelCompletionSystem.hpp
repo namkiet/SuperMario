@@ -18,8 +18,8 @@
 
 #include <LevelManager.hpp>
 
-#include <Prefabs/Fireworks.hpp>
-#include <Prefabs/Background.hpp>
+#include <Entity/Miscellaneous/Fireworks.hpp>
+#include <Entity/Miscellaneous/Background.hpp>
 
 #include <ScoreManager.hpp>
 

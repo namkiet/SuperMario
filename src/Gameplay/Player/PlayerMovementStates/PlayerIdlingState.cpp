@@ -6,7 +6,7 @@
 #include <Engine/Core/RigidBody.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/Fire/Components.hpp>
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 #include <Core/TextureManager.hpp>
 #include <Core/KeyPressPool.hpp>
 
@@ -24,6 +24,10 @@ std::shared_ptr<PlayerMovementState> PlayerIdlingState::getNewState(Entity* enti
         {
             return std::make_shared<PlayerJumpingState>();
         }
+        else if (entity->hasComponent<BigMarioTag>() && KeyPressPool::Instance().isKeyPressed(sf::Keyboard::S)) 
+        {
+            return std::make_shared<PlayerCrouchingState>();
+        }
 
         if (rb.velocity.x != 0.0f)
         {
@@ -34,11 +38,6 @@ std::shared_ptr<PlayerMovementState> PlayerIdlingState::getNewState(Entity* enti
     if (entity->hasComponent<ShootingTag>())
     {
         return std::make_shared<PlayerShootingState>();
-    }
-
-    if (entity->hasComponent<BigMarioTag>() && KeyPressPool::Instance().isKeyPressed(sf::Keyboard::S)) 
-    {
-        return std::make_shared<PlayerCrouchingState>();
     }
 
     return nullptr;

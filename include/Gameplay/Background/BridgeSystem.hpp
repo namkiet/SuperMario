@@ -12,6 +12,8 @@
 #include <Gameplay/Enemy/Bowser/Components.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
 
+#include <Entity/Miscellaneous/Debris.hpp>
+
 #include <TimeManager.hpp>
 
 #include <iostream>

@@ -3,7 +3,7 @@
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
 

@@ -2,7 +2,7 @@
 #include <nlohmann/json.hpp>
 #include <Framework/EntityManager.hpp>
 #include <Framework/ComponentRegistry.hpp>
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 #include <SFML/Graphics.hpp>
 #include <memory>
 

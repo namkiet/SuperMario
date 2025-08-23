@@ -13,7 +13,7 @@ void PrefabPanel::draw() {
 
     selectedPrefab = nullptr;
     for (auto& prefab : prefabs.getAll()) {
-        updateAnimation(prefab.animation, 1.0f / 90); // update at constant 90 FPS
+        prefab.animation.update(1.0f / 90); // update at constant 90 FPS
 
         auto btn = getAnimationButtonInfo(prefab.animation, 24.f);
         if (ImGui::ImageButton(btn.textureID, btn.size, btn.uv0, btn.uv1)) {

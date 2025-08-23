@@ -1,4 +1,4 @@
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 #include <Gameplay/Enemy/Koopa/KoopaShell_ReviveBehaviour.hpp>
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/Enemy/Koopa/Components.hpp>

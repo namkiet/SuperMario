@@ -1,4 +1,4 @@
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 #include <Gameplay/Enemy/EnemyState.hpp>
 #include <Gameplay/Enemy/Goomba/Components.hpp>
 #include <Gameplay/Enemy/Goomba/GoombaNormalState.hpp>

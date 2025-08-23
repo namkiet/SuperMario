@@ -1,5 +1,5 @@
 #include <Framework/World.hpp>
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/Enemy/Spiny/Components.hpp>
 #include <Gameplay/Enemy/Spiny/SpinyFlippedBehaviour.hpp>

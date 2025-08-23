@@ -1,9 +1,9 @@
 #include <Framework/World.hpp>
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 #include <Gameplay/Enemy/Components.hpp>
 #include <Gameplay/Enemy/Bowser/Components.hpp>
 #include <Gameplay/Enemy/Bowser/BowserJumpBehaviour.hpp>
-#include <Gameplay/Enemy/Bowser/BowserBullet/BowserBullet.hpp>
+#include <Entity/Enemy/BowserBullet.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>
 #include <Engine/Core/RigidBody.hpp>

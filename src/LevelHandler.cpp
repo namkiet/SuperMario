@@ -2,32 +2,36 @@
 
 #include <Factories/ItemFactory.hpp>
 
-#include <Gameplay/Enemy/Goomba/Goomba.hpp>
-#include <Gameplay/Enemy/Koopa/Koopa.hpp>
-#include <Gameplay/Enemy/Koopa/KoopaJumping.hpp>
-#include <Gameplay/Enemy/Koopa/KoopaFlying.hpp>
-#include <Gameplay/Enemy/Piranha/Piranha.hpp>
+#include <Entity/Enemy/Goomba.hpp>
+#include <Entity/Enemy/Koopa.hpp>
+#include <Entity/Enemy/KoopaJumping.hpp>
+#include <Entity/Enemy/KoopaFlying.hpp>
+#include <Entity/Enemy/Piranha.hpp>
+#include <Entity/Enemy/Lakitu.hpp>
+#include <Entity/Enemy/Bowser.hpp>
+
 #include <Gameplay/Tele/Components.hpp>
-#include <Gameplay/Enemy/Lakitu/Lakitu.hpp>
-#include <Gameplay/Enemy/Bowser/Bowser.hpp>
 
 #include <LevelHandler.hpp>
 #include <Engine/Audio/Components.hpp>
 
-#include <Prefabs/Block.hpp>
-#include <Prefabs/Pipe.hpp>
-#include <Prefabs/Mario.hpp>
-#include <Prefabs/Background.hpp>
-#include <Prefabs/Coin.hpp>
-#include <Prefabs/Fireworks.hpp>
-#include <Prefabs/Podoboo.hpp>
-#include <Prefabs/FireBar.hpp>
-#include <Prefabs/Bridge.hpp>
-#include <Prefabs/Elevator.hpp>
-#include <Prefabs/Bell.hpp>
+#include <Entity/Block/Block.hpp>
+#include <Entity/Block/Pipe.hpp>
+#include <Entity/Block/Elevator.hpp>
+
+#include <Entity/Player/Mario.hpp>
+
+#include <Entity/Obstacle/Podoboo.hpp>
+#include <Entity/Obstacle/FireBar.hpp>
+
+#include <Entity/Item/Coin.hpp>
+
+#include <Entity/Miscellaneous/Background.hpp>
+#include <Entity/Miscellaneous/Fireworks.hpp>
+#include <Entity/Miscellaneous/Bridge.hpp>
+#include <Entity/Miscellaneous/Bell.hpp>
 
 #include <Core/MessageBus.hpp>
-
 #include <ThemeManager.hpp>
 
 LevelHandler::LevelHandler(World &world, int currentLevel) : world(world), currentLevel(currentLevel)

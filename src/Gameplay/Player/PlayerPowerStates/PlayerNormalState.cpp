@@ -1,7 +1,7 @@
 #include <Gameplay/Player/PlayerPowerStates/PlayerNormalState.hpp>
 #include <Gameplay/Player/PlayerPowerStates/PlayerInvincibleState.hpp>
 #include <Gameplay/Player/Components.hpp>
-#include <ECS/Entity.hpp>
+#include <Entity/Entity.hpp>
 
 const std::string PlayerNormalState::getName() const
 {
