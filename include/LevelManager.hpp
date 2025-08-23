@@ -20,6 +20,7 @@ private:
     std::string status = "playing";
     bool skipUpdate = false;
     bool shouldLoadNextLevel = false;
+    bool marioIsChosen = true;
 
     std::vector<LevelObserver *> observers;
 
@@ -120,6 +121,16 @@ public:
     {
         return prevMarioPosition;
     }
+
+    void setMarioIsChosen(bool isChosen)
+    {
+        marioIsChosen = isChosen;
+    }
+
+    bool isMarioChosen() const
+    {
+        return marioIsChosen;
+    }
 };
 
 class LevelUI : public LevelObserver
@@ -141,23 +152,23 @@ public:
     {
         window.setView(window.getDefaultView());
 
-        sf::Text worldName = textRender("WORLD", 500.f, 35.f, font, 25);
+        sf::Text worldName = textRender("WORLD", 480.f, 35.f, font, 25);
         sf::Text mapName;
 
         // Render map name based on the current level
         switch (level)
         {
         case 1:
-            mapName = textRender("1-1", 520.f, 65.f, font, 25);
+            mapName = textRender("1-1", 500.f, 65.f, font, 25);
             break;
         case 2:
-            mapName = textRender("6-1", 520.f, 65.f, font, 25);
+            mapName = textRender("6-1", 500.f, 65.f, font, 25);
             break;
         case 3:
-            mapName = textRender("5-4", 520.f, 65.f, font, 25);
+            mapName = textRender("5-4", 500.f, 65.f, font, 25);
             break;
         default:
-            mapName = textRender("Unknown Level", 520.f, 65.f, font, 25);
+            mapName = textRender("Unknown", 500.f, 65.f, font, 25);
         }
 
         // Draw world name and map name

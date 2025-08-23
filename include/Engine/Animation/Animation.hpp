@@ -58,6 +58,7 @@ struct Animation : public Component
     int row = 0;
     bool hasEnded = false;
     std::vector<const sf::Texture *> textures;
+    bool shouldRepeat = false;
 
     void update(float dt);
 };

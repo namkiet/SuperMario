@@ -8,12 +8,36 @@ void PrefabPanel::draw() {
     ImGui::Text("Prefabs");
     ImGui::Separator();
 
+    if (ImGui::BeginTabBar("PrefabTabs")) {
+        // Tab Block
+        if (ImGui::BeginTabItem("Block")) {
+            drawPrefabCategory(PrefabStorage::Category::Block);
+            ImGui::EndTabItem();
+        }
+
+        // Tab Item
+        if (ImGui::BeginTabItem("Item")) {
+            drawPrefabCategory(PrefabStorage::Category::Item);
+            ImGui::EndTabItem();
+        }
+
+        // Tab Enemy
+        if (ImGui::BeginTabItem("Enemy")) {
+            drawPrefabCategory(PrefabStorage::Category::Enemy);
+            ImGui::EndTabItem();
+        }
+
+        ImGui::EndTabBar();
+    }
+}
+
+
+void PrefabPanel::drawPrefabCategory(PrefabStorage::Category category) {
     int columns = 4;
     ImGui::Columns(columns, nullptr, false);
 
-    selectedPrefab = nullptr;
-    for (auto& prefab : prefabs.getAll()) {
-        prefab.animation.update(1.0f / 90); // update at constant 90 FPS
+    for (auto& prefab : prefabs.getCategory(category)) {
+        prefab.animation.update(1.0f / 90);
 
         auto btn = getAnimationButtonInfo(prefab.animation, 24.f);
         if (ImGui::ImageButton(btn.textureID, btn.size, btn.uv0, btn.uv1)) {
@@ -26,6 +50,7 @@ void PrefabPanel::draw() {
 
     ImGui::Columns(1); // reset
 }
+
 
 Prefab* PrefabPanel::getSelectedPrefab()
 {

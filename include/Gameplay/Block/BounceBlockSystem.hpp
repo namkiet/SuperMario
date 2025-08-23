@@ -19,9 +19,9 @@ public:
         //     std::cerr << "Failed to open output.txt for writing." << std::endl;
         //     return;
         // }
-        for (Entity *block : world.findAll<BounceBlock>())
+        for (Entity *block : world.findAll<BounceBlockTag>())
         {
-            auto &bounce = block->getComponent<BounceBlock>();
+            auto &bounce = block->getComponent<BounceBlockTag>();
             auto &pos = block->getComponent<Transform>().position;
             auto &rb = block->getComponent<RigidBody>();
 
@@ -33,7 +33,7 @@ public:
             {
                 pos.y = bounce.originalY;
                 block->removeComponent<CanKillEnemyTag>();
-                block->removeComponent<BounceBlock>();
+                block->removeComponent<BounceBlockTag>();
                 block->removeComponent<RigidBody>();
             }
         }

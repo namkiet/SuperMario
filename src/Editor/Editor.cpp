@@ -62,13 +62,29 @@ void Editor::handleEvent(const sf::Event& event, sf::RenderWindow& window)
 
 void Editor::display(sf::RenderWindow& window)
 {
+    // Tính vùng nhìn hiện tại theo camera
+    sf::Vector2f camCenter = model.getCameraCenter();
+    sf::Vector2u winSize = window.getSize();
+    sf::FloatRect viewBounds(
+        camCenter.x - winSize.x / 2.f,
+        camCenter.y - winSize.y / 2.f,
+        static_cast<float>(winSize.x),
+        static_cast<float>(winSize.y)
+    );
+
+    // Vẽ grid trước
+    drawGrid(window, viewBounds);
     if (selectedPrefab)
     {
         sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 
         sf::Sprite sprite = selectedPrefab->animation.sprite;
         resizeSprite(sprite, selectedPrefab->size);
-        sprite.setPosition(mousePos - 0.5f * selectedPrefab->size);
+
+        selectedPrefab->curPos.x = std::round((mousePos.x - 0.5f * selectedPrefab->size.x) / 48) * 48;
+        selectedPrefab->curPos.y = std::round((mousePos.y + 0.5f * selectedPrefab->size.y) / 48) * 48 - selectedPrefab->size.y;
+
+        sprite.setPosition(selectedPrefab->curPos);
         sf::Color color = sprite.getColor();
         color.a = 200;
         sprite.setColor(color);
@@ -99,4 +115,30 @@ void Editor::drawUI()
     }
 
     ImGui::End();
+}
+
+void Editor::drawGrid(sf::RenderWindow& window, const sf::FloatRect& viewBounds, float cellSize)
+{
+    // Tạo VertexArray cho các đường ngang và dọc
+    sf::VertexArray lines(sf::Lines);
+
+    // Tọa độ bắt đầu và kết thúc
+    float startX = std::floor(viewBounds.left / cellSize) * cellSize;
+    float startY = std::floor(viewBounds.top / cellSize) * cellSize;
+    float endX = viewBounds.left + viewBounds.width;
+    float endY = viewBounds.top + viewBounds.height;
+
+    // Các đường dọc
+    for (float x = startX; x <= endX; x += cellSize) {
+        lines.append(sf::Vertex(sf::Vector2f(x, startY), sf::Color(200, 200, 200, 100)));
+        lines.append(sf::Vertex(sf::Vector2f(x, endY), sf::Color(200, 200, 200, 100)));
+    }
+
+    // Các đường ngang
+    for (float y = startY; y <= endY; y += cellSize) {
+        lines.append(sf::Vertex(sf::Vector2f(startX, y), sf::Color(200, 200, 200, 100)));
+        lines.append(sf::Vertex(sf::Vector2f(endX, y), sf::Color(200, 200, 200, 100)));
+    }
+
+    window.draw(lines);
 }

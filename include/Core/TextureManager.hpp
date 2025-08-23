@@ -23,6 +23,8 @@ public:
             throw std::runtime_error("Failed to load texture: " + fileName);
         }
 
+        texture.setRepeated(true);
+
         return textureMap.emplace(fileName, std::move(texture)).first->second;
     }
 

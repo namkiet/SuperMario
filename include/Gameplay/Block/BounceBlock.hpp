@@ -1,7 +1,7 @@
 #pragma once
 #include <ECS/Component.hpp>
 
-struct BounceBlock : public Component
+struct BounceBlockTag : public Component
 {
     float originalY = 0.0f;
     float bounceVel = -300;

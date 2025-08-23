@@ -65,7 +65,7 @@ private:
             return;
 
         // If there is no debris, we can turn the normal block into debris
-        Entity *normalBlock = world.findFirst<NormalBlock, Transform>();
+        Entity *normalBlock = world.findFirst<NormalBlockTag, Transform>();
         if (!normalBlock)
             return;
         normalBlock->addComponent<DespawnTag>();
@@ -80,7 +80,7 @@ private:
 
     void secondHitCheck(World &world, Entity *player, Entity *collider)
     {
-        Entity *normalBlock = world.findFirst<NormalBlock, Transform>();
+        Entity *normalBlock = world.findFirst<NormalBlockTag, Transform>();
         if (normalBlock)
             return;
 

@@ -679,12 +679,12 @@ void PlayingState::setupButton()
  << std::endl;    }
 }
 
-void PlayingState::setLevel(int level, bool hasWonLastLevel, bool shouldContinue)
+void PlayingState::setLevel(int level, bool hasWonLastLevel, bool shouldContinue, bool allowEditing)
 {
     this->level = level;
     if (gameManager)
         delete gameManager;
-        gameManager = new GameManager(level, hasWonLastLevel, shouldContinue);
+        gameManager = new GameManager(level, hasWonLastLevel, shouldContinue, allowEditing);
     setupButton();
 
     LevelManager::instance().setSkipUpdate(false);

@@ -74,7 +74,8 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue) : levelHandler(world, level), currentLevel(level)
+GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue, bool allowEditing) 
+    : levelHandler(world, level), currentLevel(level), canEdit(allowEditing)
 {
     MessageBus::subscribe("GameSaved", this, [this](const std::string &)
                           {
@@ -82,7 +83,7 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue) :
         j["level"] = currentLevel;
         j["lives"] = lives;
         world.saveSceneToFile(j["entities"]);  
-        std::ofstream fout("save.json");
+        std::ofstream fout(canEdit ? "sample.json" : "save.json");
         fout << j.dump(4); });
 
     MessageBus::subscribe("GamePaused", this, [this](const std::string &)
@@ -92,13 +93,10 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue) :
 
     if (shouldContinue)
     {
-        std::ifstream fin("save.json");
+        std::ifstream fin(canEdit ? "sample.json" : "save.json");
         json j;
         fin >> j;
-        // currentLevel = j["level"];
-
         lives = j["lives"];
-
         world.entityManager.removeAllEntities();
         world.loadSceneFromFile(j["entities"]);
     }
@@ -106,6 +104,11 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue) :
     {
         levelHandler.start();
         world.createEntity()->addComponent<Camera>();
+    }
+
+    if (canEdit)
+    {
+        ThemeManager::setTheme(1);
     }
 
     world.addSystem<PlayTimeSystem>();
@@ -261,7 +264,7 @@ void GameManager::handleEvent(const sf::Event &event, sf::RenderWindow &window)
             mario->addComponent<CanFireTag>();
         }
 
-        if (event.key.code == sf::Keyboard::P)
+        if (event.key.code == sf::Keyboard::P && canEdit)
         {
             oneFrame = !oneFrame;
 
@@ -291,15 +294,15 @@ void GameManager::update(float dt)
     if (dt > 0.5f)
         return;
 
+    // std::cout << "[FPS]: " << 1.0f / dt << "\n";
+
     if (isPaused)
         return;
 
     if (oneFrame && !shouldPlay)
     {
         world.getSystem<CollisionDetectionSystem>()->update(world, dt);
-        world.getSystem<AnimationSystem>()->update(world, dt);
-        // world.getSystem<HitBlockSystem>()->update(world, dt);
-        // world.getSystem<MovementSystem>()->update(world, dt);
+        // world.getSystem<AnimationSystem>()->update(world, dt);
         return;
     }
 
@@ -319,6 +322,9 @@ void GameManager::draw(sf::RenderWindow &window, int level)
     // Set the custom view
     world.getSystem<RenderSystem>()->draw(world, window, currentLevel);
 
+    // Drawn with custom view
+    world.getSystem<DrawBoxColliderSystem>()->draw(world, window);
+
     if (level == 0)
         return;
 
@@ -327,8 +333,6 @@ void GameManager::draw(sf::RenderWindow &window, int level)
         editor->drawUI();
         editor->display(window);
 
-        // Drawn with custom view
-        world.getSystem<DrawBoxColliderSystem>()->draw(world, window);
     }
 
     // Drawn with custiom view

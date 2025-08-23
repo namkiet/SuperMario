@@ -7,6 +7,7 @@ public:
     PrefabPanel(PrefabStorage& prefabs);
     void draw();
     Prefab* getSelectedPrefab();
+    void drawPrefabCategory(PrefabStorage::Category category);
 
 private:
     PrefabStorage& prefabs;

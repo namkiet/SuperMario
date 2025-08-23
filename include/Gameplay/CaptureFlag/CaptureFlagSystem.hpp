@@ -87,7 +87,7 @@ private:
         {
             for (auto &[block, _, __] : player->getComponent<BoxCollider2D>().collisions)
             {
-                if (!block->hasComponent<FlagBlock>())
+                if (!block->hasComponent<FlagBlockTag>())
                     continue;
 
                 auto &anim = player->getComponent<Animation>();
@@ -102,7 +102,7 @@ private:
             return;
         for (auto &[block, _, __] : flag->getComponent<BoxCollider2D>().collisions)
         {
-            if (!block->hasComponent<FlagBlock>())
+            if (!block->hasComponent<FlagBlockTag>())
                 continue;
 
             for (Entity *player : world.findAll<ClimbingOnFlagPoleTag, PlayerTag, BoxCollider2D, Transform>())

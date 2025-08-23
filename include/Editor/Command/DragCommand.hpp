@@ -33,6 +33,7 @@ public:
         if (!draggedEntity) return true;
 
         auto& pos = draggedEntity->getComponent<Transform>().position;
+        auto& size = draggedEntity->getComponent<Transform>().size;
         sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 
         canPlace = true;
@@ -61,6 +62,9 @@ public:
             }
 
             pos = mousePos - dragOffset;
+
+            pos.x = std::round(pos.x / 48) * 48;
+            pos.y = std::round((pos.y + size.y) / 48) * 48 - size.y;
 
             window.setMouseCursor(canPlace ? handCursor : notAllowedCursor);
             return false; // keep command active while dragging

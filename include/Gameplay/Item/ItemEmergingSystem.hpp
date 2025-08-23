@@ -29,26 +29,29 @@ public:
                     pos.y = emerging.finalY;
                     // std::cout << pos.y << std::endl;
                     emerging.finished = true;
-                    item->removeComponent<ItemEmerging>();
+                }
+            }
+            else
+            {
+                item->removeComponent<ItemEmerging>();
 
-                    // Add collectable tag
-                    item->addComponent<CollectableTag>();
+                // Add collectable tag
+                item->addComponent<CollectableTag>();
 
-                    // Set the size of the collision box for the item
-                    item->addComponent<BoxCollider2D>(size);
+                // Set the size of the collision box for the item
+                item->addComponent<BoxCollider2D>(size);
 
-                    if (item->hasComponent<StarTag>() || item->hasComponent<MushroomTag>())
-                    {
-                        // Patrol
-                        item->addComponent<PatrolComponent>();
-                        item->getComponent<PatrolComponent>().moveSpeed = 200.0f;
+                if (item->hasComponent<StarTag>() || item->hasComponent<MushroomTag>())
+                {
+                    // Patrol
+                    item->addComponent<PatrolComponent>();
+                    item->getComponent<PatrolComponent>().moveSpeed = 200.0f;
 
-                        // Apply gravity
-                        item->addComponent<RigidBody>(sf::Vector2f(0, 0));
+                    // Apply gravity
+                    item->addComponent<RigidBody>(sf::Vector2f(0, 0));
 
-                        // Add block collision detection
-                        item->addComponent<CanHitBlockTag>();
-                    }
+                    // Add block collision detection
+                    item->addComponent<CanHitBlockTag>();
                 }
             }
         }

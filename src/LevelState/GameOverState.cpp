@@ -60,17 +60,28 @@ GameOverState::GameOverState(std::shared_ptr<Game> game) : LevelState(game)
     DeathPanel->setActive(true);
     dummyContainer->addComponent(DeathPanel);
 
+    auto gameOverButton = makeButtonUtil(
+        sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y / 3),
+        std::make_shared<RoundedRectangleShape>(sf::Vector2f(600.f, 100.f), 30.f),
+        "",
+        StateColor(sf::Color(255, 239, 235, 255), sf::Color(255, 239, 235, 255)),
+        false,
+        90,
+        nullptr, nullptr, sf::Color(255, 49, 49, 255), true);
+
     auto gameOverText = helperBuilder::makeText("Game Over",
-                                                sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y / 3),
-                                                40, UIFont, StateColor(sf::Color::White, sf::Color::White, sf::Color(255, 49, 49), sf::Color::White), true);
+                                                sf::Vector2f(UIConstant::ws.x * 0.5f, UIConstant::ws.y * 0.27f),
+                                                100,
+                                                UIFont,
+                                                StateColor(sf::Color::White, sf::Color::White, sf::Color(255, 49, 49), sf::Color::White), true);
 
     auto restartBtnDeath = makeButtonUtil(
-        sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y * 0.5), // Vị trí Restart
+        sf::Vector2f(UIConstant::ws.x * 0.5f, UIConstant::ws.y * 0.5), // Vị trí Restart
         std::make_shared<RoundedRectangleShape>(sf::Vector2f(300.f, 50.f), 20.f),
         "Restart",
         StateColor(sf::Color(255, 255, 255, 200), sf::Color(255, 255, 255, 0)),
         false,
-        25,
+        50,
         [this, DeathPanel]()
         {
             shouldRestart = true;
@@ -82,12 +93,12 @@ GameOverState::GameOverState(std::shared_ptr<Game> game) : LevelState(game)
         nullptr, sf::Color::White, true);
 
     auto exitBtnDeath = makeButtonUtil(
-        sf::Vector2f(UIConstant::ws.x / 2, UIConstant::ws.y * 0.6),
+        sf::Vector2f(UIConstant::ws.x * 0.5f, UIConstant::ws.y * 0.6),
         std::make_shared<RoundedRectangleShape>(sf::Vector2f(300.f, 50.f), 20.f),
         "Exit",
         StateColor(sf::Color(255, 255, 255, 200), sf::Color(255, 255, 255, 0)),
         false,
-        25,
+        50,
         [this]()
         {
             this->game->popState();

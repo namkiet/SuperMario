@@ -24,7 +24,7 @@ public:
 
         spawnClock.restart();
 
-        sf::Vector2f spawnPos = mousePos - 0.5f * prefab->size;
+        sf::Vector2f spawnPos = prefab->curPos;
         auto entity = prefab->creator(spawnPos.x, spawnPos.y);
 
         if (canPlace(entity.get()))

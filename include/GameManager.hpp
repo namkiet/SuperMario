@@ -14,7 +14,7 @@
 class GameManager
 {
 public:
-    GameManager(int level, bool hasWonLastLevel, bool shouldContinue);
+    GameManager(int level, bool hasWonLastLevel, bool shouldContinue, bool allowEditing);
 
     void handleEvent(const sf::Event &event, sf::RenderWindow &window);
     void update(float dt);
@@ -32,6 +32,7 @@ private:
     bool oneFrame = false;
     bool shouldPlay = true;
     bool isPaused = false;
+    const bool canEdit;
     std::unordered_map<std::string, std::string> musicPathMap;
 
     static int lives;

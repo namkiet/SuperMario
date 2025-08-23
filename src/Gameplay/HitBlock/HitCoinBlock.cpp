@@ -16,7 +16,7 @@ void HitSpecialBlockSystem::CoinBlockUpdate(World &world, float dt, Entity *bloc
     }
     if (coinBlockComponent.isCollected)
     {
-        block->removeComponent<CoinBlock>();
+        block->removeComponent<CoinBlockTag>();
         block->removeComponent<CoinBlockComponent>();
         block->removeComponent<Animation>();
        

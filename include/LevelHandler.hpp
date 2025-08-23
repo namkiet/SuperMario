@@ -45,4 +45,5 @@ public:
     LevelHandler(World &world, int currentLevel = 0);
     static std::vector<sf::Vector2f> &getCheckPointPos();
     void start();
+    ~LevelHandler();
 };

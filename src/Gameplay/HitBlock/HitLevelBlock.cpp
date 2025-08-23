@@ -14,17 +14,17 @@ void HitSpecialBlockSystem::HitLevelBlock(World &world, float dt, Entity *block)
 
     int newLevel = 1;
 
-    if (block->hasComponent<Level1Block>())
+    if (block->hasComponent<Level1BlockTag>())
     {
         newLevel = 1;
     }
-    else if (block->hasComponent<Level2Block>())
+    else if (block->hasComponent<Level2BlockTag>())
         newLevel = 2;
-    else if (block->hasComponent<Level3Block>())
+    else if (block->hasComponent<Level3BlockTag>())
     {
         newLevel = 3;
     }
-    else if (block->hasComponent<Level4Block>())
+    else if (block->hasComponent<Level4BlockTag>())
     {
         newLevel = 4;
     }

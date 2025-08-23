@@ -3,6 +3,7 @@
 
 struct ItemEmerging : public Component
 {
+    ItemEmerging(bool finished = false) : finished(finished) {}
     float finalY = 0.0f;
     float speedY = 40.0f;
     bool finished = false;
