@@ -69,16 +69,11 @@
 #include <iostream>
 #include <fstream>
 
-// #include <Serialization/ComponentMeta.hpp>
-
-#include <nlohmann/json.hpp>
-using json = nlohmann::json;
-
-void GameManager::init(bool shouldContinue, bool canEdit)
+void GameManager::init()
 {
     world.removeAllEntities();
 
-    if (canEdit)
+    if (mode == Mode::Editor)
     {
         ThemeManager::setTheme(1);
         std::ifstream fin("sample.json");
@@ -86,41 +81,35 @@ void GameManager::init(bool shouldContinue, bool canEdit)
         lives = 9999;
         world.loadSceneFromFile(j["entities"]);
     }
-    else if (shouldContinue)
+    else if (mode == Mode::LoadGame)
     {
-        std::ifstream fin("save.json");
-        json j; fin >> j;
-        lives = j["lives"];
-        world.loadSceneFromFile(j["entities"]);
+        lives = data["lives"];
+        world.loadSceneFromFile(data["entities"]);
     }
-    else
+    else if (mode == Mode::NewGame)
     {
         levelHandler.start();
         world.createEntity()->addComponent<Camera>();
     }
 
-    // create music Player
-    std::cout << "rebuild" << std::endl;
-    Entity* musicPlayer = world.createEntity(); 
-    musicPlayer->addComponent<MusicPlayer>();
+    world.createEntity()->addComponent<MusicPlayer>();
 }
 
-GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue, bool allowEditing) 
-    : levelHandler(world, level), currentLevel(level), canEdit(allowEditing)
+GameManager::GameManager(int level, bool hasWonLastLevel, Mode mode, const nlohmann::json& data)
+    : levelHandler(world, level), currentLevel(level), canEdit(mode == Mode::Editor), mode(mode), data(data)
 {
     MessageBus::subscribe("GameSaved", this, [this](const std::string &) {
         json j;
         j["level"] = currentLevel;
         j["lives"] = canEdit ? 5 : lives;
         world.saveSceneToFile(j["entities"]);  
-        std::ofstream fout(canEdit ? "sample.json" : "save.json");
-        fout << j.dump(4); 
+        imgPath = world.saveGame(j);
     });
 
     MessageBus::subscribe("GamePaused", this, [this](const std::string &) { isPaused = true; });
     MessageBus::subscribe("GameResumed", this, [this](const std::string &) { isPaused = false; });
 
-    init(shouldContinue, allowEditing);
+    init();
 
     world.addSystem<PlayTimeSystem>();
 
@@ -178,7 +167,7 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue, b
     world.addSystem<BlinkSystem>();
     world.addSystem<RenderSystem>();
     world.addSystem<DrawBoxColliderSystem>();
-        world.addSystem<DrawTextSystem>();
+    world.addSystem<DrawTextSystem>();
     world.addSystem<DrawGameComponentSystem>();
 
     world.addSystem<LevelCompletionSystem>(*this);
@@ -282,7 +271,7 @@ void GameManager::handleEvent(const sf::Event &event, sf::RenderWindow &window)
             }
             else
             {
-                init(true, true);
+                init();
                 editor = new Editor(world);
             }
         }
@@ -327,11 +316,22 @@ void GameManager::update(float dt)
 
 void GameManager::draw(sf::RenderWindow &window, int level)
 {
+
     // Set the custom view
     world.getSystem<RenderSystem>()->draw(world, window, currentLevel);
 
-    // Drawn with custom view
-    world.getSystem<DrawBoxColliderSystem>()->draw(world, window);
+
+    if (imgPath != "")
+    {
+        sf::Texture texture;
+        texture.create(window.getSize().x, window.getSize().y);
+        texture.update(window);
+
+        sf::Image screenshot = texture.copyToImage();
+        screenshot.saveToFile("saves/screenshots/" + imgPath + ".png");
+        imgPath = "";
+    }
+
 
     if (level == 0)
         return;
@@ -341,6 +341,8 @@ void GameManager::draw(sf::RenderWindow &window, int level)
         editor->drawUI();
         editor->display(window);
 
+        // Drawn with custom view
+        world.getSystem<DrawBoxColliderSystem>()->draw(world, window);
     }
 
     // Drawn with custiom view

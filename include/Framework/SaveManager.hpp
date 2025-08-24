@@ -11,12 +11,25 @@ using json = nlohmann::json;
 
 class SaveManager 
 {
-public:
-    SaveManager(EntityManager& entityManager, ComponentRegistry& componentRegistry);
-    void loadFromFile(const json& j);
-    void saveToFile(json& j) const;
-
 private:
     EntityManager& entityManager;
     ComponentRegistry& componentRegistry;
+
+    std::string saveDir;
+    std::string indexPath;
+
+    std::string currentTimestamp();
+    json loadIndex();
+    void saveIndex(const json& j);
+
+public:
+    SaveManager(EntityManager& entityManager, ComponentRegistry& componentRegistry, const std::string& dir = "saves");
+
+    std::string saveGame(const json& j);
+    void loadGame(int slot);
+    json getIndex();
+
+    // wrapper cho ECS
+    void loadFromFile(const json& j);
+    void saveToFile(json& j) const;
 };

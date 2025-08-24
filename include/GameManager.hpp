@@ -11,10 +11,15 @@
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
 
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+
 class GameManager
 {
 public:
-    GameManager(int level, bool hasWonLastLevel, bool shouldContinue, bool allowEditing);
+    enum class Mode { NewGame, LoadGame, Editor };
+
+    GameManager(int level, bool hasWonLastLevel = false, Mode mode = Mode::NewGame, const json& data = {});
 
     void handleEvent(const sf::Event &event, sf::RenderWindow &window);
     void update(float dt);
@@ -35,10 +40,14 @@ private:
     const bool canEdit;
     std::unordered_map<std::string, std::string> musicPathMap;
 
+    Mode mode;
+    std::string imgPath = "";
+
     static int lives;
     static inline json prevMarioData;
 
-    void init(bool shouldContinue, bool canEdit);
+    json data;
+    void init();
 
     friend class PlayerRespawnSystem;
     friend class LevelCompletionSystem;

@@ -144,19 +144,19 @@ void PlayingState::setupButton()
     };
 }
 
-void PlayingState::setLevel(int level, bool hasWonLastLevel, bool shouldContinue, bool allowEditing)
+void PlayingState::setLevel(int level, bool hasWonLastLevel, GameManager::Mode mode, const json& data)
 {
     this->level = level;
     if (gameManager)
         delete gameManager;
-        gameManager = new GameManager(level, hasWonLastLevel, shouldContinue, allowEditing);
+        gameManager = new GameManager(level, hasWonLastLevel, mode, data);
         std::cout << "manager is deleted and create again" << std::endl;
     setupButton();
 
     LevelManager::instance().setSkipUpdate(false);
     LevelManager::instance().setStatus("playing");
     LevelManager::instance().setShouldLoadNextLevel(false);
-    if (shouldContinue) LevelManager::instance().setLevel(level);
+    if (mode != GameManager::Mode::NewGame) LevelManager::instance().setLevel(level);
     
     currentLevelState = std::make_unique<IntroState>(game);
 }

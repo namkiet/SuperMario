@@ -1,6 +1,7 @@
 #include <Game.hpp>
 #include <States/MenuState.hpp>
 #include <States/PlayingState.hpp>
+#include <States/LoadState.hpp>
 #include <Engine/Rendering/Utility.hpp>
 #include <iostream>
 #include <cassert>
@@ -157,18 +158,12 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         mainBtnColor,
         false,
         25,
-        [this, game]()
-        {
-            // auto playState = game->getRegistry().getState("play");
-            // if (playState)
-            // {
-            //     json j;
-            //     std::ifstream fin("sample.json");
-            //     fin >> j;
-            //     std::static_pointer_cast<PlayingState>(playState)->setLevel(j["level"], false, true, true);
-            //     game->pushState("play");
-            // }
-            game->pushState("load");
+        [this, game]() {
+            if (auto loadState = game->getRegistry().getState("load"))
+            {
+                std::static_pointer_cast<LoadState>(loadState)->init();
+                game->pushState("load");
+            }
         },
         nullptr, sf::Color::White, /*setCenter=*/true);
     root->addComponent(LoadBtn);

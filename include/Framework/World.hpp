@@ -72,6 +72,11 @@ public:
         saveManager.saveToFile(j);
     }
 
+    std::string saveGame(const json& j)
+    {
+        return saveManager.saveGame(j);
+    }
+
 public:
     World() : saveManager(entityManager, componentRegistry) {}
 

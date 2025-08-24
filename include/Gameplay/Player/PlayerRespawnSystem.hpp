@@ -22,7 +22,7 @@ public:
 
         if (gameMgr.canEdit || gameMgr.currentLevel == -1)
         {
-            gameMgr.init(true, true);
+            gameMgr.init();
         }
         else
         {

@@ -1,0 +1,23 @@
+{
+    "count": 3,
+    "saves": [
+        {
+            "filename": "2025-08-24T18:36:11.json",
+            "level": 2,
+            "lives": 4,
+            "timestamp": "2025-08-24T18:36:11"
+        },
+        {
+            "filename": "2025-08-24T18:39:31.json",
+            "level": 3,
+            "lives": 4,
+            "timestamp": "2025-08-24T18:39:31"
+        },
+        {
+            "filename": "2025-08-24T18:40:20.json",
+            "level": 1,
+            "lives": 4,
+            "timestamp": "2025-08-24T18:40:20"
+        }
+    ]
+}

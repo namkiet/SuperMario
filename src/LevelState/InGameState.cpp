@@ -604,7 +604,7 @@ std::shared_ptr<LevelState> InGameState::getNewState(GameManager *gameManager)
 
         if (gameManager->currentLevel == -1)
         {
-            gameManager->init(true, gameManager->canEdit);
+            gameManager->init();
         }
         else
         {
