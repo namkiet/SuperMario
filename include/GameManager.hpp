@@ -15,6 +15,7 @@ class GameManager
 {
 public:
     GameManager(int level, bool hasWonLastLevel, bool shouldContinue, bool allowEditing);
+    void init(bool shouldContinue, bool canEdit);
 
     void handleEvent(const sf::Event &event, sf::RenderWindow &window);
     void update(float dt);

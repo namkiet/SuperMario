@@ -31,9 +31,12 @@ public:
 
             if (!playerHasChanged && !newMovementState && !newSizeState && !newPowerState) continue;
 
-            playerHasChanged = false;
-            tag.speed = isMario ? 400.0f : 300.0f;
-            tag.jumpForce = isMario ? 1100.0f : 1400.0f;
+            if (playerHasChanged)
+            {
+                playerHasChanged = false;
+                tag.speed = isMario ? 400.0f : 300.0f;
+                tag.jumpForce = isMario ? 1100.0f : 1400.0f;
+            }
 
             if (newMovementState)
             {

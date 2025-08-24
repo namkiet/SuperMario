@@ -264,7 +264,7 @@ void LevelHandler::groundLoad(World &world, std::string tilename, float x, float
 {
     if (tilename == "GroundBlock") // Ground block
     {
-        world.createEntity<GroundBlock>(x, y, width, height, scale);
+        world.createEntity<InvisibleGroundBlock>(x, y, width, height, scale);
     }
     else if (tilename == "StairsBlock")
     {

@@ -45,6 +45,16 @@ public:
     }
 };
 
+class InvisibleGroundBlock : public Block
+{
+public: 
+    InvisibleGroundBlock(float x, float y, float width, float height, float scale)
+        : Block(x, y, width, height, scale)
+    {
+        addComponent<GroundBlockTag>();
+    }
+};
+
 class StairsBlock : public Block
 {
 public: 
