@@ -73,7 +73,12 @@ void GameManager::init()
 {
     world.removeAllEntities();
 
-    if (mode == Mode::Editor)
+    if (!data.empty())
+    {
+        lives = data["lives"];
+        world.loadSceneFromFile(data["entities"]);
+    } 
+    else if (mode == Mode::Editor)
     {
         ThemeManager::setTheme(1);
         std::ifstream fin("sample.json");
@@ -103,7 +108,8 @@ GameManager::GameManager(int level, bool hasWonLastLevel, Mode mode, const nlohm
         j["level"] = currentLevel;
         j["lives"] = canEdit ? 5 : lives;
         world.saveSceneToFile(j["entities"]);  
-        imgPath = world.saveGame(j);
+        if (editor) this->data = j;
+        else imgPath = world.saveGame(j);
     });
 
     MessageBus::subscribe("GamePaused", this, [this](const std::string &) { isPaused = true; });
@@ -265,7 +271,7 @@ void GameManager::handleEvent(const sf::Event &event, sf::RenderWindow &window)
 
             if (editor)
             {
-                // MessageBus::publish("GameSaved");
+                MessageBus::publish("GameSaved");
                 delete editor;
                 editor = nullptr;
             }

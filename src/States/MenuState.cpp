@@ -69,7 +69,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
 
     // ================ quit button============================
     auto quitBtn = makeButtonUtil(
-        sf::Vector2f((float)UIConstant::ws.x * 0.5f, (float)UIConstant::ws.y * 0.5f + 190.f),
+        sf::Vector2f((float)UIConstant::ws.x * 0.5f, (float)UIConstant::ws.y * 0.5f + 280.f),
         std::make_shared<RoundedRectangleShape>(btnSize, 15.f),
         "Quit",
         mainBtnColor,
@@ -133,7 +133,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     // settingComponent = settingsPanel;
 
     // ======================= Settings button============================
-    auto settingsPos = sf::Vector2f((float)UIConstant::ws.x * 0.5f, (float)UIConstant::ws.y * 0.5f + 100.f);
+    auto settingsPos = sf::Vector2f((float)UIConstant::ws.x * 0.5f, (float)UIConstant::ws.y * 0.5f + 190.f);
 
     auto settingroundedRectShape = std::make_shared<RoundedRectangleShape>(sf::Vector2f(220.f, 56.f), 20.f);
 
@@ -149,6 +149,36 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
 
     root->addComponent(settingsBtn);
     root->addComponent(settingsPanel);
+
+    // ======================= Settings button============================
+    auto customPos = sf::Vector2f((float)UIConstant::ws.x * 0.5f, (float)UIConstant::ws.y * 0.5f + 100.f);
+
+    auto customRoundedRectShape = std::make_shared<RoundedRectangleShape>(sf::Vector2f(220.f, 56.f), 20.f);
+
+    auto customBtn = makeButtonUtil(
+        customPos,
+        std::static_pointer_cast<sf::Shape>(customRoundedRectShape),
+        "Custom Map",
+        mainBtnColor,
+        true,
+        25,
+        [this, game]()
+        {
+            auto playState = game->getRegistry().getState("play");
+            if (playState)
+            {
+                std::ifstream fin("sample.json");
+                json j; fin >> j;
+                if (!j.empty())
+                {
+                    std::static_pointer_cast<PlayingState>(playState)->setLevel(j["level"], false, GameManager::Mode::Editor, j);
+                    game->pushState("play");
+                }
+            }
+        },
+        nullptr, sf::Color::White, /*setCenter=*/true);
+
+    root->addComponent(customBtn);
 
     // ====================== Load game button=============================
     auto LoadBtn = makeButtonUtil(

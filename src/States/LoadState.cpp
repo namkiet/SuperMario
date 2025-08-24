@@ -23,10 +23,8 @@ void LoadState::init()
     float xSpacing = 50.f;
     float ySpacing = 50.f;
 
-    // Load font
     font.loadFromFile("BalooBhai2-ExtraBold.ttf");
 
-    // Load index.json
     json index;
     std::ifstream fin("saves/index.json");
     if (!fin.is_open()) return;
@@ -41,7 +39,6 @@ void LoadState::init()
         sf::Vector2f position(firstBoxPos.x + col * (boxSize.x + xSpacing),
                               firstBoxPos.y + row * (boxSize.y + ySpacing));
 
-        // background sprite
         sf::Sprite boxSprite;
         if (i < saveCount)
         {
@@ -53,14 +50,12 @@ void LoadState::init()
             // boxSprite.setTexture(TextureManager::load("assets/Background/MenuBackground1.png"));
         }
 
-        // làm tối background để text nổi bật
         boxSprite.setColor(sf::Color(180, 180, 180));
         boxSprite.setPosition(position);
         boxSprite.setScale(boxSize.x / boxSprite.getLocalBounds().width,
                            boxSize.y / boxSprite.getLocalBounds().height);
         saveBoxSprites.push_back(boxSprite);
 
-        // overlay rect (làm khung mờ)
         sf::RectangleShape boxShape(boxSize);
         boxShape.setPosition(position);
         boxShape.setOutlineColor(sf::Color::Black);
@@ -68,7 +63,6 @@ void LoadState::init()
         boxShape.setFillColor(sf::Color(0, 0, 0, 100)); // tối hơn
         saveBoxes.push_back(boxShape);
 
-        // text
         sf::Text text;
         text.setFont(font);
         text.setCharacterSize(24); // chữ to hơn
