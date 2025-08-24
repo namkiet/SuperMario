@@ -42,8 +42,10 @@ void LoadState::init()
         sf::Sprite boxSprite;
         if (i < saveCount)
         {
+            std::string timestamp = saves[i]["timestamp"].get<std::string>();
+            std::replace_if(timestamp.begin(), timestamp.end(), ::isspace, '_');
             boxSprite.setTexture(TextureManager::load(
-                "saves/screenshots/" + saves[i]["timestamp"].get<std::string>() + ".png"));
+            "saves/screenshots/" + timestamp + ".png"));
         }
         else
         {

@@ -23,7 +23,7 @@ public:
 
             deathTimer = 0.0f;
             world.destroyEntity(entity);
-            std::cout <<"num live left" << GameManager::getLives() << std::endl;
+            // std::cout <<"num live left" << GameManager::getLives() << std::endl;
             if (GameManager::getLives() <= 1)
             {
                 world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/gameover.wav"), false, true, sf::Time(sf::seconds(1000.f)));

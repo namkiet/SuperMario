@@ -31,7 +31,7 @@ namespace UIConstant
     inline const sf::Vector2f settingPanelSize(520.f, 410.f);
     inline const sf::Vector2f panelPos((ws.x - panelSize.x) * 0.5f, (ws.y - panelSize.y) * 0.7f);
 
-    inline const StateColor soundButtonColor(sf::Color(255, 49, 49, 200), sf::Color(255, 255, 255, 50));                   // colorSetting of sound button
+    inline const StateColor soundButtonColor(sf::Color(255, 255, 255, 50), sf::Color(255, 49, 49, 200));                   // colorSetting of sound button
     inline const sf::Vector2f moveUpPos = sf::Vector2f(panelPos.x + panelSize.x * 0.5f, panelPos.y + panelSize.y * 0.05f); // moveUpPos in setting only
     inline const sf::Vector2f controlbtnSize = sf::Vector2f(56.f, 56.f);                                                   // control btn in setting only
     inline const float buttonOffset = controlbtnSize.y * 1.5f;                                                             // distance between key button in setting only

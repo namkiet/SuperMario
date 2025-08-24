@@ -77,12 +77,13 @@ void GameManager::init()
     {
         lives = data["lives"];
         world.loadSceneFromFile(data["entities"]);
-    } 
+    }
     else if (mode == Mode::Editor)
     {
         ThemeManager::setTheme(1);
         std::ifstream fin("sample.json");
-        json j; fin >> j;
+        json j;
+        fin >> j;
         lives = 9999;
         world.loadSceneFromFile(j["entities"]);
     }
@@ -100,20 +101,22 @@ void GameManager::init()
     world.createEntity()->addComponent<MusicPlayer>();
 }
 
-GameManager::GameManager(int level, bool hasWonLastLevel, Mode mode, const nlohmann::json& data)
+GameManager::GameManager(int level, bool hasWonLastLevel, Mode mode, const nlohmann::json &data)
     : levelHandler(world, level), currentLevel(level), canEdit(mode == Mode::Editor), mode(mode), data(data)
 {
-    MessageBus::subscribe("GameSaved", this, [this](const std::string &) {
+    MessageBus::subscribe("GameSaved", this, [this](const std::string &)
+                          {
         json j;
         j["level"] = currentLevel;
         j["lives"] = canEdit ? 5 : lives;
         world.saveSceneToFile(j["entities"]);  
         if (editor) this->data = j;
-        else imgPath = world.saveGame(j);
-    });
+        else imgPath = world.saveGame(j); });
 
-    MessageBus::subscribe("GamePaused", this, [this](const std::string &) { isPaused = true; });
-    MessageBus::subscribe("GameResumed", this, [this](const std::string &) { isPaused = false; });
+    MessageBus::subscribe("GamePaused", this, [this](const std::string &)
+                          { isPaused = true; });
+    MessageBus::subscribe("GameResumed", this, [this](const std::string &)
+                          { isPaused = false; });
 
     init();
 
@@ -179,7 +182,7 @@ GameManager::GameManager(int level, bool hasWonLastLevel, Mode mode, const nlohm
     world.addSystem<LevelCompletionSystem>(*this);
     world.addSystem<DespawnSystem>();
     world.addSystem<PlayerRespawnSystem>(*this);
-    
+
     // if (LevelManager::instance().getStatus() == std::string("gameover"))
     // {
     //     world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/gameover.wav"), false, true, sf::Time(sf::seconds(1000)));
@@ -291,17 +294,20 @@ void GameManager::handleEvent(const sf::Event &event, sf::RenderWindow &window)
 
 void GameManager::update(float dt)
 {
-    if (dt > 0.5f) return;
+    if (dt > 0.5f)
+        return;
 
     // std::cout << "[FPS]: " << 1.0f / dt << "\n";
 
     if (isPaused)
-        {
-            auto mu = world.findFirst<MusicPlayer>();
-            if (!mu) return;
-            auto& music = mu->getComponent<MusicPlayer>().music;
-            music.setVolume(0);
-            return;}
+    {
+        auto mu = world.findFirst<MusicPlayer>();
+        if (!mu)
+            return;
+        auto &music = mu->getComponent<MusicPlayer>().music;
+        music.setVolume(0);
+        return;
+    }
 
     if (editor)
     {
@@ -318,7 +324,6 @@ void GameManager::draw(sf::RenderWindow &window, int level)
     // Set the custom view
     world.getSystem<RenderSystem>()->draw(world, window, currentLevel);
 
-
     if (imgPath != "")
     {
         sf::Texture texture;
@@ -329,7 +334,6 @@ void GameManager::draw(sf::RenderWindow &window, int level)
         screenshot.saveToFile("saves/screenshots/" + imgPath + ".png");
         imgPath = "";
     }
-
 
     if (level == 0)
         return;

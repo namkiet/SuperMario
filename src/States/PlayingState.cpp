@@ -14,9 +14,9 @@ PlayingState::PlayingState(std::shared_ptr<Game> game) : GameState(game), gameMa
 {
     uiRoot = nullptr;
 
-    std::cout << " to playstate constructor ok" << std::endl;
+    // std::cout << " to playstate constructor ok" << std::endl;
     setupButton();
-    std::cout << "playstate constructor ok" << std::endl;
+    // std::cout << "playstate constructor ok" << std::endl;
 }
 
 void PlayingState::handleEvent(const sf::Event &event)
@@ -150,7 +150,7 @@ void PlayingState::setLevel(int level, bool hasWonLastLevel, GameManager::Mode m
     if (gameManager)
         delete gameManager;
         gameManager = new GameManager(level, hasWonLastLevel, mode, data);
-        std::cout << "manager is deleted and create again" << std::endl;
+        // std::cout << "manager is deleted and create again" << std::endl;
     setupButton();
 
     LevelManager::instance().setSkipUpdate(false);

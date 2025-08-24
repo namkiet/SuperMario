@@ -49,7 +49,7 @@ void LevelHandler::start()
         load("assets/Levels/map11b.json", world);
         // Load the level setup from a JSON file
         load("assets/Levels/map11.json", world);
-        std::cout << "music path in level " << currentLevel << "\n";
+        // std::cout << "music path in level " << currentLevel << "\n";
 
         break;
     case 2:
@@ -59,7 +59,7 @@ void LevelHandler::start()
         // Load the level setup from a JSON file
         load("assets/Levels/map61.json", world);
         
-        std::cout << "music path in level " << currentLevel << "\n";
+        // std::cout << "music path in level " << currentLevel << "\n";
 
         break;
     case 3:
@@ -69,7 +69,7 @@ void LevelHandler::start()
         // Load the level setup from a JSON file
         load("assets/Levels/map54.json", world);
         
-        std::cout << "music path in level " << currentLevel << "\n";
+        // std::cout << "music path in level " << currentLevel << "\n";
         break;
     default:
     

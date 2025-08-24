@@ -403,7 +403,7 @@ void InGameState::setupButton()
         nullptr, sf::Color::White, /*setCenter=*/true);
     pausePanel->addComponent(saveBtn);
 
-    std::cout << "433 ok \n";
+    // std::cout << "433 ok \n";
 
     roundedRectShape = std::make_shared<RoundedRectangleShape>(pauseButtonShape, 15.f);
 
