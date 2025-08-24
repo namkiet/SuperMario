@@ -364,7 +364,7 @@ void LevelHandler::playerLoad(World &world, std::string tilename, float x, float
     {
         // world.createEntity<Mario>(x, y, width, height, 3);
         teleMap[tilename] = sf::Vector2f(x * scale, y * scale);
-        world.createEntity()->addComponent<MusicSource>("assets/Sounds/underground.mid", sf::Vector2f(x * scale, y * scale));
+        world.createEntity()->addComponent<MusicSource>("assets/Sounds/underground.wav", sf::Vector2f(x * scale, y * scale));
     }
 
     else if (tilename == "CheckPoint2")

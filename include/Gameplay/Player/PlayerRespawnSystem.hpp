@@ -19,7 +19,7 @@ public:
         // auto mario = world.createEntity<Mario>((float)0 * 16, (float)6 * 16, 16.0f, 16.0f, 3.0f);
         // mario->addComponent<GrowUpTag>();
         // mario->addComponent<CanFireTag>();
-
+        std::cout << "manager will be delete\n";
         LevelManager::instance().setLevel(0);
         LevelManager::instance().setStatus("intro");
 

@@ -11,6 +11,7 @@ public:
     sf::Time MusicBlockBySoundTime = sf::seconds(0.f);
     void update(World &world, float dt) override
     {
+        std::cout << "still update" << std::endl;
         for (Entity *entity : world.findAll<SoundComponent>())
         {
             auto& soundComponent = entity->getComponent<SoundComponent>();

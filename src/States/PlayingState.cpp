@@ -40,7 +40,7 @@ void PlayingState::update(float dt)
 {
     if (LevelManager::instance().getSkipUpdate())
     {
-        // std::cout << "newLevel = " << newLevel << std::endl;
+        std::cout << "newLevel = " << LevelManager::instance().getLevel() << std::endl;
         setLevel(LevelManager::instance().getLevel());
         return;
     }
@@ -685,6 +685,7 @@ void PlayingState::setLevel(int level, bool hasWonLastLevel, bool shouldContinue
     if (gameManager)
         delete gameManager;
         gameManager = new GameManager(level, hasWonLastLevel, shouldContinue, allowEditing);
+        std::cout << "manager is deleted and create again" << std::endl;
     setupButton();
 
     LevelManager::instance().setSkipUpdate(false);

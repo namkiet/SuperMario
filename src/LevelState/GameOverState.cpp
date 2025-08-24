@@ -115,6 +115,7 @@ GameOverState::GameOverState(std::shared_ptr<Game> game) : LevelState(game)
 
 void GameOverState::update(GameManager *gameManager, float dt)
 {
+    gameManager->update(dt);
     timeElapsed += dt;
 }
 

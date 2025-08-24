@@ -16,7 +16,7 @@ public:
 class TimeManager
 {
 private:
-    int timeLeft = 400;
+    int timeLeft = 7;
     bool isPaused = false;
     bool goesFaster = false;
     bool firstTimeReach0 = false;
@@ -125,7 +125,7 @@ public:
 
     void reset()
     {
-        timeLeft = 400;
+        timeLeft = 7;
         isPaused = false;
         goesFaster = false;
         firstTimeReach0 = false;

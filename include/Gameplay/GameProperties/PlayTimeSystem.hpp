@@ -32,18 +32,18 @@ public:
         else if (!TimeManager::instance().getTimeGoesFaster() && TimeManager::instance().getTime() <= 0)
         {
             Entity *player = world.findFirst<PlayerTag>();
-            player->addComponent<DespawnTag>();                          // Add a tag to despawn the entity
-
-            static float timeUpTimer = 0.0f;
-            timeUpTimer += dt;
-            if (timeUpTimer >= 2.0f)
-            {
-                LevelManager::instance().setStatus("timeup");
-                LevelManager::instance().setPrevMarioPosition(player->getComponent<Transform>().position);
-                // world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/gameover.wav"), false);
-                // std::cout << "It looks good '================" << std::endl;
-                timeUpTimer = 0.0f; // Reset timer for next time
-            }
+            if (player) player->addComponent<DespawnTag>();                          // Add a tag to despawn the entity
+            // else return;
+            // static float timeUpTimer = 0.0f;
+            // timeUpTimer += dt;
+            // if (timeUpTimer >= 3.0f)
+            // {
+            //     LevelManager::instance().setStatus("timeup");
+            //     LevelManager::instance().setPrevMarioPosition(player->getComponent<Transform>().position);
+            //     // world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/gameover.wav"), false, true, sf::seconds(1000.f));
+            //     // std::cout << "It looks good '================" << std::endl;
+            //     timeUpTimer = 0.0f; // Reset timer for next time
+            // }
         }
     }
 };
