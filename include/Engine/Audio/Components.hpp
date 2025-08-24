@@ -28,8 +28,8 @@ struct MusicSource: public Component
     MusicSource(const std::string& path = "", sf::Vector2f pos = sf::Vector2f(-2000, -2000))
         : path(path), soundSource(pos)
     {
-        std::cout << "path = " << path << std::endl;
-        std::cout << "pos =" << pos.y << " " << pos.y << std::endl;
+        // std::cout << "path = " << path << std::endl;
+        // std::cout << "pos =" << pos.y << " " << pos.y << std::endl;
     }
 };
 

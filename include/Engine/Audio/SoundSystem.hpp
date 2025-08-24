@@ -66,7 +66,7 @@ public:
             music.setMusic(mu.path);
             music.music.setVolume(SOUND::shouldPlayMusic && !SoundBlockMusic? 50: 0);
             music.music.play(); music.music.setLoop(true);
-            std::cout << "set to new music source" << std::endl;
+            // std::cout << "set to new music source" << std::endl;
         }
     }
 };
