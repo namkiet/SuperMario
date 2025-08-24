@@ -21,7 +21,7 @@ public:
         addComponent<Transform>(sf::Vector2f(x, y) * scale, sf::Vector2f(16, 24) * scale);
         addComponent<BoxCollider2D>(sf::Vector2f(16, 24) * scale);
         addComponent<Animation>(EnemyFactory::getEnemyTexture("piranha_normal"), 16, 24, 2, 0.25f);
-        addComponent<ZIndex>(-1);
+        addComponent<ZIndex>(-3);
         addComponent<EnemyTag>(std::make_shared<PiranhaNormalState>(), std::make_shared<PiranhaBehaviour>());
         addComponent<PiranhaPatrol>(y * scale, (float)(24 * 3 + 16), 2.0f, 2.0f);
 

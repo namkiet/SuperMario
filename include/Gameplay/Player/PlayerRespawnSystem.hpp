@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ECS/System.hpp>
+#include <GameManager.hpp>
 #include <Framework/World.hpp>
 #include <Gameplay/Player/Components.hpp>
 #include <Gameplay/GameProperties/Components.hpp>
@@ -11,18 +12,25 @@
 class PlayerRespawnSystem : public System
 {
 public:
+    PlayerRespawnSystem(GameManager& gameMgr)
+        : gameMgr(gameMgr) {}
+
     void update(World &world, float dt) override
     {
         if (world.findFirst<PlayerTag>())
             return;
 
-        // auto mario = world.createEntity<Mario>((float)0 * 16, (float)6 * 16, 16.0f, 16.0f, 3.0f);
-        // mario->addComponent<GrowUpTag>();
-        // mario->addComponent<CanFireTag>();
-        std::cout << "manager will be delete\n";
-        LevelManager::instance().setLevel(0);
-        LevelManager::instance().setStatus("intro");
-
+        if (gameMgr.canEdit || gameMgr.currentLevel == -1)
+        {
+            gameMgr.init(true, true);
+        }
+        else
+        {
+            LevelManager::instance().setLevel(0);
+            LevelManager::instance().setStatus("intro");
+        }
         
     }
+private:
+    GameManager& gameMgr;
 };

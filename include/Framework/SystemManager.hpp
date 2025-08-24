@@ -15,6 +15,13 @@ public:
         orderedSystems.push_back(system);
     }
 
+    template<typename T, typename... Args>
+    void addSystem(Args&&... args) {
+        auto system = std::make_shared<T>(std::forward<Args>(args)...);
+        systems[typeid(T)] = system;
+        orderedSystems.push_back(system);
+    }
+
     template<typename T>
     std::shared_ptr<T> getSystem() const {
         auto it = systems.find(typeid(T));

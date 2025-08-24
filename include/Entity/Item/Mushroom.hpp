@@ -27,7 +27,7 @@ public:
         // addComponent<Animation>(TextureManager::load("assets/Item/Mushroom/Mushroom1_0.png"));
 
         addComponent<Animation>(ItemFactory::getItemTexture("mushroom1"));
-        addComponent<ZIndex>(-1);
+        addComponent<ZIndex>(-3);
 
         addComponent<MushroomTag>(MushroomTag::Buff::GROW_UP);
     }
@@ -48,7 +48,7 @@ public:
         // addComponent<Animation>(TextureManager::load("assets/Item/Mushroom/Mushroom1_1.png"));
 
         addComponent<Animation>(ItemFactory::getItemTexture("mushroom2"));
-        addComponent<ZIndex>(-1);
+        addComponent<ZIndex>(-3);
 
         addComponent<MushroomTag>(MushroomTag::Buff::GIVE_ONE_MORE_LIFE);
     }
@@ -63,7 +63,7 @@ public:
         addComponent<Transform>(sf::Vector2f(x, y), sf::Vector2f(width, height));
 
         addComponent<Animation>(ItemFactory::getItemTexture("mushroom1"));
-        addComponent<ZIndex>(-1);
+        addComponent<ZIndex>(-3);
         addComponent<LevelMushroomTag>();
         if (newLevel == 1)
             addComponent<MushroomTag>(MushroomTag::Buff::GET_TO_LEVEL_1);

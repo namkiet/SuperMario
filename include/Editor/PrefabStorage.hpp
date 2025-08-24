@@ -40,7 +40,7 @@ struct Prefab
 class PrefabStorage
 {
 public:
-    enum class Category { Block, Item, Enemy };
+    enum class Category { Block, Item, Enemy, Background };
 
     PrefabStorage(EntityManager& em, ComponentRegistry& cr) : em(em), cr(cr) { registerPrefabs(); }
 
@@ -57,9 +57,11 @@ private:
         registerEnemies();
         registerBlocks();
         registerItems();
+        registerBackgrounds();
     }
 
     void registerEnemies();
     void registerBlocks();
     void registerItems();
+    void registerBackgrounds();
 };

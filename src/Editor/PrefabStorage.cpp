@@ -10,6 +10,8 @@
 
 #include <Entity/Block/Block.hpp>
 
+#include <Entity/Miscellaneous/Background.hpp>
+
 #include <Entity/Item/Coin.hpp>
 #include <Entity/Item/Flower.hpp>
 #include <Entity/Item/Mushroom.hpp>
@@ -125,5 +127,14 @@ void PrefabStorage::registerItems()
             auto e = std::make_unique<Mushroom1>(x, y, 48.0f, 48.0f); // wrap raw pointer
             e->addComponent<ItemEmerging>(true);
             return std::move(e);
+        });
+}
+
+
+void PrefabStorage::registerBackgrounds()
+{
+    prefabList[int(Category::Background)].emplace_back("Castle",
+        [this](float x, float y) -> std::unique_ptr<Entity> {
+            return std::make_unique<Background>(x / 3, y / 3, 80.0f, 80.0f, 3, 0); // wrap raw pointer
         });
 }
