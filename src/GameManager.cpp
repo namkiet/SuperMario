@@ -190,8 +190,12 @@ GameManager::GameManager(int level, bool hasWonLastLevel, Mode mode, const nlohm
         auto player = world.findFirst<PlayerTag>();
         auto tf = player->getComponent<Transform>();
         world.componentRegistry.loadComponents(prevMarioData, player);
+        std::ofstream fout("player.json");
+        fout << prevMarioData.dump(4);
         player->getComponent<Transform>().position = tf.position;
         player->getComponent<Transform>().position.y -= (player->getComponent<Transform>().size.y - tf.size.y);
+
+        player->removeComponent<InvincibleTag>();
     }
     else if (level != 0)
     {

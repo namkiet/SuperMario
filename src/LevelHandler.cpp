@@ -19,7 +19,8 @@
 #include <Entity/Block/Pipe.hpp>
 #include <Entity/Block/Elevator.hpp>
 
-#include <Entity/Player/Mario.hpp>
+#include <Entity/Character/Mario.hpp>
+#include <Entity/Character/Luigi.hpp>
 
 #include <Entity/Obstacle/Podoboo.hpp>
 #include <Entity/Obstacle/FireBar.hpp>
@@ -34,13 +35,9 @@
 #include <Core/MessageBus.hpp>
 #include <ThemeManager.hpp>
 
-LevelHandler::LevelHandler(World &world, int currentLevel) : world(world), currentLevel(currentLevel)
-{
-    MessageBus::subscribe("SelectedMario", this, [this](const std::string &)
-                          { shouldCreateMario = true; });
-    MessageBus::subscribe("SelectedLuigi", this, [this](const std::string &)
-                          { shouldCreateMario = false; });
-}
+#include <LevelManager.hpp>
+
+LevelHandler::LevelHandler(World &world, int currentLevel) : world(world), currentLevel(currentLevel) {}
 
 void LevelHandler::start()
 {
@@ -350,7 +347,14 @@ void LevelHandler::playerLoad(World &world, std::string tilename, float x, float
 {
     if (tilename == "StartingPoint") // Player
     {
-        world.createEntity<Mario>(x, y, width, height, scale, shouldCreateMario);
+        if (LevelManager::instance().isMarioChosen())
+        {
+            world.createEntity<Mario>(x, y, width, height, scale);
+        }
+        else
+        {
+            world.createEntity<Luigi>(x, y, width, height, scale);
+        }
         checkPointPos.push_back(sf::Vector2f(x * scale, y * scale));
         auto source = world.createEntity(); source->addComponent<MusicSource>(musicPath, sf::Vector2f(x * scale, y * scale));
 
@@ -422,5 +426,4 @@ LevelHandler::~LevelHandler()
 {
     checkPointPos.clear();
     teleMap.clear();
-    shouldCreateMario = true;
 }

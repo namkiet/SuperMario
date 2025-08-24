@@ -7,7 +7,6 @@
 #include <Gameplay/GameProperties/Components.hpp>
 #include <Gameplay/Fire/Components.hpp>
 #include <LevelManager.hpp>
-#include <Entity/Player/Mario.hpp>
 
 class PlayerRespawnSystem : public System
 {

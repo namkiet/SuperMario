@@ -24,49 +24,22 @@
 #include <Core/TextureManager.hpp>
 #include <Core/Variables.hpp>
 
-class Mario : public Entity
+class Character : public Entity
 {
 public:
-    Mario(float x, float y, float width, float height, float scale, bool shouldCreateMario)
+    Character(float x, float y, float width, float height, float scale)
     {
-        if (shouldCreateMario)
-        {
-            addComponent<Animation>(TextureManager::load("assets/Player/SmallPlayer/marioSmall_0.png"));
-            addComponent<PlayerTag>(std::make_shared<PlayerIdlingState>(), std::make_shared<PlayerSmallState>(), std::make_shared<PlayerNormalState>(), true);
-        }
-        else
-        {
-            addComponent<Animation>(TextureManager::load("assets/Player/SmallPlayer/luigiSmall_0.png"));
-            addComponent<PlayerTag>(std::make_shared<PlayerIdlingState>(), std::make_shared<PlayerSmallState>(), std::make_shared<PlayerNormalState>(), false);
-        }
-
         addComponent<ZIndex>(-1);
-
         addComponent<FollowByCameraTag>();
-
-        // Set the size of the collision box for the player
         addComponent<BoxCollider2D>(sf::Vector2f((width - 4) * scale, height * scale), sf::Vector2f(2 * scale, 0));
-
-        // Set the rigid body for the player
         addComponent<RigidBody>(sf::Vector2f(0, 0));
-
-        // Set the transform for the player
         addComponent<Transform>(sf::Vector2f(x, y) * scale, sf::Vector2f(width, height) * scale);
-
         addComponent<StomperTag>();
-
-        // Able to get damage
         addComponent<CanGetDamageTag>();
-
-        // Able to collect items
         addComponent<CanCollectTag>();
-
         addComponent<InputTag>();
-
         addComponent<CanHitBlockTag>();
-
         addComponent<FireCooldown>();
-
         addComponent<CanCaptureFlagTag>();
     }
 };
