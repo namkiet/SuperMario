@@ -259,13 +259,13 @@ void GameManager::handleEvent(const sf::Event &event, sf::RenderWindow &window)
             mario->addComponent<CanFireTag>();
         }
 
-        if (event.key.code == sf::Keyboard::P && canEdit)
+        if (event.key.code == sf::Keyboard::P)
         {
             oneFrame = !oneFrame;
 
             if (editor)
             {
-                MessageBus::publish("GameSaved");
+                // MessageBus::publish("GameSaved");
                 delete editor;
                 editor = nullptr;
             }

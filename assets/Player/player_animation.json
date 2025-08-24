@@ -64,6 +64,8 @@
             "CrouchingShrinkingNormal": "IdlingShrinkingNormal",
 
             "ShootingFireInvincible": "ShootingFireNormal",
+            "ShootingGrowingUpNormal": "ShootingFireNormal",
+            "ShootingGrowingUpInvincible": "ShootingFireNormal",
             "ShootingShrinkingNormal": "IdlingShrinkingNormal",
             "ShootingShrinkingInvincible": "IdlingShrinkingNormal"
         }

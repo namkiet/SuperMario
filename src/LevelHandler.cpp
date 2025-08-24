@@ -167,7 +167,7 @@ void LevelHandler::tileLoad(World &world, std::string tilename, float x, float y
 
     if (tilename.find("1UpBlock") != std::string::npos) // 1Up blocks
     {
-        world.createEntity<LevelBlock>(x, y, width, height, scale);
+        world.createEntity<LevelUpBlock>(x, y, width, height, scale);
     }
     else if (tilename.find("NormalBlock") != std::string::npos) // Normal blocks
     {
