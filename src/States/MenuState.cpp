@@ -159,15 +159,16 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         25,
         [this, game]()
         {
-            auto playState = game->getRegistry().getState("play");
-            if (playState)
-            {
-                json j;
-                std::ifstream fin("sample.json");
-                fin >> j;
-                std::static_pointer_cast<PlayingState>(playState)->setLevel(j["level"], false, true, true);
-                game->pushState("play");
-            }
+            // auto playState = game->getRegistry().getState("play");
+            // if (playState)
+            // {
+            //     json j;
+            //     std::ifstream fin("sample.json");
+            //     fin >> j;
+            //     std::static_pointer_cast<PlayingState>(playState)->setLevel(j["level"], false, true, true);
+            //     game->pushState("play");
+            // }
+            game->pushState("load");
         },
         nullptr, sf::Color::White, /*setCenter=*/true);
     root->addComponent(LoadBtn);

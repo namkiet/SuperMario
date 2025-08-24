@@ -1,5 +1,5 @@
 #pragma once
-#include "GameState.hpp"
+#include <States/GameState.hpp>
 #include "GameManager.hpp"
 #include <SFML/Graphics.hpp>
 #include <LevelState/LevelState.hpp>

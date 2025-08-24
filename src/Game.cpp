@@ -2,6 +2,7 @@
 #include <Game.hpp>
 #include <States/MenuState.hpp>
 #include <States/PlayingState.hpp>
+#include <States/LoadState.hpp>
 #include <States/SettingsState.hpp>
 #include <Core/Variables.hpp>
 #include <States/KeySettingState.hpp>
@@ -33,6 +34,7 @@ Game::Game()
     registry.registerInstance("menu", std::make_shared<MenuState>(std::shared_ptr<Game>(this)));
     registry.registerInstance("play", std::make_shared<PlayingState>(std::shared_ptr<Game>(this)));
     registry.registerInstance("settings", std::make_shared<SettingsState>(std::shared_ptr<Game>(this)));
+    registry.registerInstance("load", std::make_shared<LoadState>(std::shared_ptr<Game>(this)));
 // registry.registerInstance("keysettings", std::make_shared<KeySettingState>(std::shared_ptr<Game>(this)));
 
     pushState("menu");

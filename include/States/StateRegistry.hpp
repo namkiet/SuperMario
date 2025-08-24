@@ -3,7 +3,7 @@
 #include <memory>
 #include <unordered_map>
 #include <string>
-#include "GameState.hpp"
+#include <States/GameState.hpp>
 
 class StateRegistry
 {
