@@ -6,6 +6,7 @@
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
+#include <Engine/Rendering/ZIndex.hpp>
 
 #include <Gameplay/Background/Components.hpp>
 
@@ -25,7 +26,8 @@ public:
         // Set the animation for the bell
         std::vector<const sf::Texture *> textures = ItemFactory::getItemTextures("bell");
         addComponent<Animation>(textures, (int)width,(int) height, 0.3f, true);
-
+        addComponent<ZIndex>(-2);
+        
         addComponent<BellTag>();
     }
 };

@@ -303,11 +303,11 @@ void LevelHandler::itemLoad(World &world, std::string tilename, float x, float y
     }
     else if (tilename.find("KeyBridge") != std::string::npos)
     {
-        world.createEntity<Bridge>(x, y, scale, 1);
+        world.createEntity<Bridge>(x, y, scale, 2);
     }
     else if (tilename.find("Bridge") != std::string::npos)
     {
-        world.createEntity<Bridge>(x, y, scale, 2);
+        world.createEntity<Bridge>(x, y, scale, 1);
     }
     else if (tilename.find("SmallUpElevator") != std::string::npos)
     {

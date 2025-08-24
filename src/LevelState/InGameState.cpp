@@ -426,9 +426,9 @@ void InGameState::setupButton()
     std::shared_ptr<sf::Sprite> marioSprite = std::make_shared<sf::Sprite>(texholder.get(TexType::marioidling));
     resizeSprite(*marioSprite, sf::Vector2f(80.f, 80.f));
     auto marioImage = helperBuilder::makeSprite(sf::Vector2f(panelPos.x + panelSize.x * 0.4f, panelPos.y + panelSize.y * 0.25f),
-                                                 marioSprite, 
-                                                 mainBtnColor, 
-                                                 /*setCenter=*/true);
+                                                marioSprite,
+                                                mainBtnColor,
+                                                /*setCenter=*/true);
     pausePanel->addComponent(marioImage);
 
     // ============ multiply message =====================
@@ -442,8 +442,8 @@ void InGameState::setupButton()
     // ============ live num =========================
     auto LiveNumMessage = makeTextUtil("4",
                                        sf::Vector2f(panelPos.x + panelSize.x * 0.65f, panelPos.y + panelSize.y * 0.2f),
-                                       70, 
-                                       textColorSetting, 
+                                       70,
+                                       textColorSetting,
                                        /*setCenter=*/true);
     pausePanel->addComponent(LiveNumMessage);
 
@@ -608,6 +608,7 @@ std::shared_ptr<LevelState> InGameState::getNewState(GameManager *gameManager)
         }
         else
         {
+            LevelManager::instance().getPrevMarioPosition() = sf::Vector2f(0.f, 0.f);
             LevelManager::instance().setSkipUpdate(true);
             LevelManager::instance().setLevel(LevelManager::instance().getLevel());
         }
