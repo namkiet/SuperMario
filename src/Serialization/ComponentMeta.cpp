@@ -161,7 +161,7 @@ DEFINE_TAG(Level4BlockTag)
 DEFINE_TAG(LevelBlockTag)
 
 #include <Gameplay/Player/Components.hpp>
-DEFINE_COMPONENT(PlayerTag, movementState, sizeState, powerState, isMario, speed, jumpForce)
+DEFINE_COMPONENT(PlayerTag, movementState, sizeState, powerState, speed, jumpForce)
 DEFINE_TAG(BigMarioTag)
 DEFINE_TAG(GrowUpTag)
 DEFINE_COMPONENT(InputTag, horizontalMovement, jumpPressed)

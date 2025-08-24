@@ -16,11 +16,9 @@ namespace PHYSICS
 
 namespace PLAYER
 {
-    // inline float HORIZONTAL_SPEED = 400.0f;
-    
-    inline float HORIZONTAL_SPEED = 800.0f;
-
+    inline bool IS_SELECTING_MARIO = true;
 }
+
 namespace SOUND
 {
     inline bool shouldPlaySound = true;

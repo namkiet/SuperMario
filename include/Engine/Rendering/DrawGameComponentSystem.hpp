@@ -15,8 +15,6 @@
 #include <Gameplay/GameProperties/Components.hpp>
 #include <Gameplay/Item/Components.hpp>
 
-#include <Entity/Player/Mario.hpp>
-
 class DrawGameComponentSystem : public System
 {
 private:

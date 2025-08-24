@@ -29,7 +29,6 @@ private:
     std::string musicPath;
 
     static std::vector<sf::Vector2f> checkPointPos;
-    static inline bool shouldCreateMario = true;
 
     void tileLoad(World &world, std::string tilename, float x, float y, float width, float height);
     void pipeLoad(World &world, std::string tilename, float x, float y, float width, float height);

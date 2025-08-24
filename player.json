@@ -1,0 +1,109 @@
+{
+    "BoxCollider2D": {
+        "bounce": false,
+        "collisions": [
+            {
+                "collider": 83,
+                "direction": 3,
+                "overlap": {
+                    "height": 37.6654052734375,
+                    "left": 9408.0,
+                    "top": 586.3345947265625,
+                    "width": 1.908203125
+                }
+            },
+            {
+                "collider": 79,
+                "direction": 1,
+                "overlap": {
+                    "height": 10.3345947265625,
+                    "left": 9373.908203125,
+                    "top": 624.0,
+                    "width": 36.0
+                }
+            }
+        ],
+        "corners": [
+            {
+                "x": 0.0,
+                "y": 0.0
+            },
+            {
+                "x": 0.0,
+                "y": 0.0
+            },
+            {
+                "x": 0.0,
+                "y": 0.0
+            },
+            {
+                "x": 0.0,
+                "y": 0.0
+            }
+        ],
+        "isDisabled": false,
+        "offset": {
+            "x": 6.0,
+            "y": 0.0
+        },
+        "origin": {
+            "x": 0.0,
+            "y": 0.0
+        },
+        "rotation": 0.0,
+        "size": {
+            "x": 36.0,
+            "y": 48.0
+        }
+    },
+    "CanCollectTag": {},
+    "CanHitBlockTag": {},
+    "CanKillEnemyTag": {},
+    "FireCooldown": {
+        "timeCount": 0.0
+    },
+    "FollowByCameraTag": {},
+    "InvincibleTag": {
+        "duration": 500.0,
+        "timer": 6.452044486999512
+    },
+    "PlayerTag": {
+        "jumpForce": 1100.0,
+        "movementState": "PlayerRunningState",
+        "powerState": "PlayerInvincibleState",
+        "sizeState": "PlayerSmallState",
+        "speed": 400.0
+    },
+    "RigidBody": {
+        "acceleration": {
+            "x": 0.0,
+            "y": 0.0
+        },
+        "antiGravity": 0.0,
+        "applyGravity": true,
+        "onGround": true,
+        "velocity": {
+            "x": 0.0,
+            "y": 0.0
+        }
+    },
+    "StomperTag": {},
+    "Transform": {
+        "position": {
+            "x": 9367.908203125,
+            "y": 576.0
+        },
+        "prevPos": {
+            "x": 9367.908203125,
+            "y": 576.0
+        },
+        "size": {
+            "x": 48.0,
+            "y": 48.0
+        }
+    },
+    "ZIndex": {
+        "value": -1
+    },
+    "name": "5Mario"
+}

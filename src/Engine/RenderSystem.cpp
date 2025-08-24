@@ -9,7 +9,6 @@ void RenderSystem::backgroundRender(sf::RenderWindow &window, int level) const
 {
     sf::Sprite sky;
     sf::Sprite backgroundSprite;
-
     // std::cout << level << "\n";
 
     switch (level)
@@ -34,6 +33,8 @@ void RenderSystem::backgroundRender(sf::RenderWindow &window, int level) const
         window.draw(backgroundSprite);
         break;
     case -1:
+        sky = sf::Sprite(TextureManager::load("assets/Background/map11_1.png"));
+        window.draw(sky);
         break;
     default:
         backgroundSprite = sf::Sprite(TextureManager::load("assets/Background/menu.png"));
