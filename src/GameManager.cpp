@@ -265,10 +265,8 @@ void GameManager::handleEvent(const sf::Event &event, sf::RenderWindow &window)
             mario->addComponent<CanFireTag>();
         }
 
-        if (event.key.code == sf::Keyboard::P)
+        if (event.key.code == sf::Keyboard::P && canEdit)
         {
-            oneFrame = !oneFrame;
-
             if (editor)
             {
                 MessageBus::publish("GameSaved");
@@ -281,11 +279,6 @@ void GameManager::handleEvent(const sf::Event &event, sf::RenderWindow &window)
                 editor = new Editor(world);
             }
         }
-
-        if (event.key.code == sf::Keyboard::O)
-        {
-            shouldPlay = true;
-        }
     }
 
     if (editor)
@@ -294,35 +287,24 @@ void GameManager::handleEvent(const sf::Event &event, sf::RenderWindow &window)
 
 void GameManager::update(float dt)
 {
-    if (dt > 0.5f)
-        return;
+    if (dt > 0.5f) return;
 
     // std::cout << "[FPS]: " << 1.0f / dt << "\n";
 
-    if (isPaused)
-        return;
+    if (isPaused) return;
 
-    if (oneFrame && !shouldPlay)
+    if (editor)
     {
         world.getSystem<CollisionDetectionSystem>()->update(world, dt);
         // world.getSystem<AnimationSystem>()->update(world, dt);
         return;
     }
 
-    // std::cout << 1.0f / dt << "\n";
     world.update(dt);
-
-    if (oneFrame)
-    {
-        shouldPlay = false;
-    }
-
-    // std::cout << level << "\n";
 }
 
 void GameManager::draw(sf::RenderWindow &window, int level)
 {
-
     // Set the custom view
     world.getSystem<RenderSystem>()->draw(world, window, currentLevel);
 

@@ -98,7 +98,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     auto playBtn = makeButtonUtil(
         playPos,
         std::static_pointer_cast<sf::Shape>(roundedRectShape),
-        "New game",
+        "New Game",
         mainBtnColor,
         false,
         25,
@@ -184,7 +184,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
     auto LoadBtn = makeButtonUtil(
         sf::Vector2f((float)UIConstant::ws.x * 0.5f, (float)UIConstant::ws.y * 0.5f + 10.f),
         std::make_shared<RoundedRectangleShape>(btnSize, 15.f),
-        "Load game",
+        "Load Game",
         mainBtnColor,
         false,
         25,

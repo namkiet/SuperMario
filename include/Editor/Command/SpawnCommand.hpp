@@ -17,12 +17,12 @@ public:
     {
         if (!prefab) return true;
 
-        // anti-hold: enforce cooldown
-        sf::Time elapsed = spawnClock.getElapsedTime();
-        if (elapsed.asMilliseconds() < cooldownMs)
-            return true; // too soon, ignore
+        // // anti-hold: enforce cooldown
+        // sf::Time elapsed = spawnClock.getElapsedTime();
+        // if (elapsed.asMilliseconds() < cooldownMs)
+        //     return true; // too soon, ignore
 
-        spawnClock.restart();
+        // spawnClock.restart();
 
         sf::Vector2f spawnPos = prefab->curPos;
         auto entity = prefab->creator(spawnPos.x, spawnPos.y);
@@ -47,6 +47,8 @@ public:
         {
             auto bounds2 = Physics::GetCollisionBounds(nearby);
             if (!bounds1.intersects(bounds2)) continue;
+
+            if (bounds1 == bounds2) return false;
 
             if ((entity->hasComponent<CanHitBlockTag>() && nearby->hasComponent<BlockTag>())|| 
                 (entity->hasComponent<BlockTag>() && nearby->hasComponent<CanHitBlockTag>())) return false;

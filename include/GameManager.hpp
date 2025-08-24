@@ -34,8 +34,6 @@ private:
     LevelHandler levelHandler;
     Editor *editor = nullptr;
     int currentLevel = 1;
-    bool oneFrame = false;
-    bool shouldPlay = true;
     bool isPaused = false;
     const bool canEdit;
     std::unordered_map<std::string, std::string> musicPathMap;

@@ -8,6 +8,7 @@ void PrefabPanel::draw() {
     ImGui::Text("Prefabs");
     ImGui::Separator();
 
+    selectedPrefab = nullptr;
     if (ImGui::BeginTabBar("PrefabTabs")) {
         // Tab Block
         if (ImGui::BeginTabItem("Block")) {
