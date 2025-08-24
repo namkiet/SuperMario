@@ -15,7 +15,6 @@ class GameManager
 {
 public:
     GameManager(int level, bool hasWonLastLevel, bool shouldContinue, bool allowEditing);
-    void init(bool shouldContinue, bool canEdit);
 
     void handleEvent(const sf::Event &event, sf::RenderWindow &window);
     void update(float dt);
@@ -38,4 +37,10 @@ private:
 
     static int lives;
     static inline json prevMarioData;
+
+    void init(bool shouldContinue, bool canEdit);
+
+    friend class PlayerRespawnSystem;
+    friend class LevelCompletionSystem;
+    friend class InGameState;
 };

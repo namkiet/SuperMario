@@ -379,9 +379,10 @@ void InGameState::setupButton()
         mainBtnColor,
         false,
         50,
-        [this]()
+        [this, pausePanel]()
         {
             shouldRestart = true;
+            pausePanel->setActive(false);
         },
         nullptr, sf::Color::White, /*setCenter=*/true);
     pausePanel->addComponent(restartBtn);
@@ -600,8 +601,16 @@ std::shared_ptr<LevelState> InGameState::getNewState(GameManager *gameManager)
     if (shouldRestart)
     {
         shouldRestart = false;
-        LevelManager::instance().setSkipUpdate(true);
-        LevelManager::instance().setLevel(LevelManager::instance().getLevel());
+
+        if (gameManager->currentLevel == -1)
+        {
+            gameManager->init(true, gameManager->canEdit);
+        }
+        else
+        {
+            LevelManager::instance().setSkipUpdate(true);
+            LevelManager::instance().setLevel(LevelManager::instance().getLevel());
+        }
         gameManager->setLives(5);
     }
     return nullptr;

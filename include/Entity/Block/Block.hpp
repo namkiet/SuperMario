@@ -4,6 +4,7 @@
 
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/RigidBody.hpp>
+#include <Engine/Rendering/ZIndex.hpp>
 #include <Engine/Animation/Animation.hpp>
 #include <Engine/Physics/BoxCollider2D.hpp>
 #include <Engine/Physics/BlockTag.hpp>
@@ -29,6 +30,8 @@ public:
 
         // Set the transform for the player
         addComponent<Transform>(sf::Vector2f(x, y) * scale, sf::Vector2f(width, height) * scale);
+
+        addComponent<ZIndex>(-2);
     }
 };
 

@@ -28,7 +28,7 @@ public:
         // Set the animation for the flower
         std::vector<const sf::Texture *> textures = ItemFactory::getItemTextures("flower");
         addComponent<Animation>(textures,(int) width,(int) height, 0.15f, true);
-        addComponent<ZIndex>(-1);
+        addComponent<ZIndex>(-3);
 
         addComponent<FlowerTag>();
     }

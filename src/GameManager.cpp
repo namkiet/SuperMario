@@ -166,8 +166,6 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue, b
     world.addSystem<FireBarSystem>();
     world.addSystem<PodobooSystem>();
 
-    world.addSystem<LevelCompletionSystem>();
-
     world.addSystem<TextPoppingSystem>();
 
     world.addSystem<DamageOnContactSystem>();
@@ -184,7 +182,8 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue, b
     world.addSystem<DrawGameComponentSystem>();
 
     world.addSystem<DespawnSystem>();
-    world.addSystem<PlayerRespawnSystem>();
+    world.addSystem<LevelCompletionSystem>(*this);
+    world.addSystem<PlayerRespawnSystem>(*this);
     
     // if (LevelManager::instance().getStatus() == std::string("gameover"))
     // {
@@ -277,6 +276,7 @@ void GameManager::handleEvent(const sf::Event &event, sf::RenderWindow &window)
 
             if (editor)
             {
+                MessageBus::publish("GameSaved");
                 delete editor;
                 editor = nullptr;
             }

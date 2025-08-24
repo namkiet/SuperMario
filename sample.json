@@ -21,7 +21,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 5.2525787353515625
+                "timer": 7.552169322967529
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -92,7 +92,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 5.2525787353515625
+                "timer": 7.552169322967529
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -163,7 +163,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 5.2525787353515625
+                "timer": 7.552169322967529
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -234,7 +234,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 5.2525787353515625
+                "timer": 7.552169322967529
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -305,7 +305,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 5.2525787353515625
+                "timer": 7.552169322967529
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -376,7 +376,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 5.2525787353515625
+                "timer": 7.552169322967529
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -447,7 +447,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 5.2525787353515625
+                "timer": 7.552169322967529
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -518,7 +518,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 5.2525787353515625
+                "timer": 7.552169322967529
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -589,7 +589,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 5.2525787353515625
+                "timer": 7.552169322967529
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -651,9 +651,118 @@
         "1011": {
             "name": "Unknown"
         },
-        "11": {
+        "1012": {
+            "name": "Unknown"
+        },
+        "1013": {
+            "name": "Unknown"
+        },
+        "1014": {
+            "name": "Unknown"
+        },
+        "1015": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
+                "frameCount": 1,
+                "frameDuration": 0.0,
+                "frameHeight": 80,
+                "frameWidth": 80,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": false,
+                "sprite": "assets/Background/Castle.png",
+                "textures": [
+                    "assets/Background/Castle.png"
+                ],
+                "timer": 0.8991179466247559
+            },
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 144.0,
+                    "y": 144.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 96.0
+                }
+            },
+            "Castle": {},
+            "Transform": {
+                "position": {
+                    "x": 480.0,
+                    "y": 384.0
+                },
+                "prevPos": {
+                    "x": 480.0,
+                    "y": 384.0
+                },
+                "size": {
+                    "x": 240.0,
+                    "y": 240.0
+                }
+            },
+            "ZIndex": {
+                "value": -2
+            },
+            "name": "Unknown"
+        },
+        "1016": {
+            "name": "Unknown"
+        },
+        "1017": {
+            "name": "Unknown"
+        },
+        "1018": {
+            "name": "Unknown"
+        },
+        "1019": {
+            "name": "Unknown"
+        },
+        "1020": {
+            "name": "Unknown"
+        },
+        "1021": {
+            "name": "Unknown"
+        },
+        "1022": {
+            "name": "Unknown"
+        },
+        "1023": {
+            "name": "Unknown"
+        },
+        "1024": {
+            "name": "Unknown"
+        },
+        "1025": {
+            "Animation": {
+                "currentFrame": 0,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -662,13 +771,96 @@
                 "loop": true,
                 "row": 0,
                 "shouldRepeat": false,
-                "sprite": "assets/Tile/Tile1/Tile1_25.png",
+                "sprite": "assets/Tile/Tile1/Tile1_24.png",
                 "textures": [
                     "assets/Tile/Tile1/Tile1_24.png",
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.1997007131576538
+                "timer": 0.0
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "CoinQuestionBlockTag": {},
+            "QuestionBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 288.0,
+                    "y": 528.0
+                },
+                "prevPos": {
+                    "x": 288.0,
+                    "y": 528.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "ZIndex": {
+                "value": -2
+            },
+            "name": "Unknown"
+        },
+        "1026": {
+            "name": "Unknown"
+        },
+        "1027": {
+            "name": "Unknown"
+        },
+        "11": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 3,
+                "frameDuration": 0.30000001192092896,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": false,
+                "sprite": "assets/Tile/Tile1/Tile1_24.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_24.png",
+                    "assets/Tile/Tile1/Tile1_25.png",
+                    "assets/Tile/Tile1/Tile1_26.png"
+                ],
+                "timer": 0.09929360449314117
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -729,7 +921,7 @@
             "Camera": {
                 "smoothing": 8.0,
                 "target": {
-                    "x": 821.7128295898438,
+                    "x": 480.0,
                     "y": 360.0
                 },
                 "trapHalfWidth": 80.0
@@ -763,7 +955,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 167.39169311523438
+                "timer": 169.69134521484375
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -821,7 +1013,7 @@
         },
         "120": {
             "Animation": {
-                "currentFrame": 2,
+                "currentFrame": 0,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -830,13 +1022,13 @@
                 "loop": true,
                 "row": 0,
                 "shouldRepeat": false,
-                "sprite": "assets/Tile/Tile1/Tile1_26.png",
+                "sprite": "assets/Tile/Tile1/Tile1_24.png",
                 "textures": [
                     "assets/Tile/Tile1/Tile1_24.png",
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.07497815787792206
+                "timer": 0.27457109093666077
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -908,7 +1100,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 167.39169311523438
+                "timer": 169.69134521484375
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -966,7 +1158,7 @@
         },
         "122": {
             "Animation": {
-                "currentFrame": 2,
+                "currentFrame": 1,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -975,13 +1167,13 @@
                 "loop": true,
                 "row": 0,
                 "shouldRepeat": false,
-                "sprite": "assets/Tile/Tile1/Tile1_26.png",
+                "sprite": "assets/Tile/Tile1/Tile1_25.png",
                 "textures": [
                     "assets/Tile/Tile1/Tile1_24.png",
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.24173703789710999
+                "timer": 0.1413300335407257
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -1053,7 +1245,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 167.39169311523438
+                "timer": 169.69134521484375
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -1124,7 +1316,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 167.39169311523438
+                "timer": 169.69134521484375
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -1195,7 +1387,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 167.39169311523438
+                "timer": 169.69134521484375
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -1266,7 +1458,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 167.39169311523438
+                "timer": 169.69134521484375
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -1340,7 +1532,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 5.2525787353515625
+                "timer": 7.552169322967529
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -1407,7 +1599,7 @@
         },
         "134": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -1416,13 +1608,13 @@
                 "loop": true,
                 "row": 0,
                 "shouldRepeat": false,
-                "sprite": "assets/Tile/Tile1/Tile1_25.png",
+                "sprite": "assets/Tile/Tile1/Tile1_24.png",
                 "textures": [
                     "assets/Tile/Tile1/Tile1_24.png",
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.1997007131576538
+                "timer": 0.09929360449314117
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -1494,7 +1686,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_0.png"
                 ],
-                "timer": 89.27991485595703
+                "timer": 91.57954406738281
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -1580,22 +1772,11 @@
                 "textures": [
                     "assets/Mario/Small/idling.png"
                 ],
-                "timer": 0.05773399397730827
+                "timer": 0.05732693150639534
             },
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [
-                    {
-                        "collider": 68,
-                        "direction": 1,
-                        "overlap": {
-                            "height": 0.3311767578125,
-                            "left": 729.2308959960938,
-                            "top": 624.0,
-                            "width": 36.0
-                        }
-                    }
-                ],
+                "collisions": [],
                 "corners": [
                     {
                         "x": 0.0,
@@ -1666,11 +1847,11 @@
             "StomperTag": {},
             "Transform": {
                 "position": {
-                    "x": 723.2308959960938,
+                    "x": 144.0,
                     "y": 576.0
                 },
                 "prevPos": {
-                    "x": 723.2308959960938,
+                    "x": 144.0,
                     "y": 576.0
                 },
                 "size": {
@@ -1798,7 +1979,7 @@
         },
         "5": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -1807,13 +1988,13 @@
                 "loop": true,
                 "row": 0,
                 "shouldRepeat": false,
-                "sprite": "assets/Tile/Tile1/Tile1_25.png",
+                "sprite": "assets/Tile/Tile1/Tile1_24.png",
                 "textures": [
                     "assets/Tile/Tile1/Tile1_24.png",
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.1997007131576538
+                "timer": 0.09929360449314117
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -1885,23 +2066,12 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_0.png"
                 ],
-                "timer": 188.58767700195313
+                "timer": 190.8873291015625
             },
             "BlockTag": {},
             "BoxCollider2D": {
                 "bounce": false,
-                "collisions": [
-                    {
-                        "collider": 20,
-                        "direction": 2,
-                        "overlap": {
-                            "height": 0.3311767578125,
-                            "left": 729.2308959960938,
-                            "top": 624.0,
-                            "width": 36.0
-                        }
-                    }
-                ],
+                "collisions": [],
                 "corners": [
                     {
                         "x": 0.0,
@@ -1954,7 +2124,7 @@
         },
         "7": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -1963,13 +2133,13 @@
                 "loop": true,
                 "row": 0,
                 "shouldRepeat": false,
-                "sprite": "assets/Tile/Tile1/Tile1_25.png",
+                "sprite": "assets/Tile/Tile1/Tile1_24.png",
                 "textures": [
                     "assets/Tile/Tile1/Tile1_24.png",
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.1997007131576538
+                "timer": 0.09929360449314117
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -2012,12 +2182,12 @@
             "QuestionBlockTag": {},
             "Transform": {
                 "position": {
-                    "x": 336.0,
-                    "y": 336.0
+                    "x": 528.0,
+                    "y": 144.0
                 },
                 "prevPos": {
-                    "x": 336.0,
-                    "y": 336.0
+                    "x": 528.0,
+                    "y": 144.0
                 },
                 "size": {
                     "x": 48.0,
@@ -2028,7 +2198,7 @@
         },
         "8": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -2037,13 +2207,13 @@
                 "loop": true,
                 "row": 0,
                 "shouldRepeat": false,
-                "sprite": "assets/Tile/Tile1/Tile1_25.png",
+                "sprite": "assets/Tile/Tile1/Tile1_24.png",
                 "textures": [
                     "assets/Tile/Tile1/Tile1_24.png",
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.1997007131576538
+                "timer": 0.09929360449314117
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -2156,7 +2326,7 @@
         },
         "9": {
             "Animation": {
-                "currentFrame": 1,
+                "currentFrame": 0,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -2165,13 +2335,13 @@
                 "loop": true,
                 "row": 0,
                 "shouldRepeat": false,
-                "sprite": "assets/Tile/Tile1/Tile1_25.png",
+                "sprite": "assets/Tile/Tile1/Tile1_24.png",
                 "textures": [
                     "assets/Tile/Tile1/Tile1_24.png",
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.1997007131576538
+                "timer": 0.09929360449314117
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -2230,7 +2400,7 @@
         },
         "999": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 24,
@@ -2239,13 +2409,13 @@
                 "loop": true,
                 "row": 0,
                 "shouldRepeat": false,
-                "sprite": "assets/Item/Coin/Coin3/SmallCoin1_0.png",
+                "sprite": "assets/Item/Coin/Coin3/SmallCoin1_1.png",
                 "textures": [
                     "assets/Item/Coin/Coin3/SmallCoin1_0.png",
                     "assets/Item/Coin/Coin3/SmallCoin1_1.png",
                     "assets/Item/Coin/Coin3/SmallCoin1_2.png"
                 ],
-                "timer": 0.04624869301915169
+                "timer": 0.2458415925502777
             },
             "SmallCoinTag": {},
             "Transform": {

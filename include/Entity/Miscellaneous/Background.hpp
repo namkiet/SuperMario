@@ -59,6 +59,7 @@ public:
             addComponent<CastleFlag>();
 
             addComponent<Animation>(TextureManager::load("assets/Background/CastleFlag.png"));
+            addComponent<ZIndex>(-3);
 
             // std::cout << "Castle flag created at position: " << x * scale << ", " << y * scale << std::endl;
         }
