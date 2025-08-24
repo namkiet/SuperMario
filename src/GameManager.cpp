@@ -181,8 +181,8 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue, b
         world.addSystem<DrawTextSystem>();
     world.addSystem<DrawGameComponentSystem>();
 
-    world.addSystem<DespawnSystem>();
     world.addSystem<LevelCompletionSystem>(*this);
+    world.addSystem<DespawnSystem>();
     world.addSystem<PlayerRespawnSystem>(*this);
     
     // if (LevelManager::instance().getStatus() == std::string("gameover"))
