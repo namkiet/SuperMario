@@ -418,6 +418,7 @@ void InGameState::setupButton()
         {
             game->popState();
             game->pushState("menu");
+            
         },
         nullptr, sf::Color::White, /*setCenter=*/true);
     pausePanel->addComponent(exitBtn);

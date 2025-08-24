@@ -77,7 +77,11 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         25,
         [this]()
         {
-            this->game->getWindow().close();
+            while(this->game->currentState())
+            {
+                this->game->popState();
+                this->game->getWindow().close();
+            }
         },
         nullptr, sf::Color::White, /*setCenter=*/true);
     root->addComponent(quitBtn);

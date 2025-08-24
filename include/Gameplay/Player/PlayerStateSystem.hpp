@@ -15,10 +15,12 @@ class PlayerStateSystem : public System
 public:
     void update(World& world, float dt) override
     {
+        // std::cout << "playerState system works\n";
         for (Entity* player : world.findAll<PlayerTag, Animation>())
         {
             auto& tag = player->getComponent<PlayerTag>();
 
+                        // std::cout << "playerState 0 ok" << std::endl;
             if (!tag.movementState || !tag.sizeState || !tag.powerState) continue;
 
             tag.movementState->update(player, dt);
@@ -28,9 +30,10 @@ public:
             auto newMovementState = tag.movementState->getNewState(player);
             auto newSizeState = tag.sizeState->getNewState(player);
             auto newPowerState = tag.powerState->getNewState(player);
+            // std::cout << "playerState 1 ok" << std::endl;
 
             if (!playerHasChanged && !newMovementState && !newSizeState && !newPowerState) continue;
-
+            std::cout << "change playerState" << std::endl;
             if (playerHasChanged)
             {
                 playerHasChanged = false;
@@ -40,6 +43,9 @@ public:
 
             if (newMovementState)
             {
+                
+                std::cout << newMovementState->getName() << std::endl;
+                
                 tag.movementState->onExit(player);
                 tag.movementState = newMovementState;
                 tag.movementState->onEnter(player);
@@ -47,13 +53,15 @@ public:
 
             if (newSizeState)
             {
+                
+                std::cout << newSizeState->getName() << std::endl;
                 tag.sizeState->onExit(player);
                 tag.sizeState = newSizeState;
                 tag.sizeState->onEnter(player);
             }
-
             if (newPowerState)
             {
+                std::cout << newPowerState->getName() << std::endl;
                 tag.powerState->onExit(player);
                 tag.powerState = newPowerState;
                 tag.powerState->onEnter(player);

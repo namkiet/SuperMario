@@ -16,7 +16,7 @@ const std::string PlayerFireState::getName() const
 void PlayerFireState::onEnter(Entity* entity)
 {   
     entity->addComponent<CanFireTag>();
-    entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/fire.wav"));
+    // entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/fire.wav"));
 }
 
 void PlayerFireState::onExit(Entity* entity)
