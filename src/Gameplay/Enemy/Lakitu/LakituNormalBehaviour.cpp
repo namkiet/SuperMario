@@ -52,10 +52,8 @@ void LakituNormalBehaviour::patrol(Entity* entity, float dt, World& world)
     auto& tf = entity->getComponent<Transform>();
     auto& towardPlayer = entity->getComponent<TowardPlayer>();
 
-    // auto playerTf = world.findFirst<PlayerTag, Transform>()->getComponent<Transform>();
-    // auto targetCenter = playerTf.position + (playerTf.size / 2.0f);
     auto lakituCenter = tf.position + (tf.size / 2.0f);
-    Entity* player = world.findFirst<PlayerTag>();
+    auto player = world.findFirst<PlayerTag>();
     auto targetCenter = patrol.freeTarget;
     if (player) 
     {
@@ -63,7 +61,9 @@ void LakituNormalBehaviour::patrol(Entity* entity, float dt, World& world)
         targetCenter = playerTf.position + (playerTf.size / 2.0f);
     }
     if (targetCenter.x > patrol.limitX)
-    targetCenter = patrol.freeTarget;
+    {
+        targetCenter = patrol.freeTarget;
+    }
 
     if (abs(lakituCenter.x - targetCenter.x) > patrol.distance + 200)
     {
@@ -139,10 +139,21 @@ void LakituNormalBehaviour::attack(Entity* entity, float dt, World& world)
     auto& attack = entity->getComponent<LakituAttack>();
     auto tf = entity->getComponent<Transform>();
     auto rb = entity->getComponent<RigidBody>();
+    auto patrol = entity->getComponent<LakituPatrol>();
 
-    auto playerPos = world.findFirst<PlayerTag, Transform>()->getComponent<Transform>().position;
+    auto player = world.findFirst<PlayerTag>();
+    auto targetCenter = patrol.freeTarget;
+    if (player) 
+    {
+        auto playerTf = player->getComponent<Transform>();
+        targetCenter = playerTf.position + (playerTf.size / 2.0f);
+    }
+    if (targetCenter.x > patrol.limitX)
+    {
+        targetCenter = patrol.freeTarget;
+    }
 
-    if (abs(playerPos.x - tf.position.x) > attack.distance) 
+    if (abs(targetCenter.x - tf.position.x) > attack.distance) 
         return;
 
     attack.timer += dt;
@@ -168,7 +179,7 @@ void LakituNormalBehaviour::attack(Entity* entity, float dt, World& world)
         auto& spinyPatrol = spiny->getComponent<SpinyPatrol>();
             
         spinyTf.position = sf::Vector2f(tf.position.x, tf.position.y - spinyTf.size.y);
-        spinyPatrol.velocity.x = playerPos.x - tf.position.x;
+        spinyPatrol.velocity.x = targetCenter.x - tf.position.x;
         spinyRb.velocity.y = -700;
     }
 }

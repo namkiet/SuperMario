@@ -30,8 +30,12 @@ void BowserSkidBehaviour::patrol(Entity* entity, float dt, World& world)
     auto& patrol = entity->getComponent<BowserPatrol>();
     auto& tf = entity->getComponent<Transform>();
     auto& rb = entity->getComponent<RigidBody>();
-    auto& playerTF = world.findFirst<PlayerTag, Transform>()->getComponent<Transform>();
     auto& towardPlayer = entity->getComponent<TowardPlayer>();
+    
+    auto player = world.findFirst<PlayerTag, Transform>();
+    if (!player) return;
+
+    auto playerTF = player->getComponent<Transform>();
 
     towardPlayer.direction = (tf.position.x < playerTF.position.x ? Direction::Right : Direction::Left);
 

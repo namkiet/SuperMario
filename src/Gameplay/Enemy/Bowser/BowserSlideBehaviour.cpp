@@ -51,8 +51,13 @@ void BowserSlideBehaviour::patrol(Entity* entity, float dt, World& world)
     auto& box = entity->getComponent<BoxCollider2D>();
     auto& tf = entity->getComponent<Transform>();
     auto& rb = entity->getComponent<RigidBody>();
-    auto& playerTF = world.findFirst<PlayerTag, Transform>()->getComponent<Transform>();
+    
+    auto player = world.findFirst<PlayerTag, Transform>();
+    if (!player) return;
 
+    auto playerTF = player->getComponent<Transform>();
+
+    
     bool stillOnGround = false;    
     for (auto& [collider, direction, overlap] : box.collisions)
     {
