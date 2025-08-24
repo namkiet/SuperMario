@@ -11,6 +11,7 @@ public:
     sf::Time MusicBlockBySoundTime = sf::seconds(0.f);
     void update(World &world, float dt) override
     {
+        std::cout << "still update" << std::endl;
         for (Entity *entity : world.findAll<SoundComponent>())
         {
             auto& soundComponent = entity->getComponent<SoundComponent>();
@@ -40,7 +41,8 @@ public:
         bool SoundBlockMusic = MusicBlockBySoundTime > sf::Time::Zero;
 
         auto camera = world.findFirst<Camera>();
-        auto musicPlayer = world.findFirst<MusicPlayer>(); auto& music = musicPlayer->getComponent<MusicPlayer>();
+        auto musicPlayer = world.findFirst<MusicPlayer>(); 
+        auto& music = musicPlayer->getComponent<MusicPlayer>();
         if (SoundBlockMusic) 
         {
             // std::cout << "can not play music due to sound block\n";

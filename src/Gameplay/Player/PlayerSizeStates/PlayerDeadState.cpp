@@ -19,7 +19,7 @@ void PlayerDeadState::onEnter(Entity* entity)
     {
         entity->getComponent<RigidBody>().velocity = sf::Vector2f(0, -600);
     }
-    entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/death.wav"), false);
+    entity->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/death.wav"), false, true, sf::seconds(1.f));
 }
 
 std::shared_ptr<PlayerSizeState> PlayerDeadState::getNewState(Entity* entity)

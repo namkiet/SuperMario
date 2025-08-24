@@ -37,4 +37,10 @@ private:
 
     static int lives;
     static inline json prevMarioData;
+
+    void init(bool shouldContinue, bool canEdit);
+
+    friend class PlayerRespawnSystem;
+    friend class LevelCompletionSystem;
+    friend class InGameState;
 };

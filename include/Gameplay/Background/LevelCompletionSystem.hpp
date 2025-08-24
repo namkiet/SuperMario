@@ -1,5 +1,5 @@
 #pragma once
-
+#include <GameManager.hpp>
 #include <Engine/Core/Transform.hpp>
 #include <Engine/Core/RigidBody.hpp>
 #include <Engine/Animation/Animation.hpp>
@@ -31,6 +31,20 @@ class LevelCompletionSystem : public System
 {
 private:
     float timeElapsed = 0.0f;
+    GameManager& gameMgr;
+
+    void win()
+    {
+        // if (gameMgr.canEdit)
+        // {
+            
+        // }
+        // else
+        // {
+            LevelManager::instance().setStatus("win");
+        // }
+    }
+
     void castleCollisionCheck(World &world, float dt, Entity *player, Entity *collider)
     {
         auto &castlePos = collider->getComponent<Transform>().position;
@@ -92,7 +106,7 @@ private:
                 auto &seq = player->getComponent<FireworkComponent>();
                 if (seq.fireworksLeft <= 0 && timeElapsed > 3.0f)
                 {
-                    LevelManager::instance().setStatus("win");
+                    win();
                 }
             }
             else
@@ -100,7 +114,7 @@ private:
                 timeElapsed += dt;
                 if (timeElapsed > 3.0f)
                 {
-                    LevelManager::instance().setStatus("win");
+                    win();
                 }
             }
         }
@@ -116,17 +130,23 @@ private:
 
         if (timeElapsed > 3.0f)
         {
-            LevelManager::instance().setStatus("win");
+            win();
         }
     }
 
 public:
+    LevelCompletionSystem(GameManager& gameMgr) : gameMgr(gameMgr) {}
+    
     void update(World &world, float dt) override
     {
         for (Entity *player : world.findAll<PlayerTag, BoxCollider2D, RigidBody>())
         {
+            bool hasWon = false;
+
             for (const auto &[collider, direction, overlap] : player->getComponent<BoxCollider2D>().collisions)
             {
+                if (!collider) continue;
+
                 if (!collider->hasComponent<Transform>())
                     continue;
 
@@ -138,6 +158,7 @@ public:
 
                 if (collider->hasComponent<Castle>() || collider->hasComponent<Princess>())
                 {
+                    hasWon = true;
                     TimeManager::instance().setTimeGoesFaster(true);
 
                     // Update score
@@ -148,6 +169,8 @@ public:
                     }
                 }
             }
+
+            if (hasWon) break;
         }
     }
 };

@@ -74,30 +74,23 @@
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
-GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue, bool allowEditing) 
-    : levelHandler(world, level), currentLevel(level), canEdit(allowEditing)
+void GameManager::init(bool shouldContinue, bool canEdit)
 {
-    MessageBus::subscribe("GameSaved", this, [this](const std::string &)
-                          {
-        json j;
-        j["level"] = currentLevel;
-        j["lives"] = lives;
-        world.saveSceneToFile(j["entities"]);  
-        std::ofstream fout(canEdit ? "sample.json" : "save.json");
-        fout << j.dump(4); });
+    world.removeAllEntities();
 
-    MessageBus::subscribe("GamePaused", this, [this](const std::string &)
-                          { std::cout << "Paused\n"; isPaused = true; });
-    MessageBus::subscribe("GameResumed", this, [this](const std::string &)
-                          { isPaused = false; });
-
-    if (shouldContinue)
+    if (canEdit)
     {
-        std::ifstream fin(canEdit ? "sample.json" : "save.json");
-        json j;
-        fin >> j;
+        ThemeManager::setTheme(1);
+        std::ifstream fin("sample.json");
+        json j; fin >> j;
+        lives = 9999;
+        world.loadSceneFromFile(j["entities"]);
+    }
+    else if (shouldContinue)
+    {
+        std::ifstream fin("save.json");
+        json j; fin >> j;
         lives = j["lives"];
-        world.entityManager.removeAllEntities();
         world.loadSceneFromFile(j["entities"]);
     }
     else
@@ -106,10 +99,28 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue, b
         world.createEntity()->addComponent<Camera>();
     }
 
-    if (canEdit)
-    {
-        ThemeManager::setTheme(1);
-    }
+    // create music Player
+    std::cout << "rebuild" << std::endl;
+    Entity* musicPlayer = world.createEntity(); 
+    musicPlayer->addComponent<MusicPlayer>();
+}
+
+GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue, bool allowEditing) 
+    : levelHandler(world, level), currentLevel(level), canEdit(allowEditing)
+{
+    MessageBus::subscribe("GameSaved", this, [this](const std::string &) {
+        json j;
+        j["level"] = currentLevel;
+        j["lives"] = canEdit ? 5 : lives;
+        world.saveSceneToFile(j["entities"]);  
+        std::ofstream fout(canEdit ? "sample.json" : "save.json");
+        fout << j.dump(4); 
+    });
+
+    MessageBus::subscribe("GamePaused", this, [this](const std::string &) { isPaused = true; });
+    MessageBus::subscribe("GameResumed", this, [this](const std::string &) { isPaused = false; });
+
+    init(shouldContinue, allowEditing);
 
     world.addSystem<PlayTimeSystem>();
 
@@ -155,8 +166,6 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue, b
     world.addSystem<FireBarSystem>();
     world.addSystem<PodobooSystem>();
 
-    world.addSystem<LevelCompletionSystem>();
-
     world.addSystem<TextPoppingSystem>();
 
     world.addSystem<DamageOnContactSystem>();
@@ -173,11 +182,8 @@ GameManager::GameManager(int level, bool hasWonLastLevel, bool shouldContinue, b
     world.addSystem<DrawGameComponentSystem>();
 
     world.addSystem<DespawnSystem>();
-    world.addSystem<PlayerRespawnSystem>();
-    
-    // create music Player
-    std::cout << "rebuild" << std::endl;
-    Entity* musicPlayer = world.createEntity(); musicPlayer->addComponent<MusicPlayer>();
+    world.addSystem<LevelCompletionSystem>(*this);
+    world.addSystem<PlayerRespawnSystem>(*this);
     
     // if (LevelManager::instance().getStatus() == std::string("gameover"))
     // {
@@ -270,11 +276,13 @@ void GameManager::handleEvent(const sf::Event &event, sf::RenderWindow &window)
 
             if (editor)
             {
+                MessageBus::publish("GameSaved");
                 delete editor;
                 editor = nullptr;
             }
             else
             {
+                init(true, true);
                 editor = new Editor(world);
             }
         }

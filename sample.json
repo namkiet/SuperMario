@@ -1,10 +1,927 @@
 {
     "entities": {
+        "1": {
+            "name": "Unknown"
+        },
+        "1000": {
+            "name": "Unknown"
+        },
+        "1001": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 1,
+                "frameDuration": 0.0,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": true,
+                "sprite": "assets/Tile/Tile1/Tile1_28.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_28.png"
+                ],
+                "timer": 7.552169322967529
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "StairsBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 912.0,
+                    "y": 480.0
+                },
+                "prevPos": {
+                    "x": 912.0,
+                    "y": 480.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "name": "Unknown"
+        },
+        "1002": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 1,
+                "frameDuration": 0.0,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": true,
+                "sprite": "assets/Tile/Tile1/Tile1_28.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_28.png"
+                ],
+                "timer": 7.552169322967529
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "StairsBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 912.0,
+                    "y": 528.0
+                },
+                "prevPos": {
+                    "x": 912.0,
+                    "y": 528.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "name": "Unknown"
+        },
+        "1003": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 1,
+                "frameDuration": 0.0,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": true,
+                "sprite": "assets/Tile/Tile1/Tile1_28.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_28.png"
+                ],
+                "timer": 7.552169322967529
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "StairsBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 912.0,
+                    "y": 576.0
+                },
+                "prevPos": {
+                    "x": 912.0,
+                    "y": 576.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "name": "Unknown"
+        },
+        "1004": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 1,
+                "frameDuration": 0.0,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": true,
+                "sprite": "assets/Tile/Tile1/Tile1_28.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_28.png"
+                ],
+                "timer": 7.552169322967529
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "StairsBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 960.0,
+                    "y": 576.0
+                },
+                "prevPos": {
+                    "x": 960.0,
+                    "y": 576.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "name": "Unknown"
+        },
+        "1005": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 1,
+                "frameDuration": 0.0,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": true,
+                "sprite": "assets/Tile/Tile1/Tile1_28.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_28.png"
+                ],
+                "timer": 7.552169322967529
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "StairsBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 960.0,
+                    "y": 528.0
+                },
+                "prevPos": {
+                    "x": 960.0,
+                    "y": 528.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "name": "Unknown"
+        },
+        "1006": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 1,
+                "frameDuration": 0.0,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": true,
+                "sprite": "assets/Tile/Tile1/Tile1_28.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_28.png"
+                ],
+                "timer": 7.552169322967529
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "StairsBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 960.0,
+                    "y": 432.0
+                },
+                "prevPos": {
+                    "x": 960.0,
+                    "y": 432.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "name": "Unknown"
+        },
+        "1007": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 1,
+                "frameDuration": 0.0,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": true,
+                "sprite": "assets/Tile/Tile1/Tile1_28.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_28.png"
+                ],
+                "timer": 7.552169322967529
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "StairsBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 960.0,
+                    "y": 432.0
+                },
+                "prevPos": {
+                    "x": 960.0,
+                    "y": 432.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "name": "Unknown"
+        },
+        "1008": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 1,
+                "frameDuration": 0.0,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": true,
+                "sprite": "assets/Tile/Tile1/Tile1_28.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_28.png"
+                ],
+                "timer": 7.552169322967529
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "StairsBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 960.0,
+                    "y": 384.0
+                },
+                "prevPos": {
+                    "x": 960.0,
+                    "y": 384.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "name": "Unknown"
+        },
+        "1009": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 1,
+                "frameDuration": 0.0,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": true,
+                "sprite": "assets/Tile/Tile1/Tile1_28.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_28.png"
+                ],
+                "timer": 7.552169322967529
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "StairsBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 960.0,
+                    "y": 480.0
+                },
+                "prevPos": {
+                    "x": 960.0,
+                    "y": 480.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "name": "Unknown"
+        },
+        "1010": {
+            "name": "Unknown"
+        },
+        "1011": {
+            "name": "Unknown"
+        },
+        "1012": {
+            "name": "Unknown"
+        },
+        "1013": {
+            "name": "Unknown"
+        },
+        "1014": {
+            "name": "Unknown"
+        },
+        "1015": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 1,
+                "frameDuration": 0.0,
+                "frameHeight": 80,
+                "frameWidth": 80,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": false,
+                "sprite": "assets/Background/Castle.png",
+                "textures": [
+                    "assets/Background/Castle.png"
+                ],
+                "timer": 0.8991179466247559
+            },
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 144.0,
+                    "y": 144.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 96.0
+                }
+            },
+            "Castle": {},
+            "Transform": {
+                "position": {
+                    "x": 480.0,
+                    "y": 384.0
+                },
+                "prevPos": {
+                    "x": 480.0,
+                    "y": 384.0
+                },
+                "size": {
+                    "x": 240.0,
+                    "y": 240.0
+                }
+            },
+            "ZIndex": {
+                "value": -2
+            },
+            "name": "Unknown"
+        },
+        "1016": {
+            "name": "Unknown"
+        },
+        "1017": {
+            "name": "Unknown"
+        },
+        "1018": {
+            "name": "Unknown"
+        },
+        "1019": {
+            "name": "Unknown"
+        },
+        "1020": {
+            "name": "Unknown"
+        },
+        "1021": {
+            "name": "Unknown"
+        },
+        "1022": {
+            "name": "Unknown"
+        },
+        "1023": {
+            "name": "Unknown"
+        },
+        "1024": {
+            "name": "Unknown"
+        },
+        "1025": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 3,
+                "frameDuration": 0.30000001192092896,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": false,
+                "sprite": "assets/Tile/Tile1/Tile1_24.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_24.png",
+                    "assets/Tile/Tile1/Tile1_25.png",
+                    "assets/Tile/Tile1/Tile1_26.png"
+                ],
+                "timer": 0.0
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "CoinQuestionBlockTag": {},
+            "QuestionBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 288.0,
+                    "y": 528.0
+                },
+                "prevPos": {
+                    "x": 288.0,
+                    "y": 528.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "ZIndex": {
+                "value": -2
+            },
+            "name": "Unknown"
+        },
+        "1026": {
+            "name": "Unknown"
+        },
+        "1027": {
+            "name": "Unknown"
+        },
+        "11": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 3,
+                "frameDuration": 0.30000001192092896,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": false,
+                "sprite": "assets/Tile/Tile1/Tile1_24.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_24.png",
+                    "assets/Tile/Tile1/Tile1_25.png",
+                    "assets/Tile/Tile1/Tile1_26.png"
+                ],
+                "timer": 0.09929360449314117
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "CoinQuestionBlockTag": {},
+            "QuestionBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 432.0,
+                    "y": 432.0
+                },
+                "prevPos": {
+                    "x": 432.0,
+                    "y": 432.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "name": "Unknown"
+        },
         "114": {
             "Camera": {
                 "smoothing": 8.0,
                 "target": {
-                    "x": 384.00701904296875,
+                    "x": 480.0,
                     "y": 360.0
                 },
                 "trapHalfWidth": 80.0
@@ -38,7 +955,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 87.51029205322266
+                "timer": 169.69134521484375
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -80,12 +997,12 @@
             "StairsBlockTag": {},
             "Transform": {
                 "position": {
-                    "x": 720.0,
-                    "y": 528.0
+                    "x": 768.0,
+                    "y": 576.0
                 },
                 "prevPos": {
-                    "x": 720.0,
-                    "y": 528.0
+                    "x": 768.0,
+                    "y": 576.0
                 },
                 "size": {
                     "x": 48.0,
@@ -96,7 +1013,7 @@
         },
         "120": {
             "Animation": {
-                "currentFrame": 2,
+                "currentFrame": 0,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -105,13 +1022,13 @@
                 "loop": true,
                 "row": 0,
                 "shouldRepeat": false,
-                "sprite": "assets/Tile/Tile1/Tile1_26.png",
+                "sprite": "assets/Tile/Tile1/Tile1_24.png",
                 "textures": [
                     "assets/Tile/Tile1/Tile1_24.png",
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.2935701012611389
+                "timer": 0.27457109093666077
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -154,12 +1071,12 @@
             "QuestionBlockTag": {},
             "Transform": {
                 "position": {
-                    "x": 624.0,
-                    "y": 336.0
+                    "x": 384.0,
+                    "y": 288.0
                 },
                 "prevPos": {
-                    "x": 624.0,
-                    "y": 336.0
+                    "x": 384.0,
+                    "y": 288.0
                 },
                 "size": {
                     "x": 48.0,
@@ -183,7 +1100,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 87.51029205322266
+                "timer": 169.69134521484375
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -225,12 +1142,12 @@
             "StairsBlockTag": {},
             "Transform": {
                 "position": {
-                    "x": 768.0,
-                    "y": 480.0
+                    "x": 816.0,
+                    "y": 528.0
                 },
                 "prevPos": {
-                    "x": 768.0,
-                    "y": 480.0
+                    "x": 816.0,
+                    "y": 528.0
                 },
                 "size": {
                     "x": 48.0,
@@ -241,7 +1158,7 @@
         },
         "122": {
             "Animation": {
-                "currentFrame": 0,
+                "currentFrame": 1,
                 "frameCount": 3,
                 "frameDuration": 0.30000001192092896,
                 "frameHeight": 16,
@@ -250,13 +1167,13 @@
                 "loop": true,
                 "row": 0,
                 "shouldRepeat": false,
-                "sprite": "assets/Tile/Tile1/Tile1_24.png",
+                "sprite": "assets/Tile/Tile1/Tile1_25.png",
                 "textures": [
                     "assets/Tile/Tile1/Tile1_24.png",
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.16032995283603668
+                "timer": 0.1413300335407257
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -299,12 +1216,12 @@
             "QuestionBlockTag": {},
             "Transform": {
                 "position": {
-                    "x": 528.0,
-                    "y": 336.0
+                    "x": 432.0,
+                    "y": 240.0
                 },
                 "prevPos": {
-                    "x": 528.0,
-                    "y": 336.0
+                    "x": 432.0,
+                    "y": 240.0
                 },
                 "size": {
                     "x": 48.0,
@@ -328,7 +1245,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 87.51029205322266
+                "timer": 169.69134521484375
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -370,12 +1287,12 @@
             "StairsBlockTag": {},
             "Transform": {
                 "position": {
-                    "x": 768.0,
-                    "y": 528.0
+                    "x": 816.0,
+                    "y": 576.0
                 },
                 "prevPos": {
-                    "x": 768.0,
-                    "y": 528.0
+                    "x": 816.0,
+                    "y": 576.0
                 },
                 "size": {
                     "x": 48.0,
@@ -399,7 +1316,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 87.51029205322266
+                "timer": 169.69134521484375
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -441,12 +1358,12 @@
             "StairsBlockTag": {},
             "Transform": {
                 "position": {
-                    "x": 816.0,
-                    "y": 432.0
+                    "x": 864.0,
+                    "y": 480.0
                 },
                 "prevPos": {
-                    "x": 816.0,
-                    "y": 432.0
+                    "x": 864.0,
+                    "y": 480.0
                 },
                 "size": {
                     "x": 48.0,
@@ -470,7 +1387,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 87.51029205322266
+                "timer": 169.69134521484375
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -512,12 +1429,12 @@
             "StairsBlockTag": {},
             "Transform": {
                 "position": {
-                    "x": 816.0,
-                    "y": 480.0
+                    "x": 864.0,
+                    "y": 576.0
                 },
                 "prevPos": {
-                    "x": 816.0,
-                    "y": 480.0
+                    "x": 864.0,
+                    "y": 576.0
                 },
                 "size": {
                     "x": 48.0,
@@ -541,7 +1458,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_28.png"
                 ],
-                "timer": 87.51029205322266
+                "timer": 169.69134521484375
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -583,11 +1500,11 @@
             "StairsBlockTag": {},
             "Transform": {
                 "position": {
-                    "x": 816.0,
+                    "x": 864.0,
                     "y": 528.0
                 },
                 "prevPos": {
-                    "x": 816.0,
+                    "x": 864.0,
                     "y": 528.0
                 },
                 "size": {
@@ -601,6 +1518,86 @@
             "name": "Unknown"
         },
         "129": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 1,
+                "frameDuration": 0.0,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": true,
+                "sprite": "assets/Tile/Tile1/Tile1_28.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_28.png"
+                ],
+                "timer": 7.552169322967529
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "StairsBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 912.0,
+                    "y": 432.0
+                },
+                "prevPos": {
+                    "x": 912.0,
+                    "y": 432.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "name": "Unknown"
+        },
+        "131": {
+            "name": "Unknown"
+        },
+        "132": {
+            "name": "Unknown"
+        },
+        "133": {
+            "name": "Unknown"
+        },
+        "134": {
             "Animation": {
                 "currentFrame": 0,
                 "frameCount": 3,
@@ -617,7 +1614,7 @@
                     "assets/Tile/Tile1/Tile1_25.png",
                     "assets/Tile/Tile1/Tile1_26.png"
                 ],
-                "timer": 0.16032995283603668
+                "timer": 0.09929360449314117
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -660,129 +1657,16 @@
             "QuestionBlockTag": {},
             "Transform": {
                 "position": {
-                    "x": 432.0,
-                    "y": 336.0
+                    "x": 480.0,
+                    "y": 384.0
                 },
                 "prevPos": {
-                    "x": 432.0,
-                    "y": 336.0
+                    "x": 480.0,
+                    "y": 384.0
                 },
                 "size": {
                     "x": 48.0,
                     "y": 48.0
-                }
-            },
-            "name": "Unknown"
-        },
-        "131": {
-            "name": "Unknown"
-        },
-        "132": {
-            "name": "Unknown"
-        },
-        "133": {
-            "name": "Unknown"
-        },
-        "134": {
-            "Animation": {
-                "currentFrame": 1,
-                "frameCount": 2,
-                "frameDuration": 0.25,
-                "frameHeight": 24,
-                "frameWidth": 16,
-                "hasEnded": false,
-                "loop": true,
-                "row": 0,
-                "shouldRepeat": false,
-                "sprite": "assets/Enemy/Koopa/koopa_walk.png",
-                "textures": [
-                    "assets/Enemy/Koopa/koopa_walk.png"
-                ],
-                "timer": 0.14857012033462524
-            },
-            "BoxCollider2D": {
-                "bounce": false,
-                "collisions": [],
-                "corners": [
-                    {
-                        "x": 0.0,
-                        "y": 0.0
-                    },
-                    {
-                        "x": 0.0,
-                        "y": 0.0
-                    },
-                    {
-                        "x": 0.0,
-                        "y": 0.0
-                    },
-                    {
-                        "x": 0.0,
-                        "y": 0.0
-                    }
-                ],
-                "isDisabled": false,
-                "offset": {
-                    "x": 0.0,
-                    "y": 0.0
-                },
-                "origin": {
-                    "x": 0.0,
-                    "y": 0.0
-                },
-                "rotation": 0.0,
-                "size": {
-                    "x": 48.0,
-                    "y": 72.0
-                }
-            },
-            "CanHitBlockTag": {},
-            "DamageOnContactComponent": {
-                "validDirections": [
-                    3,
-                    4,
-                    2
-                ]
-            },
-            "EnemyTag": {
-                "behaviour": "KoopaNormalBehaviour",
-                "state": "KoopaNormalState"
-            },
-            "FlipXTag": {},
-            "KoopaNormalTag": {},
-            "KoopaPatrol": {
-                "lastDirection": 3,
-                "velocity": {
-                    "x": -60.0,
-                    "y": 0.0
-                }
-            },
-            "RigidBody": {
-                "acceleration": {
-                    "x": 0.0,
-                    "y": 0.0
-                },
-                "antiGravity": 0.0,
-                "applyGravity": true,
-                "onGround": true,
-                "velocity": {
-                    "x": -60.0,
-                    "y": 0.0
-                }
-            },
-            "StompableTag": {},
-            "Transform": {
-                "position": {
-                    "x": 1152.0,
-                    "y": 552.0
-                },
-                "prevPos": {
-                    "x": 1131.44580078125,
-                    "y": 552.0
-                },
-                "size": {
-                    "x": 48.0,
-                    "y": 72.0
                 }
             },
             "name": "Unknown"
@@ -802,7 +1686,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_0.png"
                 ],
-                "timer": 9.398571968078613
+                "timer": 91.57954406738281
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -867,6 +1751,12 @@
         "138": {
             "name": "Unknown"
         },
+        "139": {
+            "name": "Unknown"
+        },
+        "140": {
+            "name": "Unknown"
+        },
         "20": {
             "Animation": {
                 "currentFrame": 0,
@@ -882,7 +1772,7 @@
                 "textures": [
                     "assets/Mario/Small/idling.png"
                 ],
-                "timer": 0.05717798322439194
+                "timer": 0.05732693150639534
             },
             "BoxCollider2D": {
                 "bounce": false,
@@ -957,11 +1847,11 @@
             "StomperTag": {},
             "Transform": {
                 "position": {
-                    "x": 192.0,
+                    "x": 144.0,
                     "y": 576.0
                 },
                 "prevPos": {
-                    "x": 432.0,
+                    "x": 144.0,
                     "y": 576.0
                 },
                 "size": {
@@ -973,6 +1863,9 @@
                 "value": -1
             },
             "name": "5Mario"
+        },
+        "3": {
+            "name": "Unknown"
         },
         "30": {
             "BlockTag": {},
@@ -1084,6 +1977,80 @@
             },
             "name": "10LevelBlock"
         },
+        "5": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 3,
+                "frameDuration": 0.30000001192092896,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": false,
+                "sprite": "assets/Tile/Tile1/Tile1_24.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_24.png",
+                    "assets/Tile/Tile1/Tile1_25.png",
+                    "assets/Tile/Tile1/Tile1_26.png"
+                ],
+                "timer": 0.09929360449314117
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "CoinQuestionBlockTag": {},
+            "QuestionBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 480.0,
+                    "y": 192.0
+                },
+                "prevPos": {
+                    "x": 480.0,
+                    "y": 192.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "name": "Unknown"
+        },
         "68": {
             "Animation": {
                 "currentFrame": 0,
@@ -1099,7 +2066,7 @@
                 "textures": [
                     "assets/Tile/Tile1/Tile1_0.png"
                 ],
-                "timer": 108.70609283447266
+                "timer": 190.8873291015625
             },
             "BlockTag": {},
             "BoxCollider2D": {
@@ -1155,6 +2122,154 @@
             },
             "name": "11GroundBlock"
         },
+        "7": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 3,
+                "frameDuration": 0.30000001192092896,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": false,
+                "sprite": "assets/Tile/Tile1/Tile1_24.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_24.png",
+                    "assets/Tile/Tile1/Tile1_25.png",
+                    "assets/Tile/Tile1/Tile1_26.png"
+                ],
+                "timer": 0.09929360449314117
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "CoinQuestionBlockTag": {},
+            "QuestionBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 528.0,
+                    "y": 144.0
+                },
+                "prevPos": {
+                    "x": 528.0,
+                    "y": 144.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "name": "Unknown"
+        },
+        "8": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 3,
+                "frameDuration": 0.30000001192092896,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": false,
+                "sprite": "assets/Tile/Tile1/Tile1_24.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_24.png",
+                    "assets/Tile/Tile1/Tile1_25.png",
+                    "assets/Tile/Tile1/Tile1_26.png"
+                ],
+                "timer": 0.09929360449314117
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "CoinQuestionBlockTag": {},
+            "QuestionBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 528.0,
+                    "y": 336.0
+                },
+                "prevPos": {
+                    "x": 528.0,
+                    "y": 336.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "name": "Unknown"
+        },
         "80": {
             "BoxCollider2D": {
                 "bounce": false,
@@ -1208,8 +2323,118 @@
                 }
             },
             "name": "10Background"
+        },
+        "9": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 3,
+                "frameDuration": 0.30000001192092896,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": false,
+                "sprite": "assets/Tile/Tile1/Tile1_24.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_24.png",
+                    "assets/Tile/Tile1/Tile1_25.png",
+                    "assets/Tile/Tile1/Tile1_26.png"
+                ],
+                "timer": 0.09929360449314117
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "CoinQuestionBlockTag": {},
+            "QuestionBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 384.0,
+                    "y": 480.0
+                },
+                "prevPos": {
+                    "x": 384.0,
+                    "y": 480.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "name": "Unknown"
+        },
+        "999": {
+            "Animation": {
+                "currentFrame": 1,
+                "frameCount": 3,
+                "frameDuration": 0.30000001192092896,
+                "frameHeight": 24,
+                "frameWidth": 15,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": false,
+                "sprite": "assets/Item/Coin/Coin3/SmallCoin1_1.png",
+                "textures": [
+                    "assets/Item/Coin/Coin3/SmallCoin1_0.png",
+                    "assets/Item/Coin/Coin3/SmallCoin1_1.png",
+                    "assets/Item/Coin/Coin3/SmallCoin1_2.png"
+                ],
+                "timer": 0.2458415925502777
+            },
+            "SmallCoinTag": {},
+            "Transform": {
+                "position": {
+                    "x": 305.0,
+                    "y": 65.0
+                },
+                "prevPos": {
+                    "x": 305.0,
+                    "y": 65.0
+                },
+                "size": {
+                    "x": 15.0,
+                    "y": 24.0
+                }
+            },
+            "name": "9SmallCoin"
         }
     },
     "level": -1,
-    "lives": 9999
+    "lives": 5
 }

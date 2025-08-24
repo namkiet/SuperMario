@@ -49,6 +49,11 @@ public:
         systemManager.addSystem<T>();
     }
 
+    template<typename T, typename... Args>
+    void addSystem(Args&&... args) {
+        return systemManager.addSystem<T>(std::forward<Args>(args)...);
+    }
+
     template<typename T>
     std::shared_ptr<T> getSystem() const {
         return systemManager.getSystem<T>();

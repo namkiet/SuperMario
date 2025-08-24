@@ -264,7 +264,7 @@ void LevelHandler::groundLoad(World &world, std::string tilename, float x, float
 {
     if (tilename == "GroundBlock") // Ground block
     {
-        world.createEntity<GroundBlock>(x, y, width, height, scale);
+        world.createEntity<InvisibleGroundBlock>(x, y, width, height, scale);
     }
     else if (tilename == "StairsBlock")
     {
@@ -364,7 +364,7 @@ void LevelHandler::playerLoad(World &world, std::string tilename, float x, float
     {
         // world.createEntity<Mario>(x, y, width, height, 3);
         teleMap[tilename] = sf::Vector2f(x * scale, y * scale);
-        world.createEntity()->addComponent<MusicSource>("assets/Sounds/underground.mid", sf::Vector2f(x * scale, y * scale));
+        world.createEntity()->addComponent<MusicSource>("assets/Sounds/underground.wav", sf::Vector2f(x * scale, y * scale));
     }
 
     else if (tilename == "CheckPoint2")

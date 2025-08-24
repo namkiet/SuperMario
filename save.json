@@ -1,0 +1,739 @@
+{
+    "entities": {
+        "1": {
+            "Animation": {
+                "currentFrame": 0,
+                "frameCount": 1,
+                "frameDuration": 0.0,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": false,
+                "sprite": "assets/Player/SmallPlayer/marioSmall_0.png",
+                "textures": [
+                    "assets/Player/SmallPlayer/marioSmall_0.png"
+                ],
+                "timer": 7.095712661743164
+            },
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [
+                    {
+                        "collider": 1005,
+                        "direction": 1,
+                        "overlap": {
+                            "height": 0.3604736328125,
+                            "left": 246.0,
+                            "top": 528.0,
+                            "width": 36.0
+                        }
+                    }
+                ],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 6.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 36.0,
+                    "y": 48.0
+                }
+            },
+            "CanCaptureFlagTag": {},
+            "CanCollectTag": {},
+            "CanGetDamageTag": {},
+            "CanHitBlockTag": {},
+            "FireCooldown": {
+                "timeCount": 0.0
+            },
+            "FollowByCameraTag": {},
+            "InputTag": {
+                "horizontalMovement": 0,
+                "jumpPressed": false
+            },
+            "PlayerTag": {
+                "isMario": true,
+                "jumpForce": 1100.0,
+                "movementState": "PlayerIdlingState",
+                "powerState": "PlayerNormalState",
+                "sizeState": "PlayerSmallState",
+                "speed": 400.0
+            },
+            "RigidBody": {
+                "acceleration": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "antiGravity": 0.0,
+                "applyGravity": true,
+                "onGround": true,
+                "velocity": {
+                    "x": 0.0,
+                    "y": 0.0
+                }
+            },
+            "StomperTag": {},
+            "Transform": {
+                "position": {
+                    "x": 240.0,
+                    "y": 480.0
+                },
+                "prevPos": {
+                    "x": 240.0,
+                    "y": 480.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "ZIndex": {
+                "value": -1
+            },
+            "name": "5Mario"
+        },
+        "1000": {
+            "name": "Unknown"
+        },
+        "1001": {
+            "Animation": {
+                "currentFrame": 2,
+                "frameCount": 3,
+                "frameDuration": 0.30000001192092896,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": false,
+                "sprite": "assets/Tile/Tile1/Tile1_26.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_24.png",
+                    "assets/Tile/Tile1/Tile1_25.png",
+                    "assets/Tile/Tile1/Tile1_26.png"
+                ],
+                "timer": 0.19570866227149963
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "Level3BlockTag": {},
+            "LevelBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 528.0,
+                    "y": 48.0
+                },
+                "prevPos": {
+                    "x": 528.0,
+                    "y": 48.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "name": "11Level3Block"
+        },
+        "1002": {
+            "Animation": {
+                "currentFrame": 2,
+                "frameCount": 3,
+                "frameDuration": 0.30000001192092896,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": false,
+                "sprite": "assets/Tile/Tile1/Tile1_26.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_24.png",
+                    "assets/Tile/Tile1/Tile1_25.png",
+                    "assets/Tile/Tile1/Tile1_26.png"
+                ],
+                "timer": 0.19570866227149963
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "Level1BlockTag": {},
+            "LevelBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 96.0,
+                    "y": 96.0
+                },
+                "prevPos": {
+                    "x": 96.0,
+                    "y": 96.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "name": "11Level1Block"
+        },
+        "1003": {
+            "Animation": {
+                "currentFrame": 2,
+                "frameCount": 3,
+                "frameDuration": 0.30000001192092896,
+                "frameHeight": 16,
+                "frameWidth": 16,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": false,
+                "sprite": "assets/Tile/Tile1/Tile1_26.png",
+                "textures": [
+                    "assets/Tile/Tile1/Tile1_24.png",
+                    "assets/Tile/Tile1/Tile1_25.png",
+                    "assets/Tile/Tile1/Tile1_26.png"
+                ],
+                "timer": 0.19570866227149963
+            },
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "Level2BlockTag": {},
+            "LevelBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 336.0,
+                    "y": 192.0
+                },
+                "prevPos": {
+                    "x": 336.0,
+                    "y": 192.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 48.0
+                }
+            },
+            "name": "11Level2Block"
+        },
+        "1004": {
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 48.0,
+                    "y": 528.0
+                }
+            },
+            "GroundBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "prevPos": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "size": {
+                    "x": 48.0,
+                    "y": 528.0
+                }
+            },
+            "name": "20InvisibleGroundBlock"
+        },
+        "1005": {
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [
+                    {
+                        "collider": 1,
+                        "direction": 2,
+                        "overlap": {
+                            "height": 0.3604736328125,
+                            "left": 246.0,
+                            "top": 528.0,
+                            "width": 36.0
+                        }
+                    }
+                ],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 1008.0,
+                    "y": 48.0
+                }
+            },
+            "GroundBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 0.0,
+                    "y": 528.0
+                },
+                "prevPos": {
+                    "x": 0.0,
+                    "y": 528.0
+                },
+                "size": {
+                    "x": 1008.0,
+                    "y": 48.0
+                }
+            },
+            "name": "20InvisibleGroundBlock"
+        },
+        "1006": {
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 144.0,
+                    "y": 48.0
+                }
+            },
+            "GroundBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 48.0,
+                    "y": 240.0
+                },
+                "prevPos": {
+                    "x": 48.0,
+                    "y": 240.0
+                },
+                "size": {
+                    "x": 144.0,
+                    "y": 48.0
+                }
+            },
+            "name": "20InvisibleGroundBlock"
+        },
+        "1007": {
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 96.0,
+                    "y": 528.0
+                }
+            },
+            "GroundBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 912.0,
+                    "y": 0.0
+                },
+                "prevPos": {
+                    "x": 912.0,
+                    "y": 0.0
+                },
+                "size": {
+                    "x": 96.0,
+                    "y": 528.0
+                }
+            },
+            "name": "20InvisibleGroundBlock"
+        },
+        "1008": {
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 144.0,
+                    "y": 48.0
+                }
+            },
+            "GroundBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 480.0,
+                    "y": 192.0
+                },
+                "prevPos": {
+                    "x": 480.0,
+                    "y": 192.0
+                },
+                "size": {
+                    "x": 144.0,
+                    "y": 48.0
+                }
+            },
+            "name": "20InvisibleGroundBlock"
+        },
+        "1009": {
+            "BlockTag": {},
+            "BoxCollider2D": {
+                "bounce": false,
+                "collisions": [],
+                "corners": [
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    {
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                ],
+                "isDisabled": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "origin": {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                "rotation": 0.0,
+                "size": {
+                    "x": 144.0,
+                    "y": 48.0
+                }
+            },
+            "GroundBlockTag": {},
+            "Transform": {
+                "position": {
+                    "x": 288.0,
+                    "y": 336.0
+                },
+                "prevPos": {
+                    "x": 288.0,
+                    "y": 336.0
+                },
+                "size": {
+                    "x": 144.0,
+                    "y": 48.0
+                }
+            },
+            "name": "20InvisibleGroundBlock"
+        },
+        "1010": {
+            "Animation": {
+                "currentFrame": 2,
+                "frameCount": 3,
+                "frameDuration": 0.30000001192092896,
+                "frameHeight": 24,
+                "frameWidth": 15,
+                "hasEnded": false,
+                "loop": true,
+                "row": 0,
+                "shouldRepeat": false,
+                "sprite": "assets/Item/Coin/Coin3/SmallCoin1_2.png",
+                "textures": [
+                    "assets/Item/Coin/Coin3/SmallCoin1_0.png",
+                    "assets/Item/Coin/Coin3/SmallCoin1_1.png",
+                    "assets/Item/Coin/Coin3/SmallCoin1_2.png"
+                ],
+                "timer": 0.19570866227149963
+            },
+            "SmallCoinTag": {},
+            "Transform": {
+                "position": {
+                    "x": 305.0,
+                    "y": 65.0
+                },
+                "prevPos": {
+                    "x": 305.0,
+                    "y": 65.0
+                },
+                "size": {
+                    "x": 15.0,
+                    "y": 24.0
+                }
+            },
+            "name": "9SmallCoin"
+        },
+        "1011": {
+            "Camera": {
+                "smoothing": 8.0,
+                "target": {
+                    "x": 480.0,
+                    "y": 360.0
+                },
+                "trapHalfWidth": 80.0
+            },
+            "name": "Unknown"
+        },
+        "1012": {
+            "name": "Unknown"
+        }
+    },
+    "level": -1,
+    "lives": 9998
+}

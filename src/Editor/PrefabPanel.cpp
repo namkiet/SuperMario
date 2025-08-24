@@ -27,6 +27,12 @@ void PrefabPanel::draw() {
             ImGui::EndTabItem();
         }
 
+        // Tab Background
+        if (ImGui::BeginTabItem("Background")) {
+            drawPrefabCategory(PrefabStorage::Category::Background);
+            ImGui::EndTabItem();
+        }
+
         ImGui::EndTabBar();
     }
 }

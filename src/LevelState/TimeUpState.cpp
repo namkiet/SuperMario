@@ -17,6 +17,7 @@ void TimeUpState::update(GameManager *gameManager, float dt)
     {
         return;
     }
+    gameManager->update(dt);
     timeElapsed += dt;
 }
 
