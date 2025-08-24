@@ -38,8 +38,12 @@ void SaveManager::saveIndex(const json& j) {
 }
 
 std::string SaveManager::saveGame(const json& j) {
-    // Tạo tên file theo timestamp
-    std::string filename = currentTimestamp() + ".json";
+    // Tạo tên file theo timestamp, thay space bằng _
+    std::string timestamp = currentTimestamp();
+    for (auto& c : timestamp) {
+        if (c == ' ') c = '_';
+    }
+    std::string filename = timestamp + ".json";
     std::string slotFile = saveDir + "/" + filename;
 
     // ghi dữ liệu game
@@ -59,7 +63,7 @@ std::string SaveManager::saveGame(const json& j) {
     // tạo metadata
     json meta;
     meta["filename"]  = filename;
-    meta["timestamp"] = currentTimestamp();
+    meta["timestamp"] = timestamp;
     meta["level"]     = j.value("level", 0);
     meta["lives"]     = j.value("lives", 5);
 
@@ -77,7 +81,7 @@ std::string SaveManager::saveGame(const json& j) {
 
     saveIndex(index);
 
-    return currentTimestamp();
+    return timestamp;
 }
 
 

@@ -291,7 +291,13 @@ void GameManager::update(float dt)
 
     // std::cout << "[FPS]: " << 1.0f / dt << "\n";
 
-    if (isPaused) return;
+        if (isPaused)
+        {
+                auto mu = world.findFirst<MusicPlayer>();
+            if (!mu) return;
+            auto& music = mu->getComponent<MusicPlayer>().music;
+            music.setVolume(0);
+            return;}
 
     if (editor)
     {

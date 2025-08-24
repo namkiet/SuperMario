@@ -77,6 +77,10 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         25,
         [this]()
         {
+            while(this->game->currentState())
+            {
+                this->game->popState();
+            }
             this->game->getWindow().close();
         },
         nullptr, sf::Color::White, /*setCenter=*/true);
@@ -160,7 +164,7 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         std::static_pointer_cast<sf::Shape>(customRoundedRectShape),
         "Custom Map",
         mainBtnColor,
-        true,
+        false,
         25,
         [this, game]()
         {
