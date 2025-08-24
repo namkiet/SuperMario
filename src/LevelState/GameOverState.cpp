@@ -142,6 +142,7 @@ std::shared_ptr<LevelState> GameOverState::getNewState(GameManager *gameManager)
     if (shouldRestart)
     {
         shouldRestart = false;
+        LevelManager::instance().getPrevMarioPosition() = sf::Vector2f(0.f, 0.f);
         LevelManager::instance().setSkipUpdate(true);
         LevelManager::instance().setLevel(LevelManager::instance().getLevel());
         gameManager->setLives(5);
