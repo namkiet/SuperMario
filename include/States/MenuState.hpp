@@ -18,7 +18,7 @@ private:
     std::shared_ptr<UIComponent> uiRoot;
     // std::shared_ptr<UIComponent> settingComponent;
 public:
-    MenuState(std::shared_ptr<Game> game);
+    MenuState(Game* game);
     void handleEvent(const sf::Event &event) override;
     void update(float dt) override;
     void render(sf:: RenderWindow&window) override;

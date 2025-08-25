@@ -8,7 +8,7 @@
 class PlayingState : public GameState
 {
 public:
-    PlayingState(std::shared_ptr<Game> game);
+    PlayingState(Game* game);
     void handleEvent(const sf::Event &event) override;
     void update(float dt) override;
     void render(sf::RenderWindow &window) override;

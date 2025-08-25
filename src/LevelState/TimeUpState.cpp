@@ -7,7 +7,7 @@
 #include <UI/UIConstant.hpp>
 #include <UI/HelperBuilder.hpp>
 
-TimeUpState::TimeUpState(std::shared_ptr<Game> game) : LevelState(game)
+TimeUpState::TimeUpState(Game* game) : LevelState(game)
 {
 }
 

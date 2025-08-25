@@ -7,7 +7,7 @@
 class LevelState
 {
 protected:
-    std::shared_ptr<Game> game;
+    Game* game;
     std::shared_ptr<UIComponent> uiRoot;
     sf::Font UIFont;
     friend class PlayingState;
@@ -15,7 +15,7 @@ public:
     LevelState() {
         uiRoot = nullptr;
     }
-    LevelState(std::shared_ptr<Game> game): game(game) {
+    LevelState(Game* game): game(game) {
         uiRoot = nullptr;
         UIFont.loadFromFile("BalooBhai2-ExtraBold.ttf");
     }

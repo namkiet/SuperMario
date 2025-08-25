@@ -7,7 +7,7 @@
 
 using json = nlohmann::json;
 
-LoadState::LoadState(std::shared_ptr<Game> game) : GameState(game)
+LoadState::LoadState(Game* game) : GameState(game)
 {
     init();
 }

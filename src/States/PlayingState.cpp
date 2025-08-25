@@ -10,7 +10,7 @@
 #include <LevelManager.hpp>
 #include <Core/MessageBus.hpp>
 
-PlayingState::PlayingState(std::shared_ptr<Game> game) : GameState(game), gameManager(nullptr)
+PlayingState::PlayingState(Game* game) : GameState(game), gameManager(nullptr)
 {
     uiRoot = nullptr;
 

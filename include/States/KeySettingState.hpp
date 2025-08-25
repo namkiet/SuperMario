@@ -17,7 +17,7 @@
 //     ButtonContainer buttonContainer;
 
 // public:
-//     KeySettingState(std::shared_ptr<Game> game);
+//     KeySettingState(Game* game);
 
 //     void handleEvent(const sf::Event &event) override;
 //     void update(float dt) override;

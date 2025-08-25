@@ -9,7 +9,7 @@ template <typename Resource, typename Identifier>
 class ResourceHolder {
 public:
     ResourceHolder() = default;
-    ResourceHolder(const ResourceHolder&) = delete;
+ResourceHolder(const ResourceHolder&) = delete;
     ResourceHolder& operator=(const ResourceHolder&) = delete;
 
     // Load cơ bản: load từ file

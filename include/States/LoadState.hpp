@@ -17,7 +17,7 @@ private:
     json saves;
 
 public:
-    LoadState(std::shared_ptr<Game> game);
+    LoadState(Game* game);
     void init();
     void handleEvent(const sf::Event &event) override;
     void update(float dt) override;

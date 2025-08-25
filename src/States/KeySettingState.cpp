@@ -8,7 +8,7 @@
 // // #include <UI/KeyBinding.hpp>
 // #include <iostream>
 
-// KeySettingState::KeySettingState(std::shared_ptr<Game> game): GameState(game)
+// KeySettingState::KeySettingState(Game* game): GameState(game)
 // {
 //         font.loadFromFile("arial.ttf");
 //         if (!backgroundTexture.loadFromFile("assets/Background/MenuBackground.png"))

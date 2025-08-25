@@ -1,7 +1,7 @@
 #include <Game.hpp>
 #include <States/SettingsState.hpp>
 
-SettingsState::SettingsState(std::shared_ptr<Game> game): GameState(game) 
+SettingsState::SettingsState(Game* game): GameState(game) 
 {
     font.loadFromFile("arial.ttf");
     info.setFont(font);

@@ -7,7 +7,7 @@
 #include <UI/HelperBuilder.hpp>
 #include <Core/MessageBus.hpp>
 
-LevelChosenState::LevelChosenState(std::shared_ptr<Game> game) : LevelState(game)
+LevelChosenState::LevelChosenState(Game* game) : LevelState(game)
 {
     auto &texholder = game->getTexHolder();
 

@@ -9,7 +9,7 @@ private:
     sf::Text info;
 
 public:
-    SettingsState(std::shared_ptr<Game> game);
+    SettingsState(Game* game);
     void handleEvent(const sf::Event& event) override;
     void update(float dt) override;
     void render(sf::RenderWindow& window) override;

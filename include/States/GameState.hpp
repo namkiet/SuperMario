@@ -12,9 +12,9 @@ class Game;
 class GameState
 {
 protected:
-    std::shared_ptr<Game> game;
+    Game* game;
 public:
-    GameState(std::shared_ptr<Game> game);
+    GameState(Game* game);
     virtual ~GameState() = default;
     virtual void handleEvent(const sf::Event& event) = 0;
     virtual void update(float dt) = 0;

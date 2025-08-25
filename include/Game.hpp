@@ -14,10 +14,11 @@ class Game
 private:
     sf::ContextSettings contextSettings;
     sf::RenderWindow window;
+    TextureHolder textureHolder;
     std::vector<std::shared_ptr<GameState>> stateStack;
     bool isRunning = true;
     StateRegistry registry;
-    TextureHolder textureHolder;
+
     // sf::Music backgroundMusic;
 public:
     Game();

@@ -9,7 +9,7 @@
 #include <UI/HelperBuilder.hpp>
 #include <UI/CommonUIPool.hpp>
 
-MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
+MenuState::MenuState(Game* game) : GameState(game)
 {
     font.loadFromFile("BalooBhai2-ExtraBold.ttf");
 

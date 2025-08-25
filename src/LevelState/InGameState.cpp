@@ -29,7 +29,7 @@
 //     TimeManager::instance().addObserver(timeUI);
 // }
 
-InGameState::InGameState(std::shared_ptr<Game> game) : LevelState(game)
+InGameState::InGameState(Game* game) : LevelState(game)
 {
     scoreUI = new ScoreUI();
     ScoreManager::instance().addObserver(scoreUI);

@@ -12,7 +12,7 @@
 //     font.loadFromFile("BalooBhai2-ExtraBold.ttf");
 // }
 
-GameOverState::GameOverState(std::shared_ptr<Game> game) : LevelState(game)
+GameOverState::GameOverState(Game* game) : LevelState(game)
 {
     UIFont.loadFromFile("BalooBhai2-ExtraBold.ttf");
     auto &texholder = game->getTexHolder();

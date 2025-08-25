@@ -31,11 +31,11 @@ Game::Game()
     textureHolder.load(TexType::keybutton, "assets/UI/keyButton.png");
     textureHolder.load(TexType::pause, "assets/UI/pause.png");
 
-    registry.registerInstance("menu", std::make_shared<MenuState>(std::shared_ptr<Game>(this)));
-    registry.registerInstance("play", std::make_shared<PlayingState>(std::shared_ptr<Game>(this)));
-    registry.registerInstance("settings", std::make_shared<SettingsState>(std::shared_ptr<Game>(this)));
-    registry.registerInstance("load", std::make_shared<LoadState>(std::shared_ptr<Game>(this)));
-// registry.registerInstance("keysettings", std::make_shared<KeySettingState>(std::shared_ptr<Game>(this)));
+    registry.registerInstance("menu", std::make_shared<MenuState>(this));
+    registry.registerInstance("play", std::make_shared<PlayingState>(this));
+    registry.registerInstance("settings", std::make_shared<SettingsState>(this));
+    registry.registerInstance("load", std::make_shared<LoadState>(this));
+// registry.registerInstance("keysettings", std::make_shared<KeySettingState>(Game*(this)));
 
     pushState("menu");
 

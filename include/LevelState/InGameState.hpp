@@ -18,7 +18,7 @@ public:
 
 public:
     // InGameState();
-    InGameState(std::shared_ptr<Game> game);
+    InGameState(Game* game);
     void update(GameManager *gameManager, float dt) override;
     std::shared_ptr<LevelState> getNewState(GameManager *gameManager) override;
     void render(GameManager *gameManager, sf::RenderWindow &window, int level) override;
