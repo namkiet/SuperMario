@@ -73,11 +73,11 @@ void GameManager::init()
 {
     world.removeAllEntities();
 
-    if (!data.empty())
+    if (!sceneData.empty())
     {
-        lives = data["lives"];
-        world.loadSceneFromFile(data["entities"]);
-    }
+        lives = sceneData["lives"];
+        world.loadSceneFromFile(sceneData["entities"]);
+    } 
     else if (mode == Mode::Editor)
     {
         ThemeManager::setTheme(1);
@@ -89,8 +89,8 @@ void GameManager::init()
     }
     else if (mode == Mode::LoadGame)
     {
-        lives = data["lives"];
-        world.loadSceneFromFile(data["entities"]);
+        lives = sceneData["lives"];
+        world.loadSceneFromFile(sceneData["entities"]);
     }
     else if (mode == Mode::NewGame)
     {
@@ -101,22 +101,20 @@ void GameManager::init()
     world.createEntity()->addComponent<MusicPlayer>();
 }
 
-GameManager::GameManager(int level, bool hasWonLastLevel, Mode mode, const nlohmann::json &data)
-    : levelHandler(world, level), currentLevel(level), canEdit(mode == Mode::Editor), mode(mode), data(data)
+GameManager::GameManager(int level, bool hasWonLastLevel, Mode mode, const nlohmann::json& data)
+    : levelHandler(world, level), currentLevel(level), canEdit(mode == Mode::Editor), mode(mode), sceneData(data)
 {
-    MessageBus::subscribe("GameSaved", this, [this](const std::string &)
-                          {
+    MessageBus::subscribe("GamePaused", this, [this](const std::string &) { isPaused = true; });
+    MessageBus::subscribe("GameResumed", this, [this](const std::string &) { isPaused = false; });
+    MessageBus::subscribe("GameSaved", this, [this](const std::string &payload) {
         json j;
         j["level"] = currentLevel;
         j["lives"] = canEdit ? 5 : lives;
         world.saveSceneToFile(j["entities"]);  
-        if (editor) this->data = j;
-        else imgPath = world.saveGame(j); });
-
-    MessageBus::subscribe("GamePaused", this, [this](const std::string &)
-                          { isPaused = true; });
-    MessageBus::subscribe("GameResumed", this, [this](const std::string &)
-                          { isPaused = false; });
+        if (payload == "Editor Save") sceneData = j;
+        else if (canEdit) imgPath = world.saveGame(sceneData);
+        else imgPath = world.saveGame(j);
+    });
 
     init();
 
@@ -165,7 +163,6 @@ GameManager::GameManager(int level, bool hasWonLastLevel, Mode mode, const nlohm
     world.addSystem<PodobooSystem>();
 
     world.addSystem<TextPoppingSystem>();
-
     world.addSystem<DamageOnContactSystem>();
 
     world.addSystem<EnemyStateSystem>();
@@ -182,11 +179,6 @@ GameManager::GameManager(int level, bool hasWonLastLevel, Mode mode, const nlohm
     world.addSystem<LevelCompletionSystem>(*this);
     world.addSystem<DespawnSystem>();
     world.addSystem<PlayerRespawnSystem>(*this);
-
-    // if (LevelManager::instance().getStatus() == std::string("gameover"))
-    // {
-    //     world.createEntity()->addComponent<SoundComponent>(&SoundManager::load("assets/Sounds/gameover.wav"), false, true, sf::Time(sf::seconds(1000)));
-    // }
 
     if (hasWonLastLevel)
     {
@@ -230,8 +222,7 @@ GameManager::GameManager(int level, bool hasWonLastLevel, Mode mode, const nlohm
     }
     else if (level == 0)
     {
-        auto player = world.findFirst<PlayerTag, FollowByCameraTag>();
-        if (player)
+        if (auto player = world.findFirst<PlayerTag, FollowByCameraTag>())
         {
             player->removeComponent<FollowByCameraTag>();
         }
@@ -242,17 +233,6 @@ void GameManager::handleEvent(const sf::Event &event, sf::RenderWindow &window)
 {
     if (event.type == sf::Event::KeyPressed)
     {
-        // if (event.key.code == sf::Keyboard::S)
-        // {
-        //     std::ifstream fin("save.json");
-        //     json j;
-        //     fin >> j;
-        //     currentLevel = j["level"];
-
-        //     world.entityManager.removeAllEntities();
-        //     world.loadSceneFromFile(j["entities"]);
-        // }
-
         if (event.key.code == sf::Keyboard::N)
         {
             world.findFirst<PlayerTag>()->addComponent<InvincibleTag>(500.0f);
@@ -265,8 +245,6 @@ void GameManager::handleEvent(const sf::Event &event, sf::RenderWindow &window)
 
         if (event.key.code == sf::Keyboard::F)
         {
-            // do nothing
-
             auto mario = world.findFirst<PlayerTag>();
             mario->addComponent<GrowUpTag>();
             mario->addComponent<CanFireTag>();
@@ -276,7 +254,7 @@ void GameManager::handleEvent(const sf::Event &event, sf::RenderWindow &window)
         {
             if (editor)
             {
-                MessageBus::publish("GameSaved");
+                MessageBus::publish("GameSaved", "Editor Save");
                 delete editor;
                 editor = nullptr;
             }
@@ -312,7 +290,7 @@ void GameManager::update(float dt)
     if (editor)
     {
         world.getSystem<CollisionDetectionSystem>()->update(world, dt);
-        // world.getSystem<AnimationSystem>()->update(world, dt);
+        world.getSystem<AnimationSystem>()->update(world, dt);
         return;
     }
 
@@ -321,8 +299,7 @@ void GameManager::update(float dt)
 
 void GameManager::draw(sf::RenderWindow &window, int level)
 {
-    // Set the custom view
-    world.getSystem<RenderSystem>()->draw(world, window, currentLevel);
+    world.getSystem<RenderSystem>()->draw(world, window, currentLevel); // Set the custom view
 
     if (imgPath != "")
     {
@@ -334,24 +311,17 @@ void GameManager::draw(sf::RenderWindow &window, int level)
         screenshot.saveToFile("saves/screenshots/" + imgPath + ".png");
         imgPath = "";
     }
-
-    if (level == 0)
-        return;
+    
+    if (level == 0) return;
 
     if (editor)
     {
         editor->drawUI();
         editor->display(window);
-
-        // Drawn with custom view
-        world.getSystem<DrawBoxColliderSystem>()->draw(world, window);
+        world.getSystem<DrawBoxColliderSystem>()->draw(world, window); // Drawn with custom view
     }
-
-    // Drawn with custiom view
-    world.getSystem<DrawTextSystem>()->draw(world, window);
-
-    // Set the default view
-    world.getSystem<DrawGameComponentSystem>()->draw(world, window);
+    world.getSystem<DrawTextSystem>()->draw(world, window); // Drawn with custiom view
+    world.getSystem<DrawGameComponentSystem>()->draw(world, window); // Set the default view
 }
 
 int GameManager::lives = 5;

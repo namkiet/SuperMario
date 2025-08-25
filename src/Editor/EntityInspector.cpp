@@ -5,7 +5,7 @@ EntityInspector::EntityInspector()
 {
     basicFields.insert("Transform");
     basicFields.insert("BoxCollider2D");
-    basicFields.insert("Animation");
+    basicFields.insert("ZIndex");
 }
 
 void EntityInspector::draw(json& j) {

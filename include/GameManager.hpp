@@ -44,7 +44,7 @@ private:
     static int lives;
     static inline json prevMarioData;
 
-    json data;
+    json sceneData;
     void init();
 
     friend class PlayerRespawnSystem;

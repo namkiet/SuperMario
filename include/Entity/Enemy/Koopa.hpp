@@ -13,6 +13,7 @@
 #include <Gameplay/Enemy/Koopa/KoopaNormalState.hpp>
 #include <Gameplay/Enemy/Koopa/KoopaNormalBehaviour.hpp>
 #include <Factories/EnemyFactory.hpp>
+
 class Koopa : public Entity
 {
 public:
