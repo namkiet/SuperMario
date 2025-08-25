@@ -13,7 +13,7 @@ SaveManager::SaveManager(EntityManager& entityManager, ComponentRegistry& compon
 std::string SaveManager::currentTimestamp() {
     std::time_t now = std::time(nullptr);
     char buf[32];
-    std::strftime(buf, sizeof(buf), "%Y-%m-%d %H-%M-%S", std::localtime(&now));
+    std::strftime(buf, sizeof(buf), "%Y-%m-%d_%H-%M-%S", std::localtime(&now));
     return std::string(buf);
 }
 

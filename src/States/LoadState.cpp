@@ -43,9 +43,8 @@ void LoadState::init()
         if (i < saveCount)
         {
             std::string timestamp = saves[i]["timestamp"].get<std::string>();
-            std::replace_if(timestamp.begin(), timestamp.end(), ::isspace, '_');
-            boxSprite.setTexture(TextureManager::load(
-            "saves/screenshots/" + timestamp + ".png"));
+            // std::replace_if(timestamp.begin(), timestamp.end(), ::isspace, '_');
+            boxSprite.setTexture(TextureManager::load("saves/screenshots/" + timestamp + ".png"));
         }
         else
         {
@@ -148,7 +147,8 @@ void LoadState::update(float dt)
 void LoadState::render(sf::RenderWindow &window)
 {
     // window.clear(sf::Color::Black);
-    sf::Sprite backgroundSprite = sf::Sprite(TextureManager::load("assets/Background/MenuBackground.png"));
+    sf::Sprite backgroundSprite(TextureManager::load("assets/Background/MenuBackground.png"));
+    
     window.draw(backgroundSprite);
 
     for (const auto &boxSprite : saveBoxSprites)
