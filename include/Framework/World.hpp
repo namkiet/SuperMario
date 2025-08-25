@@ -72,9 +72,9 @@ public:
         saveManager.saveToFile(j);
     }
 
-    std::string saveGame(const json& j)
+    std::string saveGame(const json& j, const std::string& saveDir)
     {
-        return saveManager.saveGame(j);
+        return saveManager.saveGame(j, saveDir);
     }
 
 public:

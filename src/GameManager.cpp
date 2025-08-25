@@ -112,8 +112,8 @@ GameManager::GameManager(int level, bool hasWonLastLevel, Mode mode, const nlohm
         j["lives"] = canEdit ? 5 : lives;
         world.saveSceneToFile(j["entities"]);  
         if (payload == "Editor Save") sceneData = j;
-        else if (canEdit) imgPath = world.saveGame(sceneData);
-        else imgPath = world.saveGame(j);
+        else if (canEdit) imgPath = world.saveGame(j, "customs");
+        else imgPath = world.saveGame(j, "saves");
     });
 
     init();
@@ -308,7 +308,8 @@ void GameManager::draw(sf::RenderWindow &window, int level)
         texture.update(window);
 
         sf::Image screenshot = texture.copyToImage();
-        screenshot.saveToFile("saves/screenshots/" + imgPath + ".png");
+        if (canEdit) screenshot.saveToFile("customs/screenshots/" + imgPath + ".png");
+        else screenshot.saveToFile("saves/screenshots/" + imgPath + ".png");
         imgPath = "";
     }
     

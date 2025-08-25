@@ -15,19 +15,12 @@ private:
     EntityManager& entityManager;
     ComponentRegistry& componentRegistry;
 
-    std::string saveDir;
-    std::string indexPath;
-
     std::string currentTimestamp();
-    json loadIndex();
-    void saveIndex(const json& j);
 
 public:
-    SaveManager(EntityManager& entityManager, ComponentRegistry& componentRegistry, const std::string& dir = "saves");
+    SaveManager(EntityManager& entityManager, ComponentRegistry& componentRegistry);
 
-    std::string saveGame(const json& j);
-    void loadGame(int slot);
-    json getIndex();
+    std::string saveGame(const json& j, const std::string& saveDir);
 
     // wrapper cho ECS
     void loadFromFile(const json& j);

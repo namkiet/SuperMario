@@ -2,6 +2,7 @@
 #include <States/MenuState.hpp>
 #include <States/PlayingState.hpp>
 #include <States/LoadState.hpp>
+#include <States/CustomState.hpp>
 #include <Engine/Rendering/Utility.hpp>
 #include <iostream>
 #include <cassert>
@@ -168,16 +169,10 @@ MenuState::MenuState(std::shared_ptr<Game> game) : GameState(game)
         25,
         [this, game]()
         {
-            auto playState = game->getRegistry().getState("play");
-            if (playState)
+            if (auto customState = game->getRegistry().getState("custom"))
             {
-                std::ifstream fin("sample.json");
-                json j; fin >> j;
-                if (!j.empty())
-                {
-                    std::static_pointer_cast<PlayingState>(playState)->setLevel(j["level"], false, GameManager::Mode::Editor, j);
-                    game->pushState("play");
-                }
+                std::static_pointer_cast<CustomState>(customState)->init();
+                game->pushState("custom");
             }
         },
         nullptr, sf::Color::White, /*setCenter=*/true);
