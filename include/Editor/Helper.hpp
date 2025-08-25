@@ -10,7 +10,7 @@ struct AnimationButtonInfo {
     ImVec2 size;
 };
 
-inline AnimationButtonInfo getAnimationButtonInfo(const Animation& anim, float buttonSize = 48.f) {
+inline AnimationButtonInfo getAnimationButtonInfo(Animation anim, float buttonSize = 48.f) {
     AnimationButtonInfo info{};
     if (!anim.sprite.getTexture()) return info;
 

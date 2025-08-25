@@ -9,8 +9,10 @@
 #include <Entity/Enemy/Lakitu.hpp>
 
 #include <Entity/Block/Block.hpp>
+#include <Entity/Block/Pipe.hpp>
 
 #include <Entity/Miscellaneous/Background.hpp>
+#include <Entity/Miscellaneous/Bridge.hpp>
 
 #include <Entity/Item/Coin.hpp>
 #include <Entity/Item/Flower.hpp>
@@ -67,27 +69,9 @@ void PrefabStorage::registerEnemies()
 void PrefabStorage::registerBlocks()
 {
     // Coin Question block
-    prefabList[int(Category::Block)].emplace_back("CoinBlock",
+    prefabList[int(Category::Block)].emplace_back("Coin Block",
         [this](float x, float y) -> std::unique_ptr<Entity> {
             return std::make_unique<QuestionBlock>(x / 3, y / 3, 16.0f, 16.0f, 3.0f, 1); // wrap raw pointer
-        });
-    
-    // Mushroom Question block
-    prefabList[int(Category::Block)].emplace_back("MushroomBlock",
-        [this](float x, float y) -> std::unique_ptr<Entity> {
-            return std::make_unique<QuestionBlock>(x / 3, y / 3, 16.0f, 16.0f, 3.0f, 2); // wrap raw pointer
-        });
-
-    // Flower Question block
-    prefabList[int(Category::Block)].emplace_back("FlowerBlock",
-        [this](float x, float y) -> std::unique_ptr<Entity> {
-            return std::make_unique<QuestionBlock>(x / 3, y / 3, 16.0f, 16.0f, 3.0f, 3); // wrap raw pointer
-        });
-
-    // Star Question block
-    prefabList[int(Category::Block)].emplace_back("StarBlock",
-        [this](float x, float y) -> std::unique_ptr<Entity> {
-            return std::make_unique<QuestionBlock>(x / 3, y / 3, 16.0f, 16.0f, 3.0f, 4); // wrap raw pointer
         });
 
     prefabList[int(Category::Block)].emplace_back("Ground",
@@ -98,6 +82,22 @@ void PrefabStorage::registerBlocks()
     prefabList[int(Category::Block)].emplace_back("Stairs",
         [this](float x, float y) -> std::unique_ptr<Entity> {
             return std::make_unique<StairsBlock>(x / 3, y / 3, 16.0f, 16.0f, 3.0f); // wrap raw pointer
+        });
+
+    prefabList[int(Category::Block)].emplace_back("Pipe 0",
+        [this](float x, float y) -> std::unique_ptr<Entity> {
+            return std::make_unique<Pipe>(x / 3, y / 3, 32.0f, 16.0f, 3.0f, 0, false); // wrap raw pointer
+        });
+
+    prefabList[int(Category::Block)].emplace_back("Pipe 1",
+        [this](float x, float y) -> std::unique_ptr<Entity> {
+            return std::make_unique<Pipe>(x / 3, y / 3, 32.0f, 16.0f, 3.0f, 1, false); // wrap raw pointer
+        });
+
+
+    prefabList[int(Category::Block)].emplace_back("Pipe 2",
+        [this](float x, float y) -> std::unique_ptr<Entity> {
+            return std::make_unique<Pipe>(x / 3, y / 3, 32.0f, 16.0f, 3.0f, 2, false); // wrap raw pointer
         });
 }
 
@@ -136,5 +136,15 @@ void PrefabStorage::registerBackgrounds()
     prefabList[int(Category::Background)].emplace_back("Castle",
         [this](float x, float y) -> std::unique_ptr<Entity> {
             return std::make_unique<Background>(x / 3, y / 3, 80.0f, 80.0f, 3, 0); // wrap raw pointer
+        });
+
+    prefabList[int(Category::Background)].emplace_back("Bridge 1",
+        [this](float x, float y) -> std::unique_ptr<Entity> {
+            return std::make_unique<Bridge>(x / 3, y / 3, 3, 1); // wrap raw pointer
+        });
+
+    prefabList[int(Category::Background)].emplace_back("Bridge 2",
+        [this](float x, float y) -> std::unique_ptr<Entity> {
+            return std::make_unique<Bridge>(x / 3, y / 3, 3, 2); // wrap raw pointer
         });
 }
